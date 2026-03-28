@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.03784v1/fig-001.webp",
+      "caption": "Figure 2: Generation pipeline of the discrete-event world model for warehouse robot fleet restocking.",
+      "page": 6,
+      "index": 1,
+      "width": 968,
+      "height": 305
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03784v1/fig-002.webp",
+      "caption": "Table 2: Main Results on Effectiveness. We report the SOSS and SBCS scores averaged over all 7 scenarios. DEVS-Gen achieves scores that are comparable to the full iterative agents while operating without execution feedback. Gray rows indicate average scores over different models.",
+      "page": 11,
+      "index": 2,
+      "width": 864,
+      "height": 345
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03784v1/fig-003.webp",
+      "caption": "Figure 5: The final connection of the ABP DEVS model.",
+      "page": 34,
+      "index": 3,
+      "width": 968,
+      "height": 476
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03784v1/fig-004.webp",
+      "caption": "Figure 4: Visualized PlanTree hierarchy for the ABP Model. The root model recursively decomposes into sub-models until atomic primitives are reached.",
+      "page": 33,
+      "index": 4,
+      "width": 999,
+      "height": 1137
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03784v1/fig-005.webp",
+      "caption": "Figure 3: Ablation study on synthesis latency (using GPT-5.2). The chart compares the wall-clock time required for the Planning and Generation phases under serial and parallel execution modes. While the acceleration in the Planning phase is limited by the current benchmark scale, the Generation phase achieves a 4.7× speedup, validating the scalability of the approach.",
+      "page": 13,
+      "index": 5,
+      "width": 492,
+      "height": 396
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03784v1/fig-006.webp",
+      "caption": "Figure 1: Illustrative example of the generation and execution of a discrete-event world model for a warehouse robot fleet restocking task. To facilitate planning, a natural-language environment specification is translated into a world model, which exposes a standardized execution interface for interventions (e.g., fleet size, dispatching rule, charger count) and emits a structured event trace and performance metrics (e.g., KPIs). In this paper, we propose to operationalize such a world model as a DEVS model composed of interacting atomic and coupled components, each representing an entity with local state, event-handling logic, and timing semantics. Interactions among entities are realized through event messages routed via component ports, while event timing is governed by component-specific time-advance and transition functions. This enables systematic what-if analysis and comparative evaluation of alternative operational policies.",
+      "page": 5,
+      "index": 6,
+      "width": 968,
+      "height": 427
+    }
+  ]
+}

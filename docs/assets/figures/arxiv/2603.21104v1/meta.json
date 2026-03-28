@@ -1,0 +1,118 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.21104v1/fig-001.webp",
+      "caption": "Figure 3 Qualitative comparison in a merging scenario (Scene 103, 10-second closed-loop rollout at 10 Hz). Factual (Original): In the recorded safe scene, the merging vehicle from the side road maintains a temporal safety margin by yielding, allowing the ego vehicle to pass the intersection safely. CounterScene (Ours): By causally identifying the yielding vehicle and progressively compressing its spatiotemporal margin, CounterScene generates a highly realistic safety-critical counterfactual: the adversarial vehicle aggressively cuts into the main road, forcing the ego vehicle into an emergency hard brake (matching our high HBR metric) to avoid a severe collision. Baselines: In contrast, baseline methods fail to capture the causal interaction structure. They either preserve the safe yielding behavior (failing to induce adversarial risk) or exhibit varying degrees of unstructured trajectory distortion, highlighting their inability to generate structurally valid and physically plausible critical interactions.",
+      "page": 11,
+      "index": 1,
+      "width": 986,
+      "height": 677
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21104v1/fig-002.webp",
+      "caption": "Figure 4 Qualitative comparison of a merging collision in Scene 110. Factual (Original): In the recorded scene, the merging vehicle from the side road actively maintains safety by yielding, providing a sufficient spatiotemporal margin for the ego vehicle to pass. CounterScene (Ours): By accurately identifying the yielding vehicle as the causal variable and surgically stripping its safety margin, CounterScene generates a highly realistic collision. The adversarial agent aggressively merges into the main road without yielding, resulting in a physically plausible crash while the rest of the scene evolves naturally. Baselines: Lacking structural causal reasoning, baseline methods completely fail to generate meaningful adversarial pressure. They either passively preserve the original yielding behavior (resulting in zero risk) or introduce unstructured trajectory noise that fails to culminate in a realistic collision.",
+      "page": 25,
+      "index": 2,
+      "width": 986,
+      "height": 677
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21104v1/fig-003.webp",
+      "caption": "Figure 5 Qualitative comparison of a rear-end collision in Scene 905. Factual (Original): In the recorded safe scene, the trailing vehicle actively maintains a safe longitudinal distance, preserving a temporal margin that prevents a collision as the ego vehicle navigates the lane. CounterScene (Ours): By causally identifying the trailing vehicle and surgically compressing its longitudinal safety margin, our framework generates a highly realistic rear-end crash. The adversarial agent aggressively accelerates into the ego vehicle, demonstrating how targeted temporal compression naturally evolves into a high-risk scenario without distorting the surrounding traffic dynamics. Baselines: Lacking structured causal reasoning, baseline methods fail to capture the nature of this longitudinal interaction. They either maintain the original safe following distance (generating zero adversarial pressure) or apply unstructured perturbations that cause the vehicle to veer off-course, ultimately failing to induce a physically plausible rear-end collision.",
+      "page": 26,
+      "index": 3,
+      "width": 986,
+      "height": 677
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21104v1/fig-004.webp",
+      "caption": "Figure 1 Counterfactual causal reasoning for safety-critical generative BEV world model. Given an observed traffic scene where the critical agent waits and the ego vehicle passes safely, we ask the counterfactual question: What if the critical agent did not wait? By intervening on the agent trajectory, CounterScene constructs a counterfactual world that induces safety-critical interactions while preserving realistic traffic dynamics. This is achieved through causal adversarial agent identification, causal interaction graph modeling, and counterfactual guidance in diffusion.",
+      "page": 2,
+      "index": 4,
+      "width": 986,
+      "height": 312
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21104v1/fig-005.webp",
+      "caption": "Table 1 Comparison of representative safety-critical generative simulation methods. We compare key design dimensions, including adversarial agent selection, interaction modeling, and counterfactual intervention. Existing approaches typically rely on heuristic agent selection and lack explicit causal interaction modeling, which limits their ability to construct controllable high-risk interactions. In contrast, CounterScene combines causal adversarial agent identification, causal interaction graph modeling, and counterfactual diffusion guidance to generate realistic yet safety-critical closed-loop interactions.",
+      "page": 2,
+      "index": 5,
+      "width": 968,
+      "height": 237
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21104v1/fig-006.webp",
+      "caption": "Table 5 Zero-shot cross-dataset transfer on nuPlan. All models are trained on nuScenes only. CounterScene achieves the best realism across all horizons. At short horizons, it generates realistic near-miss interactions (high HBR) rather than forced collisions; at longer horizons, these interactions naturally evolve into collisions, matching the highest CR while maintaining substantially better trajectory quality. Best results are bold, second best are underlined.",
+      "page": 10,
+      "index": 6,
+      "width": 986,
+      "height": 215
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21104v1/fig-007.webp",
+      "caption": "Table 8 Full per-horizon results on nuScenes (10 Hz). OOR, HBR, and CR are reported in percentage.",
+      "page": 23,
+      "index": 7,
+      "width": 682,
+      "height": 1306
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21104v1/fig-008.webp",
+      "caption": "Figure 7 Qualitative comparison of a high-speed rear-end collision in Scene 915. Factual (Original): In the recorded scene, the trailing vehicle decelerates appropriately, actively maintaining a safe following distance and temporal margin behind the ego vehicle. CounterScene (Ours): By identifying the trailing vehicle as the causal variable, CounterScene specifically suppresses its natural braking behavior. The adversarial agent maintains a high velocity and fails to decelerate in time, effectively compressing the temporal safety margin to zero. This targeted temporal intervention culminates in a severe, physically plausible rear-end crash. Baselines: Lacking structured causal reasoning, baseline methods fail to orchestrate this direct velocity-based conflict. They either passively execute the original safe deceleration (generating zero adversarial pressure) or apply unstructured noise that disrupts the vehicle’s heading without achieving a precise longitudinal impact.",
+      "page": 28,
+      "index": 8,
+      "width": 986,
+      "height": 677
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21104v1/fig-009.webp",
+      "caption": "Table 2 Main results across prediction horizons. Realism (ADE, FDE, ORR↓) and adversarial effectiveness (HBR, CR↑) averaged over short (1–4 s), mid (5–7 s), and long (8–10 s) horizons. CounterScene is the only method that simultaneously achieves superior realism and the highest collision rate, with the adversarial advantage widening at longer horizons. Best results are highlighted in bold and underline.",
+      "page": 8,
+      "index": 9,
+      "width": 986,
+      "height": 213
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21104v1/fig-010.webp",
+      "caption": "Figure 2 Overview of CounterScene. The framework consists of four modules. (1) Causal adversarial agent selection identifies the most critical interacting agent using geometric conflict analysis and danger scoring. (2) Causal Interaction Graph (CIG) encodes conflict-aware interaction relationships among agents. (3) A diffusion-based interactive BEV world model with a SceneTransformer denoiser generates multi-agent trajectories. (4) Counterfactual guidance perturbs the adversarial agent trajectory during denoising to construct safety-critical interactions while maintaining realistic traffic dynamics.",
+      "page": 4,
+      "index": 10,
+      "width": 986,
+      "height": 491
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21104v1/fig-011.webp",
+      "caption": "Table 6 Hyper-parameters used in CounterScene experiments.",
+      "page": 17,
+      "index": 11,
+      "width": 986,
+      "height": 575
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21104v1/fig-012.webp",
+      "caption": "Figure 6 Qualitative comparison of a head-on collision induced by a subtle trajectory shift in Scene 913. Factual (Original): In the recorded scene, the vehicle on the other path strictly maintains its nominal trajectory, preserving a safe spatial margin as the ego vehicle approaches. CounterScene (Ours): By identifying this vehicle as the causal variable, CounterScene applies a minimal, targeted spatial intervention. A slight, physically plausible deviation in the steering angle surgically strips the safety margin, seamlessly redirecting the vehicle into the ego’s path and culminating in a severe head-on crash. Baselines: Lacking structured causal reasoning, baseline methods overlook this subtle vulnerability. They either passively maintain the original safe trajectory (generating zero risk) or apply unstructured noise that results in unrealistic meandering, failing to orchestrate a precise head-on collision.",
+      "page": 27,
+      "index": 12,
+      "width": 986,
+      "height": 677
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21104v1/fig-013.webp",
+      "caption": "Table 9 Ablation results on nuScenes at 3s, 7s, and 10s (10 Hz). PG: progressive guidance, CW: conflict-aware weighting, ATC: adaptive arrival-time compression, JR: jerk regularization.",
+      "page": 24,
+      "index": 13,
+      "width": 818,
+      "height": 481
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21104v1/fig-014.webp",
+      "caption": "Table 7 Progressive guidance configuration in CounterScene.",
+      "page": 20,
+      "index": 14,
+      "width": 986,
+      "height": 238
+    }
+  ]
+}

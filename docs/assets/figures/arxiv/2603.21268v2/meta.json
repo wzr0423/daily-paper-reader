@@ -1,0 +1,86 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.21268v2/fig-001.webp",
+      "caption": "Figure 7: Cosine similarity between PPO and auxiliary gradients over training (3 seeds). All five factor-specific auxiliary gradients remain orthogonal to the PPO gradient (| cos | < 0.01) throughout the entire training run.",
+      "page": 11,
+      "index": 1,
+      "width": 484,
+      "height": 283
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21268v2/fig-002.webp",
+      "caption": "Table 9: Peak tracking error after push (flat task, 5 seeds × 50 episodes). Bold indicates lower peak error.",
+      "page": 7,
+      "index": 2,
+      "width": 481,
+      "height": 254
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21268v2/fig-003.webp",
+      "caption": "Table 18: Summary of key claims and evidence status.",
+      "page": 10,
+      "index": 3,
+      "width": 481,
+      "height": 507
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21268v2/fig-004.webp",
+      "caption": "Table 17: Factorial degradation analysis (10 seeds, randomized task). Degradation = |Severe − ID|/|ID|.",
+      "page": 10,
+      "index": 4,
+      "width": 481,
+      "height": 276
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21268v2/fig-005.webp",
+      "caption": "Table 23: Observed patterns under our simulation protocol.",
+      "page": 13,
+      "index": 5,
+      "width": 482,
+      "height": 310
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21268v2/fig-006.webp",
+      "caption": "Table 1: Model architecture summary. Parameter counts vary by task due to different observation dimensions.",
+      "page": 4,
+      "index": 6,
+      "width": 482,
+      "height": 340
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21268v2/fig-007.webp",
+      "caption": "Table 21: Mutual information between representations and dynamics factors (5 seeds, KNN estimation k = 5, ∼36k samples, nats).",
+      "page": 12,
+      "index": 7,
+      "width": 486,
+      "height": 403
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21268v2/fig-008.webp",
+      "caption": "Table 14: Ablation study on the randomized task (10 seeds, paired t-test vs. full DynaMITE). Bold p-value indicates p < 0.05.",
+      "page": 9,
+      "index": 8,
+      "width": 486,
+      "height": 503
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21268v2/fig-009.webp",
+      "caption": "Table 12: Latent intervention analysis: average absolute reward change per factor subspace (3 seeds × 5 factors × 3 DR levels = 90 conditions, 50-ep eval).",
+      "page": 9,
+      "index": 9,
+      "width": 486,
+      "height": 254
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21268v2/fig-010.webp",
+      "caption": "Figure 2: In-distribution reward (5 seeds, deterministic evaluation). LSTM achieves the best reward on all tasks; DynaMITE ranks second on three of four tasks but is significantly worse than LSTM on all.",
+      "page": 5,
+      "index": 10,
+      "width": 481,
+      "height": 332
+    }
+  ]
+}

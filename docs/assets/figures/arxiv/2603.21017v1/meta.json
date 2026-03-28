@@ -1,0 +1,78 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.21017v1/fig-001.webp",
+      "caption": "Fig. 10: In-Distribution Scenarios. Real-world execution sequences demonstrating successful nominal manipulation for the Stack Blocks, Pour Tea, and Press Button tasks.",
+      "page": 22,
+      "index": 1,
+      "width": 712,
+      "height": 358
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21017v1/fig-002.webp",
+      "caption": "Table 1: Evaluation Results (Success Rate %). We report the In-Distribution (ID) and Out-of-Distribution (OOD) performance of the base policies, the trackingaugmented policies (DP3 ablation, Flow Policy, our DDP) under OOD, and the robustness of DDP under various imagination substitution rates.",
+      "page": 10,
+      "index": 2,
+      "width": 723,
+      "height": 622
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21017v1/fig-003.webp",
+      "caption": "Fig. 11: Failure modes of the DP3 tracking ablation. Real-world execution sequences demonstrating how the baseline policy fails under severe Out-of-Distribution (OOD) spatial shifts, resulting in missing grasps, dropping objects, and imprecise pressing (pressing the box after pressing the button).",
+      "page": 23,
+      "index": 3,
+      "width": 685,
+      "height": 346
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21017v1/fig-004.webp",
+      "caption": "Fig. 7: Qualitative real-robot execution on Stack Blocks, Pour Tea, and Press Button tasks. DDP successfully tracks OOD objects, finishes the main actions of subtasks via the imagined Dream Policy, and executes recover to achieve the remaining task success. In contrast, the tracking-augmented DP3 ablation fails across severe OOD scenarios.",
+      "page": 13,
+      "index": 4,
+      "width": 660,
+      "height": 643
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21017v1/fig-005.webp",
+      "caption": "Fig. 2: Overview of the DDP workflow. Illustrating the closed-loop transitions between physical reality (ID) and internal imagination (OOD) across subtasks.",
+      "page": 8,
+      "index": 5,
+      "width": 708,
+      "height": 206
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21017v1/fig-006.webp",
+      "caption": "Fig. 5: Robot Setup and Objects Tracking. (a) is all the hardware for the realworld experiment. (b) shows the bounding box for object tracking across all tasks.",
+      "page": 12,
+      "index": 6,
+      "width": 638,
+      "height": 291
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21017v1/fig-007.webp",
+      "caption": "Table 3: Detailed OOD Disturbance Parameters for MetaWorld Tasks. The displacement vector ∆P is represented as [dx, dy, dz] in meters.",
+      "page": 24,
+      "index": 7,
+      "width": 725,
+      "height": 804
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21017v1/fig-008.webp",
+      "caption": "Fig. 9: DDP execution on the MetaWorld benchmark (Remaining 8 tasks).",
+      "page": 20,
+      "index": 8,
+      "width": 733,
+      "height": 531
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21017v1/fig-009.webp",
+      "caption": "Fig. 1: Overview of the Dream Diffusion Policy (DDP) framework. (a) A shared 3D encoder extracts unified latent embeddings from point clouds and proprioception. These history latents jointly condition the Diffusion Policy to denoise action chunks, and the Diffusion World Model (via channel-wise concatenation) to forecast future latent states. (b) During inference stage, upon detecting an Out-of-Distribution anomaly, the system halts, tracks the object, and transitions into an imagination loop. The World Model autoregressively forecasts latent states to drive the policy’s action generation, safely bypassing corrupted observations until the recovery is triggered.",
+      "page": 5,
+      "index": 9,
+      "width": 719,
+      "height": 331
+    }
+  ]
+}

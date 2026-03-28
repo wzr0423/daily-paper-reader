@@ -1,10 +1,10 @@
 {
-  "generated_at": "2026-03-28T14:59:48.004963+00:00",
-  "updated_date": "20260227-20260328",
+  "generated_at": "2026-03-28T19:23:19.036583+00:00",
+  "updated_date": "20260328",
   "carryover_days": 9,
   "tag_states": {
     "1": {
-      "updated_date": "20260227-20260328",
+      "updated_date": "20260328",
       "carryover_days": 9,
       "items": [
         {
@@ -53,128 +53,6 @@
           "matched_requirement_id": "req-8",
           "selection_source": "carryover_cache",
           "paper_id": "2603.15583v1",
-          "carry_days": 1
-        },
-        {
-          "id": "2603.02772v1",
-          "source": "arxiv",
-          "title": "Agentic Self-Evolutionary Replanning for Embodied Navigation",
-          "abstract": "Failure is inevitable for embodied navigation in complex environments. To enhance the resilience, replanning (RP) is a viable option, where the robot is allowed to fail, but is capable of adjusting plan until success. However, existing RP approaches freeze the ego action model and miss the opportunities to explore better plans by upgrading the robot itself. To address this limitation, we propose Self-Evolutionary RePlanning, or SERP for short, which leads to a paradigm shift from frozen models towards evolving models by run-time learning from recent experiences. In contrast to existing model evolution approaches that often get stuck at predefined static parameters, we introduce agentic self-evolving action model that uses in-context learning with auto-differentiation (ILAD) for adaptive function adjustment and global parameter reset. To achieve token-efficient replanning for SERP, we also propose graph chain-of-thought (GCOT) replanning with large language model (LLM) inference over distilled graphs. Extensive simulation and real-world experiments demonstrate that SERP achieves higher success rate with lower token expenditure over various benchmarks, validating its superior robustness and efficiency across diverse environments.",
-          "authors": [
-            "Guoliang Li",
-            "Ruihua Han",
-            "Chengyang Li",
-            "He Li",
-            "Shuai Wang",
-            "Wenchao Ding",
-            "Hong Zhang",
-            "Chengzhong Xu"
-          ],
-          "primary_category": "cs.RO",
-          "categories": [
-            "cs.RO"
-          ],
-          "published": "2026-03-03T09:12:29+00:00",
-          "link": "https://arxiv.org/pdf/2603.02772v1",
-          "tags": [
-            "keyword:1",
-            "query:1"
-          ],
-          "llm_score": 8.0,
-          "llm_evidence_en": "agentic self-evolving action model for navigation",
-          "llm_evidence_cn": "用于导航的智能体自进化动作模型",
-          "llm_evidence": "用于导航的智能体自进化动作模型",
-          "canonical_evidence": "用于导航的智能体自进化动作模型",
-          "llm_tldr_en": "Proposes SERP to enable robots to evolve their action models through run-time in-context learning.",
-          "llm_tldr_cn": "提出SERP框架，通过运行时上下文学习使机器人的动作模型能够自进化。",
-          "llm_tldr": "提出SERP框架，通过运行时上下文学习使机器人的动作模型能够自进化。",
-          "llm_tags": [
-            "query:1"
-          ],
-          "matched_query_tag": "query:1",
-          "matched_query_text": "Recent advances in world action models for autonomous agents",
-          "matched_requirement_id": "req-7",
-          "selection_source": "carryover_cache",
-          "paper_id": "2603.02772v1",
-          "carry_days": 1
-        },
-        {
-          "id": "2603.03784v1",
-          "source": "arxiv",
-          "title": "Specification-Driven Generation and Evaluation of Discrete-Event World Models via the DEVS Formalism",
-          "abstract": "World models are essential for planning and evaluation in agentic systems, yet existing approaches lie at two extremes: hand-engineered simulators that offer consistency and reproducibility but are costly to adapt, and implicit neural models that are flexible but difficult to constrain, verify, and debug over long horizons. We seek a principled middle ground that combines the reliability of explicit simulators with the flexibility of learned models, allowing world models to be adapted during online execution. By targeting a broad class of environments whose dynamics are governed by the ordering, timing, and causality of discrete events, such as queueing and service operations, embodied task planning, and message-mediated multi-agent coordination, we advocate explicit, executable discrete-event world models synthesized directly from natural-language specifications. Our approach adopts the DEVS formalism and introduces a staged LLM-based generation pipeline that separates structural inference of component interactions from component-level event and timing logic. To evaluate generated models without a unique ground truth, simulators emit structured event traces that are validated against specification-derived temporal and semantic constraints, enabling reproducible verification and localized diagnostics. Together, these contributions produce world models that are consistent over long-horizon rollouts, verifiable from observable behavior, and efficient to synthesize on demand during online execution.",
-          "authors": [
-            "Zheyu Chen",
-            "Zhuohuan Li",
-            "Chuanhao Li"
-          ],
-          "primary_category": "cs.AI",
-          "categories": [
-            "cs.AI"
-          ],
-          "published": "2026-03-04T06:50:32+00:00",
-          "link": "https://arxiv.org/pdf/2603.03784v1",
-          "tags": [
-            "keyword:1",
-            "query:1"
-          ],
-          "llm_score": 8.0,
-          "llm_evidence_en": "Discrete-event world models for agentic planning and evaluation",
-          "llm_evidence_cn": "用于智能体规划和评估的离散事件世界模型",
-          "llm_evidence": "用于智能体规划和评估的离散事件世界模型",
-          "canonical_evidence": "用于智能体规划和评估的离散事件世界模型",
-          "llm_tldr_en": "Proposes a middle ground between hand-engineered simulators and neural world models using the DEVS formalism.",
-          "llm_tldr_cn": "提出了一种结合显式模拟器可靠性与学习模型灵活性的离散事件世界模型。",
-          "llm_tldr": "提出了一种结合显式模拟器可靠性与学习模型灵活性的离散事件世界模型。",
-          "llm_tags": [
-            "query:1"
-          ],
-          "matched_query_tag": "query:1",
-          "matched_query_text": "World models in reinforcement learning and robotics",
-          "matched_requirement_id": "req-3",
-          "selection_source": "carryover_cache",
-          "paper_id": "2603.03784v1",
-          "carry_days": 1
-        },
-        {
-          "id": "2603.25415v1",
-          "source": "arxiv",
-          "title": "Modernising Reinforcement Learning-Based Navigation for Embodied Semantic Scene Graph Generation",
-          "abstract": "Semantic world models enable embodied agents to reason about objects, relations, and spatial context beyond purely geometric representations. In Organic Computing, such models are a key enabler for objective-driven self-adaptation under uncertainty and resource constraints. The core challenge is to acquire observations maximising model quality and downstream usefulness within a limited action budget.   Semantic scene graphs (SSGs) provide a structured and compact representation for this purpose. However, constructing them within a finite action horizon requires exploration strategies that trade off information gain against navigation cost and decide when additional actions yield diminishing returns.   This work presents a modular navigation component for Embodied Semantic Scene Graph Generation and modernises its decision-making by replacing the policy-optimisation method and revisiting the discrete action formulation. We study compact and finer-grained, larger discrete motion sets and compare a single-head policy over atomic actions with a factorised multi-head policy over action components. We evaluate curriculum learning and optional depth-based collision supervision, and assess SSG completeness, execution safety, and navigation behaviour.   Results show that replacing the optimisation algorithm alone improves SSG completeness by 21\\% relative to the baseline under identical reward shaping. Depth mainly affects execution safety (collision-free motion), while completeness remains largely unchanged. Combining modern optimisation with a finer-grained, factorised action representation yields the strongest overall completeness--efficiency trade-off.",
-          "authors": [
-            "Roman Kueble",
-            "Marco Hueller",
-            "Mrunmai Phatak",
-            "Rainer Lienhart",
-            "Joerg Haehner"
-          ],
-          "primary_category": "cs.AI",
-          "categories": [
-            "cs.AI",
-            "cs.RO"
-          ],
-          "published": "2026-03-26T13:10:08+00:00",
-          "link": "https://arxiv.org/pdf/2603.25415v1",
-          "tags": [
-            "keyword:1",
-            "query:1"
-          ],
-          "llm_score": 8.0,
-          "llm_evidence_en": "Semantic world models for embodied agent reasoning",
-          "llm_evidence_cn": "用于具身智能体推理的语义世界模型",
-          "llm_evidence": "用于具身智能体推理的语义世界模型",
-          "canonical_evidence": "用于具身智能体推理的语义世界模型",
-          "llm_tldr_en": "Uses semantic scene graphs as world models to enable objective-driven self-adaptation in embodied agents.",
-          "llm_tldr_cn": "利用语义场景图作为世界模型，支持具身智能体在不确定环境下的目标驱动自适应。",
-          "llm_tldr": "利用语义场景图作为世界模型，支持具身智能体在不确定环境下的目标驱动自适应。",
-          "llm_tags": [
-            "query:1"
-          ],
-          "matched_query_tag": "query:1",
-          "matched_query_text": "World models in reinforcement learning and robotics",
-          "matched_requirement_id": "req-3",
-          "selection_source": "carryover_cache",
-          "paper_id": "2603.25415v1",
           "carry_days": 1
         },
         {
@@ -253,94 +131,6 @@
           "carry_days": 1
         },
         {
-          "id": "2603.25399v1",
-          "source": "arxiv",
-          "title": "LaMP: Learning Vision-Language-Action Policies with 3D Scene Flow as Latent Motion Prior",
-          "abstract": "We introduce \\textbf{LaMP}, a dual-expert Vision-Language-Action framework that embeds dense 3D scene flow as a latent motion prior for robotic manipulation. Existing VLA models regress actions directly from 2D semantic visual features, forcing them to learn complex 3D physical interactions implicitly. This implicit learning strategy degrades under unfamiliar spatial dynamics. LaMP addresses this limitation by aligning a flow-matching \\emph{Motion Expert} with a policy-predicting \\emph{Action Expert} through gated cross-attention. Specifically, the Motion Expert generates a one-step partially denoised 3D scene flow, and its hidden states condition the Action Expert without full multi-step reconstruction. We evaluate LaMP on the LIBERO, LIBERO-Plus, and SimplerEnv-WidowX simulation benchmarks as well as real-world experiments. LaMP consistently outperforms evaluated VLA baselines across LIBERO, LIBERO-Plus, and SimplerEnv-WidowX benchmarks, achieving the highest reported average success rates under the same training budgets. On LIBERO-Plus OOD perturbations, LaMP shows improved robustness with an average 9.7% gain over the strongest prior baseline. Our project page is available at https://summerwxk.github.io/lamp-project-page/.",
-          "authors": [
-            "Xinkai Wang",
-            "Chenyi Wang",
-            "Yifu Xu",
-            "Mingzhe Ye",
-            "Fu-Cheng Zhang",
-            "Jialin Tian",
-            "Xinyu Zhan",
-            "Lifeng Zhu",
-            "Cewu Lu",
-            "Lixin Yang"
-          ],
-          "primary_category": "cs.CV",
-          "categories": [
-            "cs.CV",
-            "cs.RO"
-          ],
-          "published": "2026-03-26T12:47:51+00:00",
-          "link": "https://arxiv.org/pdf/2603.25399v1",
-          "tags": [
-            "keyword:1",
-            "query:1"
-          ],
-          "llm_score": 8.0,
-          "llm_evidence_en": "Uses 3D scene flow as a latent motion prior for vision-language-action policies",
-          "llm_evidence_cn": "使用3D场景流作为视觉-语言-动作策略的潜动作先验",
-          "llm_evidence": "使用3D场景流作为视觉-语言-动作策略的潜动作先验",
-          "canonical_evidence": "使用3D场景流作为视觉-语言-动作策略的潜动作先验",
-          "llm_tldr_en": "LaMP integrates 3D scene flow as a latent prior to improve VLA model performance in complex physical interactions.",
-          "llm_tldr_cn": "LaMP将3D场景流作为潜先验集成，提升了VLA模型在复杂物理交互中的性能。",
-          "llm_tldr": "LaMP将3D场景流作为潜先验集成，提升了VLA模型在复杂物理交互中的性能。",
-          "llm_tags": [
-            "query:1"
-          ],
-          "matched_query_tag": "query:1",
-          "matched_query_text": "Learning latent dynamics for world modeling",
-          "matched_requirement_id": "req-5",
-          "selection_source": "carryover_cache",
-          "paper_id": "2603.25399v1",
-          "carry_days": 1
-        },
-        {
-          "id": "2603.08113v1",
-          "source": "arxiv",
-          "title": "SAMoE-VLA: A Scene Adaptive Mixture-of-Experts Vision-Language-Action Model for Autonomous Driving",
-          "abstract": "Recent advances in Vision-Language-Action (VLA) models have shown promising capabilities in autonomous driving by leveraging the understanding and reasoning strengths of Large Language Models(LLMs).However, our empirical analysis reveals that directly applying existing token-level MoE mechanisms--which are inherited from LLM architectures--to VLA models results in unstable performance and safety degradation in autonomous driving, highlighting a misalignment between token-based expert specialization and scene-level decision-making.To address this, we propose SAMoE-VLA, a scene-adaptive Vision-Language-Action framework that conditions expert selection on structured scene representations instead of token embeddings. Our key idea is to derive the MoE routing signal from bird's-eye-view (BEV) features that encapsulates traffic scene context, enabling scenario-dependent expert weighting and merging tailored to distinct driving conditions. Furthermore, to support temporally consistent reasoning across world-knowledge, perception, language, and action, we introduce a Conditional Cross-Modal Causal Attention mechanism that integrates world state, linguistic intent, and action history into a unified causal reasoning process. Extensive experiments on the nuScenes open loop planning dataset and LangAuto closed-loop benchmark demonstrate that SAMoE-VLA achieves state-of-the-art performance, outperforming prior VLA-based and world-model-based approaches with fewer parameters.Our code will be released soon.",
-          "authors": [
-            "Zihan You",
-            "Hongwei Liu",
-            "Chenxu Dang",
-            "Zhe Wang",
-            "Sining Ang",
-            "Aoqi Wang",
-            "Yan Wang"
-          ],
-          "primary_category": "cs.CV",
-          "categories": [
-            "cs.CV"
-          ],
-          "published": "2026-03-09T08:54:03+00:00",
-          "link": "https://arxiv.org/pdf/2603.08113v1",
-          "tags": [
-            "keyword:1",
-            "query:1"
-          ],
-          "llm_score": 8.0,
-          "llm_evidence_en": "Scene-adaptive Vision-Language-Action model for autonomous driving decision-making",
-          "llm_evidence_cn": "用于自动驾驶决策的场景自适应视觉-语言-动作模型",
-          "llm_evidence": "用于自动驾驶决策的场景自适应视觉-语言-动作模型",
-          "canonical_evidence": "用于自动驾驶决策的场景自适应视觉-语言-动作模型",
-          "llm_tldr_en": "SAMoE-VLA improves autonomous driving safety by conditioning expert selection on structured scene representations.",
-          "llm_tldr_cn": "SAMoE-VLA通过基于结构化场景表示的专家选择，提升了自动驾驶的安全性。",
-          "llm_tldr": "SAMoE-VLA通过基于结构化场景表示的专家选择，提升了自动驾驶的安全性。",
-          "llm_tags": [
-            "query:1"
-          ],
-          "matched_query_tag": "query:1",
-          "matched_query_text": "Recent advances in world action models for autonomous agents",
-          "matched_requirement_id": "req-7",
-          "selection_source": "carryover_cache",
-          "paper_id": "2603.08113v1",
-          "carry_days": 1
-        },
-        {
           "id": "2603.17850v1",
           "source": "arxiv",
           "title": "ProbeFlow: Training-Free Adaptive Flow Matching for Vision-Language-Action Models",
@@ -414,49 +204,6 @@
           "matched_requirement_id": "req-3",
           "selection_source": "carryover_cache",
           "paper_id": "2603.13215v1",
-          "carry_days": 1
-        },
-        {
-          "id": "2603.09542v1",
-          "source": "arxiv",
-          "title": "NS-VLA: Towards Neuro-Symbolic Vision-Language-Action Models",
-          "abstract": "Vision-Language-Action (VLA) models are formulated to ground instructions in visual context and generate action sequences for robotic manipulation. Despite recent progress, VLA models still face challenges in learning related and reusable primitives, reducing reliance on large-scale data and complex architectures, and enabling exploration beyond demonstrations. To address these challenges, we propose a novel Neuro-Symbolic Vision-Language-Action (NS-VLA) framework via online reinforcement learning (RL). It introduces a symbolic encoder to embedding vision and language features and extract structured primitives, utilizes a symbolic solver for data-efficient action sequencing, and leverages online RL to optimize generation via expansive exploration. Experiments on robotic manipulation benchmarks demonstrate that NS-VLA outperforms previous methods in both one-shot training and data-perturbed settings, while simultaneously exhibiting superior zero-shot generalizability, high data efficiency and expanded exploration space. Our code is available.",
-          "authors": [
-            "Ziyue Zhu",
-            "Shangyang Wu",
-            "Shuai Zhao",
-            "Zhiqiu Zhao",
-            "Shengjie Li",
-            "Yi Wang",
-            "Fang Li",
-            "Haoran Luo"
-          ],
-          "primary_category": "cs.RO",
-          "categories": [
-            "cs.RO"
-          ],
-          "published": "2026-03-10T11:51:54+00:00",
-          "link": "https://arxiv.org/pdf/2603.09542v1",
-          "tags": [
-            "keyword:1",
-            "query:1"
-          ],
-          "llm_score": 8.0,
-          "llm_evidence_en": "VLA framework via online reinforcement learning",
-          "llm_evidence_cn": "通过在线强化学习的VLA框架",
-          "llm_evidence": "通过在线强化学习的VLA框架",
-          "canonical_evidence": "通过在线强化学习的VLA框架",
-          "llm_tldr_en": "Combines neuro-symbolic methods with online RL to improve VLA model exploration and data efficiency.",
-          "llm_tldr_cn": "结合神经符号方法与在线强化学习，提升VLA模型的探索能力和数据效率。",
-          "llm_tldr": "结合神经符号方法与在线强化学习，提升VLA模型的探索能力和数据效率。",
-          "llm_tags": [
-            "query:1"
-          ],
-          "matched_query_tag": "query:1",
-          "matched_query_text": "Model-based reinforcement learning with world models",
-          "matched_requirement_id": "req-6",
-          "selection_source": "carryover_cache",
-          "paper_id": "2603.09542v1",
           "carry_days": 1
         },
         {
@@ -546,6 +293,297 @@
           "matched_requirement_id": "req-5",
           "selection_source": "carryover_cache",
           "paper_id": "2603.12655v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2603.19655v1",
+          "source": "arxiv",
+          "title": "Accurate Open-Loop Control of a Soft Continuum Robot Through Visually Learned Latent Representations",
+          "abstract": "This work addresses open-loop control of a soft continuum robot (SCR) from video-learned latent dynamics. Visual Oscillator Networks (VONs) from previous work are used, that provide mechanistically interpretable 2D oscillator latents through an attention broadcast decoder (ABCD). Open-loop, single-shooting optimal control is performed in latent space to track image-specified waypoints without camera feedback. An interactive SCR live simulator enables design of static, dynamic, and extrapolated targets and maps them to model-specific latent waypoints. On a two-segment pneumatic SCR, Koopman, MLP, and oscillator dynamics, each with and without ABCD, are evaluated on setpoint and dynamic trajectories. ABCD-based models consistently reduce image-space tracking error. The VON and ABCD-based Koopman models attains the lowest MSEs. Using an ablation study, we demonstrate that several architecture choices and training settings contribute to the open-loop control performance. Simulation stress tests further confirm static holding, stable extrapolated equilibria, and plausible relaxation to the rest state. To the best of our knowledge, this is the first demonstration that interpretable, video-learned latent dynamics enable reliable long-horizon open-loop control of an SCR.",
+          "authors": [
+            "Henrik Krauss",
+            "Johann Licher",
+            "Naoya Takeishi",
+            "Annika Raatz",
+            "Takehisa Yairi"
+          ],
+          "primary_category": "cs.RO",
+          "categories": [
+            "cs.RO",
+            "eess.SY"
+          ],
+          "published": "2026-03-20T05:43:26+00:00",
+          "link": "https://arxiv.org/pdf/2603.19655v1",
+          "tags": [
+            "keyword:1",
+            "query:1"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "Control through visually learned latent dynamics",
+          "llm_evidence_cn": "通过视觉学习的潜空间动力学进行控制",
+          "llm_evidence": "通过视觉学习的潜空间动力学进行控制",
+          "canonical_evidence": "通过视觉学习的潜空间动力学进行控制",
+          "llm_tldr_en": "This paper performs optimal control in a visually learned latent space for soft continuum robots.",
+          "llm_tldr_cn": "该研究在视觉学习的潜空间内对软体连续机器人进行最优控制。",
+          "llm_tldr": "该研究在视觉学习的潜空间内对软体连续机器人进行最优控制。",
+          "llm_tags": [
+            "query:1"
+          ],
+          "matched_query_tag": "query:1",
+          "matched_query_text": "Learning latent dynamics for world modeling",
+          "matched_requirement_id": "req-5",
+          "selection_source": "carryover_cache",
+          "paper_id": "2603.19655v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2603.22760v1",
+          "source": "arxiv",
+          "title": "SG-VLA: Learning Spatially-Grounded Vision-Language-Action Models for Mobile Manipulation",
+          "abstract": "Vision-Language-Action (VLA) models show promise for robotic control, yet performance in complex household environments remains sub-optimal. Mobile manipulation requires reasoning about global scene layout, fine-grained geometry, and high-dimensional continuous actions, making standard imitation learning insufficient. We introduce a framework for learning spatially-grounded VLA models that strengthens perception and representation through auxiliary task co-training and multi-modal input enhancement. Our method addresses the challenge of controlling a 13-dimensional action space involving coordinated base motion, arm articulation, and gripper actuation. To enrich spatial understanding, the model incorporates multi-view RGB observations, depth cues, and short temporal history, providing perspectives of both global scene structure and local manipulation context. To improve representation quality, we co-train auxiliary decoders that reconstruct interpretable intermediate signals - including global robot position, joint configurations, grasp affordances, target-object relative pose, and segmentation masks - from shared visual-language features. These objectives provide dense supervision that encourages the backbone to develop spatially grounded, manipulation-aware latent representations. Through extensive evaluation on home rearrangement tasks, our approach achieves consistent improvements across picking, placing, opening, and closing operations, substantially outperforming direct imitation learning. Our findings suggest that spatial grounding through auxiliary and multi-modal learning provides a strong direction for scaling VLA models toward general-purpose domestic robots.",
+          "authors": [
+            "Ruisen Tu",
+            "Arth Shukla",
+            "Sohyun Yoo",
+            "Xuanlin Li",
+            "Junxi Li",
+            "Jianwen Xie",
+            "Hao Su",
+            "Zhuowen Tu"
+          ],
+          "primary_category": "cs.RO",
+          "categories": [
+            "cs.RO"
+          ],
+          "published": "2026-03-24T03:44:25+00:00",
+          "link": "https://arxiv.org/pdf/2603.22760v1",
+          "tags": [
+            "keyword:1",
+            "query:1"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "Vision-Language-Action models for mobile manipulation",
+          "llm_evidence_cn": "用于移动操作的视觉-语言-动作模型",
+          "llm_evidence": "用于移动操作的视觉-语言-动作模型",
+          "canonical_evidence": "用于移动操作的视觉-语言-动作模型",
+          "llm_tldr_en": "Introduces SG-VLA to improve spatial grounding and high-dimensional action control in robotic mobile manipulation.",
+          "llm_tldr_cn": "引入 SG-VLA 框架，增强机器人移动操作中的空间感知和高维动作控制能力。",
+          "llm_tldr": "引入 SG-VLA 框架，增强机器人移动操作中的空间感知和高维动作控制能力。",
+          "llm_tags": [
+            "query:1"
+          ],
+          "matched_query_tag": "query:1",
+          "matched_query_text": "Recent advances in world action models for autonomous agents",
+          "matched_requirement_id": "req-7",
+          "selection_source": "carryover_cache",
+          "paper_id": "2603.22760v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2603.22003v1",
+          "source": "arxiv",
+          "title": "VP-VLA: Visual Prompting as an Interface for Vision-Language-Action Models",
+          "abstract": "Vision-Language-Action (VLA) models typically map visual observations and linguistic instructions directly to robotic control signals. This \"black-box\" mapping forces a single forward pass to simultaneously handle instruction interpretation, spatial grounding, and low-level control, often leading to poor spatial precision and limited robustness in out-of-distribution scenarios. To address these limitations, we propose VP-VLA, a dual-system framework that decouples high-level reasoning and low-level execution via a structured visual prompting interface. Specifically, a \"System 2 Planner\" decomposes complex instructions into sub-tasks and identifies relevant target objects and goal locations. These spatial anchors are then overlaid directly onto visual observations as structured visual prompts, such as crosshairs and bounding boxes. Guided by these prompts and enhanced by a novel auxiliary visual grounding objective during training, a \"System 1 Controller\" reliably generates precise low-level execution motions. Experiments on the Robocasa-GR1-Tabletop benchmark and SimplerEnv simulation demonstrate that VP-VLA improves success rates by 5% and 8.3%, surpassing competitive baselines including QwenOFT and GR00T-N1.6.",
+          "authors": [
+            "Zixuan Wang",
+            "Yuxin Chen",
+            "Yuqi Liu",
+            "Jinhui Ye",
+            "Pengguang Chen",
+            "Changsheng Lu",
+            "Shu Liu",
+            "Jiaya Jia"
+          ],
+          "primary_category": "cs.RO",
+          "categories": [
+            "cs.RO"
+          ],
+          "published": "2026-03-23T14:08:58+00:00",
+          "link": "https://arxiv.org/pdf/2603.22003v1",
+          "tags": [
+            "keyword:1",
+            "query:1"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "Vision-Language-Action models with structured visual prompting for robotics",
+          "llm_evidence_cn": "具有结构化视觉提示的视觉-语言-动作机器人模型",
+          "llm_evidence": "具有结构化视觉提示的视觉-语言-动作机器人模型",
+          "canonical_evidence": "具有结构化视觉提示的视觉-语言-动作机器人模型",
+          "llm_tldr_en": "Decouples reasoning and execution in VLA models using a visual prompting interface to improve spatial precision.",
+          "llm_tldr_cn": "通过视觉提示接口解耦 VLA 模型的推理与执行，提升机器人在复杂任务中的空间精度。",
+          "llm_tldr": "通过视觉提示接口解耦 VLA 模型的推理与执行，提升机器人在复杂任务中的空间精度。",
+          "llm_tags": [
+            "query:1"
+          ],
+          "matched_query_tag": "query:1",
+          "matched_query_text": "Recent advances in world action models for autonomous agents",
+          "matched_requirement_id": "req-7",
+          "selection_source": "carryover_cache",
+          "paper_id": "2603.22003v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2603.25481v1",
+          "source": "arxiv",
+          "title": "LILAC: Language-Conditioned Object-Centric Optical Flow for Open-Loop Trajectory Generation",
+          "abstract": "We address language-conditioned robotic manipulation using flow-based trajectory generation, which enables training on human and web videos of object manipulation and requires only minimal embodiment-specific data. This task is challenging, as object trajectory generation from pre-manipulation images and natural language instructions requires appropriate instruction-flow alignment. To tackle this challenge, we propose the flow-based Language Instruction-guided open-Loop ACtion generator (LILAC). This flow-based Vision-Language-Action model (VLA) generates object-centric 2D optical flow from an RGB image and a natural language instruction, and converts the flow into a 6-DoF manipulator trajectory. LILAC incorporates two key components: Semantic Alignment Loss, which strengthens language conditioning to generate instruction-aligned optical flow, and Prompt-Conditioned Cross-Modal Adapter, which aligns learned visual prompts with image and text features to provide rich cues for flow generation. Experimentally, our method outperformed existing approaches in generated flow quality across multiple benchmarks. Furthermore, in physical object manipulation experiments using free-form instructions, LILAC demonstrated a superior task success rate compared to existing methods. The project page is available at https://lilac-75srg.kinsta.page/.",
+          "authors": [
+            "Motonari Kambara",
+            "Koki Seno",
+            "Tomoya Kaichi",
+            "Yanan Wang",
+            "Komei Sugiura"
+          ],
+          "primary_category": "cs.RO",
+          "categories": [
+            "cs.RO"
+          ],
+          "published": "2026-03-26T14:21:22+00:00",
+          "link": "https://arxiv.org/pdf/2603.25481v1",
+          "tags": [
+            "keyword:1",
+            "query:1"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "vision-language-action model for trajectory generation",
+          "llm_evidence_cn": "用于轨迹生成的视觉-语言-动作模型",
+          "llm_evidence": "用于轨迹生成的视觉-语言-动作模型",
+          "canonical_evidence": "用于轨迹生成的视觉-语言-动作模型",
+          "llm_tldr_en": "Proposes a flow-based VLA model for language-conditioned robotic manipulation and trajectory generation.",
+          "llm_tldr_cn": "提出一种基于流的VLA模型，用于语言条件下的机器人操作和轨迹生成。",
+          "llm_tldr": "提出一种基于流的VLA模型，用于语言条件下的机器人操作和轨迹生成。",
+          "llm_tags": [
+            "query:1"
+          ],
+          "matched_query_tag": "query:1",
+          "matched_query_text": "Action conditioned generative world models for robotics",
+          "matched_requirement_id": "req-8",
+          "selection_source": "carryover_cache",
+          "paper_id": "2603.25481v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2603.22899v1",
+          "source": "arxiv",
+          "title": "Agile-VLA: Few-Shot Industrial Pose Rectification via Implicit Affordance Anchoring",
+          "abstract": "Deploying Vision-Language-Action (VLA) models on resource-constrained edge platforms encounters a fundamental conflict between high-latency semantic inference and the high-frequency control required for dynamic manipulation. To address the challenge, this paper presents Agile-VLA, a hierarchical framework designed for industrial pose reorientation tasks on edge devices such as the NVIDIA Jetson Orin Nano. The core innovation is an Implicit Affordance Anchoring mechanism that directly maps geometric visual cues, specifically centroid and rim keypoint anchors, into structured parametric action primitives, thereby substantially reducing reliance on high-latency semantic inference during closed-loop control. By decoupling perception (10 Hz) from control (50 Hz) via an asynchronous dual-stream architecture, the system effectively mitigates the frequency mismatch inherent in edge-based robot learning. Experimental results on a standard 6-DoF manipulator demonstrate that Agile-VLA achieves robust rectification of complex, irregular workpieces using only 5-shot demonstrations through extrinsic dexterity.",
+          "authors": [
+            "Teng Yan",
+            "Zhengyang Pei",
+            "Chengyu Shi",
+            "Yue Yu",
+            "Yikun Chen",
+            "Zilong Zhu",
+            "Zelin Fang",
+            "Kaile Guo",
+            "Zihang Wang",
+            "Peigen Tian",
+            "Bingzhuo Zhong"
+          ],
+          "primary_category": "cs.RO",
+          "categories": [
+            "cs.RO"
+          ],
+          "published": "2026-03-24T07:48:08+00:00",
+          "link": "https://arxiv.org/pdf/2603.22899v1",
+          "tags": [
+            "keyword:1",
+            "query:1"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "Vision-Language-Action (VLA) models for industrial robot manipulation",
+          "llm_evidence_cn": "用于工业机器人操作的视觉-语言-动作 (VLA) 模型",
+          "llm_evidence": "用于工业机器人操作的视觉-语言-动作 (VLA) 模型",
+          "canonical_evidence": "用于工业机器人操作的视觉-语言-动作 (VLA) 模型",
+          "llm_tldr_en": "Presents Agile-VLA, a hierarchical framework for high-frequency industrial robot control using affordance anchoring.",
+          "llm_tldr_cn": "提出Agile-VLA，一种利用示能锚定实现高频工业机器人控制的分层框架。",
+          "llm_tldr": "提出Agile-VLA，一种利用示能锚定实现高频工业机器人控制的分层框架。",
+          "llm_tags": [
+            "query:1"
+          ],
+          "matched_query_tag": "query:1",
+          "matched_query_text": "Action conditioned generative world models for robotics",
+          "matched_requirement_id": "req-8",
+          "selection_source": "carryover_cache",
+          "paper_id": "2603.22899v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2603.24541v1",
+          "source": "arxiv",
+          "title": "SEGAR: Selective Enhancement for Generative Augmented Reality",
+          "abstract": "Generative world models offer a compelling foundation for augmented-reality (AR) applications: by predicting future image sequences that incorporate deliberate visual edits, they enable temporally coherent, augmented future frames that can be computed ahead of time and cached, avoiding per-frame rendering from scratch in real time. In this work, we present SEGAR, a preliminary framework that combines a diffusion-based world model with a selective correction stage to support this vision. The world model generates augmented future frames with region-specific edits while preserving others, and the correction stage subsequently aligns safety-critical regions with real-world observations while preserving intended augmentations elsewhere. We demonstrate this pipeline in driving scenarios as a representative setting where semantic region structure is well defined and real-world feedback is readily available. We view this as an early step toward generative world models as practical AR infrastructure, where future frames can be generated, cached, and selectively corrected on demand.",
+          "authors": [
+            "Fanjun Bu",
+            "Chenyang Yuan",
+            "Hiroshi Yasuda"
+          ],
+          "primary_category": "cs.CV",
+          "categories": [
+            "cs.CV",
+            "cs.AI"
+          ],
+          "published": "2026-03-25T17:15:45+00:00",
+          "link": "https://arxiv.org/pdf/2603.24541v1",
+          "tags": [
+            "keyword:1",
+            "query:1"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "generative world models for augmented reality",
+          "llm_evidence_cn": "用于增强现实的生成式世界模型",
+          "llm_evidence": "用于增强现实的生成式世界模型",
+          "canonical_evidence": "用于增强现实的生成式世界模型",
+          "llm_tldr_en": "Combines diffusion-based world models with selective correction for temporally coherent AR frame generation.",
+          "llm_tldr_cn": "结合扩散世界模型与选择性修正，实现时间连续的增强现实帧生成。",
+          "llm_tldr": "结合扩散世界模型与选择性修正，实现时间连续的增强现实帧生成。",
+          "llm_tags": [
+            "query:1"
+          ],
+          "matched_query_tag": "query:1",
+          "matched_query_text": "Action conditioned generative world models for robotics",
+          "matched_requirement_id": "req-8",
+          "selection_source": "carryover_cache",
+          "paper_id": "2603.24541v1",
+          "carry_days": 1
+        },
+        {
+          "id": "2603.25044v1",
+          "source": "arxiv",
+          "title": "ThermoAct:Thermal-Aware Vision-Language-Action Models for Robotic Perception and Decision-Making",
+          "abstract": "In recent human-robot collaboration environments, there is a growing focus on integrating diverse sensor data beyond visual information to enable safer and more intelligent task execution. Although thermal data can be crucial for enhancing robot safety and operational efficiency, its integration has been relatively overlooked in prior research. This paper proposes a novel Vision-Language-Action (VLA) framework that incorporates thermal information for robot task execution. The proposed system leverages a Vision-Language Model (VLM) as a high-level planner to interpret complex natural language commands and decompose them into simpler sub-tasks. This approach facilitates efficient data collection and robust reasoning for complex operations. Unlike conventional methods that rely solely on visual data, our approach integrates thermal information, enabling the robot to perceive physical properties and proactively ensure environmental safety. Experimental results from real-world task scenarios validate the feasibility of our proposed framework, suggesting its potential to enhance task success rates and safety compared to existing vision-based systems.",
+          "authors": [
+            "Young-Chae Son",
+            "Dae-Kwan Ko",
+            "Yoon-Ji Choi",
+            "Soo-Chul Lim"
+          ],
+          "primary_category": "cs.RO",
+          "categories": [
+            "cs.RO"
+          ],
+          "published": "2026-03-26T05:26:56+00:00",
+          "link": "https://arxiv.org/pdf/2603.25044v1",
+          "tags": [
+            "keyword:1",
+            "query:1"
+          ],
+          "llm_score": 8.0,
+          "llm_evidence_en": "vision-language-action models for robotic decision-making",
+          "llm_evidence_cn": "用于机器人决策的视觉-语言-动作模型",
+          "llm_evidence": "用于机器人决策的视觉-语言-动作模型",
+          "canonical_evidence": "用于机器人决策的视觉-语言-动作模型",
+          "llm_tldr_en": "Incorporates thermal data into VLA frameworks to enhance robot safety and decision-making in collaboration.",
+          "llm_tldr_cn": "将热成像数据整合至VLA框架，提升机器人在协作环境中的安全性和决策能力。",
+          "llm_tldr": "将热成像数据整合至VLA框架，提升机器人在协作环境中的安全性和决策能力。",
+          "llm_tags": [
+            "query:1"
+          ],
+          "matched_query_tag": "query:1",
+          "matched_query_text": "Recent advances in world action models for autonomous agents",
+          "matched_requirement_id": "req-7",
+          "selection_source": "carryover_cache",
+          "paper_id": "2603.25044v1",
           "carry_days": 1
         }
       ]
