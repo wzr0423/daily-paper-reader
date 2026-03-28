@@ -25,3 +25,55 @@ subscriptions:
     stage: A
     diff_threshold_pct: 15
   keyword_recall_mode: or
+  intent_profiles:
+    - tag: '1'
+      description: 寻找关于世界动作模型（World Action Model）及相关领域（如模型预测、强化学习）的学术论文。
+      enabled: true
+      paper_sources:
+        - arxiv
+      keywords:
+        - keyword: robot manipulation
+          keyword_cn: ''
+          query: r
+        - keyword: VLA
+          keyword_cn: ''
+          query: V
+        - keyword: World Model
+          keyword_cn: 世界模型
+          query: World models in reinforcement learning and robotics
+        - keyword: Action Model
+          keyword_cn: 动作模型
+          query: Action-conditioned world models for decision making
+        - keyword: Latent Dynamics
+          keyword_cn: 潜空间动力学
+          query: Learning latent dynamics for world modeling
+        - keyword: Model-based RL
+          keyword_cn: 基于模型的强化学习
+          query: Model-based reinforcement learning with world models
+      intent_queries:
+        - query: Recent advances in world action models for autonomous agents
+          query_cn: 自主智能体世界动作模型的最新进展
+          enabled: true
+          source: manual
+          note: ''
+        - query: Action conditioned generative world models for robotics
+          query_cn: 机器人领域中基于动作的生成式世界模型
+          enabled: true
+          source: manual
+          note: ''
+      updated_at: '2026-03-28T14:47:20.886Z'
+source_backends:
+  arxiv:
+    papers_table: arxiv_papers
+    use_vector_rpc: true
+    vector_rpc: match_arxiv_papers
+    vector_rpc_exact: match_arxiv_papers_exact
+    use_bm25_rpc: true
+    bm25_rpc: match_arxiv_papers_bm25
+    sync_table: arxiv_sync_status
+    sync_success_value: success
+    schema: public
+    kind: supabase
+    enabled: true
+    url: https://lyucdwgefyfbmaiopjbk.supabase.co
+    anon_key: sb_publishable_lX-oi64Uxyd7SIVv3_w2Uw_MTOojeKq
