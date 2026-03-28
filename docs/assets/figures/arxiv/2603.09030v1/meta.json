@@ -1,0 +1,150 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.09030v1/fig-001.webp",
+      "caption": "Figure 11 Object Generalization Results. We observe strong improvements in prediction quality of interaction with unseen objects as we include more diverse items in the training data.",
+      "page": 11,
+      "index": 1,
+      "width": 956,
+      "height": 225
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09030v1/fig-002.webp",
+      "caption": "Table 4 Per-category perceptual similarity across different training data mixtures.",
+      "page": 21,
+      "index": 2,
+      "width": 906,
+      "height": 372
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09030v1/fig-003.webp",
+      "caption": "Figure 1 We introduce PlayWorld, a scalable framework for training high-fidelity video world models from autonomous robot play that enables fine-grained dynamics prediction for accurate policy evaluation, and online reinforcement learning policy fine-tuning that yields strong real-world success rate improvements.",
+      "page": 2,
+      "index": 3,
+      "width": 986,
+      "height": 325
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09030v1/fig-004.webp",
+      "caption": "Figure 4 t-SNE analysis of training samples. Robot play data exhibits markedly broader behavioral coverage than human-collected trajectories. Colors indicate coarse interaction modes assigned by a human annotator.",
+      "page": 7,
+      "index": 4,
+      "width": 459,
+      "height": 493
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09030v1/fig-005.webp",
+      "caption": "Figure 9 Fine-tuning Experiment Results. PlayWorld-finetuned policy demonstrates improved success rates and learns robust recovery behaviors beyond seen demonstrations.",
+      "page": 10,
+      "index": 5,
+      "width": 573,
+      "height": 427
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09030v1/fig-006.webp",
+      "caption": "Figure 10 Scaling behavior for world models trained with different data mixtures.",
+      "page": 10,
+      "index": 6,
+      "width": 436,
+      "height": 320
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09030v1/fig-007.webp",
+      "caption": "Table 5 Hyperparameters used for DSRL training and diffusion policy.",
+      "page": 23,
+      "index": 7,
+      "width": 336,
+      "height": 621
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09030v1/fig-008.webp",
+      "caption": "Figure 5 PlayWorld faithfully captures fine-grained dynamic behaviors. PlayWorld’s predictions closely match fine-grained dynamic interaction modes in the real-world, such as missed grasps, collisions, deformations, and slips.",
+      "page": 8,
+      "index": 8,
+      "width": 930,
+      "height": 560
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09030v1/fig-009.webp",
+      "caption": "Figure 6 PlayWorld ’s predicted policy outcome distribution matches closely with real-world behavior.",
+      "page": 8,
+      "index": 9,
+      "width": 518,
+      "height": 343
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09030v1/fig-010.webp",
+      "caption": "Figure 2 PlayWorld System Diagram. Left: Autonomous data-collection pipeline in which the VLM and VLA iteratively propose and execute tasks. Right: Video world-model backbone and the setup for policy evaluation and fine-tuning.",
+      "page": 4,
+      "index": 10,
+      "width": 986,
+      "height": 337
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09030v1/fig-011.webp",
+      "caption": "Figure 12 Example extracted centroids from the demonstration data that roughly corresponds to distinct nominal behavior episodes.",
+      "page": 19,
+      "index": 11,
+      "width": 986,
+      "height": 187
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09030v1/fig-012.webp",
+      "caption": "Table 2 Hyperparameters used for video model training.",
+      "page": 19,
+      "index": 12,
+      "width": 379,
+      "height": 360
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09030v1/fig-013.webp",
+      "caption": "Figure 15 Task: remove the carrot from the bowl. Top: base policy behavior in the real world. Bottom: PlayWorld fine-tuned policy behavior in the world, where the robot learned to grasp a more stable position.",
+      "page": 24,
+      "index": 13,
+      "width": 986,
+      "height": 335
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09030v1/fig-014.webp",
+      "caption": "Figure 16 Task: fold the towel from left to right. Top: base policy behavior in the real world. Bottom: PlayWorld fine-tuned policy behavior in the world, where the grasping motion is more robust and accurate.",
+      "page": 24,
+      "index": 14,
+      "width": 986,
+      "height": 341
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09030v1/fig-015.webp",
+      "caption": "Figure 8 Example Policy Interaction with different World Models. We provide closed-loop rollouts with two example policies to demonstrate how hallucinated success can impact prediction outcomes.",
+      "page": 9,
+      "index": 15,
+      "width": 986,
+      "height": 361
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09030v1/fig-016.webp",
+      "caption": "Figure 7 Policy Evaluation Success Rate (SR) Correlation. Across diverse policies (architectures, training mixtures, and tasks), PlayWorld ’s predicted success rates are most strongly correlated with observed success rates and show the lowest variability.",
+      "page": 9,
+      "index": 16,
+      "width": 986,
+      "height": 302
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09030v1/fig-017.webp",
+      "caption": "Figure 14 Training sample distribution for demonstration data, human-collected play data, and autonomously-collected play data at different scales. We observe that play data consistently provides the widest distribution over the state space, while other human-collected data exhibits limited expansion in coverage even at larger scale.",
+      "page": 20,
+      "index": 17,
+      "width": 886,
+      "height": 590
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09030v1/fig-018.webp",
+      "caption": "Figure 13 Example play data episodes selected from autonomous roll-outs for various tasks.",
+      "page": 20,
+      "index": 18,
+      "width": 986,
+      "height": 552
+    }
+  ]
+}

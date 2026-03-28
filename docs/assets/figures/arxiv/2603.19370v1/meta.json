@@ -1,0 +1,70 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.19370v1/fig-001.webp",
+      "caption": "Figure 4 Qualitative visualization across multiple benchmarks. The figure presents improved action prediction and manipulation quality achieved by VAMPO on real-world platforms (Agibot Genie 01, Flexiv dual-arm robot, VidowX).",
+      "page": 11,
+      "index": 1,
+      "width": 982,
+      "height": 213
+    },
+    {
+      "url": "assets/figures/arxiv/2603.19370v1/fig-002.webp",
+      "caption": "Figure 5 Real-world evaluation across multiple task benchmarks. The figure reports performance on three manipulation benchmarks—grasping in clutter, single-arm pick-and-place, and bimanual grasp-and-place—on the Agibot Genie 01 platform. VAMPO(Ours) achieves the best performance across all tasks.",
+      "page": 11,
+      "index": 2,
+      "width": 978,
+      "height": 333
+    },
+    {
+      "url": "assets/figures/arxiv/2603.19370v1/fig-003.webp",
+      "caption": "Figure 1 Overall of VAMPO. Our post-training framework introduces reinforcement learning from verified rewards in place of the surrogate objective in video action models, enabling direct optimization of task-specific goals in training video prediction model (VPM). This approach improves the accuracy of VPM’s predictive visual representations, leading to enhanced action generation and task performance. Notably, our method demonstrates significant improvements not only in simulated environments but also in real-world scenarios, showcasing its robustness and versatility across diverse settings.",
+      "page": 2,
+      "index": 3,
+      "width": 976,
+      "height": 302
+    },
+    {
+      "url": "assets/figures/arxiv/2603.19370v1/fig-004.webp",
+      "caption": "Table 3 Performance on L-CALVIN (long-horizon). The table reports tasks completed in sequence (1–10) and average trajectory length (Avg. Len) under the ABC→D protocol. VAMPO (Ours) yields the best results across all task lengths; improvements are highlighted.",
+      "page": 10,
+      "index": 4,
+      "width": 868,
+      "height": 391
+    },
+    {
+      "url": "assets/figures/arxiv/2603.19370v1/fig-005.webp",
+      "caption": "Figure 3 Evaluation on Visual Dynamics. The figure reports the L1 evaluation between predicted latents and ground-truth latents over training steps, and VAMPO exhibits improved alignment with expert dynamics, leading to hallucination suppression, planning correction, and action rectification.",
+      "page": 8,
+      "index": 5,
+      "width": 982,
+      "height": 253
+    },
+    {
+      "url": "assets/figures/arxiv/2603.19370v1/fig-006.webp",
+      "caption": "Figure 6 Ablation studies on core components. The figure visualizes the effects of different design choices on CALVIN ABC→D: (a) post-training steps (GRPO iterations), (b) optimization algorithm (DDPO vs. GRPO), (c) hybrid denoising strategy (5-step vs. 1-step SDE), and (d) reward type (pixel-level vs. latent-level). Our final configuration (1400-step GRPO, 1-step SDE, latent-space reward) consistently achieves the best performance.",
+      "page": 12,
+      "index": 6,
+      "width": 982,
+      "height": 596
+    },
+    {
+      "url": "assets/figures/arxiv/2603.19370v1/fig-007.webp",
+      "caption": "Table 2 Performance on the CALVIN ABC→D benchmark. The table reports task completion in a row (1–5) and average trajectory length (Avg. Len) for VLM-based and VPM-based VLAs. VAMPO(Ours) achieves the best performance; our method’s row is highlighted.",
+      "page": 9,
+      "index": 7,
+      "width": 944,
+      "height": 433
+    },
+    {
+      "url": "assets/figures/arxiv/2603.19370v1/fig-008.webp",
+      "caption": "Figure 2 Overview of the VAMPO training paradigm. In the pretraining stage, the video prediction model (VPM) and action generation model (AGM) are trained on expert demonstrations. In the policy optimization stage, the VPM generates future latents via a hybrid denoising process, using SDE-style stochasticity only at the first step and ODE-based denoising for the remaining steps. Verified rewards are computed by comparing predicted latents with expert latents, and GRPO is used to optimize the VPM toward more precise, control-relevant visual dynamics for downstream action generation.",
+      "page": 5,
+      "index": 8,
+      "width": 937,
+      "height": 337
+    }
+  ]
+}

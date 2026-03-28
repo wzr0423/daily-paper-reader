@@ -1,0 +1,166 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.04553v1/fig-001.webp",
+      "caption": "Figure 9: Encoding and decoding particles in DLP. Input image is first used to generate keypoint proposals, that, jointly with input image are used to encode a set of particles by the ENCODER, which is then decoded by the DECODER. Further details are provided in Section 4 of the main text and Section A.4 of the Appendix.",
+      "page": 25,
+      "index": 1,
+      "width": 664,
+      "height": 350
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04553v1/fig-002.webp",
+      "caption": "Table 11: Ablation results: impact of latent action dimensions and type, and positional embeddings on LPWM performance. Results are reported on the Sketchy dataset after 10 epochs of training. Results do not reflect final performance.",
+      "page": 47,
+      "index": 2,
+      "width": 825,
+      "height": 208
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04553v1/fig-003.webp",
+      "caption": "Figure 16: Multi-modal future sampling by LPWM. Starting from the same initial frame, LPWM produces diverse possible future trajectories, illustrated on the Mario (left) and BAIR (right) datasets.",
+      "page": 47,
+      "index": 3,
+      "width": 790,
+      "height": 245
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04553v1/fig-004.webp",
+      "caption": "Figure 12: PyTorch-style pseudocode of the transparency and depth factorization used for compositing particles.",
+      "page": 30,
+      "index": 4,
+      "width": 844,
+      "height": 433
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04553v1/fig-005.webp",
+      "caption": "Figure 11: Decoding particles in DLP. Each particle is decoded into a localized appearance patch, positioned and scaled according to its spatial attributes, while transparency and depth resolve visibility and occlusions. The background is decoded with a standard upsampling CNN-based network. Finally, the foreground and background components are stitched using the effective alpha masks.",
+      "page": 30,
+      "index": 5,
+      "width": 664,
+      "height": 454
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04553v1/fig-006.webp",
+      "caption": "Figure 3: Latent Particle World Model architecture. Left: Input frames are encoded into particle sets by the ENCODER and decoded back to images by the DECODER. The CONTEXT module then processes the particles to sample latent actions, which are combined with the particles in the DYNAMICS module to predict next-step particle states. Right: The CONTEXT module models the per-particle latent action distribution. During training, we use the latent inverse dynamics head, while at inference, the latent policy is employed for sampling.",
+      "page": 7,
+      "index": 6,
+      "width": 829,
+      "height": 417
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04553v1/fig-007.webp",
+      "caption": "Figure 5: Spatial-softmax. Given a heatmap H̃ ∈ RH×W , the softmax function is applied over the spatial dimensions to normalize H̃ into a probability distribution H. These values are then used to compute the expected coordinate values for each axis, and their covariance.",
+      "page": 22,
+      "index": 7,
+      "width": 664,
+      "height": 304
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04553v1/fig-008.webp",
+      "caption": "Figure 6: PyTorch-style code of Spatial Softmax for keypoint detection.",
+      "page": 22,
+      "index": 8,
+      "width": 844,
+      "height": 782
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04553v1/fig-009.webp",
+      "caption": "Figure 14: Spatio-temporal transformer block. It consists of (1) a spatial block that independently processes all M particles at each timestep, with shape [B × T,M,D], and (2) a temporal block that captures each particle’s temporal dependencies across the full horizon, with shape [B × M,T,D]. Here, B is batch size, T is temporal horizon, M is number of particles, and D is the embedding dimension.",
+      "page": 34,
+      "index": 9,
+      "width": 664,
+      "height": 526
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04553v1/fig-010.webp",
+      "caption": "Figure 4: LPWM generated goal-conditioned imagined trajectories (top) and actual environment executions (bottom) through a learned mapping to actions on OGBench-Scene. The imagined trajectories closely match the actual executions, demonstrating LPWM’s predictive accuracy.",
+      "page": 10,
+      "index": 10,
+      "width": 788,
+      "height": 288
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04553v1/fig-011.webp",
+      "caption": "Figure 13: Particle-grid regime. Each particle is constrained to move only within a local region around its original patch center, and when it reaches the limits of this region, its features are transferred to nearby particles.",
+      "page": 33,
+      "index": 11,
+      "width": 664,
+      "height": 206
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04553v1/fig-012.webp",
+      "caption": "Table 8: Quantitative results on video prediction for datasets with deterministic dynamics. t is the training horizon, c is the conditional frames at inference and p is the predicted frames at inference.",
+      "page": 46,
+      "index": 12,
+      "width": 818,
+      "height": 181
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04553v1/fig-013.webp",
+      "caption": "Table 9: Video prediction results on BAIR-64 (64 × 64) conditioning on one past frame and predicting 15 frames in the future. Table adapted from Shrivastava & Shrivastava (2024).",
+      "page": 46,
+      "index": 13,
+      "width": 398,
+      "height": 370
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04553v1/fig-014.webp",
+      "caption": "Figure 7: PyTorch-style code for differentiable warping with encoding (image→glimpse) and decoding (glimpse→image).",
+      "page": 23,
+      "index": 14,
+      "width": 844,
+      "height": 533
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04553v1/fig-015.webp",
+      "caption": "Figure 10: Encoding particles in DLP. The encoding process involves 4 steps: (1) keypoint proposals - a patch-based network with a spatial softmax layer generates candidate particle locations; (2) attribute encoding - offsets, scales, depths, and transparencies are inferred for each particle; (3) appearance encoding - foreground particle features, and (4) background encoding - global background features are extracted from the keypoint-masked image.",
+      "page": 28,
+      "index": 15,
+      "width": 664,
+      "height": 306
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04553v1/fig-016.webp",
+      "caption": "Table 13: Full results on Visual Scene with the visual-scene-play-v0 dataset. Results for baselines were taken from the original OGBench benchmark (Park et al., 2025) and represent success rates across 4 seeds. Results within a standard deviation are highlighted in bold.",
+      "page": 49,
+      "index": 16,
+      "width": 764,
+      "height": 185
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04553v1/fig-017.webp",
+      "caption": "Figure 17: LPWM generated goal-conditioned imagined trajectories (top) and actual environment executions (bottom) through a learned mapping to actions on PandaPush from two views. LPWM generates dynamics in both views simultaneously, handling occlusions by the gripper.",
+      "page": 49,
+      "index": 17,
+      "width": 790,
+      "height": 612
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04553v1/fig-018.webp",
+      "caption": "Figure 8: A Deep Latent Particle. Each component of a latent particle corresponds to a disentangled stochastic attribute: position zp, scale zs, depth zd, transparency zt, and visual features zf . Further details are provided in Section 3 of the main text and Section A.3 of the Appendix.",
+      "page": 24,
+      "index": 18,
+      "width": 664,
+      "height": 329
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04553v1/fig-019.webp",
+      "caption": "Figure 15: PyTorch-style code for policy learning with Latent Particle World Models.",
+      "page": 37,
+      "index": 19,
+      "width": 844,
+      "height": 847
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04553v1/fig-020.webp",
+      "caption": "Table 12: Performance results on PandaPush, a physics-based tabletop benchmark in IsaacGym where a Franka arm must arrange multiple cubes to match target goal images. Reported values are success rates over 500 trajectories across 5 seeds; results within one standard deviation of the best are shown in bold.",
+      "page": 48,
+      "index": 20,
+      "width": 827,
+      "height": 185
+    }
+  ]
+}

@@ -1,0 +1,118 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.01063v1/fig-001.webp",
+      "caption": "Figure 1. The comparison between RL fine-tuning of general VLA and ELF-VLA. Top: VLA training with RL algorithm suffers from a performance plateau: in certain scenarios, the policy model’s rollouts consistently yield low-scoring answers, trapping the agent and preventing it from discovering a better policy. Bottom: ELF-VLA addresses this by using a teacher model to provide structured feedback, which is then used to re-rollout a refinement, forcing the policy to break through this performance plateau.",
+      "page": 1,
+      "index": 1,
+      "width": 496,
+      "height": 285
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01063v1/fig-002.webp",
+      "caption": "Table 1. Comparison with state-of-the-art methods on the NAVSIMv1 with PDMS.",
+      "page": 6,
+      "index": 2,
+      "width": 1036,
+      "height": 396
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01063v1/fig-003.webp",
+      "caption": "Table 2. Comparison with state-of-the-art methods on the NAVSIMv2 with EPDMS.",
+      "page": 6,
+      "index": 3,
+      "width": 1026,
+      "height": 210
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01063v1/fig-004.webp",
+      "caption": "Figure 11. Visualization of trajectory refinement process by ELF-VLA on the NAVSIM dataset. Visualization of the initial Wrong Trajectories (red), the Ground Truth (green), and the final Refined Trajectory (blue).",
+      "page": 15,
+      "index": 4,
+      "width": 986,
+      "height": 531
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01063v1/fig-005.webp",
+      "caption": "Figure 10. Visualization of trajectory refinement process by ELF-VLA on the NAVSIM dataset. Visualization of the initial Wrong Trajectories (red), the Ground Truth (green), and the final Refined Trajectory (blue).",
+      "page": 15,
+      "index": 5,
+      "width": 986,
+      "height": 531
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01063v1/fig-006.webp",
+      "caption": "Figure 4. Ratio of total-failure samples measured during the RL training phase for GRPO, GT-GRPO, Rule-GRPO, and ELF-VLA. A total failure indicates all rollouts for a sample failed on a specific metric (PDMS below s, NC of 0 and DAC of 0, respectively).",
+      "page": 7,
+      "index": 6,
+      "width": 496,
+      "height": 300
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01063v1/fig-007.webp",
+      "caption": "Table 4. Comparison of high-level planning on NAVSIM.",
+      "page": 7,
+      "index": 7,
+      "width": 498,
+      "height": 254
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01063v1/fig-008.webp",
+      "caption": "Figure 9. Illustration of high-level actions and ground truth generation. The top panels list the discrete categories for longitudinal and lateral planning. The bottom panels demonstrate the labeling criteria: longitudinal states are determined by sliding-window acceleration analysis, while lateral behaviors are identified based on the relationship between the vehicle’s trajectory and map topology.",
+      "page": 14,
+      "index": 8,
+      "width": 983,
+      "height": 357
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01063v1/fig-009.webp",
+      "caption": "Figure 2. Overview of ELF-VLA. First, the model is pre-trained on an autonomous driving Q&A dataset to provide it with foundational driving knowledge. Subsequently, it undergoes SFT on a mixed dataset of “Base Inputs” and “Feedback Inputs”, enabling it to learn trajectory prediction and feedback-based refinement simultaneously. Finally, in the RL phase, a teacher model is used to generate feedback, thereby reducing the proportion of zero-reward rollouts.",
+      "page": 3,
+      "index": 9,
+      "width": 1036,
+      "height": 298
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01063v1/fig-010.webp",
+      "caption": "Figure 8. Comparison of feedback mechanisms. Unlike the binary signals in Rule-GRPO (a), our teacher-based feedback in ELFVLA (b) provides structured diagnostics and concrete, actionable strategies to guide trajectory refinement.",
+      "page": 13,
+      "index": 10,
+      "width": 983,
+      "height": 392
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01063v1/fig-011.webp",
+      "caption": "Figure 5. Visualization of trajectory refinement process by ELF-VLA on the NAVSIM dataset. Visualization of the initial Wrong Trajectories (red), the Ground Truth (green), and the final Refined Trajectory (blue). A teacher-generated Feedback guides the refinement of a Wrong Trajectory into a Refined Trajectory. Colored text in the Feedback details the specific refinements that have been applied.",
+      "page": 8,
+      "index": 11,
+      "width": 986,
+      "height": 531
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01063v1/fig-012.webp",
+      "caption": "Figure 3. Overview of GRPO with feedback. The policy model generates initial responses. Based on the rewards, teacher model (Qwen3VL-32B) provides feedback, guiding the policy to sample improved refinement responses. A high-quality refinement response is selected and combined with the initial response set for joint optimization. Policy Shaping is applied to the final probability.",
+      "page": 4,
+      "index": 12,
+      "width": 986,
+      "height": 457
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01063v1/fig-013.webp",
+      "caption": "Table 7. Training hyperparameters of ELF-VLA",
+      "page": 12,
+      "index": 13,
+      "width": 508,
+      "height": 629
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01063v1/fig-014.webp",
+      "caption": "Figure 6. Prompt design of VLA Model (Base Inputs).",
+      "page": 12,
+      "index": 14,
+      "width": 983,
+      "height": 196
+    }
+  ]
+}

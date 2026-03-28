@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2602.23997v1/fig-001.webp",
+      "caption": "Figure 1: Given a specification 𝜑 formalizing the intended agent’s behavior,1 a rewardmodel is automatically converted/generated from 𝜑 . Simultaneously with optimizing the return, the agent learns a representation of the observations through the state space of a verifiable world model. Consequently, the policy is learned directly on this representation. To provide the guarantees, the world model is processed through a verifier (e.g., a model-checker). The verifier’s output guides the agent or corrects the policy as needed. At any time, the verifier can return a certificate on both specification satisfaction and the abstraction quality of the world model. Note that we do not assume to have access to the explicit environment dynamics (simulating it is sufficient).",
+      "page": 2,
+      "index": 1,
+      "width": 764,
+      "height": 254
+    }
+  ]
+}

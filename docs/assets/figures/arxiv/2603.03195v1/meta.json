@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.03195v1/fig-001.webp",
+      "caption": "Table 1. Comparison of different methods on the LIBERO [32] and SimplerEnv-WidowX [30] benchmarks. The best and the second-best values for each metric are bold and underlined respectively.",
+      "page": 6,
+      "index": 1,
+      "width": 339,
+      "height": 385
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03195v1/fig-002.webp",
+      "caption": "Figure 3. Visualization of the disentangled motion and structure latents. We select two frames (t1 and t2) and show the original (Orig.) and reconstructed (Recon.) frames. “M. Recon.” and “S. Recon.” denote the reconstructions obtained by decoding only the motion latent or only the structure latent, respectively. The structure latent preserves the global scene layout, whereas the motion latent captures motion and fine-grained temporal details.",
+      "page": 6,
+      "index": 2,
+      "width": 1032,
+      "height": 935
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03195v1/fig-003.webp",
+      "caption": "Figure 4. Cross-reconstruction visualization. We extract the structure latent from the static video in the first row and the motion latent from the robot-arm motion video in the second row. By combining the two latents, we reconstruct the video shown in the third row. We compute the difference between the cross-reconstructed frames and the static frames to highlight the changed regions, which correspond to the robot arm’s motion.",
+      "page": 7,
+      "index": 3,
+      "width": 1036,
+      "height": 546
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03195v1/fig-004.webp",
+      "caption": "Figure 5. Comparative visualization of future-frame prediction strategies. There are two tasks demonstrated: i) pick up the black bowl from the table center and place it on the plate, and ii) sweep into a pile. (a) The world-model approach predicts five future frames. (b) The single-goal-frame approach predicts one goal frame. (c) Our method reasons through a learned motion latent zm, producing more reasonable and instruction-aligned frames.",
+      "page": 7,
+      "index": 4,
+      "width": 1027,
+      "height": 524
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03195v1/fig-005.webp",
+      "caption": "Figure 2. Overview of the CoWVLA framework. CoWVLA consists of two core components: a latent motion extractor and a VLA decoder. The latent motion extractor, implemented as a video VAE, disentangles each video segment into a structure latent zs and two directional motion latents zhm and zwm, which are concatenated into a unified latent motion vector zm. The VLA decoder performs unified autoregressive modeling over multimodal sequences. During pre-training, the model takes the instruction and initial frame as input, and uses a learnable motion query Q to predict the latent motion ẑm while reconstructing the terminal frame of the video segment. During co-fine-tuning, the input expands into alternating keyframe–action pairs; Q continues to aggregate temporally continuous latent dynamics, guiding multi-step action generation under sparse visual observations.",
+      "page": 3,
+      "index": 5,
+      "width": 1020,
+      "height": 386
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03195v1/fig-006.webp",
+      "caption": "Figure 7. Comparison between data collection and real-world deployment during testing.",
+      "page": 18,
+      "index": 6,
+      "width": 932,
+      "height": 763
+    }
+  ]
+}

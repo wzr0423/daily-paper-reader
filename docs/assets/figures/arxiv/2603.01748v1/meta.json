@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.01748v1/fig-001.webp",
+      "caption": "Table 1: Mean per-cell f1-scores, for reconstructing the board configurations from encoder states (Enc.) and from one-step roll-outs in imagination (Im.), using linear probes. We report the mean and standard deviation over 10 different runs, for each model and benchmark.",
+      "page": 11,
+      "index": 1,
+      "width": 629,
+      "height": 261
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01748v1/fig-002.webp",
+      "caption": "Fig. 1: Overview of the model architecture and of the loss function. Encoders map successive observations into a shared Boolean latent space, and a predictor transforms the current latent state into the next, given the action. We illustrate and evaluate this setup on an 8-puzzle benchmark with MNIST digits, where actions move the blank tile and induce local state changes and new renderings of the digits. The crossed lines denote operations that stop the gradient, and we introduce a training scheme with two-steps updates: initially, the predictor is updated solely based on hard bits b, followed by a joint update of the encoder and predictor using probabilities p. Test-time inference relies only on the pathway involving b. The parameters ϕ′ are an EMA copy of the parameters ϕ.",
+      "page": 4,
+      "index": 2,
+      "width": 696,
+      "height": 390
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01748v1/fig-003.webp",
+      "caption": "Table 2: Mean per-cell accuracies, for reconstructing the board configurations from encoder states and from one-step roll-outs in imagination, using linear probes. We report the mean and standard deviation over 10 different runs on the MNIST 8-puzzle benchmark.",
+      "page": 12,
+      "index": 3,
+      "width": 652,
+      "height": 240
+    }
+  ]
+}

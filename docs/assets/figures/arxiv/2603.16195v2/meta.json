@@ -1,0 +1,78 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.16195v2/fig-001.webp",
+      "caption": "Fig. 4: Qualitative comparison on MetaWorld [45]. VPP [14] utilizes entangled onestep features, resulting in a diverging attention trajectory that completely misses the target “nut”. In contrast, our S-VAM foresees explicit geometric and semantic representations. This decoupled future blueprint enables the action expert to anchor a coherent attention trajectory that accurately guides to the instructed target, ensuring successful grasping. Note: Visualization settings follow Fig. 3.",
+      "page": 11,
+      "index": 1,
+      "width": 723,
+      "height": 496
+    },
+    {
+      "url": "assets/figures/arxiv/2603.16195v2/fig-002.webp",
+      "caption": "Table 2: Quantitative comparison on Metaworld [45]. We report success rates on easy, middle, and hard tasks, along with the overall average. Best and second-best results are highlighted accordingly.",
+      "page": 11,
+      "index": 2,
+      "width": 662,
+      "height": 250
+    },
+    {
+      "url": "assets/figures/arxiv/2603.16195v2/fig-003.webp",
+      "caption": "Fig. 1: Motivation and Overview of our Shortcut Video-Action Model. (a) Current video-action models struggle with a trade-off: one-step feature extraction is fast but yields noisy and entangled representations, whereas multi-step video generation predicts precise future states but is too slow for real-time control. (b) To address this, we propose a shortcut video-action model that foresees coherent geometric and semantic representations via a single forward pass. Specifically, we introduce a self-distillation strategy that extracts vision foundation model (VFM) representations (DPAv3 [25] and DINOv2 [28]) from the diffusion model’s own multi-step generated videos to serve as teacher supervision exclusively during training (dashed path). By employing lightweight decouplers as students to map entangled one-step features to these geometry and semantics-oriented targets, our approach condenses structured generative priors of multi-step denoising into one-step inference, thereby enabling real-time and precise action prediction.",
+      "page": 2,
+      "index": 3,
+      "width": 706,
+      "height": 237
+    },
+    {
+      "url": "assets/figures/arxiv/2603.16195v2/fig-004.webp",
+      "caption": "Table 1: Quantitative comparison on CALVIN [27]. We report stage-wise success rates (1-5) and average sequence length (Avg. Len.). Best and second-best results are highlighted accordingly.",
+      "page": 10,
+      "index": 4,
+      "width": 642,
+      "height": 282
+    },
+    {
+      "url": "assets/figures/arxiv/2603.16195v2/fig-005.webp",
+      "caption": "Fig. 5: Multi-task real-world experiments. (a) We deploy our system on a dual-arm Cobot using only monocular front-camera observations. (b) Our S-VAM demonstrates a significant success rate improvement over VPP [14] on all tasks without compromising real-time control capabilities.",
+      "page": 14,
+      "index": 5,
+      "width": 712,
+      "height": 299
+    },
+    {
+      "url": "assets/figures/arxiv/2603.16195v2/fig-006.webp",
+      "caption": "Table 4: Quantitative comparison of different VFM representations as teacher targets.",
+      "page": 13,
+      "index": 6,
+      "width": 683,
+      "height": 351
+    },
+    {
+      "url": "assets/figures/arxiv/2603.16195v2/fig-007.webp",
+      "caption": "Table 3: Ablation study on key components of our S-VAM.",
+      "page": 12,
+      "index": 7,
+      "width": 579,
+      "height": 228
+    },
+    {
+      "url": "assets/figures/arxiv/2603.16195v2/fig-008.webp",
+      "caption": "Fig. 3: Qualitative comparison on CALVIN [27]. VPP [14] utilizes entangled one-step features, resulting in an erratic attention trajectory that explicitly contradicts the language instruction and leads to failed actuation. In contrast, our S-VAM foresees geometric and semantic representations. This decoupled future blueprint enables the action expert to anchor a coherent attention trajectory that perfectly aligns with the language instruction, thereby ensuring successful execution. Note: Geometric foresight is visualized as probe-based depth maps [19, 41]; one-step and semantic features are visualized via PCA computed globally across the entire sequence.",
+      "page": 9,
+      "index": 8,
+      "width": 723,
+      "height": 497
+    },
+    {
+      "url": "assets/figures/arxiv/2603.16195v2/fig-009.webp",
+      "caption": "Fig. 2: Architecture of our S-VAM. The core technical novelty lies in establishing a shortcut that bypasses the prohibitive latency of iterative video generation. Specifically, specialized decouplers disentangle highly entangled one-step diffusion features into coherent geometric and semantic foresight. This foresight is then aggregated with original features by a Uni-Perceiver, providing a holistic condition context for the downstream diffusion policy to predict precise robot action.",
+      "page": 5,
+      "index": 9,
+      "width": 712,
+      "height": 227
+    }
+  ]
+}

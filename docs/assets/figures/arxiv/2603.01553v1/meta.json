@@ -1,0 +1,142 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.01553v1/fig-001.webp",
+      "caption": "Table 1. Results across methods under different delays (mean ± standard error across 4 training random seeds). Method abbreviations: SAC (Vanilla SAC), DR (DR-Critic), SADR (SA-MLP+DRCritic). For delay=0, DR-Critic and SA-MLP+DR-Critic reduce to Vanilla SAC; hence we report a single SAC(0) baseline and mark other methods with —. The results of SAID are obtained from 4 random seeds with 200 evaluation episodes per seed. Bold indicates the best mean within each task and delay.",
+      "page": 6,
+      "index": 1,
+      "width": 476,
+      "height": 627
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01553v1/fig-002.webp",
+      "caption": "Table 3. Task-independent hyperparameters of SAID.",
+      "page": 15,
+      "index": 2,
+      "width": 1008,
+      "height": 557
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01553v1/fig-003.webp",
+      "caption": "Figure 1. Illustration of our idea under case delay=3 as an example. Upper: inpainting in images. Bottom: state-action sequence inpainting for decision making with signal delay (our approach).",
+      "page": 2,
+      "index": 3,
+      "width": 492,
+      "height": 283
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01553v1/fig-004.webp",
+      "caption": "Figure 8. Violin plot of relative uncertainly (STD) of Online RL vs. offline RL among different evaluation episodes (averaged over 4 random training seeds). The white point indicates the data mean. Mann-Whitney U-test was conducted but no significant difference was observed.",
+      "page": 7,
+      "index": 4,
+      "width": 428,
+      "height": 358
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01553v1/fig-005.webp",
+      "caption": "Figure 7. Violin plot of relative uncertainly (STD) of Online RL vs. offline RL among different same training seeds (averaged over 200 evaluation episdoes). The white point indicates the data mean. Mann-Whitney U-test was conducted and it showed a significantly higher seed-uncertainty of online RL than offline RL.",
+      "page": 7,
+      "index": 5,
+      "width": 428,
+      "height": 361
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01553v1/fig-006.webp",
+      "caption": "Table 2. Offline RL results on D4RL MuJoCo locomotion tasks, the performance of SAID is averaged over 4 random model seeds with each evaluated over 200 episodes. Here we omit the confidence interval since the performance of SAID for offline RL is less sensitive to random seed, see Sec. 6.3 for more discussion. DQL* is our replicated results using the same code base as SAID.",
+      "page": 7,
+      "index": 6,
+      "width": 1008,
+      "height": 271
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01553v1/fig-007.webp",
+      "caption": "Table 6. SAID’s online RL performance vs. Denoising steps of the diffusion model during inference.",
+      "page": 18,
+      "index": 7,
+      "width": 895,
+      "height": 575
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01553v1/fig-008.webp",
+      "caption": "Figure 9. Examining SAID’s performance for online RLwD tasks when using all online experiences (5M steps) or using only the last 20% experiences (1M steps). Data are Mean ± S.E.M.",
+      "page": 8,
+      "index": 8,
+      "width": 474,
+      "height": 508
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01553v1/fig-009.webp",
+      "caption": "Figure 10. Examining SAID’s performance for online RLwD (alltasks average) with different denoising steps during inference. Data are Mean ± S.E.M.",
+      "page": 8,
+      "index": 9,
+      "width": 425,
+      "height": 421
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01553v1/fig-010.webp",
+      "caption": "Figure 12. Episodic returns of SAID for each task (delay=0). The histogram shows the performance distribution of 200 episodes of one trained diffusion planning model.",
+      "page": 19,
+      "index": 10,
+      "width": 813,
+      "height": 592
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01553v1/fig-011.webp",
+      "caption": "Figure 13. Episodic returns of SAID for each task (delay=4). The histogram shows the performance distribution of 200 episodes of one trained diffusion planning model.",
+      "page": 19,
+      "index": 11,
+      "width": 813,
+      "height": 581
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01553v1/fig-012.webp",
+      "caption": "Table 4. Best hyperparameters of SAID for each task after grid search (pd: depth of the planner DiT, tmp: temperature of the planner during inference).",
+      "page": 17,
+      "index": 12,
+      "width": 829,
+      "height": 532
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01553v1/fig-013.webp",
+      "caption": "Table 5. SAID’s offline RL performance with error bar (S.E.M. 4 random seeds).",
+      "page": 17,
+      "index": 13,
+      "width": 765,
+      "height": 338
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01553v1/fig-014.webp",
+      "caption": "Figure 15. Episodic returns of SAID for each task (delay=16). The histogram shows the performance distribution of 200 episodes of one trained diffusion planning model.",
+      "page": 20,
+      "index": 14,
+      "width": 813,
+      "height": 596
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01553v1/fig-015.webp",
+      "caption": "Figure 14. Episodic returns of SAID for each task (delay=8). The histogram shows the performance distribution of 200 episodes of one trained diffusion planning model.",
+      "page": 20,
+      "index": 15,
+      "width": 813,
+      "height": 592
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01553v1/fig-016.webp",
+      "caption": "Figure 5. Performance (mean episodic return) for online RL with delay. One may notice that the experimental result of Hopper at delay=16 is higher than that at delay=8. This is also reported in",
+      "page": 5,
+      "index": 16,
+      "width": 476,
+      "height": 603
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01553v1/fig-017.webp",
+      "caption": "Figure 11. Full D4RL locomotion task results for Fig. 4.",
+      "page": 16,
+      "index": 17,
+      "width": 666,
+      "height": 619
+    }
+  ]
+}

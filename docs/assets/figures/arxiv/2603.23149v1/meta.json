@@ -1,0 +1,110 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.23149v1/fig-001.webp",
+      "caption": "Table 1: Fidelity Results. We measure the alignment between the predicted description and the actual simulator state. We compare DILLO against LLM and VLM baselines (Few-Shot, Zero-Shot, and CAP) across two model scales (1B and 4B parameters) on both the MetaWorld and LIBERO suites. DILLO consistently achieves high fidelity and outperforms or matches baselines, validating that the latent state is a sufficient statistic for semantic prediction.",
+      "page": 11,
+      "index": 1,
+      "width": 714,
+      "height": 216
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23149v1/fig-002.webp",
+      "caption": "Table 2: Reasoning Based LLM Score. We compare DILLO against VLM baselines (Few-Shot, Zero-Shot, and CAP) across two model scales (1B and 4B parameters). DILLO consistently outperforms standard baselines in semantic reasoning, even approaching or exceeding the CAP in the 1B regime.",
+      "page": 11,
+      "index": 2,
+      "width": 714,
+      "height": 213
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23149v1/fig-003.webp",
+      "caption": "Fig. 8: The input prompt utilized for querying Qwen2.5-32B-Instruct in our AI-based study",
+      "page": 26,
+      "index": 3,
+      "width": 738,
+      "height": 567
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23149v1/fig-004.webp",
+      "caption": "Fig. 5: Gemma-3-1b and Gemma-3-4b prompts used in the Fewshot-Captioning configuration. For Gemma-3-4b, we also interleave images with the given observations.",
+      "page": 21,
+      "index": 4,
+      "width": 738,
+      "height": 779
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23149v1/fig-005.webp",
+      "caption": "Fig. 1: (left) Standard approaches rely on heavy visual world models to simulate future outcomes using expensive rendering. In contrast, (right) DILLO avoids this visual dependency entirely. By distilling the foresight of a simulator-privileged Teacher VLM into a fast Language-Action World Model, DILLO predicts future outcome descriptions and success verdicts directly from policy latents (zt) and action chunks (at:t+k). This shift from “simulate-then-act” to “describe-then-act” enables fast proactive steering on consumer hardware.",
+      "page": 2,
+      "index": 5,
+      "width": 708,
+      "height": 198
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23149v1/fig-006.webp",
+      "caption": "Fig. 6: Qualitative examples of DILLO for Drawer-Open (Top), Soccer (Middle), and Sweep-Into (Bottom) tasks.",
+      "page": 23,
+      "index": 6,
+      "width": 725,
+      "height": 617
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23149v1/fig-007.webp",
+      "caption": "Table 3: Steering Success Rates and Verdict Accuracy. We report Steering Success Rates (SR) and Safety Verdict Accuracy (%). High success rates and accuracy confirm that the model effectively steers rollouts while discriminating successful dynamics from failures.",
+      "page": 13,
+      "index": 7,
+      "width": 700,
+      "height": 274
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23149v1/fig-008.webp",
+      "caption": "Fig. 3: Proactive Policy Steering via Latent Rejection Sampling. At inference time, DILLO acts as a high-speed safety filter. The policy proposes N candidate action chunks (ai t:t+k). Instead of re-rendering future images for each candidate, DILLO projects the policy latent (zt) directly into the Language-Action World Model. The model predicts a semantic description and verdict for each chunk. Negative trajectories (red ×) are rejected, and the first verified positive plan (green ✓) is executed.",
+      "page": 8,
+      "index": 8,
+      "width": 652,
+      "height": 250
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23149v1/fig-009.webp",
+      "caption": "Table 4: Fidelity Text-to-Text Results. We compare DILLO against predictive baselines (Few-Shot and Zero-Shot) across two model scales (1B and 4B parameters) on both the MetaWorld and LIBERO suites. Unlike the predictive baselines, the captioning model (CAP) has privileged access to past and future information. DILLO consistently outperforms the fair predictive baselines, validating that the latent state is a sufficient statistic for semantic prediction.",
+      "page": 19,
+      "index": 9,
+      "width": 714,
+      "height": 222
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23149v1/fig-010.webp",
+      "caption": "Fig. 4: Qualitative validation of DILLO’s foresight for ‘Positive’ (left) and ‘Negative’ (right) outcomes. DILLO generates the predicted description (d) and verdict (check/cross) using only the policy’s latent state (zt) and the proposed action chunk. The initial observation (ot) and ground-truth future (ot+K) are shown purely for visual comparison, confirming the high fidelity of the latent-based prediction.",
+      "page": 12,
+      "index": 10,
+      "width": 616,
+      "height": 273
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23149v1/fig-011.webp",
+      "caption": "Fig. 9: AI judge preference percentage results for the 1B and 4B models across the three MetaWorld tasks (Sweep-Into, Soccer, and Drawer-Open) and the five LIBERO suites (Spatial, Object, Goal, LIBERO-10, and LIBERO-90).",
+      "page": 27,
+      "index": 11,
+      "width": 508,
+      "height": 918
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23149v1/fig-012.webp",
+      "caption": "Fig. 7: Qualitative examples of DILLO for LIBERO-90 (Top), LIBERO-10 (Middle), and LIBERO-Goal (Bottom) tasks. Descriptions are trimmed for readability.",
+      "page": 24,
+      "index": 12,
+      "width": 725,
+      "height": 606
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23149v1/fig-013.webp",
+      "caption": "Fig. 2: DILLO Training Pipeline. We distill the foresight of a VLM teacher. The pipeline bypasses visual processing by projecting the fixed policy’s internal latents (zt) and action chunks (at:t+k) directly into the LLM’s embedding space.",
+      "page": 5,
+      "index": 13,
+      "width": 716,
+      "height": 217
+    }
+  ]
+}

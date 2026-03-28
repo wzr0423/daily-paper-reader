@@ -1,0 +1,86 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.02104v1/fig-001.webp",
+      "caption": "Figure 5: The trained encoder network establishes a two-tier representation architecture. Positive trajectories occupy the premium region (green) while negative trajectories are confined to the inferior region (red), with point size indicating L2 norm magnitude. This structure enables both categorical separation and magnitude-based importance ranking.",
+      "page": 6,
+      "index": 1,
+      "width": 452,
+      "height": 302
+    },
+    {
+      "url": "assets/figures/arxiv/2603.02104v1/fig-002.webp",
+      "caption": "Figure 6: Fetch and Shadow Dexterous Hand environments.",
+      "page": 6,
+      "index": 2,
+      "width": 452,
+      "height": 350
+    },
+    {
+      "url": "assets/figures/arxiv/2603.02104v1/fig-003.webp",
+      "caption": "Table 4: Sensitivity analysis of σ on HandManipulateEggFull. The default value σ = 0.2 achieves the highest success rate by effectively balancing gradient strength and discriminative power.",
+      "page": 11,
+      "index": 3,
+      "width": 546,
+      "height": 480
+    },
+    {
+      "url": "assets/figures/arxiv/2603.02104v1/fig-004.webp",
+      "caption": "Figure 1: Overview of our ACDC framework. Planning Level: Adaptive Curriculum (AC) Planning establishes an adaptive curriculum by combining diversity and quality metrics through an adaptive weighting mechanism to generate trajectory priority scores F (τ). Control Level: Dynamic Contrastive (DC) Control leverages these scores through a ranking and pairing module to construct positive/negative pairs, then employs two-phase contrastive learning for experience selection. Phase I trains an encoder network to learn trajectory representations from constructed pairs, while Phase II computes L2-norm scores through agent-encoder interaction to dynamically guide experience selection.",
+      "page": 2,
+      "index": 4,
+      "width": 844,
+      "height": 202
+    },
+    {
+      "url": "assets/figures/arxiv/2603.02104v1/fig-005.webp",
+      "caption": "Figure 2: Architecture of Adaptive Curriculum (AC) Planning. The framework evaluates trajectories through two complementary metrics: diversity scores and quality scores, which are normalized to d̃τ and q̃τ respectively. The weighting function generates adaptive parameter λ(sr, t) based on current success rate and learning progress. These components are combined through the adaptive weighting mechanism to produce trajectory scores: F (τ) = d̃τ + λ(sr, t)q̃τ , where the value of λ(sr, t) dynamically determines whether the agent operates in exploration (low λ(sr, t)), balanced (medium λ(sr, t)), or exploitation (high λ(sr, t)) planning. Note: ”=⇒” denotes normalization; achieved goals gac refer to task-relevant components extracted from the observation space.",
+      "page": 2,
+      "index": 5,
+      "width": 844,
+      "height": 283
+    },
+    {
+      "url": "assets/figures/arxiv/2603.02104v1/fig-006.webp",
+      "caption": "Table 1: Final mean success rate ± standard deviation averaged over the last 20 epochs. Best results are shown in bold.",
+      "page": 7,
+      "index": 6,
+      "width": 1106,
+      "height": 233
+    },
+    {
+      "url": "assets/figures/arxiv/2603.02104v1/fig-007.webp",
+      "caption": "Figure 7: Learning curves showing median success rate across 5 random seeds in six robotic manipulation environments.",
+      "page": 7,
+      "index": 7,
+      "width": 844,
+      "height": 441
+    },
+    {
+      "url": "assets/figures/arxiv/2603.02104v1/fig-008.webp",
+      "caption": "Table 2: Sample Efficiency Analysis across 6 Robotic Tasks. For each environment, we set a specific success rate threshold θ (in 2nd column) and report the Time-to-Threshold (TTT), defined as the number of epochs required to first reach θ. We also report the Cumulative Regret (R) over 100 epochs based on the learning curves. Lower values for both metrics indicate higher sample efficiency. “-” denotes failure to reach θ within the training budget.",
+      "page": 8,
+      "index": 8,
+      "width": 1054,
+      "height": 202
+    },
+    {
+      "url": "assets/figures/arxiv/2603.02104v1/fig-009.webp",
+      "caption": "Figure 11: Learning curves comparing SAC, SAC+HER, SAC+ACDC, and DDPG+ACDC on Hand environments.",
+      "page": 12,
+      "index": 9,
+      "width": 477,
+      "height": 344
+    },
+    {
+      "url": "assets/figures/arxiv/2603.02104v1/fig-010.webp",
+      "caption": "Figure 4: Architecture of Dynamic Contrastive(DC) Control. This level operates in two phases: Phase I (Encoder Network Training) ranks trajectories using AC’s combined scores F (τ) and selects positive and negative pairs. An LSTM-based sequence encoder extracts temporal features from achieved goals along the trajectory and fuses them with the adaptive weighting parameter λ(sr, t) through a fusion layer to create joint encodings Z(τ,λ(sr,t)), then employs contrastive learning with a combined loss function to separate positive and negative examples while ensuring positive encodings exhibit larger norms than negative ones. Phase II (Experience Selection) uses the trained encoder network to process all trajectories τ ∈ current Replay Buffer B with λ(sr, t), computing L2-norms ∥Zτ,λ(sr,t)∥2 as trajectory scores for dynamic experience selection that adapts to the agent’s evolving capabilities.",
+      "page": 5,
+      "index": 10,
+      "width": 844,
+      "height": 339
+    }
+  ]
+}

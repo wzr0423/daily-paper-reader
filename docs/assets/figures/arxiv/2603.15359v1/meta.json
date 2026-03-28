@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.15359v1/fig-001.webp",
+      "caption": "Fig. 1: NavThinker: future-aware social navigation. Social navigation requires the robot to reach a goal in environments shared with dynamic pedestrians. Red regions highlight interaction zones where the robot and pedestrians may conflict. Top: egocentric depth observations at two timesteps. Bottom: the world model imagines action-conditioned futures for the corresponding observations. By imagining how the scene evolves under different candidate actions, NavThinker anticipates potential social conflicts and selects safe, socially compliant actions.",
+      "page": 1,
+      "index": 1,
+      "width": 483,
+      "height": 477
+    },
+    {
+      "url": "assets/figures/arxiv/2603.15359v1/fig-002.webp",
+      "caption": "Fig. 3: World model imagination quality. Left: current depth observation with RGB, third-person view, and top-down map for reference. Right: after executing the action at the previous timestep, we show (from top to bottom) the ground-truth depth, the world model’s predicted depth, the PCA visualization of ground-truth DA-V2 features, and the PCA visualization of predicted features. The world model produces faithful depth predictions and latent features that closely match the ground truth across different actions.",
+      "page": 6,
+      "index": 2,
+      "width": 892,
+      "height": 506
+    },
+    {
+      "url": "assets/figures/arxiv/2603.15359v1/fig-003.webp",
+      "caption": "Fig. 4: Qualitative comparisons on Social-HM3D. Navthinker produces safe actions under different social situations. Rows 1–2 (Blind corner): A* collides when turning, while ours avoids the pedestrian. Rows 3–4 (Intersection): Falcon collides at the intersection, while ours safely yields and passes. Rows 5–6 (Front approach): Habitat-official collides in a head-on encounter, while ours gives way for the pedestrian. Red boxes mark baseline failures; green checkmarks indicate safe behaviors.",
+      "page": 7,
+      "index": 3,
+      "width": 437,
+      "height": 770
+    },
+    {
+      "url": "assets/figures/arxiv/2603.15359v1/fig-004.webp",
+      "caption": "Fig. 5: Real-world deployment on a Unitree Go2 robot. In this scenario, the robot navigates around a group of people and reaches its goal while maintaining safe distances.",
+      "page": 7,
+      "index": 4,
+      "width": 487,
+      "height": 489
+    },
+    {
+      "url": "assets/figures/arxiv/2603.15359v1/fig-005.webp",
+      "caption": "Fig. 2: Overview of the NavThinker framework. Our framework consists of two modules: a world model that learns action-conditioned scene dynamics (top), and an imagination-augmented planner policy trained with DD-PPO (bottom). During World Model Learning, depth observations, actions, and robot states are extracted from the Replay Buffer. A frozen DA-V2 ViT encoder extracts patch embeddings, and a Causal Attention Transformer autoregressively predicts future latent features. A Depth Decoder and a Human Trajectory Decoder are trained alongside a latent consistency loss to anchor representations to scene geometry and human motion. During Policy Learning, the Observation Encoder produces the current embedding from depth and robot states. The Imagination module queries the world model under each candidate action, generating action-conditioned future features that are fused with the current embedding via Feature Fusion. The fused representation feeds into the DD-PPO Actor-Critic network. Predicted human trajectories additionally provide Reward Shaping, coupling prediction with planning in an imagine-then-act loop.",
+      "page": 3,
+      "index": 5,
+      "width": 869,
+      "height": 519
+    },
+    {
+      "url": "assets/figures/arxiv/2603.15359v1/fig-006.webp",
+      "caption": "TABLE I: Single-Robot Social Navigation Results on Social-HM3D and Social-MP3D (zero-shot transfer from Social-HM3D). We report SR/SPL (success/efficiency), PSC (social compliance), and H-Coll (human collisions). Best and 2nd-best are in bold and underline.",
+      "page": 5,
+      "index": 6,
+      "width": 1020,
+      "height": 243
+    }
+  ]
+}

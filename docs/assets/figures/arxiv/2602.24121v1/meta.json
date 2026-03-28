@@ -1,0 +1,142 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2602.24121v1/fig-001.webp",
+      "caption": "Fig. 3. Overview of evaluation tasks. We evaluate our method and baselines on 4 tasks - 2 in sim and 2 in real. The Pick and Place tasks (a,c) involve reaching the block, grasping it, lifting and placing it beyond a target line. The Push tasks (b,d) involve reaching the block and pushing it beyond a target line.",
+      "page": 6,
+      "index": 1,
+      "width": 1068,
+      "height": 237
+    },
+    {
+      "url": "assets/figures/arxiv/2602.24121v1/fig-002.webp",
+      "caption": "Fig. 8. MPAIL2 ablations over number of demonstrations (left), horizon lengths (middle), and gradient penalty coefficients (right) in Sim: Block Push.",
+      "page": 15,
+      "index": 2,
+      "width": 959,
+      "height": 262
+    },
+    {
+      "url": "assets/figures/arxiv/2602.24121v1/fig-003.webp",
+      "caption": "Fig. 7. Results in gymnasium environments [47]. All methods are provided 50 synthetic demonstration observations. RLPD is additionally provided dense reward and demonstration actions. Reward is normalized such that 1.0 reflects the average reward across the demonstrations.",
+      "page": 15,
+      "index": 3,
+      "width": 950,
+      "height": 332
+    },
+    {
+      "url": "assets/figures/arxiv/2602.24121v1/fig-004.webp",
+      "caption": "Fig. 1. Overview of MPAIL2. (0) The learner observes a task demonstration and stores the observations before training. (1) The learner observes the world, and encodes the observation into its current latent state, z0 = e(o). The learner’s policy π suggests reactive, possibly suboptimal actions (purple dotted lines). Before executing any actions, the learner predicts and evaluates the world at future latent states to derive a plan by using the pictured component models. This process involves: (a) randomly sampling action sequences (i.e. plans) for evaluation (not pictured); (b) predicting trajectories implied by sampled plans using the dynamics model z′ = f(z, a) (dotted lines); (c) and finally, predicting the total return of a plan by adding up the rewards of its implied state-transitions r(z, z′) with terminal value bootstrapping Q(z, a). (2) An action a is executed according to plans with higher returns; the world’s response to the action is observed o′; and the interaction (o, a, o′) is accumulated in the learner’s experience. Learning occurs by updating all of the component models over the collective experience. Initial task observations are used only to update the reward model.",
+      "page": 2,
+      "index": 4,
+      "width": 1074,
+      "height": 600
+    },
+    {
+      "url": "assets/figures/arxiv/2602.24121v1/fig-005.webp",
+      "caption": "Fig. 4. Cumulative successes in simulated experiments. Offline results of BC are shown in Table III.",
+      "page": 7,
+      "index": 5,
+      "width": 747,
+      "height": 242
+    },
+    {
+      "url": "assets/figures/arxiv/2602.24121v1/fig-006.webp",
+      "caption": "Fig. 5. Cumulative successes in real-world experiments. Offline results of BC are shown in Table IV. Complete training time for one training run (including resets, computation, etc.) is approximately 90 minutes for Block Push and 70 minutes for Pick and Place.",
+      "page": 7,
+      "index": 6,
+      "width": 515,
+      "height": 239
+    },
+    {
+      "url": "assets/figures/arxiv/2602.24121v1/fig-007.webp",
+      "caption": "TABLE III. Comparison of the performance of our method against baselines on simulation tasks. Best indicates the best performing model checkpoint given evaluation statistics over a training run; Last indicates the last model checkpoint in training. Evaluation metrics are computed over 100 trials per checkpoint across 5 randomly generated seeds.",
+      "page": 7,
+      "index": 7,
+      "width": 444,
+      "height": 488
+    },
+    {
+      "url": "assets/figures/arxiv/2602.24121v1/fig-008.webp",
+      "caption": "TABLE V. Full Checkpoint History by Environment Steps.",
+      "page": 14,
+      "index": 8,
+      "width": 529,
+      "height": 379
+    },
+    {
+      "url": "assets/figures/arxiv/2602.24121v1/fig-009.webp",
+      "caption": "Fig. 6. Cumulative successes in real-world transfer experiment. Methods are first trained on the Block Push task, then transferred to a new task where demonstrations push the block in the opposite (+y) direction. For experimental control, methods are trained on the second task from scratch. BC performance is shown as a fraction of the total interactions.",
+      "page": 8,
+      "index": 9,
+      "width": 510,
+      "height": 353
+    },
+    {
+      "url": "assets/figures/arxiv/2602.24121v1/fig-010.webp",
+      "caption": "TABLE IV. Comparison of the performance of our method against baselines on real robot tasks. Best indicates the best performing model checkpoint given evaluation statistics over a training run; Last indicates the last model checkpoint in training. Evaluation metrics are computed over 50 trials per checkpoint over 3 randomly generated seeds.",
+      "page": 8,
+      "index": 10,
+      "width": 386,
+      "height": 800
+    },
+    {
+      "url": "assets/figures/arxiv/2602.24121v1/fig-011.webp",
+      "caption": "Fig. 14. PyTorch [36] 7.1M Model Architecture for observation space with two RGB images and proprioception (i.e. Push Block and Pick-and-Place).",
+      "page": 19,
+      "index": 11,
+      "width": 488,
+      "height": 1180
+    },
+    {
+      "url": "assets/figures/arxiv/2602.24121v1/fig-012.webp",
+      "caption": "Fig. 13. Transfer experiment (Figure 6 with dynamics-only transfer. As in Section IV, all tasks related to transfer are performed in the real-world.",
+      "page": 17,
+      "index": 12,
+      "width": 485,
+      "height": 250
+    },
+    {
+      "url": "assets/figures/arxiv/2602.24121v1/fig-013.webp",
+      "caption": "TABLE VII. MPAIL Hyperparameters. Used across all experiments unless specified otherwise. Only the Reward model does not employ LayerNorm.",
+      "page": 17,
+      "index": 13,
+      "width": 485,
+      "height": 356
+    },
+    {
+      "url": "assets/figures/arxiv/2602.24121v1/fig-014.webp",
+      "caption": "Fig. 11. Cumulative successes in real-world transfer experiment in Pick and Place. New task demonstrations invert the directionality of the initial demonstrations’ pick and place procedure by inverting the start and end regions for the block. Model evaluations for this experiment are shown in Table VI.",
+      "page": 17,
+      "index": 14,
+      "width": 502,
+      "height": 300
+    },
+    {
+      "url": "assets/figures/arxiv/2602.24121v1/fig-015.webp",
+      "caption": "Fig. 2. Top. Simulation of MPAIL2 on the Block Push (state) task at three time steps along an episode. Bottom. Predicted plans in the XY plane (topdown) for the next one second at each time step. End-effector plans are drawn in green. Block plans are drawn in orange. Block trajectories, static in the leftmost frame, become dynamic as the robot approaches and makes contact. These predictions show how the agent gradually learns to plan over physically causal relationships, like contact. Note: planning occurs in latent space. This visualization is made possible by a separately trained decoder.",
+      "page": 5,
+      "index": 15,
+      "width": 529,
+      "height": 394
+    },
+    {
+      "url": "assets/figures/arxiv/2602.24121v1/fig-016.webp",
+      "caption": "Fig. 9. Time efficiency of MPAIL2 compared to other methods. We plot talgo(c)/tMPAIL2(c) where t(c) is the learning iteration at which the algorithm achieves a cumulative success percentage. With respect to a given baseline, the value reflects how many times faster MPAIL2 achieves a given success percentage. An endpoint indicates where the corresponding baseline achieves its maximum success percentage.",
+      "page": 16,
+      "index": 16,
+      "width": 959,
+      "height": 318
+    },
+    {
+      "url": "assets/figures/arxiv/2602.24121v1/fig-017.webp",
+      "caption": "Fig. 10. Success rate stability. We plot the average success rate of each method over a moving window of 25 episodes. A value of 1 indicates success on all episodes across 25 updates. This graph captures a method’s stability across updates. In Sim: Block Push (State) and Sim: Pick and Place, MPAIL2 is able to maintain a consistent success rate of roughly 0.8 and 0.6 respectively while the decreasing curve in Sim: Block Push indicates instability as witnessed by the flattening of the cumulative success curve in Figure 4.",
+      "page": 16,
+      "index": 17,
+      "width": 959,
+      "height": 328
+    }
+  ]
+}

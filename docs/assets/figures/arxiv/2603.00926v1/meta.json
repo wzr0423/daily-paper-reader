@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.00926v1/fig-001.webp",
+      "caption": "Fig. 3: The architecture of our DAM-VLA. Given an RGB image observation and a task description, the model predicts a sequence of temporal actions. The process consists of three key components: 1) a vision-language model that encodes observation into visual, class and register tokens, and integrates visual tokens with a set of linguistic tokens, and produces the cognition and reasoning latents; 2) an action routing module that generates a weight and feeds it into the dynamic action model; 3) a dynamic action model that dynamically executes different action models by combining the low-level class token or register token from the vision model with the high-level cognition latent from the VLM to predict an action sequence.",
+      "page": 3,
+      "index": 1,
+      "width": 1000,
+      "height": 511
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.01714v1/fig-001.webp",
+      "caption": "Figure 3. Model Behavior Analysis. We compare the behavioral patterns of TopoCurate-SFT (Ours) vs. the baseline SFT (w/o Topology). (a) Ours demonstrates significantly higher reflective recovery rates, particularly in the complex Telecom domain. (b) In terms of the number of interaction turns (lower is better), Ours achieves higher efficiency overall, while maintaining success rate across all domains. (c) Ours consistently generates more diverse tool chains (Unique Chain Ratio), mitigating mode collapse.",
+      "page": 15,
+      "index": 1,
+      "width": 1002,
+      "height": 268
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01714v1/fig-002.webp",
+      "caption": "Table 2. Performance comparison on Tau2 Bench (IID) and BFCL v3 Multiturn (OOD). Models are trained on Tau2 environments. Gray rows denote TopoCurate variants. Bold indicates best results.",
+      "page": 7,
+      "index": 2,
+      "width": 925,
+      "height": 565
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01714v1/fig-003.webp",
+      "caption": "Figure 2. Pass@k Comparison. We compare three settings: the base Qwen3-Instruct backbone (Thinking mode), a baseline SFT model trained on standard outcome-filtered data (w/o Topology), and our proposed TopoCurate-SFT. The results demonstrate that TopoCurate consistently push superior agentic capability boundaries across all domains and model scales.",
+      "page": 8,
+      "index": 3,
+      "width": 802,
+      "height": 504
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01714v1/fig-004.webp",
+      "caption": "Figure 1. Overview of the TopoCurate Framework. Our method operates in three systematic stages: (Left) Topological Modeling transforms disjoint rollouts into a unified state-transition graph by defining states via action-observation tuples and aggregating semantically equivalent turns; (Middle) Trajectory Selection for SFT applies three process-aware metrics—Reflective Recovery (resilience), Semantic Efficiency (economy), and Strategic Diversity (exploration)—to prioritize high-quality trajectories; (Right) Task Selection for RL evaluates tasks using Error Branch Ratio and Strategy Heterogeneity to select structurally complex tasks that maximize gradient efficiency. This unified topological view enables rigorous curation beyond simple outcome filtering.",
+      "page": 4,
+      "index": 4,
+      "width": 906,
+      "height": 419
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01714v1/fig-005.webp",
+      "caption": "Figure 5. Training Reward Curves for RL. (Left) Comparison of models initialized with topologically-curated SFT (w/ Topology) vs. outcome-filtered SFT (w/o Topology), using the same RL task pool. (Right) Comparison of models trained on topologically-selected RL tasks (w/ Topology) vs. uniformly-sampled tasks (w/o Topology) from the same SFT checkpoint. Topological curation improves both initialization quality and task selection efficiency.",
+      "page": 16,
+      "index": 5,
+      "width": 907,
+      "height": 301
+    }
+  ]
+}

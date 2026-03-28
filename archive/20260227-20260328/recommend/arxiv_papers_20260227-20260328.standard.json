@@ -1,0 +1,2698 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-03-28T14:59:48.001674+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 71,
+    "deep_cap": 6,
+    "deep_selected": 53,
+    "quick_candidates": 43,
+    "quick_skim_target": 11,
+    "quick_selected": 11
+  },
+  "deep_dive": [
+    {
+      "id": "2603.04553v1",
+      "source": "arxiv",
+      "title": "Latent Particle World Models: Self-supervised Object-centric Stochastic Dynamics Modeling",
+      "abstract": "We introduce Latent Particle World Model (LPWM), a self-supervised object-centric world model scaled to real-world multi-object datasets and applicable in decision-making. LPWM autonomously discovers keypoints, bounding boxes, and object masks directly from video data, enabling it to learn rich scene decompositions without supervision. Our architecture is trained end-to-end purely from videos and supports flexible conditioning on actions, language, and image goals. LPWM models stochastic particle dynamics via a novel latent action module and achieves state-of-the-art results on diverse real-world and synthetic datasets. Beyond stochastic video modeling, LPWM is readily applicable to decision-making, including goal-conditioned imitation learning, as we demonstrate in the paper. Code, data, pre-trained models and video rollouts are available: https://taldatech.github.io/lpwm-web",
+      "authors": [
+        "Tal Daniel",
+        "Carl Qi",
+        "Dan Haramati",
+        "Amir Zadeh",
+        "Chuan Li",
+        "Aviv Tamar",
+        "Deepak Pathak",
+        "David Held"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-03-04T19:36:08+00:00",
+      "link": "https://arxiv.org/pdf/2603.04553v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Self-supervised object-centric world model with latent action module",
+      "llm_evidence_cn": "具有潜动作模块的自监督以对象为中心的世界模型",
+      "llm_evidence": "具有潜动作模块的自监督以对象为中心的世界模型",
+      "canonical_evidence": "具有潜动作模块的自监督以对象为中心的世界模型",
+      "llm_tldr_en": "Introduces LPWM, an object-centric world model that learns stochastic dynamics via a latent action module.",
+      "llm_tldr_cn": "引入LPWM，一种通过潜动作模块学习随机动力学的以对象为中心的世界模型。",
+      "llm_tldr": "引入LPWM，一种通过潜动作模块学习随机动力学的以对象为中心的世界模型。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Learning latent dynamics for world modeling",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.08546v1",
+      "source": "arxiv",
+      "title": "Interactive World Simulator for Robot Policy Training and Evaluation",
+      "abstract": "Action-conditioned video prediction models (often referred to as world models) have shown strong potential for robotics applications, but existing approaches are often slow and struggle to capture physically consistent interactions over long horizons, limiting their usefulness for scalable robot policy training and evaluation. We present Interactive World Simulator, a framework for building interactive world models from a moderate-sized robot interaction dataset. Our approach leverages consistency models for both image decoding and latent-space dynamics prediction, enabling fast and stable simulation of physical interactions. In our experiments, the learned world models produce interaction-consistent pixel-level predictions and support stable long-horizon interactions for more than 10 minutes at 15 FPS on a single RTX 4090 GPU. Our framework enables scalable demonstration collection solely within the world models to train state-of-the-art imitation policies. Through extensive real-world evaluation across diverse tasks involving rigid objects, deformable objects, object piles, and their interactions, we find that policies trained on world-model-generated data perform comparably to those trained on the same amount of real-world data. Additionally, we evaluate policies both within the world models and in the real world across diverse tasks, and observe a strong correlation between simulated and real-world performance. Together, these results establish the Interactive World Simulator as a stable and physically consistent surrogate for scalable robotic data generation and faithful, reproducible policy evaluation.",
+      "authors": [
+        "Yixuan Wang",
+        "Rhythm Syed",
+        "Fangyu Wu",
+        "Mengchao Zhang",
+        "Aykut Onol",
+        "Jose Barreiros",
+        "Hooshang Nayyeri",
+        "Tony Dear",
+        "Huan Zhang",
+        "Yunzhu Li"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-03-09T16:13:32+00:00",
+      "link": "https://arxiv.org/pdf/2603.08546v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Interactive world models for robot policy training",
+      "llm_evidence_cn": "用于机器人策略训练的交互式世界模型",
+      "llm_evidence": "用于机器人策略训练的交互式世界模型",
+      "canonical_evidence": "用于机器人策略训练的交互式世界模型",
+      "llm_tldr_en": "Builds interactive world models using consistency models for fast and stable robot policy evaluation.",
+      "llm_tldr_cn": "利用一致性模型构建交互式世界模型，实现快速且稳定的机器人策略评估。",
+      "llm_tldr": "利用一致性模型构建交互式世界模型，实现快速且稳定的机器人策略评估。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Action conditioned generative world models for robotics",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.08572v1",
+      "source": "arxiv",
+      "title": "MetaWorld-X: Hierarchical World Modeling via VLM-Orchestrated Experts for Humanoid Loco-Manipulation",
+      "abstract": "Learning natural, stable, and compositionally generalizable whole-body control policies for humanoid robots performing simultaneous locomotion and manipulation (loco-manipulation) remains a fundamental challenge in robotics. Existing reinforcement learning approaches typically rely on a single monolithic policy to acquire multiple skills, which often leads to cross-skill gradient interference and motion pattern conflicts in high-degree-of-freedom systems. As a result, generated behaviors frequently exhibit unnatural movements, limited stability, and poor generalization to complex task compositions. To address these limitations, we propose MetaWorld-X, a hierarchical world model framework for humanoid control. Guided by a divide-and-conquer principle, our method decomposes complex control problems into a set of specialized expert policies (Specialized Expert Policies, SEP). Each expert is trained under human motion priors through imitation-constrained reinforcement learning, introducing biomechanically consistent inductive biases that ensure natural and physically plausible motion generation. Building upon this foundation, we further develop an Intelligent Routing Mechanism (IRM) supervised by a Vision-Language Model (VLM), enabling semantic-driven expert composition. The VLM-guided router dynamically integrates expert policies according to high-level task semantics, facilitating compositional generalization and adaptive execution in multi-stage loco-manipulation tasks.",
+      "authors": [
+        "Yutong Shen",
+        "Hangxu Liu",
+        "Penghui Liu",
+        "Jiashuo Luo",
+        "Yongkang Zhang",
+        "Rex Morvley",
+        "Chen Jiang",
+        "Jianwei Zhang",
+        "Lei Zhang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-03-09T16:28:26+00:00",
+      "link": "https://arxiv.org/pdf/2603.08572v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Hierarchical world model framework for humanoid control",
+      "llm_evidence_cn": "用于类人机器人控制的分层世界模型框架",
+      "llm_evidence": "用于类人机器人控制的分层世界模型框架",
+      "canonical_evidence": "用于类人机器人控制的分层世界模型框架",
+      "llm_tldr_en": "Proposes MetaWorld-X, a hierarchical world model for stable humanoid loco-manipulation control.",
+      "llm_tldr_cn": "提出 MetaWorld-X，一种用于类人机器人运动与操作控制的分层世界模型框架。",
+      "llm_tldr": "提出 MetaWorld-X，一种用于类人机器人运动与操作控制的分层世界模型框架。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "World models in reinforcement learning and robotics",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.09030v1",
+      "source": "arxiv",
+      "title": "PlayWorld: Learning Robot World Models from Autonomous Play",
+      "abstract": "Action-conditioned video models offer a promising path to building general-purpose robot simulators that can improve directly from data. Yet, despite training on large-scale robot datasets, current state-of-the-art video models still struggle to predict physically consistent robot-object interactions that are crucial in robotic manipulation. To close this gap, we present PlayWorld, a simple, scalable, and fully autonomous pipeline for training high-fidelity video world simulators from interaction experience. In contrast to prior approaches that rely on success-biased human demonstrations, PlayWorld is the first system capable of learning entirely from unsupervised robot self-play, enabling naturally scalable data collection while capturing complex, long-tailed physical interactions essential for modeling realistic object dynamics. Experiments across diverse manipulation tasks show that PlayWorld generates high-quality, physically consistent predictions for contact-rich interactions that are not captured by world models trained on human-collected data.We further demonstrate the versatility of PlayWorld in enabling fine-grained failure prediction and policy evaluation, with up to 40% improvements over human-collected data. Finally, we demonstrate how PlayWorld enables reinforcement learning in the world model, improving policy performance by 65% in success rates when deployed in the real world.",
+      "authors": [
+        "Tenny Yin",
+        "Zhiting Mei",
+        "Zhonghe Zheng",
+        "Miyu Yamane",
+        "David Wang",
+        "Jade Sceats",
+        "Samuel M. Bateman",
+        "Lihan Zha",
+        "Apurva Badithela",
+        "Ola Shorinwa",
+        "Anirudha Majumdar"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-03-09T23:58:07+00:00",
+      "link": "https://arxiv.org/pdf/2603.09030v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Action-conditioned video world simulators from robot self-play",
+      "llm_evidence_cn": "基于机器人自主游玩的动作条件视频世界模拟器",
+      "llm_evidence": "基于机器人自主游玩的动作条件视频世界模拟器",
+      "canonical_evidence": "基于机器人自主游玩的动作条件视频世界模拟器",
+      "llm_tldr_en": "PlayWorld learns high-fidelity video world models for robotics entirely from unsupervised self-play data.",
+      "llm_tldr_cn": "PlayWorld完全通过无监督的自主游玩数据，为机器人学习高保真视频世界模型。",
+      "llm_tldr": "PlayWorld完全通过无监督的自主游玩数据，为机器人学习高保真视频世界模型。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Action conditioned generative world models for robotics",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.09030v2",
+      "source": "arxiv",
+      "title": "PlayWorld: Learning Robot World Models from Autonomous Play",
+      "abstract": "Action-conditioned video models offer a promising path to building general-purpose robot simulators that can improve directly from data. Yet, despite training on large-scale robot datasets, current state-of-the-art video models still struggle to predict physically consistent robot-object interactions that are crucial in robotic manipulation. To close this gap, we present PlayWorld, a simple, scalable, and fully autonomous pipeline for training high-fidelity video world simulators from interaction experience. In contrast to prior approaches that rely on success-biased human demonstrations, PlayWorld is the first system capable of learning entirely from unsupervised robot self-play, enabling naturally scalable data collection while capturing complex, long-tailed physical interactions essential for modeling realistic object dynamics. Experiments across diverse manipulation tasks show that PlayWorld generates high-quality, physically consistent predictions for contact-rich interactions that are not captured by world models trained on human-collected data. We further demonstrate the versatility of PlayWorld in enabling fine-grained failure prediction and policy evaluation, with up to 40% improvements over human-collected data. Finally, we demonstrate how PlayWorld enables reinforcement learning in the world model, improving policy performance by 65% in success rates when deployed in the real world.",
+      "authors": [
+        "Tenny Yin",
+        "Zhiting Mei",
+        "Zhonghe Zheng",
+        "Miyu Yamane",
+        "David Wang",
+        "Jade Sceats",
+        "Samuel M. Bateman",
+        "Lihan Zha",
+        "Apurva Badithela",
+        "Ola Shorinwa",
+        "Anirudha Majumdar"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-03-09T23:58:07+00:00",
+      "link": "https://arxiv.org/pdf/2603.09030v2",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Action-conditioned video world simulators from interaction experience",
+      "llm_evidence_cn": "基于交互经验的动作条件视频世界模拟器",
+      "llm_evidence": "基于交互经验的动作条件视频世界模拟器",
+      "canonical_evidence": "基于交互经验的动作条件视频世界模拟器",
+      "llm_tldr_en": "Introduces PlayWorld, a pipeline for learning high-fidelity video world models from robot self-play.",
+      "llm_tldr_cn": "介绍 PlayWorld，一个通过机器人自主博弈学习高保真视频世界模型的流水线。",
+      "llm_tldr": "介绍 PlayWorld，一个通过机器人自主博弈学习高保真视频世界模型的流水线。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Action conditioned generative world models for robotics",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.09241v1",
+      "source": "arxiv",
+      "title": "RAE-NWM: Navigation World Model in Dense Visual Representation Space",
+      "abstract": "Visual navigation requires agents to reach goals in complex environments through perception and planning. World models address this task by simulating action-conditioned state transitions to predict future observations. Current navigation world models typically learn state evolution under actions within the compressed latent space of a Variational Autoencoder, where spatial compression often discards fine-grained structural information and hinders precise control. To better understand the propagation characteristics of different representations, we conduct a linear dynamics probe and observe that dense DINOv2 features exhibit stronger linear predictability for action-conditioned transitions. Motivated by this observation, we propose the Representation Autoencoder-based Navigation World Model (RAE-NWM), which models navigation dynamics in a dense visual representation space. We employ a Conditional Diffusion Transformer with Decoupled Diffusion Transformer head (CDiT-DH) to model continuous transitions, and introduce a separate time-driven gating module for dynamics conditioning to regulate action injection strength during generation. Extensive evaluations show that modeling sequential rollouts in this space improves structural stability and action accuracy, benefiting downstream planning and navigation.",
+      "authors": [
+        "Mingkun Zhang",
+        "Wangtian Shen",
+        "Fan Zhang",
+        "Haijian Qin",
+        "Zihao Pei",
+        "Ziyang Meng"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-03-10T06:16:23+00:00",
+      "link": "https://arxiv.org/pdf/2603.09241v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Learning action-conditioned state transitions in dense representation space",
+      "llm_evidence_cn": "在稠密表示空间中学习动作条件状态转移",
+      "llm_evidence": "在稠密表示空间中学习动作条件状态转移",
+      "canonical_evidence": "在稠密表示空间中学习动作条件状态转移",
+      "llm_tldr_en": "Proposes a navigation world model using dense DINOv2 features for better action-conditioned state evolution.",
+      "llm_tldr_cn": "提出一种利用稠密DINOv2特征的导航世界模型，以实现更好的动作条件状态演化。",
+      "llm_tldr": "提出一种利用稠密DINOv2特征的导航世界模型，以实现更好的动作条件状态演化。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Learning latent dynamics for world modeling",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.10422v1",
+      "source": "arxiv",
+      "title": "World2Act: Latent Action Post-Training via Skill-Compositional World Models",
+      "abstract": "World Models (WMs) have emerged as a promising approach for post-training Vision-Language-Action (VLA) policies to improve robustness and generalization under environmental changes. However, most WM-based post-training methods rely on pixel-space supervision, making policies sensitive to pixel-level artifacts and hallucination from imperfect WM rollouts. We introduce World2Act, a post-training framework that aligns VLA actions directly with WM video-dynamics latents using a contrastive matching objective, reducing dependence on pixels. Post-training performance is tied to rollout quality, yet current WMs struggle with arbitrary-length video generation as they are mostly trained on fixed-length clips while robotic execution durations vary widely. To address this, we propose an automatic LLM-based skill-decomposition pipeline that segments high-level instructions into low-level prompts. Our pipeline produces RoboCasa-Skill and LIBERO-Skill, supporting skill-compositional WMs that remain temporally consistent across diverse task horizons. Empirically, applying World2Act to VLAs like GR00T-N1.6 and Cosmos Policy achieves state-of-the-art results on RoboCasa and LIBERO, and improves real-world performance by 6.7%, enhancing embodied agent generalization.",
+      "authors": [
+        "An Dinh Vuong",
+        "Tuan Van Vo",
+        "Abdullah Sohail",
+        "Haoran Ding",
+        "Liang Ma",
+        "Xiaodan Liang",
+        "Anqing Duan",
+        "Ivan Laptev",
+        "Ian Reid"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-03-11T05:11:44+00:00",
+      "link": "https://arxiv.org/pdf/2603.10422v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Aligns VLA actions with world model video-dynamics latents",
+      "llm_evidence_cn": "将VLA动作与世界模型视频动力学潜变量对齐",
+      "llm_evidence": "将VLA动作与世界模型视频动力学潜变量对齐",
+      "canonical_evidence": "将VLA动作与世界模型视频动力学潜变量对齐",
+      "llm_tldr_en": "Introduces World2Act to align VLA actions with latent dynamics of world models for improved robustness.",
+      "llm_tldr_cn": "引入World2Act，将VLA动作与世界模型的潜动力学对齐，以提高鲁棒性。",
+      "llm_tldr": "引入World2Act，将VLA动作与世界模型的潜动力学对齐，以提高鲁棒性。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Learning latent dynamics for world modeling",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.10448v1",
+      "source": "arxiv",
+      "title": "DiT4DiT: Jointly Modeling Video Dynamics and Actions for Generalizable Robot Control",
+      "abstract": "Vision-Language-Action (VLA) models have emerged as a promising paradigm for robot learning, but their representations are still largely inherited from static image-text pretraining, leaving physical dynamics to be learned from comparatively limited action data. Generative video models, by contrast, encode rich spatiotemporal structure and implicit physics, making them a compelling foundation for robotic manipulation. But their potentials are not fully explored in the literature. To bridge the gap, we introduce DiT4DiT, an end-to-end Video-Action Model that couples a video Diffusion Transformer with an action Diffusion Transformer in a unified cascaded framework. Instead of relying on reconstructed future frames, DiT4DiT extracts intermediate denoising features from the video generation process and uses them as temporally grounded conditions for action prediction. We further propose a dual flow-matching objective with decoupled timesteps and noise scales for video prediction, hidden-state extraction, and action inference, enabling coherent joint training of both modules. Across simulation and real-world benchmarks, DiT4DiT achieves state-of-the-art results, reaching average success rates of 98.6% on LIBERO and 50.8% on RoboCasa GR1 while using substantially less training data. On the Unitree G1 robot, it also delivers superior real-world performance and strong zero-shot generalization. Importantly, DiT4DiT improves sample efficiency by over 10x and speeds up convergence by up to 7x, demonstrating that video generation can serve as an effective scaling proxy for robot policy learning. We release code and models at https://dit4dit.github.io/.",
+      "authors": [
+        "Teli Ma",
+        "Jia Zheng",
+        "Zifan Wang",
+        "Chuili Jiang",
+        "Andy Cui",
+        "Junwei Liang",
+        "Shuo Yang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-11T06:03:53+00:00",
+      "link": "https://arxiv.org/pdf/2603.10448v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Jointly modeling video dynamics and actions for robot control",
+      "llm_evidence_cn": "联合建模视频动力学与动作以进行机器人控制",
+      "llm_evidence": "联合建模视频动力学与动作以进行机器人控制",
+      "canonical_evidence": "联合建模视频动力学与动作以进行机器人控制",
+      "llm_tldr_en": "Introduces DiT4DiT, a unified video-action model using diffusion transformers for robotic manipulation.",
+      "llm_tldr_cn": "引入 DiT4DiT，一种利用扩散 Transformer 进行机器人操作的统一视频动作模型。",
+      "llm_tldr": "引入 DiT4DiT，一种利用扩散 Transformer 进行机器人操作的统一视频动作模型。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Recent advances in world action models for autonomous agents",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.11110v1",
+      "source": "arxiv",
+      "title": "ResWM: Residual-Action World Model for Visual RL",
+      "abstract": "Learning predictive world models from raw visual observations is a central challenge in reinforcement learning (RL), especially for robotics and continuous control. Conventional model-based RL frameworks directly condition future predictions on absolute actions, which makes optimization unstable: the optimal action distributions are task-dependent, unknown a priori, and often lead to oscillatory or inefficient control. To address this, we introduce the Residual-Action World Model (ResWM), a new framework that reformulates the control variable from absolute actions to residual actions -- incremental adjustments relative to the previous step. This design aligns with the inherent smoothness of real-world control, reduces the effective search space, and stabilizes long-horizon planning. To further strengthen the representation, we propose an Observation Difference Encoder that explicitly models the changes between adjacent frames, yielding compact latent dynamics that are naturally coupled with residual actions. ResWM is integrated into a Dreamer-style latent dynamics model with minimal modifications and no extra hyperparameters. Both imagination rollouts and policy optimization are conducted in the residual-action space, enabling smoother exploration, lower control variance, and more reliable planning. Empirical results on the DeepMind Control Suite demonstrate that ResWM achieves consistent improvements in sample efficiency, asymptotic returns, and control smoothness, significantly surpassing strong baselines such as Dreamer and TD-MPC. Beyond performance, ResWM produces more stable and energy-efficient action trajectories, a property critical for robotic systems deployed in real-world environments. These findings suggest that residual action modeling provides a simple yet powerful principle for bridging algorithmic advances in RL with the practical requirements of robotics.",
+      "authors": [
+        "Jseen Zhang",
+        "Gabriel Adineera",
+        "Jinzhou Tan",
+        "Jinoh Kim"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-03-11T11:27:08+00:00",
+      "link": "https://arxiv.org/pdf/2603.11110v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Residual-action world model for visual reinforcement learning",
+      "llm_evidence_cn": "用于视觉强化学习的残差动作世界模型",
+      "llm_evidence": "用于视觉强化学习的残差动作世界模型",
+      "canonical_evidence": "用于视觉强化学习的残差动作世界模型",
+      "llm_tldr_en": "Introduces ResWM to stabilize model-based RL by predicting residual actions instead of absolute ones.",
+      "llm_tldr_cn": "引入ResWM，通过预测残差动作而非绝对动作来稳定基于模型的强化学习。",
+      "llm_tldr": "引入ResWM，通过预测残差动作而非绝对动作来稳定基于模型的强化学习。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Model-based reinforcement learning with world models",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.12639v1",
+      "source": "arxiv",
+      "title": "RoboStereo: Dual-Tower 4D Embodied World Models for Unified Policy Optimization",
+      "abstract": "Scalable Embodied AI faces fundamental constraints due to prohibitive costs and safety risks of real-world interaction. While Embodied World Models (EWMs) offer promise through imagined rollouts, existing approaches suffer from geometric hallucinations and lack unified optimization frameworks for practical policy improvement. We introduce RoboStereo, a symmetric dual-tower 4D world model that employs bidirectional cross-modal enhancement to ensure spatiotemporal geometric consistency and alleviate physics hallucinations. Building upon this high-fidelity 4D simulator, we present the first unified framework for world-model-based policy optimization: (1) Test-Time Policy Augmentation (TTPA) for pre-execution verification, (2) Imitative-Evolutionary Policy Learning (IEPL) leveraging visual perceptual rewards to learn from expert demonstrations, and (3) Open-Exploration Policy Learning (OEPL) enabling autonomous skill discovery and self-correction. Comprehensive experiments demonstrate RoboStereo achieves state-of-the-art generation quality, with our unified framework delivering >97% average relative improvement on fine-grained manipulation tasks.",
+      "authors": [
+        "Ruicheng Zhang",
+        "Guangyu Chen",
+        "Zunnan Xu",
+        "Zihao Liu",
+        "Zhizhou Zhong",
+        "Mingyang Zhang",
+        "Jun Zhou",
+        "Xiu Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-03-13T04:16:19+00:00",
+      "link": "https://arxiv.org/pdf/2603.12639v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "4D embodied world models for unified policy optimization",
+      "llm_evidence_cn": "用于统一策略优化的 4D 具身世界模型",
+      "llm_evidence": "用于统一策略优化的 4D 具身世界模型",
+      "canonical_evidence": "用于统一策略优化的 4D 具身世界模型",
+      "llm_tldr_en": "RoboStereo uses a dual-tower 4D world model to ensure geometric consistency for policy optimization.",
+      "llm_tldr_cn": "RoboStereo 利用双塔 4D 世界模型确保几何一致性，从而优化具身智能策略。",
+      "llm_tldr": "RoboStereo 利用双塔 4D 世界模型确保几何一致性，从而优化具身智能策略。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Action conditioned generative world models for robotics",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.14392v1",
+      "source": "arxiv",
+      "title": "WestWorld: A Knowledge-Encoded Scalable Trajectory World Model for Diverse Robotic Systems",
+      "abstract": "Trajectory world models play a crucial role in robotic dynamics learning, planning, and control. While recent works have explored trajectory world models for diverse robotic systems, they struggle to scale to a large number of distinct system dynamics and overlook domain knowledge of physical structures. To address these limitations, we introduce WestWorld, a knoWledge-Encoded Scalable Trajectory World model for diverse robotic systems. To tackle the scalability challenge, we propose a novel system-aware Mixture-of-Experts (Sys-MoE) that dynamically combines and routes specialized experts for different robotic systems via a learnable system embedding. To further enhance zero-shot generalization, we incorporate domain knowledge of robot physical structures by introducing a structural embedding that aligns trajectory representations with morphological information. After pretraining on 89 complex environments spanning diverse morphologies across both simulation and real-world settings, WestWorld achieves significant improvements over competitive baselines in zero- and few-shot trajectory prediction. Additionally, it shows strong scalability across a wide range of robotic environments and significantly improves performance on downstream model-based control for different robots. Finally, we deploy our model on a real-world Unitree Go1, where it demonstrates stable locomotion performance (see our demo on the website: https://westworldrobot.github.io/). The code will be available upon publication.",
+      "authors": [
+        "Yuchen Wang",
+        "Jiangtao Kong",
+        "Sizhe Wei",
+        "Xiaochang Li",
+        "Haohong Lin",
+        "Hongjue Zhao",
+        "Tianyi Zhou",
+        "Lu Gan",
+        "Huajie Shao"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.RO"
+      ],
+      "published": "2026-03-15T14:12:43+00:00",
+      "link": "https://arxiv.org/pdf/2603.14392v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "trajectory world models for diverse robotic systems",
+      "llm_evidence_cn": "适用于多样化机器人系统的轨迹世界模型",
+      "llm_evidence": "适用于多样化机器人系统的轨迹世界模型",
+      "canonical_evidence": "适用于多样化机器人系统的轨迹世界模型",
+      "llm_tldr_en": "Introduces WestWorld, a scalable trajectory world model using Mixture-of-Experts for diverse robotics.",
+      "llm_tldr_cn": "引入WestWorld，一种利用混合专家模型实现的多样化机器人系统可扩展轨迹世界模型。",
+      "llm_tldr": "引入WestWorld，一种利用混合专家模型实现的多样化机器人系统可扩展轨迹世界模型。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "World models in reinforcement learning and robotics",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.15359v1",
+      "source": "arxiv",
+      "title": "NavThinker: Action-Conditioned World Models for Coupled Prediction and Planning in Social Navigation",
+      "abstract": "Social navigation requires robots to act safely in dynamic human environments. Effective behavior demands thinking ahead: reasoning about how the scene and pedestrians evolve under different robot actions rather than reacting to current observations alone. This creates a coupled prediction-planning challenge, where robot actions and human motion mutually influence each other. To address this challenge, we propose NavThinker, a future-aware framework that couples an action-conditioned world model with on-policy reinforcement learning. The world model operates in the Depth Anything V2 patch feature space and performs autoregressive prediction of future scene geometry and human motion; multi-head decoders then produce future depth maps and human trajectories, yielding a future-aware state aligned with traversability and interaction risk. Crucially, we train the policy with DD-PPO while injecting world-model think-ahead signals via: (i) action-conditioned future features fused into the current observation embedding and (ii) social reward shaping from predicted human trajectories. Experiments on single- and multi-robot Social-HM3D show state-of-the-art navigation success, with zero-shot transfer to Social-MP3D and real-world deployment on a Unitree Go2, validating generalization and practical applicability. Webpage: https://github.com/hutslib/NavThinker.",
+      "authors": [
+        "Tianshuai Hu",
+        "Zeying Gong",
+        "Lingdong Kong",
+        "XiaoDong Mei",
+        "Yiyi Ding",
+        "Qi Zeng",
+        "Ao Liang",
+        "Rong Li",
+        "Yangyi Zhong",
+        "Junwei Liang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-16T14:37:16+00:00",
+      "link": "https://arxiv.org/pdf/2603.15359v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Action-conditioned world model coupled with reinforcement learning for navigation",
+      "llm_evidence_cn": "动作条件世界模型与强化学习相结合用于导航",
+      "llm_evidence": "动作条件世界模型与强化学习相结合用于导航",
+      "canonical_evidence": "动作条件世界模型与强化学习相结合用于导航",
+      "llm_tldr_en": "Couples an action-conditioned world model with RL for predictive planning in social robot navigation.",
+      "llm_tldr_cn": "将动作条件世界模型与强化学习结合，用于社交机器人导航中的预测性规划。",
+      "llm_tldr": "将动作条件世界模型与强化学习结合，用于社交机器人导航中的预测性规划。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Action-conditioned world models for decision making",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.15359v2",
+      "source": "arxiv",
+      "title": "NavThinker: Action-Conditioned World Models for Coupled Prediction and Planning in Social Navigation",
+      "abstract": "Social navigation requires robots to act safely in dynamic human environments. Effective behavior demands thinking ahead: reasoning about how the scene and pedestrians evolve under different robot actions rather than reacting to current observations alone. This creates a coupled prediction-planning challenge, where robot actions and human motion mutually influence each other. To address this challenge, we propose NavThinker, a future-aware framework that couples an action-conditioned world model with on-policy reinforcement learning. The world model operates in the Depth Anything V2 patch feature space and performs autoregressive prediction of future scene geometry and human motion; multi-head decoders then produce future depth maps and human trajectories, yielding a future-aware state aligned with traversability and interaction risk. Crucially, we train the policy with DD-PPO while injecting world-model think-ahead signals via: (i) action-conditioned future features fused into the current observation embedding and (ii) social reward shaping from predicted human trajectories. Experiments on single- and multi-robot Social-HM3D show state-of-the-art navigation success, with zero-shot transfer to Social-MP3D and real-world deployment on a Unitree Go2, validating generalization and practical applicability. Webpage: https://hutslib.github.io/NavThinker.",
+      "authors": [
+        "Tianshuai Hu",
+        "Zeying Gong",
+        "Lingdong Kong",
+        "XiaoDong Mei",
+        "Yiyi Ding",
+        "Qi Zeng",
+        "Ao Liang",
+        "Rong Li",
+        "Yangyi Zhong",
+        "Junwei Liang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-16T14:37:16+00:00",
+      "link": "https://arxiv.org/pdf/2603.15359v2",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Action-conditioned world model for social navigation planning",
+      "llm_evidence_cn": "用于社交导航规划的动作条件世界模型",
+      "llm_evidence": "用于社交导航规划的动作条件世界模型",
+      "canonical_evidence": "用于社交导航规划的动作条件世界模型",
+      "llm_tldr_en": "NavThinker couples an action-conditioned world model with RL for predictive planning in social navigation.",
+      "llm_tldr_cn": "NavThinker将动作条件世界模型与强化学习结合，用于社交导航中的预测性规划。",
+      "llm_tldr": "NavThinker将动作条件世界模型与强化学习结合，用于社交导航中的预测性规划。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Action-conditioned world models for decision making",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.16195v2",
+      "source": "arxiv",
+      "title": "S-VAM: Shortcut Video-Action Model by Self-Distilling Geometric and Semantic Foresight",
+      "abstract": "Video action models (VAMs) have emerged as a promising paradigm for robot learning, owing to their powerful visual foresight for complex manipulation tasks. However, current VAMs, typically relying on either slow multi-step video generation or noisy one-step feature extraction, cannot simultaneously guarantee real-time inference and high-fidelity foresight. To address this limitation, we propose S-VAM, a shortcut video-action model that foresees coherent geometric and semantic representations via a single forward pass. Serving as a stable blueprint, these foreseen representations significantly simplify the action prediction. To enable this efficient shortcut, we introduce a novel self-distillation strategy that condenses structured generative priors of multi-step denoising into one-step inference. Specifically, vision foundation model (VFM) representations extracted from the diffusion model's own multi-step generated videos provide teacher targets. Lightweight decouplers, as students, learn to directly map noisy one-step features to these targets. Extensive experiments in simulation and the real world demonstrate that our S-VAM outperforms state-of-the-art methods, enabling efficient and precise manipulation in complex environments. Our project page is https://haodong-yan.github.io/S-VAM/",
+      "authors": [
+        "Haodong Yan",
+        "Zhide Zhong",
+        "Jiaguan Zhu",
+        "Junjie He",
+        "Weilin Yuan",
+        "Wenxuan Song",
+        "Xin Gong",
+        "Yingjie Cai",
+        "Guanyi Zhao",
+        "Xu Yan",
+        "Bingbing Liu",
+        "Ying-Cong Chen",
+        "Haoang Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-03-17T07:21:28+00:00",
+      "link": "https://arxiv.org/pdf/2603.16195v2",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "shortcut video-action model for robot learning",
+      "llm_evidence_cn": "用于机器人学习的快捷视频动作模型",
+      "llm_evidence": "用于机器人学习的快捷视频动作模型",
+      "canonical_evidence": "用于机器人学习的快捷视频动作模型",
+      "llm_tldr_en": "Introduces S-VAM, a real-time video-action model using self-distillation for efficient robotic foresight.",
+      "llm_tldr_cn": "引入S-VAM，一种通过自蒸馏实现高效机器人视觉预测的实时视频动作模型。",
+      "llm_tldr": "引入S-VAM，一种通过自蒸馏实现高效机器人视觉预测的实时视频动作模型。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Action conditioned generative world models for robotics",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.16666v1",
+      "source": "arxiv",
+      "title": "Fast-WAM: Do World Action Models Need Test-time Future Imagination?",
+      "abstract": "World Action Models (WAMs) have emerged as a promising alternative to Vision-Language-Action (VLA) models for embodied control because they explicitly model how visual observations may evolve under action. Most existing WAMs follow an imagine-then-execute paradigm, incurring substantial test-time latency from iterative video denoising, yet it remains unclear whether explicit future imagination is actually necessary for strong action performance. In this paper, we ask whether WAMs need explicit future imagination at test time, or whether their benefit comes primarily from video modeling during training. We disentangle the role of video modeling during training from explicit future generation during inference by proposing \\textbf{Fast-WAM}, a WAM architecture that retains video co-training during training but skips future prediction at test time. We further instantiate several Fast-WAM variants to enable a controlled comparison of these two factors. Across these variants, we find that Fast-WAM remains competitive with imagine-then-execute variants, while removing video co-training causes a much larger performance drop. Empirically, Fast-WAM achieves competitive results with state-of-the-art methods both on simulation benchmarks (LIBERO and RoboTwin) and real-world tasks, without embodied pretraining. It runs in real time with 190ms latency, over 4$\\times$ faster than existing imagine-then-execute WAMs. These results suggest that the main value of video prediction in WAMs may lie in improving world representations during training rather than generating future observations at test time. Project page: https://yuantianyuan01.github.io/FastWAM/",
+      "authors": [
+        "Tianyuan Yuan",
+        "Zibin Dong",
+        "Yicheng Liu",
+        "Hang Zhao"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-03-17T15:33:43+00:00",
+      "link": "https://arxiv.org/pdf/2603.16666v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "World Action Models (WAMs) for embodied control",
+      "llm_evidence_cn": "用于具身控制的世界动作模型 (WAM)",
+      "llm_evidence": "用于具身控制的世界动作模型 (WAM)",
+      "canonical_evidence": "用于具身控制的世界动作模型 (WAM)",
+      "llm_tldr_en": "Investigates the necessity of test-time imagination in World Action Models and proposes Fast-WAM.",
+      "llm_tldr_cn": "探讨了世界动作模型在测试时想象的必要性，并提出了高效的Fast-WAM架构。",
+      "llm_tldr": "探讨了世界动作模型在测试时想象的必要性，并提出了高效的Fast-WAM架构。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Recent advances in world action models for autonomous agents",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.16666v2",
+      "source": "arxiv",
+      "title": "Fast-WAM: Do World Action Models Need Test-time Future Imagination?",
+      "abstract": "World Action Models (WAMs) have emerged as a promising alternative to Vision-Language-Action (VLA) models for embodied control because they explicitly model how visual observations may evolve under action. Most existing WAMs follow an imagine-then-execute paradigm, incurring substantial test-time latency from iterative video denoising, yet it remains unclear whether explicit future imagination is actually necessary for strong action performance. In this paper, we ask whether WAMs need explicit future imagination at test time, or whether their benefit comes primarily from video modeling during training. We disentangle the role of video modeling during training from explicit future generation during inference by proposing \\textbf{Fast-WAM}, a WAM architecture that retains video co-training during training but skips future prediction at test time. We further instantiate several Fast-WAM variants to enable a controlled comparison of these two factors. Across these variants, we find that Fast-WAM remains competitive with imagine-then-execute variants, while removing video co-training causes a much larger performance drop. Empirically, Fast-WAM achieves competitive results with state-of-the-art methods both on simulation benchmarks (LIBERO and RoboTwin) and real-world tasks, without embodied pretraining. It runs in real time with 190ms latency, over 4$\\times$ faster than existing imagine-then-execute WAMs. These results suggest that the main value of video prediction in WAMs may lie in improving world representations during training rather than generating future observations at test time. Project page: https://yuantianyuan01.github.io/FastWAM/",
+      "authors": [
+        "Tianyuan Yuan",
+        "Zibin Dong",
+        "Yicheng Liu",
+        "Hang Zhao"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI"
+      ],
+      "published": "2026-03-17T15:33:43+00:00",
+      "link": "https://arxiv.org/pdf/2603.16666v2",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "investigates World Action Models (WAMs) for embodied control",
+      "llm_evidence_cn": "研究用于具身控制的世界动作模型 (WAM)",
+      "llm_evidence": "研究用于具身控制的世界动作模型 (WAM)",
+      "canonical_evidence": "研究用于具身控制的世界动作模型 (WAM)",
+      "llm_tldr_en": "Fast-WAM explores whether explicit future imagination is necessary for World Action Models during inference.",
+      "llm_tldr_cn": "Fast-WAM 探讨了世界动作模型在推理阶段是否真的需要显式的未来想象。",
+      "llm_tldr": "Fast-WAM 探讨了世界动作模型在推理阶段是否真的需要显式的未来想象。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Recent advances in world action models for autonomous agents",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.16669v1",
+      "source": "arxiv",
+      "title": "Kinema4D: Kinematic 4D World Modeling for Spatiotemporal Embodied Simulation",
+      "abstract": "Simulating robot-world interactions is a cornerstone of Embodied AI. Recently, a few works have shown promise in leveraging video generations to transcend the rigid visual/physical constraints of traditional simulators. However, they primarily operate in 2D space or are guided by static environmental cues, ignoring the fundamental reality that robot-world interactions are inherently 4D spatiotemporal events that require precise interactive modeling. To restore this 4D essence while ensuring the precise robot control, we introduce Kinema4D, a new action-conditioned 4D generative robotic simulator that disentangles the robot-world interaction into: i) Precise 4D representation of robot controls: we drive a URDF-based 3D robot via kinematics, producing a precise 4D robot control trajectory. ii) Generative 4D modeling of environmental reactions: we project the 4D robot trajectory into a pointmap as a spatiotemporal visual signal, controlling the generative model to synthesize complex environments' reactive dynamics into synchronized RGB/pointmap sequences. To facilitate training, we curated a large-scale dataset called Robo4D-200k, comprising 201,426 robot interaction episodes with high-quality 4D annotations. Extensive experiments demonstrate that our method effectively simulates physically-plausible, geometry-consistent, and embodiment-agnostic interactions that faithfully mirror diverse real-world dynamics. For the first time, it shows potential zero-shot transfer capability, providing a high-fidelity foundation for advancing next-generation embodied simulation.",
+      "authors": [
+        "Mutian Xu",
+        "Tianbao Zhang",
+        "Tianqi Liu",
+        "Zhaoxi Chen",
+        "Xiaoguang Han",
+        "Ziwei Liu"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "published": "2026-03-17T15:36:38+00:00",
+      "link": "https://arxiv.org/pdf/2603.16669v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Action-conditioned 4D generative robotic simulator for world modeling",
+      "llm_evidence_cn": "用于世界建模的动作条件4D生成式机器人模拟器",
+      "llm_evidence": "用于世界建模的动作条件4D生成式机器人模拟器",
+      "canonical_evidence": "用于世界建模的动作条件4D生成式机器人模拟器",
+      "llm_tldr_en": "Introduces Kinema4D, a generative world model for precise 4D spatiotemporal robot-world interaction.",
+      "llm_tldr_cn": "引入Kinema4D，一种用于精确4D时空机器人与世界交互的生成式世界模型。",
+      "llm_tldr": "引入Kinema4D，一种用于精确4D时空机器人与世界交互的生成式世界模型。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Action conditioned generative world models for robotics",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.17240v1",
+      "source": "arxiv",
+      "title": "GigaWorld-Policy: An Efficient Action-Centered World--Action Model",
+      "abstract": "World-Action Models (WAM) initialized from pre-trained video generation backbones have demonstrated remarkable potential for robot policy learning. However, existing approaches face two critical bottlenecks that hinder performance and deployment. First, jointly reasoning over future visual dynamics and corresponding actions incurs substantial inference overhead. Second, joint modeling often entangles visual and motion representations, making motion prediction accuracy heavily dependent on the quality of future video forecasts. To address these issues, we introduce GigaWorld-Policy, an action-centered WAM that learns 2D pixel-action dynamics while enabling efficient action decoding, with optional video generation. Specifically, we formulate policy training into two coupled components: the model predicts future action sequences conditioned on the current observation, and simultaneously generates future videos conditioned on the predicted actions and the same observation. The policy is supervised by both action prediction and video generation, providing richer learning signals and encouraging physically plausible actions through visual-dynamics constraints. With a causal design that prevents future-video tokens from influencing action tokens, explicit future-video generation is optional at inference time, allowing faster action prediction during deployment. To support this paradigm, we curate a diverse, large-scale robot dataset to pre-train an action-centered video generation model, which is then adapted as the backbone for robot policy learning. Experimental results on real-world robotic platforms show that GigaWorld-Policy runs 9x faster than the leading WAM baseline, Motus, while improving task success rates by 7%. Moreover, compared with pi-0.5, GigaWorld-Policy improves performance by 95% on RoboTwin 2.0.",
+      "authors": [
+        "Angen Ye",
+        "Boyuan Wang",
+        "Chaojun Ni",
+        "Guan Huang",
+        "Guosheng Zhao",
+        "Hao Li",
+        "Hengtao Li",
+        "Jie Li",
+        "Jindi Lv",
+        "Jingyu Liu",
+        "Min Cao",
+        "Peng Li",
+        "Qiuping Deng",
+        "Wenjun Mei",
+        "Xiaofeng Wang",
+        "Xinze Chen",
+        "Xinyu Zhou",
+        "Yang Wang",
+        "Yifan Chang",
+        "Yifan Li",
+        "Yukun Zhou",
+        "Yun Ye",
+        "Zhichao Liu",
+        "Zheng Zhu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-03-18T00:52:02+00:00",
+      "link": "https://arxiv.org/pdf/2603.17240v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Introduces GigaWorld-Policy, an action-centered World-Action Model (WAM) for robot policy learning.",
+      "llm_evidence_cn": "引入了 GigaWorld-Policy，一种用于机器人策略学习的以动作为中心的世界动作模型 (WAM)。",
+      "llm_evidence": "引入了 GigaWorld-Policy，一种用于机器人策略学习的以动作为中心的世界动作模型 (WAM)。",
+      "canonical_evidence": "引入了 GigaWorld-Policy，一种用于机器人策略学习的以动作为中心的世界动作模型 (WAM)。",
+      "llm_tldr_en": "Proposes an efficient action-centered world-action model that decouples visual and motion representations for robotics.",
+      "llm_tldr_cn": "提出了一种高效的以动作为中心的世界动作模型，解耦了机器人视觉和运动表示。",
+      "llm_tldr": "提出了一种高效的以动作为中心的世界动作模型，解耦了机器人视觉和运动表示。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Recent advances in world action models for autonomous agents",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.17240v2",
+      "source": "arxiv",
+      "title": "GigaWorld-Policy: An Efficient Action-Centered World--Action Model",
+      "abstract": "World-Action Models (WAM) initialized from pre-trained video generation backbones have demonstrated remarkable potential for robot policy learning. However, existing approaches face two critical bottlenecks that hinder performance and deployment. First, jointly reasoning over future visual dynamics and corresponding actions incurs substantial inference overhead. Second, joint modeling often entangles visual and motion representations, making motion prediction accuracy heavily dependent on the quality of future video forecasts. To address these issues, we introduce GigaWorld-Policy, an action-centered WAM that learns 2D pixel-action dynamics while enabling efficient action decoding, with optional video generation. Specifically, we formulate policy training into two coupled components: the model predicts future action sequences conditioned on the current observation, and simultaneously generates future videos conditioned on the predicted actions and the same observation. The policy is supervised by both action prediction and video generation, providing richer learning signals and encouraging physically plausible actions through visual-dynamics constraints. With a causal design that prevents future-video tokens from influencing action tokens, explicit future-video generation is optional at inference time, allowing faster action prediction during deployment. To support this paradigm, we curate a diverse, large-scale robot dataset to pre-train an action-centered video generation model, which is then adapted as the backbone for robot policy learning. Experimental results on real-world robotic platforms show that GigaWorld-Policy runs 9x faster than the leading WAM baseline, Motus, while improving task success rates by 7%. Moreover, compared with pi-0.5, GigaWorld-Policy improves performance by 95% on RoboTwin 2.0.",
+      "authors": [
+        "Angen Ye",
+        "Boyuan Wang",
+        "Chaojun Ni",
+        "Guan Huang",
+        "Guosheng Zhao",
+        "Hao Li",
+        "Hengtao Li",
+        "Jie Li",
+        "Jindi Lv",
+        "Jingyu Liu",
+        "Min Cao",
+        "Peng Li",
+        "Qiuping Deng",
+        "Wenjun Mei",
+        "Xiaofeng Wang",
+        "Xinze Chen",
+        "Xinyu Zhou",
+        "Yang Wang",
+        "Yifan Chang",
+        "Yifan Li",
+        "Yukun Zhou",
+        "Yun Ye",
+        "Zhichao Liu",
+        "Zheng Zhu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-03-18T00:52:02+00:00",
+      "link": "https://arxiv.org/pdf/2603.17240v2",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Action-centered world-action model for efficient robot policy learning",
+      "llm_evidence_cn": "用于高效机器人策略学习的以动作为中心的世界动作模型",
+      "llm_evidence": "用于高效机器人策略学习的以动作为中心的世界动作模型",
+      "canonical_evidence": "用于高效机器人策略学习的以动作为中心的世界动作模型",
+      "llm_tldr_en": "Develops GigaWorld-Policy, an efficient action-centered WAM for faster robot control and decoding.",
+      "llm_tldr_cn": "开发了GigaWorld-Policy，一种高效的以动作为中心的世界动作模型。",
+      "llm_tldr": "开发了GigaWorld-Policy，一种高效的以动作为中心的世界动作模型。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Recent advances in world action models for autonomous agents",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.17808v1",
+      "source": "arxiv",
+      "title": "EVA: Aligning Video World Models with Executable Robot Actions via Inverse Dynamics Rewards",
+      "abstract": "Video generative models are increasingly used as world models for robotics, where a model generates a future visual rollout conditioned on the current observation and task instruction, and an inverse dynamics model (IDM) converts the generated frames into executable robot actions. However, current video world models lack explicit executability constraints. As a result, visually coherent rollouts may still violate rigid-body and kinematic consistency, producing unstable or infeasible control commands when decoded by an IDM. We refer to this mismatch between visual generation and physically executable control as the executability gap. While this gap can be mitigated at inference time using techniques such as rejection sampling, such approaches are inefficient due to the high cost of video generation. In this paper, we leverage the executability gap as a training signal and introduce Executable Video Alignment (EVA), a reinforcement-learning post-training framework for aligning video world models. EVA trains an inverse dynamics model on real robot trajectories and repurposes it as a reward model that evaluates generated videos through the action sequences they induce, encouraging smooth motions measured by velocity, acceleration, and jerk while penalizing actions that violate embodiment constraints. Importantly, the reward remains informative even when generated videos contain severe visual artifacts, since such artifacts typically translate into unstable or out-of-bound actions. Experiments on the RoboTwin benchmark and a real bimanual robot show that EVA reduces embodiment-specific artifacts in generated rollouts and improves downstream task execution success.",
+      "authors": [
+        "Ruixiang Wang",
+        "Qingming Liu",
+        "Yueci Deng",
+        "Guiliang Liu",
+        "Zhen Liu",
+        "Kui Jia"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-03-18T15:02:19+00:00",
+      "link": "https://arxiv.org/pdf/2603.17808v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "aligning video world models with executable robot actions",
+      "llm_evidence_cn": "将视频世界模型与可执行机器人动作对齐",
+      "llm_evidence": "将视频世界模型与可执行机器人动作对齐",
+      "canonical_evidence": "将视频世界模型与可执行机器人动作对齐",
+      "llm_tldr_en": "EVA introduces inverse dynamics rewards to ensure video world model rollouts are physically executable.",
+      "llm_tldr_cn": "EVA 引入逆动力学奖励，确保视频世界模型生成的序列符合物理可执行性。",
+      "llm_tldr": "EVA 引入逆动力学奖励，确保视频世界模型生成的序列符合物理可执行性。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Action conditioned generative world models for robotics",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.17808v2",
+      "source": "arxiv",
+      "title": "EVA: Aligning Video World Models with Executable Robot Actions via Inverse Dynamics Rewards",
+      "abstract": "Video generative models are increasingly used as world models for robotics, where a model generates a future visual rollout conditioned on the current observation and task instruction, and an inverse dynamics model (IDM) converts the generated frames into executable robot actions. However, current video world models lack explicit executability constraints. As a result, visually coherent rollouts may still violate rigid-body and kinematic consistency, producing unstable or infeasible control commands when decoded by an IDM. We refer to this mismatch between visual generation and physically executable control as the executability gap. While this gap can be mitigated at inference time using techniques such as rejection sampling, such approaches are inefficient due to the high cost of video generation. In this paper, we leverage the executability gap as a training signal and introduce Executable Video Alignment (EVA), a reinforcement-learning post-training framework for aligning video world models. EVA trains an inverse dynamics model on real robot trajectories and repurposes it as a reward model that evaluates generated videos through the action sequences they induce, encouraging smooth motions measured by velocity, acceleration, and jerk while penalizing actions that violate embodiment constraints. Importantly, the reward remains informative even when generated videos contain severe visual artifacts, since such artifacts typically translate into unstable or out-of-bound actions. Experiments on the RoboTwin benchmark and a real bimanual robot show that EVA reduces embodiment-specific artifacts in generated rollouts and improves downstream task execution success.",
+      "authors": [
+        "Ruixiang Wang",
+        "Qingming Liu",
+        "Yueci Deng",
+        "Guiliang Liu",
+        "Zhen Liu",
+        "Kui Jia"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-03-18T15:02:19+00:00",
+      "link": "https://arxiv.org/pdf/2603.17808v2",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "video world models for executable robot actions",
+      "llm_evidence_cn": "用于可执行机器人动作的视频世界模型",
+      "llm_evidence": "用于可执行机器人动作的视频世界模型",
+      "canonical_evidence": "用于可执行机器人动作的视频世界模型",
+      "llm_tldr_en": "Aligns video world models with executable actions using inverse dynamics rewards to bridge the gap.",
+      "llm_tldr_cn": "利用逆动力学奖励将视频世界模型与可执行动作对齐，弥合生成与控制间的差距。",
+      "llm_tldr": "利用逆动力学奖励将视频世界模型与可执行动作对齐，弥合生成与控制间的差距。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Action conditioned generative world models for robotics",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.20607v1",
+      "source": "arxiv",
+      "title": "Towards Practical World Model-based Reinforcement Learning for Vision-Language-Action Models",
+      "abstract": "Vision-Language-Action (VLA) models show strong generalization for robotic control, but finetuning them with reinforcement learning (RL) is constrained by the high cost and safety risks of real-world interaction. Training VLA models in interactive world models avoids these issues but introduces several challenges, including pixel-level world modeling, multi-view consistency, and compounding errors under sparse rewards. Building on recent advances across large multimodal models and model-based RL, we propose VLA-MBPO, a practical framework to tackle these problems in VLA finetuning. Our approach has three key design choices: (i) adapting unified multimodal models (UMMs) for data-efficient world modeling; (ii) an interleaved view decoding mechanism to enforce multi-view consistency; and (iii) chunk-level branched rollout to mitigate error compounding. Theoretical analysis and experiments across simulation and real-world tasks demonstrate that VLA-MBPO significantly improves policy performance and sample efficiency, underscoring its robustness and scalability for real-world robotic deployment.",
+      "authors": [
+        "Zhilong Zhang",
+        "Haoxiang Ren",
+        "Yihao Sun",
+        "Yifei Sheng",
+        "Haonan Wang",
+        "Haoxin Lin",
+        "Zhichao Wu",
+        "Pierre-Luc Bacon",
+        "Yang Yu"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.LG"
+      ],
+      "published": "2026-03-21T02:44:39+00:00",
+      "link": "https://arxiv.org/pdf/2603.20607v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Practical world model-based reinforcement learning for VLA model finetuning",
+      "llm_evidence_cn": "用于VLA模型微调的实用世界模型强化学习",
+      "llm_evidence": "用于VLA模型微调的实用世界模型强化学习",
+      "canonical_evidence": "用于VLA模型微调的实用世界模型强化学习",
+      "llm_tldr_en": "VLA-MBPO provides a framework for finetuning VLA models using interactive world models to avoid real-world risks.",
+      "llm_tldr_cn": "VLA-MBPO提供了一个利用交互式世界模型微调VLA模型的框架，规避了现实交互风险。",
+      "llm_tldr": "VLA-MBPO提供了一个利用交互式世界模型微调VLA模型的框架，规避了现实交互风险。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Model-based reinforcement learning with world models",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.22078v1",
+      "source": "arxiv",
+      "title": "Do World Action Models Generalize Better than VLAs? A Robustness Study",
+      "abstract": "Robot action planning in the real world is challenging as it requires not only understanding the current state of the environment but also predicting how it will evolve in response to actions. Vision-language-action (VLA), which repurpose large-scale vision-language models for robot action generation using action experts, have achieved notable success across a variety of robotic tasks. Nevertheless, their performance remains constrained by the scope of their training data, exhibiting limited generalization to unseen scenarios and vulnerability to diverse contextual perturbations. More recently, world models have been revisited as an alternative to VLAs. These models, referred to as world action models (WAMs), are built upon world models that are trained on large corpora of video data to predict future states. With minor adaptations, their latent representation can be decoded into robot actions. It has been suggested that their explicit dynamic prediction capacity, combined with spatiotemporal priors acquired from web-scale video pretraining, enables WAMs to generalize more effectively than VLAs. In this paper, we conduct a comparative study of prominent state-of-the-art VLA policies and recently released WAMs. We evaluate their performance on the LIBERO-Plus and RoboTwin 2.0-Plus benchmarks under various visual and language perturbations. Our results show that WAMs achieve strong robustness, with LingBot-VA reaching 74.2% success rate on RoboTwin 2.0-Plus and Cosmos-Policy achieving 82.2% on LIBERO-Plus. While VLAs such as $π_{0.5}$ can achieve comparable robustness on certain tasks, they typically require extensive training with diverse robotic datasets and varied learning objectives. Hybrid approaches that partially incorporate video-based dynamic learning exhibit intermediate robustness, highlighting the importance of how video priors are integrated.",
+      "authors": [
+        "Zhanguang Zhang",
+        "Zhiyuan Li",
+        "Behnam Rahmati",
+        "Rui Heng Yang",
+        "Yintao Ma",
+        "Amir Rasouli",
+        "Sajjad Pakdamansavoji",
+        "Yangzheng Wu",
+        "Lingfeng Zhang",
+        "Tongtong Cao",
+        "Feng Wen",
+        "Xingyue Quan",
+        "Yingxue Zhang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-23T15:13:15+00:00",
+      "link": "https://arxiv.org/pdf/2603.22078v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "robustness study of world action models (WAMs)",
+      "llm_evidence_cn": "世界动作模型（WAMs）的鲁棒性研究",
+      "llm_evidence": "世界动作模型（WAMs）的鲁棒性研究",
+      "canonical_evidence": "世界动作模型（WAMs）的鲁棒性研究",
+      "llm_tldr_en": "Evaluates the generalization and robustness of World Action Models compared to Vision-Language-Action models.",
+      "llm_tldr_cn": "对比评估了世界动作模型与视觉-语言-动作模型在泛化性和鲁棒性上的表现。",
+      "llm_tldr": "对比评估了世界动作模型与视觉-语言-动作模型在泛化性和鲁棒性上的表现。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Recent advances in world action models for autonomous agents",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.22430v1",
+      "source": "arxiv",
+      "title": "Model Predictive Control with Differentiable World Models for Offline Reinforcement Learning",
+      "abstract": "Offline Reinforcement Learning (RL) aims to learn optimal policies from fixed offline datasets, without further interactions with the environment. Such methods train an offline policy (or value function), and apply it at inference time without further refinement. We introduce an inference time adaptation framework inspired by model predictive control (MPC) that utilizes a pretrained policy along with a learned world model of state transitions and rewards. While existing world model and diffusion-planning methods use learned dynamics to generate imagined trajectories during training, or to sample candidate plans at inference time, they do not use inference-time information to optimize the policy parameters on the fly. In contrast, our design is a Differentiable World Model (DWM) pipeline that enables endto-end gradient computation through imagined rollouts for policy optimization at inference time based on MPC. We evaluate our algorithm on D4RL continuous-control benchmarks (MuJoCo locomotion tasks and AntMaze), and show that exploiting inference-time information to optimize the policy parameters yields consistent gains over strong offline RL baselines.",
+      "authors": [
+        "Rohan Deb",
+        "Stephen J. Wright",
+        "Arindam Banerjee"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-03-23T18:05:29+00:00",
+      "link": "https://arxiv.org/pdf/2603.22430v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Model predictive control with differentiable world models",
+      "llm_evidence_cn": "结合可微世界模型的模型预测控制",
+      "llm_evidence": "结合可微世界模型的模型预测控制",
+      "canonical_evidence": "结合可微世界模型的模型预测控制",
+      "llm_tldr_en": "Introduces an MPC framework using learned world models for inference-time policy optimization in offline RL.",
+      "llm_tldr_cn": "引入一种 MPC 框架，利用学习到的世界模型在离线强化学习推理时优化策略。",
+      "llm_tldr": "引入一种 MPC 框架，利用学习到的世界模型在离线强化学习推理时优化策略。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Action-conditioned world models for decision making",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.23149v1",
+      "source": "arxiv",
+      "title": "Describe-Then-Act: Proactive Agent Steering via Distilled Language-Action World Models",
+      "abstract": "Deploying safety-critical agents requires anticipating the consequences of actions before they are executed. While world models offer a paradigm for this proactive foresight, current approaches relying on visual simulation incur prohibitive latencies, often exceeding several seconds per step. In this work, we challenge the assumption that visual processing is necessary for failure prevention. We show that a trained policy's latent state, combined with its planned actions, already encodes sufficient information to anticipate action outcomes, making visual simulation redundant for failure prevention. To this end, we introduce DILLO (DIstiLLed Language-ActiOn World Model), a fast steering layer that shifts the paradigm from \"simulate-then-act\" to \"describe-then-act.\" DILLO is trained via cross-modal distillation, where a privileged Vision Language Model teacher annotates offline trajectories and a latent-conditioned Large Language Model student learns to predict semantic outcomes. This creates a text-only inference path, bypassing heavy visual generation entirely, achieving a 14x speedup over baselines. Experiments on MetaWorld and LIBERO demonstrate that DILLO produces high-fidelity descriptions of the next state and is able to steer the policy, improving episode success rate by up to 15 pp and 9.3 pp on average across tasks.",
+      "authors": [
+        "Massimiliano Pappa",
+        "Luca Romani",
+        "Valentino Sacco",
+        "Alessio Palma",
+        "Stéphane Lathuilière",
+        "Fabio Galasso",
+        "Xavier Alameda-Pineda",
+        "Indro Spinelli"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-03-24T12:49:25+00:00",
+      "link": "https://arxiv.org/pdf/2603.23149v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Distilled language-action world models for proactive steering",
+      "llm_evidence_cn": "用于主动引导的蒸馏语言-动作世界模型",
+      "llm_evidence": "用于主动引导的蒸馏语言-动作世界模型",
+      "canonical_evidence": "用于主动引导的蒸馏语言-动作世界模型",
+      "llm_tldr_en": "Introduces DILLO, a fast world model that anticipates action outcomes without expensive visual simulation.",
+      "llm_tldr_cn": "提出DILLO模型，通过蒸馏语言-动作潜状态实现无需视觉模拟的快速动作后果预测。",
+      "llm_tldr": "提出DILLO模型，通过蒸馏语言-动作潜状态实现无需视觉模拟的快速动作后果预测。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Recent advances in world action models for autonomous agents",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.23481v1",
+      "source": "arxiv",
+      "title": "VTAM: Video-Tactile-Action Models for Complex Physical Interaction Beyond VLAs",
+      "abstract": "Video-Action Models (VAMs) have emerged as a promising framework for embodied intelligence, learning implicit world dynamics from raw video streams to produce temporally consistent action predictions. Although such models demonstrate strong performance on long-horizon tasks through visual reasoning, they remain limited in contact-rich scenarios where critical interaction states are only partially observable from vision alone. In particular, fine-grained force modulation and contact transitions are not reliably encoded in visual tokens, leading to unstable or imprecise behaviors. To bridge this gap, we introduce the Video-Tactile Action Model (VTAM), a multimodal world modeling framework that incorporates tactile perception as a complementary grounding signal. VTAM augments a pretrained video transformer with tactile streams via a lightweight modality transfer finetuning, enabling efficient cross-modal representation learning without tactile-language paired data or independent tactile pretraining. To stabilize multimodal fusion, we introduce a tactile regularization loss that enforces balanced cross-modal attention, preventing visual latent dominance in the action model. VTAM demonstrates superior performance in contact-rich manipulation, maintaining a robust success rate of 90 percent on average. In challenging scenarios such as potato chip pick-and-place requiring high-fidelity force awareness, VTAM outperforms the pi 0.5 baseline by 80 percent. Our findings demonstrate that integrating tactile feedback is essential for correcting visual estimation errors in world action models, providing a scalable approach to physically grounded embodied foundation models.",
+      "authors": [
+        "Haoran Yuan",
+        "Weigang Yi",
+        "Zhenyu Zhang",
+        "Wendi Chen",
+        "Yuchen Mo",
+        "Jiashi Yin",
+        "Xinzhuo Li",
+        "Xiangyu Zeng",
+        "Chuan Wen",
+        "Cewu Lu",
+        "Katherine Driggs-Campbell",
+        "Ismini Lourentzou"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI",
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-03-24T17:45:06+00:00",
+      "link": "https://arxiv.org/pdf/2603.23481v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Multimodal world modeling framework for complex physical interaction",
+      "llm_evidence_cn": "用于复杂物理交互的多模态世界建模框架",
+      "llm_evidence": "用于复杂物理交互的多模态世界建模框架",
+      "canonical_evidence": "用于复杂物理交互的多模态世界建模框架",
+      "llm_tldr_en": "VTAM integrates tactile perception into video-action models to improve contact-rich robotic manipulation.",
+      "llm_tldr_cn": "VTAM将触觉感知整合到视频动作模型中，以改进触觉丰富的机器人操作任务。",
+      "llm_tldr": "VTAM将触觉感知整合到视频动作模型中，以改进触觉丰富的机器人操作任务。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Action conditioned generative world models for robotics",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.24581v1",
+      "source": "arxiv",
+      "title": "Latent-WAM: Latent World Action Modeling for End-to-End Autonomous Driving",
+      "abstract": "We introduce Latent-WAM, an efficient end-to-end autonomous driving framework that achieves strong trajectory planning through spatially-aware and dynamics-informed latent world representations. Existing world-model-based planners suffer from inadequately compressed representations, limited spatial understanding, and underutilized temporal dynamics, resulting in sub-optimal planning under constrained data and compute budgets. Latent-WAM addresses these limitations with two core modules: a Spatial-Aware Compressive World Encoder (SCWE) that distills geometric knowledge from a foundation model and compresses multi-view images into compact scene tokens via learnable queries, and a Dynamic Latent World Model (DLWM) that employs a causal Transformer to autoregressively predict future world status conditioned on historical visual and motion representations. Extensive experiments on NAVSIM v2 and HUGSIM demonstrate new state-of-the-art results: 89.3 EPDMS on NAVSIM v2 and 28.9 HD-Score on HUGSIM, surpassing the best prior perception-free method by 3.2 EPDMS with significantly less training data and a compact 104M-parameter model.",
+      "authors": [
+        "Linbo Wang",
+        "Yupeng Zheng",
+        "Qiang Chen",
+        "Shiwei Li",
+        "Yichen Zhang",
+        "Zebin Xing",
+        "Qichao Zhang",
+        "Xiang Li",
+        "Deheng Qian",
+        "Pengxuan Yang",
+        "Yihang Dong",
+        "Ce Hao",
+        "Xiaoqing Ye",
+        "Junyu han",
+        "Yifeng Pan",
+        "Dongbin Zhao"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-03-25T17:56:07+00:00",
+      "link": "https://arxiv.org/pdf/2603.24581v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Latent world action modeling for autonomous driving",
+      "llm_evidence_cn": "用于自动驾驶的潜空间世界动作建模",
+      "llm_evidence": "用于自动驾驶的潜空间世界动作建模",
+      "canonical_evidence": "用于自动驾驶的潜空间世界动作建模",
+      "llm_tldr_en": "Latent-WAM uses spatially-aware latent representations for efficient trajectory planning in autonomous driving.",
+      "llm_tldr_cn": "Latent-WAM利用空间感知潜空间表示，实现自动驾驶中高效的轨迹规划。",
+      "llm_tldr": "Latent-WAM利用空间感知潜空间表示，实现自动驾驶中高效的轨迹规划。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Recent advances in world action models for autonomous agents",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.25685v1",
+      "source": "arxiv",
+      "title": "Persistent Robot World Models: Stabilizing Multi-Step Rollouts via Reinforcement Learning",
+      "abstract": "Action-conditioned robot world models generate future video frames of the manipulated scene given a robot action sequence, offering a promising alternative for simulating tasks that are difficult to model with traditional physics engines. However, these models are optimized for short-term prediction and break down when deployed autoregressively: each predicted clip feeds back as context for the next, causing errors to compound and visual quality to rapidly degrade. We address this through the following contributions. First, we introduce a reinforcement learning (RL) post-training scheme that trains the world model on its own autoregressive rollouts rather than on ground-truth histories. We achieve this by adapting a recent contrastive RL objective for diffusion models to our setting and show that its convergence guarantees carry over exactly. Second, we design a training protocol that generates and compares multiple candidate variable-length futures from the same rollout state, reinforcing higher-fidelity predictions over lower-fidelity ones. Third, we develop efficient, multi-view visual fidelity rewards that combine complementary perceptual metrics across camera views and are aggregated at the clip level for dense, low-variance training signal. Fourth, we show that our approach establishes a new state-of-the-art for rollout fidelity on the DROID dataset, outperforming the strongest baseline on all metrics (e.g., LPIPS reduced by 14% on external cameras, SSIM improved by 9.1% on the wrist camera), winning 98% of paired comparisons, and achieving an 80% preference rate in a blind human study.",
+      "authors": [
+        "Jai Bardhan",
+        "Patrik Drozdik",
+        "Josef Sivic",
+        "Vladimir Petrik"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "published": "2026-03-26T17:36:08+00:00",
+      "link": "https://arxiv.org/pdf/2603.25685v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "Action-conditioned robot world models for simulating tasks via RL post-training",
+      "llm_evidence_cn": "通过强化学习后训练模拟任务的动作条件机器人世界模型",
+      "llm_evidence": "通过强化学习后训练模拟任务的动作条件机器人世界模型",
+      "canonical_evidence": "通过强化学习后训练模拟任务的动作条件机器人世界模型",
+      "llm_tldr_en": "Stabilizes multi-step world model rollouts using RL post-training to reduce autoregressive error accumulation.",
+      "llm_tldr_cn": "利用强化学习后训练稳定世界模型的多步推演，减少自回归误差累积。",
+      "llm_tldr": "利用强化学习后训练稳定世界模型的多步推演，减少自回归误差累积。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Action conditioned generative world models for robotics",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2602.23997v1",
+      "source": "arxiv",
+      "title": "Foundation World Models for Agents that Learn, Verify, and Adapt Reliably Beyond Static Environments",
+      "abstract": "The next generation of autonomous agents must not only learn efficiently but also act reliably and adapt their behavior in open worlds. Standard approaches typically assume fixed tasks and environments with little or no novelty, which limits world models' ability to support agents that must evolve their policies as conditions change. This paper outlines a vision for foundation world models: persistent, compositional representations that unify reinforcement learning, reactive/program synthesis, and abstraction mechanisms. We propose an agenda built around four components: (i) learnable reward models from specifications to support optimization with clear objectives; (ii) adaptive formal verification integrated throughout learning; (iii) online abstraction calibration to quantify the reliability of the model's predictions; and (iv) test-time synthesis and world-model generation guided by verifiers. Together, these components enable agents to synthesize verifiable programs, derive new policies from a small number of interactions, and maintain correctness while adapting to novelty. The resulting framework positions foundation world models as a substrate for learning, reasoning, and adaptation, laying the groundwork for agents that not only act well but can explain and justify the behavior they adopt.",
+      "authors": [
+        "Florent Delgrange"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-02-27T13:20:46+00:00",
+      "link": "https://arxiv.org/pdf/2602.23997v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "foundation world models for autonomous agents",
+      "llm_evidence_cn": "自主智能体的基础世界模型",
+      "llm_evidence": "自主智能体的基础世界模型",
+      "canonical_evidence": "自主智能体的基础世界模型",
+      "llm_tldr_en": "Outlines a vision for foundation world models that unify RL, verification, and abstraction for reliable agents.",
+      "llm_tldr_cn": "勾勒了基础世界模型的愿景，统一强化学习与验证以实现可靠的自主智能体。",
+      "llm_tldr": "勾勒了基础世界模型的愿景，统一强化学习与验证以实现可靠的自主智能体。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "World models in reinforcement learning and robotics",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.01549v1",
+      "source": "arxiv",
+      "title": "Pri4R: Learning World Dynamics for Vision-Language-Action Models with Privileged 4D Representation",
+      "abstract": "Humans learn not only how their bodies move, but also how the surrounding world responds to their actions. In contrast, while recent Vision-Language-Action (VLA) models exhibit impressive semantic understanding, they often fail to capture the spatiotemporal dynamics governing physical interaction. In this paper, we introduce Pri4R, a simple yet effective approach that endows VLA models with an implicit understanding of world dynamics by leveraging privileged 4D information during training. Specifically, Pri4R augments VLAs with a lightweight point track head that predicts 3D point tracks. By injecting VLA features into this head to jointly predict future 3D trajectories, the model learns to incorporate evolving scene geometry within its shared representation space, enabling more physically aware context for precise control. Due to its architectural simplicity, Pri4R is compatible with dominant VLA design patterns with minimal changes. During inference, we run the model using the original VLA architecture unchanged; Pri4R adds no extra inputs, outputs, or computational overhead. Across simulation and real-world evaluations, Pri4R significantly improves performance on challenging manipulation tasks, including a +10% gain on LIBERO-Long and a +40% gain on RoboCasa. We further show that 3D point track prediction is an effective supervision target for learning action-world dynamics, and validate our design choices through extensive ablations.",
+      "authors": [
+        "Jisoo Kim",
+        "Jungbin Cho",
+        "Sanghyeok Chu",
+        "Ananya Bal",
+        "Jinhyung Kim",
+        "Gunhee Lee",
+        "Sihaeng Lee",
+        "Seung Hwan Kim",
+        "Bohyung Han",
+        "Hyunmin Lee",
+        "Laszlo A. Jeni",
+        "Seungryong Kim"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.RO"
+      ],
+      "published": "2026-03-02T07:23:53+00:00",
+      "link": "https://arxiv.org/pdf/2603.01549v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "learning world dynamics with privileged 4D representation",
+      "llm_evidence_cn": "利用特权 4D 表示学习世界动态",
+      "llm_evidence": "利用特权 4D 表示学习世界动态",
+      "canonical_evidence": "利用特权 4D 表示学习世界动态",
+      "llm_tldr_en": "Pri4R endows VLA models with world dynamics understanding by predicting 3D point tracks during training.",
+      "llm_tldr_cn": "Pri4R 通过在训练中预测 3D 点轨迹，赋予 VLA 模型对世界动态的理解能力。",
+      "llm_tldr": "Pri4R 通过在训练中预测 3D 点轨迹，赋予 VLA 模型对世界动态的理解能力。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Learning latent dynamics for world modeling",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.02935v1",
+      "source": "arxiv",
+      "title": "Contextual Latent World Models for Offline Meta Reinforcement Learning",
+      "abstract": "Offline meta-reinforcement learning seeks to learn policies that generalize across related tasks from fixed datasets. Context-based methods infer a task representation from transition histories, but learning effective task representations without supervision remains a challenge. In parallel, latent world models have demonstrated strong self-supervised representation learning through temporal consistency. We introduce contextual latent world models, which condition latent world models on inferred task representations and train them jointly with the context encoder. This enforces task-conditioned temporal consistency, yielding task representations that capture task-dependent dynamics rather than merely discriminating between tasks. Our method learns more expressive task representations and significantly improves generalization to unseen tasks across MuJoCo, Contextual-DeepMind Control, and Meta-World benchmarks.",
+      "authors": [
+        "Mohammadreza Nakheai",
+        "Aidan Scannell",
+        "Kevin Luck",
+        "Joni Pajarinen"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-03-03T12:45:20+00:00",
+      "link": "https://arxiv.org/pdf/2603.02935v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Contextual latent world models for learning task-dependent dynamics",
+      "llm_evidence_cn": "用于学习任务相关动力学的上下文潜空间世界模型",
+      "llm_evidence": "用于学习任务相关动力学的上下文潜空间世界模型",
+      "canonical_evidence": "用于学习任务相关动力学的上下文潜空间世界模型",
+      "llm_tldr_en": "Combines latent world models with context encoders to improve offline meta-reinforcement learning.",
+      "llm_tldr_cn": "结合潜空间世界模型与上下文编码器，提升离线元强化学习的性能。",
+      "llm_tldr": "结合潜空间世界模型与上下文编码器，提升离线元强化学习的性能。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Learning latent dynamics for world modeling",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.03195v1",
+      "source": "arxiv",
+      "title": "Chain of World: World Model Thinking in Latent Motion",
+      "abstract": "Vision-Language-Action (VLA) models are a promising path toward embodied intelligence, yet they often overlook the predictive and temporal-causal structure underlying visual dynamics. World-model VLAs address this by predicting future frames, but waste capacity reconstructing redundant backgrounds. Latent-action VLAs encode frame-to-frame transitions compactly, but lack temporally continuous dynamic modeling and world knowledge. To overcome these limitations, we introduce CoWVLA (Chain-of-World VLA), a new \"Chain of World\" paradigm that unifies world-model temporal reasoning with a disentangled latent motion representation. First, a pretrained video VAE serves as a latent motion extractor, explicitly factorizing video segments into structure and motion latents. Then, during pre-training, the VLA learns from an instruction and an initial frame to infer a continuous latent motion chain and predict the segment's terminal frame. Finally, during co-fine-tuning, this latent dynamic is aligned with discrete action prediction by jointly modeling sparse keyframes and action sequences in a unified autoregressive decoder. This design preserves the world-model benefits of temporal reasoning and world knowledge while retaining the compactness and interpretability of latent actions, enabling efficient visuomotor learning. Extensive experiments on robotic simulation benchmarks show that CoWVLA outperforms existing world-model and latent-action approaches and achieves moderate computational efficiency, highlighting its potential as a more effective VLA pretraining paradigm. The project website can be found at https://fx-hit.github.io/cowvla-io.",
+      "authors": [
+        "Fuxiang Yang",
+        "Donglin Di",
+        "Lulu Tang",
+        "Xuancheng Zhang",
+        "Lei Fan",
+        "Hao Li",
+        "Chen Wei",
+        "Tonghua Su",
+        "Baorui Ma"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.RO"
+      ],
+      "published": "2026-03-03T17:52:06+00:00",
+      "link": "https://arxiv.org/pdf/2603.03195v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Unifies world-model temporal reasoning with disentangled latent motion representation",
+      "llm_evidence_cn": "将世界模型时间推理与解耦的潜动作表示相结合",
+      "llm_evidence": "将世界模型时间推理与解耦的潜动作表示相结合",
+      "canonical_evidence": "将世界模型时间推理与解耦的潜动作表示相结合",
+      "llm_tldr_en": "Introduces CoWVLA to unify world-model temporal reasoning with compact latent motion for embodied intelligence.",
+      "llm_tldr_cn": "引入CoWVLA，将世界模型的时间推理与紧凑的潜动作表示相结合，用于具身智能。",
+      "llm_tldr": "引入CoWVLA，将世界模型的时间推理与紧凑的潜动作表示相结合，用于具身智能。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Learning latent dynamics for world modeling",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.04029v1",
+      "source": "arxiv",
+      "title": "Self-adapting Robotic Agents through Online Continual Reinforcement Learning with World Model Feedback",
+      "abstract": "As learning-based robotic controllers are typically trained offline and deployed with fixed parameters, their ability to cope with unforeseen changes during operation is limited. Biologically inspired, this work presents a framework for online Continual Reinforcement Learning that enables automated adaptation during deployment. Building on DreamerV3, a model-based Reinforcement Learning algorithm, the proposed method leverages world model prediction residuals to detect out-of-distribution events and automatically trigger finetuning. Adaptation progress is monitored using both task-level performance signals and internal training metrics, allowing convergence to be assessed without external supervision and domain knowledge. The approach is validated on a variety of contemporary continuous control problems, including a quadruped robot in high-fidelity simulation, and a real-world model vehicle. Relevant metrics and their interpretation are presented and discussed, as well as resulting trade-offs described. The results sketch out how autonomous robotic agents could once move beyond static training regimes toward adaptive systems capable of self-reflection and -improvement during operation, just like their biological counterparts.",
+      "authors": [
+        "Fabian Domberg",
+        "Georg Schildbach"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-03-04T13:07:42+00:00",
+      "link": "https://arxiv.org/pdf/2603.04029v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "online RL with world model feedback",
+      "llm_evidence_cn": "带有世界模型反馈的在线强化学习",
+      "llm_evidence": "带有世界模型反馈的在线强化学习",
+      "canonical_evidence": "带有世界模型反馈的在线强化学习",
+      "llm_tldr_en": "Uses world model prediction residuals to trigger online adaptation in robotic agents via continual RL.",
+      "llm_tldr_cn": "利用世界模型预测残差，通过持续强化学习触发机器人智能体的在线自适应。",
+      "llm_tldr": "利用世界模型预测残差，通过持续强化学习触发机器人智能体的在线自适应。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Model-based reinforcement learning with world models",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.05438v1",
+      "source": "arxiv",
+      "title": "Planning in 8 Tokens: A Compact Discrete Tokenizer for Latent World Model",
+      "abstract": "World models provide a powerful framework for simulating environment dynamics conditioned on actions or instructions, enabling downstream tasks such as action planning or policy learning. Recent approaches leverage world models as learned simulators, but its application to decision-time planning remains computationally prohibitive for real-time control. A key bottleneck lies in latent representations: conventional tokenizers encode each observation into hundreds of tokens, making planning both slow and resource-intensive. To address this, we propose CompACT, a discrete tokenizer that compresses each observation into as few as 8 tokens, drastically reducing computational cost while preserving essential information for planning. An action-conditioned world model that occupies CompACT tokenizer achieves competitive planning performance with orders-of-magnitude faster planning, offering a practical step toward real-world deployment of world models.",
+      "authors": [
+        "Dongwon Kim",
+        "Gawon Seo",
+        "Jinsung Lee",
+        "Minsu Cho",
+        "Suha Kwak"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.RO"
+      ],
+      "published": "2026-03-05T18:00:02+00:00",
+      "link": "https://arxiv.org/pdf/2603.05438v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Compact discrete tokenizer for latent world model planning",
+      "llm_evidence_cn": "用于潜空间世界模型规划的紧凑离散分词器",
+      "llm_evidence": "用于潜空间世界模型规划的紧凑离散分词器",
+      "canonical_evidence": "用于潜空间世界模型规划的紧凑离散分词器",
+      "llm_tldr_en": "CompACT reduces latent tokens to enable efficient real-time decision-time planning with world models.",
+      "llm_tldr_cn": "CompACT通过减少潜空间Token数量，实现了基于世界模型的高效实时决策规划。",
+      "llm_tldr": "CompACT通过减少潜空间Token数量，实现了基于世界模型的高效实时决策规划。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Action-conditioned world models for decision making",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.07145v1",
+      "source": "arxiv",
+      "title": "LiveWorld: Simulating Out-of-Sight Dynamics in Generative Video World Models",
+      "abstract": "Recent generative video world models aim to simulate visual environment evolution, allowing an observer to interactively explore the scene via camera control. However, they implicitly assume that the world only evolves within the observer's field of view. Once an object leaves the observer's view, its state is \"frozen\" in memory, and revisiting the same region later often fails to reflect events that should have occurred in the meantime. In this work, we identify and formalize this overlooked limitation as the \"out-of-sight dynamics\" problem, which impedes video world models from representing a continuously evolving world. To address this issue, we propose LiveWorld, a novel framework that extends video world models to support persistent world evolution. Instead of treating the world as static observational memory, LiveWorld models a persistent global state composed of a static 3D background and dynamic entities that continue evolving even when unobserved. To maintain these unseen dynamics, LiveWorld introduces a monitor-based mechanism that autonomously simulates the temporal progression of active entities and synchronizes their evolved states upon revisiting, ensuring spatially coherent rendering. For evaluation, we further introduce LiveBench, a dedicated benchmark for the task of maintaining out-of-sight dynamics. Extensive experiments show that LiveWorld enables persistent event evolution and long-term scene consistency, bridging the gap between existing 2D observation-based memory and true 4D dynamic world simulation. The baseline and benchmark will be publicly available at https://zichengduan.github.io/LiveWorld/index.html.",
+      "authors": [
+        "Zicheng Duan",
+        "Jiatong Xia",
+        "Zeyu Zhang",
+        "Wenbo Zhang",
+        "Gengze Zhou",
+        "Chenhui Gou",
+        "Yefei He",
+        "Feng Chen",
+        "Xinyu Zhang",
+        "Lingqiao Liu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-03-07T10:31:39+00:00",
+      "link": "https://arxiv.org/pdf/2603.07145v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Generative video world models for interactive scene exploration",
+      "llm_evidence_cn": "用于交互式场景探索的生成式视频世界模型",
+      "llm_evidence": "用于交互式场景探索的生成式视频世界模型",
+      "canonical_evidence": "用于交互式场景探索的生成式视频世界模型",
+      "llm_tldr_en": "Proposes LiveWorld to simulate out-of-sight dynamics in generative video world models for persistent environments.",
+      "llm_tldr_cn": "提出LiveWorld，在生成式视频世界模型中模拟视线外动态，实现持久环境。",
+      "llm_tldr": "提出LiveWorld，在生成式视频世界模型中模拟视线外动态，实现持久环境。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Action conditioned generative world models for robotics",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.07264v1",
+      "source": "arxiv",
+      "title": "Kinematics-Aware Latent World Models for Data-Efficient Autonomous Driving",
+      "abstract": "Data-efficient learning remains a central challenge in autonomous driving due to the high cost and safety risks of large-scale real-world interaction. Although world-model-based reinforcement learning enables policy optimization through latent imagination, existing approaches often lack explicit mechanisms to encode spatial and kinematic structure essential for driving tasks. In this work, we build upon the Recurrent State-Space Model (RSSM) and propose a kinematics-aware latent world model framework for autonomous driving. Vehicle kinematic information is incorporated into the observation encoder to ground latent transitions in physically meaningful motion dynamics, while geometry-aware supervision regularizes the RSSM latent state to capture task-relevant spatial structure beyond pixel reconstruction. The resulting structured latent dynamics improve long-horizon imagination fidelity and stabilize policy optimization. Experiments in a driving simulation benchmark demonstrate consistent gains over both model-free and pixel-based world-model baselines in terms of sample efficiency and driving performance. Ablation studies further verify that the proposed design enhances spatial representation quality within the latent space. These results suggest that integrating kinematic grounding into RSSM-based world models provides a scalable and physically grounded paradigm for autonomous driving policy learning.",
+      "authors": [
+        "Jiazhuo Li",
+        "Linjiang Cao",
+        "Qi Liu",
+        "Xi Xiong"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-03-07T15:47:54+00:00",
+      "link": "https://arxiv.org/pdf/2603.07264v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "kinematics-aware latent world models for driving",
+      "llm_evidence_cn": "用于驾驶的运动学感知潜空间世界模型",
+      "llm_evidence": "用于驾驶的运动学感知潜空间世界模型",
+      "canonical_evidence": "用于驾驶的运动学感知潜空间世界模型",
+      "llm_tldr_en": "Integrates vehicle kinematics into latent world models to improve data efficiency in autonomous driving.",
+      "llm_tldr_cn": "将车辆运动学信息整合进潜空间世界模型，提升自动驾驶的数据效率。",
+      "llm_tldr": "将车辆运动学信息整合进潜空间世界模型，提升自动驾驶的数据效率。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Learning latent dynamics for world modeling",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.08361v1",
+      "source": "arxiv",
+      "title": "$Δ$VLA: Prior-Guided Vision-Language-Action Models via World Knowledge Variation",
+      "abstract": "Recent vision-language-action (VLA) models have significantly advanced robotic manipulation by unifying perception, reasoning, and control. To achieve such integration, recent studies adopt a predictive paradigm that models future visual states or world knowledge to guide action generation. However, these models emphasize forecasting outcomes rather than reasoning about the underlying process of change, which is essential for determining how to act. To address this, we propose $Δ$VLA, a prior-guided framework that models world-knowledge variations relative to an explicit current-world knowledge prior for action generation, rather than regressing absolute future world states. Specifically, 1) to construct the current world knowledge prior, we propose the Prior-Guided WorldKnowledge Extractor (PWKE). It extracts manipulable regions, spatial relations, and semantic cues from the visual input, guided by auxiliary heads and prior pseudo labels, thus reducing redundancy. 2) Building upon this, to represent how world knowledge evolves under actions, we introduce the Latent World Variation Quantization (LWVQ). It learns a discrete latent space via a VQ-VAE objective to encode world knowledge variations, shifting prediction from full modalities to compact latent. 3)Moreover, to mitigate interference during variation modeling, we design the Conditional Variation Attention (CV-Atten), whichpromotes disentangled learning and preserves the independence of knowledge representations. Extensive experiments on both simulated benchmarks and real-world robotic tasks demonstrate $Δ$VLA achieves state-of-the-art performance while improving efficiency. Code and real-world execution videos are available at https://github.com/JiuTian-VL/DeltaVLA.",
+      "authors": [
+        "Yijie Zhu",
+        "Jie He",
+        "Rui Shao",
+        "Kaishen Yuan",
+        "Tao Tan",
+        "Xiaochen Yuan",
+        "Zitong Yu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-03-09T13:26:05+00:00",
+      "link": "https://arxiv.org/pdf/2603.08361v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "models world-knowledge variations for action generation",
+      "llm_evidence_cn": "为动作生成建模世界知识变化",
+      "llm_evidence": "为动作生成建模世界知识变化",
+      "canonical_evidence": "为动作生成建模世界知识变化",
+      "llm_tldr_en": "Proposes ΔVLA to guide action generation by modeling variations in world knowledge rather than absolute states.",
+      "llm_tldr_cn": "提出ΔVLA，通过建模世界知识的变化而非绝对状态来指导机器人动作生成。",
+      "llm_tldr": "提出ΔVLA，通过建模世界知识的变化而非绝对状态来指导机器人动作生成。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Recent advances in world action models for autonomous agents",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.08519v1",
+      "source": "arxiv",
+      "title": "AtomVLA: Scalable Post-Training for Robotic Manipulation via Predictive Latent World Models",
+      "abstract": "Vision-Language-Action (VLA) models demonstrate remarkable potential for generalizable robotic manipulation. The execution of complex multi-step behaviors in VLA models can be improved by robust instruction grounding, a critical component for effective control. However, current paradigms predominantly rely on coarse, high-level task instructions during supervised fine-tuning. This instruction grounding gap leaves models without explicit intermediate guidance, leading to severe compounding errors in long-horizon tasks. Therefore, bridging this instruction gap and providing scalable post-training for VLA models is urgent. To tackle this problem, we propose \\method, the first subtask-aware VLA framework integrated with a scalable offline post-training pipeline. Our framework leverages a large language model to decompose high-level demonstrations into fine-grained atomic subtasks. This approach utilizes a pretrained predictive world model to score candidate action chunks against subtask goals in the latent space, mitigating error accumulation while significantly improving long-horizon robustness. Furthermore, this approach enables highly efficient Group Relative Policy Optimization without the prohibitive expenses associated with online rollouts on physical robots. Extensive simulations validate that our AtomVLA maintains strong robustness under perturbations. When evaluated against fundamental baseline models, it achieves an average success rate of 97.0\\% on the LIBERO benchmark and 48.0\\% on the LIBERO-PRO benchmark. Finally, experiments conducted in the real world using the Galaxea R1 Lite platform confirm its broad applicability across diverse tasks, especially long-horizon tasks. All datasets, checkpoints, and code will be released to the public domain following the acceptance of this work for future research.",
+      "authors": [
+        "Xiaoquan Sun",
+        "Zetian Xu",
+        "Chen Cao",
+        "Zonghe Liu",
+        "Yihan Sun",
+        "Jingrui Pang",
+        "Ruijian Zhang",
+        "Zhen Yang",
+        "Kang Pang",
+        "Dingxin He",
+        "Mingqi Yuan",
+        "Jiayu Chen"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-09T15:52:48+00:00",
+      "link": "https://arxiv.org/pdf/2603.08519v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Integrates VLA framework with predictive latent world models for robotic manipulation.",
+      "llm_evidence_cn": "将 VLA 框架与用于机器人操作的预测性潜在世界模型相结合。",
+      "llm_evidence": "将 VLA 框架与用于机器人操作的预测性潜在世界模型相结合。",
+      "canonical_evidence": "将 VLA 框架与用于机器人操作的预测性潜在世界模型相结合。",
+      "llm_tldr_en": "Proposes a subtask-aware VLA framework using latent world models to reduce compounding errors in long-horizon tasks.",
+      "llm_tldr_cn": "提出了一种利用潜在世界模型的子任务感知 VLA 框架，以减少长程任务中的复合误差。",
+      "llm_tldr": "提出了一种利用潜在世界模型的子任务感知 VLA 框架，以减少长程任务中的复合误差。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Learning latent dynamics for world modeling",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.11041v1",
+      "source": "arxiv",
+      "title": "DynVLA: Learning World Dynamics for Action Reasoning in Autonomous Driving",
+      "abstract": "We propose DynVLA, a driving VLA model that introduces a new CoT paradigm termed Dynamics CoT. DynVLA forecasts compact world dynamics before action generation, enabling more informed and physically grounded decision-making. To obtain compact dynamics representations, DynVLA introduces a Dynamics Tokenizer that compresses future evolution into a small set of dynamics tokens. Considering the rich environment dynamics in interaction-intensive driving scenarios, DynVLA decouples ego-centric and environment-centric dynamics, yielding more accurate world dynamics modeling. We then train DynVLA to generate dynamics tokens before actions through SFT and RFT, improving decision quality while maintaining latency-efficient inference. Compared to Textual CoT, which lacks fine-grained spatiotemporal understanding, and Visual CoT, which introduces substantial redundancy due to dense image prediction, Dynamics CoT captures the evolution of the world in a compact, interpretable, and efficient form. Extensive experiments on NAVSIM, Bench2Drive, and a large-scale in-house dataset demonstrate that DynVLA consistently outperforms Textual CoT and Visual CoT methods, validating the effectiveness and practical value of Dynamics CoT.",
+      "authors": [
+        "Shuyao Shang",
+        "Bing Zhan",
+        "Yunfei Yan",
+        "Yuqi Wang",
+        "Yingyan Li",
+        "Yasong An",
+        "Xiaoman Wang",
+        "Jierui Liu",
+        "Lu Hou",
+        "Lue Fan",
+        "Zhaoxiang Zhang",
+        "Tieniu Tan"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-03-11T17:59:31+00:00",
+      "link": "https://arxiv.org/pdf/2603.11041v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "forecasts world dynamics before action generation for decision-making",
+      "llm_evidence_cn": "在动作生成前预测世界动态以辅助决策",
+      "llm_evidence": "在动作生成前预测世界动态以辅助决策",
+      "canonical_evidence": "在动作生成前预测世界动态以辅助决策",
+      "llm_tldr_en": "DynVLA introduces Dynamics CoT to forecast world evolution, improving action reasoning in autonomous driving.",
+      "llm_tldr_cn": "DynVLA 引入动态思维链预测世界演变，提升了自动驾驶中的动作推理能力。",
+      "llm_tldr": "DynVLA 引入动态思维链预测世界演变，提升了自动驾驶中的动作推理能力。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Action-conditioned world models for decision making",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.11395v1",
+      "source": "arxiv",
+      "title": "ARROW: Augmented Replay for RObust World models",
+      "abstract": "Continual reinforcement learning challenges agents to acquire new skills while retaining previously learned ones with the goal of improving performance in both past and future tasks. Most existing approaches rely on model-free methods with replay buffers to mitigate catastrophic forgetting; however, these solutions often face significant scalability challenges due to large memory demands. Drawing inspiration from neuroscience, where the brain replays experiences to a predictive World Model rather than directly to the policy, we present ARROW (Augmented Replay for RObust World models), a model-based continual RL algorithm that extends DreamerV3 with a memory-efficient, distribution-matching replay buffer. Unlike standard fixed-size FIFO buffers, ARROW maintains two complementary buffers: a short-term buffer for recent experiences and a long-term buffer that preserves task diversity through intelligent sampling. We evaluate ARROW on two challenging continual RL settings: Tasks without shared structure (Atari), and tasks with shared structure, where knowledge transfer is possible (Procgen CoinRun variants). Compared to model-free and model-based baselines with replay buffers of the same-size, ARROW demonstrates substantially less forgetting on tasks without shared structure, while maintaining comparable forward transfer. Our findings highlight the potential of model-based RL and bio-inspired approaches for continual reinforcement learning, warranting further research.",
+      "authors": [
+        "Abdulaziz Alyahya",
+        "Abdallah Al Siyabi",
+        "Markus R. Ernst",
+        "Luke Yang",
+        "Levin Kuhlmann",
+        "Gideon Kowadlo"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-03-12T00:15:11+00:00",
+      "link": "https://arxiv.org/pdf/2603.11395v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "model-based continual RL with robust world models",
+      "llm_evidence_cn": "基于鲁棒世界模型的模型化持续强化学习",
+      "llm_evidence": "基于鲁棒世界模型的模型化持续强化学习",
+      "canonical_evidence": "基于鲁棒世界模型的模型化持续强化学习",
+      "llm_tldr_en": "Introduces ARROW, a memory-efficient model-based continual RL algorithm extending DreamerV3.",
+      "llm_tldr_cn": "提出ARROW算法，一种扩展DreamerV3的内存高效型模型化持续强化学习算法。",
+      "llm_tldr": "提出ARROW算法，一种扩展DreamerV3的内存高效型模型化持续强化学习算法。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Model-based reinforcement learning with world models",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.12553v1",
+      "source": "arxiv",
+      "title": "Beyond Dense Futures: World Models as Structured Planners for Robotic Manipulation",
+      "abstract": "Recent world-model-based Vision-Language-Action (VLA) architectures have improved robotic manipulation through predictive visual foresight. However, dense future prediction introduces visual redundancy and accumulates errors, causing long-horizon plan drift. Meanwhile, recent sparse methods typically represent visual foresight using high-level semantic subtasks or implicit latent states. These representations often lack explicit kinematic grounding, weakening the alignment between planning and low-level execution. To address this, we propose StructVLA, which reformulates a generative world model into an explicit structured planner for reliable control. Instead of dense rollouts or semantic goals, StructVLA predicts sparse, physically meaningful structured frames. Derived from intrinsic kinematic cues (e.g., gripper transitions and kinematic turning points), these frames capture spatiotemporal milestones closely aligned with task progress. We implement this approach through a two-stage training paradigm with a unified discrete token vocabulary: the world model is first trained to predict structured frames and subsequently optimized to map the structured foresight into low-level actions. This approach provides clear physical guidance and bridges visual planning and motion control. In our experiments, StructVLA achieves strong average success rates of 75.0% on SimplerEnv-WidowX and 94.8% on LIBERO. Real-world deployments further demonstrate reliable task completion and robust generalization across both basic pick-and-place and complex long-horizon tasks.",
+      "authors": [
+        "Minghao Jin",
+        "Mozheng Liao",
+        "Mingfei Han",
+        "Zhihui Li",
+        "Xiaojun Chang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "published": "2026-03-13T01:33:48+00:00",
+      "link": "https://arxiv.org/pdf/2603.12553v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "generative world model as a structured planner for robotics",
+      "llm_evidence_cn": "生成式世界模型作为机器人的结构化规划器",
+      "llm_evidence": "生成式世界模型作为机器人的结构化规划器",
+      "canonical_evidence": "生成式世界模型作为机器人的结构化规划器",
+      "llm_tldr_en": "Reformulates generative world models into structured planners to improve robotic manipulation reliability.",
+      "llm_tldr_cn": "将生成式世界模型重构为结构化规划器，以提高机器人操作控制的可靠性。",
+      "llm_tldr": "将生成式世界模型重构为结构化规划器，以提高机器人操作控制的可靠性。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Action conditioned generative world models for robotics",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.14948v1",
+      "source": "arxiv",
+      "title": "Bridging Scene Generation and Planning: Driving with World Model via Unifying Vision and Motion Representation",
+      "abstract": "End-to-end autonomous driving aims to generate safe and plausible planning policies from raw sensor input. Driving world models have shown great potential in learning rich representations by predicting the future evolution of a driving scene. However, existing driving world models primarily focus on visual scene representation, and motion representation is not explicitly designed to be planner-shared and inheritable, leaving a schism between the optimization of visual scene generation and the requirements of precise motion planning. We present WorldDrive, a holistic framework that couples scene generation and real-time planning via unifying vision and motion representation. We first introduce a Trajectory-aware Driving World Model, which conditions on a trajectory vocabulary to enforce consistency between visual dynamics and motion intentions, enabling the generation of diverse and plausible future scenes conditioned on a specific trajectory. We transfer the vision and motion encoders to a downstream Multi-modal Planner, ensuring the driving policy operates on mature representations pre-optimized by scene generation. A simple interaction between motion representation, visual representation, and ego status can generate high-quality, multi-modal trajectories. Furthermore, to exploit the world model's foresight, we propose a Future-aware Rewarder, which distills future latent representation from the frozen world model to evaluate and select optimal trajectories in real-time. Extensive experiments on the NAVSIM, NAVSIM-v2, and nuScenes benchmarks demonstrate that WorldDrive achieves leading planning performance among vision-only methods while maintaining high-fidelity action-controlled video generation capabilities, providing strong evidence for the effectiveness of unifying vision and motion representation for robust autonomous driving.",
+      "authors": [
+        "Xingtai Gui",
+        "Meijie Zhang",
+        "Tianyi Yan",
+        "Wencheng Han",
+        "Jiahao Gong",
+        "Feiyang Tan",
+        "Cheng-zhong Xu",
+        "Jianbing Shen"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-03-16T07:59:39+00:00",
+      "link": "https://arxiv.org/pdf/2603.14948v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Driving world model unifying vision and motion representation for planning",
+      "llm_evidence_cn": "统一视觉与运动表示的驾驶世界模型用于规划",
+      "llm_evidence": "统一视觉与运动表示的驾驶世界模型用于规划",
+      "canonical_evidence": "统一视觉与运动表示的驾驶世界模型用于规划",
+      "llm_tldr_en": "Presents WorldDrive, a framework coupling scene generation and planning for autonomous driving.",
+      "llm_tldr_cn": "提出WorldDrive框架，将场景生成与自动驾驶实时规划相结合。",
+      "llm_tldr": "提出WorldDrive框架，将场景生成与自动驾驶实时规划相结合。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Action-conditioned world models for decision making",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.16195v1",
+      "source": "arxiv",
+      "title": "S-VAM: Shortcut Video-Action Model by Self-Distilling Geometric and Semantic Foresight",
+      "abstract": "Video action models (VAMs) have emerged as a promising paradigm for robot learning, owing to their powerful visual foresight for complex manipulation tasks. However, current VAMs, typically relying on either slow multi-step video generation or noisy one-step feature extraction, cannot simultaneously guarantee real-time inference and high-fidelity foresight. To address this limitation, we propose S-VAM, a shortcut video-action model that foresees coherent geometric and semantic representations via a single forward pass. Serving as a stable blueprint, these foreseen representations significantly simplify the action prediction. To enable this efficient shortcut, we introduce a novel self-distillation strategy that condenses structured generative priors of multi-step denoising into one-step inference. Specifically, vision foundation model (VFM) representations extracted from the diffusion model's own multi-step generated videos provide teacher targets. Lightweight decouplers, as students, learn to directly map noisy one-step features to these targets. Extensive experiments in simulation and the real world demonstrate that our S-VAM outperforms state-of-the-art methods, enabling efficient and precise manipulation in complex environments. Our project page is https://haodong-yan.github.io/S-VAM/",
+      "authors": [
+        "Haodong Yan",
+        "Zhide Zhong",
+        "Jiaguan Zhu",
+        "Junjie He",
+        "Weilin Yuan",
+        "Wenxuan Song",
+        "Xin Gong",
+        "Yingjie Cai",
+        "Guanyi Zhao",
+        "Xu Yan",
+        "Bingbing Liu",
+        "Ying-Cong Chen",
+        "Haoang Li"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-03-17T07:21:28+00:00",
+      "link": "https://arxiv.org/pdf/2603.16195v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Proposes a shortcut video-action model for robot learning with visual foresight",
+      "llm_evidence_cn": "提出了一种用于机器人学习的快捷视频动作模型，具有视觉前瞻能力",
+      "llm_evidence": "提出了一种用于机器人学习的快捷视频动作模型，具有视觉前瞻能力",
+      "canonical_evidence": "提出了一种用于机器人学习的快捷视频动作模型，具有视觉前瞻能力",
+      "llm_tldr_en": "S-VAM enables real-time robot manipulation by self-distilling geometric and semantic foresight into a single pass.",
+      "llm_tldr_cn": "S-VAM通过自蒸馏几何和语义前瞻，实现了机器人操作的实时推理和高保真预测。",
+      "llm_tldr": "S-VAM通过自蒸馏几何和语义前瞻，实现了机器人操作的实时推理和高保真预测。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Recent advances in world action models for autonomous agents",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.17652v1",
+      "source": "arxiv",
+      "title": "VectorWorld: Efficient Streaming World Model via Diffusion Flow on Vector Graphs",
+      "abstract": "Closed-loop evaluation of autonomous-driving policies requires interactive simulation beyond log replay. However, existing generative world models often degrade in closed loop due to (i) history-free initialization that mismatches policy inputs, (ii) multi-step sampling latency that violates real-time budgets, and (iii) compounding kinematic infeasibility over long horizons. We propose VectorWorld, a streaming world model that incrementally generates ego-centric $64 \\mathrm{m}\\times 64\\mathrm{m}$ lane--agent vector-graph tiles during rollout. VectorWorld aligns initialization with history-conditioned policies by producing a policy-compatible interaction state via a motion-aware gated VAE. It enables real-time outpainting via solver-free one-step masked completion with an edge-gated relational DiT trained with interval-conditioned MeanFlow and JVP-based large-step supervision. To stabilize long-horizon rollouts, we introduce $Δ$Sim, a physics-aligned non-ego (NPC) policy with hybrid discrete--continuous actions and differentiable kinematic logit shaping. On Waymo open motion and nuPlan, VectorWorld improves map-structure fidelity and initialization validity, and supports stable, real-time $1\\mathrm{km}+$ closed-loop rollouts (\\href{https://github.com/jiangchaokang/VectorWorld}{code}).",
+      "authors": [
+        "Chaokang Jiang",
+        "Desen Zhou",
+        "Jiuming Liu",
+        "Kevin Li Sun"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "published": "2026-03-18T12:13:30+00:00",
+      "link": "https://arxiv.org/pdf/2603.17652v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Streaming world model via diffusion flow for autonomous driving",
+      "llm_evidence_cn": "基于扩散流的自动驾驶流式世界模型",
+      "llm_evidence": "基于扩散流的自动驾驶流式世界模型",
+      "canonical_evidence": "基于扩散流的自动驾驶流式世界模型",
+      "llm_tldr_en": "Presents VectorWorld, an efficient generative world model for real-time closed-loop autonomous driving evaluation.",
+      "llm_tldr_cn": "提出VectorWorld，一种用于自动驾驶闭环评估的高效流式矢量图生成世界模型。",
+      "llm_tldr": "提出VectorWorld，一种用于自动驾驶闭环评估的高效流式矢量图生成世界模型。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Action conditioned generative world models for robotics",
+      "matched_requirement_id": "req-8",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.18464v1",
+      "source": "arxiv",
+      "title": "AcceRL: A Distributed Asynchronous Reinforcement Learning and World Model Framework for Vision-Language-Action Models",
+      "abstract": "Reinforcement learning (RL) for large-scale Vision-Language-Action (VLA) models faces significant challenges in computational efficiency and data acquisition. We propose AcceRL, a fully asynchronous and decoupled RL framework designed to eliminate synchronization barriers by physically isolating training, inference, and rollouts. Crucially, AcceRL is the first to integrate a plug-and-play, trainable world model into a distributed asynchronous RL pipeline to generate virtual experiences. Experiments on the LIBERO benchmark demonstrate that AcceRL achieves state-of-the-art (SOTA) performance. Systematically, it exhibits super-linear scaling in throughput and highly efficient hardware utilization. Algorithmically, the world-model-augmented variant delivers unprecedented sample efficiency and robust training stability in complex control tasks.",
+      "authors": [
+        "Chengxuan Lu",
+        "Shukuan Wang",
+        "Yanjie Li",
+        "Wei Liu",
+        "Shiji Jin",
+        "Fuyuan Qian",
+        "Peiming Li",
+        "Baigui Sun",
+        "Yang Liu"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-03-19T03:50:45+00:00",
+      "link": "https://arxiv.org/pdf/2603.18464v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "trainable world model in asynchronous RL pipeline",
+      "llm_evidence_cn": "异步强化学习流水线中的可训练世界模型",
+      "llm_evidence": "异步强化学习流水线中的可训练世界模型",
+      "canonical_evidence": "异步强化学习流水线中的可训练世界模型",
+      "llm_tldr_en": "Develops AcceRL, a distributed RL framework integrating a world model to generate virtual experiences for VLAs.",
+      "llm_tldr_cn": "开发了AcceRL分布式强化学习框架，集成世界模型为VLA模型生成虚拟经验。",
+      "llm_tldr": "开发了AcceRL分布式强化学习框架，集成世界模型为VLA模型生成虚拟经验。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Model-based reinforcement learning with world models",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.19370v1",
+      "source": "arxiv",
+      "title": "VAMPO: Policy Optimization for Improving Visual Dynamics in Video Action Models",
+      "abstract": "Video action models are an appealing foundation for Vision--Language--Action systems because they can learn visual dynamics from large-scale video data and transfer this knowledge to downstream robot control. Yet current diffusion-based video predictors are trained with likelihood-surrogate objectives, which encourage globally plausible predictions without explicitly optimizing the precision-critical visual dynamics needed for manipulation. This objective mismatch often leads to subtle errors in object pose, spatial relations, and contact timing that can be amplified by downstream policies. We propose VAMPO, a post-training framework that directly improves visual dynamics in video action models through policy optimization. Our key idea is to formulate multi-step denoising as a sequential decision process and optimize the denoising policy with rewards defined over expert visual dynamics in latent space. To make this optimization practical, we introduce an Euler Hybrid sampler that injects stochasticity only at the first denoising step, enabling tractable low-variance policy-gradient estimation while preserving the coherence of the remaining denoising trajectory. We further combine this design with GRPO and a verifiable non-adversarial reward. Across diverse simulated and real-world manipulation tasks, VAMPO improves task-relevant visual dynamics, leading to better downstream action generation and stronger generalization. The homepage is https://vampo-robot.github.io/VAMPO/.",
+      "authors": [
+        "Zirui Ge",
+        "Pengxiang Ding",
+        "Baohua Yin",
+        "Qishen Wang",
+        "Zhiyong Xie",
+        "Yemin Wang",
+        "Jinbo Wang",
+        "Hengtao Li",
+        "Runze Suo",
+        "Wenxuan Song",
+        "Han Zhao",
+        "Shangke Lyu",
+        "Zhaoxin Fan",
+        "Haoang Li",
+        "Ran Cheng",
+        "Cheng Chi",
+        "Huibin Ge",
+        "Yaozhi Luo",
+        "Donglin Wang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-19T18:04:03+00:00",
+      "link": "https://arxiv.org/pdf/2603.19370v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Policy optimization for improving visual dynamics in video action models",
+      "llm_evidence_cn": "通过策略优化改进视频动作模型中的视觉动力学",
+      "llm_evidence": "通过策略优化改进视频动作模型中的视觉动力学",
+      "canonical_evidence": "通过策略优化改进视频动作模型中的视觉动力学",
+      "llm_tldr_en": "Proposes VAMPO to refine video action models for better precision in robot manipulation tasks.",
+      "llm_tldr_cn": "提出VAMPO框架，通过策略优化提升视频动作模型在机器人操控中的动力学精度。",
+      "llm_tldr": "提出VAMPO框架，通过策略优化提升视频动作模型在机器人操控中的动力学精度。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Recent advances in world action models for autonomous agents",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.21315v1",
+      "source": "arxiv",
+      "title": "FluidWorld: Reaction-Diffusion Dynamics as a Predictive Substrate for World Models",
+      "abstract": "World models learn to predict future states of an environment, enabling planning and mental simulation. Current approaches default to Transformer-based predictors operating in learned latent spaces. This comes at a cost: O(N^2) computation and no explicit spatial inductive bias. This paper asks a foundational question: is self-attention necessary for predictive world modeling, or can alternative computational substrates achieve comparable or superior results? I introduce FluidWorld, a proof-of-concept world model whose predictive dynamics are governed by partial differential equations (PDEs) of reaction-diffusion type. Instead of using a separate neural network predictor, the PDE integration itself produces the future state prediction. In a strictly parameter-matched three-way ablation on unconditional UCF-101 video prediction (64x64, ~800K parameters, identical encoder, decoder, losses, and data), FluidWorld is compared against both a Transformer baseline (self-attention) and a ConvLSTM baseline (convolutional recurrence). While all three models converge to comparable single-step prediction loss, FluidWorld achieves 2x lower reconstruction error, produces representations with 10-15% higher spatial structure preservation and 18-25% more effective dimensionality, and critically maintains coherent multi-step rollouts where both baselines degrade rapidly. All experiments were conducted on a single consumer-grade PC (Intel Core i5, NVIDIA RTX 4070 Ti), without any large-scale compute. These results establish that PDE-based dynamics, which natively provide O(N) spatial complexity, adaptive computation, and global spatial coherence through diffusion, are a viable and parameter-efficient alternative to both attention and convolutional recurrence for world modeling.",
+      "authors": [
+        "Fabien Polly"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-03-22T16:49:43+00:00",
+      "link": "https://arxiv.org/pdf/2603.21315v1",
+      "tags": [
+        "keyword:1"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Proposes FluidWorld, a world model learning latent dynamics via reaction-diffusion PDEs.",
+      "llm_evidence_cn": "提出了 FluidWorld，一个通过反应扩散偏微分方程学习潜在动力学的世界模型。",
+      "llm_evidence": "提出了 FluidWorld，一个通过反应扩散偏微分方程学习潜在动力学的世界模型。",
+      "canonical_evidence": "提出了 FluidWorld，一个通过反应扩散偏微分方程学习潜在动力学的世界模型。",
+      "llm_tldr_en": "Explores reaction-diffusion dynamics as an alternative to Transformers for predictive world modeling.",
+      "llm_tldr_cn": "探索反应扩散动力学作为 Transformer 的替代方案，用于预测性世界建模。",
+      "llm_tldr": "探索反应扩散动力学作为 Transformer 的替代方案，用于预测性世界建模。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Learning latent dynamics for world modeling",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.21546v1",
+      "source": "arxiv",
+      "title": "What Do World Models Learn in RL? Probing Latent Representations in Learned Environment Simulators",
+      "abstract": "World models learn to simulate environment dynamics from experience, enabling sample-efficient reinforcement learning. But what do these models actually represent internally? We apply interpretability techniques--including linear and nonlinear probing, causal interventions, and attention analysis--to two architecturally distinct world models: IRIS (discrete token transformer) and DIAMOND (continuous diffusion UNet), trained on Atari Breakout and Pong. Using linear probes, we find that both models develop linearly decodable representations of game state variables (object positions, scores), with MLP probes yielding only marginally higher R^2, confirming that these representations are approximately linear. Causal interventions--shifting hidden states along probe-derived directions--produce correlated changes in model predictions, providing evidence that representations are functionally used rather than merely correlated. Analysis of IRIS attention heads reveals spatial specialization: specific heads attend preferentially to tokens overlapping with game objects. Multi-baseline token ablation experiments consistently identify object-containing tokens as disproportionately important. Our findings provide interpretability evidence that learned world models develop structured, approximately linear internal representations of environment state across two games and two architectures.",
+      "authors": [
+        "Xinyu Zhang"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-03-23T04:00:53+00:00",
+      "link": "https://arxiv.org/pdf/2603.21546v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Probes latent representations in learned environment simulators (world models) used in RL.",
+      "llm_evidence_cn": "探究强化学习中使用的学习环境模拟器（世界模型）的潜在表示。",
+      "llm_evidence": "探究强化学习中使用的学习环境模拟器（世界模型）的潜在表示。",
+      "canonical_evidence": "探究强化学习中使用的学习环境模拟器（世界模型）的潜在表示。",
+      "llm_tldr_en": "Analyzes what world models internally represent by probing latent states in discrete and continuous architectures.",
+      "llm_tldr_cn": "通过探测离散和连续架构中的潜在状态，分析世界模型内部表示的内容。",
+      "llm_tldr": "通过探测离散和连续架构中的潜在状态，分析世界模型内部表示的内容。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "World models in reinforcement learning and robotics",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.22281v1",
+      "source": "arxiv",
+      "title": "ThinkJEPA: Empowering Latent World Models with Large Vision-Language Reasoning Model",
+      "abstract": "Recent progress in latent world models (e.g., V-JEPA2) has shown promising capability in forecasting future world states from video observations. Nevertheless, dense prediction from a short observation window limits temporal context and can bias predictors toward local, low-level extrapolation, making it difficult to capture long-horizon semantics and reducing downstream utility. Vision--language models (VLMs), in contrast, provide strong semantic grounding and general knowledge by reasoning over uniformly sampled frames, but they are not ideal as standalone dense predictors due to compute-driven sparse sampling, a language-output bottleneck that compresses fine-grained interaction states into text-oriented representations, and a data-regime mismatch when adapting to small action-conditioned datasets. We propose a VLM-guided JEPA-style latent world modeling framework that combines dense-frame dynamics modeling with long-horizon semantic guidance via a dual-temporal pathway: a dense JEPA branch for fine-grained motion and interaction cues, and a uniformly sampled VLM \\emph{thinker} branch with a larger temporal stride for knowledge-rich guidance. To transfer the VLM's progressive reasoning signals effectively, we introduce a hierarchical pyramid representation extraction module that aggregates multi-layer VLM representations into guidance features compatible with latent prediction. Experiments on hand-manipulation trajectory prediction show that our method outperforms both a strong VLM-only baseline and a JEPA-predictor baseline, and yields more robust long-horizon rollout behavior.",
+      "authors": [
+        "Haichao Zhang",
+        "Yijiang Li",
+        "Shwai He",
+        "Tushar Nagarajan",
+        "Mingfei Chen",
+        "Jianglin Lu",
+        "Ang Li",
+        "Yun Fu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.CL",
+        "cs.LG",
+        "cs.RO"
+      ],
+      "published": "2026-03-23T17:59:42+00:00",
+      "link": "https://arxiv.org/pdf/2603.22281v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Empowering latent world models with vision-language reasoning",
+      "llm_evidence_cn": "利用视觉语言推理模型增强潜世界模型",
+      "llm_evidence": "利用视觉语言推理模型增强潜世界模型",
+      "canonical_evidence": "利用视觉语言推理模型增强潜世界模型",
+      "llm_tldr_en": "Integrates VLMs with latent world models to capture long-horizon semantics and improve future state forecasting.",
+      "llm_tldr_cn": "将大视觉语言模型与潜世界模型结合，增强了长程语义捕捉与未来状态预测能力。",
+      "llm_tldr": "将大视觉语言模型与潜世界模型结合，增强了长程语义捕捉与未来状态预测能力。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Learning latent dynamics for world modeling",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.22892v1",
+      "source": "arxiv",
+      "title": "VLGOR: Visual-Language Knowledge Guided Offline Reinforcement Learning for Generalizable Agents",
+      "abstract": "Combining Large Language Models (LLMs) with Reinforcement Learning (RL) enables agents to interpret language instructions more effectively for task execution. However, LLMs typically lack direct perception of the physical environment, which limits their understanding of environmental dynamics and their ability to generalize to unseen tasks. To address this limitation, we propose Visual-Language Knowledge-Guided Offline Reinforcement Learning (VLGOR), a framework that integrates visual and language knowledge to generate imaginary rollouts, thereby enriching the interaction data. The core premise of VLGOR is to fine-tune a vision-language model to predict future states and actions conditioned on an initial visual observation and high-level instructions, ensuring that the generated rollouts remain temporally coherent and spatially plausible. Furthermore, we employ counterfactual prompts to produce more diverse rollouts for offline RL training, enabling the agent to acquire knowledge that facilitates following language instructions while grounding in environments based on visual cues. Experiments on robotic manipulation benchmarks demonstrate that VLGOR significantly improves performance on unseen tasks requiring novel optimal policies, achieving a success rate over 24% higher than the baseline methods.",
+      "authors": [
+        "Pengsen Liu",
+        "Maosen Zeng",
+        "Nan Tang",
+        "Kaiyuan Li",
+        "Jing-Cheng Pang",
+        "Yunan Liu",
+        "Yang Yu"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG"
+      ],
+      "published": "2026-03-24T07:40:30+00:00",
+      "link": "https://arxiv.org/pdf/2603.22892v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Integrates visual and language knowledge to generate imaginary rollouts for offline RL",
+      "llm_evidence_cn": "整合视觉和语言知识，为离线强化学习生成想象回放",
+      "llm_evidence": "整合视觉和语言知识，为离线强化学习生成想象回放",
+      "canonical_evidence": "整合视觉和语言知识，为离线强化学习生成想象回放",
+      "llm_tldr_en": "VLGOR uses a vision-language model to predict future states and actions, enriching data for offline RL agents.",
+      "llm_tldr_cn": "VLGOR利用视觉语言模型预测未来状态和动作，为离线强化学习代理丰富交互数据。",
+      "llm_tldr": "VLGOR利用视觉语言模型预测未来状态和动作，为离线强化学习代理丰富交互数据。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Model-based reinforcement learning with world models",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.23245v1",
+      "source": "arxiv",
+      "title": "Neural ODE and SDE Models for Adaptation and Planning in Model-Based Reinforcement Learning",
+      "abstract": "We investigate neural ordinary and stochastic differential equations (neural ODEs and SDEs) to model stochastic dynamics in fully and partially observed environments within a model-based reinforcement learning (RL) framework. Through a sequence of simulations, we show that neural SDEs more effectively capture the inherent stochasticity of transition dynamics, enabling high-performing policies with improved sample efficiency in challenging scenarios. We leverage neural ODEs and SDEs for efficient policy adaptation to changes in environment dynamics via inverse models, requiring only limited interactions with the new environment. To address partial observability, we introduce a latent SDE model that combines an ODE with a GAN-trained stochastic component in latent space. Policies derived from this model provide a strong baseline, outperforming or matching general model-based and model-free approaches across stochastic continuous-control benchmarks. This work demonstrates the applicability of action-conditional latent SDEs for RL planning in environments with stochastic transitions. Our code is available at: https://github.com/ChaoHan-UoS/NeuralRL",
+      "authors": [
+        "Chao Han",
+        "Stefanos Ioannou",
+        "Luca Manneschi",
+        "T. J. Hayward",
+        "Michael Mangan",
+        "Aditya Gilra",
+        "Eleni Vasilaki"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-03-24T14:12:41+00:00",
+      "link": "https://arxiv.org/pdf/2603.23245v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Model-based RL using neural ODE/SDE for environment dynamics",
+      "llm_evidence_cn": "使用神经ODE/SDE进行环境动力学建模的基于模型的强化学习",
+      "llm_evidence": "使用神经ODE/SDE进行环境动力学建模的基于模型的强化学习",
+      "canonical_evidence": "使用神经ODE/SDE进行环境动力学建模的基于模型的强化学习",
+      "llm_tldr_en": "Explores neural ODEs and SDEs to model stochastic dynamics for planning and adaptation in model-based RL.",
+      "llm_tldr_cn": "探索使用神经ODE和SDE对随机动力学建模，以实现基于模型强化学习中的规划与自适应。",
+      "llm_tldr": "探索使用神经ODE和SDE对随机动力学建模，以实现基于模型强化学习中的规划与自适应。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Model-based reinforcement learning with world models",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.23497v1",
+      "source": "arxiv",
+      "title": "WildWorld: A Large-Scale Dataset for Dynamic World Modeling with Actions and Explicit State toward Generative ARPG",
+      "abstract": "Dynamical systems theory and reinforcement learning view world evolution as latent-state dynamics driven by actions, with visual observations providing partial information about the state. Recent video world models attempt to learn this action-conditioned dynamics from data. However, existing datasets rarely match the requirement: they typically lack diverse and semantically meaningful action spaces, and actions are directly tied to visual observations rather than mediated by underlying states. As a result, actions are often entangled with pixel-level changes, making it difficult for models to learn structured world dynamics and maintain consistent evolution over long horizons. In this paper, we propose WildWorld, a large-scale action-conditioned world modeling dataset with explicit state annotations, automatically collected from a photorealistic AAA action role-playing game (Monster Hunter: Wilds). WildWorld contains over 108 million frames and features more than 450 actions, including movement, attacks, and skill casting, together with synchronized per-frame annotations of character skeletons, world states, camera poses, and depth maps. We further derive WildBench to evaluate models through Action Following and State Alignment. Extensive experiments reveal persistent challenges in modeling semantically rich actions and maintaining long-horizon state consistency, highlighting the need for state-aware video generation. The project page is https://shandaai.github.io/wildworld-project/.",
+      "authors": [
+        "Zhen Li",
+        "Zian Meng",
+        "Shuwei Shi",
+        "Wenshuo Peng",
+        "Yuwei Wu",
+        "Bo Zheng",
+        "Chuanhao Li",
+        "Kaipeng Zhang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-03-24T17:58:25+00:00",
+      "link": "https://arxiv.org/pdf/2603.23497v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Dataset for dynamic world modeling with actions and latent-state dynamics",
+      "llm_evidence_cn": "包含动作和潜状态动力学的动态世界建模数据集",
+      "llm_evidence": "包含动作和潜状态动力学的动态世界建模数据集",
+      "canonical_evidence": "包含动作和潜状态动力学的动态世界建模数据集",
+      "llm_tldr_en": "Presents WildWorld, a large-scale dataset designed for action-conditioned latent world dynamics modeling.",
+      "llm_tldr_cn": "提供 WildWorld，一个专为动作条件潜状态世界动力学建模设计的大规模数据集。",
+      "llm_tldr": "提供 WildWorld，一个专为动作条件潜状态世界动力学建模设计的大规模数据集。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Learning latent dynamics for world modeling",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.25741v1",
+      "source": "arxiv",
+      "title": "Vega: Learning to Drive with Natural Language Instructions",
+      "abstract": "Vision-language-action models have reshaped autonomous driving to incorporate languages into the decision-making process. However, most existing pipelines only utilize the language modality for scene descriptions or reasoning and lack the flexibility to follow diverse user instructions for personalized driving. To address this, we first construct a large-scale driving dataset (InstructScene) containing around 100,000 scenes annotated with diverse driving instructions with the corresponding trajectories. We then propose a unified Vision-Language-World-Action model, Vega, for instruction-based generation and planning. We employ the autoregressive paradigm to process visual inputs (vision) and language instructions (language) and the diffusion paradigm to generate future predictions (world modeling) and trajectories (action). We perform joint attention to enable interactions between the modalities and use individual projection layers for different modalities for more capabilities. Extensive experiments demonstrate that our method not only achieves superior planning performance but also exhibits strong instruction-following abilities, paving the way for more intelligent and personalized driving systems.",
+      "authors": [
+        "Sicheng Zuo",
+        "Yuxuan Li",
+        "Wenzhao Zheng",
+        "Zheng Zhu",
+        "Jie Zhou",
+        "Jiwen Lu"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.AI",
+        "cs.RO"
+      ],
+      "published": "2026-03-26T17:59:56+00:00",
+      "link": "https://arxiv.org/pdf/2603.25741v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Unified Vision-Language-World-Action model for autonomous driving planning",
+      "llm_evidence_cn": "用于自动驾驶规划的统一视觉-语言-世界-动作模型",
+      "llm_evidence": "用于自动驾驶规划的统一视觉-语言-世界-动作模型",
+      "canonical_evidence": "用于自动驾驶规划的统一视觉-语言-世界-动作模型",
+      "llm_tldr_en": "Vega is a unified model for instruction-based driving that combines world modeling with action planning.",
+      "llm_tldr_cn": "Vega是一个统一的指令驱动驾驶模型，结合了世界建模与动作规划。",
+      "llm_tldr": "Vega是一个统一的指令驱动驾驶模型，结合了世界建模与动作规划。",
+      "llm_tags": [
+        "query:1:composite"
+      ],
+      "matched_query_tag": "query:1:composite",
+      "matched_query_text": "Papers central to 寻找关于世界动作模型（World Action Model）及相关领域（如模型预测、强化学习）的学术论文。, especially work that connects or combines: r; V; World models in reinforcement learning and robotics; Action-conditioned world models for decision making; Learning latent dynamics for world modeling; Model-based reinforcement learning with world models; Recent advances in world action models for autonomous agents; Action conditioned generative world models for robotics.",
+      "matched_requirement_id": "req-composite-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2602.24121v1",
+      "source": "arxiv",
+      "title": "Planning from Observation and Interaction",
+      "abstract": "Observational learning requires an agent to learn to perform a task by referencing only observations of the performed task. This work investigates the equivalent setting in real-world robot learning where access to hand-designed rewards and demonstrator actions are not assumed. To address this data-constrained setting, this work presents a planning-based Inverse Reinforcement Learning (IRL) algorithm for world modeling from observation and interaction alone. Experiments conducted entirely in the real-world demonstrate that this paradigm is effective for learning image-based manipulation tasks from scratch in under an hour, without assuming prior knowledge, pre-training, or data of any kind beyond task observations. Moreover, this work demonstrates that the learned world model representation is capable of online transfer learning in the real-world from scratch. In comparison to existing approaches, including IRL, RL, and Behavior Cloning (BC), which have more restrictive assumptions, the proposed approach demonstrates significantly greater sample efficiency and success rates, enabling a practical path forward for online world modeling and planning from observation and interaction. Videos and more at: https://uwrobotlearning.github.io/mpail2/.",
+      "authors": [
+        "Tyler Han",
+        "Siyang Shen",
+        "Rohan Baijal",
+        "Harine Ravichandiran",
+        "Bat Nemekhbold",
+        "Kevin Huang",
+        "Sanghun Jung",
+        "Byron Boots"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-02-27T15:58:11+00:00",
+      "link": "https://arxiv.org/pdf/2602.24121v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "world modeling from observation and interaction",
+      "llm_evidence_cn": "通过观察与交互进行世界建模",
+      "llm_evidence": "通过观察与交互进行世界建模",
+      "canonical_evidence": "通过观察与交互进行世界建模",
+      "llm_tldr_en": "Presents a planning-based IRL algorithm for world modeling from scratch using only observations and interaction.",
+      "llm_tldr_cn": "提出一种基于规划的逆强化学习算法，仅通过观察和交互从零开始构建世界模型。",
+      "llm_tldr": "提出一种基于规划的逆强化学习算法，仅通过观察和交互从零开始构建世界模型。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Learning latent dynamics for world modeling",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2603.00926v1",
+      "source": "arxiv",
+      "title": "DAM-VLA: A Dynamic Action Model-Based Vision-Language-Action Framework for Robot Manipulation",
+      "abstract": "In dynamic environments such as warehouses, hospitals, and homes, robots must seamlessly transition between gross motion and precise manipulations to complete complex tasks. However, current Vision-Language-Action (VLA) frameworks, largely adapted from pre-trained Vision-Language Models (VLMs), often struggle to reconcile general task adaptability with the specialized precision required for intricate manipulation. To address this challenge, we propose DAM-VLA, a dynamic action model-based VLA framework. DAM-VLA integrates VLM reasoning with diffusion-based action models specialized for arm and gripper control. Specifically, it introduces (i) an action routing mechanism, using task-specific visual and linguistic cues to select appropriate action models (e.g., arm movement or gripper manipulation), (ii) a dynamic action model that fuses high-level VLM cognition with low-level visual features to predict actions, and (iii) a dual-scale action weighting mechanism that enables dynamic coordination between the arm-movement and gripper-manipulation models. Across extensive evaluations, DAM-VLA achieves superior success rates compared to state-of-the-art VLA methods in simulated (SIMPLER, FurnitureBench) and real-world settings, showing robust generalization from standard pick-and-place to demanding long-horizon and contact-rich tasks.",
+      "authors": [
+        "Xiongfeng Peng",
+        "Jiaqian Yu",
+        "Dingzhe Li",
+        "Yixiang Jin",
+        "Lu Xu",
+        "Yamin Mao",
+        "Chao Zhang",
+        "Weiming Li",
+        "Sujin Jang",
+        "Dongwook Lee",
+        "Daehyun Ji"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-01T05:16:04+00:00",
+      "link": "https://arxiv.org/pdf/2603.00926v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Integrates VLM reasoning with diffusion-based action models for robot manipulation",
+      "llm_evidence_cn": "将VLM推理与基于扩散的机器人操作动作模型相结合",
+      "llm_evidence": "将VLM推理与基于扩散的机器人操作动作模型相结合",
+      "canonical_evidence": "将VLM推理与基于扩散的机器人操作动作模型相结合",
+      "llm_tldr_en": "Proposes DAM-VLA, integrating vision-language reasoning with specialized diffusion action models for manipulation.",
+      "llm_tldr_cn": "提出DAM-VLA，将视觉语言推理与专门的扩散动作模型结合用于机器人操作。",
+      "llm_tldr": "提出DAM-VLA，将视觉语言推理与专门的扩散动作模型结合用于机器人操作。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Recent advances in world action models for autonomous agents",
+      "matched_requirement_id": "req-7",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2603.01469v1",
+      "source": "arxiv",
+      "title": "Mean-Flow based One-Step Vision-Language-Action",
+      "abstract": "Recent advances in FlowMatching-based Vision-Language-Action (VLA) frameworks have demonstrated remarkable advantages in generating high-frequency action chunks, particularly for highly dexterous robotic manipulation tasks. Despite these notable achievements, their practical applications are constrained by prolonged generation latency, which stems from inherent iterative sampling requirements and architectural limitations. To address this critical bottleneck, we propose a Mean-Flow based One-Step VLA approach. Specifically, we resolve the noise-induced issues in the action generation process, thereby eliminating the consistency constraints inherent to conventional Flow-Matching methods. This significantly enhances generation efficiency and enables one-step action generation. Real-world robotic experiments show that the generation speed of the proposed Mean-Flow based One-Step VLA is 8.7 times and 83.9 times faster than that of SmolVLA and Diffusion Policy, respectively. These results elucidate its great potential as a high-efficiency backbone for VLA-based robotic manipulation.",
+      "authors": [
+        "Yang Chen",
+        "Xiaoguang Ma",
+        "Bin Zhao"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-03-02T05:30:30+00:00",
+      "link": "https://arxiv.org/pdf/2603.01469v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Vision-Language-Action (VLA) framework for robotic manipulation",
+      "llm_evidence_cn": "用于机器人操作的视觉-语言-动作（VLA）框架",
+      "llm_evidence": "用于机器人操作的视觉-语言-动作（VLA）框架",
+      "canonical_evidence": "用于机器人操作的视觉-语言-动作（VLA）框架",
+      "llm_tldr_en": "Proposes a one-step VLA approach to improve generation efficiency in dexterous robotic manipulation.",
+      "llm_tldr_cn": "提出一种单步VLA方法，旨在提高灵巧机器人操作中的动作生成效率。",
+      "llm_tldr": "提出一种单步VLA方法，旨在提高灵巧机器人操作中的动作生成效率。",
+      "llm_tags": [
+        "query:1:composite"
+      ],
+      "matched_query_tag": "query:1:composite",
+      "matched_query_text": "Papers central to 寻找关于世界动作模型（World Action Model）及相关领域（如模型预测、强化学习）的学术论文。, especially work that connects or combines: r; V; World models in reinforcement learning and robotics; Action-conditioned world models for decision making; Learning latent dynamics for world modeling; Model-based reinforcement learning with world models; Recent advances in world action models for autonomous agents; Action conditioned generative world models for robotics.",
+      "matched_requirement_id": "req-composite-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2603.01553v1",
+      "source": "arxiv",
+      "title": "State-Action Inpainting Diffuser for Continuous Control with Delay",
+      "abstract": "Signal delay poses a fundamental challenge in continuous control and reinforcement learning (RL) by introducing a temporal gap between interaction and perception. Current solutions have largely evolved along two distinct paradigms: model-free approaches which utilize state augmentation to preserve Markovian properties, and model-based methods which focus on inferring latent beliefs via dynamics modeling. In this paper, we bridge these perspectives by introducing State-Action Inpainting Diffuser (SAID), a framework that integrates the inductive bias of dynamics learning with the direct decision-making capability of policy optimization. By formulating the problem as a joint sequence inpainting task, SAID implicitly captures environmental dynamics while directly generating consistent plans, effectively operating at the intersection of model-based and model-free paradigms. Crucially, this generative formulation allows SAID to be seamlessly applied to both online and offline RL. Extensive experiments on delayed continuous control benchmarks demonstrate that SAID achieves state-of-the-art and robust performance. Our study suggests a new methodology to advance the field of RL with delay.",
+      "authors": [
+        "Dongqi Han",
+        "Wei Wang",
+        "Enze Zhang",
+        "Dongsheng Li"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-03-02T07:28:27+00:00",
+      "link": "https://arxiv.org/pdf/2603.01553v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "captures environmental dynamics via joint sequence inpainting",
+      "llm_evidence_cn": "通过联合序列修复捕捉环境动态",
+      "llm_evidence": "通过联合序列修复捕捉环境动态",
+      "canonical_evidence": "通过联合序列修复捕捉环境动态",
+      "llm_tldr_en": "SAID uses a diffusion-based inpainting framework to model dynamics and policy for delayed control.",
+      "llm_tldr_cn": "SAID 采用基于扩散的修复框架，为延迟控制建模环境动态和决策策略。",
+      "llm_tldr": "SAID 采用基于扩散的修复框架，为延迟控制建模环境动态和决策策略。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Learning latent dynamics for world modeling",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2603.01063v1",
+      "source": "arxiv",
+      "title": "Unleashing VLA Potentials in Autonomous Driving via Explicit Learning from Failures",
+      "abstract": "Vision-Language-Action (VLA) models for autonomous driving often hit a performance plateau during Reinforcement Learning (RL) optimization. This stagnation arises from exploration capabilities constrained by previous Supervised Fine-Tuning (SFT), leading to persistent failures in long-tail scenarios. In these critical situations, all explored actions yield a zero-value driving score. This information-sparse reward signals a failure, yet fails to identify its root cause -- whether it is due to incorrect planning, flawed reasoning, or poor trajectory execution. To address this limitation, we propose VLA with Explicit Learning from Failures (ELF-VLA), a framework that augments RL with structured diagnostic feedback. Instead of relying on a vague scalar reward, our method produces detailed, interpretable reports that identify the specific failure mode. The VLA policy then leverages this explicit feedback to generate a Feedback-Guided Refinement. By injecting these corrected, high-reward samples back into the RL training batch, our approach provides a targeted gradient, which enables the policy to solve critical scenarios that unguided exploration cannot. Extensive experiments demonstrate that our method unlocks the latent capabilities of VLA models, achieving state-of-the-art (SOTA) performance on the public NAVSIM benchmark for overall PDMS, EPDMS score and high-level planning accuracy.",
+      "authors": [
+        "Yuechen Luo",
+        "Qimao Chen",
+        "Fang Li",
+        "Shaoqing Xu",
+        "Jaxin Liu",
+        "Ziying Song",
+        "Zhi-xin Yang",
+        "Fuxi Wen"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-03-01T11:41:22+00:00",
+      "link": "https://arxiv.org/pdf/2603.01063v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "VLA models in autonomous driving via RL optimization",
+      "llm_evidence_cn": "通过强化学习优化自动驾驶中的 VLA 模型",
+      "llm_evidence": "通过强化学习优化自动驾驶中的 VLA 模型",
+      "canonical_evidence": "通过强化学习优化自动驾驶中的 VLA 模型",
+      "llm_tldr_en": "ELF-VLA improves RL for autonomous driving by providing structured diagnostic feedback on failures.",
+      "llm_tldr_cn": "ELF-VLA 通过提供结构化的失败诊断反馈，改进了自动驾驶中的强化学习优化。",
+      "llm_tldr": "ELF-VLA 通过提供结构化的失败诊断反馈，改进了自动驾驶中的强化学习优化。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Model-based reinforcement learning with world models",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2603.01714v1",
+      "source": "arxiv",
+      "title": "TopoCurate:Modeling Interaction Topology for Tool-Use Agent Training",
+      "abstract": "Training tool-use agents typically relies on outcome-based filtering: Supervised Fine-Tuning (SFT) on successful trajectories and Reinforcement Learning (RL) on pass-rate-selected tasks. However, this paradigm ignores interaction dynamics: successful trajectories may lack error recovery or exhibit redundancy, while pass rates fail to distinguish structurally informative tasks from trivial ones. We propose \\textbf{TopoCurate}, an interaction-aware framework that projects multi-trial rollouts from the same task into a unified semantic quotient topology. By merging equivalent action-observation states, this projection transforms scattered linear trajectories into a structured manifold that explicitly captures how tool invocations and environmental responses drive the divergence between effective strategies and failure modes. Leveraging this representation, we introduce a dual-selection mechanism: for SFT, we prioritize trajectories demonstrating reflective recovery, semantic efficiency, and strategic diversity to mitigate covariate shift and mode collapse; for RL, we select tasks with high error branch ratios and strategic heterogeneity, maximizing gradient Signal-to-Noise Ratio to address vanishing signals in sparse-reward settings. Evaluations on BFCLv3 and Tau2 Bench show that TopoCurate achieves consistent gains of 4.2\\% (SFT) and 6.9\\% (RL) over state-of-the-art baselines. We will release the code and data soon for further investigations.",
+      "authors": [
+        "Jinluan Yang",
+        "Yuxin Liu",
+        "Zhengyu Chen",
+        "Chengcheng Han",
+        "Yueqing Sun",
+        "Qi Gu",
+        "Hui Su",
+        "Xunliang Cai",
+        "Fei Wu",
+        "Kun Kuang"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.CL"
+      ],
+      "published": "2026-03-02T10:38:54+00:00",
+      "link": "https://arxiv.org/pdf/2603.01714v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "modeling interaction topology for agent training",
+      "llm_evidence_cn": "为智能体训练建模交互拓扑",
+      "llm_evidence": "为智能体训练建模交互拓扑",
+      "canonical_evidence": "为智能体训练建模交互拓扑",
+      "llm_tldr_en": "Proposes TopoCurate to structure interaction dynamics into a manifold for better tool-use agent training.",
+      "llm_tldr_cn": "提出TopoCurate，将交互动态结构化为流形，以优化工具使用智能体的训练。",
+      "llm_tldr": "提出TopoCurate，将交互动态结构化为流形，以优化工具使用智能体的训练。",
+      "llm_tags": [
+        "query:1:composite"
+      ],
+      "matched_query_tag": "query:1:composite",
+      "matched_query_text": "Papers central to 寻找关于世界动作模型（World Action Model）及相关领域（如模型预测、强化学习）的学术论文。, especially work that connects or combines: r; V; World models in reinforcement learning and robotics; Action-conditioned world models for decision making; Learning latent dynamics for world modeling; Model-based reinforcement learning with world models; Recent advances in world action models for autonomous agents; Action conditioned generative world models for robotics.",
+      "matched_requirement_id": "req-composite-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2603.01748v1",
+      "source": "arxiv",
+      "title": "Discrete World Models via Regularization",
+      "abstract": "World models aim to capture the states and dynamics of an environment in a compact latent space. Moreover, using Boolean state representations is particularly useful for search heuristics and symbolic reasoning and planning. Existing approaches keep latents informative via decoder-based reconstruction, or instead via contrastive or reward signals. In this work, we introduce Discrete World Models via Regularization (DWMR): a reconstruction-free and contrastive-free method for unsupervised Boolean world-model learning. In particular, we introduce a novel world-modeling loss that couples latent prediction with specialized regularizers. Such regularizers maximize the entropy and independence of the representation bits through variance, correlation, and coskewness penalties, while simultaneously enforcing a locality prior for sparse action changes. To enable effective optimization, we also introduce a novel training scheme improving robustness to discrete roll-outs. Experiments on two benchmarks with underlying combinatorial structure show that DWMR learns more accurate representations and transitions than reconstruction-based alternatives. Finally, DWMR can also be paired with an auxiliary reconstruction decoder, and this combination yields additional gains.",
+      "authors": [
+        "Davide Bizzaro",
+        "Luciano Serafini"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI"
+      ],
+      "published": "2026-03-02T11:17:38+00:00",
+      "link": "https://arxiv.org/pdf/2603.01748v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "learning latent dynamics in discrete latent space",
+      "llm_evidence_cn": "在离散潜空间中学习潜动态",
+      "llm_evidence": "在离散潜空间中学习潜动态",
+      "canonical_evidence": "在离散潜空间中学习潜动态",
+      "llm_tldr_en": "Introduces DWMR for unsupervised learning of Boolean world models using specialized regularization losses.",
+      "llm_tldr_cn": "引入DWMR，通过专门的正则化损失实现布尔世界模型的无监督学习。",
+      "llm_tldr": "引入DWMR，通过专门的正则化损失实现布尔世界模型的无监督学习。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Learning latent dynamics for world modeling",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2603.05117v1",
+      "source": "arxiv",
+      "title": "SeedPolicy: Horizon Scaling via Self-Evolving Diffusion Policy for Robot Manipulation",
+      "abstract": "Imitation Learning (IL) enables robots to acquire manipulation skills from expert demonstrations. Diffusion Policy (DP) models multi-modal expert behaviors but suffers performance degradation as observation horizons increase, limiting long-horizon manipulation. We propose Self-Evolving Gated Attention (SEGA), a temporal module that maintains a time-evolving latent state via gated attention, enabling efficient recurrent updates that compress long-horizon observations into a fixed-size representation while filtering irrelevant temporal information. Integrating SEGA into DP yields Self-Evolving Diffusion Policy (SeedPolicy), which resolves the temporal modeling bottleneck and enables scalable horizon extension with moderate overhead. On the RoboTwin 2.0 benchmark with 50 manipulation tasks, SeedPolicy outperforms DP and other IL baselines. Averaged across both CNN and Transformer backbones, SeedPolicy achieves 36.8% relative improvement in clean settings and 169% relative improvement in randomized challenging settings over the DP. Compared to vision-language-action models such as RDT with 1.2B parameters, SeedPolicy achieves competitive performance with one to two orders of magnitude fewer parameters, demonstrating strong efficiency and scalability. These results establish SeedPolicy as a state-of-the-art imitation learning method for long-horizon robotic manipulation. Code is available at: https://github.com/Youqiang-Gui/SeedPolicy.",
+      "authors": [
+        "Youqiang Gui",
+        "Yuxuan Zhou",
+        "Shen Cheng",
+        "Xinyang Yuan",
+        "Haoqiang Fan",
+        "Peng Cheng",
+        "Shuaicheng Liu"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-05T12:42:53+00:00",
+      "link": "https://arxiv.org/pdf/2603.05117v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Self-evolving latent state for long-horizon robot manipulation",
+      "llm_evidence_cn": "用于长程机器人操控的自进化潜状态",
+      "llm_evidence": "用于长程机器人操控的自进化潜状态",
+      "canonical_evidence": "用于长程机器人操控的自进化潜状态",
+      "llm_tldr_en": "Introduces SeedPolicy to scale observation horizons in robot manipulation using a gated attention temporal module.",
+      "llm_tldr_cn": "通过门控注意力时间模块解决了扩散策略在长程机器人操控中的视野缩放问题。",
+      "llm_tldr": "通过门控注意力时间模块解决了扩散策略在长程机器人操控中的视野缩放问题。",
+      "llm_tags": [
+        "query:1:composite"
+      ],
+      "matched_query_tag": "query:1:composite",
+      "matched_query_text": "Papers central to 寻找关于世界动作模型（World Action Model）及相关领域（如模型预测、强化学习）的学术论文。, especially work that connects or combines: r; V; World models in reinforcement learning and robotics; Action-conditioned world models for decision making; Learning latent dynamics for world modeling; Model-based reinforcement learning with world models; Recent advances in world action models for autonomous agents; Action conditioned generative world models for robotics.",
+      "matched_requirement_id": "req-composite-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2603.02104v1",
+      "source": "arxiv",
+      "title": "ACDC: Adaptive Curriculum Planning with Dynamic Contrastive Control for Goal-Conditioned Reinforcement Learning in Robotic Manipulation",
+      "abstract": "Goal-conditioned reinforcement learning has shown considerable potential in robotic manipulation; however, existing approaches remain limited by their reliance on prioritizing collected experience, resulting in suboptimal performance across diverse tasks. Inspired by human learning behaviors, we propose a more comprehensive learning paradigm, ACDC, which integrates multidimensional Adaptive Curriculum (AC) Planning with Dynamic Contrastive (DC) Control to guide the agent along a well-designed learning trajectory. More specifically, at the planning level, the AC component schedules the learning curriculum by dynamically balancing diversity-driven exploration and quality-driven exploitation based on the agent's success rate and training progress. At the control level, the DC component implements the curriculum plan through norm-constrained contrastive learning, enabling magnitude-guided experience selection aligned with the current curriculum focus. Extensive experiments on challenging robotic manipulation tasks demonstrate that ACDC consistently outperforms the state-of-the-art baselines in both sample efficiency and final task success rate.",
+      "authors": [
+        "Xuerui Wang",
+        "Guangyu Ren",
+        "Tianhong Dai",
+        "Bintao Hu",
+        "Shuangyao Huang",
+        "Wenzhang Zhang",
+        "Hengyan Liu"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-02T17:23:09+00:00",
+      "link": "https://arxiv.org/pdf/2603.02104v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "Goal-conditioned reinforcement learning in robotic manipulation",
+      "llm_evidence_cn": "机器人操作中的目标条件强化学习",
+      "llm_evidence": "机器人操作中的目标条件强化学习",
+      "canonical_evidence": "机器人操作中的目标条件强化学习",
+      "llm_tldr_en": "Proposes ACDC, a curriculum planning paradigm for improving goal-conditioned RL in robotics.",
+      "llm_tldr_cn": "提出 ACDC，一种用于改进机器人目标条件强化学习的课程规划范式。",
+      "llm_tldr": "提出 ACDC，一种用于改进机器人目标条件强化学习的课程规划范式。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Model-based reinforcement learning with world models",
+      "matched_requirement_id": "req-6",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2603.02491v1",
+      "source": "arxiv",
+      "title": "What Capable Agents Must Know: Selection Theorems for Robust Decision-Making under Uncertainty",
+      "abstract": "As artificial agents become increasingly capable, what internal structure is *necessary* for an agent to act competently under uncertainty? Classical results show that optimal control can be *implemented* using belief states or world models, but not that such representations are required. We prove quantitative \"selection theorems\" showing that low *average-case regret* on structured families of action-conditioned prediction tasks forces an agent to implement a predictive, structured internal state. Our results cover stochastic policies, partial observability, and evaluation under task distributions, without assuming optimality, determinism, or access to an explicit model. Technically, we reduce predictive modeling to binary \"betting\" decisions and show that regret bounds limit probability mass on suboptimal bets, enforcing the predictive distinctions needed to separate high-margin outcomes. In fully observed settings, this yields approximate recovery of the interventional transition kernel; under partial observability, it implies necessity of belief-like memory and predictive state, addressing an open question in prior world-model recovery work.",
+      "authors": [
+        "Aran Nayebi"
+      ],
+      "primary_category": "cs.LG",
+      "categories": [
+        "cs.LG",
+        "cs.AI",
+        "cs.RO",
+        "q-bio.NC",
+        "stat.ML"
+      ],
+      "published": "2026-03-03T00:47:58+00:00",
+      "link": "https://arxiv.org/pdf/2603.02491v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "action-conditioned prediction tasks and world models",
+      "llm_evidence_cn": "动作条件预测任务与世界模型",
+      "llm_evidence": "动作条件预测任务与世界模型",
+      "canonical_evidence": "动作条件预测任务与世界模型",
+      "llm_tldr_en": "Proves that low regret in action-conditioned tasks necessitates internal world model structures.",
+      "llm_tldr_cn": "证明了在动作条件任务中实现低悔值必然要求智能体具备内部世界模型结构。",
+      "llm_tldr": "证明了在动作条件任务中实现低悔值必然要求智能体具备内部世界模型结构。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Action-conditioned world models for decision making",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2603.05291v1",
+      "source": "arxiv",
+      "title": "Iterative On-Policy Refinement of Hierarchical Diffusion Policies for Language-Conditioned Manipulation",
+      "abstract": "Hierarchical policies for language-conditioned manipulation decompose tasks into subgoals, where a high-level planner guides a low-level controller. However, these hierarchical agents often fail because the planner generates subgoals without considering the actual limitations of the controller. Existing solutions attempt to bridge this gap via intermediate modules or shared representations, but they remain limited by their reliance on fixed offline datasets. We propose HD-ExpIt, a framework for iterative fine-tuning of hierarchical diffusion policies via environment feedback. HD-ExpIt organizes training into a self-reinforcing cycle: it utilizes diffusion-based planning to autonomously discover successful behaviors, which are then distilled back into the hierarchical policy. This loop enables both components to improve while implicitly grounding the planner in the controller's actual capabilities without requiring explicit proxy models. Empirically, HD-ExpIt significantly improves hierarchical policies trained solely on offline data, achieving state-of-the-art performance on the long-horizon CALVIN benchmark among methods trained from scratch.",
+      "authors": [
+        "Clemence Grislain",
+        "Olivier Sigaud",
+        "Mohamed Chetouani"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-05T15:34:43+00:00",
+      "link": "https://arxiv.org/pdf/2603.05291v1",
+      "tags": [
+        "keyword:1",
+        "query:1"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "diffusion-based planning for language-conditioned manipulation",
+      "llm_evidence_cn": "基于扩散模型的语言条件操作规划",
+      "llm_evidence": "基于扩散模型的语言条件操作规划",
+      "canonical_evidence": "基于扩散模型的语言条件操作规划",
+      "llm_tldr_en": "Introduces HD-ExpIt for iterative refinement of hierarchical diffusion policies via environment feedback.",
+      "llm_tldr_cn": "引入HD-ExpIt框架，通过环境反馈迭代优化分层扩散策略。",
+      "llm_tldr": "引入HD-ExpIt框架，通过环境反馈迭代优化分层扩散策略。",
+      "llm_tags": [
+        "query:1"
+      ],
+      "matched_query_tag": "query:1",
+      "matched_query_text": "Action-conditioned world models for decision making",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

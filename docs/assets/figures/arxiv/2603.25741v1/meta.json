@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.25741v1/fig-001.webp",
+      "caption": "Table 1. Comparison with state-of-the-art methods on the NAVSIM v2 with extended metrics. NC: No at-fault Collision. DAC: Drivable Area Compliance. DDC: Driving Direction Compliance. TLC: Traffic Light Compliance. EP: Ego Progress. TTC: Time to Collision. LK: Lane Keeping. HC: History Comfort. EC: Extended Comfort. EPDMS: Extended Predictive Driver Model Score. †: Using the best-of-N (N=6) strategy following [85].",
+      "page": 6,
+      "index": 1,
+      "width": 1016,
+      "height": 265
+    },
+    {
+      "url": "assets/figures/arxiv/2603.25741v1/fig-002.webp",
+      "caption": "Figure 4. Ablation of interleaving image-action sequences. We compare the finetuning losses of models trained on noninterleaving sequences (original) and interleaving sequences of different lengths.",
+      "page": 7,
+      "index": 2,
+      "width": 488,
+      "height": 259
+    },
+    {
+      "url": "assets/figures/arxiv/2603.25741v1/fig-003.webp",
+      "caption": "Table 2. Comparison with state-of-the-art methods on the NAVSIM v1. NC: no at-fault collision. DAC: drivable area compliance. TTC: time-to-collision. C.: comfort. EP: ego progress. PDMS: the predictive driver model score. Abbreviations: 1x Cam (single front-view camera), Nx Cam (surround-view cameras), L (LiDAR). †: Using the best-of-N (N=6) strategy following [85].",
+      "page": 7,
+      "index": 3,
+      "width": 1026,
+      "height": 444
+    },
+    {
+      "url": "assets/figures/arxiv/2603.25741v1/fig-004.webp",
+      "caption": "Figure 5. Instruction-based planning examples. We visualize the effects of language instructions on action planning with front-view camera images and BEV maps.",
+      "page": 8,
+      "index": 4,
+      "width": 1029,
+      "height": 559
+    },
+    {
+      "url": "assets/figures/arxiv/2603.25741v1/fig-005.webp",
+      "caption": "Figure 2. Overview of our model. Compared to traditional imitation driving models, which can only predict the single expert trajectory, Vega can follow natural language instructions to generate diverse planning trajectories and future image predictions.",
+      "page": 4,
+      "index": 5,
+      "width": 1029,
+      "height": 645
+    },
+    {
+      "url": "assets/figures/arxiv/2603.25741v1/fig-006.webp",
+      "caption": "Figure 6. Future image generation conditioned on instructions and actions. In the same scenario, given two sets of instructions, the model plans two action sequences and generates their respective future images. Both action sequences follow their instructions and both images are consistent with their actions.",
+      "page": 9,
+      "index": 6,
+      "width": 978,
+      "height": 1075
+    },
+    {
+      "url": "assets/figures/arxiv/2603.25741v1/fig-007.webp",
+      "caption": "Figure 3. Framework of our Unified Vision-Language-WorldAction Model. We jointly model action planning and image generation using multi-modal inputs and a MoT architecture [38].",
+      "page": 5,
+      "index": 7,
+      "width": 477,
+      "height": 277
+    }
+  ]
+}

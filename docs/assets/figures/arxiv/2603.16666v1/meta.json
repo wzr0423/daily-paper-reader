@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.16666v1/fig-001.webp",
+      "caption": "Figure 1: Three representative WAM paradigms. (A) Joint-modeling WAMs denoise future video and action tokens together. (B) Causal WAMs first generate future observations and then condition action prediction on the generated future representation. (C) Fast-WAM retains video co-training during training but removes explicit future generation at inference time, directly predicting actions from latent world representations in a single forward pass.",
+      "page": 2,
+      "index": 1,
+      "width": 824,
+      "height": 457
+    },
+    {
+      "url": "assets/figures/arxiv/2603.16666v1/fig-002.webp",
+      "caption": "Table 1: Results on RoboTwin. Fast-WAM matches strong pretrained WAM baselines without using embodied pretraining, while the two imagine-then-execute variants remain highly comparable and removing video co-training causes a substantial drop.",
+      "page": 7,
+      "index": 2,
+      "width": 656,
+      "height": 337
+    },
+    {
+      "url": "assets/figures/arxiv/2603.16666v1/fig-003.webp",
+      "caption": "Figure 3: Real-world towel-folding task on the Galaxea R1 Lite platform. Folding a deformable object requires long-horizon planning and precise closed-loop manipulation, making it a challenging benchmark for evaluating both task success and execution efficiency.",
+      "page": 7,
+      "index": 3,
+      "width": 826,
+      "height": 238
+    },
+    {
+      "url": "assets/figures/arxiv/2603.16666v1/fig-004.webp",
+      "caption": "Table 3: Per-task success rates on RoboTwin under clean and randomized evaluation settings.",
+      "page": 13,
+      "index": 4,
+      "width": 822,
+      "height": 932
+    },
+    {
+      "url": "assets/figures/arxiv/2603.16666v1/fig-005.webp",
+      "caption": "Table 2: Results on LIBERO. Fast-WAM achieves competitive overall performance without embodied pretraining, remains close to both imagine-then-execute variants, and outperforms the no-video-cotraining ablation by a clear margin.",
+      "page": 8,
+      "index": 5,
+      "width": 776,
+      "height": 305
+    },
+    {
+      "url": "assets/figures/arxiv/2603.16666v1/fig-006.webp",
+      "caption": "Figure 4: Real-world results on the long-horizon towel-folding task. The left panel plots success rate against average completion time, where upper-left is better. The right panel compares inference latency. Fast-WAM achieves strong real-world performance with substantially lower latency than imagine-then-execute variants, while removing video co-training degrades both success rate and completion time.",
+      "page": 9,
+      "index": 6,
+      "width": 771,
+      "height": 305
+    },
+    {
+      "url": "assets/figures/arxiv/2603.16666v1/fig-007.webp",
+      "caption": "Figure 2: Fast-WAM architecture and the structured attention mask used to disentangle video cotraining from action generation.",
+      "page": 5,
+      "index": 7,
+      "width": 715,
+      "height": 413
+    }
+  ]
+}

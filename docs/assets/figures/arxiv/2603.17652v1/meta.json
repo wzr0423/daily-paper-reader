@@ -1,0 +1,246 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-001.webp",
+      "caption": "Figure 1. Comparison with Prior Works. Unlike prior pipelines that degrade in closed loop due to accumulated drift (autoregressive rollout) or history-free cold-start initialization, VectorWorldsupports kilometer-scale closed-loop simulation via streaming outpainting in our experiments. The engine operates in a closed loop: 0) An Ego Planner drives within the scene; 1) Initial Scene Generation creates the base tile; 2) Scene Outpainting dynamically extends the map frontier using edge-gated relational DiT; and 3) NPC Behavior (∆Sim) ensures reactive interactions. This mechanism enables consistent, kilometer-scale driving simulation by progressively outpainting the world ahead.",
+      "page": 1,
+      "index": 1,
+      "width": 492,
+      "height": 693
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-002.webp",
+      "caption": "Table 13. ∆Sim component analysis on accuracy, controllability, and feasibility (Waymo). We evaluate the impact of Hybrid Action Head (A+R) and Differentiable Kinematic Alignment Loss (DKAL). Ctrl-Sim baseline suffers from poor controllability (ρ = −0.25) and high latency. Our full ∆Sim achieves the lowest ADE (1.72m) and highest controllability (ρ = 0.53). Crucially, DKAL significantly reduces closed-loop physical violations (e.g., Lat. Acc. 12.5% → 2.1%), ensuring stable long-horizon rollouts.",
+      "page": 25,
+      "index": 2,
+      "width": 1008,
+      "height": 225
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-003.webp",
+      "caption": "Table 12. Step-budget sensitivity of our latent generator (numeric companion). Detailed metrics for Figure 6. While DDPM (100 steps) achieves the lowest EPD (Waymo: 0.080m; nuPlan: 0.072m), its latency (158ms) is the highest and limits online use. Our MeanFlow-5 provides a favorable balance between fidelity and latency, while MeanFlow-1 enables ultra-low latency streaming.",
+      "page": 25,
+      "index": 3,
+      "width": 625,
+      "height": 304
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-004.webp",
+      "caption": "Table 15. Failure reproduction across backends. We verify if failures discovered in simulation correspond to realistic crash types. We match generated failure scenarios to the nearest log scenarios based on map and agent topology. VectorWorld failures show high Type Agreement (78.5%) with log data, indicating that our simulator exposes realistic safety-critical events rather than simulation artifacts.",
+      "page": 26,
+      "index": 4,
+      "width": 875,
+      "height": 189
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-005.webp",
+      "caption": "Table 14. Policy training value with cross-backend evaluation (Waymo). To reduce the risk of simulator overfitting, we evaluate policies across different backends under matched horizons. A policy retrained in VectorWorld improves success not only in VectorWorld but also transfers to log replay and ScenDream backends (see Panel A). Panel B further evaluates long-horizon performance (1 km+) in VectorWorld.",
+      "page": 26,
+      "index": 5,
+      "width": 1013,
+      "height": 367
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-006.webp",
+      "caption": "Figure 11. End-to-end generation latency (timeline view). Qualitative snapshots under increasing time budgets for a 64m × 64m tile. VectorWorld reaches the final lane–agent vector scene with one solver-free MeanFlow step plus one VAE decode (≈ 6ms), whereas multi-step diffusion baselines only converge at substantially higher budgets (e.g., ∼ 160ms).",
+      "page": 30,
+      "index": 6,
+      "width": 1017,
+      "height": 390
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-007.webp",
+      "caption": "Table 1. Quantitative comparison of scene generation quality. We evaluate VectorWorld against prior vectorized scene generators on nuPlan and Waymo. VectorWorld achieves strong structure and safety with competitive perceptual alignment. ↓/↑ indicates lower/higher is better. Bold and underline denote the best and second-best results among non-privileged methods.",
+      "page": 7,
+      "index": 7,
+      "width": 961,
+      "height": 337
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-008.webp",
+      "caption": "Figure 5. Qualitative comparison on Waymo and nuPlan. Visualizing decoded elements in 64m×64m tiles. VectorWorld demonstrates superior lane connectivity and fewer agent overlaps at initialization compared to prior vectorized generators.",
+      "page": 7,
+      "index": 8,
+      "width": 995,
+      "height": 439
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-009.webp",
+      "caption": "Figure 10. Agent controllability under fixed map conditioning. The map (lane graph) is held fixed as a condition, while the agent configuration is generated under different controllability settings. This visualization isolates controllability from map diversity by using the same conditioned lanes across all panels.",
+      "page": 29,
+      "index": 9,
+      "width": 1017,
+      "height": 581
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-010.webp",
+      "caption": "Table 7. Training hyperparameters on Waymo. Values are reported for the default setting used in our main experiments.",
+      "page": 22,
+      "index": 10,
+      "width": 875,
+      "height": 529
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-011.webp",
+      "caption": "Figure 15. Streaming outpainting with dynamic agent set and per-agent intent control (case study 2). The visualization illustrates stable long-horizon expansion with agent insertion/removal and controllable behaviors, enabled by the interaction-state interface .",
+      "page": 34,
+      "index": 11,
+      "width": 1017,
+      "height": 434
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-012.webp",
+      "caption": "Table 6. Notation for the ∆Sim behavior model and closed-loop simulation.",
+      "page": 14,
+      "index": 12,
+      "width": 991,
+      "height": 501
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-013.webp",
+      "caption": "Figure 2. Interaction-state interface with motion-aware gated VAE. A motion-aware gate gi fuses static state si and motion code mi, suppressing history noise for stationary agents while preserving dynamics for moving ones. A factorized scene transformer aggregates typed relations (L2L/L2A/A2A) and outputs Gaussian latents z = (zlane, zagent) for downstream generation. Warm-started interaction states align initialization with historyconditioned policies.",
+      "page": 3,
+      "index": 13,
+      "width": 501,
+      "height": 517
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-014.webp",
+      "caption": "Figure 14. Streaming outpainting in closed-loop rollout (case study 1). The simulator repeatedly outpaints new lane–agent tiles near the frontier while clamping the observed region. The visualization highlights seam consistency and stable long-horizon progression.",
+      "page": 33,
+      "index": 14,
+      "width": 1017,
+      "height": 479
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-015.webp",
+      "caption": "Table 8. Evaluation of map topology and agent distribution alignment. We report lane-graph Topology discrepancies (Conn., Dens., Reach, Conve.; lower is better) and Agent Distributional JSD for key attributes (lower is better). These metrics diagnose structural and density drifts that can be amplified under repeated inpainting/outpainting. Bold and underline denote the best and second-best results among non-privileged methods (excluding methods marked with *).",
+      "page": 23,
+      "index": 15,
+      "width": 979,
+      "height": 269
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-016.webp",
+      "caption": "Table 9. Ablations of motion-aware gated VAE (Waymo). We evaluate the impact of the interaction-state interface on autoencoding fidelity and downstream initialization. Snapshot-only leads to high initialization collision rates due to the lack of motion history (cold start). Concat motion (naive) degrades static reconstruction by injecting noise into parked vehicles. Our Motion-aware Gated design achieves the best trade-off, selectively encoding momentum only for dynamic agents. Lower is better for all metrics.",
+      "page": 23,
+      "index": 16,
+      "width": 983,
+      "height": 270
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-017.webp",
+      "caption": "Figure 9. nuPlan qualitative comparison with traffic-light semantics. Lane centerlines are colored by traffic-light state (green vs. red) to visualize control-relevant map semantics. We compare VectorWorld with strong baselines under the same vectorized rendering.",
+      "page": 28,
+      "index": 17,
+      "width": 1017,
+      "height": 577
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-018.webp",
+      "caption": "Table 5. Notation for latent variables and generative dynamics (VAE + diffusion/flow/MeanFlow).",
+      "page": 13,
+      "index": 18,
+      "width": 991,
+      "height": 441
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-019.webp",
+      "caption": "Figure 7. Visualization of motion-aware gating (Waymo). Gate activation increases with motion magnitude, clustering static agents at low activation while assigning higher activation to dynamic agents. This supports that the motion-aware gated VAE suppresses motion-code noise for parked agents while encoding history for moving agents, improving warm-start consistency.",
+      "page": 13,
+      "index": 19,
+      "width": 713,
+      "height": 349
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-020.webp",
+      "caption": "Figure 6. Quality–latency trade-off for tile generation. Endpoint distance (EPD) and mean agent-JSD are plotted against wall-clock latency as the solver-step budget varies; the vertical marker indicates the streaming budget (including one VAE decode).",
+      "page": 8,
+      "index": 20,
+      "width": 965,
+      "height": 212
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-021.webp",
+      "caption": "Table 2. Closed-loop system evaluation on Waymo. Units: Scene Validity (FD, S.Coll) and Ego Performance (Coll, Offroad, Success) are in percentages (%) unless unitless. Route is in meters. Columns: NPC Policy denotes the background traffic controller; Ego Planner denotes the agent under test. Key: Warm = Motion-history warm start; Online = Streaming outpainting.",
+      "page": 8,
+      "index": 21,
+      "width": 1013,
+      "height": 233
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-022.webp",
+      "caption": "Table 3. ∆Sim ablation on Waymo. Components: return-to-go conditioning (RTG), hybrid anchor+residual action head (A+R), and DKAL. Metrics: average displacement error (ADE; ↓), controllability rank-correlation (ρ; ↑), and inference cost (latency / forward passes; ↓).",
+      "page": 8,
+      "index": 22,
+      "width": 1013,
+      "height": 185
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-023.webp",
+      "caption": "Figure 3. Edge-gated relational DiT for vector-graph latent generation. The framework generates vector-graph latents via a factorized transformer backbone. To capture complex graph dependencies, we introduce a Relational Attention Module (Right). Unlike standard attention, this module conditions message passing on edge features eij via: 1) An additive bias Bij applied to attention scores to regulate connectivity; 2) A multiplicative gate Gij applied to value vectors to modulate feature aggregation. This design enables precise structural control across heterogeneous agents and map elements, compatible with various generative dynamics (DDPM, Flow, or MeanFlow).",
+      "page": 4,
+      "index": 23,
+      "width": 1017,
+      "height": 412
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-024.webp",
+      "caption": "Figure 13. Planner-relevant challenging scenarios sampled from VectorWorld. We render a subset of VectorWorld-generated scenes using the protocol in Section A.15. These scenarios illustrate diverse intersection geometries, dense multi-agent interactions, and tight gaps that are valuable for stress testing and training an ego PPO planner in closed loop.",
+      "page": 32,
+      "index": 24,
+      "width": 1017,
+      "height": 827
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-025.webp",
+      "caption": "Table 4. Core notation for the vectorized scene representation (per scene unless stated otherwise).",
+      "page": 12,
+      "index": 25,
+      "width": 991,
+      "height": 633
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-026.webp",
+      "caption": "Figure 8. Waymo qualitative comparison for initial scene generation (64m × 64m). We compare VectorWorld against representative vectorized scene generators and the Waymo reference. The visualization highlights lane connectivity at intersections, agent–lane geometric consistency, and the plausibility of the initialized interaction state (including short motion history when available).",
+      "page": 27,
+      "index": 26,
+      "width": 967,
+      "height": 548
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-027.webp",
+      "caption": "Table 11. Impact of the meanflow (Geng et al., 2025) objective on solver-free sampling. We compare different training objectives under a fixed step budget. Training Cost is measured in GPU hours on 8×H20. Standard Flow Matching (FM) fails completely at 1-step (EPD 8.52m). Distillation is fast but blurs details (High Agent JSD). Our MeanFlow (JVP+2-time) incurs higher training cost (+50%) but enables the only viable 1-step generation (EPD 0.269m) that preserves agent statistics (JSD 0.136), enabling real-time streaming.",
+      "page": 24,
+      "index": 27,
+      "width": 898,
+      "height": 327
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-028.webp",
+      "caption": "Table 10. Ablation of relation-aware components in edge-gated relational DiT (Waymo). We incrementally add relational modules to the factorized DiT backbone. Relational bias is critical for graph connectivity (Conn/Reach). Cross-type bias improves agent–lane geometric consistency (e.g., Ang. JSD) under the same map. Relational bias and value gating improve structural validity (e.g., route validity and endpoint distance) under large-step sampling. Our full model achieves the best structural integrity and safety.",
+      "page": 24,
+      "index": 28,
+      "width": 983,
+      "height": 223
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-029.webp",
+      "caption": "Figure 12. End-to-end generation latency. A different scene instance rendered with the same timing protocol (latent sampling + one VAE decode). The result is consistent: VectorWorld completes a full 64m × 64m lane–agent tile in ≈ 6ms via a single MeanFlow update, while solver-based diffusion requires many iterative denoising calls.",
+      "page": 31,
+      "index": 29,
+      "width": 1017,
+      "height": 396
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17652v1/fig-030.webp",
+      "caption": "Figure 4. ∆Sim: physics-aligned NPC policy. A single-pass return-to-go (RTG) control embedding modulates the decoder via FiLM (γ, β). Actions use a hybrid head (discrete k-disks token plus continuous residual) with differentiable kinematic logit shaping and DKAL regularization. This design reduces feasibility violations that compound under kilometer-scale closed-loop simulation.",
+      "page": 5,
+      "index": 30,
+      "width": 1017,
+      "height": 235
+    }
+  ]
+}

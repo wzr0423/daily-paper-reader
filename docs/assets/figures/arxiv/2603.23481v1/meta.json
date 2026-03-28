@@ -1,0 +1,94 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.23481v1/fig-001.webp",
+      "caption": "Figure 5: Prediction visualization of the backbone video model. From top to bottom: Camera-1 view, Camera-2 view, Tactile stream prediction. Ground-truth (top rows) and VTAM predictions (bottom rows).",
+      "page": 11,
+      "index": 1,
+      "width": 1044,
+      "height": 944
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23481v1/fig-002.webp",
+      "caption": "Figure 4: Qualitative comparison between VTAM and baseline methods on real-world manipulation tasks. Top: Chip pick-and-place. Vision-only baselines fail to determine whether the chip has been successfully grasped and proceed to the placement stage even when the grasp fails. Middle: Cucumber peeling into strips. Baselines tend to follow a vision-driven trajectory that approaches the center of the cucumber but fail to maintain consistent contact with the surface, indicating poor force regulation and lack of contact awareness. Bottom: Whiteboard wiping under varying heights and tilt angles. Baselines exhibit unstable wiping behaviors, often applying either insufficient or excessively large forces, particularly on tilted surfaces. In contrast, VTAM maintains stable contact and appropriate force regulation across all tasks, enabling robust manipulation behaviors. Red boxes highlight representative failure cases of baselines.",
+      "page": 10,
+      "index": 2,
+      "width": 896,
+      "height": 1137
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23481v1/fig-003.webp",
+      "caption": "Figure 6: Qualitative peeling results.",
+      "page": 18,
+      "index": 3,
+      "width": 404,
+      "height": 402
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23481v1/fig-004.webp",
+      "caption": "Figure 3: Experiment setup and data acquisition. We collect demonstrations through manual teleoperation using a visuo–tactile sensing setup for contact-rich manipulation tasks such as chip pick-and-place.",
+      "page": 8,
+      "index": 4,
+      "width": 783,
+      "height": 311
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23481v1/fig-005.webp",
+      "caption": "Figure 2: VTAM Overview. A pretrained video backbone jointly models multi-view visual and tactile latents via alternating intra-view and cross-view attention. The resulting multimodal representation is injected into a conditional action diffusion head to predict action, virtual force, and proprioceptive state.",
+      "page": 4,
+      "index": 5,
+      "width": 1044,
+      "height": 389
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23481v1/fig-006.webp",
+      "caption": "Figure 8: Cucumber peeling video prediction (front camera view). The model maintains consistency with the ground truth across the manipulation sequence.",
+      "page": 19,
+      "index": 6,
+      "width": 1044,
+      "height": 317
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23481v1/fig-007.webp",
+      "caption": "Figure 7: Cucumber peeling video prediction (rear camera view). Top row: ground-truth; Bottom row: model predictions. The predicted frames closely match the ground-truth observations.",
+      "page": 19,
+      "index": 7,
+      "width": 1044,
+      "height": 315
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23481v1/fig-008.webp",
+      "caption": "Figure 9: Cucumber peeling tactile prediction. Tactile frames are predicted accurately. Yellow arrows visualize estimated forces for interpretation only.",
+      "page": 19,
+      "index": 8,
+      "width": 1044,
+      "height": 317
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23481v1/fig-009.webp",
+      "caption": "Figure 12: Whiteboard wiping tactile prediction. The predicted tactile frames capture the interaction between the wiper and the board surface.",
+      "page": 20,
+      "index": 9,
+      "width": 1044,
+      "height": 317
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23481v1/fig-010.webp",
+      "caption": "Figure 11: Whiteboard wiping video prediction (front camera view). The model successfully reproduces the visual dynamics of the wiping interaction.",
+      "page": 20,
+      "index": 10,
+      "width": 1044,
+      "height": 317
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23481v1/fig-011.webp",
+      "caption": "Figure 10: Whiteboard wiping video prediction (rear camera view). Top row: ground-truth; Bottom row: model predictions. Predictions match the ground truth across the wiping motion.",
+      "page": 20,
+      "index": 11,
+      "width": 1044,
+      "height": 315
+    }
+  ]
+}
