@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.00490v1/fig-001.webp",
+      "caption": "Figure 1. Overview of LifeEval. The benchmark emphasizes real-life interactive scenarios, requiring models to deliver precise, context-aware, and adaptive assistance.",
+      "page": 1,
+      "index": 1,
+      "width": 466,
+      "height": 475
+    },
+    {
+      "url": "assets/figures/arxiv/2603.00490v1/fig-002.webp",
+      "caption": "Figure 3. Task goal distribution and QA vocabulary statistics in LifeEval.",
+      "page": 6,
+      "index": 2,
+      "width": 1036,
+      "height": 302
+    },
+    {
+      "url": "assets/figures/arxiv/2603.00490v1/fig-003.webp",
+      "caption": "Table 3. Main evaluation results of representative MLLMs on LifeEval across different capability dimensions and question types. Bold and underline denote the best and second-best results, respectively.",
+      "page": 7,
+      "index": 3,
+      "width": 1026,
+      "height": 650
+    },
+    {
+      "url": "assets/figures/arxiv/2603.00490v1/fig-004.webp",
+      "caption": "Table 1. Comparison of LifeEval with existing video benchmarks. Columns summarize key properties, including dataset size (#QAs, #Clips), egocentric perspective, interactive and real-time settings, task-oriented assistance, multi-turn dialogue, availability of reasoning rationales for each answer, and annotation method. Symbols: ✓ (Yes), ❍ (Partial), ✗ (No).",
+      "page": 3,
+      "index": 4,
+      "width": 1026,
+      "height": 286
+    },
+    {
+      "url": "assets/figures/arxiv/2603.00490v1/fig-005.webp",
+      "caption": "Figure 4. Performance comparison of representative MLLMs on LifeEval. Left: Evaluation results across six capability dimensions. Right: Evaluation results across five everyday scenarios.",
+      "page": 8,
+      "index": 5,
+      "width": 612,
+      "height": 275
+    },
+    {
+      "url": "assets/figures/arxiv/2603.00490v1/fig-006.webp",
+      "caption": "Figure 2. Capability dimensions and examples in LifeEval. LifeEval defines six core capability dimensions to comprehensively evaluate a model’s interactive assistance abilities in daily life. The benchmark features both multiple-choice and open-ended questions, each accompanied by detailed reasoning explanations.",
+      "page": 4,
+      "index": 6,
+      "width": 986,
+      "height": 508
+    },
+    {
+      "url": "assets/figures/arxiv/2603.00490v1/fig-007.webp",
+      "caption": "Table 2. Question statistics of LifeEval.",
+      "page": 5,
+      "index": 7,
+      "width": 487,
+      "height": 273
+    }
+  ]
+}

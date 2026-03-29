@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.01804v1/fig-001.webp",
+      "caption": "Fig. 3: \"In-the-wild\" evaluation (using MAE) for motion prediction on both synthetic and real data of baseline models (first row) and pretrained models (Pretrain-90k, second row), sampled every 10 epochs. The hierarchy is mostly kept regardless of the architecture or pretraining data. Remarkably, VEO has the lowest error. This suggests that recent large models are more predictable and that specific models might be identified by the way they predict keypoints.",
+      "page": 9,
+      "index": 1,
+      "width": 725,
+      "height": 379
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01804v1/fig-002.webp",
+      "caption": "Fig. 2: The prompts used to condition SORA (first 3 columns) and VEO (last column) to generation videos depicting each of our proposed emotions.",
+      "page": 6,
+      "index": 2,
+      "width": 725,
+      "height": 189
+    }
+  ]
+}

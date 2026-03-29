@@ -1,0 +1,1120 @@
+Title: Beyond Surrogates: A Quantitative Analysis for Inter-Metric Relationships
+
+URL Source: https://arxiv.org/pdf/2603.07671v1
+
+Published Time: Tue, 10 Mar 2026 01:21:37 GMT
+
+Number of Pages: 18
+
+Markdown Content:
+# Beyond Surrogates: A Quantitative Analysis for Inter-Metric Relationships 
+
+Yuanhao Pu 1,3, Defu Lian ∗ 2,3, Enhong Chen 2,31School of Artificial Intelligence & Data Science, University of Science and Technology of China 
+
+> 2
+
+School of Computer Science & Technology, University of Science and Technology of China  
+
+> 3
+
+State Key Laboratory of Cognitive Intelligence, China 
+
+puyuanhao@mail.ustc.edu.cn, {liandefu,cheneh}@ustc.edu.cn 
+
+## Abstract 
+
+The Consistency property between surrogate losses and evaluation metrics has been extensively studied to ensure that minimizing a loss leads to metric optimal-ity. However, the direct relationship between different evaluation metrics remains significantly underexplored. This theoretical gap results in the "Metric Mismatch" frequently observed in industrial applications, where gains in offline validation metrics fail to translate into online performance. To bridge this disconnection, this paper proposes a unified theoretical framework designed to quantify the relation-ships between metrics. We categorize metrics into different classes to facilitate a comparative analysis across different mathematical forms and interrogates these relationships through Bayes-Optimal Set and Regret Transfer . Through this framework, we provide a new perspective on identifying the structural asymmetry in regret transfer, enabling the design of evaluation systems that are theoretically guaranteed to align offline improvements with online objectives. 
+
+## 1 Introduction 
+
+Modern machine learning heavily relies on the paradigm of metric-driven optimization. In a typical supervised learning scenario, researchers select an evaluation metric M that aligns with the practical objective, and minimize a differentiable surrogate loss L that serves as a proxy for M. A fundamental assumption underlying this paradigm is monotonicity : a reduction in the risk of L is expected to translate into an improvement in M. This is theoretically supported by Bayes-consistency [Bartlett et al., 2006, Tewari and Bartlett, 2007], which guarantees that minimizing L leads to the Bayes-optimal decision for M. Even under distribution shift, theoretical guarantees on domain-invariant learning[Blitzer et al., 2007, Ben-David et al., 2010] implicitly rely on the assumption that this structural consistency persists across domains, which is presumed to enable offline optimization to translate into performance gains in actual deployments. A common expectation is that if multiple metrics {M A, MB , · · · } are all Bayes-consistent with the same surrogate L, their empirical performance should be mutually aligned along the optimiza-tion trajectory. However, this idealization frequently collapses in industrial practice, leading to a 
+
+"Metric Mismatch" for online application systems[Gilotte et al., 2018, Krauth et al., 2020] . This misalignment stems from two fundamental hurdles: First, establishing Bayes-consistency is non-trivial [Ravikumar et al., 2011, Buffoni et al., 2011, Calauzènes et al., 2012] and often mathematically intractable for complex industrial losses (which incorporate various heuristics and regularizations) relative to metrics with intricate physical meanings. Second, Bayes-consistency is an asymptotic prop-erty that fails to characterize the rate of convergence or the structural sensitivity of metrics[Ciliberto et al., 2020]. Due to profound structural differences, metrics respond disparately to the minimization 
+
+> ∗
+
+Corresponding Author Preprint. 
+
+> arXiv:2603.07671v1 [cs.LG] 8 Mar 2026
+
+of L; for instance, in ranking tasks[Rudin, 2009], a model may achieve a higher AUC by refining the relative ordering of tail items, yet simultaneously degrade the top-ranked results, leading to a decline in top-heavy metrics like NDCG@ k or online click-through rates. While the Bayes-consistency between surrogate losses and target metrics has been extensively studied[Zhang, 2004a,b, Agarwal, 2014, Yang and Koyejo, 2020, Gao and Zhou, 2015], theoretical exploration of the direct structural relationships between metrics remains underexplored. The primary obstacle lies in the fact that most evaluation metrics are non-smooth, discrete, and highly distribution-dependent, making it mathematically intractable to establish tight and transferable bounds directly between them. This inherent complexity has shifted the focus of the community toward surrogate losses, as they provide a more tractable alternative to direct metric optimization. However, in practical applications, metric mismatch is pervasive, and since indirect theoretical results centered on surrogate losses cannot be readily converted into tools for resolving direct metric conflicts, performance trade-offs between metrics still rely heavily on intuition or empirical A/B testing[Gomez-Uribe and Hunt, 2016]. This disconnection presents a critical dilemma for supervised learning applications: how to discern whether a model with superior offline gains (measured by a surrogate L or a baseline metric 
+
+MA) will faithfully yield better online decisions ( MB ). To bridge this gap, this paper proposes a unified theoretical framework based on metric structures to analyze the correlation and performance transfer behaviors among different metrics within the same task scenario. Specifically, we make the following contributions: • We draw inspiration from the classical framework of surrogate losses and categorize metrics into three distinct groups: Pointwise, Pairwise, and Listwise .• Within this taxonomy, we characterize the inclusion relationships between the sets of Bayes-optimal predictors for different metrics, establishing a structural foundation for inter-metric consistency. • Recognizing that Bayes-optimality is rarely achievable in practice, we provide a quantitative analysis of regret transfer between metrics. We derive explicit bounds to determine how performance gains or losses in one metric translate to another. Consequently, we aim to answer a fundamental question for applications: If a model achieves an 
+
+ε-regret on metric MA, what is the guaranteed upper bound of its regret on metric MB ? By addressing this question, we provide an analytical tool to navigate the performance trade-offs that have traditionally relied on human intuition or costly empirical testing. The theoretical landscape of inter-metric relationships is summarized in Table 1. Table 1: Cross-Analysis of Metric Relationships: From Consistency to Mismatch. 
+
+Source Target Pointwise Pairwise Listwise Pointwise Cohesion 
+
+Theorem 4.1 & 4.2 
+
+Transfer Failure 
+
+Theorem 4.3 &4.4 
+
+Transfer Failure 
+
+Theorem 4.3 &4.4 Pairwise Stable Transfer 
+
+Theorem 4.3 & 4.5 
+
+Cohesion 
+
+Theorem 4.1 & 4.2 
+
+Weak Transfer 
+
+Theorem 4.3 & 4.7 Listwise Strong Transfer 
+
+Theorem 4.3 & 4.5 
+
+Strong Transfer 
+
+Theorem 4.3 & 4.7 
+
+Cohesion 
+
+Theorem 4.1 & 4.2 
+
+## 2 Related Works 
+
+2.1 Consistency: From Metrics to Surrogate Optimization 
+
+The study of statistical (Bayes-)consistency centers on whether minimizing a surrogate loss ensures the minimization of the target metric risk. Foundational works by Zhang [2004a,b],Bartlett et al. [2006] and Steinwart [2007] provided the first characterization of consistency for convex surrogates in binary classification, which was later extended to multiclass by Tewari and Bartlett [2007], revealing the 2increased complexity of calibration conditions beyond binary labels. A deeper theoretical framework Reid and Williamson [2011] connected surrogate losses with consistency properties and divergence measures, offering a comprehensive perspective on risk bounds. Soon afterwards, researchers shifted focus toward task-specific consistency. including regression[Christmann and Steinwart, 2007], top-k
+
+classification [Yang and Koyejo, 2020] and ranking problems [Cossock and Zhang, 2006, Ravikumar et al., 2011, Gao and Zhou, 2015]. More recently, a significant series of works[Long and Servedio, 2013, Zhang and Agarwal, 2020, Awasthi et al., 2022] introduced H-consistency to address the limitations of traditional Bayes-consistency. Unlike classical theory which assumes an arbitary hypothesis space, H-consistency provides non-asymptotic guarantees on specific hypothesis set H (e.g., neural networks), which shows awareness of different model structures. Consequently, the consistency framework establishes a convergence guarantee from surrogate loss function L to task objective metric M, providing a robust theoretical explanation for ML training paradigm. 
+
+2.2 Analysis of Evaluation Metrics 
+
+Though evaluation metrics are often treated as static measurement tools, their mathematical properties and formal foundations constitute an independent field of theoretical study. To formalize metric selection, an axiomatic approach[Amigó et al., 2009] introduced a framework based on formal constraints to assess metric robustness. This perspective was recently developed by Gösgens et al. [2021], which analyzed a series of ideal properties including monotonicity and symmetry to filter classification measures, shifting metric selection from heuristic choices toward logical principles. In addition, the statistical behavior of metrics has been discussed through the lens of consistency. For instance, Wang et al. [2013] provided a detailed theoretical analysis of NDCG-type measures under various decay factors, while Narasimhan et al. [2014] established the consistency of plug-in classifiers for non-decomposable measures. For more abstract unifications, Hernández-Orallo et al. [2012] translated diverse metrics into a common expression of expected classification loss. More recently, Balestra et al. [2024] introduced a group-theoretic perspective to ranking metrics, revealing the underlying algebraic structures and symmetries within the permutation space. Despite these advancements, the analysis of metrics remains largely decoupled and lacks a unified framework. Most existing works either analyze the properties of a single metric or investigate its consistency within a specific task. Building upon this, our work offers a significant advantage by providing a unified theoretical framework that bridges the gap between various metrics. 
+
+## 3 Preliminaries 
+
+Let X ⊆ Rd denote the input feature space, and let Y denote the output label space. Depending on the specific classification/ranking scenario, Y may consist of binary labels {0, 1} or multi-level relevance scores {0, 1, . . . , y max }. However, real-world applications (e.g., online recommender systems) typically rely on sparse interactions that are inherently binary or purposefully binarized for efficiency. We assume a joint distribution P over X × Y . A predictor is a scoring function 
+
+f : X → R belonging to a hypothesis class F . For any instance x ∈ X , f (x) produces a real-valued score determining predicted label or relative rank of the item within a specific output list. 
+
+3.1 Surrogate Risk and Metric Risk 
+
+In typical supervised learning, we minimize a differentiable surrogate loss L : R × Y → R+. The expected surrogate risk of a predictor f is defined as: 
+
+RL(f ) = E(x,y )∼P[L(f (x), y )] (1) The ultimate objective, however, is to optimize an evaluation metric M. Unlike surrogate losses, classification or ranking metrics are defined over a sequence of instances D = {(xi, y i)}ni=1 . Let σf
+
+be a permutation of {1, . . . , n } induced by sorting the scores f (xi) in descending order, s.t. 
+
+f (xσf (1) ) ≥ f (xσf (2) ) ≥ · · · ≥ f (xσf (n)). (2) We define the general form of the metric risk RM(f ) as: 
+
+RM(f ) = 1 − ED∼Pn
+
+" nX
+
+> i=1
+
+w(i, y σf (i), D) · ϕ(yσf (i))
+
+#
+
+(3) 3where w(·) is a position-dependent weight function and ϕ(·) is a utility function (typically ϕ(y) = y
+
+for binary relevance). This unified framework encapsulates a wide range of metrics used in both academic research and industrial production, whose detailed mathematical definitions are provided in Appendix A. Specifically, we draw inspiration from the classical categories of surrogate losses[Liu, 2011] and categorize these evaluation metrics into three distinct structural groups based on their evaluation behaviors: • Pointwise metrics ( GP ) focus on independent item identification, treating each instance as a classification or regression task. Examples include Accuracy ( Acc ) and truncated measures such as Precision@ k and Recall@ k.• Pairwise metrics ( GR) measure the relative ordering of item pairs, primarily focusing on global ranking quality. Representative example is the Area Under the ROC Curve ( AUC ), which assesses the probability of correct pairwise ranking. • Listwise metrics ( GL) are position-sensitive measures that evaluate the entire ranked list, assigning higher utility to items at top. This group includes (N)DCG , MAP , MRR , and their Top-k truncated versions ( NDCG@ k, MAP@ k, MRR@ k). These metrics encompass the most common classification and ranking criteria used in practice; notably, under the binary hypothesis y ∈ { 0, 1}, they are well-defined and free from the ambiguity encountered in multi-level settings. 
+
+3.2 Bayes-Optimality and Regret 
+
+To characterize the fundamental limits of performance, we define the optimal behavior of a predictor through functional sets. 
+
+Definition 3.1 (Bayes-Optimal Predictor Set) . For a given evaluation metric M and a hypothesis class F , the Bayes-optimal predictor set F ∗M is defined as the collection of all scoring functions that achieve the infimum of the metric risk RM:
+
+F ∗M := 
+
+
+
+f ∈ F | RM(f ) = inf   
+
+> f′∈F
+
+RM(f ′)
+
+
+
+(4) Unlike regression tasks where the optimal solution is often unique, classification or ranking metrics may induce a high-dimensional equivalence class of optimal scoring functions. This set-based formulation allows us to categorize the structural compatibility between any MA and MB .
+
+Definition 3.2 (Bayes-Optimal Inclusion and Equivalence) . We denote the structural relationship between metrics as follows: • Bayes-Subsumed ( ⪯B): We write MA ⪯B MB if F ∗MA ⊆ F ∗MB , which implies that any predictor achieving theoretical optimality for MA is guaranteed to be optimal for MB .• Bayes-Equivalent ( ≡B): We write MA ≡B MB if F ∗MA = F ∗MB , indicating they share identical theoretical goals. 
+
+Definition 3.3 (Metric Regret) . For a given predictor f ∈ F , the Regret with respect to metric M
+
+is defined as the excess risk over the Bayes-optimal value: Regret M(f ) := RM(f ) − min   
+
+> f∗∈F∗M
+
+RM(f ∗) (5) By construction, Regret M(f ) ≥ 0, and Regret M(f ) = 0 iff f ∈ F ∗M.This set-based perspective reveals the relationship between surrogate optimization and metric. 
+
+Corollary 3.1 (Bayes-Consistency) . A surrogate loss L is Bayes-consistent with a metric M if, for any sequence of predictors {fk}∞
+
+> k=1
+
+, the vanishing of the surrogate regret implies the vanishing of the metric regret: Regret L(fk) k→∞ 
+
+−−−−→ 0 = ⇒ Regret M(fk) k→∞ 
+
+−−−−→ 0 (6) This formulation provides the necessary granularity to analyze why a surrogate loss might be simulta-neously consistent with multiple metrics. Specifically, for any two metrics satisfying MA ≡B MB ,4a surrogate loss consistent with MA is inherently consistent with MB . However, this asymptotic equivalence does not guarantee a uniform regret transfer . In practical optimization, the rate of convergence and the sensitivity to local ranking perturbations can differ fundamentally between metrics, as governed by the functional form of their respective weight functions w(i).
+
+3.3 Regret Transfer 
+
+In practice, achieving the Bayes-optimal state f ∗ ∈ F ∗M is often hindered by finite sample size, restricted model capacity, and the complexities of the optimization landscape. Consequently, it is more pragmatic to analyze the behavior of metrics when the predictor f resides within an ε-neighborhood of the optimal frontier. To quantify how the approximation error in one metric propagates to another, we introduce the following definition: 
+
+Definition 3.4 (Regret Transfer Function) . For any two metrics MA and MB , the Regret Transfer Function ΨA→B : [0 , 1] → [0 , 1] characterizes the worst-case regret on metric MB given an upper bound ε on the regret of MA:
+
+ΨA→B (ε) := sup  
+
+> f∈F
+
+{Regret MB (f ) | Regret MA (f ) ≤ ε} (7) This formulation provides a unified perspective to analyze the sensitivity and robustness of metric performance in non-asymptotic regimes. It is worth noting that our definition departs from the classical calibration functions (or ψ-transforms) studied in Agarwal [2014], Kotlowski and Dembczynski [2017], which focus on the lower-bound relationship within L → M . By characterizing the worst-case degradation of MB relative to the approximation error ε in MA, the transfer function ΨA→B (ε)
+
+serves as a theoretical bound on the collateral damage incurred by target metric. Such a mapping is particularly crucial in practical training process where Bayes-optimality is unattainable, as it evaluates the reliability of a proxy MA under fixed computational or data constraints. 
+
+## 4 Main Results 
+
+4.1 Intra-group Cohesion 
+
+By categorizing evaluation metrics into Pointwise ( GP ), Pairwise ( GR), and Listwise ( GL) groups, our framework reveals an intra-group convergence property. This property suggests that metrics sharing the same evaluation unit exhibit highly aligned theoretical behaviors. 
+
+Theorem 4.1 (Alignment and One-way Inclusion) . For any two metrics MA, MB within the same structural group Gi, their relationships are governed by their evaluation scope: • Equivalence: If MA and MB are both global (e.g., NDCG , MAP ∈ G L) or both truncated at the same k (e.g., Pre@ k, Rec@ k ∈ G P ), they are Bayes-equivalent, i.e., MA ≡B MB
+
+and well-defined regret transfer, i.e., ΨA→B (ε) ≤ C · ε.• Inclusion: If MA is global and MB is truncated at k, there exists a one-way inclusion, s.t. 
+
+MA ⪯B MB . This implies that achieving global optimality guarantees local optimality, while the regret transfer ΨA→B (ε) remains well-defined. The second dimension of intra-group cohesion concerns the stability of a single metric across different truncation depths. As k varies, the stringency of the optimality requirement changes, leading to a nested structure of the Bayes-optimal sets. 
+
+Theorem 4.2 (Truncation Monotonicity) . For a truncated metric M@k ∈ G i, its theoretical properties satisfy the following monotonicity with respect to k:• Optimal Set: For k1 < k 2, the Bayes-optimal sets are nested, s.t. M@k2 ⪯B M@k1. A smaller k induces a larger equivalence class of optimal predictors, as the metric is indifferent to ranking errors beyond the top-k positions. • Regret Transfer: The regret transfer between different truncation levels Ψk2→k1 (ε) is well-behaved, whereas the reverse transfer Ψk1→k2 (ε) exhibits increasing slack as the gap between k1 and k2 grows, reflecting the loss of information due to tighter truncation. 5This hierarchical cohesion allows us to simplify the subsequent analysis: since intra-group behaviors are largely consistent or predictably nested, the metric mismatch observed in practice must stem from the fundamental structural divergence between these major groups in the non-asymptotic regime. Proofs are available in Appendix B.1. 
+
+4.2 Inter-group Bayes-Optimal Convergence and Hierarchy 
+
+Building upon the intra-group analysis, we now examine the relationships between the Bayes-optimal sets across structural groups. For simplicity, we focus on global metrics Acc, AUC and NDCG as representatives, while broader results on other global and truncated metrics can be naturally derived by composing these results with the previous section. Detailed proof are in Appendix B.2. 
+
+Theorem 4.3 (Bayes-Optimal Set Relations across Groups) . Let F ∗ 
+
+> P
+
+, F ∗
+
+> R
+
+, and F ∗ 
+
+> L
+
+denote the Bayes-optimal sets for Pointwise, Pairwise, and Listwise groups, respectively. Under a general distribution P with binary relevance: 1. Pointwise vs. Listwise/Pairwise ( ML/MR ⪯B MP ): The Bayes-optimal set for Acc is a superset of pairwise/listwise optimal sets. Any f ∈ F ∗ 
+
+> L
+
+is necessarily in F ∗ 
+
+> P
+
+, but a predictor that minimizes classification risk may incur maximum ranking regret as GP is indifferent to the ordering of instances on the same side of the threshold. 2. Pairwise vs. Listwise Convergence ( ML ≡B MR): Both Pairwise (AUC) and Listwise metrics are maximized if and only if the predictor f preserves the partial ordering of the conditional expectation η(x).
+
+4.3 Inter-group Regret Transfer Results 
+
+Despite sharing the same Bayes-optimal frontier F ∗, the objective functions of pairwise and listwise metrics exhibit fundamental heterogeneity in their regret landscapes. AUC assigns a uniform weight 
+
+1/(n+n−) to all pairs, while listwise metrics concentrate their utility on the top positions of the permutation. Building upon the Bayes-optimal hierarchy established in Section 4.2, we investigate the stability of regret transfer between metric groups. It is important to note that our objective is not merely to construct pathological counter-examples to negate this property (i.e., by showing Regret A → 0 while Regret B ≥ Const > 0). For instance, a common extreme case involves one positive item and n− → ∞ negative items. If the positive item is predicted at the second position: Regret AUC = 1
+
+n− → 0, Regret NDCG = 1log 2 − 1log 3 > 0. (8) While such a construction formally negates the transfer property, these extreme scenarios are of limited practical reference for model training where the counts of positive and negative samples (n+, n −) are typically fixed during training and evaluation. 
+
+4.3.1 Pointwise ↔ Pairwise/Listwise 
+
+The transfer behavior between Pointwise classification ( GP ) and ranking groups ( GR, GL) is inherently asymmetric, reflecting the hierarchical inclusion of their Bayes-optimal sets. The transfer from GP to any ranking group is fundamentally divergent due to the lack of intra-class constraints. 
+
+Theorem 4.4 (Pointwise Transfer Failure) . ΨP →R(ϵ) and ΨP →L(ϵ) satisfy Ψ(0) > 0.
+
+Proof. Consider a sequence D containing at least two instances within the same class (e.g., ηi, η j >
+
+0.5 with ηi > η j ). For any predictor f that assigns scores si, s j > 0.5, the classification regret contribution from these items is zero: 
+
+|I(ηi > 0.5) − I(si > 0.5) | + |I(ηj > 0.5) − I(sj > 0.5) | = 0 (9) However, Regret Acc is invariant to the relative ordering of si and sj . If f predicts sj > s i, it incurs a non-zero ranking regret proportional to (ηi − ηj ) in both Pairwise and Listwise functionals, thus 
+
+ΨP →R/L (0) ≥ Const > 0. The Pointwise functional is blind to any utility derived from ordering instances that fall on the same side of the decision threshold. 6Conversely, the transfer from ranking groups to Pointwise classification is straightforward. 
+
+Theorem 4.5 (Transfer from Ranking to Pointwise) . Let δ = min i |ηi − 0.5| > 0 be the margin of the relevance distribution. For a sequence D with n instances ( n+ positive, n− negative), the transfer functions satisfy: 
+
+ΨAUC →Acc (ϵ) = 
+
+ n+n−
+
+nδ 
+
+
+
+· ϵ (10) 
+
+ΨNDCG →Acc (ϵ) = 
+
+ IDCG n
+
+nδ · w(n)
+
+
+
+· ϵ (11) This stability arises because any predictor that minimizes ranking regret must correctly separate instances with higher η from those with lower η, whose detailed proof is in Appendix B.3. 
+
+Remark : The dependency on 1/δ reflects the inherent difficulty of classification near the decision boundary. In scenarios where δ → 0, the transfer bound can be further refined by adopting low-noise conditions[Clémençon et al., 2008, Agarwal, 2014], substituting the hard margin with a density-based control over the mass around η(x) = 0 .5. This ensures that the stability of ranking-to-pointwise transfer remains theoretically grounded even in non-separable domains. 
+
+4.3.2 Asymmetry between Pairwise and Listwise Transfer 
+
+A critical finding is the fundamental asymmetry on regret between GR (AUC) and GL (NDCG). 
+
+Theorem 4.6 (Asymmetry of Regret Transfer) . Consider a ranking list of size n with n+ positive and 
+
+n− negative instances. Let w(r) = 1 / log(1+ r) be the weighting function, with ∆max = w(1) −w(2) 
+
+and ∆min = w(n−1) −w(n) denoting its maximum and minimum differential. The transfer functions 
+
+Ψ between Pairwise regret and Listwise regret satisfy: 
+
+ΨAUC →NDCG (ϵ) = ∆max · n+n−
+
+Pn+ 
+
+> i=1
+
+w(i)
+
+!
+
+· ϵ, ΨNDCG →AUC (ϵ) = 
+
+Pn+ 
+
+> i=1
+
+w(i)
+
+n+n− · ∆min 
+
+!
+
+· ϵ (12) Detailed proof is in Appendix B.4. It demonstrates that the coupling strength between metric groups is not a static constant, but a dynamic property governed by the list scale n and the label density. In industrial applications, the transition under extremely sparse production logs often leads to a severe amplification of the transfer gap. To provide a theoretical basis for this circumstance, we now analyze the asymptotic growth rates of the transfer coefficients under representative label distributions. 
+
+Theorem 4.7 (Asymptotic Transfer Rates) . The asymptotic growth rates of the transfer coefficients 
+
+CR→L and CL→R exhibit distinct behaviors under the following label density scenarios: 1. Balanced n+, n − ∼ O(n):
+
+CR→L ∼ O(n log n), CL→R ∼ O(log n). (13) 2. Imbalanced n+ ∼ O(1) , n − ∼ O(n):
+
+CR→L ∼ O(n), CL→R ∼ O(log 2 n). (14) Detailed proof is in Appendix B.5. Theorem 4.7 reveals a fundamental scaling asymmetry between Pairwise and Listwise metrics as the system size n increases. Specifically, CR→L grows polynomially while CL→R grows only logarithmically. This confirms that optimizing NDCG imposes a tighter constraint on AUC and provides a more robust guarantee for ranking quality. Conversely, relying on AUC as a proxy for top-heavy online objectives faces error amplification. Beyond Theorem 4.7, the transfer coefficients CR→P and CL→P in Theorem 4.5 can also be asymptotically estimated, which reveals a similar pattern where NDCG impose a significantly tighter constraint on Acc than AUC: 1. Balanced n+, n − ∼ O(n):
+
+CR→P ∼ O (n) , CL→P ∼ O (1) . (15) 2. Imbalanced n+ ∼ O(1) , n − ∼ O(n):
+
+CR→P ∼ O (1) , CL→P ∼ O
+
+ log nn
+
+
+
+. (16) This explains why offline AUC gains often vanish in online production. 75 Experiments 
+
+In this section, we conduct controlled simulations and real-world experiments to empirically validate our theoretical framework. We focus on ( i) the Pointwise transfer failure and ( ii ) the regret scaling asymmetry between Pairwise and Listwise metrics by adopting a two-tier experimental design: • Structural Simulation : Since the theoretical results represent the worst-case behavior of the regret manifold, we utilize structural simulation to probe regret transfer, which allows us to inject specific error patterns of different loss functions. • Real-world Experiments : We utilize real-world optimization tasks of representative losses (BCE, BPRRendle et al. [2009], ListNetCao et al. [2007]) and report the direct performance comparisons across different metrics to corroborate our theoretical findings. 
+
+5.1 Regret Manifold Simulation Data Generation. To evaluate the scaling properties, we simulate a ranking environment with n =1, 000 items per list. We generate the ground-truth Bayes-optimal relevance scores η ∈ [0 .01 , 0.99] n
+
+sampled from a uniform distribution. This construction allows for exact calculation of the Bayes-optimal performance M (f ∗
+
+> Bayes
+
+), serving as the denominators for our regret estimations. 
+
+Loss-Specific Error Modeling. Rather than relying solely on the stochasticity of neural training, we explicitly model the prediction function f to characterize the intrinsic behavior of different losses: • Pointwise : We simulate a classifier that resolves the decision boundary at 0.5 but remains agnostic to intra-class ordering. The error is modeled as random perturbations that preserve the class label but ignore relative ranks within the same class. • Pairwise : We model a globally consistent ranker that is insensitive to position. We introduce an error probe by swapping elements at the top of the list, which results in a negligible impact on AUC regret but a significant impact on NDCG regret. • Listwise : We model a position-aware ranker where the noise variance is suppressed by a factor of 1/ log( i + 1) at rank i. This reflects the strong constraint listwise objectives exert on the head of the distribution. 
+
+Regret Visualization and Metrics. To capture the full spectrum of the regret manifold, we generate 500 snapshots for each loss type by varying a convergence parameter α ∈ [0 , 1] , where f → η as 
+
+α → 1. For each snapshot, we estimate the regret for metric M as: Regret M (f ) = 1 − M (f )
+
+M (f ∗
+
+> Bayes
+
+)
+
+We visualize these snapshots in a 3D Regret Space ( Regret Acc × Regret AUC × Regret NDCG ) and cut a slice (NDCG vs. Acc) to observe the global geometry, as shown in Figure 1. Besides, we examine the average regret between Regret AUC and Regret NDCG to empirically verify the scaling asymmetry between pairwise and listwise stability in Table 2. 
+
+5.2 Real-World Data Experiments 
+
+In the real-world setting, we evaluate our theoretical framework on the MovieLens-1M dataset. Since the ground-truth Bayes-optimal probability η is latent in real datasets, we directly report the observed performance across standard metrics instead of calculating regrets. This allow us to verify if the optimization efficiency of different losses aligns with our theoretical stability bounds. The experimental results are summarized in Table 3. 
+
+5.3 Discussion 
+
+The empirical results from both simulations and real-world experiments provide a consistent narrative that validates our theoretical framework. As shown in Figure 1 and Table 2, we observe a distinct Pointwise Transfer Failure. While the Pointwise setting achieves the lowest classification regret (racc = 0 .2325 ), it consistently suffers from the highest ranking regrets. This disconnect underscores the fact that minimizing pointwise classification error is insufficient for high-quality ranking. 80.0          
+
+> 0.1
+> 0.2
+> 0.3
+> 0.4
+> 0.5
+> Regret_Acc
+> 0.0 0.1 0.2 0.3 0.4
+> 0.5
+> Regret_AUC
+> 0.00
+> 0.02
+> 0.04
+> 0.06
+> 0.08
+> 0.10
+> 0.12
+> Regret_NDCG
+> 3D Regret Space Analysis
+> BCE (Pointwise)
+> BPR (Pairwise)
+> ListNet (Listwise)
+> 0.0 0.1 0.2 0.3 0.4 0.5
+> Regret_Acc (Pointwise)
+> 0.00
+> 0.02
+> 0.04
+> 0.06
+> 0.08
+> 0.10
+> 0.12
+> Regret_NDCG (Listwise)
+> Cross-section: Pointwise Failure (n=1000)
+> BCE (Pointwise)
+> BPR (Pairwise)
+> ListNet (Listwise)
+
+Figure 1: Regret space visualization for Simulated Pointwise, Pairwise, and Listwise losses ( n =1, 000 ). Left: 3D regret landscape. Right: Cross-section of Acc vs. NDCG regret. Table 2: Simulation Regret Comparison 
+
+Loss racc rauc rndcg 
+
+Pointwise 0.2325 0.3270 0.0667 Pairwise 0.3329 0.2104 0.0361 Listwise 0.3405 0.1756 0.0283 
+
+Table 3: Real-world Performance on ML-1M 
+
+Loss Recall@10 AUC NDCG@10 BCE 0.1574 0.9047 0.2140 BPR 0.1871 0.9212 0.2349 ListNet 0.1935 0.9207 0.2434 
+
+Regarding the asymmetric transfer, although the structural simulations capture the directional trend where the average rauc and rndcg for Listwise setting is notably lower than that of the Pairwise objective, the fixed environment of the simulation may not fully demonstrate the scaling divergence between these two paradigms. Instead, the real-world performance provides a more pronounced demonstration of this structural gap. As shown in Table 3, while BPR achieves a marginally superior AUC ( 0.9212 ), reflecting its inherent pairwise focus, ListNet consistently outperforms it in critical top-heavy metrics, including Recall@10 ( 0.1935 ) and NDCG@10 ( 0.2434 ). The fact that ListNet maintains superior ranking precision in a full-sort regime provides strong empirical support for our stability analysis: by explicitly modeling the listwise probability distribution, ListNet effectively suppresses the ranking noise that frequently impairs pairwise transfer in large-scale item spaces. 
+
+## 6 Conclusion 
+
+In this paper, we propose a unified theoretical framework to quantify the direct relationships between evaluation metrics, addressing the "Metric Mismatch" problem where offline gains fail to translate into online performance. Moving beyond surrogate-to-metric consistency, we provide an analytical framework to understand how performance trade-offs are governed by the underlying mathematical structures of metrics. We categorize metrics into Pointwise, Pairwise, and Listwise groups and prove a strict structural hierarchy where ranking optimality inherently satisfies classification requirements. Through the regret transfer function, we identify a fundamental "Pointwise Transfer Failure," confirming that optimal classification provides zero stability for ranking quality. Furthermore, we establish that the coupling strength between Pairwise and Listwise metrics is scale-dependent, exhibiting a significant scaling asymmetry. These findings offer significant practical implications for machine learning system design, explaining why minor fluctuations in AUC can lead to disproportionate failures in top-heavy online objectives like NDCG. This provides a strong theoretical justification in large-scale recommender systems to ensure that offline improvements faithfully yield online value. 9References 
+
+Peter L Bartlett, Michael I Jordan, and Jon D McAuliffe. Convexity, classification, and risk bounds. 
+
+Journal of the American Statistical Association , 101(473):138–156, 2006. Ambuj Tewari and Peter L. Bartlett. On the consistency of multiclass classification methods. J. Mach. Learn. Res. , 8:1007–1025, 2007. doi: 10.5555/1314498.1390325. URL https://dl.acm.org/ doi/10.5555/1314498.1390325 .John Blitzer, Koby Crammer, Alex Kulesza, Fernando Pereira, and Jennifer Wortman. Learn-ing bounds for domain adaptation. In John C. Platt, Daphne Koller, Yoram Singer, and Sam T. Roweis, editors, Advances in Neural Information Processing Systems 20, Pro-ceedings of the Twenty-First Annual Conference on Neural Information Processing Sys-tems, Vancouver, British Columbia, Canada, December 3-6, 2007 , pages 129–136. Cur-ran Associates, Inc., 2007. URL https://proceedings.neurips.cc/paper/2007/hash/ 42e77b63637ab381e8be5f8318cc28a2-Abstract.html .Shai Ben-David, John Blitzer, Koby Crammer, Alex Kulesza, Fernando Pereira, and Jennifer Wortman Vaughan. A theory of learning from different domains. Mach. Learn. , 79(1-2):151–175, 2010. doi: 10.1007/S10994-009-5152-4. URL https://doi.org/10.1007/s10994-009-5152-4 .Alexandre Gilotte, Clément Calauzènes, Thomas Nedelec, Alexandre Abraham, and Simon Dollé. Offline A/B testing for recommender systems. In Yi Chang, Chengxiang Zhai, Yan Liu, and Yoelle Maarek, editors, Proceedings of the Eleventh ACM International Conference on Web Search and Data Mining, WSDM 2018, Marina Del Rey, CA, USA, February 5-9, 2018 , pages 198–206. ACM, 2018. doi: 10.1145/3159652.3159687. URL https://doi.org/10.1145/3159652.3159687 .Karl Krauth, Sarah Dean, Alex Zhao, Wenshuo Guo, Mihaela Curmei, Benjamin Recht, and Michael I. Jordan. Do offline metrics predict online performance in recommender systems? 
+
+CoRR , abs/2011.07931, 2020. URL https://arxiv.org/abs/2011.07931 .Pradeep Ravikumar, Ambuj Tewari, and Eunho Yang. On NDCG consistency of listwise ranking methods. In Geoffrey J. Gordon, David B. Dunson, and Miroslav Dudík, editors, Proceedings of the Fourteenth International Conference on Artificial Intelligence and Statistics, AISTATS 2011, Fort Lauderdale, USA, April 11-13, 2011 , volume 15 of JMLR Proceedings , pages 618–626. JMLR.org, 2011. URL http://proceedings.mlr.press/v15/ravikumar11a/ravikumar11a.pdf .David Buffoni, Clément Calauzènes, Patrick Gallinari, and Nicolas Usunier. Learning scoring functions with order-preserving losses and standardized supervision. In Lise Getoor and Tobias Scheffer, editors, Proceedings of the 28th International Conference on Machine Learning, ICML 2011, Bellevue, Washington, USA, June 28 - July 2, 2011 , pages 825–832. Omnipress, 2011. URL 
+
+https://icml.cc/2011/papers/447_icmlpaper.pdf .Clément Calauzènes, Nicolas Usunier, and Patrick Gallinari. "on the (non-)existence of convex, calibrated surrogate losses for ranking". In Peter L. Bartlett, Fernando C. N. Pereira, Christopher J. C. Burges, Léon Bottou, and Kilian Q. Weinberger, editors, Advances in Neural Informa-tion Processing Systems 25: 26th Annual Conference on Neural Information Processing Sys-tems 2012. Proceedings of a meeting held December 3-6, 2012, Lake Tahoe, Nevada, United States , pages 197–205, 2012. URL https://proceedings.neurips.cc/paper/2012/hash/ 50f3f8c42b998a48057e9d33f4144b8b-Abstract.html .Carlo Ciliberto, Lorenzo Rosasco, and Alessandro Rudi. A general framework for consistent structured prediction with implicit loss embeddings. J. Mach. Learn. Res. , 21:98:1–98:67, 2020. URL https://jmlr.org/papers/v21/20-097.html .Cynthia Rudin. The p-norm push: A simple convex ranking algorithm that concentrates at the top of the list. J. Mach. Learn. Res. , 10:2233–2271, 2009. doi: 10.5555/1577069.1755861. URL 
+
+https://dl.acm.org/doi/10.5555/1577069.1755861 .Tong Zhang. Statistical behavior and consistency of classification methods based on convex risk minimization. The Annals of Statistics , 32(1):56–85, 2004a. ISSN 00905364. URL http: //www.jstor.org/stable/3448494 .10 Tong Zhang. Statistical analysis of some multi-category large margin classification methods. J. Mach. Learn. Res. , 5:1225–1251, 2004b. URL https://jmlr.org/papers/volume5/zhang04b/ zhang04b.pdf .Shivani Agarwal. Surrogate regret bounds for bipartite ranking via strongly proper losses. J. Mach. Learn. Res. , 15(1):1653–1674, 2014. doi: 10.5555/2627435.2638588. URL https: //dl.acm.org/doi/10.5555/2627435.2638588 .Forest Yang and Sanmi Koyejo. On the consistency of top-k surrogate losses. In Proceedings of the 37th International Conference on Machine Learning, ICML 2020, 13-18 July 2020, Virtual Event ,volume 119 of Proceedings of Machine Learning Research , pages 10727–10735. PMLR, 2020. URL http://proceedings.mlr.press/v119/yang20f.html .Wei Gao and Zhi-Hua Zhou. On the consistency of AUC pairwise optimization. In Qiang Yang and Michael J. Wooldridge, editors, Proceedings of the Twenty-Fourth International Joint Conference on Artificial Intelligence, IJCAI 2015, Buenos Aires, Argentina, July 25-31, 2015 , pages 939–945. AAAI Press, 2015. URL http://ijcai.org/Abstract/15/137 .Carlos Alberto Gomez-Uribe and Neil Hunt. The netflix recommender system: Algorithms, business value, and innovation. ACM Trans. Manag. Inf. Syst. , 6(4):13:1–13:19, 2016. doi: 10.1145/2843948. URL https://doi.org/10.1145/2843948 .Ingo Steinwart. How to compare different loss functions and their risks. Constructive Approximation ,26(2):225–287, 2007. Mark D. Reid and Robert C. Williamson. Information, divergence and risk for binary experiments. J. Mach. Learn. Res. , 12:731–817, 2011. doi: 10.5555/1953048.2021029. URL https://dl.acm. org/doi/10.5555/1953048.2021029 .Andreas Christmann and Ingo Steinwart. Consistency and robustness of kernel-based regression in convex risk minimization. Bernoulli , 13(3):799–819, 2007. David Cossock and Tong Zhang. Subset ranking using regression. In Gábor Lugosi and Hans Ulrich Simon, editors, Learning Theory, 19th Annual Conference on Learning Theory, COLT 2006, Pittsburgh, PA, USA, June 22-25, 2006, Proceedings , volume 4005 of Lecture Notes in Computer Science , pages 605–619. Springer, 2006. doi: 10.1007/11776420\_44. URL https://doi.org/ 10.1007/11776420_44 .Philip M. Long and Rocco A. Servedio. Consistency versus realizable h-consistency for multiclass classification. In Proceedings of the 30th International Conference on Machine Learning, ICML 2013, Atlanta, GA, USA, 16-21 June 2013 , volume 28 of JMLR Workshop and Conference Proceedings , pages 801–809. JMLR.org, 2013. URL http://proceedings.mlr.press/v28/ long13.html .Mingyuan Zhang and Shivani Agarwal. Bayes consistency vs. h-consistency: The interplay between surrogate loss functions and the scoring function class. In Hugo Larochelle, Marc’Aurelio Ranzato, Raia Hadsell, Maria-Florina Balcan, and Hsuan-Tien Lin, editors, Advances in Neural Information Processing Systems 33: Annual Conference on Neural Information Processing Systems 2020, NeurIPS 2020, December 6-12, 2020, virtual , 2020. URL https://proceedings.neurips. cc/paper/2020/hash/c4c28b367e14df88993ad475dedf6b77-Abstract.html .Pranjal Awasthi, Anqi Mao, Mehryar Mohri, and Yutao Zhong. H-consistency bounds for surrogate loss minimizers. In Kamalika Chaudhuri, Stefanie Jegelka, Le Song, Csaba Szepesvári, Gang Niu, and Sivan Sabato, editors, International Conference on Machine Learning, ICML 2022, 17-23 July 2022, Baltimore, Maryland, USA , volume 162 of Proceedings of Machine Learning Research , pages 1117–1174. PMLR, 2022. URL https://proceedings.mlr.press/v162/ awasthi22c.html .Enrique Amigó, Julio Gonzalo, Javier Artiles, and Felisa Verdejo. A comparison of extrinsic clustering evaluation metrics based on formal constraints. Inf. Retr. , 12(4):461–486, 2009. doi: 10.1007/S10791-008-9066-8. URL https://doi.org/10.1007/s10791-008-9066-8 .11 Martijn Gösgens, Anton Zhiyanov, Aleksey Tikhonov, and Liudmila Prokhorenkova. Good classification measures and how to find them. In Marc’Aurelio Ranzato, Alina Beygelz-imer, Yann N. Dauphin, Percy Liang, and Jennifer Wortman Vaughan, editors, Ad-vances in Neural Information Processing Systems 34: Annual Conference on Neural Information Processing Systems 2021, NeurIPS 2021, December 6-14, 2021, virtual ,pages 17136–17147, 2021. URL https://proceedings.neurips.cc/paper/2021/hash/ 8e489b4966fe8f703b5be647f1cbae63-Abstract.html .Yining Wang, Liwei Wang, Yuanzhi Li, Di He, and Tie-Yan Liu. A theoretical analysis of NDCG type ranking measures. In Shai Shalev-Shwartz and Ingo Steinwart, editors, COLT 2013 - The 26th Annual Conference on Learning Theory, June 12-14, 2013, Princeton University, NJ, USA ,volume 30 of JMLR Workshop and Conference Proceedings , pages 25–54. JMLR.org, 2013. URL 
+
+http://proceedings.mlr.press/v30/Wang13.html .Harikrishna Narasimhan, Rohit Vaish, and Shivani Agarwal. On the statistical consistency of plug-in classifiers for non-decomposable performance measures. In Zoubin Ghahra-mani, Max Welling, Corinna Cortes, Neil D. Lawrence, and Kilian Q. Weinberger, edi-tors, Advances in Neural Information Processing Systems 27: Annual Conference on Neu-ral Information Processing Systems 2014, December 8-13 2014, Montreal, Quebec, Canada ,pages 1493–1501, 2014. URL https://proceedings.neurips.cc/paper/2014/hash/ 32b30a250abd6331e03a2a1f16466346-Abstract.html .José Hernández-Orallo, Peter A. Flach, and César Ferri. A unified view of performance metrics: translating threshold choice into expected classification loss. J. Mach. Learn. Res. , 13:2813–2869, 2012. doi: 10.5555/2503308.2503332. URL https://dl.acm.org/doi/10.5555/2503308. 2503332 .Chiara Balestra, Andreas Mayr, and Emmanuel Müller. Ranking evaluation metrics from a group-theoretic perspective. CoRR , abs/2408.16009, 2024. doi: 10.48550/ARXIV.2408.16009. URL 
+
+https://doi.org/10.48550/arXiv.2408.16009 .Tie-Yan Liu. Learning to Rank for Information Retrieval . Springer, 2011. ISBN 978-3-642-14266-6. doi: 10.1007/978-3-642-14267-3. URL https://doi.org/10.1007/978-3-642-14267-3 .Wojciech Kotlowski and Krzysztof Dembczynski. Surrogate regret bounds for generalized classifica-tion performance metrics. Mach. Learn. , 106(4):549–572, 2017. doi: 10.1007/S10994-016-5591-7. URL https://doi.org/10.1007/s10994-016-5591-7 .Stéphan Clémençon, Gábor Lugosi, and Nicolas Vayatis. Ranking and empirical minimization of u-statistics. The Annals of Statistics , pages 844–874, 2008. Steffen Rendle, Christoph Freudenthaler, Zeno Gantner, and Lars Schmidt-Thieme. BPR: bayesian personalized ranking from implicit feedback. In Jeff A. Bilmes and Andrew Y. Ng, editors, 
+
+UAI 2009, Proceedings of the Twenty-Fifth Conference on Uncertainty in Artificial Intelligence, Montreal, QC, Canada, June 18-21, 2009 , pages 452–461. AUAI Press, 2009. URL https://www. auai.org/uai2009/papers/UAI2009_0139_48141db02b9f0b02bc7158819ebfa2c7.pdf .Zhe Cao, Tao Qin, Tie-Yan Liu, Ming-Feng Tsai, and Hang Li. Learning to rank: from pairwise approach to listwise approach. In Zoubin Ghahramani, editor, Machine Learning, Proceedings of the Twenty-Fourth International Conference (ICML 2007), Corvallis, Oregon, USA, June 20-24, 2007 , volume 227 of ACM International Conference Proceeding Series , pages 129–136. ACM, 2007. doi: 10.1145/1273496.1273513. URL https://doi.org/10.1145/1273496.1273513 .Norbert Fuhr. Probabilistic models in information retrieval. Comput. J. , 35(3):243–255, 1992. doi: 10.1093/COMJNL/35.3.243. URL https://doi.org/10.1093/comjnl/35.3.243 .12 A Detailed Definitions of Evaluation Metrics 
+
+A.1 Pointwise Metrics 
+
+Pointwise metrics focus on independent item identification, treating each instance as a standalone classification task. Let n = |D| denote the total number of instances, and n+ = Pni=1 yi and 
+
+n− = n − n+ denote the number of positive and negative instances in the dataset, respectively. For truncation at position k, the weight incorporates an indicator function I(i ≤ k). ϕ(y) = y unless specifically defined. 
+
+Accuracy (Acc) measures the proportion of correctly classified instances, which relies on a decision threshold τ (typically 0.5 for calibrated scores). In our unified framework, it can be viewed as a global metric where each position i in the ranked list σf is assigned a uniform weight, Acc = 1
+
+n
+
+> n
+
+X
+
+> i=1
+
+I(yσf (i) = ˆ yσf (i)), w(i, y, D) = 1
+
+n , ϕ(y, ˆy) = I(y = ˆ y) (17) 
+
+Precision@ k (P@ k) calculates the fraction of relevant items within the top-k positions of the list. P@k = 1
+
+k
+
+> k
+
+X
+
+> i=1
+
+yσf (i) w(i, y, D) = 1
+
+k I(i ≤ k) (18) 
+
+Recall@ k (R@ k) evaluates the proportion of total positive instances captured within top-k results. R@k = 1
+
+n+
+
+> k
+
+X
+
+> i=1
+
+yσf (i) w(i, y, D) = 1
+
+n+ I(i ≤ k) (19) 
+
+A.2 Pairwise Metric AUC measures the probability of correct pairwise ordering, which can be expressed as a linear sum over positive instances based on the number of negative instances ranked below them. Here we omit ties and focus on simplified tasks where AUC =
+
+P 
+
+> i:yσf(i)=1
+
+P  
+
+> j:yσf(j)=0
+
+I(i < j )
+
+n+n− , w(i, y, D) = 
+
+Pnj=i+1 (1 − yσf (j))
+
+n+n− (20) 
+
+A.3 Listwise Metrics 
+
+These metrics are position-sensitive, assigning higher weights to items at the top of the ranked list to reflect user attention patterns. 
+
+NDCG: Discounted Cumulative Gain measures utility with logarithmic decay, where NDCG@ k is normalized by the Ideal DCG (IDCG). NDCG = 1
+
+IDCG 
+
+> n
+
+X
+
+> i=1
+
+yσf (i)
+
+log 2(i + 1) w(i, y, D) = 1
+
+IDCG · log 2(i + 1) (21) NDCG @k = 1
+
+IDCG kkX
+
+> i=1
+
+yσf (i)
+
+log 2(i + 1) w(i, y, D) = I(i ≤ k)
+
+IDCG k · log 2(i + 1) (22) 
+
+MAP averages the precision values at each rank where a relevant item is correctly identified. MAP = 1
+
+n+
+
+X 
+
+> i:yσf(i)=1
+
+P@i w(i, y, D) = 
+
+Pij=1 yσf (j)
+
+n+ · i (23) MAP @k = 1min( k, n +)
+
+X 
+
+> i:yσf(i)=1 ,i ≤k
+
+P@i w(i, y, D) = 
+
+Pij=1 yσf (j)
+
+min( k, n +) · i · I(i ≤ k) (24) 13 MRR focuses exclusively on the rank of the first relevant item in the list. MRR =
+
+> n
+
+X
+
+> i=1
+
+yσf (i)
+
+i
+
+> i−1
+
+Y
+
+> j=1
+
+(1 − yσf (j)) w(i, y, D) = 
+
+Qi−1
+
+> j=1
+
+(1 − yσf (j))
+
+i (25) MRR @k =
+
+> k
+
+X
+
+> i=1
+
+yσf (i)
+
+i
+
+> i−1
+
+Y
+
+> j=1
+
+(1 − yσf (j)) w(i, y, D) = 
+
+Qi−1
+
+> j=1
+
+(1 − yσf (j))
+
+i · I(i ≤ k) (26) 
+
+## B Proofs of Metrics Properties 
+
+B.1 Proof of Theorem 4.1 & 4.2 
+
+To maintain consistency with our structural taxonomy, we prove the intra-group properties by following the sequence from Pointwise to Listwise groups. 
+
+Lemma B.1 (Bayes-Optimality of GP ). Under the binary hypothesis y ∈ { 0, 1}:1. Equivalence: Conditioned on a fixed number of positives n+ per list, P@ k and R@ k are Bayes-equivalent, i.e., P@ k ≡B R@ k.2. Inclusion: The Bayes-optimal set of Acc is a subset of the truncated pointwise optimal sets, s.t. Acc ⪯B P@ k/ R@ k.
+
+Proof. 1. Consider that n+ is fixed for any given sequence of instances D. The expected utilities are 
+
+UP@ k = E[ 1
+
+k
+
+> k
+
+X
+
+> i=1
+
+yi], UR@ k = E[ 1
+
+n+
+
+> k
+
+X
+
+> i=1
+
+yi]. (27) Since 1/k and 1/n + are positive constants, both metrics are maximized by any f that selects the set of k instances with the largest η(x), confirming F ∗ 
+
+> P rec @k
+
+= F ∗
+
+> Rec @k
+
+.2. Acc requires correct classification for all x ∈ D relative to an optimal threshold. Achieving F ∗
+
+> Acc
+
+implies that all positive instances are correctly identified and placed above all negative instances. This inherently satisfies the requirement for P@ k/R@ k to fill the top-k slots with positive instances, hence F ∗ 
+
+> Acc
+
+⊆ F ∗ 
+
+> P@ k
+
+= F ∗
+
+> R@ k
+
+.As for listwise metrics, we prove their property with the following metric family. 
+
+Definition B.1 (Top-Weighted Additive Metrics) . A ranking metric M belongs to the class of 
+
+top-weighted additive metrics (Gadd ) if its expected utility UM(f ) can be expressed as: 
+
+UM(f ) = ED
+
+" nX
+
+> i=1
+
+w(i) · yσf (i)
+
+#
+
+(28) subject to the following conditions: 1. Position-Dependency: The weights w = {w(i)}ni=1 form a fixed, strictly decreasing sequence w(1) > w (2) > · · · > w (n) ≥ 0.2. Label-Independency: Each weight w(i) depends only on the rank position i and is inde-pendent of the realization of labels in D.3. Linearity of Expectation: The expected utility satisfies UM(f ) =
+
+ED
+
+P ni=1 w(i)η(xσf (i)), where η(x) = E[y|x] is the conditional probability. The structural properties of Gadd ensure that the maximization of expected utility can be decoupled across rank positions. By leveraging the linearity of expectation and the monotonic decay of weights, we establish the following properties. 
+
+Lemma B.2 (General Properties of Gadd ). For any metric M ∈ G add with weights w(1) > · · · >w(n) ≥ 0:14 1. Optimal Ordering: UM(f ) is maximized iff f sorts instances such that η(xσf (1) ) ≥ · · · ≥ 
+
+η(xσf (n)).2. Truncation Inclusion: For its truncated version M@k, F ∗M ⊆ F ∗M@k .
+
+Proof. (1) By Definition B.1, UM(f ) = ED [P w(i)η(xσf (i))] . Since {w(i)} is strictly decreasing, the rearrangement inequality states the sum is maximized iff η(xσf (i)) is non-increasing. (2) Let f ∈ F ∗M. Since f sorts the full list by η, it necessarily selects the k largest η values and sorts them non-increasingly in the top-k positions, which is the optimality condition for w@k(i) = 
+
+w(i)I(i ≤ k).To bridge the abstract family Gadd with specific ranking metrics, we provide the following proposition. 
+
+Proposition B.1 (Metric Embedding into Gadd ). The convergence of GL is guaranteed by the following embeddings: 1. Global DCG is a direct instance of Gadd with w(i) = (log 2(i + 1)) −1.2. NDCG, MAP and MRR, while not in Gadd , satisfy the Probability Ranking Principle (PRP)[Fuhr, 1992]. Under binary relevance and item exchangeability, their Bayes-optimal sets F ∗
+
+> NDCG
+
+, F ∗ 
+
+> MAP
+
+and F ∗ 
+
+> MRR
+
+converge to the same ordering rule as Gadd .
+
+Proof of Theorem 4.1. The alignment (Equivalence) and Inclusion follow from Lemma B.1 for Pointwise metrics and the combined results of Lemma B.2 and Proposition B.1 for Listwise metrics. 
+
+Proof of Theorem 4.2. 
+
+1. Optimal Set Nesting: For k1 < k 2, any f ∈ F ∗M@k2
+
+satisfies optimality for the top-k2 items. Since the top-k1 items are a subset of the top-k2, the condition for M@k1 is inherently met, thus 
+
+F ∗M@k2
+
+⊆ F ∗M@k1
+
+.
+
+2. Regret Transfer Sensitivity: Let ∆ηi ≥ 0 be the optimality gap. We distinguish between two cases based on the metric’s normalization structure: • Case 1: Pointwise Metrics (e.g., P@ k, R@ k): For k1 < k 2, since Regret @k2 (f ) = 
+
+> 1
+> k2
+
+Pk2 
+
+> i=1
+
+∆ηi ≤ ϵ, and ∆ηi ≥ 0, the partial sum is bounded by the total sum. Thus: Regret @k1 (f ) = 1
+
+k1
+
+> k1
+
+X
+
+> i=1
+
+∆ηi ≤ 1
+
+k1
+
+> k2
+
+X
+
+> i=1
+
+∆ηi = k2
+
+k1
+
+1
+
+k2
+
+> k2
+
+X
+
+> i=1
+
+∆ηi
+
+!
+
+≤ k2
+
+k1
+
+· ϵ (29) Therefore, Ψk2→k1 (ϵ) ≤ Cϵ with C = k2/k 1.• Case 2: Listwise Metrics (e.g., NDCG, MAP, MRR): For NDCG@ k, letting C =IDCG k2 /IDCG k1 ≥ 1 and noting that w(i)∆ ηi ≥ 0:Regret @k1 (f ) = 
+
+Pk1 
+
+> i=1
+
+w(i)∆ ηi
+
+IDCG k1
+
+≤
+
+Pk2 
+
+> i=1
+
+w(i)∆ ηi
+
+IDCG k1
+
+= IDCG k2
+
+IDCG k1
+
+· Regret @k2 (f ) ≤ Cϵ 
+
+(30) For MAP and MRR, since they share the same F ∗ and their regret is monotonically controlled by the cumulative optimality gaps up to k, they exhibit a similar linear upper bound Ψk2→k1 (ϵ) ≤ Cϵ .Conversely, the reverse transfer Ψk1→k2 (ϵ) is divergent. If Regret @k1 (f ) = 0 , the gap ∆ηi for 
+
+i ∈ (k1, k 2] can be arbitrarily large, resulting in Ψk1→k2 (0) = sup {Regret @k2 (f )} > 0, confirming information loss during upward truncation. 15 B.2 Proof of Theorem 4.3 B.2.1 Pointwise vs. Listwise Proposition B.2. Under the binary relevance hypothesis, the Bayes-optimal set for Listwise metrics is a proper subset of the Pointwise (Accuracy) optimal set, i.e., ML ⪯B MP .
+
+Proof. Consider the Bayes-optimal risk minimizers in the space of all measurable functions F . The set F ∗ 
+
+> P
+
+consists of functions f that satisfy the sign-consistency condition: 
+
+F ∗ 
+
+> P
+
+= {f ∈ F | ∀ x ∈ X , (f (x) − τ )( η(x) − 0.5) > 0} (31) where τ is the decision threshold. This condition only constrains the mapping of x relative to the level set {x : η(x) = 0 .5} and imposes zero constraints on the relative ordering of any xi, xj on the same side of the threshold. By Lemma B.2, any M ∈ G L requires f to be a monotonic transformation of η:
+
+F ∗ 
+
+> L
+
+= {f ∈ F | ∀ xi, xj ∈ X , η (xi) > η (xj ) = ⇒ f (xi) > f (xj )} (32) For any f ∈ F ∗
+
+> L
+
+, let f (x0.5) = τ . The monotonicity ensures that ∀η(x) > 0.5, f (x) > τ and 
+
+∀η(x) < 0.5, f (x) < τ . Thus, F ∗ 
+
+> L
+
+⊆ F ∗ 
+
+> P
+
+. Note that the expected metric risk is governed by the conditional expectation η(x) = P (y = 1 |x) rather than realizations D.To show the inclusion is proper, we define the set of rank-reversed predictors 
+
+Frev = {f ∈ F ∗ 
+
+> P
+
+| ∃ xi, xj ∈ X , (η(xi) − 0.5)( η(xj ) − 0.5) > 0,
+
+s.t. (η(xi) − η(xj ))( f (xi) − f (xj )) < 0}. (33) Since Frev is non-empty for any continuous η, and Frev ∩ F ∗ 
+
+> L
+
+= ∅ while Frev ⊂ F ∗ 
+
+> P
+
+, it follows that F ∗ 
+
+> L
+
+⊊ F ∗ 
+
+> P
+
+. The existence of Frev implies ΨP →L(0) > 0, confirming that optimal classification provides no stability for ranking. 
+
+B.2.2 Pairwise vs. Listwise Proposition B.3 (Bayes-Optimal Convergence and Structural Heterogeneity) . The Bayes-optimal sets F ∗ 
+
+> R
+
+(Pairwise) and F ∗ 
+
+> L
+
+(Listwise) are equivalent, both converging to the set of monotonic transformations of the regression function η.
+
+Proof. Consider the conditional expectation η(x) = E[y|x]. The expected utility of a pairwise metric 
+
+MR ∈ G R is maximized when the predictor f correctly orders all pairs (xi, xj ) such that η(xi) >η(xj ). Formally, UR(f ) is maximized iff for every pair, sgn (f (xi) − f (xj )) = sgn (η(xi) − η(xj )) .By Lemma B.2, any top-weighted additive metric ML ∈ G L is maximized iff the instances are sorted in non-increasing order of their conditional expectations η(x). Since both UR(f ) and UL(f ) reach their theoretical maximum iff f preserves the partial ordering induced by η, we have: 
+
+F ∗ 
+
+> R
+
+= F ∗ 
+
+> L
+
+= {f ∈ F | ∀ xi, xj , η (xi) > η (xj ) = ⇒ f (xi) > f (xj )} (34) Thus, the two groups share the identical Bayes-optimal frontier with infinite model capacity. 
+
+B.3 Proof of Theorem 4.5 
+
+Proof. Let E = {i | (ηi − 0.5)( si − 0.5) < 0} be the set of instances misclassified by f . The classification regret is given by Regret Acc = |E |/n . For any misclassified instance i ∈ E , there are two cases: 1. i is a false positive ( ηi < 0.5, s i > 0.5): For every true positive instance j (ηj > 0.5, s j >
+
+0.5) that is correctly classified, the pair (i, j ) is correctly ranked. However, if any correctly classified negative instance j (ηj < 0.5, s j < 0.5) exists, it does not directly yield a ranking regret for (i, j ).2. The critical constraint comes from pairs (i, j ) where i ∈ E and j ∈ D \ E such that ηj and 
+
+ηi are on opposite sides of 0.5.16 Specifically, consider the total pairwise gap sum P 
+
+> i<j
+
+I(σ(i) > σ (j))( ηi − ηj ). A classification error on instance i implies that i has crossed the 0.5 threshold in score space. For a false positive 
+
+i ∈ E (ηi < 0.5), it must be ranked above all correctly classified negative instances j ∈ D− \ E to not incur pairwise regret within the negative class, but more importantly, to satisfy Regret Acc = 0 , it must not displace any positive instances. By summing the relevance gaps, each misclassified instance i ∈ E incurs a minimum regret of 
+
+|ηi − 0.5| relative to the threshold. In the Pairwise case, an error on i ∈ E implies it is misranked relative to at least one instance j on the other side of the threshold. Summing over E :
+
+X
+
+> i∈E
+
+δ ≤ X
+
+> i∈E
+
+|ηi − 0.5| ≤ n+n−
+
+1 Regret AUC (f ; D) (35) Dividing by nδ , we obtain: Regret Acc = |E |
+
+n ≤ n+n−
+
+nδ Regret AUC (f ; D) (36) For the Listwise case, a classification error at position k incurs at least w(k)δ in the unnormalized sum. Using the lower bound w(n) for any position: 
+
+|E | · w(n) · δ ≤ IDCG n · Regret NDCG (f ; D) = ⇒ Regret Acc ≤ IDCG n
+
+nδw (n) Regret NDCG (37) As for the attainability of the upper bound, we construct a least favorable permutation where • AUC → Acc : Consider a case where all instances satisfy |ηi − 0.5| = δ. If a single positive instance is displaced by a single negative instance, then Regret AUC = 1 
+
+> n+n−
+
+. If this displacement causes one instance to cross the decision threshold, then Regret Acc = 1 
+
+> n
+
+.The ratio directly matches the upper bound in Eq.(36). • NDCG → Acc : The ratio is maximized when a classification error incurs the minimum possible NDCG regret. This occurs when a positive item is misclassified and placed at the last rank n, where the weighting function w(n) is at its minimum. Hence we finish the proof. 
+
+B.4 Proof of Theorem 4.6 
+
+Proof. We begin by establishing the relationship between the cumulative rank displacement and the respective regrets. Let r1 < r 2 < · · · < r n+ be the ranks of the positive instances in the predicted permutation. The total pairwise rank inversion is defined as I = Pn+
+
+> i=1
+
+(ri − i).
+
+I. Derivation of ΨR→L: For the weighting function w(r) = 1 / log(1 + r), its first-order discrete difference ∆( t) = w(t) − w(t + 1) is monotonically decreasing due to the convexity of 1/ log(1 + r)
+
+for r ≥ 1. Thus, for any rank ri ≥ i, the total weight loss for the i-th positive instance can be bounded by the maximum differential ∆max :
+
+w(i) − w(ri) = 
+
+> ri−1
+
+X
+
+> t=i
+
+(w(t) − w(t + 1)) ≤ (ri − i) · max  
+
+> t≥1
+
+∆( t) = ∆ max (ri − i). (38) Summing across all n+ positive instances, we obtain: 
+
+> n+
+
+X
+
+> i=1
+
+(w(i) − w(ri)) ≤ ∆max 
+
+> n+
+
+X
+
+> i=1
+
+(ri − i) = ∆ max I. (39) By definition, Regret AUC = In+n− and Regret NDCG =  
+
+> Pn+
+> i=1 (w(i)−w(ri))
+> Pn+
+> i=1 w(i)
+
+. Substituting these into the inequality: Regret NDCG ·
+
+> n+
+
+X
+
+> i=1
+
+w(i) ≤ ∆max · (n+n− · Regret AUC ). (40) 17 As for attainability, this bound is tight when rank inversions occur exclusively at the very top of the list ( r1 = 2 , i = 1 ), where the marginal weight drop is exactly ∆max . Solving for Regret NDCG yields the transfer function ΨR→L(ϵ) = 
+
+ 
+
+> ∆max ·n+n−
+> Pn+
+> i=1 w(i)
+
+
+
+· ϵ.
+
+II. Derivation of ΨL→R: Similarly, we utilize the minimum differential ∆min to lower bound the weight loss. For any ri ≥ i, we have: 
+
+w(i) − w(ri) = 
+
+> ri−1
+
+X
+
+> t=i
+
+(w(t) − w(t + 1)) ≥ (ri − i) · min  
+
+> 1≤t<n
+
+∆( t) = ∆ min (ri − i). (41) Summing over all positive instances i = 1 , . . . , n +:
+
+> n+
+
+X
+
+> i=1
+
+(w(i) − w(ri)) ≥ ∆min 
+
+> n+
+
+X
+
+> i=1
+
+(ri − i) = ∆ min I. (42) Rearranging to isolate the rank inversion sum I:
+
+I ≤ 1∆min 
+
+> n+
+
+X
+
+> i=1
+
+(w(i) − w(ri)) . (43) Substituting this into the expression for Pairwise regret: Regret AUC = In+n− ≤ 1
+
+n+n− · ∆min 
+
+> n+
+
+X
+
+> i=1
+
+(w(i) − w(ri)) . (44) To express this in terms of Listwise regret, we multiply and divide by Pn+ 
+
+> i=1
+
+w(i):Regret AUC ≤
+
+Pn+ 
+
+> i=1
+
+w(i)
+
+n+n− · ∆min 
+
+!
+
+·
+
+Pn+
+
+> i=1
+
+(w(i) − w(ri)) 
+
+Pn+ 
+
+> i=1
+
+w(i) =
+
+Pn+ 
+
+> i=1
+
+w(i)
+
+n+n− · ∆min 
+
+!
+
+Regret NDCG . (45) The bound is attained when rank inversions are concentrated at the bottom of the list ( rn+ = n), where the marginal weight loss is minimized to ∆min . This derivation concludes the explicit form of 
+
+ΨL→R(ϵ).
+
+B.5 Proof of Theorem 4.7 
+
+Proof. The rates are derived by substituting the asymptotic orders into the explicit coefficients from Theorem 4.6. For the Pairwise-to-Listwise coefficient CR→L = ∆max ·n+n−  
+
+> Pn+
+> i=1 w(i)
+
+:• In the balanced case, Pn+ 
+
+> i=1
+
+w(i) ≈ R n 
+
+> 11log(1+ x)
+
+dx ∼ O(n/ log n). Thus, CR→L ∼   
+
+> O(n2)
+> O(n/ log n)
+
+= O(n log n).• In the imbalanced case, Pn+ 
+
+> i=1
+
+w(i) is a sum of O(1) terms, hence O(1) . Thus, CR→L ∼ 
+
+> O(n)
+> O(1)
+
+= O(n).For the Listwise-to-Pairwise coefficient CL→R =  
+
+> Pw(i)
+> n+n−·∆min
+
+:• We approximate ∆min = w(n − 1) − w(n) ≈ | w′(n)| = 1  
+
+> nln 2(n+1)
+
+∼ O( 1   
+
+> nlog 2n
+
+).• In the balanced case, CL→R ∼ O(n/ log n)     
+
+> O(n2·1
+> nlog 2n)
+
+= O(n/ log n)   
+
+> O(n/ log 2n)
+
+= O(log n).• In the imbalanced case, CL→R ∼ O(1)      
+
+> O(n·1
+> nlog 2n)
+
+= O(log 2 n).The derivation confirms that the Listwise-to-Pairwise path remains significantly more stable (logarith-mic vs. polynomial growth) across both scenarios. 18

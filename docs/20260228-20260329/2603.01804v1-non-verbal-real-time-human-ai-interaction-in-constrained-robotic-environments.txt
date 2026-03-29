@@ -1,0 +1,190 @@
+Title: Non-verbal Real-time Human-AI Interaction in Constrained Robotic Environments
+
+URL Source: https://arxiv.org/pdf/2603.01804v1
+
+Published Time: Tue, 03 Mar 2026 03:47:03 GMT
+
+Number of Pages: 11
+
+Markdown Content:
+# Non-verbal Real-time Human-AI Interaction in Constrained Robotic Environments 
+
+Dragoş Costea ⋆1 , Alina Marcu ∗1 , Cristina Lazăr 1 , and Marius Leordeanu 1,2,3 
+
+> 1
+
+National University of Science and Technology Politehnica of Bucharest, 313 Splaiul Independentei, Bucharest, Romania 
+
+{dragos.costea, alina.marcu, cristina.lazar, marius.leordeanu}@upb.ro  
+
+> 2
+
+Institute of Mathematics of the Romanian Academy, Bucharest, Romania  
+
+> 3
+
+NORCE - Norwegian Research Center, Norway 
+
+Abstract. We study the ongoing debate regarding the statistical fidelity of AI-generated data compared to human-generated data in the context of non-verbal communication using full body motion. Concretely, we ask if contemporary generative models move beyond surface mimicry to participate in the silent, but expressive dialogue of body language. We tackle this question by introducing the first framework that generates a natural non-verbal interaction between Human and AI in real-time from 2D body keypoints. Our experiments utilize four lightweight architectures which run at up to 100 FPS on an NVIDIA Orin Nano, effectively closing the perception-action loop needed for natural Human-AI interaction. We trained on 437 human video clips and demonstrated that pretraining on synthetically-generated sequences reduces motion errors significantly, without sacrificing speed. Yet, a measurable reality gap persists. When the best model is evaluated on keypoints extracted from cutting-edge text-to-video systems, such as SORA and VEO, we observe that performance drops on SORA-generated clips. However, it degrades far less on VEO, suggesting that temporal coherence, not image fidelity, drives real-world performance. Our results demonstrate that statistically distinguishable differences persist between Human and AI motion. 
+
+Keywords: Non-verbal Chat, Human-AI interaction, real vs. synthetic, motion forecasting, edge AI, full-body keypoints 
+
+## 1 Introduction 
+
+Non-verbal communication, using posture, gesture, and whole-body movement, often conveys affect and intent more effectively than speech [ 1]. Enabling machines to read and respond to these cues is especially important in embodied settings that operate under tight compute, energy, connectivity, and privacy constraints. In such conditions, anticipating near-future motion (hundreds of milliseconds  
+
+> ⋆
+
+Equal contribution.  
+
+> arXiv:2603.01804v1 [cs.CV] 2 Mar 2026 2Dragoş Costea, Alina Marcu, Cristina Lazăr and Marius Leordeanu
+
+to ∼1 s) enables proactive collision avoidance, better handover timing, adaptive camera framing, and more natural joint action. Despite rapid progress in generative AI, many systems remain “disembodied”: they produce media from prompts but do not engage in continuous, reactive, physically expressive interaction. Existing animation pipelines are largely an-chored to speech, such as co-speech gesture generation or audio-driven talking heads [ 5 ,15 ], leaving purely non-verbal interaction comparatively underexplored, in part due to limited data and the difficulty of modeling subtle person-specific expressions [16]. 
+
+Background and relevant work. In human–robot interaction (HRI), non-verbal behaviors strongly shape first impressions and perceived social qualities, motivating design frameworks that explicitly encode such cues [ 13 ]. On the mod-eling side, motion generation has evolved from recurrent models for short-horizon pose prediction [ 8] to diffusion models that produce high-fidelity, conditioned motion [ 12 ]. In parallel, emotion recognition from skeletal data has benefited from spatio-temporal architectures such as ST-GCNs that operate directly on skeleton graphs [ 14 ]. However, generation and recognition are typically treated in isolation. Moreover, widely used affect datasets (e.g. MELD, IEMOCAP) rely on verbal context [ 10 , 2], while large-scale skeleton/action datasets lack fine-grained emotion labels [ 11 ]. Recent synthetic motion generators (such as MotionLCM [ 3]) offer scalable pretraining opportunities, and the advent of high-end video generators (like OpenAI’s SORA [ 9] and Google’s VEO3 [ 4]) raises the question of how well motion understanding models transfer to purely synthetic scenes. 
+
+Contributions. We close the perception–action loop for non-verbal human–AI interaction by learning from body keypoints, a modality that is both structured and computationally efficient for on-device use. We explore lightweight deep models that jointly (i) recognize the affect expressed by an observed human and (ii) express affect by predicting low-latency future motion, to enable responsive and transparent behavior without reliance on speech or text. For natural and effective Human-AI interaction, an AI system must not only comprehend human emotion through recognition but also respond appropriately and expressively through generation to favor and engage interaction, to become more welcoming, instead of uncanny. Towards these efforts, we make the following contributions: 
+
+– A dual-task framework for simultaneous, real-time expression (future-motion prediction) and recognition of non-verbal emotion from body keypoints. 
+
+– A comparative study of four lightweight architectures tailored to low-latency interaction, establishing robust baselines on authentic human interaction data. 
+
+– An investigation of large-scale synthetic motion pretraining to boost down-stream performance. 
+
+– An evaluation of trained models on state-of-the-art synthetic video (SORA, VEO3) to assess generalization beyond natural footage [9,4]. Non-Verbal Chat for Constrained HAI 3
+
+## 2 Methodology 
+
+This section details our technical approach, from the formal problem definition to the specific deep learning architectures used for full-body motion estimation and emotion recognition, as well as the datasets used for training, pretraining and evaluation. Our goal is to predict future body motion keypoints in real time for a natural human-machine interface. We also classify the underlying emotion from an observed sequence of body keypoints in order for future algorithms to tailor the experience according to subtle motion cues. 
+
+2.1 Problem Formulation 
+
+We address the dual task of non-verbal emotion expression and recognition. 
+
+Input: Our models use a sequence of 2D body keypoints, X = {p1, . . . , pTin },representing Tin = 60 frames of motion (equivalent to 2 seconds at 30 FPS). Each frame pt ∈ RK×D consists of K = 17 keypoints in D = 2 dimensions (x, y coordinates). The 17 keypoints correspond to the standard COCO layout [ 6 ], including major joints of the head, torso, arms, and legs. 
+
+Output: The model produces a tuple ( ˆYgen , ˆycls ) containing: 
+
+– A predicted sequence of future keypoints, ˆYgen = {ˆpTin +1 , . . . , ˆpTin +Tout },for an output duration of Tout = 30 frames (1 second). 
+
+– A probability distribution over C = 3 discrete emotion classes: “enthusiastic,” “laughing,” and “happy to see you”. 
+
+Data preprocessing: To ensure our models learn motion patterns that are invariant to a person’s position and scale in the video frame, we apply a two-step normalization process to each sequence: 
+
+– Centering: We first compute the centroid (mean position) of the 17 keypoints for each frame and subtract it, effectively centering the skeleton at the origin. 
+
+p′ 
+
+> t,k
+
+= pt,k − 1
+
+K
+
+> K
+
+X
+
+> j=1
+
+pt,j (1) 
+
+– Scaling: We then normalize the scale by dividing the centered keypoints by the maximum Euclidean distance of any keypoint from the origin within that frame. This maps the pose to a canonical scale. 
+
+p′′  
+
+> t,k
+
+= p′
+
+> t,k
+
+max j || p′ 
+
+> t,j
+
+|| 2
+
+(2) The centroids and scaling factors are stored and used to denormalize the predicted motions for visualization. 4 Dragoş Costea, Alina Marcu, Cristina Lazăr and Marius Leordeanu 
+
+Loss function: Our models are trained end-to-end using a composite loss function that combines a regression loss for motion generation and a classification loss for emotion recognition: 
+
+Ltotal = Lgen + λLcls (3) where Lgen is the Mean Squared Error (L2 loss) between the predicted and ground truth future keypoints, and Lcls is the Cross-Entropy loss for emotion classification. After empirical tuning, the classification loss weight λ is set to 0.3. 
+
+2.2 Model Architectures 
+
+We benchmark four lightweight architectures, each designed with a shared encoder to create a latent representation of the input motion, followed by two separate heads for the motion generation and emotion recognition tasks. 
+
+– MLP: A simple Multi-Layer Perceptron baseline. The input sequence of 60 frames is flattened into a single vector of size 60 × 17 × 2 = 2040 . This vector is processed by a shared backbone of four fully-connected layers (with 1024, 512, 256, and 128 neurons respectively), each followed by a ReLU activation, Dropout ( p = 0 .3), and BatchNorm. The final 128-dimensional feature vector is fed into two heads: a linear layer predicting the flattened 30-frame output sequence, and a 2-layer classifier. 
+
+– LSTM: A recurrent architecture using a 2-layer LSTM with a hidden size of 128 and a dropout rate of 0.2. Each frame’s keypoints are flattened to a 34-dimensional vector, forming an input sequence of length 60. The final hidden state of the LSTM serves as the motion representation, which is then passed to the two task-specific heads. 
+
+– CNN-LSTM: A hybrid model that first extracts spatio-temporal features using a 1D Convolutional Neural Network. The input sequence (transposed to shape [batch, 34, 60]) is passed through three 1D convolutional layers (with 64, 128, and 256 output channels and a kernel size of 3), each followed by ReLU, BatchNorm, and Dropout. The resulting feature sequence is then fed into a 2-layer LSTM with a hidden size of 128. The final hidden state is used for prediction and classification. 
+
+– Transformer: A Transformer model using an encoder architecture. The 34-dimensional per-frame input is projected into a 256-dimensional space (dmodel ). We add sinusoidal positional encoding before feeding the sequence into a 4-layer Transformer Encoder with 8 attention heads. The output from the last time step is used as the final feature vector for the two heads. All models are small enough to run above real-time frame rates on edge devices, as shown in Table 1, the slowest achieving ≈100FPS on the NVIDIA Orin Nano. Nevertheless, prediction pipelines could average output sequences for smoother prediction and include keypoint detection, resulting in a longer inference time. Non-Verbal Chat for Constrained HAI 5
+
+Fig. 1: Results confirming the effec-tiveness of pretraining on AI gener-ated data using MotionLCM [ 3]. While the choice of architecture is important, most models show significant improve-ments over the baseline that generally increases with the number of synthetic samples seen - 9k, 45k or 90k, from left to right. 
+
+Table 1: Model inference time compari-son on consumer ( RTX 4090 ) and em-bedded ( Orin Nano ) GPUs. While the results show 1-2ms/inference on a desk-top GPU, even our largest model runs at about 100 frames per second on an entry level embedded platform, leaving headroom for other operations such as keypoint detection and avatar anima-tion.                
+
+> Model Parameters Inference Time [ms] RTX 4090 Orin Nano
+> CNN-LSTM 592,060 0.832 4.844 LSTM 347,644 0.422 3.371 MLP 2,914,428 0.473 1.643 Transformer 3,430,140 1.762 9.294
+
+2.3 Datasets 
+
+Our experiments leverage three distinct types of data to train, pretrain and evaluate our models. 
+
+Real Human Motion Dataset: Our primary dataset consists of 437 video sequences of real human motion depicting highly-positive emotions, annotated with one of the three emotion labels (“enthusiastic,” “laughing,” and “happy to see you”). 17 keypoints were selected from the 543 generated from MediaPipe’s Holistic model [ 7], in order to match the COCO format[ 6], for future fast detection. To augment this dataset and create sufficient training samples, we employ a sliding window approach with a 1 frame step. This results in a 16x larger dataset of motion segments (6992 samples), which is then split into an 80% training set (Train) and a 20% test set (Test). Throughout our tests we refer to this dataset as either “real”, “baseline” or “human-generated”. We use these data for both training and finetuning. 
+
+Synthetic Pretraining Datasets: To explore the benefit of large-scale data, we generate a synthetic motion dataset using MotionLCM [ 3], a text-to-motion diffu-sion model. MotionLCM only outputs 22-keypoints person skeletons and the data generation process involved prompts only specifying the emotion: "enthusiastic", "laughing" and "happy to see you". We convert to the COCO keypoints format and generate a 90k sample dataset (30k per emotion) which has been portioned into three progressively larger tiers for pretraining (9k, 45k, 90k samples) termed as Pretrain-9k, Pretrain-45k, and Pretrain-90k. This data is exclusively used in pretraining the models. 6 Dragoş Costea, Alina Marcu, Cristina Lazăr and Marius Leordeanu 
+
+Synthetic In-the-Wild Test Datasets (SORA & VEO): To test model generalization to unseen, purely synthetic motion, we curate three distinct test sets. These are generated using state-of-the-art text-to-video models: OpenAI’s SORA [ 9 ] and Google’s VEO3 [ 4]. We create videos from various prompts (see Figure 2) and then apply the same MediaPipe keypoint extraction pipeline used for our real dataset. This provides a challenging “in-the-wild” benchmark to measure the gap between models trained on real/MotionLCM data and their ability to interpret motions from different generative sources. The first one, SORA Human 
+
+is generated using the plotted human skeletons from the real data and using them along with a text prompt to generate RGB videos, which are translated back to keypoints using our MediaPipe extraction pipeline described above. The second one, SORA AI is generated using the same conditioning procedure, but the input videos are not the real human data skeletons - they are replaced by the ones generated by MotionLCM. Finally, VEO, the third one, is only conditioned on text, consisting on an instruction to generate a human (i.e. "a person"), the emotion being shown (i.e., "enthusiastic", "laughing" and "happy to see you") and camera instructions (i.e. "full body shot"), due to zooming in/ body cut issues we encountered for the emotion-only prompt. 
+
+Fig. 2: The prompts used to condition SORA (first 3 columns) and VEO (last column) to generation videos depicting each of our proposed emotions. 
+
+## 3 Experiments 
+
+We conducted a series of three studies to evaluate our proposed framework. We first establish baseline performance on real data then analyze the effect of synthetic pretraining. Finally, we measure the generalization gap to novel synthetic video content. 
+
+Implementation details : All models were trained using the Adam optimizer for 200 epochs with a batch size of 32. Learning rates were set to 0.001 for LSTM/CNN-LSTM, 0.0005 for Transformer, and 0.002 for MLP, with weight decay of 1e-4. We used PyTorch as our deep-learning framework. All experiments were performed on an Ubuntu 22.04.5 LTS workstation equipped with an Intel Core i9-14900K CPU, 188 GB RAM, and a single NVIDIA RTX 4090 GPU. 
+
+Evaluation metrics : For the body keypoints generation, we report mean abso-lute error (MAE) for geometric accuracy. For the classification task, we report the mean accuracy. For real-time performance measurements, we report the latency Non-Verbal Chat for Constrained HAI 7
+
+(ms/inference) to validate the real-time capability of our models and also model complexity (in terms of number of parameters) – see Table 1. 
+
+3.1 The effect of pretraining on synthetic data 
+
+In this study, we investigate the hypothesis that pretraining on large-scale synthetic data can improve model performance and data efficiency. We first establish the baseline performance by training all four architectures (MLP, LSTM, CNN-LSTM, Transformer) from scratch solely on our real human motion dataset, using the split presented before. The objective is to identify the most effective and efficient architecture for real-time keypoint generation and emotion recognition without leveraging any external synthetic data. After this, we employ a pretraining procedure using the same arhitectures, trained from scratch, followed by a finetuning strategy. The model is first pre-trained on the synthetic MotionLCM dataset and subsequently finetuned on the real human motion training set. We systematically evaluate this effect using our three tiers of synthetic data: 9k, 45k, and 90k samples. The results compare the performance of the model fine-tuned from each pretraining tier against the baseline model trained from scratch. Relative performance improvements on the real test sets, compared to the baseline are reported in Figure 1. The results indicate that the magnitude of the gain depends on the sequence -modeling capacity of the backbone architecture and the amount of synthetic pretraining. Recurrent and attention -based models (LSTM, CNN -LSTM, Transformer) benefit the most, since their motion prediction error on the real test split consistently drops after pretraining and continues to improve as the pretraining set grows to 90k examples. In contrast, the MLP baseline sees little to no benefit and can even regress, suggesting that purely feed -forward encoders struggle to absorb the diverse temporal statistics present in MotionLCM outputs. Overall, Figure 1 supports the view that synthetic motion is most useful when the downstream architecture can explicitly model temporal dependencies and that larger pretraining corpora improve data efficiency for those models. 
+
+3.2 Measuring the synthetic to real gap 
+
+This study assesses the generalization capabilities of our best model (pretrained on 90k synthetic samples and fine-tuned on real data) by testing it "in-the-wild" on our curated test sets from SORA and VEO. This experiment is designed to quantify the domain gap between the training data distribution (real and MotionLCM) and motions generated by cutting-edge, general-purpose video models. Results are reported in Figure 3. The figure plots MAE (lower is better) every 10 epochs for each architecture, comparing models trained from scratch (top row) with those pretrained on the 90k synthetic set and then fine -tuned on real data (bottom row). Across architectures, pretraining shifts the curves downward on the Human test split and accelerates convergence, meaning good performance is reached earlier and 8 Dragoş Costea, Alina Marcu, Cristina Lazăr and Marius Leordeanu 
+
+Table 2: Impact of pretraining for the emotion recognition task on various AI-generated test sets (SORA Human , SORA AI and VEO3) and human-generated test data (denoted with Human in the table). We report Accuracy ( ×100 ). Models are marked by (1) CNN-LSTM, (2) LSTM, (3) MLP, and (4) Transformer.                                           
+
+> SORA Human SORA AI VEO Human (1) (2) (3) (4) (1) (2) (3) (4) (1) (2) (3) (4) (1) (2) (3) (4) Baseline 45.76 45.54 47.99 46.65 31.25 32.66 39.96 35.74 39.27 61.15 63.44 53.12 100 100 91.71 100 Pretrained 38.28 44.31 36.72 45.98 28.35 50.00 43.93 48.15 51.67 59.48 55.42 53.65 100 100 94.78 100
+> ∆Improvement -7.48 -1.23 -11.27 -0.67 -2.90 +17.34 +3.97 +12.41 +12.40 -1.67 -8.02 +0.53 --+3.07 -
+
+maintained more stably, which is desirable for rapid iteration on embedded platforms. When evaluated “in -the -wild,” the pretrained models still incur a domain gap, but its size differs by generator: errors on VEO are consistently closer to the real -data curves than errors on SORA, indicating that temporal coherence and physically plausible dynamics matter more to our keypoint -based predictor than photorealism. Architecturally, LSTM and CNN -LSTM exhibit the smoothest and most stable improvements; the Transformer benefits as well but remains more variable; the MLP shows the least consistent gains and occasional spikes, stressing the importance of a model’s capacity to learn sequential dependencies. Table 2 reports classification accuracy for the same four backbones (CNN -LSTM, LSTM, MLP, Transformer) across SORA Human , SORA AI , VEO, and Human. We observe that on the Human split, accuracy is at or near ceiling for all models, leaving little headroom and hinting at a dataset -difficulty ceiling effect. Also on SORA AI , where SORA is conditioned on MotionLCM skeletons (closer to the pretraining distribution), pretraining substantially helps sequence models, such as the LSTM and Transformer. The CNN -LSTM is the exception here, possibly reflecting an over -commitment to pretraining priors that do not perfectly match SORA’s rendering-to-keypoint pipeline. Our experiments yielded mixed results on SORA Human and VEO. On SORA Human 
+
+(SORA conditioned on human skeletons), pretraining can hurt recognition for models, with small negative/neutral changes for the others. This suggests that stylization artifacts introduced when SORA “re -renders” human motion can push the resulting keypoint dynamics away from both real and MotionLCM statistics. On VEO, the picture is more balanced: CNN -LSTM improves significantly, the Transformer is essentially unchanged while the LSTM and MLP mildly degrade. Together with Figure 3, these results support our hypothesis that temporal sta-bility and kinematic plausibility (stronger in VEO) better support downstream understanding than image fidelity alone (stronger in SORA). The key takeaway is that pretraining on MotionLCM robustly helps gener-ation and selectively helps recognition, with the largest gains when the target motions share generative lineage or temporal statistics with the pretraining source (SORA AI , parts of VEO). Conversely, when synthetic renderers per-turb human motion in ways foreign to both real and MotionLCM dynam-Non-Verbal Chat for Constrained HAI 9
+
+ics (SORA Human ), recognition can degrade, underscoring a measurable—and model-dependent—synthetic-to-real gap. 
+
+Fig. 3: "In-the-wild" evaluation (using MAE) for motion prediction on both synthetic and real data of baseline models (first row) and pretrained models (Pretrain-90k, second row), sampled every 10 epochs. The hierarchy is mostly kept regardless of the architecture or pretraining data. Remarkably, VEO has the lowest error. This suggests that recent large models are more predictable and that specific models might be identified by the way they predict keypoints. 
+
+Limitations and Future Work: Our study is limited to 2D keypoint predic-tion and a specific synthetic data generation method for pretraining (MotionLCM). Future work should explore 3D motion prediction and different synthetic data generation approaches. Additionally, the current setup is offline and the eval-uation is constrained to only three positive-valence emotions, which may not capture the full diversity of human motion and emotion patterns. A key next step is to integrate this into a live, interactive system with a human-in-the-loop to evaluate user experience and a wider range of emotions. 
+
+## 4 Conclusion 
+
+Our study yields three practical insights for non -verbal HAI. First, synthetic motion is an effective pretraining signal for real - time models: sequence -aware backbones (LSTM, CNN -LSTM, Transformer) reduce motion error on real clips without sacrificing latency, enabling responsive deployment on edge devices. Second, a domain gap persists between human motion and motions rendered by current video generators; it is smaller for VEO than SORA, pointing to 10 Dragoş Costea, Alina Marcu, Cristina Lazăr and Marius Leordeanu 
+
+the primacy of temporal coherence over image fidelity for keypoint -level under-standing. Third, recognition benefits are architecture and also source dependent: pretraining helps most when the downstream data shares the temporal statistics of the synthetic corpus (such as SORA AI and parts of VEO), while stylized re -renderings of human motion (SORA Human ) can hurt accuracy. Together with our quantitative analysis, these results suggest a practical recipe: pair large -scale synthetic pretraining with light real -world fine -tuning and favor sequence - aware models, while developing diagnostics and metrics that explicitly target temporal plausibility to better detect and bridge residual synthetic–real gaps. 
+
+Acknowledgements. This work is supported in part by projects “Romanian Hub for Artificial Intelligence - HRIA”, Smart Growth, Digitization and Financial Instruments Program, 2021-2027 (MySMIS no. 334906) and "European Light-house of AI for Sustainability - ELIAS", Horizon Europe program (Grant No. 101120237). 
+
+## References 
+
+1. Barrett, P.H.: The Works of Charles Darwin: Vol 23: The Expression of the Emotions in Man and Animals. Routledge (2016) 2. Busso, C., Bulut, M., Lee, C.C., Kazemzadeh, A., Mower, E., Kim, S., Chang, J.N., Lee, S., Narayanan, S.S.: Iemocap: Interactive emotional dyadic motion capture database. Language resources and evaluation 42 (2008) 335–359 3. Dai, W., Chen, L.H., Wang, J., Liu, J., Dai, B., Tang, Y.: Motionlcm: Real-time controllable motion generation via latent consistency model. arXiv preprint arXiv:2404.19759 (2024) 4. Google DeepMind: Veo: a state-of-the-art model for video generation. https: //deepmind.google/technologies/veo/ (May 2024) Last accessed: 2026-02-12. 5. Li, J., Kang, D., Pei, W., Zhe, X., Zhang, Y., He, Z., Bao, L.: Audio2gestures: Generating diverse gestures from speech audio with conditional variational autoen-coders. In: Proceedings of the IEEE/CVF International Conference on Computer Vision. (2021) 11293–11302 6. Lin, T.Y., Maire, M., Belongie, S., Hays, J., Perona, P., Ramanan, D., Dollár, P., Zitnick, C.L.: Microsoft coco: Common objects in context. In: European conference on computer vision, Springer (2014) 740–755 7. Lugaresi, C., Tang, J., Nash, H., McClanahan, C., Uboweja, E., Hays, M., Zhang, F., Chang, C.L., Yong, M.G., Lee, J., et al.: Mediapipe: A framework for building perception pipelines. arXiv preprint arXiv:1906.08172 (2019) 8. Martinez, J., Black, M.J., Romero, J.: On human motion prediction using recurrent neural networks. In: Proceedings of the IEEE conference on computer vision and pattern recognition. (2017) 2891–2899 9. OpenAI: Video generation models as world simulators. https:// openai.com/research/video-generation-models-as-world-simulators (Febru-ary 2024) Last accessed: 2026-02-12. 10. Poria, S., Hazarika, D., Majumder, N., Naik, G., Cambria, E., Mihalcea, R.: Meld: A multimodal multi-party dataset for emotion recognition in conversations. arXiv preprint arXiv:1810.02508 (2018) 11. Shahroudy, A., Liu, J., Ng, T.T., Wang, G.: Ntu rgb+ d: A large scale dataset for 3d human activity analysis. In: Proceedings of the IEEE conference on computer vision and pattern recognition. (2016) 1010–1019 Non-Verbal Chat for Constrained HAI 11 12. Tevet, G., Gordon, S., Gafni, Y., Shafir, Y., Kasten, Y., Cohen-Or, D., Lischinski, D.: Human motion diffusion model. In: International Conference on Learning Representations (ICLR). (2023) 13. Urakami, J., Seaborn, K.: Nonverbal cues in human–robot interaction: A communi-cation studies perspective. ACM Transactions on Human-Robot Interaction 12 (2) (2023) 1–21 14. Yan, S., Xiong, Y., Lin, D.: Spatial temporal graph convolutional networks for skeleton-based action recognition. In: Proceedings of the AAAI conference on artificial intelligence. Volume 32. (2018) 15. Zhang, W., Cun, X., Wang, X., Zhang, Y., Shen, X., Guo, Y., Shan, Y., Wang, F.: Sadtalker: Learning realistic 3d motion coefficients for stylized audio-driven single image talking face animation. In: Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition. (2023) 8652–8661 16. Zhao, S., Wang, S., Soleymani, M., Joshi, D., Ji, Q.: Affective computing for large-scale heterogeneous multimedia data: A survey. ACM Transactions on Multimedia Computing, Communications, and Applications (TOMM) 15 (3s) (2019) 1–32

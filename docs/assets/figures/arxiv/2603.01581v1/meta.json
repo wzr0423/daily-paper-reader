@@ -1,0 +1,70 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.01581v1/fig-001.webp",
+      "caption": "Figure 8: Experiments of Hyper-Parameters in KERV",
+      "page": 6,
+      "index": 1,
+      "width": 498,
+      "height": 300
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01581v1/fig-002.webp",
+      "caption": "Figure 7: An Experimental Example of KERV on LIBERO-Goal Environment",
+      "page": 6,
+      "index": 2,
+      "width": 1054,
+      "height": 229
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01581v1/fig-003.webp",
+      "caption": "Table 2: End-to-End Results of KERV and Baselines",
+      "page": 6,
+      "index": 3,
+      "width": 446,
+      "height": 366
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01581v1/fig-004.webp",
+      "caption": "Figure 1: (a) Naive VLA+SD vs. (b) SpecVLA vs. (c) The Proposed KERV",
+      "page": 2,
+      "index": 4,
+      "width": 1063,
+      "height": 365
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01581v1/fig-005.webp",
+      "caption": "Figure 2: Discrepancy about Errors",
+      "page": 3,
+      "index": 5,
+      "width": 505,
+      "height": 305
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01581v1/fig-006.webp",
+      "caption": "Figure 3: Discrepancy about Acceptance Threshold",
+      "page": 3,
+      "index": 6,
+      "width": 498,
+      "height": 305
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01581v1/fig-007.webp",
+      "caption": "Figure 4: KF-Based Compensation Mechanism in KERV",
+      "page": 4,
+      "index": 7,
+      "width": 496,
+      "height": 298
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01581v1/fig-008.webp",
+      "caption": "Figure 5: Kinematic-Based Threshold Adjustment in KERV",
+      "page": 4,
+      "index": 8,
+      "width": 489,
+      "height": 301
+    }
+  ]
+}

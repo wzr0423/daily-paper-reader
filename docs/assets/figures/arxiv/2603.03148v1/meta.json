@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.03148v1/fig-001.webp",
+      "caption": "Fig. 3: Confusion matrices illustrating the models’ believed execution success as opposed to the actual execution success",
+      "page": 6,
+      "index": 1,
+      "width": 512,
+      "height": 550
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03148v1/fig-002.webp",
+      "caption": "Fig. 2: Illustration of the simulated robot and test environment. Green dots are semantic locations that the agent can navigate to via the connected lines.",
+      "page": 4,
+      "index": 2,
+      "width": 491,
+      "height": 717
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03148v1/fig-003.webp",
+      "caption": "Fig. 1: Overview of our proposed system",
+      "page": 2,
+      "index": 3,
+      "width": 898,
+      "height": 589
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03148v1/fig-004.webp",
+      "caption": "Fig. 4: Ground-truth success rate of the models over an increasing number of executions added to the episodic memory",
+      "page": 7,
+      "index": 4,
+      "width": 512,
+      "height": 538
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03148v1/fig-005.webp",
+      "caption": "Fig. 5: Tool calls of the models over an increasing number of executions accumulated in the episodic memory",
+      "page": 7,
+      "index": 5,
+      "width": 512,
+      "height": 550
+    }
+  ]
+}

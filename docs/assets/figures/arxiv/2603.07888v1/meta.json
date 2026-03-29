@@ -1,0 +1,206 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.07888v1/fig-001.webp",
+      "caption": "Figure 1: Comparison of VLM-SubtleBench and MLLM-CompBench with GPT-4o.",
+      "page": 1,
+      "index": 1,
+      "width": 394,
+      "height": 328
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07888v1/fig-002.webp",
+      "caption": "Figure 4: Statistics of the test split of VLM-SubtleBench.",
+      "page": 6,
+      "index": 2,
+      "width": 731,
+      "height": 314
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07888v1/fig-003.webp",
+      "caption": "Figure 18: Example of subtraction-image construction. Given two aligned images (I1, I2), the subtraction map S highlights regions with maximal pixel-wise change.",
+      "page": 25,
+      "index": 3,
+      "width": 826,
+      "height": 230
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07888v1/fig-004.webp",
+      "caption": "Figure 17: Example of overlap-image construction. Two aligned inputs are blended with equal weights (50% each) to produce a composite image that visually merges both inputs.",
+      "page": 25,
+      "index": 4,
+      "width": 826,
+      "height": 183
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07888v1/fig-005.webp",
+      "caption": "Table 8: Model-wise accuracy on VLM-SubtleBench, MLLM-CompBench, MMAD, and QAG360K.",
+      "page": 26,
+      "index": 5,
+      "width": 806,
+      "height": 277
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07888v1/fig-006.webp",
+      "caption": "Figure 19: Example highlight images. Significant regions of change, extracted via percentile thresholding and morphological filtering, are emphasized by dimming the background and drawing green bounding-box boundaries.",
+      "page": 26,
+      "index": 6,
+      "width": 829,
+      "height": 254
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07888v1/fig-007.webp",
+      "caption": "Table 7: Number of test examples per difference type, domain, and source.",
+      "page": 15,
+      "index": 7,
+      "width": 729,
+      "height": 856
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07888v1/fig-008.webp",
+      "caption": "Figure 11: Grid prompt used in our benchmark.",
+      "page": 21,
+      "index": 8,
+      "width": 826,
+      "height": 385
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07888v1/fig-009.webp",
+      "caption": "Figure 10: Two-step reasoning prompt used in our benchmark.",
+      "page": 21,
+      "index": 9,
+      "width": 826,
+      "height": 827
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07888v1/fig-010.webp",
+      "caption": "Figure 2: Example tasks from the VLM-SubtleBench, covering ten difference categories (Attribute, State, Emotion, Temporal, Spatial, Existence, Quality, Quantity, Viewpoint, Action) and six domains (natural, game, medical, industry, aerial, synthetic). For each example, the correct answer is highlighted in bold green. Model responses from GPT-5-main, Claude-sonnet-4, and Gemini-2.5pro are shown beneath each question in order. Some VQA instances are simplified due to space constraints; full versions and additional examples are provided in the appendix.",
+      "page": 2,
+      "index": 10,
+      "width": 818,
+      "height": 588
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07888v1/fig-011.webp",
+      "caption": "Table 13: Performance of proprietary models by data source",
+      "page": 29,
+      "index": 11,
+      "width": 822,
+      "height": 755
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07888v1/fig-012.webp",
+      "caption": "Figure 12: Concatenating prompt used in our benchmark.",
+      "page": 22,
+      "index": 12,
+      "width": 826,
+      "height": 386
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07888v1/fig-013.webp",
+      "caption": "Figure 13: Highlighting prompt used in our benchmark.",
+      "page": 22,
+      "index": 13,
+      "width": 826,
+      "height": 762
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07888v1/fig-014.webp",
+      "caption": "Figure 15: Subtracting prompt used in our benchmark.",
+      "page": 23,
+      "index": 14,
+      "width": 826,
+      "height": 548
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07888v1/fig-015.webp",
+      "caption": "Figure 14: Overlapping prompt used in our benchmark.",
+      "page": 23,
+      "index": 15,
+      "width": 826,
+      "height": 533
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07888v1/fig-016.webp",
+      "caption": "Table 12: Effect of different prompting strategies in VLM-SubtleBench.",
+      "page": 28,
+      "index": 16,
+      "width": 794,
+      "height": 219
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07888v1/fig-017.webp",
+      "caption": "Table 2: Performance of open-source and proprietary vision-language models in VLM-SubtleBench. Human evaluation was conducted on a randomly selected 10% of the samples.",
+      "page": 8,
+      "index": 17,
+      "width": 818,
+      "height": 396
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07888v1/fig-018.webp",
+      "caption": "Figure 7: Example annotation interface for sources without ground-truth annotations (YT8M temporal). Annotators provide labels (e.g., whether the temporal order is irreversible) for each frame pair.",
+      "page": 17,
+      "index": 18,
+      "width": 829,
+      "height": 431
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07888v1/fig-019.webp",
+      "caption": "Table 10: Domain-wise accuracy (%) of open-source and proprietary VLMs.",
+      "page": 27,
+      "index": 19,
+      "width": 818,
+      "height": 423
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07888v1/fig-020.webp",
+      "caption": "Figure 16: Captioning prompt used in our benchmark.",
+      "page": 24,
+      "index": 20,
+      "width": 826,
+      "height": 259
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07888v1/fig-021.webp",
+      "caption": "Table 4: Effect of prompting strategies and fine-tuning in VLM-SubtleBench.",
+      "page": 9,
+      "index": 21,
+      "width": 818,
+      "height": 325
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07888v1/fig-022.webp",
+      "caption": "Figure 8: Standard prompt used in our benchmark.",
+      "page": 20,
+      "index": 22,
+      "width": 826,
+      "height": 365
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07888v1/fig-023.webp",
+      "caption": "Figure 9: Reasoning prompt used in our benchmark.",
+      "page": 20,
+      "index": 23,
+      "width": 826,
+      "height": 486
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07888v1/fig-024.webp",
+      "caption": "Figure 3: Data Curation Pipeline of VLM-SubtleBench.",
+      "page": 5,
+      "index": 24,
+      "width": 826,
+      "height": 490
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07888v1/fig-025.webp",
+      "caption": "Figure 6: Example annotation interface for sources with ground-truth annotations (ChangeIt). Annotators select frame pairs from pre-sampled candidates based on the provided labels.",
+      "page": 16,
+      "index": 25,
+      "width": 826,
+      "height": 440
+    }
+  ]
+}
