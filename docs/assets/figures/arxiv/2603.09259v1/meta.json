@@ -1,0 +1,70 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.09259v1/fig-001.webp",
+      "caption": "Fig. 3. Model training diagram using RoomTour3D. Two complementary tasks are designed to enhance NaviLLM: (a) Pretraining. Sampled frames along the trajectory serve as candidate observations, and the model is optimized to summarize object progression along the path. (b) Finetuning. Each frame acts as a navigable step. Given the historical observations <0>–<2> and a navigation instruction, the model predicts the next action by choosing among candidate views (A–D).",
+      "page": 6,
+      "index": 1,
+      "width": 1074,
+      "height": 363
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09259v1/fig-002.webp",
+      "caption": "Fig. 4. Overview of implicit-geometry training. Our RoomTour3D-IGR processes both explicit geometry from simulators and implicit geometry from RoomTour videos, alongside task instructions. (a) For simulator data, the pipeline follows the original RoomTour3D setup: RGB observations are encoded by the scene encoder, while explicit geometric features (e.g., distance and heading) are incorporated. For instance, <2>–<A>: 1.6 m, 88° denotes a spatial relation guiding the agent’s next action. (b) For RoomTour videos, frames 1–2 form the trajectory history, and frame 3 acts as a navigation candidate. RGB frames are encoded by the scene encoder, while a VGGT-based spatial encoder extracts implicit geometric features. These embeddings are projected via a spatial projector into the LLM’s latent space to guide accurate action prediction.",
+      "page": 7,
+      "index": 2,
+      "width": 1025,
+      "height": 548
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09259v1/fig-003.webp",
+      "caption": "TABLE 4 Overall comparison with SOTA zero-shot methods on R2R. † denotes training exclusive navigable actions. ⋆ denotes using 36 views setting.",
+      "page": 10,
+      "index": 3,
+      "width": 471,
+      "height": 383
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09259v1/fig-004.webp",
+      "caption": "Fig. 1. Overview of our origin RoomTour3D with COLMAP reconstruction and explicit geometry information. Starting from a room tour video, we first apply BLIP-2 [91] on frame sequence to predict the room locations. Next, we use RAM [18] and GroundingDINO [19] to identify objects within the frames and employ Depth-Anything [20] for depth prediction. Subsequently, COLMAP is used to reconstruct the 3D scene with complete geometry information, and we sample human walking trajectories from the continuous frames. The trajectory captures open-world objects, their positions, and depths relative to the camera. Finally, we use advanced LLM, i.e., GPT-4 to generate the free-form descriptions for pretraining, namely description-enriched trajectories. Specifically, for the trajectory shown in the figure, which involves instant turning points, we specially treat <0> to <6> as walking trajectory, <A> <B> and <C> as side-watching points and use them as negative candidates for navigation finetuning task, namely action-enriched trajectories. For more details, please refer to Section 3.",
+      "page": 4,
+      "index": 4,
+      "width": 1044,
+      "height": 540
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09259v1/fig-005.webp",
+      "caption": "Fig. 5. Visual robustness evaluation under common degradations on R2R Val Unseen. The figure illustrates four types of perturbations (Gaussian noise, motion blur, JPEG compression, defocus blur, and brightness) with image examples, together with SPL and SR results. Compared to NaviLLM, our RoomTour3D-trained agent suffers smaller performance drops under all degradations, highlighting improved tolerance in real-world.",
+      "page": 12,
+      "index": 5,
+      "width": 1047,
+      "height": 390
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09259v1/fig-006.webp",
+      "caption": "Fig. 6. Visualization of navigation paths of NaviLLM [24] and our RoomTour3D model on R2R-unseen. 1⃝ denotes the starting location. The red circle marks an incorrect endpoint, while the green circle indicates the correct one. (a) In a scenario requiring directional judgment, our method makes the correct decision, whereas the baseline is misled by a similar-looking entrance at the waypoint and mistakenly turns right. (b) In an unusual room layout, where two different sinks appear in close proximity, the baseline is distracted by the first incorrect sink it encounters. In contrast, our method follows the instruction “go straight until you pass” more reliably and successfully reaches the correct sink.",
+      "page": 12,
+      "index": 6,
+      "width": 970,
+      "height": 425
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09259v1/fig-007.webp",
+      "caption": "TABLE 1 Overall comparison with the baseline methods. Our RoomTour3D data can boost NaviLLM by a margin on SOON, R2R and REVERIE on SPL metric and on CVDN GP metric. ⋆ denotes reproduced results. † denotes involving all RoomTour3D data into geometry-aware training, refering to Table 6 for detailed comparison.",
+      "page": 9,
+      "index": 7,
+      "width": 1020,
+      "height": 453
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09259v1/fig-008.webp",
+      "caption": "Fig. 2. Instruction generation in a controllable way. (a) Using open-sourced expert models, we identify what objects are in the frames, and assess how far an object is and determine where an object is located. The information is then textualized to create richly detailed frame captions. (b) BLIP-2 is adopted to predict and smooth room location across sequential frames. (c) Combining room locations and object information, we use GPT-4 for controllable and open-vocabulary instruction generation. The prompt consists of a task instruction that defines the generation task, and in-context examples that constrain the output style.",
+      "page": 5,
+      "index": 8,
+      "width": 1074,
+      "height": 433
+    }
+  ]
+}

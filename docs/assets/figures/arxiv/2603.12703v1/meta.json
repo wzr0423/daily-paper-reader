@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.12703v1/fig-001.webp",
+      "caption": "Fig. 1: Streaming counting as a probe for spatial-temporal state maintenance. Top: Object counting tracks the current count at each moment (current-state) and cumulative unique identities across time. Bottom: Event counting detects instantaneous actions and span events. Models are queried at multiple timepoints during video playback.",
+      "page": 2,
+      "index": 1,
+      "width": 718,
+      "height": 528
+    },
+    {
+      "url": "assets/figures/arxiv/2603.12703v1/fig-002.webp",
+      "caption": "Fig. 3: VCBench dataset construction pipeline. Shows the complete process from video source selection, fine-grained annotation generation to streaming query point design. We collect videos from multiple sources including web platforms, existing computer vision datasets, and self-generated simulations, then perform manual annotations and design streaming query points.",
+      "page": 7,
+      "index": 2,
+      "width": 666,
+      "height": 302
+    },
+    {
+      "url": "assets/figures/arxiv/2603.12703v1/fig-003.webp",
+      "caption": "Table 3: Event Counting Results on VCBench. GPA: Gaussian Precision Accuracy, MoC: Monotonicity Consistency, UDA: Update Direction Accuracy (scaled to 0-100). Best in bold, second underlined.",
+      "page": 10,
+      "index": 3,
+      "width": 727,
+      "height": 410
+    },
+    {
+      "url": "assets/figures/arxiv/2603.12703v1/fig-004.webp",
+      "caption": "Table 2: Overall Performance and Object Counting Results on VCBench. GPA: Gaussian Precision Accuracy, MoC: Monotonicity Consistency, UDA: Update Direction Accuracy (scaled to 0-100). Best in bold, second underlined.",
+      "page": 10,
+      "index": 4,
+      "width": 725,
+      "height": 381
+    },
+    {
+      "url": "assets/figures/arxiv/2603.12703v1/fig-005.webp",
+      "caption": "Table 1: Dataset statistics by subcategory. Annotated events are independent occurrences. E2 events include start and end timestamps.",
+      "page": 8,
+      "index": 5,
+      "width": 594,
+      "height": 288
+    },
+    {
+      "url": "assets/figures/arxiv/2603.12703v1/fig-006.webp",
+      "caption": "Fig. 2: Taxonomy of spatial-temporal state maintenance. We decompose counting into 8 subcategories across object and event dimensions. Each subcategory requires tracking different types of information: O1 tracks currently visible quantities, O2 tracks cumulative unique identities, E1 counts discrete instantaneous occurrences, and E2 counts complete activity cycles.",
+      "page": 5,
+      "index": 6,
+      "width": 569,
+      "height": 618
+    }
+  ]
+}

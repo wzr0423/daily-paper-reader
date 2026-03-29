@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.10463v1/fig-001.webp",
+      "caption": "Table 4. ANOVA and trend analysis across coverage levels (20%, 50%, 80%). Group 1–3 correspond to means at 20%, 50%, 80%.",
+      "page": 6,
+      "index": 1,
+      "width": 1031,
+      "height": 313
+    },
+    {
+      "url": "assets/figures/arxiv/2603.10463v1/fig-002.webp",
+      "caption": "Figure 4. An overview of GeoAoT. Given an input image, GeoAoT first leverages a pre-trained LMMs to generate an initial geo-guess. It then iteratively refines this estimate through AoT based multi-turn interactions, where the model reasons about uncertainty and issues actions to gather more evidence, operating purely at inference time without any additional training.",
+      "page": 7,
+      "index": 2,
+      "width": 1018,
+      "height": 437
+    },
+    {
+      "url": "assets/figures/arxiv/2603.10463v1/fig-003.webp",
+      "caption": "Figure 2. Figure 2. (a) Global distribution of model-proposed locations across all continents. (b) Country-level distribution of the proposed locations. (c) Average navigation-graph structure of the WanderBench dataset.",
+      "page": 3,
+      "index": 3,
+      "width": 932,
+      "height": 469
+    },
+    {
+      "url": "assets/figures/arxiv/2603.10463v1/fig-004.webp",
+      "caption": "Table 5. Performance of GeoAoT on the benchmark. Blue bold values represent the best AoT result. Red bold values represent the strongest improvement per column.",
+      "page": 8,
+      "index": 4,
+      "width": 1036,
+      "height": 583
+    },
+    {
+      "url": "assets/figures/arxiv/2603.10463v1/fig-005.webp",
+      "caption": "Table 2. Spatial diversity metrics of model-proposed locations. All coordinates normalized to [0, 1]2 per continent. O16: occupancy on 16×16 grid; H16: entropy; Ahull: convex-hull area; RCE: Clark–Evans ratio; r̄NN: mean nearest-neighbor distance.",
+      "page": 4,
+      "index": 5,
+      "width": 496,
+      "height": 331
+    },
+    {
+      "url": "assets/figures/arxiv/2603.10463v1/fig-006.webp",
+      "caption": "Figure 3. Visualization of the average navigation graph structure across all locations in the WanderBench dataset. Node sizes correspond to occurrence frequency within spatial bins, while edge thickness indicates transition frequency between bins.",
+      "page": 4,
+      "index": 6,
+      "width": 466,
+      "height": 284
+    },
+    {
+      "url": "assets/figures/arxiv/2603.10463v1/fig-007.webp",
+      "caption": "Table 3. Baseline performance of models on the benchmark. Lower is better for Distance (km), higher is better for all other metrics. Blue bold values represent the best within the open-source model type. Red bold values represent the best performance across all model types (closed-source).",
+      "page": 5,
+      "index": 7,
+      "width": 1036,
+      "height": 511
+    }
+  ]
+}

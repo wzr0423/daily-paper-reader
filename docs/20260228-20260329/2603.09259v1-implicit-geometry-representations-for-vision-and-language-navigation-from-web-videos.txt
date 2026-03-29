@@ -1,0 +1,687 @@
+Title: Implicit Geometry Representations for Vision-and-Language Navigation from Web Videos
+
+URL Source: https://arxiv.org/pdf/2603.09259v1
+
+Published Time: Wed, 11 Mar 2026 00:40:51 GMT
+
+Number of Pages: 16
+
+Markdown Content:
+> SUBMISSION TO IEEE TRANSACTIONS ON PATTERN ANALYSIS AND MACHINE INTELLIGENCE 1
+
+# Implicit Geometry Representations for Vision-and-Language Navigation from Web Videos 
+
+## Mingfei Han*, Haihong Hao*, Liang Ma, Kamila Zhumakhanova, Ekaterina Radionova, Jingyi Zhang, Xiaojun Chang, Xiaodan Liang, Ivan Laptev 
+
+Abstract —Vision-and-Language Navigation (VLN) has long been constrained by the limited diversity and scalability of simulator-curated datasets, which fail to capture the complexity of real-world environments. To overcome this limitation, we introduce a large-scale video-instruction framework derived from web-based room tour videos, enabling agents to learn from natural human walking demonstrations in diverse, realistic indoor settings. Unlike existing datasets, our framework integrates both open-ended description-enriched trajectories and action-enriched trajectories reconstructed in 3D, providing richer spatial and semantic supervision. A key extension in this work is the incorporation of implicit geometry representations , which extract spatial cues directly from RGB frames without requiring fragile 3D reconstruction. This approach substantially improves data utilization, alleviates reconstruction failures, and unlocks large portions of previously unusable video data. Comprehensive experiments across multiple VLN benchmarks (CVDN, SOON, R2R, and REVERIE) demonstrate that our method not only sets new state-of-the-art performance but also enables the development of robust zero-shot navigation agents. By bridging large-scale web videos with implicit spatial reasoning, this work advances embodied navigation towards more scalable, generalizable, and real-world applicable solutions. 
+
+Index Terms —Vision-and-Language Navigation, Implicit Geometry, Web Videos, Embodied AI, Large Language Models 
+
+## ✦
+
+## 1 INTRODUCTION 
+
+# OVER the past few years, the field of Vision-and-Language Navigation (VLN) [1], [2], [3], [4], [5], [6] has primarily relied on manually designed simulators and annotated navigation paths. Early benchmarks such as R2R [2] pioneered language-guided navigation within simu-lated indoor environments, while later datasets—including CVDN [7], REVERIE [1], and SOON [8]—extended VLN to dialogue-based and object-centric tasks. Despite these ad-vances, the heavy dependence on simulated environments limits the diversity of visual scenes and fails to capture the complexity, clutter, and variability of real-world settings. To mitigate the lack of diversity in training data, sev-eral recent efforts have attempted to construct richer, more complex datasets. AirBERT [9] leverages Airbnb imagery to synthesize panoramic views, yet these static images lack the temporal coherence and spatial continuity needed for navigation. ScaleVLN [10] utilizes curated 3D environ-ments [11], [12] for large-scale training, but faces high re-construction costs and scalability limitations. YTB-VLN [13] extracts panoramic views and text from web videos, while NaVid [14] integrates MatterPort3D [15] with video data for sim-to-real transfer. Nevertheless, these datasets still fall short of jointly achieving (1) broad scene diversity ,
+
+*Authors contribute equally. 
+
+• Mingfei Han, Liang Ma, Kamila Zhumakhanova, Ekaterina Radionova, Xiaojun Chang, Xiaodan Liang and Ivan Laptev are with the Department of Computer Vision, Mohamed Bin Zayed University of Artificial Intelli-gence, Abu Dhabi, United Arab Emirates. E-mail: {mingfei.han, liang.ma }@mbzuai.ac.ae 
+
+• Haihong Hao is with School of Information Science and Technology, University of Science and Technology of China. 
+
+• Jingyi Zhang is with Shenzhen Campus of Sun Yat-Sen University. 
+
+(2) open-vocabulary object variety , and (3) comprehensive spatial understanding —three essential ingredients for de-veloping robust, generalizable embodied agents. To bridge this gap, we introduce RoomTour3D , a large-scale dataset that provides spatially enriched, geometry-aware supervision for VLN. RoomTour3D leverages pub-licly available room tour videos, which naturally capture human walking trajectories through diverse real-world in-door environments. These first-person-view videos offer agent-centric perspectives that encompass a broad spectrum of room layouts, furniture arrangements, and lighting con-ditions. The continuous motion within each video provides dense spatial context and multi-view coverage, making them ideal for modeling realistic navigation behaviors. To fully harness the potential of such videos, we develop an automated pipeline that extracts open-ended, geometry-aware human walking trajectories and generates spatially grounded navigation instructions in open-vocabulary form. Our pipeline densely samples frames along continuous walk-through sequences to model realistic navigation sce-narios. Using COLMAP [16], [17], we reconstruct 3D envi-ronments to recover geometric cues such as camera poses and orientations. Decision-making frames are sampled at turning points with maximal yaw rotation, while additional frames are selected approximately every 1.5 meters to de-fine navigable steps. The reconstructed scenes are further enriched using RAM [18] for object recognition, Grounding-DINO [19] for object localization, and Depth-Anything [20] for depth estimation. Finally, GPT-4 [21] generates open-vocabulary navigation instructions, enabling both descrip-tive summarization and task-specific guidance. While explicit 3D reconstruction provides valuable spa- 
+
+> arXiv:2603.09259v1 [cs.CV] 10 Mar 2026 SUBMISSION TO IEEE TRANSACTIONS ON PATTERN ANALYSIS AND MACHINE INTELLIGENCE 2
+
+tial structure, it remains fragile and inefficient in real-world web videos. In our preliminary data collection, nearly 200K candidate trajectories were gathered, but only about 17K could be successfully reconstructed—resulting in over 90% data loss. This low success rate arises from inherent chal-lenges in web footage, such as motion blur, dynamic objects, inconsistent lighting, and insufficient scene overlap. Con-sequently, explicit geometric reconstruction severely limits scalability and data utilization. To address this limitation, we introduce implicit geom-etry representations (IGR) as a key extension of Room-Tour3D. Instead of relying on explicit 3D reconstruction, IGR extracts spatial cues directly from RGB frames using learned spatial encodings. This implicit approach preserves essential geometric information without the need for frag-ile structure-from-motion pipelines. Inspired by advances in implicit geometry learning such as VLM-3R [22] and Cut3R [23], our design effectively leverages previously dis-carded video data, substantially expanding usable training samples. Within VLN tasks, implicit geometry encodes rich spatial priors that enhance decision-making and path plan-ning while remaining robust to visual noise and environ-mental variability. Our resulting dataset comprises approximately 100K open-ended trajectories , 200K descriptive captions , and 
+
+17K action-enriched, geometry-aware trajectories collected from 1,847 homes . We additionally release intermediate an-notations—object tags, bounding boxes, depth maps, room categories—and the corresponding code and prompts for instruction generation. Extensive experiments with Nav-iLLM [24], a state-of-the-art language model–based nav-igation agent, demonstrate consistent performance gains exceeding 6% across multiple VLN benchmarks (CVDN, SOON, R2R, and REVERIE), including a 9.8% improve-ment on SOON. When enhanced with implicit geometry, RoomTour3D-IGR achieves an additional 8% gain, confirm-ing its ability to improve navigation robustness and scala-bility. In summary, this paper makes the following contribu-tions:  
+
+> •
+
+We curate a novel dataset derived from diverse room tour videos, which provides longer trajectories, more complex environments, and greater scene continuity than previous web-based datasets.  
+
+> •
+
+We introduce a pipeline to extract geometry-aware navigation instructions, aligning spatial understand-ing with navigation goals, and generate open-vocabulary instructions for flexible and real-world navigation tasks.  
+
+> •
+
+We propose the use of implicit spatial encodings, which replace traditional explicit geometry, offering significant improvements in data utilization and ro-bustness.  
+
+> •
+
+We conduct thorough experiments and ablation stud-ies, demonstrating how our dataset and method im-prove the performance of state-of-the-art models, en-abling zero-shot generalization across diverse VLN tasks. Building upon our prior work [25], this extension in-corporates RoomTour3D-IGR—a version of RoomTour3D utilizing implicit geometry representations. This results in substantial improvements in three major areas:  
+
+> •
+
+We replace explicit geometric reconstruction with implicit spatial encodings, overcoming issues asso-ciated with noisy or incomplete geometry data from web-based videos, reducing the need for data filter-ing and reconstruction failures.  
+
+> •
+
+Our extensive ablation studies demonstrate that im-plicit geometry effectively reutilizes a significant por-tion of previously discarded data, thus broadening the available training set.  
+
+> •
+
+Comprehensive experiments across multiple VLN tasks show that our approach boosts performance while broadening RoomTour3D’s applicability and lowering barriers to data collection, making it a prac-tical solution for enhancing navigation agents using web-based videos. 
+
+## 2 RELATED WORK 
+
+2.1 Vision-and-Language Navigation 
+
+Navigating unfamiliar indoor environments through natu-ral language commands is a core capability for embodied agents designed to assist humans. The overarching goal of Vision-and-Language Navigation (VLN) is to enable agents to interpret linguistic instructions and complete diverse navigation tasks [2], [8]. Over time, a variety of benchmarks have been introduced to capture different aspects of this challenge. The R2R dataset [2] pioneered fine-grained, step-by-step instruction following in simulated environments. CVDN [7] expanded the paradigm to dialogue-driven nav-igation, while REVERIE [1] and SOON [8] focused on grounding natural language instructions to object-centric goals. Related lines of work such as Embodied Question Answering [26], [27] further extended these tasks toward active exploration in 3D environments. Recent advances have explored multiple strategies for improving vision–language grounding and action reason-ing. NavGPT2 [28] employs a Q-former for fine-grained cross-modal alignment, augmented with topological maps to support spatial reasoning. NavCoT [29] adapts LLaMA-7B with Chain-of-Thought reasoning to enable text-only large language models to perform embodied naviga-tion. SAME [30] introduces a State-Adaptive Mixture-of-Experts framework to handle dynamic observations, while SRDF [31] scales instruction–trajectory pairs through auto-matic generation, achieving human-level or better results. Other studies explore causal modeling (GOAT [32]), depth-augmented exploration (SUSA [33]), and BEV-style rea-soning (BSG [34]) inspired by multi-camera perception in autonomous driving [35]. While these methods collectively advance VLN, most still depend heavily on 2D visual cues and are often opti-mized for narrow, task-specific benchmarks [8], [36], [37], [38], [39], [40], [41], [42], [43], [44], [45], [46], [47], [48], [49], [50], [51], [52]. This specialization often limits their generalization to unseen environments [53]. In contrast, NaviLLM [24] demonstrates a more generalist framework, training a single LLM-based model jointly across multiple VLN tasks and achieving strong cross-task transferability. SUBMISSION TO IEEE TRANSACTIONS ON PATTERN ANALYSIS AND MACHINE INTELLIGENCE 3
+
+Nevertheless, even such generalist approaches remain con-strained by dataset limitations—most existing benchmarks lack real-world diversity and rely on explicit 3D annotations that are both costly and fragile. Our RoomTour3D dataset addresses these bottlenecks by leveraging large-scale, web-sourced room tour videos that provide continuous, richly annotated trajectories in realistic indoor environments. 
+
+2.2 Data-Centric Methods for VLN 
+
+A persistent challenge in VLN research is the limited availability of large, diverse training data , which restricts agents’ ability to generalize to unseen environments. Widely used datasets such as R2R [2], RxR [6], CVDN [7], and SOON [8] are all simulator-based and thus expensive to expand due to their heavy reliance on manual annotation. To mitigate this, several studies have explored data augmen-tation [54], [55], [56], [57], [58], [59], [60] and self-exploration in virtual environments [61], [62], which improve sample efficiency but do not fundamentally increase data diversity. Efforts to move beyond handcrafted simulators include web-based and synthetic approaches. VLN-BERT [41] and AirBERT [9] pretrain models on web image–caption pairs to improve vision–language alignment; however, such image collections lack the spatial and temporal continuity nec-essary for realistic navigation. Automated data generation pipelines [63], [64], such as ScaleVLN [10], leverage curated 3D scenes or synthetic environments but remain limited by reconstruction cost and lack of photorealistic variabil-ity. PanoGen [65] expands data diversity by synthesizing panoramic indoor scenes using diffusion models and re-cursive outpainting, though synthetic artifacts reduce real-ism. YTB-VLN [13] scales data collection by using YouTube room tour videos, yet its trajectories are discretized into panoramic nodes and lack explicit geometric reasoning, hindering applicability to embodied agents and real-world robotics. Our RoomTour3D dataset overcomes these constraints by departing from template-based pipelines. It introduces: (i) open-vocabulary, free-form instructions generated by large language models, (ii) open-ended trajectories extracted directly from continuous human walking videos, and (iii) decision-point and spatially proximate frame sampling for defining navigable actions. Combined with 3D reconstruc-tion and language-based scene descriptions, RoomTour3D offers a richer and more realistic supervision signal, bring-ing VLN training closer to real-world navigation behavior. 
+
+2.3 Geometric Information from Monocular Images 
+
+Inferring 3D structure from monocular imagery is a long-standing challenge in computer vision [23]. Existing meth-ods can be broadly categorized into geometry-based and learning-based approaches. Classical geometry-based methods reconstruct 3D scenes explicitly using only observed image sequences [23]. Structure-from-Motion (SfM) [66], [67], [68], [69], [70], [71], [72], [73], [74] estimates camera poses and sparse scene geometry by matching features across views, while Si-multaneous Localization and Mapping (SLAM) [75], [76], [77], [78], [79], [80], [81] incrementally builds spatial maps while tracking camera motion. More recently, neural ren-dering methods—such as NeRF [82], [83], [84], [85], [86] and Gaussian Splatting [87]—have enabled photorealistic 3D reconstruction and novel-view synthesis. However, these pipelines rely on stable textures, consistent lighting, and dense viewpoint overlap—conditions rarely met in uncon-strained web videos, where motion blur, dynamic objects, and abrupt camera movements are common. Learning-based approaches incorporate prior knowl-edge to achieve more robust geometric inference, of-ten through implicit geometry representations that cap-ture spatial information directly from image embeddings. DUSt3R [88] predicts dense point maps from uncalibrated image pairs, while CUT3R [23] extends this to streaming inputs for continuous online 3D estimation. MoGe [89] re-constructs geometry from a single image via affine-invariant point maps. Recently, VGGT [90] employs a transformer architecture to jointly predict multiple 3D attributes—depth, pose, and correspondence—without iterative optimization, significantly improving efficiency and robustness. Unlike classical methods, VGGT effectively handles low-texture regions and large viewpoint changes, making it particularly suitable for web videos and large-scale, in-the-wild data. These advancements directly motivate our use of im-plicit geometry representations in RoomTour3D. By replac-ing brittle explicit reconstruction with learned spatial em-beddings, we can fully exploit large volumes of web video data that were previously unusable due to reconstruction failures. This shift not only enhances robustness to noise and incomplete geometry but also scales spatial reasoning to diverse, unconstrained real-world environments. 
+
+## 3 ROOM TOUR 3D 
+
+In this section, we describe the automatic data curation pipeline of RoomTour3D. The pipeline encompasses the complete annotation process—from sampling open-ended human walking trajectories to generating corresponding textual descriptions enriched with open-world object di-versity and spatial awareness. Leveraging reconstructed 3D environments, we further sample navigable trajectories with associated actions. An overview of the entire data-generation process is presented in Figure 1. 
+
+3.1 Room Tour Video Collection 
+
+To achieve high diversity in indoor environments, we ex-ploit the abundance and variety of room tour videos avail-able on YouTube. These videos, typically recorded with hand-held cameras from a first-person perspective, provide realistic, dynamic visual streams that closely resemble em-bodied viewpoints. Our final dataset comprises 1,847 room tour videos totaling 243 hours of footage. The collection process builds upon the list of videos used in YTB-VLN [13], which we subsequently refined and expanded to ensure greater scene variety and data quality. To guarantee the usability of the videos for 3D re-construction, we prioritized continuous recordings with minimal interruptions—avoiding human interviews, abrupt cuts, or close-up shots. We applied a title–description–based filtering strategy using GPT-4 [21] and excluded clips SUBMISSION TO IEEE TRANSACTIONS ON PATTERN ANALYSIS AND MACHINE INTELLIGENCE 4…
+
+…
+
+Room tour video 
+
+> BLIP -2
+
+COLMAP 
+
+reconstruction               
+
+> Move through the corridor and step forwards. Pass by a paint on
+> the wall. Then advance through the bedroom and into the
+> bathroom . Start with a view of the bed, curtains, and lamp in
+> the distance. Move closer , noting the headboard, nightstand,
+> and chandelier .Pass the dresser and drawers towards the
+> doorway. In the bathroom , ...
+
+bedroom  bathroom  bedroom       
+
+> Negative cand.
+> Candid
+> ates:
+> <0>
+> <B> <C>
+> Distance and orientation diff:
+> <3> -<A>: 1.5m, 8 °;<3> -<B>: 1.8m, 34 °
+> <3> -<C>: 1.8m, -165 °; <3> -<D>: 2.0 m, -55 °
+
+picture frame, bed, 
+
+lamp, basin, 
+
+blanket, window… 
+
+> History:
+
+# … …
+
+> Depth
+> Anything
+> Grounding
+> DINO + RAM
+
+Description -enriched Trajectory 
+
+Action -enriched Trajectory              
+
+> <1> <2>
+> <A>
+> <3>
+> Current:
+> <D>
+> Positive cand. Current obs.
+> History ob s. Future obs.
+> Instruc
+> tion:
+> Move through the corridor and step forwards… advance
+> through the bedroom ... Start with a view of the bed ,
+> curtains ... Move closer , noting the headboard ... Pass
+> the dresser and …
+
+Fig. 1. Overview of our origin RoomTour3D with COLMAP reconstruction and explicit geometry information. Starting from a room tour video, we first apply BLIP-2 [91] on frame sequence to predict the room locations. Next, we use RAM [18] and Grounding-DINO [19] to identify objects within the frames and employ Depth-Anything [20] for depth prediction. Subsequently, COLMAP is used to reconstruct the 3D scene with complete geometry information, and we sample human walking trajectories from the continuous frames. The trajectory captures open-world objects, their positions, and depths relative to the camera. Finally, we use advanced LLM, i.e ., GPT-4 to generate the free-form descriptions for pretraining, namely description-enriched trajectories. Specifically, for the trajectory shown in the figure, which involves instant turning points, we specially treat <0> to <6> as walking trajectory, <A><B> and <C> as side-watching points and use them as negative candidates for navigation finetuning task, namely action-enriched trajectories. For more details, please refer to Section 3. 
+
+shorter than three minutes. Furthermore, we implemented a transition detector to identify abrupt scene changes and retained only those with at least nine continuous shots covering over 80% of the video’s duration. To maintain dataset freshness and diversity, we continually monitor and update high-quality YouTube channels (e.g., NavaRealty-Group, Open House 24, and Sona Visual) to include new uploads. For processing efficiency, all videos are spatially down-scaled to a shorter side of 360 pixels and temporally down-sampled to three frames per second. All subsequent data processing is performed on these normalized sequences. 
+
+3.2 Navigable Points and Instruction Generation 
+
+Navigable Points Generation. To infuse open-world knowl-edge from room tour videos into navigation agents, we interpret individual video frames as potential navigable observations. Each frame in a human walking trajectory can be regarded as having two possible actions: move forward or stop. At points of significant view change—instances where the view direction shifts sharply within a small spatial radius—we extract frames with distinct orientations as candidate navigable actions. Unlike YTB-VLN [13], which constructs panoramic images at discrete room nodes, our approach directly samples significant view-change points and their neighboring frames based on geometric cues. We detect such points by reconstructing the 3D scene to compute camera orientation differences and spatial dis-tances between consecutive frames. Situations in which a person revisits nearly the same spatial position from a differ-ent viewpoint, or turns sharply within close proximity, are particularly informative for generating diverse navigation actions. To identify these points, we calculate pairwise cosine similarity along the trajectory and retain frames exceeding a 45 degrees angular change. Non-maximum suppression is then applied to highlight local maxima in orientation shifts, isolating the most distinct transitions. Subsequently, DBSCAN clustering [92] groups nearby but visually distinct frames, ensuring a set of diverse, spatially meaningful nav-igable actions even without panoramic synthesis. 
+
+Instruction Generation. We next transform the collected visual–spatial information into structured textual inputs suitable for GPT-based instruction generation. This process aggregates multi-source signals from RAM (Swin-L) [18], Grounding DINO [19], and Depth-Anything [20], which collectively provide object categories, spatial coordinates, and depth cues. 
+
+Object Variety to Text. Room tour videos capture open-world indoor diversity—spanning furniture, d´ ecor, and lay-out variations—offering valuable context for training nav-igation models. We use RAM [18] to extract object tags in each frame and remove entries corresponding to room types SUBMISSION TO IEEE TRANSACTIONS ON PATTERN ANALYSIS AND MACHINE INTELLIGENCE 5Depth             
+
+> Anything
+> Grounding
+> DINO + RAM picture frame, bed,
+> lamp, basin, blanket,
+> window…
+> <0>: There is a bed, blanket, table to
+> the right of the current spot in the near
+> distance . There is a picture frame and
+> curtain to the left of the current spot in
+> closer distance . There is a chandelier
+> and pillow in the middle in a closer
+> distance . There is a window and lamp
+> in the middle in a further distance .
+
+(a) Object variety and spatial awareness 
+
+Task Instruction: 
+
+> You will be given a set of continuous frames. The frames are captured during the camera
+> movement. During movement, the objects in the frames change gradually, like objects
+> passing by, objects moving towards somewhere.
+> You should return a single and concrete sentence describing the camera moving trajectory by
+> the object's progression in the frames. You don't need to mention all the objects. It is good to
+> describe the moving trajectory without all of the objects.
+
+In -context Examples:        
+
+> Example 1:
+> <0>: In the study. there is a plant…to the left of the current spot...
+> <1>: In the study. there is a bookshelf to the left of the current spot…
+> <2>: In the hallway. there is a door to the left of the current spot…
+> Your moving trajectory description: Exit the study. Move from left to right, start near plant,
+> laptop, and table, pass a bookshelf…
+> Example 2:
+> …
+> Your turn:
+> <0>: In the bedroom , there is a bed, blanket, table to the right of the current spot…
+> …
+> <5>: In the bedroom , here is a wall to the left of the current spot in near distance …
+> Your moving trajectory description:
+
+(c) Controllable Instruction Generation    
+
+> <0> <5> <1> <4> <3> <2>
+> BLIP -2Bedroom, bedroom, bedroom, bathroom, bathroom, bedroom
+
+Q: Where am I? 
+
+Options: bedroom, bathroom, foyer, hallway, … 
+
+A: Bedroom. 
+
+<0> 
+
+Sequence: 
+
+(b) Room locations           
+
+> <6>
+> Move through the corridor and step forwards. Pass by a paint on the wall. Then advance through the
+> bedroom and into the bathroom . Start with a view of the bed, curtains, and lamp in the
+> distance. Move closer , noting the headboard, nightstand, and chandelier .Pass the dresser …
+
+Fig. 2. Instruction generation in a controllable way. (a) Using open-sourced expert models, we identify what objects are in the frames , and assess 
+
+how far an object is and determine where an object is located . The information is then textualized to create richly detailed frame captions. (b) BLIP-2 is adopted to predict and smooth room location across sequential frames. (c) Combining room locations and object information, we use GPT-4 for controllable and open-vocabulary instruction generation. The prompt consists of a task instruction that defines the generation task, and in-context examples that constrain the output style. 
+
+to maintain consistency with BLIP-2’s predicted room labels. These object tags are later used for spatial grounding and scene description. 
+
+Spatial Awareness to Text. Since navigation agents must reason about object positions and movements, spatial cues are vital. We jointly employ Grounding DINO [19] and Depth-Anything [20] to estimate spatial localization and relative distance. Depth-Anything is preferred over COLMAP [16], [17] depth because it directly provides dense and reliable depth maps without dependence on structure-from-motion, which is often error-prone in unconstrained web videos. Each frame is divided horizontally into three spatial zones—left (30%), center (40%), and right (30%)—and depth is quantized into near (30%), medium (40%), and far (30%) ranges. Overlap ratios between object bounding boxes and these regions determine relative spatial positions. For ex-ample, an object overlapping more than 30% with the near zone is labeled in the near distance. Large objects span-ning multiple ranges (e.g., carpets) are annotated across all relevant zones. This structured description encodes both position and scale, forming a rich textual input for GPT-based summarization. 
+
+GPT-Based Instruction Synthesis. We employ GPT-4 [21] to summarize the evolving object configurations along each walking trajectory. Object tags, spatial relations, and room locations are organized per frame and then formatted into a unified prompt template. GPT-4 synthesizes these structured inputs into coherent, context-aware navigation instructions, yielding high-quality training text for VLN agents. 
+
+3.3 Enriched Trajectories 
+
+3.3.1 Description-Enriched Trajectories 
+
+This subsection describes the generation of controllable, text-based descriptions for open-ended trajectories. We be-gin by uniformly sampling human-walking sequences at a rate of one frame every two seconds—approximately corresponding to an average walking speed of 1.42 m/s [93], which is typically slower indoors. As illustrated in Figure 2, each trajectory is annotated using expert models including BLIP-2 [91], RAM [18], Grounding-DINO [19], and Depth-Anything [20], which collectively provide information about object categories, spatial locations, and depth. The extracted multimodal cues are then composed into structured text and integrated with GPT-4 [21] to generate coherent and detailed trajectory-level instructions. 
+
+Object Variety and Spatial Awareness. To encode both se-mantic and spatial richness, we combine outputs from three expert models within a textual template: “There is a [object tag] to the [spatial position] of the current spot in [relative distance] .” Specifically, RAM [18] identifies object categories, Grounding-DINO [19] localizes objects spatially, and Depth-Anything [20] estimates relative depth. By analyzing object bounding-box centers and corresponding depth regions, we determine spatial placement with respect to the camera. The frame is divided into three lateral zones—left (30%), center (40%), and right (30%)—and depth is categorized as near (closest 30%), medium (next 40%), or far (remaining 30%). Overlap ratios between bounding boxes and these defined zones establish spatial and depth annotations. For instance, an object overlapping more than 30% with the near region is labeled as being in the near distance. Larger items spanning multiple zones, such as carpets or tables, are annotated across all relevant categories to preserve their extended spatial footprint. This procedure, visualized in Figure 2(a), ensures the resulting captions accurately encode both object variety and spatial relationships, facilitating effective instruction generation. 
+
+Room Location Annotation in Videos. To determine frame-level room categories, we employ BLIP-2 [91] in visual ques-tion–answering mode, using the prompt “Which room am SUBMISSION TO IEEE TRANSACTIONS ON PATTERN ANALYSIS AND MACHINE INTELLIGENCE 6(a) Pretraining with Summarization Task  (b) Finetuning with Navigation Task           
+
+> Cand: <0> <2> <4>
+> <hist>:
+> <cand>: 1.5m, 8 °1.8m, 34 °1.8m, -165 °
+> Task:
+> Describe the camera movement by listing the objects that
+> disappear from view as it pans in one direction.
+> Compare the History and Instruction to infer your current
+> progress, and then select the correct direction from the
+> candidates to go to the target location. Task:
+> Inst.:
+> Move through the corridor and step forwards… advance
+> through the bedroom ... Start with a view of the bed, curtains...
+> Move closer, noting the headboard... Pass the dresser and …
+> Output:
+> Move through the corridor
+> and step forwards. Pass by
+> a paint on the wall. Then
+> advance through the
+> bedroom and into the
+> bathroom . Start with a
+> view of the bed, curtain..
+> Output:
+> <View D >View C View B View A
+
+Embodied Agent    
+
+> Summarization
+> Navigation
+> <0> <1> <2>
+> View D
+> 2.0m, -55 °
+> <6>
+
+… … …     
+
+> History
+> Positive
+> Negative
+> Fig. 3. Model training diagram using RoomTour3D. Two complementary tasks are designed to enhance NaviLLM: (a) Pretraining. Sampled frames along the trajectory serve as candidate observations, and the model is optimized to summarize object progression along the path. (b) Finetuning.
+> Each frame acts as a navigable step. Given the historical observations <0>–<2>and a navigation instruction, the model predicts the next action by choosing among candidate views (A–D).
+
+I in?” Possible responses are restricted to a predefined list of 16 common room types ( bathroom, kitchen, bedroom, living room, hallway, office, dining room, foyer, laundry room, outside, porch, garage, front, patio, driveway, and backyard ). This tax-onomy is constructed by analyzing ten randomly sampled long videos, where BLIP-2 in generative mode identifies and ranks frequently mentioned room types. For per-frame labeling, we switch to BLIP-2’s discriminative mode and apply temporal smoothing to mitigate noise. As shown in Figure 2(b), this produces temporally consistent predictions. Manual evaluation on 50 clips achieved an accuracy of 85%, validating the reliability of this method. Restricting the answer set simplifies classification and reduces ambiguity, while the subsequent GPT-based trajectory summarization restores open-vocabulary expressiveness. 
+
+Controllable Instruction Generation. Finally, we inte-grate the room annotations with frame-level object de-scriptions and feed them into GPT-4-Turbo [21] for open-vocabulary instruction generation. Following the “Task In-struction – In-context Examples – Prediction” schema (see Figure 2(c)), GPT is guided to output concise and structured navigation-style descriptions. The in-context examples con-strain style and tone, while the task prompt defines the goal—summarizing object progression and spatial transi-tions throughout the trajectory. The generated text pro-vides coherent, controllable supervision suitable for training large-scale VLN models. 
+
+3.3.2 Action-Enriched Trajectories 
+
+3D Environment Reconstruction. To obtain accurate geo-metric information for each trajectory, we reconstruct 3D environments using COLMAP [16], [17]. Videos are sam-pled at 3 frames/s to balance accuracy and efficiency, and are segmented into 100-second overlapping clips (with 10-second overlaps) to enable parallel reconstruction. The re-sulting sub-models are merged by aligning overlapping frames—two adjacent models are fused when at least three frames overlap. Because reconstruction quality may vary, multiple models may be generated from a single clip. To merge them systematically, we build a graph where each sub-model is represented as a node and edges indicate overlapping frames. A depth-first search [94] is then applied to merge connected components recursively until a unified model is obtained. 
+
+Navigable Action Sampling. Navigation actions are ex-tracted by identifying significant view-change points within small spatial neighborhoods. The reconstructed 3D scenes allow estimation of camera orientation differences and spa-tial distances between frames, enabling detection of revis-its and sharp turns. Frames exhibiting angular changes above 45° are retained via cosine similarity filtering. Non-maximum suppression is then applied to isolate the strongest local changes, and DBSCAN clustering [92] groups spatially close yet visually distinct points. This proce-dure—visualized conceptually in Figure 3(b)—is robust to occasional reconstruction errors. Within each cluster, the most recent frame is designated as the positive candidate, and the frame with the greatest angular deviation serves as the negative candidate, producing diverse and realistic navigable actions. 
+
+3.3.3 Data Correctness Verification 
+
+To evaluate the reliability of the automatic data generation pipeline, we manually inspected 100 randomly selected trajectory descriptions. Each was scored on a four-point relevance scale (1 = totally irrelevant , 2 = partially relevant ,3 = mostly relevant , 4 = perfect match ). The average rating was 3.08, with 74% of samples judged “mostly relevant” or “per-fect match,” demonstrating that the generated annotations are both accurate and visually consistent. Representative examples of this verification are provided in the appendix. 
+
+3.4 From Explicit to Implicit 
+
+Implicit geometry representations (IGR) have been exten-sively explored in recent learning-based 3D methods such as CUT3R [23] and VGGT [90]. Prior studies suggest that implicit energy fields naturally encode geometric smooth-ness, continuity, and global consistency without requiring SUBMISSION TO IEEE TRANSACTIONS ON PATTERN ANALYSIS AND MACHINE INTELLIGENCE 7Action:  frame  3
+
+(a)  Explicit  geometry  from  simulators  (b)  Implicit  geometry  from  RoomTour  videos                            
+
+> <A> <B>
+> <1>
+> <2>
+> Observations at <2>:
+> <2> -<A> :
+> 1.6m, 88 °
+> <2> -<B> :
+> 1.8m, -83 °
+> Explicit geometry at <2> :
+> Sub sequence:
+> …
+> …
+> Pose
+> Encoder  Scene
+> Encoder
+> Spatial
+> projector  Scene
+> Encoder
+> Implicit geometric
+> embedding
+> Human annotated instruction: Exit the bathroom. Turn left. Then go into the
+> bedroom nearest to the world map on the wall above a desk. Stop a couple of
+> feet into the room.
+> Generated geometry -aware instruction: Move forward from a starting point with a
+> stool and wall lamps nearby , passing through a living room with various art pieces
+> and a picture frame to the right , transitioning into an area with a chandelier and
+> armchair chairs in the distance , then approaching a …
+> Spatial encoder
+> frame 1frame 3
+
+Scene  projector          
+
+> <hist>: <1> <cand>: <A> <B> <2> -<A>
+> <2> -<B>
+> Current: <2>; Candidates: <A> <B>
+
+Scene  projector       
+
+> <hist>: frames 1&2 <cand>: frame 3
+> frame 2
+
+Action:  <A>       
+
+> Selected view then append to
+> <hist> as <2>
+
+Task 
+
+Instruction 
+
+Trajectory 
+
+Description 
+
+Large Language Model      
+
+> This frame is then append to
+> <hist>
+
+Fig. 4. Overview of implicit-geometry training. Our RoomTour3D-IGR processes both explicit geometry from simulators and implicit geometry from RoomTour videos, alongside task instructions. (a) For simulator data, the pipeline follows the original RoomTour3D setup: RGB observations are encoded by the scene encoder, while explicit geometric features (e.g., distance and heading) are incorporated. For instance, <2>–<A>: 1.6 m, 88° denotes a spatial relation guiding the agent’s next action. (b) For RoomTour videos, frames 1–2 form the trajectory history, and frame 3 acts as a navigation candidate. RGB frames are encoded by the scene encoder, while a VGGT-based spatial encoder extracts implicit geometric features. These embeddings are projected via a spatial projector into the LLM’s latent space to guide accurate action prediction. 
+
+dense discretization into meshes or point clouds. By shaping a continuous energy landscape instead of directly regressing explicit structures, such models effectively represent multi-modal or uncertain geometries while maintaining overall coherence. Similar advantages are reported in robot manipulation, where energy-based implicit behavioral policies outperform explicit imitation strategies such as mean-squared error or mixture density networks [95]. Their superiority arises from representing continuous energy landscapes across the ac-tion space, allowing optimization toward low-energy, high-quality decisions. Our preliminary experiments also support these ob-servations: implicit geometry formulations capture global consistency even under irregular spatial sampling, enabling accurate 3D estimation without explicit continuity (see Fig-ure 4). This property aligns with the discrete and un-constrained nature of web-based videos, which lack the temporal and spatial regularity of simulator environments. Motivated by these findings, we replace explicit geometric inputs in our VLN model with implicit geometry encodings. Although the output policy remains discrete, using implicit spatial inputs provides smoother, more coherent, and noise-resilient perception—benefits verified in our subsequent experiments. 
+
+3.5 End-to-End RoomTour3D-IGR 
+
+We introduce RoomTour3D-IGR , an extension of our navi-gation framework that employs implicit geometry represen-tations. As illustrated in Figure 4, the architecture extends a pretrained navigation agent by integrating a new spatial encoding module capable of inferring geometry directly from RGB inputs. This design overcomes the principal lim-itation of web-based data—namely, the absence of explicit geometric annotations—allowing effective use of previously discarded videos. 
+
+Spatial Encoder. Instead of relying on explicit pose-based geometric information, we adopt implicit representations extracted via a Spatial Encoder . This encoder reuses the trans-former blocks of the pretrained VGGT [90] model (excluding its prediction heads). Given a sequence of N frames (Ii)Ni=1 ,each image Ii ∈ R3×H×W is first patchified into K tokens 
+
+tI ∈ RK×C using DINO feature extraction. These tokens are then processed through stacked transformer layers to yield frame-wise implicit geometric embeddings. 
+
+RoomTour3D-IGR Architecture. As shown in Figure 4, RoomTour3D-IGR preserves the original components of RoomTour3D—namely, the scene encoder, large language model (LLM), and pose encoder for explicit geome-try—while introducing the additional Spatial Encoder. The system dynamically selects between explicit and implicit geometry depending on data type. When processing simula-tor data, it behaves identically to the original RoomTour3D pipeline. When applied to web-based videos, the pose en-coder is replaced by the Spatial Encoder, whose outputs are projected via a spatial projector to align with the LLM feature space. These implicit geometric embeddings are then fused with visual and textual representations to form a unified end-to-end navigation model capable of operating seamlessly across both simulator and real-world domains. SUBMISSION TO IEEE TRANSACTIONS ON PATTERN ANALYSIS AND MACHINE INTELLIGENCE 8
+
+## 4 VISION -AND -L ANGUAGE NAVIGATION MODEL 
+
+In this section, we demonstrate how the proposed Room-Tour3D data can be effectively utilized to train a gener-alist embodied agent. We first review the state-of-the-art large language model–based navigation framework, Nav-iLLM [24]. Then, we describe two RoomTour3D-specific training tasks: a vision–instruction summarization task for pretraining and an action–instruction navigation task for finetuning. 
+
+4.1 Revisiting NaviLLM 
+
+NaviLLM represents a state-of-the-art (SOTA) large lan-guage model (LLM) framework for embodied navigation, achieving superior results across major benchmarks such as CVDN and SOON. It processes panoramic inputs by encod-ing scene observations and integrating them with natural-language navigation instructions. Distinct tokens are used to differentiate input types: <hist > denotes historical ob-servations, and <cand > represents candidate views at each decision step. During training, NaviLLM takes as input a navigation instruction together with multiple candidate views. At each step, the model predicts the most appropriate view (action) from the candidates. The selected view is subsequently cached as a <hist > token, allowing the model to update its internal state for future reasoning. At the final step of the navigation sequence, all accumulated <hist > tokens are summarized as an auxiliary task to encourage com-prehensive understanding of the agent’s traversed path. During inference, the model follows the same procedure: it sequentially accumulates historical observations ( <hist >)and evaluates candidate views ( <cand >) at each step to select the next optimal action. This iterative decision-making process ensures that the agent’s behavior remains consistent with both the observed environment and the given instruc-tion. 
+
+4.2 Summarization Task for Pretraining 
+
+To exploit the rich sequential structure of RoomTour3D videos and enhance long-horizon reasoning, we adapt Nav-iLLM for a summarization pretraining task . Here, each frame within a trajectory is treated as a candidate view, wrapped by <cand > tokens. Similar to the panoramic nodes used in conventional VLN settings, these frames represent consecutive agent observations along a path. As illustrated in Figure 3(a), we provide the LLM with both the sampled frame tokens and the corresponding task instruction in a unified prompt. The objective is to gen-erate a trajectory summary describing object progression, spatial transitions, and room locations. Training follows a next-token prediction paradigm, consistent with standard autoregressive language model optimization. This pretrain-ing stage allows the model to internalize spatial–temporal patterns and learn to reason about object relationships and scene continuity over extended sequences. 
+
+4.3 Navigation Task for Finetuning 
+
+To enable effective decision-making in realistic and large-scale environments, we further adapt NaviLLM for an 
+
+action–instruction finetuning task based on the action-enriched trajectories from RoomTour3D. Unlike panoramic observations that represent a static viewpoint, our dataset provides consecutive frames from distinct locations and ori-entations, with only one frame leading toward the intended destination. Each frame is again represented as a candidate action wrapped with <cand > tokens and is processed in the same format as panoramic views. As depicted in Figure 3(b), the model receives both the navigation instruction and historical frames, then selects the next optimal action from the available candidates. The chosen frame is cached as a 
+
+<hist > token, which updates the model’s navigation history for subsequent decisions. During finetuning, every frame corresponds to a poten-tial navigable step. The next frame in the trajectory serves as the ground-truth target action, with <STOP > used as an al-ternative termination token. The model learns to iteratively predict the next step based on accumulated observations and the instruction context, effectively building an internal representation of the trajectory. At the final step, the model performs a summarization subtask that reinforces its ability to recall object transitions and room layouts, improving consistency between visual history and linguistic under-standing. This hierarchical training approach strengthens the model’s capacity for long-term reasoning and precise action selection. 
+
+4.4 Training with Implicit Geometry 
+
+To integrate the proposed implicit geometry representations into the RoomTour3D training framework, we extend the model to the RoomTour3D-IGR configuration. We initialize this version with the pretrained weights from RoomTour3D and randomly initialize the projector module that bridges the Spatial Encoder and the LLM. The training corpus comprises both simulator-based data (e.g., Matterport3D) containing explicit geometric information and web-based videos containing only implicit geometry. When training on simulator data, RoomTour3D-IGR be-haves identically to the original RoomTour3D pipeline, us-ing explicit geometric features such as distances and head-ing offsets. Conversely, when processing web-based video data, explicit geometry is replaced with implicit spatial embeddings extracted by the Spatial Encoder. During this phase, the Spatial Encoder remains frozen while the pro-jector and LLM parameters are trainable. This ensures that the learned projector aligns the implicit spatial features with the LLM’s latent representation, enabling the joint system to generate meaningful geometric encodings. As a result, RoomTour3D-IGR effectively compensates for the absence of explicit 3D information in web videos and leverages a much larger portion of available data that would otherwise be discarded. This integration allows the agent to benefit from both high-quality simulator annotations and large-scale real-world video diversity, yielding a more robust and generalizable navigation policy. 
+
+## 5 TASKS AND EXPERIMENTS 
+
+5.1 Benchmarks and Metrics 
+
+Benchmarks. During pretraining, we follow practice from NaviLLM [24] and perform teacher-forcing training on the SUBMISSION TO IEEE TRANSACTIONS ON PATTERN ANALYSIS AND MACHINE INTELLIGENCE 9    
+
+> TABLE 1 Overall comparison with the baseline methods. Our RoomTour3D data can boost NaviLLM by a margin on SOON, R2R and REVERIE on SPL metric and on CVDN GP metric. ⋆denotes reproduced results. †denotes involving all RoomTour3D data into geometry-aware training, refering to Table 6 for detailed comparison.
+
+Methods CVDN SOON R2R REVERIE 
+
+Val-U Test Val-U Test Val-U Test Val-U Test 
+
+Models Focusing on Single Task 
+
+PREVALENT [47] 3.15 2.44 - - 53 51 - -HOP [48] 4.41 3.24 - - 57 59 26.1 24.3 HAMT [36] 5.13 5.58 - - 61 60 30.2 26.7 DUET [37] - - 22.6 21.4 60 58 33.7 36.0 VLN-SIG [49] 5.52 5.83 - - 62 60 - -VLN-PETL [50] 5.69 6.13 - - 60 58 27.7 26.7 DiscussNav [98] - - - - 40 - - -NavGPT2 [28] - - - - 61 60 - -AZHP [38] - - 26.6 - 61 60 36.6 35.8 BEV-BERT [51] - - - - 64 60 36.4 36.4 
+
+Unified Model For All Tasks 
+
+NaviLLM (w. Pretrain) [24] 6.16 7.90 29.2 26.3 59 60 35.7 32.3 NaviLLM (w. Pretrain) ⋆ 6.09 - 28.0 - 57 - 31.4 -
+
+RoomTour3D–IGR (Ours) † 7.38 8.06 32.7 29.4 66 64 39.2 37.0 
+
+combined dataset from our video-instruction data from RoomTour3D, together with CVDN [7], SOON [8], R2R [2], REVERIE [1] and ScanQA [96], and augmented data from R2R and REVERIE. In the multi-task fine-tuning stage, we alternate between teacher forcing and student forcing on the combined data from our action-instruction data from RoomTour3D, together with CVDN, SOON, R2R, REVERIE, ScanQA and LLaVA-23k [97]. To evaluate the impact of our data on navigation agent training, we test on CVDN, SOON, R2R, and REVERIE. CVDN requires navigating towards a target by understand-ing dialog history, linking dialogue comprehension to ac-tions. SOON tasks the agent with locating objects without bounding boxes, emphasizing semantic-visual alignment. R2R involves following step-by-step instructions, requir-ing dynamic progress tracking and precise alignment with navigational history. REVERIE focuses on localizing distant objects based on concise instructions, aided by ground truth bounding boxes at waypoints. 
+
+Evaluation Metrics. For the navigation tasks, we follow the evaluation methodology from [2] using the following navigation metrics: Success Rate (SR) , which measures whether the agent reaches the target location within a set distance threshold; Success Rate Weighted by Path Length (SPL) , which is the SR adjusted by the ratio of the ground truth path length to the actual path traveled; Goal Progress (GP) , the advancement in meters towards the goal. GP is utilized for the CVDN dataset, whereas SR and SPL are the metrics for other datasets. 
+
+5.2 Implementation details 
+
+Following the practice from NaviLLM [24], we fine-tune the multi-view fusion module and the LLM. The multi-view fusion module consists of a 2-layer transformer encoder with a hidden size of 1024, and the LLM is built upon Vicuna-7B-v1.1 [99]. The ViT in the scene encoder is EVA-CLIP-02-Large, which remains frozen during training. Our Spatial Encoder is built upon the pre-trained VGGT [90] without the prediction heads. The Spatial Encoder also remains frozen during training. Our RoomTour3D training follows a two-stage strategy using the Adam optimizer with a learning rate of 3e-5. The model is trained for 2500 steps in the pre-training stage and 1250 steps in the multi-task fine-tuning stage, with a batch size of 256. Our RoomTour3D– IGR training is built upon RoomTour3D with a learning rate of 5e-6 and 5000 steps using multi-task learning. The training process utilizes 4 ×8 Nvidia A100 GPUs. During testing, we employ a sampling strategy with a temperature of 0.01 for the SOON and REVERIE tasks to encourage exploration, while a greedy strategy is used for other tasks. This approach ensures robust performance across various evaluation scenarios. 
+
+5.3 Comparison on Supervised Tasks 
+
+As shown in Table 1, we performed a one-time fine-tuning on the four tasks in a fully supervised manner. To begin, our experiments reiterate the superiority of multitask training over single-task training. Also, incorporating our Room-Tour3D data into the pre-training process led to consistent improvements across all metrics on Val-U, achieving state-of-the-art results in the GP metric in the CVDN dataset. While the improvement on the CVDN datasets is modest, the most significant boost compared to the reproduced baseline is observed in R2R Val-U, REVERIE Val-U and SOON Val-U, with gains of approximately 7%, 3.5% and 3.5%, respectively. It is also surprising to witness that our RoomTour3D-IGR also achieves steady improvement on the held-out testing set. The improvement in R2R is largely driven by enhanced spatial awareness, stemming from the inclusion of proximity data, which helps the model better understand object distance and position. Similarly, SUBMISSION TO IEEE TRANSACTIONS ON PATTERN ANALYSIS AND MACHINE INTELLIGENCE 10                                                           
+
+> TABLE 2 RoomTour3D Desc and RoomTour3D Action stand for description-enriched trajectories only and action-enriched trajectories. Involving description-enriched trajectories and action-enriched trajectories achieves improvement over multiple benchmarks. The inclusion of implicit geometric representation achieves a further performance boost on both Val-U and Test sets. (E) denotes explicit geometric trajectories, and (I) denotes implicit geometry representation.
+> Methods Data type CVDN SOON R2R REVERIE
+> Desc Action Val-U Test Val-U Test Val-U Test Val-U Test NaviLLM (w. Pretrain) ⋆××6.09 -28.0 -57 -31.4 -RoomTour3D Desc ✓×6.96 7.55 30.2 26.5 62 62 37.1 35.1 RoomTour3D Action ✓✓(E) 6.33 7.22 31.7 27.8 62 62 37.4 36.4 RoomTour3D–IGR ✓✓(E+I) 7.10 7.73 32.0 28.3 64 63 38.0 36.5
+> TABLE 3 Ablation study on the input modalities for the trajectory summarization task.
+
+Object tags Depth / Box Room type CVDN SOON R2R REVERIE 
+
+GP ↑ SR ↑ SPL ↑ SR ↑ SPL ↑ SR ↑ SPL ↑× × × 6.09 33.6 28.0 66 57 38.3 31.4 
+
+✓ × × 5.41 32.5 26.5 64 56 42.5 34.4 
+
+✓ ✓ × 6.49 37.6 30.4 68 62 41.7 36.0 
+
+✓ ✓ ✓ 6.96 38.8 30.2 69 62 43.3 37.1     
+
+> TABLE 4 Overall comparison with SOTA zero-shot methods on R2R. †denotes training exclusive navigable actions. ⋆denotes using 36 views setting.
+
+Methods SR ↑ SPL ↑
+
+Random Walk [100] 3 2
+
+Commercial Models 
+
+NavGPT (GPT-3.5) ⋆ [101] 13.89 9.12 NavGPT (GPT-4) [101] 34 29 MapGPT (GPT-4) [102] 38.8 25.8 MapGPT (GPT-4V) [102] 43.7 34.8 DiscussNav (GPT-4) [42] 43 40 
+
+Open-source Models 
+
+LangNav (LLaMA2-7B) [100] 0 0NavCoT (LLaMA2-7B) [29] 7.78 6.50 DuET (Init. LXMERT [103]) 1 0NaviLLM † [24] 0 0RoomTour3D (Ours) 14.33 10.86 RoomTour3D–IGR (Ours) 19.21 14.60 
+
+gains in REVERIE are attributed to a combination of open-vocabulary tags, spatial awareness, and the addition of room type data, which encourages the model to infer the layout of environments, thereby boosting its spatial reason-ing capabilities. Moreover, our use of open-ended instruc-tions allows the model to adapt flexibly to diverse scenarios, fostering more robust and generalizable performance and better contextual understanding. 
+
+5.4 Comparison on Zero-shot Task 
+
+To further demonstrate the substantial indoor knowledge contained in our data and its effectiveness for embodied action and language instructions, we conduct zero-shot experiments on embodied action prediction, as shown in Table 4. We removed all action and geometric data from the training datasets and retrained NaviLLM with and with-out our RoomTour3D dataset. Without action prediction data, NaviLLM lacked the ability to learn effective navi-gable action selection. However, with the inclusion of our action-enriched trajectories, NaviLLM achieved a 14.33% SR and a 10.86% SPL, outperforming open-source models built on LLaMA-7B and reaching results comparable to NavGPT [101], which leverages GPT-3.5. These improve-ments validate the effectiveness of our 3D trajectories mined from room tour video reconstructions and emphasize the value of our action-enriched trajectories. Compared to using only the explicit geometry encoding from RoomTour3D, the additional use of implicit geometry encoding in Room-Tour3D–IGR achieved even higher performance, demon-strating a clear improvement. This gain is likely due to the implicit geometry representation’s ability to expand the effective training dataset and provide the navigation agent with richer prior knowledge. Together, they highlight the substantial contribution of our dataset in advancing open-world navigation research. 
+
+5.5 Ablation study 
+
+Effect of different RoomTour3D trajectories. Table 2compares the NaviLLM baseline with models trained on description-enriched trajectories and action-enriched trajectories. Using only description-enriched trajectories (RoomTour3D Desc ) already improves the baseline across all benchmarks—for example, SOON Val-U increases from 28.0 to 30.2, R2R Val-U improves from 57 to 62 (with 62 on Test), and REVERIE Val-U rises from 31.4 to 37.1 (35.1 on Test). Incorporating action-enriched trajectories with explicit ge-ometry (RoomTour3D Action ) yields further gains, achieving 31.7 on SOON and 37.4 on REVERIE, while maintaining performance on R2R and CVDN. Finally, adding implicit geometry representation ( RoomTour3D–IGR ) delivers the best overall results, 7.10 on CVDN, 32.0 on SOON, 64 on R2R, and 38.0 on REVERIE, demonstrating that both description- and action-enriched trajectories are beneficial and that implicit geometry further enhances generalization. Note that within this range of experiments, only action-enriched trajectories are used for geometry training. SUBMISSION TO IEEE TRANSACTIONS ON PATTERN ANALYSIS AND MACHINE INTELLIGENCE 11                                   
+
+> TABLE 5 Ablation study on geometric encoding. Compared with using only explicit or only implicit encoding, our RoomTour3D–IGR combines both and serves as a better choice. We report SPL for R2R, REVERIE and SOON, GP for CVDN on Val-U.
+> Geometry encoding CVDN SOON R2R REVERIE
+> Explicit 6.33 31.7 62 37.4 Implicit 7.07 30.9 64 36.8 Explicit + Implicit 7.38 32.7 66 39.2
+> TABLE 6 Ablation on training data usage. As implicit geometry relaxes reconstruction constraints, more trajectories can be included for geometric training. Consistent performance improvement across CVDN, SOON, R2R, and REVERIE (GP reported for CVDN, SPL for others) can be observed. †means involvement of all RoomTour3D data.
+> Methods CVDN SOON R2R REVERIE
+> RoomTour3D Desc 6.96 30.2 62 37.1
+> RoomTour3D–IGR 7.10 32.0 64 38.0
+> RoomTour3D–IGR †7.38 32.7 66 39.2
+
+Effect of open-world semantics and spatial awareness. 
+
+As shown in Table 3, we analyzed the impact of various information types on instruction generation. Adding object variety significantly improved performance on REVERIE with increase SPL from 31.35% to 34.37%, as this dataset relies on object grounding. However, it had no direct impact on SOON, possibly because SOON relies solely on detailed textual descriptions without explicit bounding box anno-tations. After introducing depth estimation, which helps determine the relative distances of objects, the performance on SOON, R2R and REVERIE achieve marginal boosts. This demonstrates that enhancing spatial awareness significantly contributes to indoor navigation tasks. Furthermore, incor-porating room locations, which capture the scene semantics along the trajectory, provided a moderate boost across all four VLN tasks. This further highlights the critical role of object variety and spatial awareness in improving naviga-tion performance. 
+
+Impact of geometry training scale. Table 6 highlights how implicit geometry allows more data to be exploited for geometric training. Starting from description-enriched tra-jectories, adding implicit geometry already improves per-formance (e.g., +0.14 on CVDN and +0.9 on REVERIE), confirming its effectiveness even without enlarging the ge-ometry training set ( i.e ., the action-enriched trajectories). When all trajectories are included with implicit geometric encoding, the performance further improves from 64 to 66 on R2R, and from 38.0 to 39.2 on REVERIE, from 7.10 to 7.38 on CVDN, from 32.0 to 32.7 on SOON. This demonstrates that implicit representations not only bypass the strict filter-ing of explicit reconstruction but also unlock a much larger portion of training data, which translates into consistent and measurable improvements across diverse navigation tasks. 
+
+Source of geometric information. Table 5 presents the ablation study on different sources of geometric encoding. Using only explicit geometry achieves a baseline of 6.33 on CVDN, 31.7 on SOON, 62 on R2R, and 37.4 on REVERIE. In contrast, implicit geometry encoding provides stronger generalization in most benchmarks, particularly on CVDN (7.07 vs. 6.33) and R2R (64 vs. 62), although it slightly under-performs on REVERIE. When combining both explicit and implicit geometry (RoomTour3D–IGR), the model achieves the best overall performance across all datasets—7.38 on CVDN, 32.7 on SOON, 66 on R2R, and 39.2 on REVERIE. These results confirm that implicit encoding is more robust than explicit alone, while the integration of both sources offers complementary benefits and leads to the strongest performance. 
+
+5.6 Robustness to Visual Degradations 
+
+While the original NaviLLM model was trained on simulator-rendered data, such data are inherently clean and free of noise, which diverges from the visual inputs a real navigation robot would encounter. In practice, robots may experience camera shake during movement or out-of-focus frames, leading to degraded observations that sig-nificantly affect performance. Our RoomTour3D dataset, being web-based, is closer to real-world conditions: human operators who captured these videos naturally introduced motion jitter, defocus, and other imperfections. We there-fore hypothesize that training on RoomTour3D enhances the model’s robustness and tolerance to real-world dis-turbances. Following prior work [104], we systematically introduce five common degradation types: Gaussian Noise (simulating sensor noise), Motion Blur (simulating motion-induced shake), JPEG (corrupted by JPEG compression), Defocus Blur (simulating camera defocus), and Brightness change (simulating camera over-exposure) to evaluate the visual robustness of our approach. Compared with NaviLLM, our RoomTour3D model demonstrates stronger robustness against visual degrada-tions. As shown in Figure 5, both models experience per-formance drops under degraded inputs, but the impact on RoomTour3D is consistently smaller. In mild cases such as Gaussian Noise and Brightness changes, RoomTour3D suffers almost no degradation, whereas NaviLLM shows around a 3% drop in SPL and SR. In more severe scenarios such as Motion Blur, NaviLLM encounters a substantial 11% decline, while RoomTour3D shows only about a 7% decrease. This advantage arises because our RoomTour3D dataset, being web-based, inherently captures real-world imperfections, such as motion jitter, defocus, and compres-sion artifacts, introduced during human video recording. Training on RoomTour3D therefore equips the model with greater tolerance to real-world disturbances and enhances its overall robustness. 
+
+5.7 Navigation Case Visualization 
+
+As shown in Figure 6, we highlight two representative cases where our RoomTour3D model improves upon Nav-iLLM [24]. In case (a), at 3⃝, the agent is required to make a left turn following the instruction “Turn into the doorway on the left.” However, the baseline incorrectly turns right at the designated decision point, causing it to deviate from the intended path. Once this mistake occurs, even with scene-graph history, the model struggles to realign with the correct trajectory. In contrast, training with RoomTour3D provides richer spatial and semantic supervision, enabling the agent SUBMISSION TO IEEE TRANSACTIONS ON PATTERN ANALYSIS AND MACHINE INTELLIGENCE 12 NaviLLM SR NaviLLM SPL RoomTour3D SR RoomTour3D SPL  
+
+> 64
+> 52
+> 57
+> 48
+> 69
+> 63
+> 62
+> 56
+> 45
+> 50
+> 55
+> 60
+> 65
+> 70
+> Origin JPEG
+
+Origin  Motion Blur Gaussian Noise  Compression Defocus Blur Brightness    
+
+> 64
+> 62
+> 57 55
+> 69 69
+> 62
+> 52
+> 57
+> 62
+> 67
+> Origin Brightness
+
+Robutsness against visual degradation      
+
+> Performance
+> 64
+> 61
+> 57
+> 53
+> 69 68
+> 62 61
+> 52
+> 57
+> 62
+> 67
+> Origin Gaussian Noise
+> 64
+> 60
+> 57
+> 52
+> 69
+> 66
+> 62
+> 59
+> 52
+> 57
+> 62
+> 67
+> Origin Defocus Blur
+> 64
+> 51
+> 57
+> 47
+> 69
+> 62 62
+> 56
+> 45
+> 50
+> 55
+> 60
+> 65
+> 70
+> Origin Motion Blur
+
+(a) Different visual degradation 
+
+(b) Performance variation of NaviLLM and RoomTour3D 
+
+Fig. 5. Visual robustness evaluation under common degradations on R2R Val Unseen. The figure illustrates four types of perturbations (Gaussian noise, motion blur, JPEG compression, defocus blur, and brightness) with image examples, together with SPL and SR results. Compared to NaviLLM, our RoomTour3D-trained agent suffers smaller performance drops under all degradations, highlighting improved tolerance in real-world. ⑤
+
+①
+
+②
+
+③
+
+④⑤
+
+⑥
+
+⑥
+
+Observation  ⑥
+
+Observation  ⑥
+
+① ②
+
+③ ④
+
+⑤
+
+④
+
+⑤
+
+⑥
+
+⑥
+
+⑦
+
+⑦
+
+Observation  ④
+
+Observation  ④      
+
+> Instruction :Exit the room then go straight until you pass the room on
+> the left then turn left and go into the room and wait by the sink .
+> (Instruction_id : 3952_1 Scan_id : zsNo4HB9uLZ)
+> Instruction :Exit the sewing room. Turn right. Go toward the glass cabinet
+> with the dolls in it. Turn into the doorway on the left . Pass the bed and
+> go through the next doorway on the left into the bathroom.
+> (Instruction_id : 4676_0 Scan_id : QUCTc6BB5sX)
+
+Ours 
+
+Baseline 
+
+Ours 
+
+Baseline 
+
+(a) Direction judgment  (b) Unusual room layout 
+
+Fig. 6. Visualization of navigation paths of NaviLLM [24] and our RoomTour3D model on R2R-unseen. 1 ⃝ denotes the starting location. The red circle marks an incorrect endpoint, while the green circle indicates the correct one. (a) In a scenario requiring directional judgment, our method makes the correct decision, whereas the baseline is misled by a similar-looking entrance at the waypoint and mistakenly turns right. (b) In an unusual room layout, where two different sinks appear in close proximity, the baseline is distracted by the first incorrect sink it encounters. In contrast, our method follows the instruction “go straight until you pass” more reliably and successfully reaches the correct sink. 
+
+to make more accurate decisions in such directional judg-ment scenarios. In case (b), at 4⃝, the agent must follow the instruction 
+
+“Go straight until you pass the room” to reach the correct sink among two sinks located in close proximity. The baseline, however, is distracted by the first sink it encounters and deviates onto an incorrect path. This unusual room lay-out, where multiple similar objects appear nearby, causes the baseline to overlook the critical instruction phrase “go straight until.” By leveraging RoomTour3D, which offers richer priors about room layouts and spatial semantics, our method better adheres to the instruction and successfully navigates to the correct sink. 
+
+## 6 CONCLUSION 
+
+In this paper, we presented RoomTour3D, a novel dataset automatically constructed from large collections of room tour videos for vision-and-language navigation (VLN). By leveraging the sequential continuity of video streams and integrating both object diversity and spatial awareness, our framework generates over 200K navigation instructions and 17K action-enriched trajectories across 1,847 indoor scenes. From these videos, we further extract navigable trajectories based on frame sequences and reconstructed 3D environ-ments, leading to significant performance improvements and new state-of-the-art results on the SOON and REVERIE benchmarks. Moreover, this scalable pipeline enables the training of a zero-shot navigation agent, underscoring the effectiveness and generalizability of RoomTour3D for ad-vancing embodied VLN research. Beyond explicit geometry, we extend the framework with implicit geometry representations (RoomTour3D-IGR), which infer spatial cues directly from RGB imagery without depending on fragile 3D reconstruction. This enhancement SUBMISSION TO IEEE TRANSACTIONS ON PATTERN ANALYSIS AND MACHINE INTELLIGENCE 13 
+
+mitigates the high failure rate of reconstruction in un-constrained web videos and greatly increases the usable data volume. Experimental results confirm that implicit geometry not only substitutes explicit geometry effectively but also produces consistent gains across multiple VLN benchmarks, improving both robustness and scalability. Collectively, these contributions establish RoomTour3D and its implicit variant as powerful resources for developing next-generation embodied navigation systems capable of learning from large-scale, real-world visual data. 
+
+## REFERENCES 
+
+[1] Y. Qi, Q. Wu, P. Anderson, X. Wang, W. Y. Wang, C. Shen, and A. van den Hengel, “REVERIE: Remote embodied visual referring expression in real indoor environments,” 2020. [2] P. Anderson, Q. Wu, D. Teney, J. Bruce, M. Johnson, N. S ¨ underhauf, I. Reid, S. Gould, and A. van den Hengel, “Vision-and-language navigation: Interpreting visually-grounded navi-gation instructions in real environments,” 2018. [3] X. E. Wang, V. Jain, E. Ie, W. Y. Wang, Z. Kozareva, and S. Ravi, “Environment-agnostic multitask learning for natural language grounded navigation,” in Computer Vision–ECCV 2020: 16th Eu-ropean Conference, Glasgow, UK, August 23–28, 2020, Proceedings, Part XXIV 16 . Springer, 2020, pp. 413–430. [4] V. Jain, G. Magalhaes, A. Ku, A. Vaswani, E. Ie, and J. Baldridge, “Stay on the path: Instruction fidelity in vision-and-language navigation,” arXiv preprint arXiv:1905.12255 , 2019. [5] X. Liang, L. Ma, S. Guo, J. Han, H. Xu, S. Ma, and X. Liang, “CorNav: Autonomous agent with self-corrected planning for zero-shot vision-and-language navigation,” 2024. [6] A. Ku, P. Anderson, R. Patel, E. Ie, and J. Baldridge, “Room-across-room: Multilingual vision-and-language naviga-tion with dense spatiotemporal grounding,” arXiv preprint arXiv:2010.07954 , 2020. [7] J. Thomason, M. Murray, M. Cakmak, and L. Zettlemoyer, “Vision-and-dialog navigation,” 2019. [8] F. Zhu, X. Liang, Y. Zhu, X. Chang, and X. Liang, “SOON: Sce-nario oriented object navigation with graph-based exploration,” 2021. [9] P.-L. Guhur, M. Tapaswi, S. Chen, I. Laptev, and C. Schmid, “Air-bert: In-domain pretraining for vision-and-language navigation,” 2021. [10] Z. Wang, J. Li, Y. Hong, Y. Wang, Q. Wu, M. Bansal, S. Gould, H. Tan, and Y. Qiao, “Scaling data generation in vision-and-language navigation,” in ICCV 2023 , 2023. [11] F. Xia, A. R. Zamir, Z. He, A. Sax, J. Malik, and S. Savarese, “Gibson Env: Real-world perception for embodied agents,” in 
+
+Proceedings of the IEEE conference on computer vision and pattern recognition , 2018, pp. 9068–9079. [12] S. K. Ramakrishnan, A. Gokaslan, E. Wijmans, O. Maksymets, A. Clegg, J. Turner, E. Undersander, W. Galuba, A. Westbury, A. X. Chang et al. , “Habitat-Matterport 3D dataset (HM3D): 1000 large-scale 3d environments for embodied ai,” arXiv preprint arXiv:2109.08238 , 2021. [13] K. Lin, P. Chen, D. Huang, T. H. Li, M. Tan, and C. Gan, “Learning vision-and-language navigation from youtube videos,” 2023. [14] J. Zhang, K. Wang, R. Xu, G. Zhou, Y. Hong, X. Fang, Q. Wu, Z. Zhang, and W. He, “NaVid: Video-based vlm plans the next step for vision-and-language navigation,” arXiv preprint arXiv:2402.15852 , 2024. [15] A. Chang, A. Dai, T. Funkhouser, M. Halber, M. Niessner, M. Savva, S. Song, A. Zeng, and Y. Zhang, “Matterport3d: Learning from rgb-d data in indoor environments,” International Conference on 3D Vision (3DV) , 2017. [16] J. L. Sch ¨ onberger and J.-M. Frahm, “Structure-from-Motion Re-visited,” in Conference on Computer Vision and Pattern Recognition (CVPR) , 2016. [17] J. L. Sch ¨ onberger, E. Zheng, M. Pollefeys, and J.-M. Frahm, “Pixelwise view selection for unstructured multi-view stereo,” in European Conference on Computer Vision (ECCV) , 2016. [18] Y. Zhang, X. Huang, J. Ma, Z. Li, Z. Luo, Y. Xie, Y. Qin, T. Luo, Y. Li, S. Liu et al. , “Recognize Anything: A strong image tagging model,” arXiv preprint arXiv:2306.03514 , 2023. [19] S. Liu, Z. Zeng, T. Ren, F. Li, H. Zhang, J. Yang, C. Li, J. Yang, H. Su, J. Zhu et al. , “Grounding Dino: Marrying dino with grounded pre-training for open-set object detection,” arXiv preprint arXiv:2303.05499 , 2023. [20] L. Yang, B. Kang, Z. Huang, X. Xu, J. Feng, and H. Zhao, “Depth Anything: Unleashing the power of large-scale unlabeled data,” in CVPR , 2024. [21] OpenAI, “GPT-4: Generative pre-trained transformer 4,” OpenAI API, 2022. [Online]. Available: https://beta.openai.com [22] Z. Fan, J. Zhang, R. Li, J. Zhang, R. Chen, H. Hu, K. Wang, H. Qu, D. Wang, Z. Yan et al. , “Vlm-3r: Vision-language models augmented with instruction-aligned 3d reconstruction,” arXiv preprint arXiv:2505.20279 , 2025. [23] Q. Wang, Y. Zhang, A. Holynski, A. A. Efros, and A. Kanazawa, “Continuous 3d perception model with persistent state,” in Pro-ceedings of the Computer Vision and Pattern Recognition Conference ,2025, pp. 10 510–10 522. [24] D. Zheng, S. Huang, L. Zhao, Y. Zhong, and L. Wang, “Towards learning a generalist model for embodied navigation,” 2023. [25] M. Han, L. Ma, K. Zhumakhanova, E. Radionova, J. Zhang, X. Chang, X. Liang, and I. Laptev, “Roomtour3d: Geometry-aware video-instruction tuning for embodied navigation,” in Pro-ceedings of the Computer Vision and Pattern Recognition Conference ,2025, pp. 27 586–27 596. [26] E. Wijmans, S. Datta, O. Maksymets, A. Das, G. Gkioxari, S. Lee, I. Essa, D. Parikh, and D. Batra, “Embodied question answering in photorealistic environments with point cloud perception,” 2019. [27] A. Das, S. Datta, G. Gkioxari, S. Lee, D. Parikh, and D. Batra, “Embodied question answering,” 2017. [28] G. Zhou, Y. Hong, Z. Wang, X. E. Wang, and Q. Wu, “Navgpt-2: Unleashing navigational reasoning capability for large vision-language models,” in European Conference on Computer Vision .Springer, 2025, pp. 260–278. [29] B. Lin, Y. Nie, Z. Wei, J. Chen, S. Ma, J. Han, H. Xu, X. Chang, and X. Liang, “NavCoT: Boosting llm-based vision-and-language navigation via learning disentangled reasoning,” arXiv preprint arXiv:2403.07376 , 2024. [30] G. Zhou, Y. Hong, Z. Wang, C. Zhao, M. Bansal, and Q. Wu, “Same: Learning generic language-guided visual nav-igation with state-adaptive mixture of experts,” arXiv preprint arXiv:2412.05552 , 2024. [31] Z. Wang, J. Li, Y. Hong, S. Li, K. Li, S. Yu, Y. Wang, Y. Qiao, Y. Wang, M. Bansal et al. , “Bootstrapping language-guided nav-igation learning with self-refining data flywheel,” arXiv preprint arXiv:2412.08467 , 2024. [32] L. Wang, Z. He, R. Dang, M. Shen, C. Liu, and Q. Chen, “Vision-and-language navigation via causal learning,” in Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition ,2024, pp. 13 139–13 150. [33] X. Zhang, Y. Xu, J. Li, Z. Hu, and R. Hong, “Agent journey be-yond rgb: Unveiling hybrid semantic-spatial environmental rep-resentations for vision-and-language navigation,” arXiv preprint arXiv:2412.06465 , 2024. [34] R. Liu, X. Wang, W. Wang, and Y. Yang, “Bird’s-eye-view scene graph for vision-language navigation,” in Proceedings of the IEEE/CVF International Conference on Computer Vision , 2023, pp. 10 968–10 980. [35] Z. Li, W. Wang, H. Li, E. Xie, C. Sima, T. Lu, Y. Qiao, and J. Dai, “Bevformer: Learning bird’s-eye-view representation from multi-camera images via spatiotemporal transformers,” in European conference on computer vision . Springer, 2022, pp. 1–18. [36] S. Chen, P.-L. Guhur, C. Schmid, and I. Laptev, “History aware multimodal transformer for vision-and-language navigation,” in 
+
+NeurIPS , 2021. [37] S. Chen, P.-L. Guhur, M. Tapaswi, C. Schmid, and I. Laptev, “Think global, act local: Dual-scale graph transformer for vision-and-language navigation,” 2022. [38] C. Gao, X. Peng, M. Yan, H. Wang, L. Yang, H. Ren, H. Li, and S. Liu, “Adaptive zone-aware hierarchical planner for vision-language navigation,” in Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , 2023, pp. 14 911–14 920. [39] X. Li, Z. Wang, J. Yang, Y. Wang, and S. Jiang, “KERM: Knowledge enhanced reasoning for vision-and-language navigation,” 2023. [40] M. Hwang, J. Jeong, M. Kim, Y. Oh, and S. Oh, “Meta-explore: Exploratory hierarchical vision-and-language navigation using scene object spectrum grounding,” in Proceedings of the IEEE/CVF SUBMISSION TO IEEE TRANSACTIONS ON PATTERN ANALYSIS AND MACHINE INTELLIGENCE 14 
+
+Conference on Computer Vision and Pattern Recognition , 2023, pp. 6683–6693. [41] Y. Hong, Q. Wu, Y. Qi, C. Rodriguez-Opazo, and S. Gould, “A recurrent vision-and-language BERT for navigation,” in Proceed-ings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , June 2021, pp. 1643–1653. [42] Y. Long, X. Li, W. Cai, and H. Dong, “Discuss before moving: Visual language navigation via multi-expert discussions,” arXiv preprint arXiv:2309.11382 , 2023. [43] R. Liu, W. Wang, and Y. Yang, “Volumetric environment repre-sentation for vision-language navigation,” in CVPR , 2024, pp. 16 317–16 328. [44] L. Wang, Z. He, R. Dang, M. Shen, C. Liu, and Q. Chen, “Vision-and-language navigation via causal learning,” in The IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) ,2024. [45] G. Zhao, G. Li, W. Chen, and Y. Yu, “Over-nav: Elevating iterative vision-and-language navigation with open-vocabulary detection and structured representation,” 2024. [Online]. Available: https://arxiv.org/abs/2403.17334 [46] M. Hwang, J. Jeong, M. Kim, Y. Oh, and S. Oh, “Meta-explore: Exploratory hierarchical vision-and-language navigation using scene object spectrum grounding,” 2023. [47] W. Hao, C. Li, X. Li, L. Carin, and J. Gao, “Towards learning a generic agent for vision-and-language navigation via pre-training,” in Proceedings of the IEEE/CVF conference on computer vision and pattern recognition , 2020, pp. 13 137–13 146. [48] Y. Qiao, Y. Qi, Y. Hong, Z. Yu, P. Wang, and Q. Wu, “HOP: History-and-order aware pre-training for vision-and-language navigation,” in Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , 2022, pp. 15 418–15 427. [49] J. Li and M. Bansal, “Improving vision-and-language navigation by generating future-view image semantics,” in Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition ,2023, pp. 10 803–10 812. [50] Y. Qiao, Z. Yu, and Q. Wu, “VLN-PETL: Parameter-efficient trans-fer learning for vision-and-language navigation,” in Proceedings of the IEEE/CVF International Conference on Computer Vision , 2023, pp. 15 443–15 452. [51] D. An, Y. Qi, Y. Li, Y. Huang, L. Wang, T. Tan, and J. Shao, “BEVbert: Multimodal map pre-training for language-guided navigation,” in Proceedings of the IEEE/CVF International Confer-ence on Computer Vision , 2023, pp. 2737–2748. [52] Y. Hong, H. Zhen, P. Chen, S. Zheng, Y. Du, Z. Chen, and C. Gan, “3D-LLM: Injecting the 3d world into large language models,” 2023. [53] H. Hao, M. Han, C. Li, Z. Li, and X. Chang, “Conav: Collaborative cross-modal reasoning for embodied navigation,” arXiv preprint arXiv:2505.16663 , 2025. [54] H. Tan, L. Yu, and M. Bansal, “Learning to navigate unseen environments: Back translation with environmental dropout,” 2019. [55] D. Fried, R. Hu, V. Cirik, A. Rohrbach, J. Andreas, L.-P. Morency, T. Berg-Kirkpatrick, K. Saenko, D. Klein, and T. Darrell, “Speaker-follower models for vision-and-language navigation,” 2018. [56] J. Li, H. Tan, and M. Bansal, “EnvEdit: Environment editing for vision-and-language navigation,” 2022. [57] J. Y. Koh, H. Lee, Y. Yang, J. Baldridge, and P. Anderson, “Path-dreamer: A world model for indoor navigation,” 2021. [58] T.-J. Fu, X. E. Wang, M. Peterson, S. Grafton, M. Eckstein, and W. Y. Wang, “Counterfactual vision-and-language navigation via adversarial path sampling,” 2020. [59] J. Li, H. Tan, and M. Bansal, “Improving cross-modal alignment in vision language navigation via syntactic information,” 2021. [60] C. Liu, F. Zhu, X. Chang, X. Liang, Z. Ge, and Y.-D. Shen, “Vision-language navigation with random environmental mixup,” 2021. [61] S. Wang, C. Montgomery, J. Orbay, V. Birodkar, A. Faust, I. Gur, N. Jaques, A. Waters, J. Baldridge, and P. Anderson, “Less is more: Generating grounded navigation instructions from land-marks,” 2022. [62] X. Liang, F. Zhu, L. Li, H. Xu, and X. Liang, “Visual-language navigation pretraining via prompt-based environmental self-exploration,” 2022. [63] S. Chen, P.-L. Guhur, M. Tapaswi, C. Schmid, and I. Laptev, “Learning from unlabeled 3d environments for vision-and-language navigation,” 2022. [64] A. Kamath, P. Anderson, S. Wang, J. Y. Koh, A. Ku, A. Waters, Y. Yang, J. Baldridge, and Z. Parekh, “A new path: Scaling vision-and-language navigation with synthetic instructions and imitation learning,” 2023. [65] J. Li and M. Bansal, “Panogen: Text-conditioned panoramic en-vironment generation for vision-and-language navigation,” Ad-vances in Neural Information Processing Systems , vol. 36, pp. 21 878– 21 894, 2023. [66] S. Agarwal, N. Snavely, S. M. Seitz, and R. Szeliski, “Bundle adjustment in the large,” in Computer Vision–ECCV 2010: 11th European Conference on Computer Vision, Heraklion, Crete, Greece, September 5–11, 2010, Proceedings, Part II . Springer, 2010, pp. 29–42. [67] S. Agarwal, Y. Furukawa, N. Snavely, I. Simon, B. Curless, S. M. Seitz, and R. Szeliski, “Building rome in a day,” Communications of the ACM , vol. 54, no. 10, pp. 105–112, 2011. [68] R. Hartley and A. Zisserman, Multiple View Geometry in Computer Vision . Cambridge University Press, 2003. [69] D. G. Lowe, “Distinctive image features from scale-invariant keypoints,” International Journal of Computer Vision , vol. 60, pp. 91–110, 2004. [70] J. L. Sch ¨ onberger and J.-M. Frahm, “Structure-from-motion revis-ited,” in Proceedings of the IEEE Conference on Computer Vision and Pattern Recognition (CVPR) . IEEE, 2016, pp. 4104–4113. [71] S. M. Seitz, B. Curless, J. Diebel, D. Scharstein, and R. Szeliski, “A comparison and evaluation of multi-view stereo reconstruction algorithms,” in 2006 IEEE Computer Society Conference on Computer Vision and Pattern Recognition (CVPR’06) , vol. 1. IEEE, 2006, pp. 519–528. [72] N. Snavely, S. M. Seitz, and R. Szeliski, “Photo tourism: exploring photo collections in 3d,” in ACM SIGGRAPH 2006 Papers . ACM, 2006, pp. 835–846. [73] ——, “Modeling the world from internet photo collections,” 
+
+International Journal of Computer Vision , vol. 80, pp. 189–210, 2008. [74] B. Triggs, P. F. McLauchlan, R. I. Hartley, and A. W. Fitzgibbon, “Bundle adjustment—a modern synthesis,” in Vision Algorithms: Theory and Practice: International Workshop on Vision Algorithms, Corfu, Greece, September 21–22, 1999, Proceedings . Springer, 2000, pp. 298–372. [75] C. Cadena, L. Carlone, H. Carrillo, Y. Latif, D. Scaramuzza, J. Neira, I. Reid, and J. J. Leonard, “Past, present, and future of simultaneous localization and mapping: Toward the robust-perception age,” IEEE Transactions on Robotics , vol. 32, no. 6, pp. 1309–1332, 2016. [76] A. J. Davison, I. D. Reid, N. D. Molton, and O. Stasse, “Monoslam: Real-time single camera slam,” IEEE Transactions on Pattern Anal-ysis and Machine Intelligence , vol. 29, no. 6, pp. 1052–1067, 2007. [77] H. Durrant-Whyte and T. Bailey, “Simultaneous localization and mapping: Part i,” IEEE Robotics & Automation Magazine , vol. 13, no. 2, pp. 99–110, 2006. [78] J. Engel, T. Sch ¨ ops, and D. Cremers, “Lsd-slam: Large-scale direct monocular slam,” in European Conference on Computer Vision .Springer, 2014, pp. 834–849. [79] G. Klein and D. Murray, “Parallel tracking and mapping for small ar workspaces,” in 2007 6th IEEE and ACM International Symposium on Mixed and Augmented Reality . IEEE, 2007, pp. 225– 234. [80] R. Mur-Artal, J. M. M. Montiel, and J. D. Tard ´ os, “Orb-slam: A versatile and accurate monocular slam system,” IEEE Transactions on Robotics , vol. 31, no. 5, pp. 1147–1163, 2015. [81] R. A. Newcombe, S. J. Lovegrove, and A. J. Davison, “Dtam: Dense tracking and mapping in real-time,” in 2011 International Conference on Computer Vision . IEEE, 2011, pp. 2320–2327. [82] B. Mildenhall, P. P. Srinivasan, M. Tancik, J. T. Barron, R. Ra-mamoorthi, and R. Ng, “Nerf: Representing scenes as neural radiance fields for view synthesis,” Communications of the ACM ,vol. 65, no. 1, pp. 99–106, 2021. [83] A. Chen, Z. Xu, A. Geiger, J. Yu, and H. Su, “Tensorf: Tenso-rial radiance fields,” in European Conference on Computer Vision .Springer, 2022, pp. 333–350. [84] S. Fridovich-Keil, A. Yu, M. Tancik, Q. Chen, B. Recht, and A. Kanazawa, “Plenoxels: Radiance fields without neural net-works,” in Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition . IEEE, 2022, pp. 5501–5510. [85] P. Wang, L. Liu, Y. Liu, C. Theobalt, T. Komura, and W. Wang, “Neus: Learning neural implicit surfaces by volume rendering SUBMISSION TO IEEE TRANSACTIONS ON PATTERN ANALYSIS AND MACHINE INTELLIGENCE 15 
+
+for multi-view reconstruction,” arXiv preprint arXiv:2106.10689 ,2021. [86] T. M ¨ uller, A. Evans, C. Schied, and A. Keller, “Instant neural graphics primitives with a multiresolution hash encoding,” ACM Transactions on Graphics (TOG) , vol. 41, no. 4, pp. 1–15, 2022. [87] B. Kerbl, G. Kopanas, T. Leimk ¨ uhler, and G. Drettakis, “3d gaussian splatting for real-time radiance field rendering,” ACM Transactions on Graphics (TOG) , vol. 42, no. 4, pp. 139:1–139:1, 2023. [88] S. Wang, V. Leroy, Y. Cabon, B. Chidlovskii, and J. Revaud, “Dust3r: Geometric 3d vision made easy,” in Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) . IEEE, 2024, pp. 20 697–20 709. [89] R. Wang, S. Xu, C. Dai, J. Xiang, Y. Deng, X. Tong, and J. Yang, “Moge: Unlocking accurate monocular geometry estimation for open-domain images with optimal training supervision,” in Pro-ceedings of the Computer Vision and Pattern Recognition Conference ,2025, pp. 5261–5271. [90] J. Wang, M. Chen, N. Karaev, A. Vedaldi, C. Rupprecht, and D. Novotny, “Vggt: Visual geometry grounded transformer,” in 
+
+Proceedings of the Computer Vision and Pattern Recognition Confer-ence , 2025, pp. 5294–5306. [91] J. Li, D. Li, S. Savarese, and S. Hoi, “BLIP-2: Bootstrapping language-image pre-training with frozen image encoders and large language models,” 2023. [92] M. Ester, H.-P. Kriegel, J. Sander, and X. Xu, “A density-based algorithm for discovering clusters in large spatial databases with noise,” in Proceedings of the Second International Conference on Knowledge Discovery and Data Mining , ser. KDD’96. AAAI Press, 1996, p. 226–231. [93] Wikipedia, “Preferred walking speed,” https://en.wikipedia. org/wiki/Preferred walking speed. [94] R. Tarjan, “Depth-first search and linear graph algorithms,” in 
+
+12th Annual Symposium on Switching and Automata Theory (swat 1971) , 1971, pp. 114–121. [95] F. Tosi, Y. Liao, C. Schmitt, and A. Geiger, “Smd-nets: Stereo mixture density networks,” 2021 IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , pp. 8938– 8948, 2021. [Online]. Available: https://api.semanticscholar.org/ CorpusID:233182047 [96] D. Azuma, T. Miyanishi, S. Kurita, and M. Kawanabe, “ScanQA: 3D question answering for spatial scene understanding,” in Pro-ceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition (CVPR) , 2022. [97] H. Liu, C. Li, Q. Wu, and Y. J. Lee, “Visual instruction tuning,” 2023. [98] Y. Long, X. Li, W. Cai, and H. Dong, “Discuss before moving: Visual language navigation via multi-expert discussions,” in 2024 IEEE International Conference on Robotics and Automation (ICRA) .IEEE, 2024, pp. 17 380–17 387. [99] W.-L. Chiang, Z. Li, Z. Lin, Y. Sheng, Z. Wu, H. Zhang, L. Zheng, S. Zhuang, Y. Zhuang, J. E. Gonzalez, I. Stoica, and E. P. Xing, “Vicuna: An open-source chatbot impressing gpt-4 with 90%* chatgpt quality,” March 2023. [Online]. Available: https://lmsys.org/blog/2023-03-30-vicuna/ [100] B. Pan, R. Panda, S. Jin, R. Feris, A. Oliva, P. Isola, and Y. Kim, “LangNav: Language as a perceptual representation for naviga-tion,” arXiv preprint arXiv:2310.07889 , 2023. [101] G. Zhou, Y. Hong, and Q. Wu, “NavGPT: Explicit reasoning in vision-and-language navigation with large language models,” in 
+
+Proceedings of the AAAI Conference on Artificial Intelligence , vol. 38, no. 7, 2024, pp. 7641–7649. [102] J. Chen, B. Lin, R. Xu, Z. Chai, X. Liang, and K.-Y. K. Wong, “Mapgpt: Map-guided prompting for unified vision-and-language navigation,” arXiv preprint arXiv:2401.07314 , 2024. [103] H. Tan and M. Bansal, “Lxmert: Learning cross-modality encoder representations from transformers,” arXiv preprint arXiv:1908.07490 , 2019. [104] D. Hendrycks and T. Dietterich, “Benchmarking neural network robustness to common corruptions and perturbations,” arXiv preprint arXiv:1903.12261 , 2019. 
+
+Mingfei Han is currently a postdoctoral asso-ciate at Mohamed Bin Zayed University of Arti-ficial Intelligence. He obtained his Ph.D. degree from University of Technology Sydney. He re-ceived the B.Eng. degree from Nankai University and the M.Eng. degree from University of Chi-nese Academy of Sciences. His research inter-ests lie in computer vision and machine learn-ing, with a particular emphasis on large vision-language models, video object perception and their applications in robotics. 
+
+Haihong Hao is currently a Ph.D. student at the School of Information Science and Technol-ogy (USTC). He received his B.E. degree in the School of Computer and Artificial Intelligence, Zhengzhou University, China. His research in-terests include computer vision and multimedia content analysis. 
+
+Liang Ma is currently a master student at De-partment of Computer Vision, Mohamed bin Za-yed University of Artificial Intelligence (MBZUAI). He received his B.E. degree in the School of Computer and Artificial Intelligence, Sun Yat-sen University, China. His research interests include computer vision and multimedia content analy-sis. 
+
+Kamila Zhumakhanova is a Master’s student in the Department of Computer Vision at the Mohamed bin Zayed University of Artificial Intelli-gence (MBZUAI). Her research interests include computer vision and machine learning, with a focus on representation learning and visual un-derstanding. 
+
+Ekaterina Radionova is a Research Scientist in the Department of Computer Vision at the Mohamed bin Zayed University of Artificial Intelli-gence (MBZUAI). Her research interests include computer vision and machine learning, with a focus on representation learning and visual un-derstanding. 
+
+Jingyi Zhang is a master student with Shenzhen Campus of Sun Yat-Sen University. His research interests include computer vision and machine learning, with a focus on representation learning and visual understanding. 
+
+Xiaojun Chang (Senior Member, IEEE) is a Pro-fessor at Future Media Computing Lab, School of Information Science and Technology, Univer-sity of Science and Technology of China. He is also a visiting Professor with Department of Computer Vision, Mohamed bin Zayed Univer-sity of Artificial Intelligence (MBZUAI). He has spent most of his time working on exploring multiple signals (visual, acoustic, textual) for automatic content analysis in unconstrained or surveillance videos. He has achieved top perfor-mances in various international competitions, such as TRECVID MED, TRECVID SIN, and TRECVID AVS. SUBMISSION TO IEEE TRANSACTIONS ON PATTERN ANALYSIS AND MACHINE INTELLIGENCE 16 
+
+Xiaodan Liang is an Associate Professor in the Department of Computer Vision at the Mo-hamed bin Zayed University of Artificial Intelli-gence (MBZUAI), and a joint Professor at Sun Yat-sen Univerisity, China. She was a Project Scientist at Carnegie Mellon University, working with Prof. Eric Xing. She has published over 120 cutting-edge papers on visual-language under-standing and generation, and its application on embodied AI, which have appeared in the most prestigious journals and conferences in the field, with Google Citation 30000+. She serves as regular Area Chairs of ICCV, CVPR, NeurIPS, ICML, ICLR and AAAI regularly, and Tutorial Chair of CVPR 2021, Ombud chair of CVPR 2023, Local chairs of ICCV 2029. She has been awarded ACM China and CCF Best Doctoral Dissertation Award and Alibaba DAMO Academy Young Fellow. Her research has been applied in the key products in several renowned AI companies such as Deepseek, Lenovo, ByteDance and Tencent Inc. 
+
+Ivan Laptev received the PhD degree in com-puter science from the Royal Institute of Tech-nology, in 2004 and the habilitation degree from ´Ecole Normale Sup ´ erieure, in 2013. He is a visiting professor with MBZUAI and a senior researcher on leave from Inria. His main re-search interests include visual recognition of hu-man actions, objects and interactions, and more recently robotics. He has published more than 150 technical papers most of which appeared in international journals and major peer-reviewed conferences of the field. He served/serves as a program chair for CVPR’18, ICCV’23, and ACCV’24. He received an ERC Starting grant and was awarded a Helmholtz prize for significant impact on computer vision.

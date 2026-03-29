@@ -1,0 +1,102 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.20194v1/fig-001.webp",
+      "caption": "Figure 9: Scaling case study on Frozen Lake.",
+      "page": 11,
+      "index": 1,
+      "width": 570,
+      "height": 221
+    },
+    {
+      "url": "assets/figures/arxiv/2603.20194v1/fig-002.webp",
+      "caption": "Table 5: Evaluation results (text-hint): Temporal Consistency, Visual Stability, Hallucination, Physics Grounding. We report no-hint score (0-9 mean as %); parenthetical change is text-hint",
+      "page": 21,
+      "index": 2,
+      "width": 785,
+      "height": 1297
+    },
+    {
+      "url": "assets/figures/arxiv/2603.20194v1/fig-003.webp",
+      "caption": "Figure 2: MME-CoF-Pro consists of 303 samples from 16 basic reasoning categories, covering from Visual Detail Reasoning to Visual Trace Reasoning. Each sample is provided with no-hint and text-hint evaluation prompt. In text-hint setting, models are provided with additional textual details to facilitate reasoning.",
+      "page": 2,
+      "index": 3,
+      "width": 824,
+      "height": 669
+    },
+    {
+      "url": "assets/figures/arxiv/2603.20194v1/fig-004.webp",
+      "caption": "Table 6: Evaluation results (visual-hint): Temporal Consistency, Visual Stability, Hallucination, Physics Grounding. No-hint score (%); parenthetical change is visual-hint minus no-hint.",
+      "page": 22,
+      "index": 4,
+      "width": 808,
+      "height": 743
+    },
+    {
+      "url": "assets/figures/arxiv/2603.20194v1/fig-005.webp",
+      "caption": "Table 2: Evaluation results (visual-hint). We report Reasoning Score (RS) and Consistency Score (CS) in no-hint settings for items that have visual-hint, with visual-hint change in parentheses.",
+      "page": 10,
+      "index": 5,
+      "width": 808,
+      "height": 668
+    },
+    {
+      "url": "assets/figures/arxiv/2603.20194v1/fig-006.webp",
+      "caption": "Figure 3: Visual Hints in MME-CoF-Pro. For controlled comparison, we additionally add visual hints to 8 categories which requires visual reasoning capabilities, using bounding boxes and arrows to indicate positions, trajectories to facilitate reasoning.",
+      "page": 3,
+      "index": 6,
+      "width": 826,
+      "height": 374
+    },
+    {
+      "url": "assets/figures/arxiv/2603.20194v1/fig-007.webp",
+      "caption": "Figure 4: Statistics, Distribution and Evaluation Results of MME-CoF-Pro.",
+      "page": 4,
+      "index": 7,
+      "width": 797,
+      "height": 277
+    },
+    {
+      "url": "assets/figures/arxiv/2603.20194v1/fig-008.webp",
+      "caption": "Table 3: Overview of MME-CoF-Pro by Reasoning Category",
+      "page": 19,
+      "index": 8,
+      "width": 829,
+      "height": 1077
+    },
+    {
+      "url": "assets/figures/arxiv/2603.20194v1/fig-009.webp",
+      "caption": "Figure 7: Failure Examples of Video Generative Models. Subfigure (a) shows that the Kling model prioritizes perceptual fidelity (e.g., wind and forest dynamics) over the intended reasoning trajectory of gradual zoom-in. Subfigures (b) to (d) reveal hallucinations and inconsistencies arising under different hint conditions.",
+      "page": 9,
+      "index": 9,
+      "width": 826,
+      "height": 582
+    },
+    {
+      "url": "assets/figures/arxiv/2603.20194v1/fig-010.webp",
+      "caption": "Table 4: Default inference configurations for evaluated video generation models. When configurable, we follow the recommended settings from the official implementations or APIs.",
+      "page": 20,
+      "index": 10,
+      "width": 662,
+      "height": 258
+    },
+    {
+      "url": "assets/figures/arxiv/2603.20194v1/fig-011.webp",
+      "caption": "Figure 5: Setting Comparisons. All three settings share the same evaluation metrics and identical instructions except for the hint components.",
+      "page": 5,
+      "index": 11,
+      "width": 414,
+      "height": 297
+    },
+    {
+      "url": "assets/figures/arxiv/2603.20194v1/fig-012.webp",
+      "caption": "Figure 6: Process-level Evaluation Metric for Reasoning Score in MME-CoF-Pro. Videos are evaluated against fine-grained reasoning steps, enabling interpretable assessment beyond final-answer accuracy.",
+      "page": 5,
+      "index": 12,
+      "width": 829,
+      "height": 381
+    }
+  ]
+}

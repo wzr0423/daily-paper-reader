@@ -1,0 +1,402 @@
+Title: Learning to Wander: Improving the Global Image Geolocation Ability of LMMs via Actionable Reasoning
+
+URL Source: https://arxiv.org/pdf/2603.10463v1
+
+Published Time: Thu, 12 Mar 2026 00:35:27 GMT
+
+Number of Pages: 11
+
+Markdown Content:
+# Learning to Wander: Improving the Global Image Geolocation Ability of LMMs via Actionable Reasoning 
+
+Yushuo Zheng 1,2 , Huiyu Duan 1, Zicheng Zhang 1,2 , Xiaohong Liu 1, Xiongkuo Min 11Shanghai Jiao Tong University 2Shanghai Artificial Intelligence Laboratory 
+
+{yushuozheng, huiyuduan, zzc1998, xiaohongliu, minxiongkuo }@sjtu.edu.cn Geolocation via Visual Clue LMMs Location Proposing       
+
+> Propose a location at Australia that can have
+> average geo -score to be 80 for GeoGuessers .
+
+Action of Thought   
+
+> Circular Quay, Sydney, Australia.
+> OK. This is the satellite image of your
+> proposed location with possible panorama
+> marked as colored dot.
+> Do you accept this map?
+> Yes, I accept this and I select dot BLUE
+> This is the panorama you selected, do you
+> accept it?
+> Yes, this is a nice image, I accept it.
+
+WanderBench      
+
+> There is no visible
+> landmark. Rotate view
+> by 180 degree right to
+> see the building at the
+> edge of the panorama.
+> There seems usable text
+> clue. Moving Forward
+> to take a close look of
+> the building lettering.
+
+Sign 
+
+Warm Climate 
+
+Architecture Text Geolocation Propose Location Vegetation 
+
+Nation Flag 
+
+> Kuala Lumpur, Malaysia
+> Pennsylvania, Unite State
+> Arequipa, Peru
+
+Landmark Building   
+
+> Group 1
+> Group 2
+> Group 3
+> F stat.
+> Spear 𝝆
+> Spear p
+> OSL slope
+> OSL p
+> Street F1 Street Recall
+> Street Acc
+> Score
+> Country F1
+> Country Recall
+> Country Acc
+> City F1
+> City Recall
+> City Acc
+> p
+
+Figure 1. Visual geolocation uses visual clues to determine the location of an image. WanderBench evaluates both the model’s ability to propose locations under different difficulty levels and its geolocation accuracy across diverse scenes. The Action of Thought allows the model to actively explore nearby views to gather more information for a more accurate result. GeoAoT further improves overall geolocation performance, shown by the thicker line in the radar chart along with location proposing performance. All radar chat is min max normalized. 
+
+Abstract 
+
+Geolocation, the task of identifying the geographic loca-tion of an image, requires abundant world knowledge and complex reasoning abilities. Though advanced large mul-timodal models (LMMs) have shown superior aforemen-tioned capabilities, their performance on the geolocation task remains unexplored. To this end, we introduce Wan-derBench , the first open access global geolocation bench-mark designed for actionable geolocation reasoning in em-bodied scenarios. WanderBench contains over 32K panora-mas across six continents, organized as navigable graphs that enable physical actions such as rotation and movement, transforming geolocation from static recognition into inter-active exploration. Building on this foundation, we pro-pose GeoAoT (Action of Thought), a Geolocation frame-work with Action of Though, which couples reasoning with embodied actions. Instead of generating textual reason-ing chains, GeoAoT produces actionable plans such as, ap-proaching landmarks or adjusting viewpoints, to actively reduce uncertainty. We further establish an evaluation protocol that jointly measures geolocation accuracy and difficulty-aware geolocation questioning ability. Experi-ments on 19 large multimodal models show that GeoAoT achieves superior fine-grained localization and stronger generalization in dynamic environments. WanderBench and 
+
+1
+
+> arXiv:2603.10463v1 [cs.CV] 11 Mar 2026
+
+GeoAoT define a new paradigm for actionable, reasoning driven geolocation in embodied visual understanding. 
+
+1. Introduction 
+
+Geolocation, the task of determining the image’s geograph-ical location of an image, is a cornerstone for applications anging including autonomous navigation, fact-checking to emergency response and cultural exploration [7, 10] etc .The fundamental challenge of geolocation lies in its demand for advanced world-knowledge and reasoning capabilities. It requires interpreting a complex array of contextual clues such as architectural styles, road signage, flora, and other cultural markers to infer a precise location. This intricate process makes geolocation a significant benchmark for the reasoning capabilities of both artificial models and human experts [22]. Though advanced abilities of LMMs, their performance on the geolocation remains unexplored. Past efforts to automate geolocation have primarily fo-cused on a static paradigm. Models like PlaNet [38] and Im2GPS [36] are trained to classify static images into coarse geographical grid cells. Subsequent retrieval based methods have improved precision by matching query images against vast, geotagged databases [28, 49]. However, this entire line of research overlooks a critical aspect of human problem-solving i.e. , active exploration . When humans are lost, they do not simply stare at a single snapshot; they move, turn their heads to read a distant sign, or walk closer to a landmark. This ability to perform actions to gather new in-formation is a key differentiator, and its absence in current models presents a significant performance bottleneck. This research gap is largely a consequence of limitations in ex-isting datasets. As shown in Table 1, prominent datasets, from web-scraped collections like Im2GPS3K [36] and YFCC26K to massive map-service datasets like OSV-5M [4] and GeoComp, consist of discrete, static images. While valuable, they lack the environmental framework to support agent based actions. A model trained on this data can learn 
+
+what a location looks like, but not how to explore it. This prevents the development and evaluation of truly interactive geolocation agents. To bridge this fundamental gap, we introduce Wander-Bench , the first open access, global geolocation dataset de-signed for embodied agent interaction . As detailed in Table 1, our dataset provides a framework where an agent can execute a vocabulary of actions, including rotation and movement. This new benchmark enables a shift from static image-to-location mapping to a dynamic, exploratory pro-cess that more closely mimics human reasoning. Furthermore, we propose GeoAoT (Action of Thought), a novel agent that integrates reasoning with action to lever-age the LMMs to perform the geolocation. It can reason about visual information and then execute an action ( e.g. ,
+
+Table 1. Comparison of geolocation datasets. WanderBench is the only openly available, globally scoped dataset providing both navigation support and bidirectional geolocation evaluation.                                                                       
+
+> Dataset Size Geographic Coverage Source Open Access Navigation Support Bidirectional Evaluation
+> Google-WS [11] 15k Global Map Service ✗✗✗
+> GMCP [40] 105K Local Map Service ✗✗✗
+> StreetCLIP [17] 1M Unknown Map Service ✗✗✗
+> Im2GPS [19] 237 Local Web-Scraped ✓✗✗
+> Im2GPS3K [36] 2997 Local Web-Scraped ✗✗✗
+> YFCC4K citevo2017 4536 Local Web-Scraped ✗✗✗
+> YFCC26K [34] 26k Local Web-Scraped ✓✗✗
+> MP-16 [23] 4.7M Local Web-Scraped ✗✗✗
+> OSV-5M [4] 5.1M Global Map Service ✓✗✗
+> GeoComp [33] 3.3M Global Map Service ✓✗✗
+> WanderBench 31K Global Web-Scraped ✓✓✓
+
+“Move forward 10 meters”) to acquire the missing data. Fi-nally, to create a more robust benchmark, we introduce a novel evaluation protocol where the AI must not only solve geolocation tasks but also assess and generate new prob-lems . The agent is tasked with providing locations and questions designed to test a specific difficulty level, demon-strating a meta-understanding of the geographical reasoning required. Our contributions are three-fold: • We present WanderBench , a new, open access global ge-olocation dataset with 32K panoramas, uniquely built to support interactive agent actions like movement and rota-tion. • We introduce GeoAoT a novel agent framework that moves beyond static Chain-of-Thought reasoning by gen-erating and executing physical actions within the environ-ment to actively gather information. • We propose a new evaluation methodology where the agent’s capabilities are measured by its ability to both solve geolocation tasks and generate new, difficulty-calibrated questions. 
+
+2. Related Work 
+
+2.1. Static Image Geolocation 
+
+Image geolocation is the task of assigning geographic co-ordinates to an image has long challenged computer vision, spatial data mining, and GeoAI [18, 42–47, 50–52]. Ex-isting methods fall into two main paradigms: classification based and retrieval based. Classification models divide the Earth into grid cells and train neural networks to predict the cell of a given image [11, 28, 30, 31, 38], enabling coarse localization but limiting fine-grained accuracy. Retrieval based methods instead match a query image to the most visually similar geotagged images in a reference database and infer coordinates from them [26, 28, 39, 41, 48, 49], offering higher precision but requiring massive, densely populated databases and failing in sparse regions. Both paradigms, however, frame geolocation as a static, single-input problem, overlooking the dynamic, exploratory strate-2ZA 
+
+## (a) 
+
+> AU
+> US
+> JP
+> K
+> R
+> A
+> R
+> C
+> A
+> K
+> E
+> C
+> L
+> Others
+
+## (b) 
+
+## (c)  
+
+> o3
+> GPT -4o
+> Gemma3 -27B
+> Llava -OneVision -72B
+> Phi -4
+> Gemini -2.5 Pro
+> InternVL2.5 32B
+> Qwen2VL -72B
+> InternVL3 -38B
+> Qwen2.5VL -32B InternVL2 -76B
+> Claude Sonnet 4
+> InternVL3 -78B
+> InternVL2.5 -78B Qwen2.5VL -72B Figure 2. Figure 2. (a) Global distribution of model-proposed locations across all continents. (b) Country-level distribution of the proposed locations. (c) Average navigation-graph structure of the WanderBench dataset.
+
+gies humans use for spatial reasoning. 
+
+2.2. Embodied Agents and Reasoning in Geoloca-tion 
+
+Research on embodied agents has primarily addressed goal directed navigation in simulated environments such as StreetLearn [27], where agents are trained to reach specific destinations rather than determine their own location. In contrast, Large Multimodal Models (LMMs) like GeoRea-soner [25] introduced the Geographical Chain of Thought, guiding models through step-by-step textual reasoning for static image based geolocation. While this improves in-terpretability, the reasoning remains passive: models can analyze what they see but cannot act to gather new evi-dence when information is missing or unclear. Our work bridges this divide by introducing an embodied agent that integrates reasoning with action, formulating and executing movement plans to actively collect disambiguating visual cues. Furthermore, unlike prior studies that only note vari-ations in task difficulty [4], our approach enables models to evaluate and generate tasks with controlled difficulty, ad-vancing meta reasoning in geolocation. 
+
+2.3. Geolocation Datasets 
+
+Existing geolocation datasets inherently constrain model development due to issues of data quality, bias, and limited interactivity. Web-scraped datasets such as YFCC100M [34] and Im2GPS3K [36] contain noisy, non-localizable content, while street view datasets like StreetLearn [27] and others [4] offer higher visual quality but remain geo-graphically biased or regionally restricted. More critically, all existing datasets are static comprising discrete images or pre rendered paths thus failing to support embodied or interactive geolocation tasks. To overcome this, we intro-duce WanderBench , a two-way benchmark that functions both as a dataset and as an evaluation framework. Beyond static accuracy, WanderBench assesses a model’s ability to propose diverse and valid locations under varying lev-els of difficulty. This dynamic, bidirectional evaluation de-sign bridges perception and reasoning, enabling more com-prehensive assessment of geospatial understanding in large multimodal models. 
+
+3. WanderBench 
+
+3.1. Dataset Overview 
+
+This dataset comprises 1,047 unique locations distributed across six continents, all generated by large multimodal models (LMMs). Each location is represented as a graph structure, where each node corresponds to a panoramic im-age with precise GPS coordinates, and edges represent nav-igable paths between these points. On average, each graph contains 31.27 panoramas (nodes) and 37.67 navigable con-nections (edges), resulting in a total of 32,741 panoramas and 39,442 edges across the entire dataset. Each panorama includes high resolution imagery and detailed metadata, supporting robust and fine grained geolocation research. 
+
+3.2. Location Generation 
+
+All benchmark locations are generated by large multimodal models (LMMs). We employ a two-stage process to ensure 3Table 2. Spatial diversity metrics of model-proposed locations. All coordinates normalized to [0 , 1] 2 per continent. O16 : occu-pancy on 16 ×16 grid; H16 : entropy; Ahull : convex-hull area; RCE :Clark–Evans ratio; ¯rNN : mean nearest-neighbor distance.                                                                                     
+
+> Model O16 H16 Ahull RCE ¯rNN
+> (×10 −2)(×10 −1)(×10 −2)(×10 −1)(×10 −2)InternVL2-76B [8] 2.73 3.10 8.61 3.21 4.63 InternVL2.5-38B [9] 1.82 2.50 5.12 1.27 1.84 InternVL2.5-78B [9] 1.95 2.58 4.31 1.63 2.35 InternVL3-38B [32] 2.02 2.66 7.16 1.95 2.82 InternVL3-78B [32] 2.08 2.62 5.40 1.97 2.84 Phi-4 [1] 2.02 2.38 3.67 1.57 2.27 Qwen2VL-72B [37] 1.95 2.57 3.22 0.95 1.38 Qwen2.5VL-72B [6] 2.08 2.60 8.95 2.67 3.86 Qwen2.5VL-32B [6] 2.02 2.62 4.05 1.42 2.04 LLaVA-OV-72B [24] 2.28 2.75 4.61 2.34 3.38 Gemma-3-27B [14] 2.47 2.96 7.65 2.05 2.96 Gemini-2.5 Pro [13] 2.73 3.23 5.70 2.42 3.50 Claude Sonnet 4 [3] 1.89 2.27 3.20 1.61 2.33 GPT-4o [21] 2.41 2.92 6.23 2.75 3.96 o3 [29] 2.86 3.21 12.8 3.70 5.34
+
+diversity and realism in the generated locations, as shown in Figure 1. In the first stage, LMMs are prompted to pro-duce detailed textual descriptions of regions within a spec-ified continent and difficulty level, emphasizing distinctive geographical and cultural characteristics. Based on these prompts, the LMMs either output a textual description of a location or provide precise geographic coordinates. In the second stage, we present the LMMs with a satellite view centered on the described location at zoom level 16, where potential panorama positions are highlighted in distinct col-ors. If the LMMs reject the given map view, we regenerate the location description and repeat the process until a valid map view is obtained. Otherwise, the LMMs select one of the marked positions, and a corresponding panoramic im-age is retrieved for that site. If the selected panorama is deemed insufficient to represent the described location, the LMMs request additional panoramas from nearby marked positions. This iterative process continues until the LMMs determine that the set of panoramas accurately reflects the intended difficulty level and spatial characteristics. 
+
+3.3. Data Collection 
+
+After the target locations are determined, we use map ser-vice provider APIs to retrieve panoramic imagery, GPS co-ordinates, and camera poses for each site. Each panorama is captured at a resolution of 2048 ×1024 pixels, provid-ing high quality visual data for geolocation and navigation tasks. The GPS coordinates are recorded with high preci-sion to ensure accurate geospatial alignment. For each region, we construct a navigation graph G that represents the local street view topology: 
+
+G = ( V, E ), (1) 
+
+V = {v1, v 2, . . . , v n}, (2) 
+
+Figure 3. Visualization of the average navigation graph structure across all locations in the WanderBench dataset. Node sizes cor-respond to occurrence frequency within spatial bins, while edge thickness indicates transition frequency between bins. 
+
+E = {(vi, v j ) | a navigable path between vi and vj }. (3) Each node vi ∈ V corresponds to a panoramic image, while each edge (vi, v j ) ∈ E denotes a traversable connection between two panoramas. To guarantee sufficient spatial continuity, we define the set of boundary nodes as 
+
+B = {v ∈ V | deg( v) = 1 }, (4) and denote by d(u, v ) the shortest-path distance between any two nodes u, v ∈ V . Each graph is required to satisfy the following coverage constraint: 
+
+min  
+
+> v∈V
+
+min  
+
+> b∈B
+
+d(v, b ) ≥ 10 , (5) ensuring that an agent starting from any node can explore at least ten steps without reaching a boundary or needing to backtrack. This structured formulation produces spatially coherent graph representations that support robust navigation, explo-ration, and downstream geolocation analysis. 
+
+3.4. Questions Generation 
+
+After the panoramas and navigation graphs are collected, we again leverage LMMs to generate geolocation questions for each location. For baseline task the LMMs are provided with the single panoramic images. They are prompted to create questions that require reasoning about spatial rela-tionships, visual cues, and contextual information present in the panoramas. The generated questions vary in difficulty and type, including multiple choice, open ended, and sce-nario based queries. Each question is paired with a correct answer and, where applicable, a set of plausible distractors to facilitate comprehensive evaluation of geolocation mod-els. This approach ensures that the questions are not only challenging but also relevant to the unique characteristics 4Table 3. Baseline performance of models on the benchmark. Lower is better for Distance (km), higher is better for all other metrics. Blue bold values represent the best within the open-source model type. Red bold values represent the best performance across all model types (closed-source).                                                                                                                                                                                                                                                                   
+
+> Model Type Model Overall Street City Country Dist. ↓Score ↑Acc. ↑Rec. ↑F1 ↑Acc. ↑Rec. ↑F1 ↑Acc. ↑Rec. ↑F1 ↑
+> Retrieval Based GeoCLIP [35] 1925 65.81 0.158 0.158 0.158 0.302 0.302 0.302 0.611 0.611 0.611 GeoCLIP-top5 1403 73.55 0.232 0.233 0.233 0.392 0.392 0.392 0.700 0.700 0.700
+> Open Source LMMs
+> InternVL2.5-78B [9] 1124 74.69 0.164 0.141 0.152 0.368 0.316 0.340 0.723 0.668 0.694 InternVL3-78B [32] 1441 72.77 0.171 0.148 0.159 0.359 0.309 0.332 0.697 0.646 0.670 Qwen2VL-72B [37] 988.7 83.46 0.270 0.233 0.250 0.525 0.451 0.485 0.837 0.813 0.825 Qwen2VL-7B [37] 2531 69.02 0.110 0.094 0.101 0.341 0.292 0.315 0.675 0.625 0.649 Qwen2.5VL-32B [6] 677.0 83.71 0.260 0.224 0.241 0.514 0.442 0.475 0.826 0.803 0.814 Qwen2.5VL-72B [6] 674.8 84.58 0.257 0.221 0.238 0.550 0.473 0.509 0.833 0.810 0.821 Qwen2.5-VL-7B [6] 1367 77.14 0.188 0.162 0.174 0.433 0.372 0.401 0.758 0.745 0.751 Gemma-3-27B [14] 1684 72.76 0.207 0.178 0.191 0.426 0.366 0.393 0.685 0.681 0.683 LLaVA-OV-72B [24] 4080 53.68 0.112 0.097 0.104 0.241 0.206 0.222 0.508 0.482 0.494 LLaMA-4-Maverick [2] 1731 72.73 0.198 0.199 0.198 0.372 0.372 0.372 0.696 0.695 0.696 LLaMA-3.2-90B-V [16] 1663 72.37 0.187 0.188 0.188 0.354 0.355 0.355 0.690 0.689 0.689 GLM-4.5V [20] 430.3 88.49 0.357 0.359 0.358 0.640 0.640 0.640 0.873 0.872 0.873 Closed Source LMMs
+> QwenVL-Max [5] 1670 69.95 0.180 0.180 0.180 0.362 0.361 0.362 0.660 0.659 0.659 Claude Haiku 4.5 [3] 2714 59.54 0.134 0.134 0.134 0.268 0.268 0.268 0.538 0.537 0.537 Claude Sonnet 4 [3] 2136 66.01 0.138 0.139 0.139 0.270 0.271 0.271 0.594 0.593 0.593 Gemini-2.5 Flash [13] 222.1 93.37 0.504 0.505 0.505 0.742 0.742 0.742 0.941 0.940 0.941
+> Gemini-2.5 Pro [13] 134.3 95.28 0.495 0.496 0.495 0.783 0.784 0.783 0.958 0.958 0.958
+> GPT-4o [21] 313.7 91.90 0.403 0.404 0.404 0.730 0.730 0.730 0.919 0.919 0.919
+> o3 [29] 318.8 92.01 0.524 0.525 0.525 0.734 0.734 0.734 0.922 0.921 0.922
+
+of each location, promoting advanced reasoning and explo-ration capabilities in geolocation tasks. 
+
+3.5. Dataset Statistic 
+
+Figure 2 (a) and (b) present the location distribution of our WanderBench dataset. The panoramas are collected from all six continents, with a balanced representation across dif-ferent geographical regions from more than 50 countries. Each of LMM propose 4 location for each continent in three different difficulty level, in result each LMM will propose total 192 location. These panoramas span a diverse range of environments, from dense urban cityscapes to sparse ru-ral landscapes, ensuring comprehensive coverage of vari-ous geographical and cultural features. The average edge to node ratio is 2.41, indicating well connected navigation graphs for realistic agent movement and exploration. To better understand the global structural characteristics of the navigation graphs, we construct an average graph representation that aggregates spatial and topological pat-terns across all locations. Each graph is first normalized by translating its central node to the origin, scaling by its me-dian edge length, and aligning its principal axis via PCA rotation. The normalized graphs are then projected into a unified polar coordinate space and discretized into radial and angular bins, where node occurrences and edge tran-sitions are accumulated to derive a consensus topology. As shown in Figure 2(c), this visualization reveals dense cen-tral hubs, frequently traversed inter-bin connections, and approximately symmetric branching patterns. The size of each circle indicates the number of panoramas (nodes) within each spatial bin, and line thickness reflects the fre-quency of navigable transitions (edges), jointly capturing common spatial and topological structures across Wander-Bench. This consensus representation offers a compact yet expressive summary of the dataset’s overall navigability and typical spatial organization. As shown in Figure 3 and Table 2, the global distribu-tion of WanderBench locations also induces rich variation in spatial diversity metrics computed over model proposed coordinates. Models that spread their predictions broadly across continents exhibit higher occupancy, entropy, and convex-hull area, indicating that they explore many dis-tinct subregions instead of collapsing onto a few high den-sity areas. For example, o3 attains the largest hull area (Ahull =12 .8×10 −2) and one of the highest Clark Evans ra-tios ( RCE =3 .70 ×10 −1), signaling wide geographical cov-erage and relatively uniform dispersion, while InternVL2-76B and Gemini 2.5 Pro show similarly strong entropy and occupancy values. In contrast, weaker or more region-biased models such as Qwen2VL-72B and Claude Son-net 4 exhibit smaller hull areas and RCE <1, revealing tightly clustered predictions concentrated in familiar re-gions. These spatial diversity statistics, together with the underlying graph structure, demonstrate that WanderBench 5Table 4. ANOVA and trend analysis across coverage levels (20%, 50%, 80%). Group 1–3 correspond to means at 20%, 50%, 80%.                                                                                                                                                                
+
+> Model Type Model Name F↑
+> Stat.
+> p↓
+> (10 −2)
+> ρ↑
+> Spear
+> p↓
+> Spear Slope ↑
+> OLS
+> p↓
+> OLS Avg. Score
+> Hard
+> Avg. Score
+> Medium
+> Avg. Score
+> Easy Remark Open Source
+> InternVL2-76B [8] 7.62 0.10 1.00 0.00 0.30 0.08 64.31 75.14 82.15 ✓
+> InternVL2.5-38B [9] 2.47 0.92 1.00 0.00 0.15 0.28 75.41 76.29 84.64 ✓
+> InternVL2.5-78B [9] 0.22 8.03 0.50 0.67 0.05 0.44 74.44 77.73 77.17 ✗
+> InternVL3-38B [32] 2.81 0.67 1.00 0.00 0.15 0.24 78.52 80.03 87.80 ✓
+> InternVL3-78B [32] 0.55 5.82 1.00 0.00 0.07 0.27 75.64 79.60 80.07 ✓
+> Phi-4 [1] 0.97 3.83 1.00 0.00 0.13 0.04 71.97 75.32 79.61 ✓
+> Qwen2VL-72B [37] 0.10 9.06 0.50 0.67 0.01 0.77 79.60 81.65 80.33 ✗
+> Qwen2.5VL-32B [6] 0.45 6.42 -0.50 0.67 -0.03 0.73 81.73 84.09 80.06 ✗
+> Qwen2.5VL-72B [6] 0.87 4.22 0.50 0.67 0.10 0.34 75.36 81.69 81.66 ✗
+> LLaVA-OV-72B [24] 0.03 9.71 0.50 0.67 0.02 0.40 79.59 79.46 80.63 ✗
+> Gemma-3-27B [14] 1.01 3.70 0.50 0.67 0.09 0.41 75.39 74.55 80.83 ✗
+> Closed Source
+> Gemini-2.5 Pro [13] 3.31 0.42 1.00 0.00 0.25 0.18 52.90 64.00 67.70 ✓
+> Claude Sonnet 4 [3] 2.09 1.32 1.00 0.00 0.16 0.08 67.36 71.12 76.94 ✓
+> GPT-4o [21] 1.63 2.04 1.00 0.00 0.16 0.13 76.92 83.48 86.63 ✓
+> o3 [29] 9.84 0.02 1.00 0.00 0.40 0.10 59.27 74.47 83.18 ✓
+
+is well suited for assessing both geolocation accuracy and global coverage behavior. Moreover, because these metrics expose subtle regional biases and mode collapse tendencies, they provide a complementary lens for interpreting failure cases and distinguishing models that merely localize well from those that truly generalize across the full geographic spectrum. 
+
+4. Experiment 
+
+4.1. Evaluation Setup 
+
+We conduct comprehensive experiments on 20 leading LMMs with various architectures and parameter scales on our WanderBench. Those models are categorized into two groups: (1) open sourced models, including InternVL se-ries [8], Qwen-VL series [6], LLaVA-OneVision [24], etc .(2)close sourced models, including GPT-4o [21], o3 [29], Gemini [12], etc . The proprietary models are all directly ac-quired from offical API providers and all opensource model are deploy on local with ms swift framework on H200 GPUs. All models are evaluated using the same prompt template provided in the Appendix. To ensure reproducibil-ity, all models are set the temperature to 0 and perform greedy decoding. Noticeably, model performance on the Geolocation will also be reflected by its ability to propose valid and di-verse locations and performance with different difficulties. Therefore, unlike the pervious benchmarks, WounderBench further evaluate the location proposing capability of those models. For this purpose, we introduce additional evalua-tion metrics specifically designed to assess the quality and diversity of the proposed locations. The evaluation metrics and results are provided in the following sections. 
+
+4.2. Geo-Guessing Capability Evaluation 
+
+Table 3 presents a comprehensive comparison of our model with both open- and closed-source Large Multimodal Mod-els (LMMs) on the geo-guessing benchmark. We assess per-formance across three hierarchical spatial levels: street , city ,and country and report standard classification metrics (ac-curacy, recall, F1) alongside great circle distance error and Geo Score: 
+
+Score = 100 · exp 
+
+
+
+− 10 x
+
+18050 
+
+
+
+, (6) which align with [15], providing a holistic measurement of fine- and coarse-grained geolocation ability. This multi-level evaluation captures not only a model’s capability to recognize broad geographic descriptors such as climate and terrain but also its sensitivity to localized cues such as ar-chitectural motifs, signage, and road patterns. The results reveal clear trends in model behavior. Open source LMMs, particularly the Qwen2.5-VL and Qwen2-VL families, demonstrate rapid progress and now com-pete closely with closed source frontier systems, achiev-ing strong city- and country-level performance while main-taining reasonable street level accuracy. Retrieval based models like GeoCLIP exhibit strength in coarse grained lo-calization due to their exposure to large-scale image–GPS pretraining but struggle to distinguish finer geographic de-tails, resulting in diminished street- and city-level accura-cies. Meanwhile, larger open source LMMs including In-ternVL variants, LLaMA based models, and GLM-4.5V show varying trade-offs between granularity and overall sta-bility, with GLM-4.5V standing out as a particularly strong open-source performer across all metrics. Closed-source frontier models achieve the best overall results. Gemini-2.5-Pro attains the lowest distance error (134.32 km) and highest composite score (95.28), outper-forming all models at both fine- and coarse-level prediction. Gemini-2.5-Flash, GPT-4o, and o3 also deliver consistently strong accuracy and recall across all spatial resolutions, in-dicating robust spatial reasoning and effective integration of visual and world knowledge. Taken together, these findings 6Geo -AoT Direct Answering 
+
+Q: Where is this location? 
+
+A: Tucson, Arizona, USA  
+
+> The image
+> shows a
+> street scene
+> with low -rise buildings and a clear blue sky.
+> The architecture appears to be somewhat
+> colonial or Spanish -influenced.
+> Location Description:
+> Tucson , Arizona, USA
+
+Moving to home node 
+
+Rotating View 
+
+Moving to Next node 
+
+Q: Where is this location? 
+
+A: Windhoek, Khomas , Namibia 
+
+…
+
+Back to Home node         
+
+> Analyze this Street View
+> panorama and make
+> your best guess about
+> the location. Provide
+> your response in the
+> required JSON format:
+> Observation:
+> Confidence:
+> Final Guess:
+> Location Disruption:
+> [City], [State], [Country]
+> Coordinate:
+> [latitude, longitude]
+> Wandering
+> Low
+> Analyze this Street View
+> panorama and take
+> necessary actions to
+> make your best guess
+> about the location.
+> Provide your response in
+> the required JSON format:
+> Rotating View
+> Back to home Node
+> Moving to next Node Or
+> High
+> The view shows
+> amix of older
+> and newer buildings , with a clear street and
+> some vegetation. The architecture and
+> overall feel suggest a coastal city.
+> Location Description:
+> Windhoek, Khomas ,Namibia
+> GT
+> Pred
+> Error: 14830km
+> GT
+> Pred
+> Error: 0.3km
+
+Figure 4. An overview of GeoAoT. Given an input image, GeoAoT first leverages a pre-trained LMMs to generate an initial geo-guess. It then iteratively refines this estimate through AoT based multi-turn interactions, where the model reasons about uncertainty and issues actions to gather more evidence, operating purely at inference time without any additional training. 
+
+highlight continued advancement in geolocation capabili-ties across the LMM landscape and underscore the narrow-ing gap between leading open- and closed-source systems in global image geolocation. 
+
+4.2.1. ANOVA and Trend Analysis 
+
+To assess robustness across coverage levels (20%, 50%, 80%), we conduct a one-way ANOVA and monotonic trend analysis as shown in Table 4. The updated ANOVA re-sults show that only a subset of models exhibits signifi-cant variance across conditions. Notably, InternVL2-76B (F = 7.62 , p = 0.001 ), Gemini-2.5 Pro ( F = 3.31 ,
+
+p = 0.004 ), and o3 ( F = 9.84 , p = 0.0002 ) display clear coverage-dependent performance shifts, while many others including several Qwen2/2.5 and InternVL2.5 mod-els show nonsignificant differences, indicating flatter or less stable responses to increased coverage. For monotonicity, we examine Spearman correlations and OLS slopes. A ma-jority of higher-performing models, including InternVL2-76B, InternVL2.5-38B, InternVL3-38B/78B, Phi-4, Claude Sonnet 4, Gemini-2.5 Pro, GPT-4o, and o3, achieve perfect monotonic trends ( ρ = 1 .0), consistently improving as cov-erage increases. In contrast, the Qwen2 and Qwen2.5 vari-ants exhibit weak or inconsistent monotonicity, often show-ing performance dips at higher coverage levels. Overall, ten models satisfy both statistical and mono-tonic consistency among them GPT-4o, o3, Gemini-2.5 Pro, and multiple InternVL models indicating stronger general-ization as data availability grows. Meanwhile, several large open source models display non-monotonic or noisy trajec-tories, suggesting potential instability or limited robustness under varying coverage. 
+
+5. GeoAoT 
+
+5.1. Framework Overview 
+
+GeoAoT reformulates the traditional Chain-of-Thought 
+
+(CoT) paradigm into an Action-of-Thought (AoT) process. As illustrated in Figure 4, the agent operates in an iterative loop composed of two stages: geo guessing and action tak-ing . In each iteration, the LMM first produces an initial ge-olocation estimate based on the current visual observation. It then reflects on the uncertainty of its reasoning identifying which visual cues are missing or ambiguous and formulates a concrete action to gather additional evidence. Formally, the GeoAoT process is expressed as: 
+
+ot = fLMM (It, h t); at = πAoT (ot); It+1 = T (It, a t), (7) where It denotes the current observation, fLMM the model’s multimodal reasoning step, πAoT the action policy derived from textual reasoning, and T the environment transition function that executes the proposed action. Unlike static CoT reasoning, GeoAoT explicitly grounds each reasoning step in a corresponding environmental ac-tion. For example, if the model determines that “the signage is unreadable,” the AoT framework converts this into the ac-tionable instruction “rotate 30° right.” This coupling allows the model to interact with the environment, reducing uncer-tainty through iterative feedback rather than relying solely on single-image inference. 7Table 5. Performance of GeoAoT on the benchmark. Blue bold values represent the best AoT result. Red bold values represent the strongest improvement per column.                                                                                                                                                                                                                                                                                      
+
+> Method Overall Street City Country Dist. ↓Score ↑Acc. ↑Rec. ↑F1 ↑Acc. ↑Rec. ↑F1 ↑Acc. ↑Rec. ↑F1 ↑
+> LLaVA OneVision 72B 4081 53.68 0.112 0.097 0.104 0.241 0.206 0.222 0.508 0.482 0.494 (w/ AoT) 3007 61.20 0.150 0.130 0.139 0.304 0.261 0.281 0.579 0.544 0.561
+> ∆(AoT −base) -1074 7.527 0.038 0.033 0.035 0.063 0.055 0.058 0.071 0.062 0.067
+> Gemma3 27B 1685 72.76 0.207 0.178 0.191 0.426 0.366 0.393 0.685 0.681 0.683 (w/ AoT) 1475 74.95 0.228 0.196 0.211 0.442 0.380 0.409 0.711 0.704 0.708
+> ∆(AoT −base) −209 .92.191 0.021 0.018 0.019 0.016 0.014 0.015 0.027 0.023 0.025
+> Qwen2.5-VL 72B 674.8 84.58 0.257 0.221 0.238 0.55 0.473 0.509 0.833 0.810 0.821 (w/ AoT) 522.4 87.02 0.270 0.233 0.250 0.584 0.502 0.540 0.863 0.835 0.849
+> ∆(AoT −base) −152 .32.441 0.013 0.011 0.012 0.033 0.029 0.031 0.030 0.025 0.027
+> InternVL3 78B 1442 72.77 0.171 0.148 0.159 0.359 0.309 0.332 0.697 0.646 0.670 (w/ AoT) 1253 73.95 0.177 0.153 0.164 0.371 0.319 0.343 0.710 0.658 0.683
+> ∆(AoT −base) −189 .11.181 0.006 0.005 0.005 0.012 0.011 0.012 0.013 0.012 0.013
+> o3 318.8 92.01 0.524 0.525 0.525 0.734 0.734 0.734 0.922 0.921 0.922 (w/ AoT) 180.3 94.85 0.606 0.608 0.607 0.810 0.810 0.810 0.950 0.950 0.950
+> ∆(AoT −base) −138 .52.841 0.082 0.082 0.082 0.076 0.076 0.076 0.029 0.029 0.029
+> Gemini 2.5 flash 222.1 93.37 0.504 0.505 0.505 0.742 0.742 0.742 0.941 0.940 0.941 (w/ AoT) 166.2 94.18 0.510 0.511 0.510 0.753 0.753 0.753 0.949 0.949 0.949
+> ∆(AoT −base) −55 .83 0.818 0.006 0.005 0.006 0.011 0.010 0.010 0.009 0.009 0.009
+> Claude Haiku 4.5 2715 59.54 0.134 0.134 0.134 0.268 0.268 0.268 0.538 0.537 0.537 (w/ AoT) 2520 62.01 0.145 0.145 0.145 0.279 0.279 0.279 0.563 0.562 0.562
+> ∆(AoT −base) −195 .02.468 0.011 0.012 0.012 0.011 0.010 0.010 0.025 0.025 0.025
+
+The AoT framework uses structured prompting tem-plates that guide the LMM to (i) analyze visible geographi-cal and cultural cues, (ii) identify missing or ambiguous ev-idence, (iii) propose an environmental action to reduce un-certainty, and (iv) update its geolocation hypothesis based on the new observation. 
+
+5.2. Evaluation and Observations 
+
+GeoAoT consistently improves geolocation performance across all evaluated LMMs (Table 5). Every model bene-fits from reduced distance error and higher accuracy met-rics, with overall error decreasing from 56,km up to more than 1,000,km depending on model capacity. High per-forming systems such as o3 and Gemini2.5Flash achieve notable error reductions (138.5 km and 55.8 km) alongside the largest fine grained gains, while weaker baselines like LLaVA OneVision 72B experience the strongest absolute improvements ( −1074 km). These results show that iter-ative observation benefits both robust and weaker models, systematically enhancing localization reliability. Improvements appear consistently across spatial scales. Street level F1 scores rise for all models, from +0.005 (In-ternVL3 78B) to +0.082 (o3), with similarly stable gains at the city level (+0.010 to +0.076). Even at the already strong country level, GeoAoT yields measurable boosts (e.g., +0.029 for o3, +0.025 for Claude Haiku). Qualita-tively, the method produces more interpretable reasoning traces: instead of issuing a single opaque prediction, mod-els perform stepwise analysis grounded in explicit observa-tional actions. This interaction supported reasoning reduces ambiguity and offers clearer insight into how predictions evolve, demonstrating that GeoAoT improves both accu-racy and transparency. 
+
+6. Conclusion 
+
+We introduced WanderBench , the first open-access global geolocation benchmark enabling embodied actions and bidirectional evaluation, and GeoAoT , a framework that couples multimodal reasoning with active exploration. Together, they reframe geolocation from static prediction to interactive inference across 32K panoramas spanning six continents, providing a unified testbed for both localization accuracy and model driven task generation. Experiments on 19 large multimodal models show that AoT based exploration consistently improves fine-grained localiza-tion and produces more interpretable reasoning aligned with physical actions. Beyond performance gains, our bidirectional protocol evaluates a model’s ability not only to solve geolocation tasks but also to construct diverse, difficulty calibrated ones, enabling deeper assessment of 8spatial understanding. These contributions establish a new foundation for embodied geolocation research and point toward future LMMs capable of more autonomous, self-evaluative, and geographically grounded intelligence. 
+
+References 
+
+[1] Marah Abdin, Jyoti Aneja, Harkirat Behl, S´ ebastien Bubeck, Ronen Eldan, et al. Phi-4 technical report. 
+
+arXiv preprint arXiv:2412.08905 , 2024. 4, 6 [2] Aaron Adcock et al. The llama 4 herd: Architecture, training, evaluation, and deployment notes, 2025. De-scribes Llama 4 Scout and Llama 4 Maverick models. 5[3] Anthropic. System card: Claude opus 4 & claude son-net 4. Technical report, Anthropic, 2025. 4, 5, 6 [4] Guillaume Astruc, Nicolas Dufour, Ioannis Siglidis, Constantin Aronssohn, Nacim Bouia, Stephanie Fu, Romain Loiseau, Van Nguyen Nguyen, Charles Raude, Elliot Vincent, and et al. Openstreetview-5m: The many roads to global visual geolocation. In Proc. of CVPR , pages 21967–21977, 2024. 2, 3 [5] Jinze Bai, Shuai Bai, Shusheng Yang, Shijie Wang, Sinan Tan, Peng Wang, Junyang Lin, Chang Zhou, and Jingren Zhou. Qwen-vl: A frontier large vision-language model with versatile abilities. arXiv preprint arXiv:2308.12966 , 2023. 5 [6] Shuai Bai, Keqin Chen, Xuejing Liu, Jialin Wang, Wenbin Ge, et al. Qwen2.5-vl technical report. arXiv preprint arXiv:2502.13923 , 2025. 4, 5, 6 [7] Athanasios Chalvatzaras, Ioannis Pratikakis, and An-gelos A Amanatiadis. A survey on map-based local-ization techniques for autonomous vehicles. IEEE Transactions on Intelligent Vehicles , pages 1574– 1596, 2023. 2 [8] Zhe Chen, Jiannan Wu, Wenhai Wang, Weijie Su, Guo Chen, Sen Xing, Muyan Zhong, Qinglong Zhang, Xizhou Zhu, Lewei Lu, et al. Internvl: Scaling up vision foundation models and aligning for generic visual-linguistic tasks, 2023. 4, 6 [9] Zhe Chen, Weiyun Wang, Yue Cao, et al. Expanding performance boundaries of open-source multimodal models with model, data, and test-time scaling. arXiv preprint arXiv:2412.05271 , 2024. 4, 5, 6 [10] Wenqing Cheng, Ruxue Wen, Haojun Huang, Wang Miao, and Chen Wang. Optdp: Towards optimal per-sonalized trajectory differential privacy for trajectory data publishing. Neurocomputing , pages 201–211, 2021. 2 [11] Brandon Clark, Alec Kerrigan, Parth Parag Kulkarni, Vicente Vivanco Cepeda, and Mubarak Shah. Where we are and what we’re looking at: Query based world-wide image geo-localization using hierarchies and scenes. In Proc. of CVPR , pages 23182–23190, 2023. 2[12] Gheorghe Comanici, Eric Bieber, Mike Schaek-ermann, Ice Pasupat, Noveen Sachdeva, Inderjit Dhillon, Marcel Blistein, Ori Ram, Dan Zhang, Evan Rosen, Luke Marris, Sam Petulla, Colin Gaffney, Asaf Aharoni, Nathan Lintz, Tiago Cardal Pais, Henrik Jacobsson, Idan Szpektor, Nan-Jiang Jiang, Krishna Haridasan, Ahmed Omran, Calian, et al. Gemini 2.5: Pushing the frontier with advanced reasoning, multi-modality, long context, and next generation agentic capabilities, 2025. 6 [13] Gheorghe Comanici et al. Gemini 2.5: Pushing the frontier with advanced reasoning, multimodality, long context, and next generation agentic capabilities, 2025. 4, 5, 6 [14] Gemma Team. Gemma 3 technical report, 2025. Ac-cessed: 2025-11-14. 4, 5, 6 [15] GeoGuessr AB. Geoguessr. https : / / www . geoguessr.com , 2013. Online geography game. 6[16] Aaron Grattafiori et al. The llama 3 herd of models, 2024. 5 [17] Lukas Haas, Silas Alberti, and Michal Skreta. Learning generalized zero-shot learners for open-domain image geolocalization. arXiv preprint arXiv:2302.00275 , 2023. 2 [18] Xiao Han, Xiangyu Zhao, Liang Zhang, and Wanyu Wang. Mitigating action hysteresis in traffic signal control with traffic predictive reinforcement learning. In Proc. of KDD , pages 673–684, 2023. 2 [19] James Hays and Alexei A Efros. Im2gps: estimat-ing geographic information from a single image. In 
+
+CVPR , pages 1–8, 2008. 2 [20] Wenyi Hong et al. Glm-4.5v and glm-4.1v-thinking: Towards versatile multimodal reasoning with scalable reinforcement learning, 2025. arXiv preprint. 5 [21] Aaron Hurst, Adam Lerer, et al. GPT-4o system card, 2024. 4, 5, 6 [22] Sohail Ahmed Khan, Laurence Dierickx, Jan-Gunnar Furuly, Henrik Brattli Vold, Rano Tahseen, Carl-Gustav Linden, and Duc-Tien Dang-Nguyen. Debunk-ing war information disorder: A case study in assess-ing the use of multimedia verification tools. Journal of the Association for Information Science and Tech-nology , 2024. 2 [23] Martha Larson, Mohammad Soleymani, Guillaume Gravier, Bogdan Ionescu, and Gareth JF Jones. The benchmarking initiative for multimedia evaluation: Mediaeval 2016. IEEE MultiMedia , pages 93–96, 2017. 2 [24] Bo Li, Yuanhan Zhang, Dong Guo, Renrui Zhang, Feng Li, Hao Zhang, Kaichen Zhang, Yanwei Li, Zi-9wei Liu, and Chunyuan Li. LLaVA-OneVision: Easy visual task transfer, 2024. 4, 5, 6 [25] Ling Li, Yu Ye, Bingchuan Jiang, and Wei Zeng. Geo-Reasoner: Geo-localization with reasoning in street views using a large vision-language model. In Proc. of ICML , 2024. 3 [26] Liu Liu and Hongdong Li. Lending orientation to neu-ral networks for cross-view geo-localization. In Proc. of CVPR , pages 5624–5633, 2019. 2 [27] Piotr Mirowski, Andras Banki-Horvath, Keith Ander-son, Denis Teplyashin, Karl Moritz Hermann, Ma-teusz Malinowski, Matthew Koichi Grimes, Karen Simonyan, Koray Kavukcuoglu, Andrew Zisserman, and et al. The StreetLearn environment and dataset. 
+
+arXiv preprint arXiv:1903.01292 , 2019. 3 [28] Eric M¨ uller-Budack, Kader Pustu-Iren, and Ralph Ew-erth. Geolocation estimation of photos using a hier-archical model and scene classification. In Proc. of ECCV , pages 563–579, 2018. 2 [29] OpenAI. OpenAI o3-mini system card. Technical re-port, OpenAI, 2025. 4, 5, 6 [30] Shraman Pramanick, Ewa M Nowara, Joshua Glea-son, Carlos D Castillo, and Rama Chellappa. Where in the world is this image? Transformer-based geo-localization in the wild. In Proc. of ECCV , pages 196– 215, 2022. 2 [31] Paul Hongsuck Seo, Tobias Weyand, Jack Sim, and Bohyung Han. CPlaNet: Enhancing image geolocal-ization by combinatorial partitioning of maps. In Proc. of ECCV , pages 536–551, 2018. 2 [32] Wenqi Shao, Junjun He, Yingtong Xiong, Wenwen Qu, Peng Sun, et al. Internvl3: Exploring advanced training and test-time recipes for open-source mul-timodal models. arXiv preprint arXiv:2504.10479 ,2025. 4, 5, 6 [33] Zirui Song, Jingpu Yang, Yuan Huang, Jonathan Ton-glet, Zeyu Zhang, Tao Cheng, Meng Fang, Iryna Gurevych, and Xiuying Chen. Geolocation with real human gameplay data: A large-scale dataset and human-like reasoning framework, 2025. 2 [34] Jonas Theiner, Eric M¨ uller-Budack, and Ralph Ew-erth. Interpretable semantic photo geolocation. In 
+
+WACV , pages 750–760, 2022. 2, 3 [35] Vicente Vivanco Cepeda, Gaurav Kumar Nayak, and Mubarak Shah. Geoclip: Clip-inspired alignment be-tween locations and images for effective worldwide geo-localization. In Advances in Neural Information Processing Systems (NeurIPS) , 2023. 5 [36] Nam Vo, Nathan Jacobs, and James Hays. Revisit-ing img2gps in the deep learning era. In ICCV , pages 2621–2630, 2017. 2, 3 [37] Peng Wang, Shuai Bai, Sinan Tan, Shijie Wang, Zhi-hao Fan, Jinze Bai, et al. Qwen2-vl: Enhancing vision-language model’s perception of the world at any resolution. arXiv preprint arXiv:2409.12191 ,2024. 4, 5, 6 [38] Tobias Weyand, Ilya Kostrikov, and James Philbin. Planet - photo geolocation with convolutional neural networks. In Proc. of ECCV , pages 37–55, 2016. 2 [39] Scott Workman, Richard Souvenir, and Nathan Ja-cobs. Wide-area image geolocalization with aerial ref-erence imagery. In Proc. of ICCV , pages 3961–3969, 2015. 2 [40] Amir Roshan Zamir and Mubarak Shah. Image geo-localization based on multiplenearest neighbor feature matching usinggeneralized graphs. IEEE transactions on pattern analysis and machine intelligence , pages 1546–1558, 2014. 2 [41] Xiaohan Zhang, Xingyu Li, Waqas Sultani, Yi Zhou, and Safwan Wshah. Cross-View geo-localization via learning disentangled geometric layout correspon-dence. In Proc. of AAAI , pages 3480–3488, 2022. 2 [42] Zijian Zhang, Ze Huang, Zhiwei Hu, Xiangyu Zhao, Wanyu Wang, Zitao Liu, Junbo Zhang, S Joe Qin, and Hongwei Zhao. MLPST: MLP is all you need for spatio-temporal prediction. In Proc. of CIKM , pages 3381–3390, 2023. 2 [43] Zijian Zhang, Xiangyu Zhao, Qidong Liu, Chunxu Zhang, Qian Ma, Wanyu Wang, Hongwei Zhao, Yiqi Wang, and Zitao Liu. Promptst: Prompt-enhanced spatio-temporal multi-attribute prediction. In Proc. of CIKM , pages 3195–3205, 2023. [44] Zijian Zhang, Xiangyu Zhao, Hao Miao, Chunxu Zhang, Hongwei Zhao, and Junbo Zhang. Autostl: Automated spatio-temporal multi-task learning. In 
+
+Proc. of AAAI , pages 4902–4910, 2023. [45] Xiangyu Zhao, Tong Xu, Qi Liu, and Hao Guo. Ex-ploring the choice under conflict for social event par-ticipation. In Proc. of DASFAA , pages 396–411, 2016. [46] Xiangyu Zhao, Tong Xu, Yanjie Fu, Enhong Chen, and Hao Guo. Incorporating spatio-temporal smooth-ness for air quality inference. In Proc. of ICDM , pages 1177–1182, 2017. [47] Xiangyu Zhao, Wenqi Fan, Hui Liu, and Jiliang Tang. Multi-type urban crime prediction. In Proc. of AAAI ,pages 4388–4396, 2022. 2 [48] Zhongliang Zhou, Jielu Zhang, Zihan Guan, Mengx-uan Hu, Ni Lao, Lan Mu, Sheng Li, and Gengchen Mai. Img2Loc: Revisiting image geolocalization using multi-modality foundation models and image-based retrieval-augmented generation. In Proc. of SI-GIR , pages 2749–2754, 2024. 2 [49] Sijie Zhu, Mubarak Shah, and Chen Chen. Trans-Geo: Transformer is all you need for cross-view image geo-localization. In Proc. of CVPR , pages 1162–1171, 2022. 2 10 [50] Yuanshao Zhu, Yongchao Ye, Ying Wu, Xiangyu Zhao, and James Yu. Synmob: Creating high-fidelity synthetic gps trajectory dataset for urban mobility analysis. In Proc. of NeurIPS , pages 22961–22977, 2023. 2 [51] Yuanshao Zhu, Yongchao Ye, Shiyao Zhang, Xiangyu Zhao, and James Yu. Difftraj: Generating gps trajec-tory with diffusion probabilistic model. In Proc. of NeurIPS , pages 65168–65188, 2023. [52] Yuanshao Zhu, James Jianqiao Yu, Xiangyu Zhao, Qidong Liu, Yongchao Ye, Wei Chen, Zijian Zhang, Xuetao Wei, and Yuxuan Liang. Controltraj: Control-lable trajectory generation with topology-constrained diffusion model. In Proc. of KDD , pages 4676–4687, 2024. 2 11
