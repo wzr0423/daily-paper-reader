@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.04705v1/fig-001.webp",
+      "caption": "Figure 1: Multimodal fusion with belief updates disambiguates human instructions and identifies the intended object among multiple candidates.",
+      "page": 1,
+      "index": 1,
+      "width": 506,
+      "height": 281
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04705v1/fig-002.webp",
+      "caption": "Figure 5: Belief convergence in the large environment. (Top) Max-belief traces show how certainty in the most likely state evolves over time. (Bottom) Target-belief traces show probability mass assigned to the true target.",
+      "page": 7,
+      "index": 2,
+      "width": 506,
+      "height": 496
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04705v1/fig-003.webp",
+      "caption": "Figure 6: Success rates by instruction modality across environments of increasing complexity.",
+      "page": 7,
+      "index": 3,
+      "width": 506,
+      "height": 295
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04705v1/fig-004.webp",
+      "caption": "Figure 2: system diagram.",
+      "page": 3,
+      "index": 4,
+      "width": 506,
+      "height": 252
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04705v1/fig-005.webp",
+      "caption": "Figure 8: Entropy loss curve.",
+      "page": 8,
+      "index": 5,
+      "width": 506,
+      "height": 304
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04705v1/fig-006.webp",
+      "caption": "Figure 7: LEGS-POMDP robot testing and dashboard interface. The figure illustrates both the real-robot experimental setup and the integrated UI, which visualizes multimodal grounding, POMDP belief states, and robot control in real time.",
+      "page": 8,
+      "index": 6,
+      "width": 1056,
+      "height": 527
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04705v1/fig-007.webp",
+      "caption": "Figure 3: Example frame showing different vector- and conebased models of the pointing direction, with the target marked in green.",
+      "page": 4,
+      "index": 7,
+      "width": 506,
+      "height": 286
+    }
+  ]
+}

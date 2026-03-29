@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.03596v1/fig-001.webp",
+      "caption": "Fig. 5: We test MEM policies across multiple challenging, long-horizon dexterous manipulation tasks that require retaining memory for up to fifteen minutes, including setting up a recipe, cleaning up a kitchen (Section IV-A), and making a grilled cheese sandwich (Section IV-C).",
+      "page": 6,
+      "index": 1,
+      "width": 1072,
+      "height": 426
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03596v1/fig-002.webp",
+      "caption": "Fig. 7: VLAs with memory can perform in-context adaptation of manipulation strategies, like adjusting grasp height or door opening direction. Without memory, policies get stuck with a suboptimal strategy.",
+      "page": 7,
+      "index": 2,
+      "width": 518,
+      "height": 352
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03596v1/fig-003.webp",
+      "caption": "Fig. 8: Comparison of approaches for equipping VLAs with memory across core memory capabilities (handling partial observability, counting, visual memory). VLAs without memory struggle to perform these tasks. Only MEM’s memory approach performs well across all core capabilities.",
+      "page": 8,
+      "index": 3,
+      "width": 1039,
+      "height": 336
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03596v1/fig-004.webp",
+      "caption": "Fig. 4: We propose to use an efficient video encoder architecture for compressing short-horizon, image-based memory. Our architecture expands standard ViTs for encoding video inputs by interleaving layers that apply bidirectional spatial attention within each observation (white arrows) with layers that additionally apply causal-temporal attention operations across observations (black arrows). We drop observation tokens for past timesteps in upper layers of the ViT to compress the inputs and reduce the number of tokens passed to the VLA backbone.",
+      "page": 4,
+      "index": 4,
+      "width": 522,
+      "height": 333
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03596v1/fig-005.webp",
+      "caption": "Fig. 2: The MEM memory system equips VLAs like π0.6 with long-horizon memory via two key components: (1) a high-level policy is trained to keep track of long-horizon semantic events by updating a language memory mt (left, Section III-B), (2) the low-level policy uses a short-horizon observation-based memory that is efficiently encoded via a video encoder (right, Section III-C).",
+      "page": 4,
+      "index": 5,
+      "width": 1046,
+      "height": 294
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03596v1/fig-006.webp",
+      "caption": "Fig. 3: Naively passing a sequence of observations into the backbone of a VLA rapidly increases inference latency. Our efficient video encoder architecture allows us to use many observation frames while remaining under critical real-time inference thresholds [6, 7]. Timings measured for the π0.6 VLA, with four input camera streams on one NVIDIA H100 GPU.",
+      "page": 4,
+      "index": 6,
+      "width": 457,
+      "height": 292
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03596v1/fig-007.webp",
+      "caption": "Fig. 10: In addition to effectively using its memory, MEM also matches the performance of state-of-the-art non-memory VLAs across challenging manipulation tasks that do not require memory.",
+      "page": 9,
+      "index": 7,
+      "width": 1039,
+      "height": 319
+    }
+  ]
+}

@@ -1,0 +1,134 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.03482v1/fig-001.webp",
+      "caption": "Figure 13. PERSIST generates diverse but coherent initial world frames from a single RGB conditioning observation. Each row corresponds to a specific input RGB frame, while each column depicts the initial world frame sampled from Wθ during a specific generation episode.",
+      "page": 26,
+      "index": 1,
+      "width": 865,
+      "height": 817
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03482v1/fig-002.webp",
+      "caption": "Figure 10. Score differences during head-to-head comparisons, 3D spatial consistency.",
+      "page": 21,
+      "index": 2,
+      "width": 865,
+      "height": 796
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03482v1/fig-003.webp",
+      "caption": "Figure 1. Initialized with a single pixel frame, PERSIST evolves in an auto-regressive loop in response to user actions . We first",
+      "page": 2,
+      "index": 3,
+      "width": 1017,
+      "height": 406
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03482v1/fig-004.webp",
+      "caption": "Figure 5. Video frames generated over 600 timestep episodes by PERSIST (Ours), Oasis (Decart et al., 2024) and WorldMem (Xiao et al., 2025a).",
+      "page": 7,
+      "index": 4,
+      "width": 813,
+      "height": 704
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03482v1/fig-005.webp",
+      "caption": "Figure 11. Score differences during head-to-head comparisons, temporal consistency.",
+      "page": 22,
+      "index": 5,
+      "width": 865,
+      "height": 796
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03482v1/fig-006.webp",
+      "caption": "Figure 2. PERSIST enables long-horizon spatial memory by modelling the dynamics of a 3D world-frame around the agent. Camera",
+      "page": 3,
+      "index": 6,
+      "width": 1017,
+      "height": 212
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03482v1/fig-007.webp",
+      "caption": "Figure 12. Score differences during head-to-head comparisons, overall quality score.",
+      "page": 23,
+      "index": 7,
+      "width": 865,
+      "height": 796
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03482v1/fig-008.webp",
+      "caption": "Table 1. FVD and mean user ratings (score range: 1-5) for videos generated from different PERSIST configurations and baselines. Bold numbers indicate the best performing methods. We find that every PERSIST configuration significantly outperforms baselines for all measured metrics. PERSIST-XL+w0 is discussed in Section 6.2.",
+      "page": 8,
+      "index": 8,
+      "width": 998,
+      "height": 192
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03482v1/fig-009.webp",
+      "caption": "Figure 6. PERSIST’s explicit 3D representation allows us to edit the world-state during an episode, enabling intuitive fine grained control over generations. We demonstrate this above with both global edits to terrain and biome, as well as the placement of smaller assets such as trees.",
+      "page": 8,
+      "index": 9,
+      "width": 917,
+      "height": 391
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03482v1/fig-010.webp",
+      "caption": "Figure 3. PERSIST can be initialized with a single RGB frame ( , row 1), or with a single RGB and world frame ( + , row 2). We visualize the world-frames and videos produced by an auto-regressive rollout of 600 timesteps. Even with a single RGB frame for initialization, PERSIST can generate cohesive and evolving worlds.",
+      "page": 4,
+      "index": 10,
+      "width": 1017,
+      "height": 448
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03482v1/fig-011.webp",
+      "caption": "Figure 8. User Study Interface. A screenshot of our web-based platform where participants evaluate video pairs based on temporal and spatial consistency.",
+      "page": 19,
+      "index": 11,
+      "width": 1017,
+      "height": 879
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03482v1/fig-012.webp",
+      "caption": "Table 5. World denoiser hyperparameters (3D-S configuration). The XL configuration uses patch size=1 and has the same number of learned parameters.",
+      "page": 17,
+      "index": 12,
+      "width": 406,
+      "height": 299
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03482v1/fig-013.webp",
+      "caption": "Table 6. Pixel denoiser configuration.",
+      "page": 17,
+      "index": 13,
+      "width": 454,
+      "height": 375
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03482v1/fig-014.webp",
+      "caption": "Figure 14. Generation glitches and subsequent recoveries over a 2000 step (83 seconds) episode generated with PERSIST. The 3D representation drifts locally, causing individual blocs to appear and disappear from the agent’s view. However we find that the 3D representation remains globally coherent and has a net stabilising effect on generation, allowing Pθ to recover from visual artifacts. This lets PERSIST generate rollouts lasting thousands of steps, even if glitches become more frequent over time due to autoregressive drift.",
+      "page": 27,
+      "index": 14,
+      "width": 715,
+      "height": 1231
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03482v1/fig-015.webp",
+      "caption": "Figure 7. PERSIST maintains a dynamic 3D state that evolves even when unobserved (bottom: a cave filling with water), allowing off-screen events to produce on-screen effects (top: water flowing onto the player at t = 150).",
+      "page": 9,
+      "index": 15,
+      "width": 1017,
+      "height": 402
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03482v1/fig-016.webp",
+      "caption": "Figure 9. Score differences during head-to-head comparisons, visual fidelity.",
+      "page": 20,
+      "index": 16,
+      "width": 865,
+      "height": 796
+    }
+  ]
+}

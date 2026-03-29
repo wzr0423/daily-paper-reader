@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.02697v1/fig-001.webp",
+      "caption": "Figure 3: Qualitative results. a) The four-view video of a certain agent maintains strong internal consistency. b) Agents generate visual scenes based on camera trajectories and interact with dynamically generated information, rather than being conditioned solely on the first frame. c) We compare the generated videos before and after the removal of certain buildings within a map. The sample shows that agents effectively exchange information based on the scene context, achieving a shared world.",
+      "page": 6,
+      "index": 1,
+      "width": 829,
+      "height": 994
+    },
+    {
+      "url": "assets/figures/arxiv/2603.02697v1/fig-002.webp",
+      "caption": "Figure 2: Method overview. Given one image from each of two agents, where four views are concatenated to depict a scene, ShareVerse performs a prediction task of 49 video frames to generate future videos conditioned on the camera trajectories from users. In the generation process, two agents explore the world, exchange captured visual information, and perceive each other’s positions.",
+      "page": 4,
+      "index": 2,
+      "width": 826,
+      "height": 318
+    },
+    {
+      "url": "assets/figures/arxiv/2603.02697v1/fig-003.webp",
+      "caption": "Figure 4: Dynamic positions. We keep the trajectory of one agent fixed and modify the other to generate two video samples. Comparison with the ground truth demonstrates that our model can accurately perceive the positions of the other agent.",
+      "page": 7,
+      "index": 3,
+      "width": 826,
+      "height": 516
+    },
+    {
+      "url": "assets/figures/arxiv/2603.02697v1/fig-004.webp",
+      "caption": "Figure 1: Illustration of the dataset construction process. We build the multi-agent synchronized training dataset by rendering in CARLA. We equip each agent with four cameras (front, rear, left, and right) and predefine six main trajectory pairs, as shown in (a) – (f). Each pair enables interaction between agents.",
+      "page": 3,
+      "index": 4,
+      "width": 826,
+      "height": 358
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.03960v1/fig-001.webp",
+      "caption": "Figure 1. Conceptual illustration of action chunk tokenization. (a) The conventional temporal-centric perspective, which structures actions as a sequence of T timesteps (chunk length), with each token having dimension Da (action dim). (b) Our proposed structural-centric perspective, which reframes the action chunk as a sequence of Da joints, where each token’s feature is its temporal trajectory over T . This (Da, T ) view naturally handles heterogeneous embodiments as a variable-length, unordered sequence, which is a key feature of our approach. array of complex, contact-rich manipulation tasks currently beyond the reach of simpler parallel-jaw grippers. Imitation learning, particularly in its offline formulation, has emerged as a promising paradigm for teaching such skills by leveraging large-scale datasets of human demonstrations [8, 13, 15, 27, 28, 41, 45, 63, 66]. A critical bottleneck, however, lies in the cross-embodiment transfer of these skills: how can a robot effectively learn from heterogeneous demonstrations, given the significant differences in morphology, kinematics, and sensory feedback [9, 68, 75, 85]? While recent Vision-Language-Action (VLA) models have made strides in general-purpose robotics [29, 72, 79, 83, 87], they predominantly rely on 2D visual inputs, which often fail to capture the intricate 3D spatial relationships essential for precise dexterous manipulation [22, 31, 32, 51, 81]. This work tackles the challenge of cross-embodiment imita-",
+      "page": 1,
+      "index": 1,
+      "width": 474,
+      "height": 330
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03960v1/fig-002.webp",
+      "caption": "Figure 4. Few-shot adaptation efficiency. We plot the average success rate versus training epochs for our method and the UniAct [82] baseline, evaluated in few-shot settings using varying numbers of in-domain demonstrations.",
+      "page": 7,
+      "index": 2,
+      "width": 488,
+      "height": 254
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03960v1/fig-003.webp",
+      "caption": "Figure 5. Frequency analysis of joint types in our Embodied Joint Codebook, derived from a survey of 10 common dexterous hands.",
+      "page": 7,
+      "index": 3,
+      "width": 492,
+      "height": 265
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03960v1/fig-004.webp",
+      "caption": "Figure 2. Our proposed model architecture. The policy takes a history of To raw 3D point clouds Pt = (Pt−To+1, . . . ,Pt) and a language instruction L as input. Observation Tokenizer: Each point cloud Pk in the history is processed via Farthest Point Sampling (FPS) and PointNets to extract local geometric tokens and a global scene context. The tokens from each time step are concatenated to form the final observation token sequence. Language is encoded by a T5 tokenizer [53]. Structural Action Tokenizer: Guided by the manipulator’s morphology, the Embodied Joint Codebook produces structural-centric embeddings aligned with the action dimension Da, which are added to the time-stepped noisy tokens Aτ t . Structural Action Transformer: A DiT [47] with causal masking predicts the action velocity field. This field is then integrated via an ODE solver to produce the final action chunk At.",
+      "page": 4,
+      "index": 4,
+      "width": 1020,
+      "height": 366
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03960v1/fig-005.webp",
+      "caption": "Figure 3. Composition of the offline pre-training dataset. The pie chart illustrates the relative data scale of each of the constituent datasets [2, 10, 16, 18, 37, 46, 55, 67].",
+      "page": 5,
+      "index": 5,
+      "width": 485,
+      "height": 329
+    }
+  ]
+}

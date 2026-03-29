@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.12806v1/fig-001.webp",
+      "caption": "Fig. 1: FLUX: A Flow-Based Unified Policy for CrossEmbodiment Navigation. Our static-to-dynamic training curriculum enables efficient, socially-aware navigation, which transfers zero-shot across three heterogeneous platforms in the real world.",
+      "page": 1,
+      "index": 1,
+      "width": 512,
+      "height": 379
+    },
+    {
+      "url": "assets/figures/arxiv/2603.12806v1/fig-002.webp",
+      "caption": "TABLE II: Performance comparison across six fundamental navigation tasks. Our method achieves state-of-the-art performance.",
+      "page": 6,
+      "index": 2,
+      "width": 1044,
+      "height": 496
+    },
+    {
+      "url": "assets/figures/arxiv/2603.12806v1/fig-003.webp",
+      "caption": "Fig. 4: Real-World Cross-Embodiment Deployment. FLUX is deployed on three heterogeneous platforms—wheeled (Go2-W), quadrupedal (Go2), and humanoid (G1)—using only a single RGB-D camera. Despite significant differences in morphology and locomotion, our unified policy achieves robust zero-shot transfer without platform-specific fine-tuning. Critic-guided visualizations further show that safer paths with larger clearance from obstacles receive higher scores, demonstrating reliable risk-aware navigation in real-world scenarios.",
+      "page": 7,
+      "index": 3,
+      "width": 1052,
+      "height": 470
+    },
+    {
+      "url": "assets/figures/arxiv/2603.12806v1/fig-004.webp",
+      "caption": "Fig. 2: Overview of FLUX framework. FLUX follows a static-to-dynamic training paradigm. Stage 1 (Top): Given egocentric visual observations and a goal, the flow policy head is pre-trained via imitation learning on static expert trajectories. It generates diverse candidate paths, which are evaluated by the critic head. Stage 2 (Bottom): The framework is post-training using Group Relative Policy Optimization via on-policy rollouts. This stage optimizes for both goal-reaching efficiency and social compliance in dynamic environments.",
+      "page": 3,
+      "index": 4,
+      "width": 1052,
+      "height": 493
+    },
+    {
+      "url": "assets/figures/arxiv/2603.12806v1/fig-005.webp",
+      "caption": "Fig. 6: Qualitative analysis of generative navigation policies. Compared to prior methods, FLUX generates trajectories with higher safety in both static and dynamic obstacle avoidance.",
+      "page": 8,
+      "index": 5,
+      "width": 512,
+      "height": 252
+    },
+    {
+      "url": "assets/figures/arxiv/2603.12806v1/fig-006.webp",
+      "caption": "Fig. 3: Overview of DynBench evaluation suite. Our benchmark provides a unified framework for fundamental navigation. (a) Diverse environments spanning unstructured cluttered environments with randomized obstacles and structured Isaac Sim scenes. (b) Six task modalities categorized into goal-conditioned navigation and coverage maximization, supporting our static-to-dynamic learning paradigm.",
+      "page": 4,
+      "index": 6,
+      "width": 1052,
+      "height": 343
+    }
+  ]
+}

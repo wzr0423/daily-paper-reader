@@ -1,0 +1,70 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.13616v1/fig-001.webp",
+      "caption": "Fig. 2: Policy performance comparisons on crowd-sourced real-world evaluations on the DROID [39] setup from RoboArena [6]. The violin plots represent empirical distributions of observed results. Policies with different letters are statistically distinguishable by the method. Policies are compared at a global error bound of α = 0.05 with a Bonferroni correction.",
+      "page": 6,
+      "index": 1,
+      "width": 502,
+      "height": 279
+    },
+    {
+      "url": "assets/figures/arxiv/2603.13616v1/fig-002.webp",
+      "caption": "Fig. A.5: Anytime p-values of test procedures on multi-policy comparisons on RoboArena data with small gaps in empirical performance of the policies. A test procedure terminates when its p-value is at or below the error threshold α. In this regime, binary metrics often fail to obtain a significant result at all, whereas methods that exploit more informative measures can stop significantly more quickly.",
+      "page": 21,
+      "index": 2,
+      "width": 1076,
+      "height": 278
+    },
+    {
+      "url": "assets/figures/arxiv/2603.13616v1/fig-003.webp",
+      "caption": "Fig. A.4: Anytime-valid p-values vs. number of trials on multi-policy comparisons on RoboArena. A test procedure terminates when its p-value is at or below the error threshold α. As can be seen, it is faster to distinguish policies under task progress metrics as opposed to binary metrics when the policy performance gap is large. PG-Binning-DROID has an empirical mean that is more than 30% points lower than π0-DROID, π0-FAST-DROID, and PG-Diff-DROID.",
+      "page": 21,
+      "index": 3,
+      "width": 1076,
+      "height": 277
+    },
+    {
+      "url": "assets/figures/arxiv/2603.13616v1/fig-004.webp",
+      "caption": "Fig. 1: The evaluation context of the N-SCORE procedure. (Left) We consider the general problem of policy comparison, which arises out of counterfactual design decisions in the policy synthesis process. (Middle) Evaluation on hardware or in high-fidelity simulation is the gold standard to assess the effect of such changes, but is costly to collect. (Right) N-SCORE is a sequential evaluation procedure that is statistically rigorous, sample efficient, and generalizes to rich, diverse measures of robot performance.",
+      "page": 2,
+      "index": 4,
+      "width": 1058,
+      "height": 409
+    },
+    {
+      "url": "assets/figures/arxiv/2603.13616v1/fig-005.webp",
+      "caption": "TABLE II: Time-to-decision for all simulation (top) and hardware (bottom) policy comparisons for evaluation context in [9]. If a decision is not reached, the entry is left blank; for the purpose of computing evaluation savings, any blank entry is counted at N trials. All simulation tasks utilize N = 200; all hardware tasks utilize N = 50. The total number of trials is the column sum multiplied by two (because there are two policies being evaluated, and each must be run). Thus, a column in the top half could require up to 2000 simulated trajectories; one in the bottom half could require up to 500 hardware evaluations. Several important observations are: (1) sequential evaluation saves significant evaluation effort over batch methods (right); (2) more informative partial credit metrics can provide even greater savings (left). In fact, for these evaluations, the savings are up to 50% on hardware and 70% in simulation.",
+      "page": 7,
+      "index": 5,
+      "width": 522,
+      "height": 264
+    },
+    {
+      "url": "assets/figures/arxiv/2603.13616v1/fig-006.webp",
+      "caption": "Fig. A.2: Violin plots and the number of samples required for N-SCORE and WSR on multi-policy comparison of RL policies on Mujoco benchmarks. Policies with different letters are statistically distinguishable by the method. Policies are compared at a global error bound of α = 0.05 with a Bonferroni correction. In all cases, N-SCORE results in the same comparison conclusions as WSR with fewer samples, demonstrating its broadly improved efficiency. These results also serve as an alternate visualization of the time-to-decision results in Table A.I.",
+      "page": 18,
+      "index": 6,
+      "width": 1076,
+      "height": 944
+    },
+    {
+      "url": "assets/figures/arxiv/2603.13616v1/fig-007.webp",
+      "caption": "Fig. A.3: Continuous task progress scores enable faster policy comparison on RoboArena policy evaluation data. Violin plots and time-to-decision for multi-policy comparison from RoboArena evaluations. Left: Policy comparison under continuous scores with N-SCORE. Right: policy comparison under Bernoulli scores with N-SCORE, WSR, and STEP. In the Bernoulli comparison setting, none of the methods are able to distinguish all the policies. Even though STEP is maximally efficient on Bernoulli comparisons, N-SCORE on continuous progress requires fewer total trials to distinguish policies. We emphasize that the partial credit and binary metrics arise from the same rollouts of each policy; the partial credit thus reflects precisely a more informative ‘representation’ of the rollout for evaluation purposes. The reduced time-to-decision and increased power (separating all of the policies successfully) highlights the fundamental advantage of fine-grained task progress scores over sparse binary success rates for efficient policy comparison. As can be observed in Figure 2 in the main text, N-SCORE also significantly reduces the time-to-decision with respect to WSR. The former requires approximately 1420 trials, while the latter needs an additional 450, while failing to distinguish π0 from PG-Diff.",
+      "page": 19,
+      "index": 7,
+      "width": 1076,
+      "height": 325
+    },
+    {
+      "url": "assets/figures/arxiv/2603.13616v1/fig-008.webp",
+      "caption": "Fig. A.1: Number of trials required to separate RL policies on InvertedPendulum-v4. This is one of the most stark instances of disparity between N-SCORE and WSR, the latter of which requires significantly more evaluation effort (by nearly a factor of three) to reach a decision.",
+      "page": 17,
+      "index": 8,
+      "width": 529,
+      "height": 279
+    }
+  ]
+}

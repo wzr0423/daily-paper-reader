@@ -1,0 +1,94 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.07109v1/fig-001.webp",
+      "caption": "Figure 6. Example visual input: A sequence of 7 frames from a number conservation task, showing the initial state, transformation process, and final state.",
+      "page": 15,
+      "index": 1,
+      "width": 1017,
+      "height": 336
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07109v1/fig-002.webp",
+      "caption": "Table 3. Four different prompt formats used in our benchmark.",
+      "page": 15,
+      "index": 2,
+      "width": 971,
+      "height": 306
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07109v1/fig-003.webp",
+      "caption": "Figure 1. Illustrative Tasks and Frame Selection Pipeline in Conservation Bench.",
+      "page": 2,
+      "index": 3,
+      "width": 1013,
+      "height": 342
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07109v1/fig-004.webp",
+      "caption": "Figure 4. Model performance showing main effects by (A) prompt type, (B) number of frames, and (C) frame sampling method. Each panel averages across the other 2 factors from the full factorial design (4 prompts × 5 frame counts × 3 extraction methods).",
+      "page": 7,
+      "index": 4,
+      "width": 1017,
+      "height": 310
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07109v1/fig-005.webp",
+      "caption": "Table 2. Task descriptions for conservation and non-conserving control scenarios across four quantitative properties.",
+      "page": 14,
+      "index": 5,
+      "width": 965,
+      "height": 410
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07109v1/fig-006.webp",
+      "caption": "Table 5. Complete Model Rankings by Average Accuracy (Ranks 1-56)",
+      "page": 18,
+      "index": 6,
+      "width": 1012,
+      "height": 1057
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07109v1/fig-007.webp",
+      "caption": "Table 6. Complete Model Rankings by Average Accuracy (Ranks 57-112, cont.)",
+      "page": 19,
+      "index": 7,
+      "width": 1012,
+      "height": 1054
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07109v1/fig-008.webp",
+      "caption": "Table 4. Counterbalanced variations of task-irrelevant features. Each unique combination of parameter values yields 48 distinct task instances per domain.",
+      "page": 17,
+      "index": 8,
+      "width": 995,
+      "height": 571
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07109v1/fig-009.webp",
+      "caption": "Figure 8. Model-level correlations between conservation task performance and control condition biases. (Left) Conservation task accuracy versus Empty Image Control accuracy shows strong positive correlation (r = 0.578, p < 0.0001), indicating models performing better on conservation tasks exhibit stronger textual priors favoring quantity invariance when visual content is removed. (Right) Conservation task accuracy versus Text Control accuracy shows similar but slightly weaker correlation (r = 0.475, p < 0.0001), with both patterns demonstrating that success on conservation tasks is driven primarily by textual biases rather than visual transformation reasoning. Evaluated on 62 VLMs supporting both empty image and text-only inputs under 7-frame conditions.",
+      "page": 20,
+      "index": 9,
+      "width": 1006,
+      "height": 411
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07109v1/fig-010.webp",
+      "caption": "Figure 7. Average model performance by quantitative domains. Models consistently perform worse on non-conserving controls compared to conservation tasks.",
+      "page": 20,
+      "index": 10,
+      "width": 799,
+      "height": 515
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07109v1/fig-011.webp",
+      "caption": "Figure 2. Overall Performance on ConservationBench. A. Accuracy averaged across conservation tasks and non-conserving control compared to strict pairwise calculation (Top 30 models; full results available in Appendix H; B. Performance on non-conserving control in relation to conservation tasks.",
+      "page": 5,
+      "index": 11,
+      "width": 1017,
+      "height": 412
+    }
+  ]
+}

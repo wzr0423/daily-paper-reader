@@ -1,0 +1,675 @@
+Title: Test-Driven Agentic Framework for Reliable Robot Controller
+
+URL Source: https://arxiv.org/pdf/2603.00455v1
+
+Published Time: Tue, 03 Mar 2026 01:30:34 GMT
+
+Number of Pages: 8
+
+Markdown Content:
+# Test-Driven Agentic Framework for Reliable Robot Controller 
+
+Shivanshu Tripathi, Reza Akbarian Bafghi, and Maziar Raissi 
+
+Abstract — In this work, we present a test-driven, agen-tic framework for synthesizing a deployable low-level robot controller for navigation tasks. Given a 2D map with an image of an ultrasonic sensor-based robot, or a 3D robotic simulation environment, our framework iteratively refines the generated controller code using diagnostic feedback from structured test suites to achieve task success. We propose a dual-tier repair strategy to refine the generated code that alternates between prompt-level refinement and direct code editing. We evaluate the approach across 2D navigation tasks and 3D navigation in the Webots simulator. Experimental results show that test-driven synthesis substantially improves controller reliability and robustness over one-shot controller generation, especially when the initial prompt is underspeci-fied. The source code and demonstration videos are available at: https://shivanshutripath.github.io/robotic_ controller.github.io/ .
+
+I. I NTRODUCTION 
+
+Motion planning is fundamental in robotics, requiring autonomous systems to generate collision-free, and dynami-cally feasible trajectories [1], [2]. However, autonomy hinges on execution, i.e., a controller must follow the plan while adhering to the robot’s sensing, actuation, and environmental constraints. This execution layer is frequently the primary source of brittleness. Sensors have discretized resolution and limited fields of view, and actuators are subject to saturation and rate limits. Consequently, a significant gap exists between the theoretical existence of a plan and re-liable execution in practice [3]. Traditionally, bridging this gap has demanded extensive manual parameter tuning, ad-hoc heuristics, and exhaustive debugging, which are time-consuming and difficult to scale. Recent advancements in LLMs offers a promising way to synthesize controller directly from high-level task de-scriptions and interface specifications. Although LLMs can substantially reduce the engineering effort required for con-troller design, one-shot code generation remains unreliable. Generated code often suffers from syntax errors, runtime crashes, safety violations, or a fails achieve task success. These failures often arise from underspecified prompts that omit important details such as robot dynamics, unit conver-sions, timing constraints, and API contracts. In the absence of these grounded details, LLMs frequently fall back on hal-lucinated assumptions that do not hold in specific hardware environments, resulting in brittle performance.   
+
+> S. Tripathi is with the Department of Electrical and Computer Engi-neering, and M. Raissi is with the Department of Mathematics at the University of California, Riverside, {strip008 ,maziarr }@ucr.edu .R. A. Bafghi is with the Department of Computer Science, University of Colorado, Boulder, {reak3132@colorado.edu }.
+
+To address these challenges, we introduce a closed-loop, agentic workflow that combines LLM-based synthesis with automated verification and repair. Our framework transforms high-level requirements into candidate controller for a robot, which are then evaluated with a comprehensive test suite assessing the performance. Diagnostic feedback from these evaluations enables iterative refinement of the prompt or directly the code, ensuring the final controller satisfies all safety and performance requirements before deployment. This paradigm shifts the engineering effort from manual implementation to an automated workflow. 
+
+A. Related Work 
+
+LLM enabled robotics. Recent research have used LLMs as high-level decision-makers to enhance autonomy in do-mains such as autonomous driving [4]–[6], service robotics [7]–[9], and system diagnosis [10], [11]. In these works, LLMs typically function as task planners that decompose instructions into logical subgoals, and use pre-existing low-level controllers for execution. However, using LLMs for direct low-level control remains a significant challenge, as these models often lack the precision and safety guarantees required for tasks such as trajectory generation and path planning [12]. While techniques such as prompt enrich-ment [13], [14], Retrieval-Augmented Generation (RAG) [16], and environment-aware refinement [18] have improved reasoning consistency, they often use an LLM during ex-ecution. This dependency introduces latency and potential stochastic failures at runtime. In contrast, our framework utilizes environment feedback to synthesize a standalone, executable controller. Once verified through our agentic loop, the resulting controller is deployable without further need of an LLM to correct the robot controller. 
+
+LLM-based coding agents. A growing body of work explores LLMs as coding agents for robotic control. These frameworks typically follow a loop: code → execute 
+
+→ verify → replan → code . For example, Code as Policies [19] enables modular program synthesis through recursive function generation. Other methods incorporate runtime assertions [20] or classical optimization-based con-trollers, such as MPC [21], to inform subsequent code regeneration. In contrast, we introduce an offline, test-driven code generation framework centered on structured PyTest suites. Using failure diagnostics to iteratively refine prompts or perform direct source-level edits prior to deployment, our approach produces a self-contained controller that operates without external solvers or specialized libraries. 
+
+Agentic workflows. Recent work on LLM-based robotics is moving from open-loop reasoning toward closed-loop, 
+
+> arXiv:2603.00455v1 [cs.RO] 28 Feb 2026
+
+self-correcting execution [22]. A key mechanism in this shift is verbal learning [24], [25], where the agent reflects on fail-ure cases in natural language and uses the resulting critique to improve subsequent decisions. Our approach is closely related in spirit to verbalized machine learning [27], which interprets language feedback as an update signal analogous to a gradient step. Building on this idea, we propose a dual-LLM design: a Learner that generates the robot controller, and an Optimizer that performs iterative improvement by refining prompts or directly editing code. 
+
+B. Contributions 
+
+The main contributions of this paper are as follows:  
+
+> •
+
+We propose a novel framework that leverages an agentic workflow to synthesize robotic controllers from under-specified high-level instructions. In contrast to one-shot prompting, our approach incorporates an automated, test-driven refinement loop that iteratively improves the generated controller, ensuring syntactic correctness and compliance with task requirements.  
+
+> •
+
+We present a unified methodology for controller syn-thesis in two representative settings: 1) 2D map-based navigation: A pipeline that con-verts raw map images into occupancy grids, which are then used for controller synthesis. 2) 3D simulation environments: A simulator-interfacing pipeline in which the environmental metadata is used to synthesize controller.  
+
+> •
+
+We validate the proposed framework through experi-ments in both 2D map-based navigation and 3D Webots simulation environments. II. P ROBLEM FORMULATION 
+
+We study a robot navigation task in an obstacle-populated environment, where the objective is to synthesize an exe-cutable controller program, controller.py , that drives the robot from a given start position to a designated goal state while ensuring collision avoidance. Unlike classical controller design settings, the controller logic is not specified a priori. Instead, it must be gener-ated from high-level natural-language instructions through an LLM-based agentic workflow. This introduces a key challenge: LLM-generated code is inherently stochastic and highly prompt-sensitive. Even under identical task condi-tions, repeated generations may produce controllers with widely varying quality. These outputs can fail at multiple levels, including, code failures (e.g., syntax errors, import errors, runtime exceptions) and performance failures (e.g., collisions, deadlock/stagnation, failure to reach the goal). Such variability makes one-shot code generation unsuitable for safety-critical robotic applications. To address this, we aim to propose an agentic workflow to autonomously adjusts the prompt or controller code through a closed-loop feedback mechanism until the final controller satisfies all performance and safety requirements validated by user defined test. The overview of our framework is illustrated in Fig. 2. Raw map       
+
+> +
+> Start point: {.... }
+> Goal point: {.... }
+> User click set (start, goal)
+> Map preprocessing:
+> 1. score candidates based on: (a) path length :(b) start/goal validity
+> (c) connectivity
+> (d) sharpness of path
+> 2. select best candidate
+> Greyscale occupancy map
+> parameters stored:
+> {"score": 0.8809628003525114, "threshold_mode": "otsu", "threshold": 135.0, "obstacle_is_dark": true, "morph_passes": 0, "inflate_px": 0, "cell": 4, "path_found": true, "start": (0,0) "goal": (9.4,-5.7) }
+
+Fig. 1. The figure shows map preprocessing pipeline. A user-provided map image is converted into a grayscale occupancy grid occ [y, x ], where 
+
+occ [y, x ] = True denotes an obstacle pixel and occ [y, x ] = False 
+
+denotes free space. This pipeline simultaneously generates params.json ,which stores the configuration parameters to produce occupancy grid. 
+
+III. D ESIGNING A CONTROLLER AGENTIC WORKFLOW 
+
+This section presents an agentic workflow for au-tomatically synthesizing an executable robot controller, 
+
+controller.py using task specification and environment context. The task specification includes the initial state, goal state, and success criteria, while the environment context provides the map or scene representation together with the robot’s sensing and actuation interfaces. Given these inputs, the workflow autonomously produces a fully deployable controller without requiring any human intervention. At a high level, the workflow follows a two-stage gen-erate and improve paradigm. In the first stage, an LLM is prompted with the the user prompt, and environment context to generate a candidate controller.py . In the second stage, the generated controller is automatically validated using a PyTest suite that checks both functional correctness and safety requirements. If the controller fails any test, the diagnostic feedback is fed back into the workflow to refine the prompt and/or the generated code, and a new controller candidate is produced. This refinement loop continues until the controller satisfies all specified requirements. We describe our methodology for two distinct settings: a 2D map-based environment, and a 3D simulator-based environment. Although these settings differ substantially in their sensing modalities and execution backends, the under-lying synthesis logic remains unchanged. In both cases, the controller is produced through the same agentic cycle of generation, evaluation, and iterative refinement. 
+
+A. 2D map-based environment 
+
+Map preprocessing: In the 2D setting, the user provides a raw RGB map image and a user prompt specifying the start and goal pixel indices. We transform this image into a discrete occupancy grid, occ [y, x ] ∈ { True , False }, where 
+
+True denotes an obstacle and False denotes navigable free space. To ensure the framework remains robust across diverse map styles, we do not assume a priori whether obstacles are represented by darker or lighter pixels. The map preprocessing pipeline follows a multi-stage transformation. Initially, grayscale conversion is performed by mapping the RGB input to a luminance-based represen-Algorithm 1: Pseudo code for map preprocessing 
+
+Input: user-given map I, start point A, goal point B
+
+Procedure: G ← Grayscale (I), T ← Otsu (G)
+
+B ← { dark, light } // binarization 
+
+I ← { 0, 1, 2, 3} // inflate parameter 
+
+C ← { 0, 4, 8, 12 , 16 } // cleanup parameter 
+
+Θ ← T × B × I × C // candidates 
+
+foreach θ ∈ Θ do 
+
+score (θ) = 2.5 ∗ min clearance 
+
+−0.02 ∗ path length − 1.2 ∗ sharpness 
+
+if A or B lie on obstacles then 
+
+score (θ) = −∞ 
+
+if A or B has no connectivity then 
+
+score (θ) = −∞ 
+
+return best θ
+
+Output: Greyscale occupancy map, parameters θ
+
+tation [28] according to the equation: 
+
+Y = 0 .2126 R + 0 .7152 G + 0 .0722 B. 
+
+Subsequently, binarization and polarity evaluation are con-ducted using Otsu’s method [29]. Since the meaning of pixel intensity is unknown, we evaluate both binary polarities (treating dark pixels as obstacles vs. treating light pixels as obstacles). For each candidate polarity, we apply morpho-logical operations to remove small noise, fill internal holes, and bridge narrow discontinuities. Obstacles are then inflated by a fixed pixel radius to provide a safety buffer for the robot’s physical dimensions. Finally, the framework performs hyperparameter optimization and feasibility checks through a grid search over polarity, cleanup strength, and inflation radii. A candidate occupancy grid is deemed feasible only if the start and goal positions reside in free space occ = False and a valid connected path exist between them. Among all feasible candidates, we select the occupancy grid that maximizes a weighted score favoring path efficiency (shortest Euclidean distance), safety (maximum clearance from obstacles), and boundary smoothness. and then pass the chosen grid and associated parameters to the controller-generation stage. This optimized grid and its associated metadata are then used to generate controller. The map-preprocessing is shown in Fig. 1 and described in Algo. 1. 
+
+Robotic controller generation: Following map prepro-cessing, we describe an agentic workflow to synthesize an executable robot controller as a single Python script, 
+
+controller.py . An overview of this architecture is pro-vided in Fig. 2. The synthesis module, code gen.py , takes the follow-ing inputs: 1) prompt.py (fixed prompt and dynamic updates): This file provides the instructions to the LLM. Its fixed component (PROMPT FIXED ) specifies non-negotiable requirements, such as the set of permit-ted libraries and mandatory functions that must be included in the generated controller. The dynamic                                              
+
+> 1from string import Template
+> 23PROMPT_FIXED =Template(r"""
+> 4#write the fixed instructions
+> 5""")
+> 6AUTO_REPAIR_RULES =r"""
+> 7#=== AUTO_REPAIR_RULES_BEGIN ===
+> 8#LLM writes instructions based on the PyTest results (from repair.py)
+> 9#=== AUTO_REPAIR_RULES_END ===
+> 10 """
+> 11 PROMPT =Template(PROMPT_FIXED.template +"\n" +AUTO_REPAIR_RULES +"\n")
+> Listing 1. Template of prompt.py
+
+updates consists of AUTO REPAIR RULES , which are updated at each iteration using diagnostics from PyTest failures. This design enables iterative correction and refinement without modifying the base prompt. The template of prompt.py is described in Listing 1. 2) sensors.py (Support module) : A lightweight aux-iliary module used by the controller. It implements a 
+
+Graphics class for Pygame-based visualization and an Ultrasonic class for occupancy-grid ray-casting, which is used to simulate range sensing. 3) Environment context and robot assets: The environ-ment inputs include a binary occupancy grid and a configuration file, params.json , which specifies the map resolution, relevant parameters (e.g., threshold and polarity), and the robot start/goal locations in pixel coordinates. A robot image is also provided for visualization of the robot on the map. The code gen.py aggregates the environment and robot contexts, injecting them into the prompt.py to generate the candidate controller.py . We validate each candidate controller using a PyTest suite. The repair.py script ex-ecutes the PyTest suite and generates a structured report that summarizes each failing test case along with its associated error cause. We treat this report as structured feedback and pass it to another LLM to drive one of two repair actions: 1) Code-level repair: directly modify the current 
+
+controller.py to resolve reported failures. This local refinement persists for a set number of attempts until the edit patience limit is reached. 2) Prompt-level repair: if repeated code edits do not resolve the failures within the edit limit, apply tar-geted updates to prompt.py . The revised prompt is then passed to code gen.py to get an improved 
+
+controller.py .This evaluate, repair, and regenerate loop repeats until the controller passes all tests or the maximum iteration threshold is reached, ensuring that the final output is verified and deployable. The pseudo code for this controller generation is provided in Algo. 2. 
+
+B. 3D simulator-based environment 
+
+We further evaluate the proposed agentic workflow in a 3D, physics-based simulation environment using arepair.py 
+
+(run Test →generate report) Are all tests satisfied? 
+
+controller.py       
+
+> PyTest files
+> No
+> Yes
+> LLM 2
+> LLM 1
+> PyTest 1 ✓
+> PyTest 2 ✓
+> ...
+> PyTest i ×
+> ...
+> PyTest n ✓
+> controller.py is ready
+> Check performance of controller.py
+
+update 
+
+prompt 
+
+generates 
+
+code 
+
+prompt.py 
+
+(fixed prompt+updates) 
+
+code gen.py 
+
+(generates controller) 
+
+sensors.py 
+
+(sensor+graphics) 
+
+occupancy map, parameters stored & robot image 
+
+edit code LLM 2
+
+Input to code gen.py 
+
+for 2D environment Fig. 2. The figure shows the overview of our test-driven agentic framework. The workflow is partitioned in to three functional domains: (1) The red block shows the inputs to code gen.py , providing preprocessed occupancy maps with params.json and the robot image; (2) The blue block highlights the calibration loop, where code gen.py generates controller.py from prompt.py . PyTest suite evaluates the generated controller, and repair.py  
+
+> updates the prompt template or updates the code based on the failures; (3) The green block defines the PyTest files, which are run via repair.py .
+
+Algorithm 2: Test-driven Controller Synthesis 
+
+Input : Prompt template π, Verification suite V,Max iterations K, Repair patience J,Environmental context E
+
+Procedure: Initialize prompt P ← PutContext (π, E)
+
+for k ← 1 to K do 
+
+C ← LLM-Generate (P) // Synthesize code 
+
+for j ← 0 to J do 
+
+R ← RunTests (C, V) // PyTest report 
+
+if R.passed = True then return C // Exit and deploy 
+
+if j < J then 
+
+C ← Edit (C, R) // Try code repair 
+
+else 
+
+σ ← Summarize (R)
+
+π ← UpdateTemplate (π, σ )
+
+P ← InjectContext (π, E)
+
+Output: Verified controller C (controller.py )differential-drive mobile robot equipped with infrared range sensors. Unlike the 2D map-based setting, this scenario requires no map preprocessing; instead, the synthesized con-troller operates directly on a simulator world configuration. The agentic loop matches Fig. 2, except that 
+
+code gen.py uses the simulator API to generate acontroller for execution in Webots. Experiments use afixed world specified by envt.wbt , which defines abounded arena with a diverse set of static obstacles. The world file is provided to the LLM for grounding, including: (i) robot embodiment (physical dimensions and differential-drive sensing/actuation interface), (ii) 
+
+environment geometry (obstacle placement and geometry), and (iii) task coordinates (initial and goal positions in the world frame). Conditioned on this specification, the LLM produces a controller.py file that is executed in Webots. Figure 3 summarizes the inputs to code gen.py 
+
+in this setting. 
+
+C. Performance metrics 
+
+For each experimental setting, we perform R independent runs, indexed by r ∈ { 1, . . . , R }. Each run proceeds for at most K iterations, indexed by k ∈ { 1, . . . , K }, and termi-nates early if the generated controller passes the complete 
+
+PyTest suite. Let fr,k denote the number of failing tests at iteration k of run r, and define the success indicator sr,k =
+
+I{fr,k = 0 }. The first-success iteration (stopping time) for run r is defined as: τr = min {k ∈ { 1, . . . , K } : sr,k = 1 },with τr = ∞ if no success occurs within K iterations. We evaluate the framework using two performance metrics: 1) Success rate (SR): The fraction of generated controller candidates that pass the complete test suite: 
+
+SR = 1
+
+|V| 
+
+X
+
+> (r,k )∈V
+
+I{fr,k = 0 },
+
+where V denotes the set of valid run-iteration pairs 
+
+(r, k ) for which a controller was generated 2) Cumulative success (CS): The fraction of runs that have succeeded at least once by iteration k, effec-tively representing the empirical Cumulative Distribu-tion Function (CDF) of τr :
+
+CS( k) = 1
+
+R
+
+> R
+
+X
+
+> r=1
+
+I{τr ≤ k}.
+
+This metric summarizes progress over iterations and indicates the proportion of runs solved by the k-th iteration. IV. E XPERIMENTS 
+
+We evaluate the proposed framework on ground-vehicle navigation tasks in environments with static obstacles. Our evaluation spans two domains: (i) a 2D navigation envi-ronment and (ii) a 3D physics-based simulation in Webots simulator. prompt.py  
+
+> (fixed prompt+updates)
+> code gen.py empty.wbt (Webots environment with obstacles, robot and goal)
+> +
+> Human prompt: For Epuck robot: start (x0, y0), goal (xd, yd); gener-ate controller.py.
+
+Input to code gen.py for 3D Webots environment 
+
+> LLM 2
+> update prompt
+> LLM 1
+> generates
+> controller.py
+
+Fig. 3. The figure shows the inputs to code gen.py in the 3D Webots simulation. The generator (LLM 1) produces controller.py conditioned on (i) the current prompt specification prompt.py (fixed base prompt plus accumulated updates), (ii) the Webots world file empty.wbt describing the arena, robot, goal, and static obstacles, and (iii) a human task prompt specifying start and goal poses. The optimizer (LLM 2) uses Pytest 
+
+feedback to update prompt.py across iterations. 
+
+A. 2D navigation setup 
+
+We first consider a planar navigation task where the robot must navigate a raw map image. The objective is to autonomously synthesize a differential-drive controller (controller.py ) that directs the agent from a initial position to a goal position. The robot is initialized with heading θ0 = 40 rad. Actuator constraints are imposed with wheel speeds vmax  
+
+> l
+
+= vmax  
+
+> r
+
+=0.02 px/s. To ensure safety, the robot is equipped with local ultrasonic sensors for obstacle detection. 
+
+a) Environment and guidance signal: As detailed in Sec. III, the raw map image is pre-processed into a grid-occupancy representation using Algo. 1. To ensure task feasibility an A∗ search algorithm computes a reference route from the start to the goal. This serves as connectivity check for controller synthesis. For real-time monitoring and debugging of the robot’s kinematics, we utilize a custom 
+
+PyGame -based visualizer to visualize the robot’s motion. 
+
+b) Task execution and iterative repair: The controller generation follows the agentic loop illustrated in Fig. 2. The fixed prompt is illustrated in Listing 2, and the the prompt is dynamically updated based on PyTest failures (see Appendix for examples). The repair process has code-level repair and prompt-level repair. We consider the optimizer LLM to have an edit patience of J = 1 attempts. If the controller fails to satisfy the verification suite after J
+
+attempts, the system updates the AUTO REPAIR RULES to refine the prompt for subsequent iterations. 
+
+c) Observations: We perform R = 5 independent runs per model, with a maximum budget of K = 20 iterations per run. With the optimizer LLM is fixed (GPT-4o), we evaluate the performance of four different learner LLMs: GPT-4o, GPT-4.1, GPT-5.2, Claude-Sonnet-4.5 and Claude-Opus-4.5. Success is measured via the PyTest suite in Table I. The performance of different models are summarized in Fig. 4. We observe that GPT-5.2 and Sonnet-4.5 has a success rate (SR) of 45% , followed by Opus-4.5 (33%) ,GPT-4.1 (25%) and GPT-4o (14%) . When comparing our iterative framework against a baseline single-shot prompting GPT-4o         
+
+> GPT-4.1
+> Opus-4.5
+> GPT-5.2
+> Sonnet-4.5
+> 0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1
+> 0.14
+> 0.25
+> 0.33
+> 0.45 0.45
+> success rate (SR)
+> 0246810 12 14
+> 0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1
+> iteration k
+> cumulative success (CS)
+> GPT-5.2
+> Opus-4.5
+> Sonnet-4.5
+> GPT-4.1
+> GPT-4o
+
+Fig. 4. The figure shows the performance of our approach in 2D navigation described in Section IV-A. The left figure shows the success rate across learner models. The right figure shows cumulative success vs iteration k.GPT-4o         
+
+> GPT-4.1
+> Opus-4.5
+> GPT-5.2
+> Sonnet-4.5
+> 0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1
+> 0.21
+> 0.35
+> 0.71
+> 0.39
+> 0.62
+> success rate (SR)
+> 0246810 12 14
+> 0
+> 0.2
+> 0.4
+> 0.6
+> 0.8
+> 1
+> iteration k
+> cumulative success (CS)
+> GPT-5.2
+> Opus-4.5
+> Sonnet-4.5
+> GPT-4.1
+> GPT-4o
+
+Fig. 5. The figure shows the controllers performance for a 3D navigation task in a Webots environment described in Section IV-B. The left figure shows the success rate across learner models. The right figure shows cumulative success vs iteration k.
+
+approach, our method ensures that a deployable controller is generated by iterative refinement as in Algo. 2. Specif-ically, GPT-4o and GPT-4.1 failed to reach success in a single iteration across all experimental runs, Opus-4.5 and GPT-5.2 succeed in 2 iterations and Sonnet-4.5 succeeds in 3 iterations out of 5 iterations on the first attempt. While the proposed iterative refinement strategy, GPT-5.2 and Sonnet-4.5 reaches CS = 1 by iteration k = 5 , whereas Opus-4.5, GPT-4.1, and GPT-4o require k = 6 , k = 7 , and 
+
+k = 15 iterations, respectively. 
+
+B. 3D Webots simulation 
+
+Next, we evaluate the proposed framework in a 3D Webots 
+
+simulator environment developed by Cyberbotics. Webots is a physics-based robotics simulator that provides a realistic 
+
+3D environment for developing and testing control, percep-tion, and navigation algorithms before deploying them on hardware. It includes a library of common robot models (including differential-drive platforms such as the e-puck), set of sensors (e.g., proximity, IMU, GPS, cameras, LiDAR) and actuator models. 
+
+a) Environment and sensing signals: We consider an e-puck differential-drive robot equipped with eight infrared (IR) proximity sensors ps0--ps7 . The controller uses six forward facing sensors, ps0--ps2 for left and ps5--ps7 
+
+for right side detection. The control is executed in discrete time with a timestep of 32 ms. At each step, the controller reads the sensor measurements and outputs angular velocity commands for the left and right wheel motors, subject to a saturation limit of 6.28 rad/s. The simulator provides a 3Dvisualization of the scene. 
+
+b) Task execution and iterative repair: We execute the synthesis loop using the agentic workflow described in Sec. III-B, with fixed prompt as Listing 3. As in the 2D setting, we use edit patience of J = 1. An iteration is 1 PROMPT_FIXED = Template(r"""  
+
+> 2
+
+Context (verbatim): sensors.py -> $ROBOT_PY_TEXT; params.json -> $PARAMS_JSON_TEXT  
+
+> 3
+
+Template vars: MAP_IMG, PARAMS_JSON, ROBOT_IMG, AXLE_LENGTH_PX, SENSOR_RANGE_PX, N_RAYS  
+
+> 4
+
+Inputs: occupancy.png (map), DDR.png (robot)  
+
+> 56
+
+Goal / tests:  
+
+> 7
+
+- Imports at top-level only (use allowed imports)  
+
+> 8
+
+- is_occupied -> Python bool  
+
+> 9
+
+- nearest_free -> Python (int,int)  
+
+> 10
+
+- A* path -> free-space pixel waypoints  
+
+> 11
+
+- Progress in 400 steps: dmin <= 0.7*d0  
+
+> 12
+
+- Reach goal in 2500 steps: <20 px, collisions = 0 
+
+> 13 14
+
+Setup:  
+
+> 15
+
+- Initialize graphics + map  
+
+> 16
+
+- Build boolean occupancy grid from map image  
+
+> 17
+
+- Load params with safe defaults; clamp ranges  
+
+> 18
+
+- If occupied ratio is implausible, flip polarity  
+
+> 19 20
+
+Start/goal selection:  
+
+> 21
+
+- Deterministic candidates (fixed RNG + corners)  
+
+> 22
+
+- Snap start/goal to nearest free  
+
+> 23 24
+
+Control (episode loop):  
+
+> 25
+
+- Forward speed +ve, reduce for large error  
+
+> 26
+
+- Obstacle handling via occupancy check  
+
+> 27
+
+- If blocked: stop motion; turn left or right  
+
+> 28
+
+- If stuck: brief forced turn, then resume pursuit  
+
+> 29 30
+
+Logging / termination:  
+
+> 31
+
+- Record position + speed each step  
+
+> 32
+
+- Keep collisions at zero  
+
+> 33
+
+- Stop when within 20 px of goal  
+
+> 34
+
+""") 
+
+Listing 2. Fixed prompt in prompt.py for 2D navigation setup 
+
+considered successful when the system gives a deployable controller before the fixed time horizon. The PyTest suite used to evaluate the controller shown in Table II. 
+
+c) Observations: We consider R = 5 independent runs per model, with K = 20 iterations per run. Then, we evaluate the performance of different LLMs as in the previous example. The performance of different models on the Webots simulator are summarized in Fig. 5. We observe that Claude-Opus-5.2 achieves a SR of 71% , sig-nificantly outperforming GPT-5.2 (39%) , Claude-Opus-5.2 
+
+(62%) , GPT-4.1 (35%) and GPT-4o (21%) . We also observe that the single shot controller generation has a success rate of 60% in Opus-4.5, Sonnet-4.5, and GPT-4.1, while other models do not succeed in first attempt. While using the proposed iterative approach, Opus-4.5 reaches CS = 1 in 
+
+k = 2 iterations, followed by Sonnet-4.5 (k = 3) , GPT-5.2 
+
+(k = 4) , GPT-4.1 (k = 9) and GPT-4o (k = 7) to converge to a reliable controller. We further observe that performance in the 3D Webots environment is better than in the 2D navigation setup, since the provided environment reduces the amount of computation and the unknown parameters. V. C ONCLUSION 
+
+We proposed a test-driven agentic framework that trans-forms high-level instructions into deployable robot controller for a robot navigation task. By using an automated veri- 
+
+> 1
+
+PROMPT_FIXED = Template(r"""  
+
+> 2
+
+Generate one Python Webots controller for E-puck (code only).  
+
+> 3
+
+- Use Supervisor. read envt.wbt. Move in XY plane.  
+
+> 4
+
+- Goal -> Solid named "GOAL". Obstacles -> WoodenBox(size), Rock(scale approx).  
+
+> 5
+
+- Build occupancy grid; plan 8-connected A*; follow waypoints using true translation+ rotation (no dead-reckoning).  
+
+> 6
+
+- Stop within goal tolerance (within 20 mm).  
+
+> 7
+
+- Use main; call under __main__.  
+
+> 8
+
+- Imports: module level only re/heapq/math; import Supervisor only inside run_episode/main.  
+
+> 910
+
+World text: $WORLD_WBT_TEXT  
+
+> 11
+
+""") 
+
+Listing 3. Fixed prompt in prompt.py for 3D Webots navigation setup 
+
+fication loop using PyTests, our approach gives a reliable controller which can directly be deployed on the robot. Our approach iteratively refines the controller code and prompt context until task requirements are met. Experimental vali-dation within 2D and 3D Webots environments confirms that this closed-loop methodology consistently yields functional controllers within a few iterations. Ultimately, this frame-work shifts the robotics engineering paradigm from manual code implementation toward automation, providing a robust robot controller. Future research will explore the extension of this work to a dynamic environment with moving obstacles. REFERENCES [1] S. M. LaValle. Planning Algorithms , volume 2. Cambridge University Press, 2006. [2] S. M. LaValle, and J. J. Kuffner. Randomized Kinodynamic Planning .Proceedings of the IEEE International Conference on Robotics and Automation (ICRA), 2001. [3] W. Zhao, J. P. Queralta and T. Westerlund. Sim-to-Real Transfer in Deep Reinforcement Learning for Robotics: a Survey . IEEE Symposium Series on Computational Intelligence (SSCI), 2020. [4] R. Schumann, W. Zhu, W. Feng, T. Fu, S. Riezler, and W. Y. Wang. VELMA:Verbalization Embodiment of LLM Agents for Vision and Language Navigation in Street View. arXiv preprint arXiv:2307.06082v2 , 2024. [5] B. Li, Y. Wang, J. Mao, B. Ivanovic, S. Veer, K. Leung, and M. Pavone. Driving everywhere with large language model policy adaptation. In Proceedings of the IEEE/CVF Conference on Computer Vision and Pattern Recognition , 14948-14957, 2024. [6] S. P. Sharan, F. Pittaluga, V. Kumar, and M. Chandraker. LLM-Assist: Enhancing Closed-Loop Planning with Language-Based Reasoning. 
+
+arXiv preprint arXiv:2401.00125 , 2023. [7] K. Rana, J. Haviland, S. Garg, J. Abou-Chakra, I. Reid, and N. Suen-derhauf. SayPlan: Grounding Large Language Models using 3D Scene Graphs for Scalable Task Planning. In 7th Annual Conference on Robot Learning , 2023. [8] D. Honerkamp, M. Buchner, F. Despinoy, T. Welschehold, and A. Valada. Language-Grounded Dynamic Scene Graphs for In-teractive Object Search with Mobile Manipulation. arXiv preprint arXiv:2403.08605 , 2024. [9] Z. Hu, F. Lucchetti, C. Schlesinger, Y. Saxena, A. Freeman, S. Modak, A. Guha, and J. Biswas. Deploying and Evaluating LLMs to Program Service Mobile Robots. IEEE Robotics and Automation Letters , 2024. [10] R. Sinha, A. Elhafsi, C. Agia, M. Foutter, E. Schmerling, and M. Pavone. Real-Time Anomaly Detection and Reactive Planning with Large Language Models. In Robotics: Science and Systems , 2024. [11] A. Tagliabue, K. Kondo, T. Zhao, M. Peterson, C. T. Tewari, and J. P. How. Real: Resilience and adaptation using large language models on autonomous aerial robots. IEEE 63rd Conference on Decision and Control (CDC) , 1539–1546, 2024. TABLE I PYTESTS FOR 2D MAP -BASED SIMULATION 
+
+Category Test Target Verification Objective Static Contract Compliance Ensures required constants ( SENSOR RANGE , etc.), imports, and main entry points are present. Hygiene Explicitly bans forbidden libraries (e.g., scipy ) and unstable code patterns (e.g., indexing pygame surfaces). 
+
+Unit API 
+
+OccMap2D Validates boundary handling, out-of-bounds indexing, and occupancy querying logic. Utility Confirms nearest free correctly identifies navigable points for robot initialization. Planner Verifies path format (Python int ), connectivity, and safety (no points in obstacles). 
+
+End-to-End 
+
+Schema Validates return signatures of simulation loops for data logging and metrics calculation. Stability Executes short rollouts to detect runtime exceptions or logical crashes under nominal conditions. Success Evaluates task completion through collision avoidance and goal-reaching within positional tolerances. TABLE II PYTESTS FOR WEBOTS SIMULATION 
+
+Category Test Target Verification Objective Static Contract Compliance Ensures required constants ( SENSOR RANGE , etc.), imports, and main entry points are present. Hygiene Explicitly bans forbidden libraries (e.g., scipy ) and unstable code patterns (e.g., indexing pygame surfaces). 
+
+Component Logic 
+
+Environment Validates environment parsing from world files. Planner Verifies A∗ path connectivity, and ensures all planned waypoints lie strictly within free-space coordinates. Control Check accuracy of differential-drive wheel speed commands for forward motion, turning, and waypoint tracking. 
+
+End-to-End Schema Validates simulation by checking return schemas for positions, speeds, and collision counts. Success Checks performance based on iterative goal progress (30% distance reduction), no collisions and reaches goal. [12] M. Aghzal, E. Plaku, and Z. Yao. Look Further Ahead: Testing the Limits of GPT-4 in Path Planning. IEEE 20th International Conference on Automation Science and Engineering (CASE) , 1029–1027, 2024. [13] C. H. Song, J. Wu, C. Washington, B. M. Sadler, W. L. Chao, and Y. Su. LLM-planner: Few-shot grounded planning for embodied agents with large language models. In Proceedings of the IEEE/CVF International Conference on Computer Vision , 2998–3009, 2023. [14] M. Lee, S. An; and M. S. Kim. PlanRAG: A Plan-then-Retrieval Augmented Generation for Generative Large Language Models as Decision Makers. arXiv preprint arXiv:2406.12430 , 2024. [15] W. Xu, M. Wang, W. Zhou, and H. Li. P-RAG: Progressive Retrieval Augmented Generation For Planning on Embodied Everyday Task. In Proceedings of the 32nd ACM International Conference on Multime-dia , 6969–6978, 2024. [16] P. Lewis, E. Perez, A. Piktus, F. Petroni, V. Karpukhin, N. Goyal, H. Kuttler, M. Lewis; W. T. Yih, and T. Rocktaschel. Retrieval-augmented generation for knowledge-intensive NLP tasks. Advances in Neural Inf. Processing Systems , 33:9459–9474, 2020. [17] T. Brown and others. Language Models are Few-Shot Learners. 
+
+Advances in Neural Inf. Processing Systems , 33:1877–1901, 2020. [18] M. Jafaripour, S. Golestan, S. Miwa, Y. Mitsuka, and O. R. Zaiane. Adaptive Iterative Feedback Prompting for Obstacle-Aware Path Plan-ning via LLMs. AAAI Workshop , 2025. [19] J. Liang, W. Huang, F. Xia, P. Xu, K. Hausman, B. Ichter, P. Florence, and A. Zeng. Code as policies: Language model programs for embodied control. arXiv preprint arXiv:2209.07753 , 2022. [20] I. Singh, V. Blukis, A. Mousavian, A. Goyal, D. Xu, J. Tremblay, D. Fox, J. Thomason, and A. Garg. Progprompt: Generating situ-ated robot task plans using large language models. arXiv preprint arXiv:2209.11302 , 2022. [21] G. Maher. LLMPC: Large Language Model Predictive Control. arXiv preprint arXiv:2501.02486 , 2025. [22] A. Brohan, Y. Chebotar, C. Finn, K. Hausman, A. Herzog, D. Ho, J. Ibarz, A. Irpan, E. Jang, and R. Julian. Do as I can, not as I say: Grounding Language in Robotic Affordances. In Conference on robot learning , 2023. [23] S. Meng, Y. Wang, C. Yang, N. Peng, and K. Chang. LLM-A*: Large Language Model Enhanced Incremental Heuristic Search on Path Planning. arXiv preprint arXiv:2407.02511v2 , 2025. [24] N. Shinn, F. Cassano, A. Gopinath, K. Narasimhan, and S. Yao. Re-flexion: Language agents with verbal reinforcement learning. Advances in Neural Information Processing Systems , 2023. [25] S. Sharan, F. Pittaluga, and M. Chandraker. LLM-Assist: Enhancing Closed-loop Planning with Language-based Reasoning. arXiv preprint arXiv:2401.00125 , 2023. [26] Z. Zhou, J. Song, K. Yao, Z. Shu, and L. Ma. ISR-LLM: Iterative Self-Refined Large Language Model for Long-Horizon Sequential Task Planning. arXiv preprint arXiv:2308.13724 , 2023. [27] T. Z. Xiao, R. Bamler, B. Scholkopf, and W. Liu. Verbalized Machine Learning: Revisiting Machine Learning with Language Models. arXiv preprint arXiv:2406.04344v3 , 2025. [28] International Telecommunication Union. Recommendation ITU-R BT.709-4: Parameter values for the HDTV standards for production and international programme exchange. ITU-R , BT.709-4, 2015. [29] N. Otsu A Threshold Selection Method from Gray-Level Histograms. 
+
+IEEE Trans. on Systems, Man, and Cybernetics , 9(1):62-66, 1979. 
+
+APPENDIX 
+
+Our prompt is refined iteratively by incorporating auto-repair rules derived from observed failures. Due to space constraints, we report only the 2D simulation results for a single GPT-5.2 run, shown in Fig. 6; the same procedure extends to other models and to the 3D Webots setting. From Fig. 6, we observe that across iterations the frame-work repeatedly finds common issues such as API mis-matches, unstable motion, and safety-contract violations. Each failure is then converted into a clear repair rule and added in the prompt for the next iteration. These rules persist across iterations and help prevent the same mistakes. In the first iteration, our framework identified a TypeError 
+
+caused by a deprecated argument name and automatically introduced a rule to standardize function signatures (e.g., replacing max r with max rad ). In the second iteration, the controller made limited progress because it became trapped in locally stable configurations. The framework responded by adding an “unstick” maneuver to the prompt, improving robustness in simulation. Overall, the prompt evolves to match the environment and past failures, so the agent learns better strategies over time. Iteration k = 1 :
+
+Generate controller.py using fixed prompt 
+
+⇓
+
+Diagnostic Report (Iteration k = 1 , e = 0 )
+
+1) The robot did not reach the target ( dmin = 102 .5, collisions = 0 ). 2) Found forbidden scipy library dependency. Test setup aborted. 3) Script contains prohibited Runtime Error raising. Test setup aborted. 
+
+⇓
+
+Edit controller.py (no prompt update) 
+
+⇓
+
+Diagnostic Report (Iteration k = 1 , e = 1 )
+
+1) No significant progress toward goal ( 209 .6( dmin ) ≥ 0.7 × 222 .4( d0)). 2) Did not reach goal. ( dmin = 199 .9, collision =0). 3) Found forbidden scipy library dependency. Test setup aborted. 4) Script contains prohibited Runtime Error raising. Test setup aborted. 
+
+⇓
+
+Edit patience reached 
+
+Iteration k = 2 :
+
+Update prompt 
+
+⇓
+
+New rules added to the fixed prompt 
+
+leftmargin=1.4em,itemsep=1mm,topsep=1mm  
+
+> •
+
+Accept both argument ( max rad and legacy max r ) to avoid TypeError . 
+
+> •
+
+Guarantee the returned cell is free by validating occupancy and expanding the search radius up to max rad . 
+
+> •
+
+Default vel=3.2 for goal dis>350 ; allow 4.2 when clearance and heading error are small; cap to 
+
+2.4 for less clearance.  
+
+> •
+
+If min front range<0.45 , stop and turn; if <0.30 , turn toward the more open side.  
+
+> •
+
+While avoid steps>0 , execute a fixed turning maneuver and suppress go-straight overrides.  
+
+> •
+
+Track best goal distance; if no improvement for 25 steps, trigger an unstick mode for 40 steps.  
+
+> •
+
+If clearance drops below threshold, revert to a slow turn toward open space. 
+
+⇓
+
+Generate controller.py 
+
+⇓
+
+Diagnostic Report (Iteration k = 2 , e = 0 )
+
+1) Found forbidden scipy library dependency. Test setup aborted. 2) Script contains prohibited Runtime Error raising. Test setup aborted. 
+
+⇓
+
+Edit controller.py (no prompt update) 
+
+⇓
+
+All PyTests passed ✓ (controller ready to deploy) 
+
+Output: controller.py

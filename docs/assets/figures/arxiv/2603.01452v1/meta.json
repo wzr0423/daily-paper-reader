@@ -1,0 +1,70 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.01452v1/fig-001.webp",
+      "caption": "Figure 6. Unnormalized curves on HumanoidBench-Medium benchmark. y-axis denotes the episodic return and x-axis represents environment interactions per million. All experiments use 3 different random seeds. We report 95% confidence intervals.",
+      "page": 11,
+      "index": 1,
+      "width": 1017,
+      "height": 341
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01452v1/fig-002.webp",
+      "caption": "Figure 7. Unnormalized curves on HumanoidBench-Hard benchmark. y-axis denotes the episodic return and x-axis represents environment interactions per million. All experiments use 3 different random seeds. We report 95% confidence intervals.",
+      "page": 11,
+      "index": 2,
+      "width": 1017,
+      "height": 464
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01452v1/fig-003.webp",
+      "caption": "Table 4. EfficientZero network architecture (for HumanoidBench-Hard).",
+      "page": 13,
+      "index": 3,
+      "width": 779,
+      "height": 373
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01452v1/fig-004.webp",
+      "caption": "Table 3. Key hyperparameters used in HumanoidBench experiments",
+      "page": 13,
+      "index": 4,
+      "width": 579,
+      "height": 506
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01452v1/fig-005.webp",
+      "caption": "Figure 3. Gradient similarities over training process. We compare the gradient similarities on different model modules between BRC and EZ-M. We choose two task pairs, (h1-walk, h1-run) and (h1-walk, h1-crawl), representing relevant and irrelevant tasks, respectively. dyn, rew, and vp represent the dynamics, reward, and value-policy model in EZ-M. (Left) We validate that the gradient similarities between the relevant task pair are higher than the irrelevant across the training process, indicating positive knowledge transfer. (Right) We showcase that EZ-M modules have higher gradient similarities than BRC modules in the relevant task pair. Curves are slightly smoothed for better visualization.",
+      "page": 8,
+      "index": 5,
+      "width": 897,
+      "height": 309
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01452v1/fig-006.webp",
+      "caption": "Figure 2. Overview of EfficientZero-Multitask (EZ-M). Green arrows and notations represent model inference and predictions. Black notations and bold arrows indicate target/grounded values and transitions. (A) Task-sharing model architecture. EZ-M uses a shared model to predict policy, value, and reward while training multiple tasks, with each component conditioned by task embeddings. (B) Balanced data collection. Rollout workers sample tasks with a balanced schedule and execute the corresponding task policy to interact with the environment. This prevents learning collapse from data imbalance and maintains diverse task coverage over time. (C) Multi-task rollout learning. For each sampled trajectory segment, the model is unrolled in latent space conditioned on the task index to produce r̂τ,k, v̂τ,k, and p̂τ,k along the imagined rollout. Supervision comes from grounded transitions (aτ,k, rτ,k) and reanalyzed targets (πτ,k, vτ,k), where cross-entropy loss enables a single network to learn consistent predictions across tasks. Blue dashed lines represents temporal consistency and path consistency. (D) Distributed implementation. Data collection (Rollout) feeds trajectories into task-independent replay buffers, while Reanalyze periodically recomputes search-based targets with the latest model. The learner consumes reanalyzed batches to update parameters and broadcasts updated weights back to rollout/reanalyze workers for scalable asynchronous training.",
+      "page": 4,
+      "index": 6,
+      "width": 763,
+      "height": 464
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01452v1/fig-007.webp",
+      "caption": "Table 1. Scores for HumanoidBench-Medium (1M) tasks. We bold the results surpass the success score or achieve the SoTA.",
+      "page": 12,
+      "index": 7,
+      "width": 854,
+      "height": 273
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01452v1/fig-008.webp",
+      "caption": "Table 2. Scores for HumanoidBench-Hard (1M) tasks. We bold the results surpass the success score or achieve the SoTA.",
+      "page": 12,
+      "index": 8,
+      "width": 1040,
+      "height": 399
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.03953v1/fig-001.webp",
+      "caption": "TABLE II RVN-BENCH RESULTS.",
+      "page": 6,
+      "index": 1,
+      "width": 952,
+      "height": 217
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03953v1/fig-002.webp",
+      "caption": "Fig. 1. Overview of the RVN-Bench. The benchmark is designed for indoor mobile robots and focuses on collision-aware visual navigation, where an agent must reach sequential goal positions using only visual observations while avoiding collisions. Built upon Habitat 2.0 and utilizing HM3D scenes, it provides high-quality visual observations, an RL environment for training and evaluation, and pipelines for collecting trajectory image datasets, including negative (collision-inducing) trajectories.",
+      "page": 2,
+      "index": 2,
+      "width": 1052,
+      "height": 370
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03953v1/fig-003.webp",
+      "caption": "Fig. 4. Real-world evaluation of NoMaD-PointGoal with different training datasets. (a) Clearpath Jackal UGV platform [32]–[34] used in the experiments. (b) Illustration of evaluation results in a house environment. Shown are the executed trajectories of the NoMaD-PointGoal agent trained on the real-world dataset (pink), trained on the simulation dataset (yellow), and trained on the combined real-world and simulation datasets (blue).",
+      "page": 7,
+      "index": 3,
+      "width": 512,
+      "height": 308
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03953v1/fig-004.webp",
+      "caption": "TABLE I COMPARISON OF VISUAL NAVIGATION BENCHMARKS.",
+      "page": 3,
+      "index": 4,
+      "width": 968,
+      "height": 281
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03953v1/fig-005.webp",
+      "caption": "Fig. 2. Trajectory image dataset generation process. We generate trajectory image datasets through the following steps. (a) Start and goal positions are randomly sampled in the scene. (b) The shortest path between these positions is computed using the ground truth occupancy map padded with a margin larger than the agent’s radius. (c) The agent follows this path using discrete actions. (d) If the agent reaches the goal position without collision, its positions, yaws, and image observations at each time step are recorded. For negative trajectory image dataset generation, the occupancy map is padded with a margin smaller than the agent radius to create path that is unsafe for the agent in step (b). If the agent collides with an obstacle at t = tc, the history of its positions, yaws, and image observations from ti to tf is recorded, where ti = max(0, tc − kpre), tf = min(T, tc + kpost), and It is set to Itc for t > tc.",
+      "page": 4,
+      "index": 5,
+      "width": 1037,
+      "height": 365
+    }
+  ]
+}

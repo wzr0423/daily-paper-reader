@@ -1,0 +1,118 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.09731v1/fig-001.webp",
+      "caption": "Fig. 3: Illustration of our scene annotation pipeline. Rather than having the MLLM generate annotations directly from the images, we adopt a multi-step pipeline to ensure object coverage and the accuracy of attributes and relations, greatly reducing the load of manual annotation required.",
+      "page": 6,
+      "index": 1,
+      "width": 713,
+      "height": 181
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09731v1/fig-002.webp",
+      "caption": "Fig. 4: Unified score Suni of Qwen3-VL-8B-Instruct across subsets under different inference strategies. Short, Medium, and Long denote the subsets with short, medium, and long atomic-action sequences. Full denotes the full dataset.",
+      "page": 11,
+      "index": 2,
+      "width": 723,
+      "height": 319
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09731v1/fig-003.webp",
+      "caption": "Fig. 5: Average single-instance final-scene description length of Qwen3-VL8B-Instruct under different inference strategies.",
+      "page": 11,
+      "index": 3,
+      "width": 715,
+      "height": 230
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09731v1/fig-004.webp",
+      "caption": "Fig. 1: Overview of EXPLORE-Bench. EXPLORE-Bench evaluates MLLMs on a new task: egocentric scene prediction with long-horizon reasoning. We annotate the final scene at the object, attribute, and relation levels to enable fine-grained scene-level evaluation. Note that the prompt is abbreviated for brevity in this figure.",
+      "page": 2,
+      "index": 4,
+      "width": 712,
+      "height": 406
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09731v1/fig-005.webp",
+      "caption": "Fig. 8: Visual comparisons of the average description length and unified score Suni on the full EXPLORE-Bench across different models.",
+      "page": 34,
+      "index": 5,
+      "width": 705,
+      "height": 254
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09731v1/fig-006.webp",
+      "caption": "Fig. 9: Two cases of the final-scene images.",
+      "page": 34,
+      "index": 6,
+      "width": 725,
+      "height": 324
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09731v1/fig-007.webp",
+      "caption": "Fig. 7: Case study of an abnormal situation. “C” refers to the camera wearer. Although both models recognize the changes, neither accurately describes the key state.",
+      "page": 14,
+      "index": 7,
+      "width": 708,
+      "height": 406
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09731v1/fig-008.webp",
+      "caption": "Table 3: Evaluation results of abnormal cases. Dark green and light green indicate the best and the second best result among all models.",
+      "page": 13,
+      "index": 8,
+      "width": 542,
+      "height": 231
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09731v1/fig-009.webp",
+      "caption": "Fig. 11: Case study of case 2 (1). “C” refers to the camera wearer. Qwen3-VL-8BInstruct describes more objects than Keye-VL-1.5-8B, but it fails to mention that the refrigerator door is still open, whereas Keye-VL-1.5-8B notices this. In addition, both models claim that the faucet is turned off, which is inconsistent with the actual scene.",
+      "page": 40,
+      "index": 9,
+      "width": 708,
+      "height": 336
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09731v1/fig-010.webp",
+      "caption": "Fig. 10: Case study of case 1. “C” refers to the camera wearer. Note that the scene in this case is the same as in Fig. 7 of the main text, but we show predictions from different models, demonstrating their consistent failures in this case. Notably, Qwen3-VL-8BInstruct and Keye-VL-1.5-8B cannot even realize that the bottle pyramid changes.",
+      "page": 40,
+      "index": 10,
+      "width": 708,
+      "height": 406
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09731v1/fig-011.webp",
+      "caption": "Table 4: Evaluation results of abnormal cases. Dark green and light green indicate the best and the second best result among all models. For models with both thinking and non-thinking modes, we report results in the non-thinking mode by default.",
+      "page": 32,
+      "index": 11,
+      "width": 625,
+      "height": 436
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09731v1/fig-012.webp",
+      "caption": "Fig. 6: Average single-instance inference time of Qwen3-VL-8B-Instruct on an NVIDIA H200 GPU under different inference strategies.",
+      "page": 12,
+      "index": 12,
+      "width": 715,
+      "height": 230
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09731v1/fig-013.webp",
+      "caption": "Fig. 12: Case study of case 2 (2). “C” refers to the camera wearer. Both Gemini3-Pro and GPT-5.2-Chat describe the key states in this scene, demonstrating their relative advantage in detecting safety hazards.",
+      "page": 41,
+      "index": 13,
+      "width": 708,
+      "height": 348
+    },
+    {
+      "url": "assets/figures/arxiv/2603.09731v1/fig-014.webp",
+      "caption": "Fig. 2: Data analysis of EXPLORE-Bench reflects the rich diversity of scenarios, objects, attributes, relations, and atomic actions.",
+      "page": 5,
+      "index": 14,
+      "width": 721,
+      "height": 268
+    }
+  ]
+}

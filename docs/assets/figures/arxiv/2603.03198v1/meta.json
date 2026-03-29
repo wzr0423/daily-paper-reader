@@ -1,0 +1,374 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-001.webp",
+      "caption": "Figure 3 ACE-Brain-0’s unified multimodal architecture and cross-domain capability coverage. ACEBrain-0 supports inputs including single-view images, multi-view images, and videos; the instruction examples illustrate that the model can perform Q&A-style tasks across domains (General/Spatial/Driving/Aerial/Embodied). The top row summarizes ACE-Brain-0’s core capability spectrum for cross-embodiment scenarios, such as Spatial Perception and Temporal Modeling, enabling unified representation and compositional generalization across domains.",
+      "page": 6,
+      "index": 1,
+      "width": 986,
+      "height": 436
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-002.webp",
+      "caption": "Table 3 Performance Comparison on Autonomous Driving Benchmarks.",
+      "page": 11,
+      "index": 2,
+      "width": 972,
+      "height": 599
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-003.webp",
+      "caption": "Figure 18 Example 3 of MindCube Benchmark.",
+      "page": 43,
+      "index": 3,
+      "width": 986,
+      "height": 354
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-004.webp",
+      "caption": "Figure 16 Example 1 of MindCube Benchmark.",
+      "page": 43,
+      "index": 4,
+      "width": 986,
+      "height": 339
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-005.webp",
+      "caption": "Figure 17 Example 2 of MindCube Benchmark.",
+      "page": 43,
+      "index": 5,
+      "width": 986,
+      "height": 383
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-006.webp",
+      "caption": "Figure 5 Example 1 of VSI Benchmark.",
+      "page": 38,
+      "index": 6,
+      "width": 986,
+      "height": 710
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-007.webp",
+      "caption": "Figure 27 Example 1 and 2 of UrbanVideo Benchmark.",
+      "page": 47,
+      "index": 7,
+      "width": 986,
+      "height": 804
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-008.webp",
+      "caption": "Figure 26 Example 2 of LingoQA Benchmark.",
+      "page": 47,
+      "index": 8,
+      "width": 986,
+      "height": 206
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-009.webp",
+      "caption": "Figure 6 Example 2 of VSI Benchmark.",
+      "page": 39,
+      "index": 9,
+      "width": 986,
+      "height": 602
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-010.webp",
+      "caption": "Figure 7 Example 3 of VSI Benchmark.",
+      "page": 39,
+      "index": 10,
+      "width": 986,
+      "height": 475
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-011.webp",
+      "caption": "Table 2 Performance Comparison on Spatial Benchmarks. Bold numbers indicate the best results, underlined numbers indicate the second-best results, and results marked with ∗ are obtained using our evaluation framework.",
+      "page": 10,
+      "index": 11,
+      "width": 979,
+      "height": 586
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-012.webp",
+      "caption": "Table 7 Optimized Merging effectively combines each domain. The average score of Spatial is computed over VSI, SAT, and MindCube benchmarks.",
+      "page": 14,
+      "index": 12,
+      "width": 968,
+      "height": 344
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-013.webp",
+      "caption": "Table 8 Training paradigm comparison. We compare four paradigms: Joint trains on mixed {Spatial, AD, UAV, Embodied} data; Sequential performs stage-wise adaptation Spatial→AD→UAV→Embodied; SR follows Spatial→Merging→Embodied.",
+      "page": 14,
+      "index": 13,
+      "width": 972,
+      "height": 275
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-014.webp",
+      "caption": "Figure 15 Example 2 of SITE Benchmark.",
+      "page": 42,
+      "index": 14,
+      "width": 971,
+      "height": 290
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-015.webp",
+      "caption": "Figure 14 Example 1 of SITE Benchmark.",
+      "page": 42,
+      "index": 15,
+      "width": 983,
+      "height": 316
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-016.webp",
+      "caption": "Figure 13 Example 3-4 of SAT Benchmark.",
+      "page": 42,
+      "index": 16,
+      "width": 986,
+      "height": 396
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-017.webp",
+      "caption": "Figure 1 Cross-Embodiment Learning Paradigm of ACE-Brain-0 and Performance Comparison with other Embodied Brains. ACE-Brain-0 unifies tasks from four domains, Spatial Cognition, Autonomous Driving, Low-Altitude Sensing, and Embodied Manipulation. We hope to answer: “How can we instill and unify these capabilities within a single embodied foundation brain?” Conventional joint training mixes multi-domain data with shared parameters, which often causes gradient interference across tasks; sequential training accumulates skills via stage-wise fine-tuning, but tends to overwrite previously learned capabilities and leads to catastrophic forgetting. In contrast, we propose our Scaffold-Specialize-Reconcile paradigm: We first construct a Spatial Expert as a universal foundational model, then train the AD and UAV experts separately to acquire domain-specific skills while enabling coarse-grained spatial reasoning, and subsequently combine their expertise into a unified model via data-free expert merging. We further perform Embodied SFT, optionally followed by GRPO-based RFT for reward-guided post-training alignment. This pipeline delivers consistent and stable improvements across all four domains. The radar chart on the right further compares ACE-Brain-0 against representative embodied brains across multiple benchmarks, showing stronger overall performance on a broader set of tasks, and validating the unified cross-embodiment capability of ACE-Brain-0.",
+      "page": 3,
+      "index": 17,
+      "width": 984,
+      "height": 548
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-018.webp",
+      "caption": "Figure 24 Example 2 of MAPLM Benchmark.",
+      "page": 46,
+      "index": 18,
+      "width": 986,
+      "height": 404
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-019.webp",
+      "caption": "Figure 25 Example 1 of LingoQA Benchmark.",
+      "page": 46,
+      "index": 19,
+      "width": 986,
+      "height": 215
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-020.webp",
+      "caption": "Figure 23 Example 1 of MAPLM Benchmark.",
+      "page": 46,
+      "index": 20,
+      "width": 986,
+      "height": 402
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-021.webp",
+      "caption": "Figure 22 Example 1 of NuPlanQA Benchmark.",
+      "page": 45,
+      "index": 21,
+      "width": 986,
+      "height": 585
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-022.webp",
+      "caption": "Figure 21 Example 3 of NuscenesQA Benchmark.",
+      "page": 45,
+      "index": 22,
+      "width": 986,
+      "height": 458
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-023.webp",
+      "caption": "Table 5 Performance Comparison on Embodied Benchmarks.",
+      "page": 13,
+      "index": 23,
+      "width": 972,
+      "height": 576
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-024.webp",
+      "caption": "Table 6 Spatial knowledge consistently improves expert performance. We compare different pretraining routes for adapting to three domains (AD, UAV, and Embodied). The average score of AD is computed over NuscenesQA, NuPlanQA, and LingoQA benchmarks; the average score of UAV is computed over UrbanVideoBench, AircopBench, and Avi-Math; the average score of Embodied is computed over RoboVQA and EgoPlan. Bold indicates the best score, and improvements (∆) are reported over Qwen3-VL-8B-Instruct.",
+      "page": 13,
+      "index": 24,
+      "width": 968,
+      "height": 288
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-025.webp",
+      "caption": "Figure 33 Example 2 of RoboVQA Benchmark.",
+      "page": 50,
+      "index": 25,
+      "width": 986,
+      "height": 331
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-026.webp",
+      "caption": "Figure 35 Example 1 of OpenEQA Benchmark.",
+      "page": 50,
+      "index": 26,
+      "width": 986,
+      "height": 363
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-027.webp",
+      "caption": "Figure 34 Example 2 of RoboVQA Benchmark.",
+      "page": 50,
+      "index": 27,
+      "width": 986,
+      "height": 333
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-028.webp",
+      "caption": "Figure 8 Example 4 of VSI Benchmark.",
+      "page": 40,
+      "index": 28,
+      "width": 986,
+      "height": 477
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-029.webp",
+      "caption": "Figure 9 Example 5 of VSI Benchmark.",
+      "page": 40,
+      "index": 29,
+      "width": 986,
+      "height": 454
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-030.webp",
+      "caption": "Figure 31 Example 5-7 of AVI-Math.",
+      "page": 49,
+      "index": 30,
+      "width": 986,
+      "height": 391
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-031.webp",
+      "caption": "Figure 30 Example 1-4 of AVI-Math.",
+      "page": 49,
+      "index": 31,
+      "width": 986,
+      "height": 408
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-032.webp",
+      "caption": "Figure 32 Example 1 of RoboVQA Benchmark.",
+      "page": 49,
+      "index": 32,
+      "width": 986,
+      "height": 335
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-033.webp",
+      "caption": "Figure 36 Example 2 of OpenEQA Benchmark.",
+      "page": 51,
+      "index": 33,
+      "width": 986,
+      "height": 360
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-034.webp",
+      "caption": "Figure 38 Example 2 of EgoPlan-Bench2 Benchmark.",
+      "page": 51,
+      "index": 34,
+      "width": 982,
+      "height": 262
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-035.webp",
+      "caption": "Figure 37 Example 1 of EgoPlan-Bench2 Benchmark.",
+      "page": 51,
+      "index": 35,
+      "width": 986,
+      "height": 312
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-036.webp",
+      "caption": "Table 4 Performance Comparison on Low-Altitude Benchmarks.",
+      "page": 12,
+      "index": 36,
+      "width": 972,
+      "height": 594
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-037.webp",
+      "caption": "Figure 19 Example 1 of NuscenesQA Benchmark.",
+      "page": 44,
+      "index": 37,
+      "width": 986,
+      "height": 456
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-038.webp",
+      "caption": "Figure 20 Example 2 of NuscenesQA Benchmark.",
+      "page": 44,
+      "index": 38,
+      "width": 986,
+      "height": 459
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-039.webp",
+      "caption": "Figure 12 Example 1-2 of SAT Benchmark.",
+      "page": 41,
+      "index": 39,
+      "width": 986,
+      "height": 488
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-040.webp",
+      "caption": "Figure 11 Example 1-4 of BLINK Benchmark.",
+      "page": 41,
+      "index": 40,
+      "width": 986,
+      "height": 325
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-041.webp",
+      "caption": "Figure 10 Example 1-2 of MMSI Benchmark.",
+      "page": 41,
+      "index": 41,
+      "width": 986,
+      "height": 360
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-042.webp",
+      "caption": "Table 1 Details of Scaffold-Specialize-Reconcile training strategy of ACE-Brain-0.",
+      "page": 9,
+      "index": 42,
+      "width": 979,
+      "height": 471
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-043.webp",
+      "caption": "Figure 2 Overview of ACE-Brain-0 Capabilities. ACE-Brain-0 is a spatial-centric foundation brain that supports Spatial Intelligence, Embodied Manipulation, Low-Altitude Sensing, and Autonomous Driving. Specifically, ACE-Brain-0 is evaluated on 7 benchmarks for Spatial Cognition, 6 benchmarks for Autonomous Driving, 5 benchmarks for Low-Altitude Sensing, and 6 benchmarks for Embodied Interaction. ACE-Brain-0’s ability to integrate perception, decision, and planning across diverse real-world embodied scenarios, highlighting its generalization capability as a universal embodied intelligence model.",
+      "page": 5,
+      "index": 43,
+      "width": 982,
+      "height": 567
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-044.webp",
+      "caption": "Figure 29 Example 3 and 4 of AirCopBench.",
+      "page": 48,
+      "index": 44,
+      "width": 986,
+      "height": 446
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-045.webp",
+      "caption": "Figure 28 Example 1 and 2 of AirCopBench.",
+      "page": 48,
+      "index": 45,
+      "width": 986,
+      "height": 473
+    },
+    {
+      "url": "assets/figures/arxiv/2603.03198v1/fig-046.webp",
+      "caption": "Figure 4 Domain distribution and Token count. This nested pie chart illustrates the proportion of tokens contributed by each domain. The distribution exhibits a long-tailed characteristic, where UAV data constitutes a relatively small proportion of the corpus.",
+      "page": 16,
+      "index": 46,
+      "width": 972,
+      "height": 379
+    }
+  ]
+}
