@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.20992v1/fig-001.webp",
+      "caption": "Fig. 3: We simulate a serial robotic arm, with an allegro robotic hand fitted with tactile sensors.",
+      "page": 4,
+      "index": 1,
+      "width": 513,
+      "height": 257
+    },
+    {
+      "url": "assets/figures/arxiv/2603.20992v1/fig-002.webp",
+      "caption": "Fig. 2: System Diagram. RGB-D and Tactile sensor inputs, and robot configuration is used to define 4 gradients. At each iteration, one of the gradients is selected according to a heuristic.",
+      "page": 2,
+      "index": 2,
+      "width": 617,
+      "height": 279
+    },
+    {
+      "url": "assets/figures/arxiv/2603.20992v1/fig-003.webp",
+      "caption": "Fig. 1: Given an initial estimate, our approach iteratively updates the object pose using differentiable simulation, the relative positioning of the estimated pose and the robotic hand as well as data from vision and tactile sensors.",
+      "page": 1,
+      "index": 3,
+      "width": 514,
+      "height": 558
+    }
+  ]
+}

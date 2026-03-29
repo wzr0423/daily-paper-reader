@@ -1,0 +1,214 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.21669v1/fig-001.webp",
+      "caption": "Figure 1. PRM-as-a-Judge and OPD. Binary success rate compresses an execution into a terminal outcome and obscures progress, efficiency, and stability. We use a Process Reward Model to induce a dense progress potential and derive OPD metrics at the outcome, process, and diagnosis levels. This yields fine-grained auditing that distinguishes near miss failures from early collapse and separates smooth successes from inefficient or unstable ones.",
+      "page": 1,
+      "index": 1,
+      "width": 494,
+      "height": 574
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21669v1/fig-002.webp",
+      "caption": "Figure 14. Simulation Task: Hanging the mug. Fine-grained manipulation tracking. The curve captures the “redundant removal” of the mug (Step ∼ 450) as a regression before the final successful placement. This granularity allows for the detection of suboptimal behavior even in successful trajectories.",
+      "page": 38,
+      "index": 2,
+      "width": 935,
+      "height": 426
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21669v1/fig-003.webp",
+      "caption": "Figure 13. Simulation Task: Place bread into the basket. The model exhibits sensitivity to spatial relations. Moving the bread away from the basket (Step ∼ 75) causes a dip in the score. The high PPL (75.06%) indicates that despite minor deviations, the overall trajectory was relatively efficient compared to other tasks.",
+      "page": 38,
+      "index": 3,
+      "width": 939,
+      "height": 426
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21669v1/fig-004.webp",
+      "caption": "Table 4. Discarded progress based metrics. All candidates are defined on the same potential Φ for comparison. For each metric we list a formal definition, the intended signal, and the primary failure mode that motivated exclusion.",
+      "page": 15,
+      "index": 4,
+      "width": 1008,
+      "height": 502
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21669v1/fig-005.webp",
+      "caption": "Table 10. Overall performance summary across different domains.",
+      "page": 30,
+      "index": 5,
+      "width": 556,
+      "height": 378
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21669v1/fig-006.webp",
+      "caption": "Table 2. Pairwise progress-judgment accuracy on RoboPulse under different relative comparison scales. We report accuracy (0–1) over Small/Medium/Large hop ranges, stratified by four collection settings (Real, Sim, UMI, Human), together with per-scale and overall averages. All evaluators are tested zero-shot through their native input interfaces, so results reflect practical judging capability rather than a strictly input-matched comparison.",
+      "page": 7,
+      "index": 6,
+      "width": 1010,
+      "height": 425
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21669v1/fig-007.webp",
+      "caption": "Figure 3. Reachability and failure-stage decomposition by milestone coverage. For each task, we plot the fraction of rollout episodes that reach milestone thresholds (25/50/75/100%), revealing where execution progress tends to stall along the horizon.",
+      "page": 7,
+      "index": 7,
+      "width": 496,
+      "height": 378
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21669v1/fig-008.webp",
+      "caption": "Table 8. Performance comparison on the Medium scale datasets.",
+      "page": 29,
+      "index": 8,
+      "width": 1017,
+      "height": 420
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21669v1/fig-009.webp",
+      "caption": "Table 9. Performance comparison on the Large scale datasets.",
+      "page": 29,
+      "index": 9,
+      "width": 1017,
+      "height": 421
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21669v1/fig-010.webp",
+      "caption": "Figure 15. RoboPulse qualitative examples for progress direction judging. Each panel shows the task, reference start/end frames, and a sampled BEFORE/AFTER pair from an episode. The arrow indicates the ground-truth progress direction. We report whether each judge predicts the correct direction. Robo-Dopamine is robust to appearance shifts and detects both improvement and regression, whereas CLIP can fail when visual similarity is misaligned with physical progress.",
+      "page": 39,
+      "index": 10,
+      "width": 979,
+      "height": 250
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21669v1/fig-011.webp",
+      "caption": "Figure 8. Failure-only OPD fingerprints over all tasks. We aggregate MP, PPL, CRA, and STR over failed episodes and normalize scores within each task across policy families. For CRA and STR, we flip the sign before normalization so that higher normalized scores consistently indicate more desirable behavior.",
+      "page": 34,
+      "index": 11,
+      "width": 996,
+      "height": 415
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21669v1/fig-012.webp",
+      "caption": "Figure 19. Prompt template for GVL (Ma et al., 2024) on RoboPulse.",
+      "page": 42,
+      "index": 12,
+      "width": 952,
+      "height": 491
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21669v1/fig-013.webp",
+      "caption": "Figure 18. Prompt template for RoboReward (Lee et al., 2026) on RoboPulse.",
+      "page": 42,
+      "index": 13,
+      "width": 995,
+      "height": 365
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21669v1/fig-014.webp",
+      "caption": "Figure 7. Success-conditioned execution quality over all tasks. We compute PPL, CRA, and STR on successful episodes only and visualize cross-policy trade-offs. This separates execution quality from success frequency and highlights policies that succeed efficiently versus those that succeed with higher correction cost or hesitation.",
+      "page": 33,
+      "index": 14,
+      "width": 995,
+      "height": 940
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21669v1/fig-015.webp",
+      "caption": "Table 7. Performance comparison on the Small scale datasets.",
+      "page": 28,
+      "index": 15,
+      "width": 1017,
+      "height": 420
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21669v1/fig-016.webp",
+      "caption": "Figure 16. Prompt template for VLAC (Zhai et al., 2025) on RoboPulse.",
+      "page": 40,
+      "index": 16,
+      "width": 988,
+      "height": 389
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21669v1/fig-017.webp",
+      "caption": "Figure 9. Real-World Task: Stack the wooden blocks. The reward curve demonstrates accurate tracking of manipulation errors. When the robot picks the wrong block or misplaces it (red arrows), the score drops, reflecting negative progress. The agent eventually recovers, reaching a success state (Progress ≈ 1.0). The CRA of 4.59% quantifies these regression events.",
+      "page": 36,
+      "index": 17,
+      "width": 953,
+      "height": 453
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21669v1/fig-018.webp",
+      "caption": "Figure 10. Real-World Task: Clean the table. This task involves semantic understanding of “messiness.” The model correctly penalizes the agent for moving a correctly placed drink and jumbling tissues, causing deep valleys in the progress curve. The successful recovery is captured by the final rise, though the efficiency (PPL 58.49%) is impacted by these mistakes.",
+      "page": 36,
+      "index": 18,
+      "width": 966,
+      "height": 470
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21669v1/fig-019.webp",
+      "caption": "Figure 6. Reachability profiles over all RoboTwin 2.0 tasks. For each task, we plot the fraction of rollouts that reach milestone thresholds at 25/50/75/100%. The curves localize where progress saturates along the horizon and expose last-mile bottlenecks when MC@75 is high but MC@100 drops sharply.",
+      "page": 32,
+      "index": 19,
+      "width": 997,
+      "height": 450
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21669v1/fig-020.webp",
+      "caption": "Figure 17. Prompt template for Gemini 3 Pro (Google, 2025), GPT-5.2 (OpenAI, 2025), Qwen3-VL (Bai et al., 2025a) pairwise progress judgment on RoboPulse. We provide the full system and user prompt, including task description, reference anchors, multiview BEFORE/AFTER observations, and the required output schema used for automated parsing.",
+      "page": 41,
+      "index": 20,
+      "width": 981,
+      "height": 1075
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21669v1/fig-021.webp",
+      "caption": "Table 6. Comparison of discriminative similarity-based methods and progress reward model judges under different noise levels. We report the performance across Real-World, Simulation, UMI, and Human settings, along with the average (AVG) for Noise levels of 0, 0.05, and 0.10.",
+      "page": 27,
+      "index": 21,
+      "width": 1017,
+      "height": 277
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21669v1/fig-022.webp",
+      "caption": "Figure 12. Simulation Task: Blocks Ranking RGB. A long-horizon task (∼ 700 steps). The initial phase is dominated by empty grasps and incorrect interactions, leading to a long period of stagnation (high STR of 16.22% and flat curve). Once the correct sorting sequence begins (Step ∼ 500), the reward signal increases steadily.",
+      "page": 37,
+      "index": 22,
+      "width": 941,
+      "height": 426
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21669v1/fig-023.webp",
+      "caption": "Figure 11. Human Task: Fold the trouser. Evaluating manipulation of deformable objects is challenging. Robo-Dopamine correctly identifies the regression when the trouser is accidentally unfolded (Step ∼ 18) and when the folded trouser is misplaced (Step ∼ 60). The curve aligns well with the visual state of the fabric.",
+      "page": 37,
+      "index": 23,
+      "width": 937,
+      "height": 396
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21669v1/fig-024.webp",
+      "caption": "Table 11. OPD auditing on RoboTwin 2.0. Performance of different policy models on three tasks. MC@25/50/75/100 denotes milestone coverage; MP/PPL/CRA/STR are averaged episode-level metrics.",
+      "page": 31,
+      "index": 24,
+      "width": 1017,
+      "height": 202
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21669v1/fig-025.webp",
+      "caption": "Table 13. OPD Auditing on RoboTwin 2.0: Task Set B. Results for Place Bread Skillet and Place Can Basket (50 rollouts each).",
+      "page": 31,
+      "index": 25,
+      "width": 1017,
+      "height": 288
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21669v1/fig-026.webp",
+      "caption": "Table 12. OPD Auditing on RoboTwin 2.0: Task Set A. Results for Hanging Mug and Place Bread Basket (50 rollouts each).",
+      "page": 31,
+      "index": 26,
+      "width": 1017,
+      "height": 287
+    }
+  ]
+}

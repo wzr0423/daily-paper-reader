@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.21114v1/fig-001.webp",
+      "caption": "Fig. 4: Survival rate decay as a function of minimum consecutive-correct threshold t for peak survival (top) and survival from start (bottom), across Image, Text-only, and Scene Graph modalities. Solid lines indicate BS=1 (episodic); dashed lines indicate BS=20 (sequential). The monotonic decline quantifies how rapidly spatial reasoning coherence degrades as stricter consistency requirements are imposed. GPT-5.2 uses BS=10.",
+      "page": 11,
+      "index": 1,
+      "width": 543,
+      "height": 427
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21114v1/fig-002.webp",
+      "caption": "Fig. 1: Counterfactual Viewpoint Reasoning. An agent observes spatial relations from a single viewpoint (left). When queried from a human located 180◦ away, the model must transform these relations under the viewpoint change rather than reuse the original description. Although the sphere is front-right of the cube from the agent’s view, from the human’s viewpoint it becomes front-left. CVT-Bench evaluates whether multimodal models can perform such viewpoint-conditioned spatial reasoning reliably.",
+      "page": 2,
+      "index": 2,
+      "width": 712,
+      "height": 259
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21114v1/fig-003.webp",
+      "caption": "Fig. 3: Global F1 across viewpoint rotations for episodic (top) and sequential (bottom) evaluation under Image, Text-only, and Scene Graph inputs. The anchor viewpoint (0◦) reflects direct spatial observation, while rotated viewpoints require counterfactual perspective transformation. Episodic performance is strong at 0◦, but systematically degrades at intermediate rotations and declines further under sequential interaction. GPT-5.2 uses BS=10.",
+      "page": 10,
+      "index": 3,
+      "width": 675,
+      "height": 403
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21114v1/fig-004.webp",
+      "caption": "Fig. 7: Qualitative failure modes in CVT-Bench. (A) Orthogonal inversion: 90◦ rotations can flip left/right relations (GT={left, front}, Pred={right, front}). (B) Scene-graph mis-association: predictions match the relation of a different object pair in the scene. (C) Within-scene drift: predictions differ between 0◦ and 360◦ queries despite identical physical states.",
+      "page": 14,
+      "index": 4,
+      "width": 721,
+      "height": 252
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21114v1/fig-005.webp",
+      "caption": "Fig. 2: High-level performance overview across ten diagnostic dimensions: episodic F1, long-context F1, rotation resilience (∆ F1 between original and rotated views), text benefit (∆ Text−Image F1), scene graph benefit (∆ SG−Text F1), episodic and sequential spatial relation tracking, relational consistency (0◦–360◦ match rate), and context stability (∆ F1 between episodic and sequential evaluation). Each cell displays a colored indicator: ✓ (strong), ∼ (moderate), or × (weak). GPT-5.2 uses BS=10.",
+      "page": 3,
+      "index": 5,
+      "width": 716,
+      "height": 229
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21114v1/fig-006.webp",
+      "caption": "Fig. 6: Multi-dimensional performance summarizing model competence across twelve axes: anchor F1 (0◦), rotation F1 (mean over 45◦–315◦), top-down perspective, global F1, and visual complexity (dense vs. sparse, visible vs. occluded) broken down by (0◦) vs rotation. Top: episodic evaluation (BS=1); bottom: sequential evaluation (BS=20, 10 for GPT).",
+      "page": 13,
+      "index": 6,
+      "width": 625,
+      "height": 427
+    },
+    {
+      "url": "assets/figures/arxiv/2603.21114v1/fig-007.webp",
+      "caption": "Fig. 5: Performance and sequential stability across input representations. Top: Global F1 decay across batch positions. Bottom: 0◦=360◦ consistency match rate drift across prompt depth, with shaded regions showing ±1 standard deviation. While models achieve strong episodic performance, spatial consistency degrades under sequential interaction, indicating instability in maintaining spatial state. GPT-5.2 uses BS=10.",
+      "page": 12,
+      "index": 7,
+      "width": 529,
+      "height": 427
+    }
+  ]
+}
