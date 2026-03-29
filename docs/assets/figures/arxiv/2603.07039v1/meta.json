@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.07039v1/fig-001.webp",
+      "caption": "Figure 3: Earth4D LFMC Prediction Performance. (Top) Distribution of absolute errors in percentage point predictions across 13,297 test samples, showing median error of 7.1pp. (A) Geographic error distribution across CONUS shows low error in well-sampled regions. (B) Temporal predictions closely track ground truth LFMC measurements across seasons (2017–2023).",
+      "page": 3,
+      "index": 1,
+      "width": 826,
+      "height": 388
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07039v1/fig-002.webp",
+      "caption": "Figure 1: DeepEarth Overview. Masked multi-modal data (e.g. images, text) sampled around an event (e.g. pollination) are encoded and fused with Earth4D space-time embeddings. These universal tokens are jointly encoded, and then masked data is inductively decoded and simulated.",
+      "page": 2,
+      "index": 2,
+      "width": 782,
+      "height": 521
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07039v1/fig-003.webp",
+      "caption": "Figure 2: Earth4D Space-Time Positional Encoding. A planetary-scale 4D encoder with fully decomposable spatio-temporal representation. Four grids (xyz, xyt, yzt, xzt) are each learned in 3D space and computed in parallel. Each grid has multiple resolution levels (Appendix A), enabling deep learning of complex joint distributions in multi-modal data across space-time scales.",
+      "page": 2,
+      "index": 3,
+      "width": 785,
+      "height": 300
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07039v1/fig-004.webp",
+      "caption": "Figure 5: Earth4D Hash Collision Analysis. (Table) 10 (x, y, z, t) point distribution scenarios that were simulated to analyze hash collisions in Earth4D memory. (Graph) Shows results for 1M point simulations across all 24 levels.",
+      "page": 7,
+      "index": 4,
+      "width": 829,
+      "height": 198
+    }
+  ]
+}

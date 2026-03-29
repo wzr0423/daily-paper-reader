@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.01414v1/fig-001.webp",
+      "caption": "Figure 6: The cover generator workflow with an example.",
+      "page": 6,
+      "index": 1,
+      "width": 502,
+      "height": 274
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01414v1/fig-002.webp",
+      "caption": "Table 2: Selected malicious instructions.",
+      "page": 11,
+      "index": 2,
+      "width": 508,
+      "height": 487
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01414v1/fig-003.webp",
+      "caption": "Figure 2: General workflow of embodied LLM systems: given inputs, LLMs generate actions to control embodied agents.",
+      "page": 2,
+      "index": 3,
+      "width": 477,
+      "height": 300
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01414v1/fig-004.webp",
+      "caption": "Figure 5: System overview of Blindfold. Given an attacker’s intent, a transformer first translates it into an action chain. Then, an intent obfuscator generates and injects cover actions to conceal the malicious intent. A rule-based verifier is further employed to enhance the executability of the chain. The final action sequence is then used to jailbreak the target embodied LLMs.",
+      "page": 5,
+      "index": 4,
+      "width": 1052,
+      "height": 293
+    }
+  ]
+}
