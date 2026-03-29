@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.05449v1/fig-001.webp",
+      "caption": "Fig. 4: Qualitative results. In the left column we show the input scene image and initial actions, where the arrow indicates 3D force and the blue wind icon indicates force fields. Note that we always apply gravity in our simulation.",
+      "page": 11,
+      "index": 1,
+      "width": 723,
+      "height": 1081
+    },
+    {
+      "url": "assets/figures/arxiv/2603.05449v1/fig-002.webp",
+      "caption": "Fig. 3: Training of Real-time Flow-Conditioned Video Model. A pretrained image-to-video model [57] is first adapted to optical-flow conditioning through LoRA [22] post-training. Next, it is distilled via distribution-matching training into a causal, flow-conditioned real-time video generator.",
+      "page": 7,
+      "index": 2,
+      "width": 723,
+      "height": 264
+    },
+    {
+      "url": "assets/figures/arxiv/2603.05449v1/fig-003.webp",
+      "caption": "Fig. 7: Ablation on physics simulator. Top: RealWonder without the physics simulator (conditioned only on input image and text, where we specify a wind blowing from the right in the text). Bottom: Our full model with wind (3D force field) as action.",
+      "page": 14,
+      "index": 3,
+      "width": 723,
+      "height": 181
+    },
+    {
+      "url": "assets/figures/arxiv/2603.05449v1/fig-004.webp",
+      "caption": "Figure 1 for example), or move cameras, and immediately see realistic visual consequences unfold. In summary, our contributions are threefold:",
+      "page": 3,
+      "index": 4,
+      "width": 710,
+      "height": 246
+    },
+    {
+      "url": "assets/figures/arxiv/2603.05449v1/fig-005.webp",
+      "caption": "Fig. 5: Comparison to baselines. In the first row, we show the input images and actions (we use arrows for 3D point forces and wind icon for force fields) together with the text prompts. We always apply gravity in our simulation.",
+      "page": 12,
+      "index": 5,
+      "width": 717,
+      "height": 724
+    },
+    {
+      "url": "assets/figures/arxiv/2603.05449v1/fig-006.webp",
+      "caption": "Fig. 2: Overview of RealWonder. (Left) Given a single image and a sequence of actions as input, we first reconstruct the 3D scene as point clouds, (Middle) estimate material for the objects to interact with, and then maintain a physics simulation stream using the actions. (Right) Meanwhile, we maintain another stream of rendering optical flow and RGB preview to condition a few-step conditional video generator, producing the physical action-conditioned video streaming.",
+      "page": 5,
+      "index": 6,
+      "width": 717,
+      "height": 247
+    }
+  ]
+}

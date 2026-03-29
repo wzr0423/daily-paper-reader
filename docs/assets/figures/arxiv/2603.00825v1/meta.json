@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.00825v1/fig-001.webp",
+      "caption": "Table 1. All metrics are calculated on a held-out test set of 300 video clips each with 32 frames. Lower is better for all scores.",
+      "page": 6,
+      "index": 1,
+      "width": 496,
+      "height": 471
+    },
+    {
+      "url": "assets/figures/arxiv/2603.00825v1/fig-002.webp",
+      "caption": "Figure 2. Architectural diagram of the COMBAT model. (a) The end-to-end training process, where a Diffusion Transformer is conditioned on action and timestep embeddings to denoise latent frame representations. (b) The internal structure of the DiT backbone, which employs a hybrid local-global attention pattern to efficiently model long-term dependencies.",
+      "page": 5,
+      "index": 2,
+      "width": 1036,
+      "height": 429
+    },
+    {
+      "url": "assets/figures/arxiv/2603.00825v1/fig-003.webp",
+      "caption": "Figure 1. An overview of the COMBAT world model. (Top) The model is conditioned on the current state (visual frames and poses) and Player 1’s control inputs to autoregressively predict subsequent frames. (Bottom) Three distinct generated trajectories showcase the model’s ability to produce plausible, strategic counter-attacks from Player 2 as an emergent response to Player 1’s actions, without direct supervision of the opponent’s policy.",
+      "page": 2,
+      "index": 3,
+      "width": 706,
+      "height": 541
+    }
+  ]
+}

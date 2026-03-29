@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.06987v1/fig-001.webp",
+      "caption": "Fig. 5: We find that our WM-based approaches outperform competing methods on the Bimanual Cable Manipulation dataset, presumably because of how they uniquely incorporate historical context. See Table I for a class-based breakdown.",
+      "page": 6,
+      "index": 1,
+      "width": 465,
+      "height": 364
+    },
+    {
+      "url": "assets/figures/arxiv/2603.06987v1/fig-002.webp",
+      "caption": "TABLE I: Classification performance of different methods on the Bimanual Cable Manipulation dataset, using an 85% conformal prediction threshold.",
+      "page": 6,
+      "index": 2,
+      "width": 527,
+      "height": 284
+    },
+    {
+      "url": "assets/figures/arxiv/2603.06987v1/fig-003.webp",
+      "caption": "Fig. 1: A schematic of the training process for the proposed method. A trajectory τ = (s1, a1, s2, a2, . . . ) is sampled from the dataset and sliced into training samples consisting of a fixed history window ht = (st−H+1, at−H+1, . . . , st, at) and future state st+1. The multi-step, multi-view images captured at the robot’s grippers (s(1)t and s (2) t ) are encoded using a foundation video encoder (Cosmos) and—alongside learned projections of the historical proprioceptive states sθt and actions at—are combined into latent feature maps. These are processed sequentially by a transformer to predict a tensor of distributions, the standard deviations of which quantify the uncertainty of the future prediction. This uncertainty is lower for nominal inputs (like those observed during training), and higher for anomalous inputs associated with failures. In other words: WM(ht) ≈ f(ht) only when ht ∈ Mnom. Sampling from this latent distribution gives a latent feature map Z ∼ N (µ, σ2), which can be decoded and refined into predictions for the next immediate state (ŝ(1)t+1, ŝ(2)t+1, ŝθt ).",
+      "page": 2,
+      "index": 3,
+      "width": 1052,
+      "height": 564
+    },
+    {
+      "url": "assets/figures/arxiv/2603.06987v1/fig-004.webp",
+      "caption": "Fig. 6: The time taken to generate a scalar non-conformity score value for a single step, for each method.",
+      "page": 7,
+      "index": 4,
+      "width": 462,
+      "height": 362
+    },
+    {
+      "url": "assets/figures/arxiv/2603.06987v1/fig-005.webp",
+      "caption": "Fig. 7: An example failure detection on an unseen failure case, visualizing captures from the left and right gripper cameras. (1) Nominal behavior—the robot is not gripping or attempting to manipulate a cable. (2) The uncertainty rises as the gripper approaches a cable and begins a sequence of grab attempts. Uncertainty tends to increase when a cable head is in view. (3) The first of three aborted grab attempts, such periods are usually associated with increased uncertainty as grab attempts represent a small portion of the nominal training set. Note that these do not constitute failures. (4) Uncertainty increases rapidly as the robot focuses instead on unplugging a cable that is already plugged in (observe the force being applied onto the cable head by the compliant grippers). (5) An actual failure occurs (dropped cable) as the robot fumbles the cable head during the unplug maneuver. (6) With the dropped cable fully out of frame, the robot is again not gripping or attempting to manipulate a cable as in (1). Uncertainty again reduces to nominal levels. Note that the world model is trained on proprioceptive state data, and is action conditioned, so some part of the predicted uncertainty likely stems from proprioceptive features not visualized in this figure.",
+      "page": 8,
+      "index": 5,
+      "width": 1054,
+      "height": 468
+    },
+    {
+      "url": "assets/figures/arxiv/2603.06987v1/fig-006.webp",
+      "caption": "Fig. 3: Histograms of the WM uncertainty scores for nominal (blue), anomalous recolored, and anomalous dynamically altered inputs, with overlaid visualizations of what these anomalous inputs look like. In each example the 90% conformal prediction threshold is rendered in red. To test our method’s ability to handle visual and proprioceptive anomalies, we alter the color to orange (top left) and green (bottom left) as well as altering the friction to half the nominal friction coefficient (top right) and zero (bottom right).",
+      "page": 5,
+      "index": 6,
+      "width": 487,
+      "height": 310
+    }
+  ]
+}

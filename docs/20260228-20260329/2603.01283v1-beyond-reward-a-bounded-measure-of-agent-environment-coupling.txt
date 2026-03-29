@@ -1,0 +1,1630 @@
+Title: Paper Title (use style: paper title)
+
+URL Source: https://arxiv.org/pdf/2603.01283v1
+
+Published Time: Tue, 03 Mar 2026 02:41:43 GMT
+
+Number of Pages: 8
+
+Markdown Content:
+Beyond Reward: A Bounded Measure of Agent –
+
+# Environment Coupling 
+
+Wael Hafez 
+
+Semarx Research LLC 
+
+Alexandria, VA, USA. 
+
+w.hafez@semarx.com 
+
+Cameron Reid 
+
+Semarx Research LLC 
+
+Alexandria, VA, USA 
+
+Cameron.reid@semarx.com 
+
+Amer Nazeri 
+
+Semarx Research LLC 
+
+Alexandria, VA, USA 
+
+Amir.nazeri@semarx.com 
+
+Abstract — Real -world reinforcement learning (RL) agents 
+
+operate in closed -loop systems where actions shape future 
+
+observations, making reliable deployment under distribution 
+
+shifts a persistent challenge. Existing monitoring relies on reward 
+
+or task metrics, capturing ou tcomes but missing early coupling 
+
+failures. We introduce bi -predictability ( 𝑷 ) as the ratio of shared 
+
+information in the observation –action –outcome loop to the total 
+
+available information — a principled, real -time measure of 
+
+interaction effectiveness with provable bounds, comparable across 
+
+tasks. An auxiliary monitor, the Information Digital Twin (IDT), 
+
+computes  𝑷  and its diagnostic components from the interaction 
+
+stream. We evaluate SAC and PPO agents on MuJoCo 
+
+HalfCheetah under eight agent - and environment -side 
+
+perturbations across 168 trials. Under nominal operation, agents 
+
+exhibit  𝑷 = 𝟎 . 𝟑𝟑 ± 𝟎 . 𝟎𝟐  , below the classical bound of  𝟎 . 𝟓  ,
+
+revealing an informational cost of action selection. The IDT 
+
+detects  𝟖𝟗 . 𝟑 % of perturbations versus  𝟒𝟒 . 𝟎 % for reward -based 
+
+monitoring, with  𝟒 . 𝟒 × lower median latency. Bi -predictability 
+
+enables early detection of interaction degradation before 
+
+performance drops and provides a prerequisite signal for 
+
+closed -loop self -regulation in deployed RL systems. 
+
+Keywords — Reinforcement learning, deployment monitoring, 
+
+information theory, digital twin, agent -environment coupling, 
+
+anomaly detection 
+
+I. INTRODUCTION 
+
+A. RL deployment as closed -loop 
+
+Deep reinforcement learning (RL) has achieved strong 
+
+results in continuous control and robotics, with growing 
+
+real -world deployment [1] , [2], [3]. Deployed RL agents operate 
+
+in closed -loop systems, where observations guide actions that 
+
+shape future observations [4]. In practice, this interaction can be 
+
+disrupted by environmental shifts, sensor degradation, or 
+
+actuator drift, often degrading perf ormance before overt failure 
+
+is observed [5], [6]. 
+
+B. Reward -Based Monitoring is Reactive and Incomplete 
+
+Current deployment monitoring typically relies on episodic 
+
+reward signals, return -based evaluation, or input distribution 
+
+tracking to assess agent health [7], [8], [9] . When degradation 
+
+is detected, the response is reactive: offline retraining on newly 
+
+collected trajectories, manual intervention, or threshold -based 
+
+alarms that trigger fallback behaviors [6] , [10]. 
+
+C. No Real -Time Siganls Monitors the Full Interaction Loop 
+
+Coupling degradation often goes unnoticed until 
+
+performance collapses, leading to costly retraining or manual 
+
+intervention. What is missing is a real -time, task -independent 
+
+early warning signal that monitors the full interaction loop. 
+
+Existing methods track only in puts or outcomes, detect failures 
+
+only after substantial performance loss, and rely on task -specific 
+
+rewards that lack a cross -task baseline. Related approaches such 
+
+as Active Inference [ 11 ], [12] and Empowerment [1 3], [1 4]
+
+quantify one -way influence rathe r than the bidirectional 
+
+coupling required for robust agency. This motivates the need for 
+
+a task -independent metric to compare interaction quality across 
+
+agents and deployment settings. 
+
+D. Bi -Predictability Addresses These Limitaitons 
+
+We show that bi -predictability ( 𝑃  )—the ratio of shared 
+
+information in the observation –action –outcome loop to the total 
+
+available information —addresses key limitations of existing 
+
+monitoring by analyzing the full interaction in real time and 
+
+providing a task -independent reference with an upper bound of 
+
+0.5. We introduce the Information Digital Twin (IDT), which 
+
+computes  𝑃  and its diagnostic components online from 
+
+the  (𝑆 , 𝐴 , 𝑆 ’) stream and uses their union as a multi -channel 
+
+detector. 
+
+Unlike traditional digital twins that replicate physical states 
+
+[1 5], [ 16], the IDT monitors the informational integrity of 
+
+agent –environment coupling, detecting degradation across 
+
+diverse perturbations with higher coverage and lower latency 
+
+than reward -based methods. This establishes a prerequisite 
+
+signal for closed -loop self -regulation under changing 
+
+deployment conditions. 
+
+We evaluate the framework on SAC and PPO agents, in 
+
+MuJoCo HalfCheetah -v4 with frozen policies. Eight agent - and 
+
+environment -side perturbations are applied across 21 seeds, 
+
+yielding 168 trials.  𝑃  and its components are computed over 
+
+sliding windows without access to internal models or rewards, 
+
+and detection coverage, latency, and diagnostic specificity are benchmarked against reward -based monitoring. Trained agents 
+
+exhibit a stable baseline of  𝑃 ≈ 0.33 , confirming that active 
+
+control incurs an inherent trade -off between predictive 
+
+coherence and agentic freedom. 
+
+E. Contributions 
+
+We make the following contributions 1:
+
+1.  We validate bi -predictability ( 𝑃 ) as a real -time, task -
+
+independent measure of RL agent –environment 
+
+coupling integrity in continuous control. 
+
+2.  We demonstrate that IDT -based monitoring detects 
+
+89 .3%  of perturbations compared with  44 .0%  for 
+
+reward -based detection, with  4.4 × lower median 
+
+latency. 
+
+3.  We show that the diagnostic decomposition provides 
+
+complementary detection channels — the union 
+
+achieves higher coverage and lower latency than any 
+
+individual metric, revealing a rich diagnostic profile 
+
+that enables future attribution analysis. 
+
+4.  We present the IDT architecture as a lightweight, 
+
+deployable monitoring module that operates without 
+
+access to internal model parameters or reward signals, 
+
+establishing a prerequisite for closed -loop self -
+
+regulation. 
+
+II. RELATED WORK 
+
+A. RL Deployment Robustness and Monitoring 
+
+RL robustness research has primarily focused on 
+
+preventative strategies — domain randomization, adversarial 
+
+training, and robust policy optimization — to mitigate the sim -
+
+to -real gap [5]. These methods improve policy resilience at 
+
+training time but do not monitor interaction integrity during 
+
+deployment. Post -deployment monitoring typically relies on 
+
+input distribution tracking [7], [8] or episodic return evaluation 
+
+[6], both of which detect degradation reactively and only after 
+
+substantial performance loss. Non -invasive, task -independent 
+
+monitoring of the full observation –action –outcome loop — the 
+
+gap identified in I.C — remains unaddressed by these 
+
+approaches .
+
+B. Information -Theoretic Measures in RL 
+
+Information theory offers a principled way to quantify 
+
+agent –environment interactions. Empowerment captures an 
+
+agent's capacity to influence future states [ 11 ], [ 13], [1 4], and 
+
+Active Inference views agent behavior as minimizing variational 
+
+free energy for stability [ 12]. However, these measures focus on 
+
+unidirectional influence —either the agent’s control over the 
+
+environment or vice versa —rather than the bidirectional 
+
+dynamics of the full interaction loop. 
+
+Our prior work demonstrated that the mutual information 
+
+shared across the observation –action –outcome loop, 
+
+𝑀𝐼 (𝑆 , 𝐴 ; 𝑆 ′) , detects behavioral anomalies in robotic control 
+
+[17]. Bi -predictability ( 𝑃 ) builds on this by normalizing for total 
+
+information and adding regime -dependent bounds, allowing  
+
+> 1
+
+Github repository:  https://github.com/Semarxai/idt_app 
+
+direct comparison of interaction quality across agents, tasks, and 
+
+deployment settings. 
+
+C. Digital Twins in Robotics 
+
+Digital twins (DTs) have progressed from static CAD 
+
+models to real -time, synchronized virtual replicas that are 
+
+essential in industry for predictive maintenance, condition 
+
+monitoring, and operational assurance [ 15], [ 16]. In robotics, 
+
+DTs help ensure safety, track actuator degradation, and enable 
+
+virtual commissioning to reduce deployment risk. With growing 
+
+system complexity, extending DTs to monitor both physical 
+
+states and decision -making health is increasingly important .
+
+III. BI-PREDICTABILITY FRAMEWORK 
+
+A. Information -Theoretic Preliminaries 
+
+Entropy  𝐻 (𝑆 ) quantifies the uncertainty, or unpredictability, 
+
+of a random variable — the larger its value, the less predictable 
+
+the variable's realizations. Mutual information  𝑀𝐼 (𝑆 , 𝐴 ; 𝑆 ′) then 
+
+measures how much knowing one set of variables reduces 
+
+uncertainty about another: specifically, how much the joint 
+
+observation –action pair  (𝑆 , 𝐴 ) shares informationally with the 
+
+outcome  𝑆 ′ [18 ], Fig. 1 .                           
+
+> Fig. 1. Information -theoretic structure of the observation –action –outcome
+> interaction. Each circle represents the entropy of one variable: observations
+> 𝐻 (𝑆 ), actions 𝐻 (𝐴 ),and outcomes 𝐻 (𝑆 ′). The central overlap is the mutual
+> information 𝑀𝐼 (𝑆 ,𝐴 ;𝑆 ′);non -overlapping regions correspond to conditional
+> entropies. Note on visual representation: While the central overlap is labeled
+> 𝑀𝐼 (𝑆 ,𝐴 ;𝑆 ′)for clarity, it serves as a visual proxy for the joint mutual
+> information; mathematically, 𝑀𝐼 (𝑆 ,𝐴 ;𝑆 ′)corresponds to the entire region of 𝑆 ′
+> shared with the ( 𝑆 ,𝐴 ) union. Bi -predictability ( 𝑃 ) is defined as the ratio of this
+> shared information to the total informational union 𝐻 (𝑆 ,𝐴 ,𝑆 ′).
+
+Conditional entropy quantifies the uncertainty remaining in 
+
+one variable after another is known. For example,  𝐻 (𝑆 ′|𝑆 , 𝐴 ) is 
+
+the uncertainty in the outcome after both the observation and 
+
+action are known; in Fig. 1 this corresponds to the region of the 
+
+S' circle that falls outside its overlap with ( 𝑆 , 𝐴 ). Conversely, 
+
+𝐻 (𝑆 , 𝐴 |𝑆 ′) is the uncertainty remaining in the observation –
+
+action pair after observing the outcome. These quantities 
+
+decompose total uncertainty into shared and unshared parts: 
+
+𝐻 (𝑆 ′) = 𝑀𝐼 (𝑆 , 𝐴 ; 𝑆 ′) + 𝐻 (𝑆 ′|𝑆 , 𝐴 ) . That is, the outcome's 
+
+total uncertainty equals the information it shares with the 
+
+observation –action pair plus what remains unexplained [ 19 ]. The interaction cycle poses the predictive question at the 
+
+heart of deployment monitoring: given an observation and 
+
+action, what is the next outcome? We focus on how much the 
+
+state –action pair ( 𝑆 , 𝐴 ), treated jointly, shares with the outcome 
+
+𝑆 ′ — that is,  𝑀𝐼 (𝑆 , 𝐴 ; 𝑆 ′) (Fig. 1). When  𝑀𝐼 (𝑆 , 𝐴 ; 𝑆 ′) is high 
+
+relative to the total uncertainty across all three variables, the 
+
+interaction loop is tightly coupled: the agent and environment 
+
+are highly predictable to one another. When it is low, the loop is 
+
+informationally loose — outcomes are poorly predict ed by the 
+
+agent's state and actions, or the agent's behavior is poorly 
+
+reflected in what follows. 
+
+B. Bi -Predictability: Definition and Classical Bound 
+
+Building on the information -theoretic quantities introduced 
+
+above, we define bi -predictability  𝑃  as the ratio of shared 
+
+information to the total informational budget of the interaction 
+
+cycle: 
+
+𝑃 = 𝑀𝐼 (𝑆 , 𝐴 ; 𝑆 ′)
+
+𝐻 (𝑆 ) + 𝐻 (𝐴 ) + 𝐻 (𝑆 ′) (1)
+
+The denominator  𝐶 = 𝐻 (𝑆 ) + 𝐻 (𝐴 ) + 𝐻 (𝑆 ′) is the total 
+
+entropy capacity deployed across the observation –action –
+
+outcome loop.  𝑃  therefore measures the fraction of this budget 
+
+that is common to both sides of the interaction — not the volume 
+
+of information exchanged, but the efficiency with which the 
+
+loop's informational resources support mutual predictability. 
+
+At the extremes,  𝑃 = 0 indicates that the observation –
+
+action pair and the outcome are statistically independent —
+
+knowing one side tells nothing about the other. The upper 
+
+bound, derived below, represents the case where each side fully 
+
+specifies the other. 
+
+To establish this bound, we note that mutual information 
+
+cannot exceed the entropy of either side of the interaction: 
+
+𝑀𝐼 (𝑆 , 𝐴 ; 𝑆 ′) ≤ 𝐻 (𝑆 , 𝐴 ) and  𝑀𝐼 (𝑆 , 𝐴 ; 𝑆 ′) ≤ 𝐻 (𝑆 ′). Since the 
+
+joint entropy is itself bounded by the sum of marginals, 
+
+𝐻 (𝑆 , 𝐴 ) ≤ 𝐻 (𝑆 ) + 𝐻 (𝐴 ), it follows that: 
+
+𝑀𝐼 (𝑆 , 𝐴 ; 𝑆 ′) ≤ min (𝐻 (𝑆 ) + 𝐻 (𝐴 ), 𝐻 (𝑆 ′)) (2)
+
+Under the fixed budget constraint  𝐻 (𝑆 ) + 𝐻 (𝐴 ) +
+
+𝐻 (𝑆 ′) = 𝐶 , the function  𝑚𝑖𝑛 (𝐻 (𝑆 ) + 𝐻 (𝐴 ), 𝐻 (𝑆 ′)) subject 
+
+to  𝐻 (𝑆 ) + 𝐻 (𝐴 ) + 𝐻 (𝑆 ′) = 𝐶  is maximized when  𝐻 (𝑆 ) +
+
+𝐻 (𝐴 ) = 𝐻 (𝑆 ′) = 𝐶 /2. Therefore, the maximum achievable 
+
+value of the numerator is C/2, yielding: 
+
+𝑃 ≤ 1
+
+2 (3)
+
+This bound is structural, arising directly from Shannon 
+
+entropy and holding for any classical system representable by 
+
+these variables, independent of domain, task, or agent 
+
+architecture. The full derivation and saturation conditions are 
+
+given in [24]; here we summarize the result relevant to 
+
+deployment monitoring .
+
+C. What Determines Bi -Predictability 
+
+Detecting deviations in agent –environment coupling is 
+
+necessary for monitoring, but understanding their cause is 
+
+essential for effective intervention. Responses differ, for 
+
+example, when degradation arises from environmental 
+
+unpredictability versus indisti nguishable agent actions. To 
+
+enable this distinction, we analyze the internal structure of  𝑃 
+
+within its classical bound.  𝑃  approaches its maximum of  1/
+
+2 when the shared information  𝐼 (𝑆 , 𝐴 ; 𝑆 ′) reaches  𝐶 /2 ,
+
+requiring conditional entropies to vanish in both directions —so 
+
+outcomes are fully determined by observation –action pairs and 
+
+these pairs are recoverable from outcomes. In real RL 
+
+deployments, these conditions are not met, making it critical to 
+
+identify what limits  𝑃  from reaching its bound .
+
+Two quantities provide the answer. Forward predictive 
+
+uncertainty measures how much the outcome remains uncertain 
+
+after the observation and action are known: 
+
+𝐻 𝑓 = 𝐻 ( 𝑆 ′ ∣ 𝑆 , 𝐴 ) (4)
+
+Backward predictive uncertainty measures how much the 
+
+observation –action pair remains uncertain after the outcome is 
+
+observed: 
+
+𝐻 𝑏 = 𝐻 ( 𝑆 , 𝐴 ∣ 𝑆 ′ ) (5)
+
+These are the two sources of informational "leakage" in the 
+
+interaction loop. When  𝐻𝑓  is high, the agent's observations and 
+
+actions fail to constrain what happens next — the environment 
+
+responds in ways the agent cannot anticipate. When  𝐻𝑏  is high, 
+
+many distinct observation –action pairs lead to the same outcome 
+
+— the agent's internal distinctions are invisible from the 
+
+environment's side. 
+
+Their difference defines the predictive asymmetry: 
+
+Δ𝐻 = 𝐻 𝑓 − 𝐻 𝑏 (6)
+
+A passive physical system without actions shows balanced 
+
+uncertainties ( 𝛥𝐻 ≈ 0 ), as seen in double -pendulum 
+
+experiments [ 24]. When actions are introduced, this balance is 
+
+disrupted: the agent's interventions cause  |𝛥𝐻 | > 0, with the 
+
+sign of  𝛥𝐻  revealing whether predictive failures originate from 
+
+the environment ( 𝛥𝐻  positive) or the agent ( 𝛥𝐻  negative).  𝑃 
+
+and  𝛥𝐻  together clarify interaction dynamics:  𝑃  assesses 
+
+overall coupling, while  𝛥𝐻  shows the source of influence. 
+
+Section IV explains how the Information Digital Twin computes 
+
+these values in real time, and Section VI demonstrates that 
+
+different perturbations yield distinct component signatures. 
+
+D. Calculating Information Metrics from Continuous 
+
+Interactions 
+
+The entropies, mutual information, and conditional entropies 
+
+that define  𝑃  and  Δ𝐻  assume discrete probability distributions. 
+
+For continuous interaction streams, we therefore discretize 
+
+variables into bins and accumulate transitions over sliding 
+
+windows of length  𝑊  with stride  𝛿  . Within each window, 
+
+empirical joint and marginal frequencies of the discretized 
+
+(𝑆 , 𝐴 , 𝑆 ’) tuples are used to compute all information -theoretic quantities. This yields a time -indexed sequence of  𝑃 
+
+and  Δ𝐻  values that tracks coupling integrity during deployment. 
+
+The choice of bin resolution, window length, and stride trades 
+
+off estimation fidelity against temporal responsiveness; the 
+
+specific parameters used here are reported in Section V.
+
+IV. REAL -TIME MONITORING OF BI-PREDICTABILITY 
+
+Section III showed that  𝑃  captures the shared information 
+
+structure of the interaction loop, while its 
+
+components  H𝑓 , 𝐻 𝑏  and  Δ𝐻  localize predictive failures. To 
+
+serve as a deployment monitoring signal, these quantities must 
+
+be computed online from the interaction stream, without access 
+
+to internal model parameters or reward signals. We introduce 
+
+the Information Digital Twin (IDT) (Fig. 2) , an auxiliary 
+
+architecture that runs alongside the deployed agent and 
+
+computes  𝑃  and its components directly from 
+
+the  (𝑆 , 𝐴 , 𝑆 ’) stream.                   
+
+> Fig. 2. Information Digital Twin (IDT) architecture. The IDT operates alongside
+> the agent –environment loop, receiving copies of observations (S, S') and actions
+> (A). The 𝑃 Calculator calculates bi -predictability 𝑃 and predictive asymmetry
+> ΔH from the interaction stream. The 𝑃 Controller detects statistical deviations
+> from baseline coupling. Dashed boxes indicate architecturally specified
+> modulation pathways —observation modulation and action modulation —that
+> are not experimentally validated in this work. The Adaptive Signal path connects
+> controller output to the modulation interfaces.
+
+The IDT operates in three stages: online metric estimation 
+
+(IV -A), statistical detection of deviations from the learned 
+
+baseline (IV -B), and a modulation stage —architecturally 
+
+specified but not yet experimentally validated —that would 
+
+adapt the agent’s obse rvation and action interfaces in response 
+
+to sustained deviations (IV -C). 
+
+A. Calculating  𝑃  from the Interaction Stream 
+
+The IDT treats the deployed agent as a black box: it observes 
+
+only the externally visible interaction stream and requires no 
+
+access to policy weights, internal activations, or reward signals. 
+
+At each time step, the agent selects an action  𝐴  given its current 
+
+observation  𝑆 , the environment transitions, and a new 
+
+observation  𝑆 ′ is produced. The IDT intercepts copies of this 
+
+(𝑆 , 𝐴 , 𝑆 ′) tuple and estimates  𝑃  and its diagnostic components 
+
+through the following pipeline: 
+
+1.  Capture. Record each  (𝑆 , 𝐴 , 𝑆 ′) transition tuple from 
+
+the live interaction stream. 
+
+2.  Discretize. Map the continuous -valued variables into 
+
+discrete representations suitable for entropy 
+
+estimation. 
+
+3.  Window. Accumulate tuples over a sliding window of 
+
+fixed length to construct empirical joint and marginal 
+
+frequency distributions. 
+
+4.  Compute. Calculate the marginal entropies 
+
+𝐻 (𝑆 ), 𝐻 (𝐴 ), 𝐻 (𝑆 ′), the joint mutual information 
+
+𝑀𝐼 (𝑆 , 𝐴 ; 𝑆 ′) , and the conditional entropies  𝐻𝑓 =
+
+𝐻 (𝑆 ′|𝑆 , 𝐴 ) and  𝐻𝑏 = 𝐻 (𝑆 , 𝐴 |𝑆 ′) from the windowed 
+
+distributions. 
+
+5.  Derive. Obtain  𝑃 = 𝑀𝐼 (𝑆 , 𝐴 ; 𝑆 ′) / [𝐻 (𝑆 ) +
+
+𝐻 (𝐴 ) + 𝐻 (𝑆 ′)] and  𝛥𝐻 = 𝐻𝑓 − 𝐻𝑏  for the 
+
+current window. 
+
+Steps 2 through 5 repeat at each window stride, producing a 
+
+time series of  𝑃  and  𝛥𝐻  values that track coupling integrity as 
+
+the agent operates. The pipeline itself is general: it applies to any 
+
+system expressible as an  (𝑆 , 𝐴 , 𝑆 ′) interaction loop, with the 
+
+estimation fidelity governed by the windowing and 
+
+discretization parameters. 
+
+B. Detecting Deviations from Baseline Coupling 
+
+The time series produced by the estimation pipeline 
+
+provides a continuous readout of coupling integrity, but raw 
+
+values of  𝑃  and  Δ𝐻  are not directly interpretable without a 
+
+reference. The  𝑃  controller (Fig. 2) establishes this reference 
+
+during an initial calibration period under nominal operation by 
+
+estimating the baseline mean  𝜇  and standard deviation  𝜎  for 
+
+each metric. Subsequent values are evaluated against this 
+
+learned baseline using the following protocol :
+
+1.  Calibrate. During a pre -perturbation period of stable 
+
+operation, compute the mean μ and standard deviation 
+
+𝜎  of  𝑃 , 𝛥𝐻 , 𝐻𝑓 , 𝑎𝑛𝑑 𝐻𝑏  across baseline windows. 
+
+2.  Compare. For each new window, evaluate whether any 
+
+metric has deviated beyond  ±3𝜎  from its baseline 
+
+mean. 
+
+3.  Flag. A detection is registered when any single metric 
+
+— 𝑃 , 𝛥𝐻 , 𝐻𝑓 , 𝑜𝑟 𝐻𝑏  — exceeds its threshold. The 
+
+union of all four channels constitutes the IDT detection 
+
+signal. A detection latency of zero indicates that the 
+
+first post -perturbation window already exceeds the 
+
+threshold. Trials in which no metric exceeds the 
+
+threshold at a ny point are recorded as undetected. 
+
+The pattern of which metrics deviate, and in which direction, 
+
+carries diagnostic information that differs across perturbation 
+
+types. These diagnostic signatures are characterized in Section 
+
+VI -D; operationalizing them as an automated attribution 
+
+mechanism is future work. 
+
+The  ±3𝜎  threshold is used because deviations in either 
+
+direction indicate issues: in general terms, a decrease in  𝑃  shows 
+
+decoherence, while an increase indicates rigidity. Using four 
+
+metrics improves detection, since different perturbations affect 
+
+components differently. 
+
+C. Toward Reflexive Modulation 
+
+The IDT includes two post -detection pathways that 
+
+modulate the observation and action interfaces ( dashed boxes, 
+
+Fig. 2). Sustained deviations trigger bandwidth adjustments —
+
+such as observation filtering or action damping —without 
+
+altering policy weights, preserving learned behavior while 
+
+mitigating coupling degradation. Deviations dominated by  𝐻𝑓  target observations, while those dominated by  𝐻𝑏  target 
+
+actions. This work validates detection and diagnostics; 
+
+modulation mechanisms are specified but not implemented, with 
+
+control laws left for future work .
+
+V. EXPERIMENTAL SETUP 
+
+A. Environment and Agents 
+
+We evaluate our framework on MuJoCo HalfCheetah -v4 
+
+[20 ], a continuous -control benchmark with 17 -dimensional 
+
+observations and 6 -dimensional torque actions. The task is to 
+
+maximize forward velocity under control costs. HalfCheetah 
+
+provides sufficient complexity for nontrivial 
+
+information -theoretic estimation wh ile remaining interpretable. 
+
+Agents are trained using Soft Actor -Critic (SAC) [ 21 ] and 
+
+Proximal Policy Optimization (PPO) [ 22 ], implemented in 
+
+Stable -Baselines -3 [ 23 ] with default hyperparameters .
+
+This This pairing tests whether bi -predictability monitoring 
+
+generalizes across policy architectures. SAC agents were trained 
+
+to convergence (  ≈ 10 𝑘 − 17 𝑘 𝑟𝑒𝑡𝑢𝑟𝑛𝑠  ) over  ~2 𝑀  steps, 
+
+while PPO agents converged faster  (≈ 6𝑘 − 8𝑘 𝑟𝑒𝑡𝑢𝑟𝑛𝑠 ) over 
+
+~1.5 𝑀  steps. Convergence was defined by stable returns over 
+
+a sustained evaluation window, after which policies were frozen. 
+
+Using algorithms with different performance levels tests 
+
+whether  𝑃  captures interaction structure independent of raw task 
+
+performance. In total, 11 SAC and 10 PPO seeds were evaluated, 
+
+yielding 21 agents. Each evaluation comprised 50 episodes 
+
+(50,000 steps). Freezing policies ensures that all observed  𝑃 
+
+deviations reflect perturbation -induced coupling changes rather 
+
+than ongoing learning. The perturbation suite is described next .
+
+B. Perturbation Design 
+
+To  assess generalization across failure modes, we designed 
+
+a perturbation suite spanning environment -side interaction 
+
+changes and agent -side observation and action degradations, 
+
+with type and severity varied to test detection sensitivity. 
+
+Environment perturba tions include gravity changes (one level) 
+
+and external force impulses (two levels), while agent 
+
+perturbations include observation noise (two levels) and action 
+
+noise (three levels). The eight conditions are summarized in 
+
+Table 1.                     
+
+> TABLE 1. Perturbation suite. Eight perturbation conditions spanning agent -side
+> and environment -side changes applied to all 21 agents for 168 total trials.
+> Category Type Parameter
+> Agent Actuator noise 1% Gaussian noise on actions
+> Agent Actuator noise 3% Gaussian noise on actions
+> Agent Actuator noise 4% Gaussian noise on actions
+> Environment External force 5 N force applied to torso, x -axis
+> Environment External force 10 N force applied to torso, x -axis
+> Environment Gravity Gravity increased to 110%
+> Agent Observation noise 1% Gaussian noise on observations
+> Agent Observation noise 3% Gaussian noise on observations
+
+This suite does not exhaust the space of possible 
+
+perturbations, which is effectively unbounded in continuous 
+
+control settings. Instead, it samples qualitatively distinct failure 
+
+mechanisms across multiple severity levels, supporting 
+
+task -independent sensi tivity rather than tuning to specific failure 
+
+modes. Each perturbation is introduced at episode 15 of a 
+
+50 -episode evaluation, yielding 14 unperturbed episodes for 
+
+baseline calibration. All eight perturbation types are applied to 
+
+each of the 21 agents, for a total of 168 trials. Information metric 
+
+computation for these trials is described next .
+
+C. Information Metrics Computation and Comparison 
+
+Protocol 
+
+Computing information -theoretic quantities from the 
+
+HalfCheetah interaction stream requires discretizing 40 
+
+continuous variables per timestep (17 state, 6 actions , 17 
+
+next -state). We apply a three -step procedure: z-score 
+
+normalization, discretization into three equal -width bins, and 
+
+grouping variables by body part (front leg, back leg, torso) 
+
+following the environment’s kinematic structure. Per -variable 
+
+bins within each group are concatenated to form composite 
+
+symbols for ( 𝑆 , 𝐴 , 𝑆 ’ ). This grouping preserves embodiment 
+
+structure while keeping the joint distribution tractable. The 
+
+three -bin choice was empirically validated: four bins produced 
+
+unreliable entropy estimates at available window sizes, while 
+
+quantile -based binning yielded fla t, uninformative metrics. 
+
+𝑃 , 𝐻𝑓 , 𝐻𝑏 , and  Δ𝐻  are computed over sliding windows of 300 
+
+timesteps with a stride of 50, yielding 991 windows per 
+
+evaluation. All quantities use standard base -2 entropy formulas. 
+
+For comparison, per -step reward is averaged over identical 
+
+windows, and the same ±3σ detection protocol is applied to both 
+
+IDT metrics and windowed reward, ensuring matched temporal 
+
+resolution and fair comparison .
+
+VI. RESULTS 
+
+A. Trained Agents Exhibit Stable Coupling Below the 
+
+Classical Bound 
+
+Before evaluating detection performance, we characterize 
+
+the informational baseline of nominal agent –environment 
+
+interaction. Under unperturbed operation, the 21 trained agents 
+
+exhibit a mean bi -predictability of  𝑃 = 0.33 ± 0.02  and a mean 
+
+predictive asymmetry of  Δ𝐻 = −0.56 ± 0.22 , stable across the 
+
+pre -perturbation episodes of all 168 evaluation runs. The 
+
+baseline  𝑃 = 0.33  lies well below the classical upper bound of 
+
+0.5 [24 ], indicating that roughly one -third of the interaction’s 
+
+total informational budget is shared. The negative  𝛥𝐻  shows 
+
+that forward prediction (anticipating  𝑆 ’ from  𝑆  and  𝐴 ) carries 
+
+greater residual uncertainty than backward inference 
+
+(recovering  𝑆  and  𝐴  from  𝑆 ′ ), reflecting the asymmetry of 
+
+active control: committed actions constrain backward inference 
+
+more strongly than stochastic environmental responses constrain 
+
+forward prediction. These baselines define the reference for 
+
+perturbation -induced deviations. Each seed’s baseline mean and 
+
+standard deviation are used to calibrate the  ±3𝜎  detection 
+
+protocol .
+
+B. IDT -Based Monitoring Detects Twice the Perturbations 
+
+That Reward Signals Miss 
+
+The We evaluate whether monitoring bi -predictability from 
+
+the interaction stream detects coupling degradation missed by 
+
+reward -based monitoring. The  ±3𝜎  detection protocol is 
+
+applied identically to IDT metrics  (𝑃 , 𝛥𝐻 , 𝐻𝑓 , 𝐻  ) and 
+
+windowed episode reward across all 168 perturbation trials. 
+
+IDT -based monitoring detected  89 .3 ± 15 .1% of 
+
+perturbations, compared with  44 .0 ± 26 .1% for reward -based detection (paired t-test,  𝑛 = 21  seeds;  𝑡 = 7.95  , 𝑝 <
+
+10 −6, 𝑑 = 1.73 ). Detection rates were computed per seed as the 
+
+proportion of perturbation trials detected and averaged across 
+
+seeds. The improvement arises from two factors: IDT metrics 
+
+respond to changes in interaction structure that may not 
+
+immediately affect cumulati ve reward, and the union of four 
+
+diagnostic channels provides broader coverage than a single 
+
+reward signal. A detection is registered when any metric exceeds 
+
+its  ±3𝜎  threshold; different perturbations activate different 
+
+subsets of channels, but collectively they capture most 
+
+conditions tested. Reward -based monitoring remains effective 
+
+for perturbations that cause large, sustained performance drops. 
+
+However, perturbations that degrade coupling without 
+
+immediate reward collapse (e.g., moderate observation noise 
+
+partially compensated by the policy) often go undetected by 
+
+reward while producing clear deviations in  𝑃  or its components. 
+
+This “silent degradation” regime motivates the proposed 
+
+framework .
+
+C. The IDT Detects Coupling Degradation 4.4× Faster Than 
+
+Reward 
+
+Beyond detecting more perturbations, timely detection is 
+
+critical for deployment monitoring, as early warning enables 
+
+intervention before irreversible performance degradation. 
+
+Detection latency is measured as the number of observation 
+
+windows between pertu rbation onset (episode 15) and the first 
+
+window in which any metric exceeds its  ±3𝜎  threshold. 
+
+Across all 168 perturbation trials, IDT‑based monitoring 
+
+achieved a median detection latency of 42 windows, compared 
+
+with 184 windows for reward‑based detection —a 4.4 ×
+
+improvement. This gap reflects a fundamental signal difference: 
+
+PPP responds to structural changes in the interaction at the 
+
+transition level, whereas reward aggregates effects over 
+
+episodes and requires degradation to accumulate before 
+
+deviating. In deployment terms, earlier detection provides a 
+
+larger window for corrective action, including operator alerts, 
+
+fallback policies, or —within a future closed‑loop architecture —
+
+reflexive modulation .
+
+D. The Diagnostic Decomposition Provides Complementary 
+
+Detection Channels 
+
+The IDT’s detection advantage over reward arises from the 
+
+complementary sensitivity of multiple information -theoretic 
+
+channels rather than any single metric. Table 2 reports the 
+
+individual detection rate and median latency for each monitored 
+
+quantity, their u nion (IDT), and reward. No single metric 
+
+dominates: individual detection rates cluster between 69 –73%, 
+
+exceeding reward -based detection (44.0%) but falling well short 
+
+of the union (89.3%) .                     
+
+> TABLE 2.Per -metric detection rate and median latency across 168 perturbation
+> trials. IDT (union) registers detection when any metric exceeds ±3𝜎 .𝑃 = bi -
+> predictability; 𝐻𝑓 =𝐻 (𝑆 ′|𝑆 ,𝐴 ); 𝐻𝑏 =𝐻 (𝑆 ,𝐴 |𝑆 ′);𝛥𝐻 =𝐻𝑓 −𝐻𝑏 .
+> Reward uses the same ±3σ protocol on windowed episodic return .
+
+A similar pattern holds for latency, with individual medians 
+
+between 67 –75 windows versus 42 for the union. This gap —
+
+approximately 16 percentage points in coverage and 25 
+
+windows in latency —demonstrates that each channel detects 
+
+perturbations missed by the others; the metrics are 
+
+complementary, not redundant .
+
+This complementarity is further reflected in per -algorithm 
+
+effect sizes. For SAC agents, information -theoretic metrics are 
+
+approximately twice as sensitive as reward (mean Cohen’s  𝑑 =
+
+0.93 − 1.02  vs.  0.60  ), whereas PPO agents exhibit 
+
+comparable sensitivity across all metrics ( 𝑑 ≈ 0.5 ). 
+
+Nevertheless, the IDT outperforms reward -based detection for 
+
+both algorithms —through stronger individual signals for SAC 
+
+and through the union of channels for PPO, where individual 
+
+metrics alone are insufficient. 
+
+These four quantities represent only a subset of the 
+
+information structure available in th e (𝑆 , 𝐴 , 𝑆 ’) interaction loop. 
+
+The full joint distribution supports a broader family of 
+
+information -theoretic measures —conditional entropies, 
+
+pairwise and conditional mutual informations, and interaction 
+
+information —each potentially sensitive to distinct failure 
+
+modes. Systematically mapping these sensitivities to 
+
+perturbation types constitutes a formal attribution analysis 
+
+enabled by this framework but left for future work .
+
+VII. DISCUSSION 
+
+A. Summary of Principal Findings 
+
+This study examined if the observation –action –outcome 
+
+loop offers monitoring benefits beyond reward -based methods. 
+
+Results show: (1) RL agents have a consistent coupling baseline 
+
+( 𝑃 = 0.33 ± 0.02  ), confirming theoretical predictions and 
+
+providing a task -independent reference for degradation; (2) 
+
+IDT -based monitoring detects  89 .3%  of perturbations —far 
+
+better than reward signals ( 44 .0% )—and does so with much 
+
+lower latency; (3) breaking down diagnostics into separate 
+
+channels further improves coverage and speed. Overall, bi -
+
+predictability emerges as an effective, real -time signal for 
+
+monitoring deployed RL systems and supports closed -loo p self -
+
+regulation. 
+
+B. 𝑃  Monitors Interaction Structure, Not Task Performance 
+
+Bi -predictability and reward measure fundamentally 
+
+different quantities. Reward aggregates task outcomes over 
+
+episodes, whereas  𝑃  captures the shared information structure of 
+
+the observation –action –outcome loop at the transition level. 
+
+This distinction produces a regime of silent degradation: 
+
+perturbations that erode coupling without immediate reward 
+
+collapse. Across 168 trials, rew ard -based monitoring missed 
+
+56% of perturbations, many of which produced clear deviations 
+
+in  𝑃  or its components. For example, moderate observation 
+
+noise (1% Gaussian) was partially compensated by the policy, 
+
+leaving reward within baseline while  𝑃  and  𝐻𝑓  deviated beyond 
+
+3σ — signaling that the agent's predictive relationship with the 
+
+environment had degraded despite sustained task performance. 
+
+Existing deployment monitoring methods operate in the 
+
+same signal space as reward. Return -based evaluation [6], out -
+
+of -distribution detection [7], [8], and concept drift tracking [9] 
+
+each capture fragments of the interaction — inputs, outputs, or                
+
+> Metric Detection Rate (%) Median Latency (windows)
+> IDT (union) 89.3 42
+> 𝑃 73.2 74
+> 𝐻𝑓 70.8 69
+> 𝐻𝑏 69.6 75
+> 𝛥𝐻 69.0 67
+> Reward 44.0 184
+
+accumulated returns — but none measures the bidirectional 
+
+coupling that links them.  𝑃  addresses this by quantifying the full 
+
+loop's shared information against a principled upper bound, 
+
+providing a common scale that is independent of task, reward 
+
+function, or agent architecture. 
+
+Conversely, coupling can remain intact while task difficulty 
+
+increases, causing reward to drop while  𝑃  stays stable. This 
+
+separation matters operationally: coupling failures warrant 
+
+intervention, whereas increased task difficulty may justify 
+
+continued operation. The ability to distinguish these regimes is 
+
+unique to interaction -level monitoring and unavaila ble to any 
+
+outcome -based signal .
+
+C. Multi -Channel Detection Succeeds Where Single Signals 
+
+Fail 
+
+The IDT's detection advantage arises from monitoring 
+
+multiple projections of the same joint distribution rather than a 
+
+single quantity. No individual metric dominates: individual 
+
+coverage ranges from 69 –73%, while their union achieves 
+
+89.3% — a 16 percentage -point gain with approximately 30 
+
+windows lower latency than the best individual channel. 
+
+Different perturbations disrupt different aspects of the  (𝑆 , 𝐴 , 𝑆 ′)
+
+distribution, making them visible to different channels. 
+
+This multi -channel structure addresses a limitation shared by 
+
+existing information -theoretic approaches. Empowerment [12], 
+
+[13] quantifies the agent's capacity to influence future states —
+
+a single, unidirectional measure that cannot distinguish whether 
+
+de gradation originates from the environment or the agent. 
+
+Active Inference [11], [20] monitors prediction error but 
+
+conflates environmental stochasticity with model 
+
+misspecification into one signal. Input -drift detectors [7], [8] 
+
+monitor observations only, m issing action -side and coupling -
+
+level failures entirely. By decomposing bidirectional coupling 
+
+into  𝐻𝑓 , 𝐻𝑏 , 𝑎𝑛𝑑 𝛥𝐻 , the IDT provides directional diagnostic 
+
+information:  𝐻𝑓 -dominated deviations implicate environment -
+
+side disruptions, while  𝐻𝑏  -dominated deviations implicate 
+
+agent -side degradation. This directional specificity is 
+
+unavailable to any single -channel approach and lays the 
+
+groundwork for automated attribution in future work .
+
+D. Theoretical Foundations and the Agency –Intelligence 
+
+Distinction 
+
+These results instantiate predictions from a first -principles 
+
+theory that derives bi -predictability from closed -loop 
+
+information structure and establishes regime -dependent bounds: 
+
+𝑃 ≤ 0.5 classically, and  𝑃 < 0.5 when agency is present 
+
+[2 4]. The observed baseline of  𝑃 = 0.33 ± 0.02  confirms this 
+
+prediction, with the gap below 0.5 reflecting the informational 
+
+cost of action selection — the agent must reserve entropy 
+
+capacity for choosing among actions, reducing the fraction 
+
+available for mutual predictability. 
+
+This cost connects to foundational results in cybernetics. 
+
+Ashby's Law of Requisite Variety requires that a regulator match 
+
+the variety of its environment [ 26 ]; the  𝑃 < 0.5 bound can be 
+
+read as its information -theoretic expression — coupling 
+
+efficiency is necessarily traded for action variety. The Conant –
+
+Ashby good regulator theorem further requires that effective 
+
+regulation entails modeling [ 27 ]; the IDT provides exactly this 
+
+modeling layer, monitoring regulation quality without 
+
+performing regulation itself. 
+
+The theory distinguishes agency from intelligence: agency 
+
+entails acting on predictions, which trained RL agents satisfy, 
+
+whereas intelligence additionally requires self -monitoring of  𝑃 
+
+and adaptive regulation. The frozen policies evaluated here 
+
+exhibit agency but not intelligence. The IDT implements the 
+
+self -monitoring prerequisite, establishing the signal needed to 
+
+advance deployed systems from agency toward intelligence. 
+
+E. Limitations and Future Work 
+
+The full IDT pipeline — 𝑃  with formal bounds, online 
+
+computation, and  ±3𝜎  detection — was validated in a single 
+
+continuous -control environment (HalfCheetah -v4). While the 
+
+underlying information metrics have shown sensitivity to 
+
+interaction degradation in robotic manipulation [ 17 ], machine 
+
+vision [ 25 ], and language model interactions [ 24 ], systematic 
+
+multi -domain validation of the complete architecture is a key 
+
+next step. 
+
+The estimation pipeline introduces methodological choices 
+
+that affect sensitivity. Three -bin discretization trades granularity 
+
+for reliable entropy estimation at available window sizes; finer 
+
+binning degraded estimates, while quantile -based binning 
+
+yielded uninformative metrics. The  ±3𝜎  threshold balances 
+
+false -positive suppression against detection coverage but was 
+
+not optimized per perturbation type. Window length (300 steps) 
+
+and stride (50 steps) govern temporal resolution and were 
+
+selected empirically; their interaction with detection latency in 
+
+faster or slower dynamical systems remains unexplored. 
+
+Finally, the present work validates detection only. 
+
+Attribution — mapping diagnostic channel responses to specific 
+
+perturbation types — and reflexive modulation — closing the 
+
+loop from metric deviation to real -time policy adjustment — are 
+
+architecturally s pecified but not experimentally validated. The 
+
+complementary channel structure suggests the information 
+
+required for attribution is present in the signal; developing 
+
+mechanisms to extract and act on it is the immediate next step. 
+
+F. From Detection to Self -Regulation 
+
+The trajectory from monitoring to self -regulation follows a 
+
+clear path. This study validates the first layer: real -time detection 
+
+of coupling degradation from the interaction stream alone. The 
+
+next layer is attribution — determining whether a detected 
+
+devi ation originates from the environment, the agent's 
+
+observations, or its actions. The diagnostic decomposition 
+
+already provides directional evidence (Hf versus Hb 
+
+dominance), and systematically mapping these signatures across 
+
+a richer perturbation space wou ld yield an automated diagnostic 
+
+capability. 
+
+The final layer is reflexive modulation: using sustained 
+
+deviations in  𝑃  to adjust the agent's observation or action 
+
+interfaces without altering policy weights. The IDT architecture 
+
+specifies these pathways (Fig. 2, dashed boxes) but does not 
+
+implement them. Closing this loop would move deployed RL 
+
+systems from passive agency — acting on learned predictions 
+
+— toward the self -monitoring and adaptive regulation that the 
+
+theoretical framework identifies as prerequisites for intelligence 
+
+[24]. Validating this progression across domains, from continuous control to manipulation to language, constitutes the 
+
+broader research program that this work initiates 
+
+VIII. CONCLUSION 
+
+This paper introduced bi -predictability ( 𝑃 ) as a real -time, 
+
+task -independent measure of RL agent –environment coupling 
+
+integrity and demonstrated its practical value through the 
+
+Information Digital Twin architecture. Evaluating SAC and 
+
+PPO agents on MuJoCo HalfCheetah -v4 across eight 
+
+perturbation t ypes and 168 trials, we showed three principal 
+
+results. 
+
+First, trained agents exhibit stable coupling at  𝑃 = 0.33 ±
+
+0.02  , below the classical bound of  0.5, confirming the 
+
+theoretically predicted informational cost of agency. This 
+
+baseline provides an interpretable, task -independent reference 
+
+against which coupling degradation can be measured. 
+
+Second, IDT -based monitoring detected  89 .3%  of 
+
+perturbations compared with  44 .0%  for reward -based 
+
+detection, with  4.4 × lower median latency (42 vs. 184 
+
+windows;  𝑝 < 10⁻⁶ ). The advantage arises from monitoring 
+
+coupling structure at the transition level rather than aggregated 
+
+outcomes — capturing silent degradation that reward signals 
+
+miss entirely. 
+
+Third, the diagnostic decomposition into complementary 
+
+channels ( 𝑃 , 𝛥𝐻 , 𝐻𝑓 , 𝐻𝑏  ) provides richer detection than any 
+
+single metric, with the union achieving 16 percentage points 
+
+higher coverage and approximately 30 windows lower latency 
+
+than the best individual channel. 
+
+These results establish that the information structure of the 
+
+observation –action –outcome loop carries a deployment -relevant 
+
+signal invisible to reward -based and single -channel monitoring 
+
+approaches. Where existing methods track fragments of the 
+
+interaction — inputs, outputs, or unidirectional influence — bi -
+
+predictability monitors the full bidirectional coupling against a 
+
+principled bound rooted in the same informational constraints 
+
+that govern any closed -loop regulator. The IDT makes this 
+
+signal actionable : computable online, without access to internal 
+
+model parameters or reward functions, and applicable across 
+
+agent architectures. By providing the detection layer in a 
+
+progression from monitoring through attribution to reflexive 
+
+modulation, real -time  𝑃  monitoring establishes a prerequisite 
+
+for building RL systems that can detect, diagnose, and ultimately 
+
+manage their own interaction quality under changing 
+
+deployment conditions .
+
+REFERENCES 
+
+[1]  E. Kaufmann, L. Bauersfeld, A. Loquercio, M. Müller, V. Koltun, and D. 
+
+Scaramuzza, "Champion -level drone racing using deep reinforcement 
+
+learning," Nature, vol. 620, no. 7976, pp. 982 –987, Aug. 2023. 
+
+[2]  I. Radosavovic et al., "Real -world humanoid locomotion with 
+
+reinforcement learning," arXiv preprint arXiv:2303.03381, 2023. 
+
+[3]  C. Tang et al., "Legged locomotion in challenging terrains using ego -
+
+centric vision," IEEE Robotics and Automation Letters, 2024. 
+
+[4]  R. S. Sutton and A. G. Barto, Reinforcement Learning: An Introduction, 
+
+2nd ed. Cambridge, MA, USA: MIT Press, 2018. 
+
+[5]  G. Dulac -Arnold et al., "Challenges of real -world reinforcement learning: 
+
+Definitions, benchmarks and analysis," Machine Learning, vol. 110, pp. 
+
+2419 –2468, 2021. 
+
+[6]  J. Josifovski et al., "Continual learning for robotics: A review," Robotics 
+
+and Autonomous Systems, 2024. 
+
+[7]  P. W. Koh et al., "Wilds: A benchmark of in -the -wild distribution shifts," 
+
+in Proc. Int. Conf. Mach. Learn. (ICML), 2021, pp. 5637 –5664. 
+
+[8]  S. Liang, Y. Li, and R. Srikant, "Enhancing the reliability of out -of -
+
+distribution image detection in neural networks," in Proc. Int. Conf. 
+
+Learn. Representations (ICLR), 2018. 
+
+[9]  S. Greco , B. Vacchetti, D . Apiletti, and T . Cerquitelli. "Unsupervised 
+
+concept drift detection from deep learning representations in real -
+
+time." IEEE Transactions on Knowledge and Data Engineering (2025) 
+
+[10]  S. Levine, A . Kumar, G . Tucker, and J . Fu. "Offline reinforcement 
+
+learning: Tutorial, review, and perspectives on open problems." arXiv 
+
+preprint arXiv:2005.01643 (2020). 
+
+[11]  K. Friston, "The free -energy principle: A rough guide to the brain?," 
+
+Trends in Cognitive Sciences, vol. 13, no. 7, pp. 293 –301, 2009. (Note: 
+
+Standard citation for Friston's core Active Inference work). 
+
+[12]  K. Friston, T . FitzGerald, F . Rigoli, P . Schwartenbeck, and G . Pezzulo. 
+
+"Active inference: a process theory." Neural computation 29, no. 1 
+
+(2017): 1 -49. 
+
+[13]  A. S. Klyubin, D. Polani, and C. L. Nehaniv, "Empowerment: A universal 
+
+agent -centric measure of control," in Proc. IEEE Congr. Evol. Comput., 
+
+2005, vol. 1, pp. 128 –135. 
+
+[14]  C. Salge, C. Glackin, and D. Polani, "Empowerment – An introduction," 
+
+in Guided Self -Organization: Inception, Springer, 2014, pp. 67 –114. 
+
+[15]  M. Grieves and J. Vickers, "Digital twin: Mitigating unpredictable, 
+
+undesirable emergent behavior in complex systems," in Transdisciplinary 
+
+Perspectives on Complex Systems, Springer, 2017, pp. 85 –113. 
+
+[16]  F. Tao, M. Zhang, and A. Y. C. Nee, Digital Twin Driven Smart 
+
+Manufacturing. Academic Press, 2019. 
+
+[17]  C. Reid, W. Hafez, and A. Nazeri. "Mutual Information Tracks Policy 
+
+Coherence in Reinforcement Learning." arXiv preprint 
+
+arXiv:2509.10423 (2025). 
+
+[18]  C. E. Shannon, "A mathematical theory of communication," Bell System 
+
+Technical Journal, vol. 27, no. 3, pp. 379 –423, July 1948. 
+
+[19]  T. M. Cover and J. A. Thomas, Elements of Information Theory, 2nd ed. 
+
+Hoboken, NJ, USA: Wiley -Interscience, 2006. 
+
+[20]  E. Todorov, T. Erez, and Y. Tassa, "MuJoCo: A physics engine for 
+
+model -based control," in Proc. IEEE/RSJ Int. Conf. Intell. Robots Syst., 
+
+2012, pp. 5026 –5033. 
+
+[21]  T. Haarnoja, A. Zhou, P. Abbeel, and S. Levine, "Soft actor -critic: Off -
+
+policy maximum entropy deep reinforcement learning with a stochastic 
+
+actor," in Proc. 35th Int. Conf. Mach. Learn., 2018, pp. 1861 –1870. 
+
+[22]  J. Schulman, F. Wolski, P. Dhariwal, A. Radford, and O. Klimov, 
+
+"Proximal policy optimization algorithms," arXiv preprint 
+
+arXiv:1707.06347, 2017. 
+
+[23]  A. Raffin et al., "Stable -Baselines3: Reliable reinforcement learning 
+
+implementations," Journal of Machine Learning Research, vol. 22, no. 
+
+268, pp. 1 –8, 2021. 
+
+[24]  W. Hafez, C. Wei, R. Felipe, A. Nazeri, and C. Reid, "A Mathematical 
+
+Theory of Agency and Intelligence," arXiv preprint arXiv:2602.22519 ,
+
+Feb. 2026. [Online]. Available: https://arxiv.org/abs/2602.22519. 
+
+[25]  A. Nazeri, W. Hafez. "Entropy -Based Non -Invasive Reliability 
+
+Monitoring of Convolutional Neural Networks." arXiv preprint 
+
+arXiv:2508.21715 (2025 ). 
+
+[26]  W. R. Ashby . "An introduction to cybernetics." (1956). 
+
+[27]  R. C. Conant, and W. R . Ashby. "Every good regulator of a system must 
+
+be a model of that system." International journal of systems science 1, no. 
+
+2 (1970): 89 -97 .

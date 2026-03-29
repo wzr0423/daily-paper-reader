@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.22796v1/fig-001.webp",
+      "caption": "TABLE III: Performance comparison between PhotoAgent (ours) and the baseline across categories.",
+      "page": 7,
+      "index": 1,
+      "width": 492,
+      "height": 256
+    },
+    {
+      "url": "assets/figures/arxiv/2603.22796v1/fig-002.webp",
+      "caption": "Fig. 6. Qualitative examples from real (a) and simulated (b) environments. Each row shows: third-person view, baseline, and PhotoAgent’s output.",
+      "page": 7,
+      "index": 2,
+      "width": 512,
+      "height": 325
+    },
+    {
+      "url": "assets/figures/arxiv/2603.22796v1/fig-003.webp",
+      "caption": "TABLE II: Experimental scenarios and user instructions. § denotes simulated scenes; ‡ indicates same subject under different instructions.",
+      "page": 7,
+      "index": 3,
+      "width": 477,
+      "height": 287
+    },
+    {
+      "url": "assets/figures/arxiv/2603.22796v1/fig-004.webp",
+      "caption": "Fig. 2. Overall cognitive architecture of PhotoAgent.",
+      "page": 3,
+      "index": 4,
+      "width": 512,
+      "height": 277
+    },
+    {
+      "url": "assets/figures/arxiv/2603.22796v1/fig-005.webp",
+      "caption": "Fig. 3. Intention Parsing workflow demonstration. “Take a photo of the toys with visual tension, like the reference.”",
+      "page": 3,
+      "index": 5,
+      "width": 512,
+      "height": 312
+    },
+    {
+      "url": "assets/figures/arxiv/2603.22796v1/fig-006.webp",
+      "caption": "Fig. 7. Stage-2 instruction adherence. Per-scene win rates under paired comparison. Scene IDs (a–h) are defined in Table II.",
+      "page": 8,
+      "index": 6,
+      "width": 512,
+      "height": 300
+    }
+  ]
+}

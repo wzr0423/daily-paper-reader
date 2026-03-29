@@ -1,0 +1,150 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.01928v1/fig-001.webp",
+      "caption": "Table 1. Comparison with state-of-the-art methods on NAVSIMv1 with PDMS. * indicates models utilizing Textual CoT.",
+      "page": 6,
+      "index": 1,
+      "width": 1017,
+      "height": 431
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01928v1/fig-002.webp",
+      "caption": "Table 2. Comparison with state-of-the-art methods on NAVSIMv2 with EPDMS.",
+      "page": 6,
+      "index": 2,
+      "width": 1008,
+      "height": 209
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01928v1/fig-003.webp",
+      "caption": "Figure 6. Qualitative visualization comparing the Textual CoT baseline (Red) and LaST-VLA (Green) on NAVSIM benchmark. (a) Drivable Area Compliance (DAC): Our method maintains precise lane adherence, whereas the baseline violates spatial boundaries. (b) Time-to-Collision (TTC): Our method accurately anticipates dynamics to avoid rear-end collisions, while the baseline fails to brake effectively.",
+      "page": 15,
+      "index": 3,
+      "width": 1017,
+      "height": 875
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01928v1/fig-004.webp",
+      "caption": "Figure 4. PDMS performance varying with training steps during the RL phase.",
+      "page": 7,
+      "index": 4,
+      "width": 492,
+      "height": 298
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01928v1/fig-005.webp",
+      "caption": "Table 3. Comparison with state-of-the-art methods on the SURDS and NuDynamics benchmarks. Score represents the average performance on SURDS. Motion denotes the Motion State Estimation accuracy on NuDynamics. * indicates models trained with SFT+RL, and † indicates models trained with Only SFT. All methods except LaST-VLA utilize Textual CoT.",
+      "page": 7,
+      "index": 5,
+      "width": 1013,
+      "height": 223
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01928v1/fig-006.webp",
+      "caption": "Figure 2. Overview of the LaST-VLA framework. (a) Model Architecture: The model constructs a Latent CoT by aligning hidden states with dynamic and geometric priors distilled from foundation models (Cosmos and VGGT) via specialized adapters. (b) Progressive Training Strategy: The pipeline features a two-stage SFT phase that utilizes structured causal masking to enforce physically grounded reasoning, followed by RL fine-tuning to directly optimize the policy for driving safety and compliance.",
+      "page": 3,
+      "index": 6,
+      "width": 967,
+      "height": 408
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01928v1/fig-007.webp",
+      "caption": "Figure 11. Examples of the Distance Estimation task on the SURDS benchmark.",
+      "page": 18,
+      "index": 7,
+      "width": 1017,
+      "height": 563
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01928v1/fig-008.webp",
+      "caption": "Figure 10. Examples of the Depth Range Determination on the SURDS benchmark.",
+      "page": 18,
+      "index": 8,
+      "width": 1017,
+      "height": 594
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01928v1/fig-009.webp",
+      "caption": "Figure 5. Qualitative visualization comparing the Textual CoT baseline (Red) and LaST-VLA (Green). (a) Drivable Area Compliance (DAC): Our method maintains precise lane adherence, whereas the baseline violates spatial boundaries. (b) Time-to-Collision (TTC): Our method accurately anticipates dynamics to avoid rear-end collisions, while the baseline fails to brake effectively.",
+      "page": 8,
+      "index": 9,
+      "width": 1017,
+      "height": 404
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01928v1/fig-010.webp",
+      "caption": "Figure 3. Architecture of the Dynamics (a) and Geometry (b) Adapters. Random mask is used only during training.",
+      "page": 4,
+      "index": 10,
+      "width": 492,
+      "height": 344
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01928v1/fig-011.webp",
+      "caption": "Figure 12. Examples of the Left/Right Determination task on the SURDS benchmark.",
+      "page": 19,
+      "index": 11,
+      "width": 1017,
+      "height": 554
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01928v1/fig-012.webp",
+      "caption": "Figure 13. Examples of the Front/Behind Determination task on the SURDS benchmark.",
+      "page": 19,
+      "index": 12,
+      "width": 1017,
+      "height": 554
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01928v1/fig-013.webp",
+      "caption": "Figure 8. Examples of the Yaw Angle Determination task on the SURDS benchmark.",
+      "page": 17,
+      "index": 13,
+      "width": 1017,
+      "height": 554
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01928v1/fig-014.webp",
+      "caption": "Figure 9. Examples of the Pixel Location Estimation task on the SURDS benchmark.",
+      "page": 17,
+      "index": 14,
+      "width": 1017,
+      "height": 554
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01928v1/fig-015.webp",
+      "caption": "Table 8. Comparison with state-of-the-art methods on the nuScenes. * indicates that the ego status is use.",
+      "page": 12,
+      "index": 15,
+      "width": 1023,
+      "height": 356
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01928v1/fig-016.webp",
+      "caption": "Table 9. Ablation study on the effectiveness of supervising features from different layers of the VGGT aggregator. The Feature (23) is the last layer. Note: These methods only have geometric (3D) latent CoT, without dynamic (WM) latent CoT.",
+      "page": 12,
+      "index": 16,
+      "width": 715,
+      "height": 185
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01928v1/fig-017.webp",
+      "caption": "Figure 14. Examples of the Motion State Estimation task on the NuDynamics benchmark.",
+      "page": 20,
+      "index": 17,
+      "width": 1017,
+      "height": 554
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01928v1/fig-018.webp",
+      "caption": "Figure 7. Qualitative visualization of failure cases on NAVSIM benchmark. The red line represents the trajectory predicted by LaST-VLA, while the green line denotes the Ground Truth. We observe that failures predominantly occur when the planned path extends beyond the front-view camera’s field of view (FOV). Lacking sufficient visual context in these peripheral regions, the model struggles with precise spatial grounding, leading to potential collisions or deviations from the drivable area.",
+      "page": 16,
+      "index": 18,
+      "width": 1017,
+      "height": 1027
+    }
+  ]
+}

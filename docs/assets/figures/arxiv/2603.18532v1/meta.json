@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.18532v1/fig-001.webp",
+      "caption": "Table C.1: Profiling statistics of the generative simulation pipeline (Fig. 2). Results are aggregated over 100 generated scenes under sequential execution on a single NVIDIA RTX 4090 GPU. QA pass rates denote stage-wise single-attempt pass rates, and average attempts are measured per accepted object asset.",
+      "page": 15,
+      "index": 1,
+      "width": 648,
+      "height": 328
+    },
+    {
+      "url": "assets/figures/arxiv/2603.18532v1/fig-002.webp",
+      "caption": "Table A.1: Training parameters.",
+      "page": 13,
+      "index": 2,
+      "width": 606,
+      "height": 231
+    },
+    {
+      "url": "assets/figures/arxiv/2603.18532v1/fig-003.webp",
+      "caption": "Figure 2: Overview of the simulation environment generation pipeline. A GPT-4o-powered scene designer converts task descriptions into structured scene graphs over semantic roles and spatial relations, which are instantiated into fully interactive 3D worlds. A quality assurance loop filters physically implausible configurations before simulation, enabling scalable, on-demand generation of diverse environments for RL training.",
+      "page": 4,
+      "index": 3,
+      "width": 826,
+      "height": 298
+    },
+    {
+      "url": "assets/figures/arxiv/2603.18532v1/fig-004.webp",
+      "caption": "Figure 3: Architecture diagram of the π0 model as a pretrained imitation model πpre (left) and then modified for RL fine-tuning, πθ (right).",
+      "page": 5,
+      "index": 4,
+      "width": 744,
+      "height": 254
+    },
+    {
+      "url": "assets/figures/arxiv/2603.18532v1/fig-005.webp",
+      "caption": "Figure C.1: Representative failure cases in the generative simulation pipeline. Top: failures detected by the automated QA modules, including semantic appearance mismatch, mesh defects, and text-to-3D semantic drift. Bottom: residual failures identified by manual inspection after all automated checks pass, including incorrect initialization, scale mismatch, and unstable object placement.",
+      "page": 16,
+      "index": 5,
+      "width": 823,
+      "height": 604
+    }
+  ]
+}

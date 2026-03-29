@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.15798v1/fig-001.webp",
+      "caption": "Table 3. Benchmark-Level API. Methods available as both Python class methods and RPC endpoints for discovering benchmarks, listing tasks, and orchestrating task instances. Each spawned task exposes its own Task-Level API endpoint.",
+      "page": 5,
+      "index": 1,
+      "width": 981,
+      "height": 270
+    },
+    {
+      "url": "assets/figures/arxiv/2603.15798v1/fig-002.webp",
+      "caption": "Table 2. Task-Level API. Methods available as both Python class methods (e.g., task.reset()) and RPC endpoints (e.g., cube/reset). The first part is the well-known MCP protocol. The second part adds observation, step, and evaluation functions aligned with the Gym API.",
+      "page": 5,
+      "index": 2,
+      "width": 962,
+      "height": 390
+    },
+    {
+      "url": "assets/figures/arxiv/2603.15798v1/fig-003.webp",
+      "caption": "Table 1. A comparative analysis of the infrastructure and operational requirements across current agentic benchmarks. The lack of uniformity in how these environments are hosted, controlled, and reset creates a significant overhead for cross-benchmark evaluation.",
+      "page": 3,
+      "index": 3,
+      "width": 1008,
+      "height": 409
+    },
+    {
+      "url": "assets/figures/arxiv/2603.15798v1/fig-004.webp",
+      "caption": "Table 4. Registry Fields. Each registered benchmark exposes this metadata for discovery, installation, and compliance verification.",
+      "page": 7,
+      "index": 4,
+      "width": 875,
+      "height": 327
+    },
+    {
+      "url": "assets/figures/arxiv/2603.15798v1/fig-005.webp",
+      "caption": "Table 5. Comparison of CUBE with existing agent benchmark frameworks, based on features and documentation at the time of writing.",
+      "page": 7,
+      "index": 5,
+      "width": 1033,
+      "height": 791
+    },
+    {
+      "url": "assets/figures/arxiv/2603.15798v1/fig-006.webp",
+      "caption": "Figure 1. Task-level diagram for CUBE’s API. Left: Separation between tasks and tools and the possibility to reconfigure the tools. Only the Gym-API is exposed. Right: By implementing base classes, CUBE’s implementation can automatically expose an RPC layer, including the well-known MCP API. On the client side, the Gym-API is exposed.",
+      "page": 4,
+      "index": 6,
+      "width": 492,
+      "height": 349
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.05440v1/fig-001.webp",
+      "caption": "Figure 7: Performance on the MuJoCo environments. Full training curves for all tasks. Note that DiffAIL occasionally collapses on Walker2D; we therefore report the average over successful runs only.",
+      "page": 25,
+      "index": 1,
+      "width": 822,
+      "height": 195
+    },
+    {
+      "url": "assets/figures/arxiv/2603.05440v1/fig-002.webp",
+      "caption": "Figure 1: Illustrating our motivation for a better distance metric and an outline of the algorithm. Panel (a) illustrates a case where the Euclidean distance between states is not a good metric: state B is closer to expert state C, but it is apparently less desirable than more distant state A, as it cannot reach C. To fix, we use random data and ICVF to find a more meaningful embedding space, as shown in the lower half. Panel (b), together with the lower half of panel (a), shows our pre-training stage: we first train ICVF to obtain ϕ(s), which serves as a reward for our agent in the online stage shown in panel (c). Fire indicates trainable modules, and snowflakes indicate frozen modules.",
+      "page": 2,
+      "index": 2,
+      "width": 788,
+      "height": 300
+    },
+    {
+      "url": "assets/figures/arxiv/2603.05440v1/fig-003.webp",
+      "caption": "Figure 11: Ablations of the pseudo reward learned by the discriminator and the ground-truth reward. Our learned reward (red) performs equal to or better than TD3 (blue) with ground-truth reward.",
+      "page": 29,
+      "index": 3,
+      "width": 784,
+      "height": 186
+    },
+    {
+      "url": "assets/figures/arxiv/2603.05440v1/fig-004.webp",
+      "caption": "Figure 6: Illustration of the MuJoCo (Todorov et al., 2012) environments we test in Sec. 4.2 and Sec. 4.3.",
+      "page": 22,
+      "index": 4,
+      "width": 806,
+      "height": 594
+    },
+    {
+      "url": "assets/figures/arxiv/2603.05440v1/fig-005.webp",
+      "caption": "Table 7: The basic statistics of the random datasets from D4RL (Fu et al., 2020) applied in our MuJoCo experiments (dataset for navigation tasks are random explorations without reward). We use the first 10K transitions in each dataset for ICVF training.",
+      "page": 23,
+      "index": 5,
+      "width": 769,
+      "height": 252
+    },
+    {
+      "url": "assets/figures/arxiv/2603.05440v1/fig-006.webp",
+      "caption": "Figure 8: Visualization of the same trajectory in the original state space and the embedding (latent) space. The color of the points represents the ground-truth reward of the state. We observe that an ICVF-trained embedding provides a much more dynamics-aware metric than the vanilla Euclidean distance. See Fig 2 in the main paper for HalfCheetah and Walker2d environment visualizations.",
+      "page": 28,
+      "index": 6,
+      "width": 787,
+      "height": 220
+    },
+    {
+      "url": "assets/figures/arxiv/2603.05440v1/fig-007.webp",
+      "caption": "Table 1: Performance comparison on MuJoCo environments. The first part of the table lists methods that require extra access to expert actions; the second part is for LfO methods. ‘*‘ represents results reported from the original paper, as we are unable to reproduce the results on our machine. Results are averaged over 50 trajectories. It is apparent that our method outperforms most baselines, even those with access to expert actions. DIFO is the most competitive expert state-only baseline.",
+      "page": 8,
+      "index": 7,
+      "width": 776,
+      "height": 367
+    },
+    {
+      "url": "assets/figures/arxiv/2603.05440v1/fig-008.webp",
+      "caption": "Table 15: Ablation study on hyperparameters. We compare different Learning Rates (LR), discriminator epochs, and discriminator update intervals.",
+      "page": 27,
+      "index": 8,
+      "width": 738,
+      "height": 304
+    },
+    {
+      "url": "assets/figures/arxiv/2603.05440v1/fig-009.webp",
+      "caption": "Table 8: Summary of the hyperparameters of LWAIL.",
+      "page": 24,
+      "index": 9,
+      "width": 770,
+      "height": 1055
+    },
+    {
+      "url": "assets/figures/arxiv/2603.05440v1/fig-010.webp",
+      "caption": "Table 19: A list of symbols used in the paper. The first part focuses on RL-specific symbols. The second part details Wasserstein-specific notation. The third part summarizes ICVF-specific symbols (Sec. 3.2).",
+      "page": 31,
+      "index": 10,
+      "width": 869,
+      "height": 768
+    },
+    {
+      "url": "assets/figures/arxiv/2603.05440v1/fig-011.webp",
+      "caption": "Figure 2: t-SNE visualization of the same trajectory in the original state space and the embedding latent space. The color of the points represents the ground-truth reward of the state (greener is higher). States connected by lines are adjacent in the trajectory. We observe that an ICVF-trained embedding provides a much more dynamics-aware metric than the Euclidean distance. For Hopper and Ant environment embeddings, see Appendix F.4.2.",
+      "page": 5,
+      "index": 11,
+      "width": 721,
+      "height": 202
+    }
+  ]
+}

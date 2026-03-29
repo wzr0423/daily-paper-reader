@@ -1,0 +1,78 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.11634v1/fig-001.webp",
+      "caption": "Fig. 4: Signature entropy correlates with success. Success rate versus Signature entropy across RoboMimic tasks (Can, Square, Transport) and dataset variants (MH/PH). Points are different curated subsets colored by the number of demonstrations; dotted lines show linear fits for random selection (green circles) and FAKTUAL (magenta squares). Pearson correlation coefficients (r) are reported in each panel, indicating a strong positive association between entropy and downstream success.",
+      "page": 6,
+      "index": 1,
+      "width": 1076,
+      "height": 187
+    },
+    {
+      "url": "assets/figures/arxiv/2603.11634v1/fig-002.webp",
+      "caption": "Fig. 5: Metaworld curation results. Success rates are computed over 50 rollouts for each of the 20 checkpoints, and we report the maximum across checkpoints. Metaworld [78] reports substantially different success rates across random seeds; accordingly, we plot only the mean success rate across 3 seeds here, and provide the full per-seed results in Table IV.",
+      "page": 7,
+      "index": 2,
+      "width": 860,
+      "height": 229
+    },
+    {
+      "url": "assets/figures/arxiv/2603.11634v1/fig-003.webp",
+      "caption": "Fig. 6: Real tasks curation results. Success rates are computed over 50 rollouts for each of the 20 checkpoints, and we report the maximum across checkpoints. Results are averaged over three random seeds, and the error bars indicate the minimum and maximum values. Hashed denotes the best-performing method (max success rate); in ties, the simplest method is selected. Two of the three real-world tasks display the curated subset outperforming the full dataset, indicating that additional demonstrations can be redundant and adding noise rather than being strictly beneficial.",
+      "page": 7,
+      "index": 3,
+      "width": 1076,
+      "height": 202
+    },
+    {
+      "url": "assets/figures/arxiv/2603.11634v1/fig-004.webp",
+      "caption": "Fig. 7: RoboMimic curation results with baselines. Success rates are computed over 50 rollouts for each of the 20 checkpoints, and we report the maximum across checkpoints. Results are averaged over three random seeds, and the error bars indicate the minimum and maximum values. Relative to random pruning, FAKTUAL is generally better, and it can get you near (and in some spots slightly above) the “All demos” reference—but it’s still below most of the stronger rollout-/quality-informed baselines, and it tends to sit closest to DemoSCORE’s performance band. In fact, we expect quality-based curation to outperform diversity-based curation when the dataset includes a mix of high- and low-quality demonstrations (e.g., MH datasets). The key trade is practical: FAKTUAL is model-free and lightweight, so it is a fast “good-enough” curation pass when we cannot afford policy/rollout-dependent scoring or training an auxiliary model.3",
+      "page": 7,
+      "index": 4,
+      "width": 968,
+      "height": 245
+    },
+    {
+      "url": "assets/figures/arxiv/2603.11634v1/fig-005.webp",
+      "caption": "Fig. 12: Number of signature levels vs. success rate results. Results are averaged over three random seeds, and the error bars indicate the minimum and maximum values. Parameters (such as dataset size) are set to m = 120 and p = 0.",
+      "page": 22,
+      "index": 5,
+      "width": 529,
+      "height": 250
+    },
+    {
+      "url": "assets/figures/arxiv/2603.11634v1/fig-006.webp",
+      "caption": "TABLE III: SmolVLA hyperparameters and training configuration for the Metworld tasks.",
+      "page": 23,
+      "index": 6,
+      "width": 1030,
+      "height": 689
+    },
+    {
+      "url": "assets/figures/arxiv/2603.11634v1/fig-007.webp",
+      "caption": "TABLE IV: Success rates for all metaworld manipulation tasks over 3 seeds. Mean, minimum, and maximum are computed across seeds.",
+      "page": 23,
+      "index": 7,
+      "width": 732,
+      "height": 460
+    },
+    {
+      "url": "assets/figures/arxiv/2603.11634v1/fig-008.webp",
+      "caption": "TABLE V: Success rates for all robomimic manipulation tasks over 3 seeds. Mean, minimum, and maximum are computed across seeds.",
+      "page": 24,
+      "index": 8,
+      "width": 760,
+      "height": 1004
+    },
+    {
+      "url": "assets/figures/arxiv/2603.11634v1/fig-009.webp",
+      "caption": "Fig. 2: Entropy vs Number of Demonstrations. In the Can task, the entropy saturates quickly and approaches an asymptote. In contrast, the Transport task entropy does not saturate over the range shown, indicating that the Transport task is more diverse (at least as discriminated by the signature entropy) and each demonstration contributes almost equally to the entropy, hence we see a weaker separation between the random and FAKTUAL lines. Note that the exact value of entropy varies greatly with the chosen kernel bandwidth; hence for brevity we choose a bandwidth of 1.0 for this figure.",
+      "page": 5,
+      "index": 9,
+      "width": 542,
+      "height": 237
+    }
+  ]
+}

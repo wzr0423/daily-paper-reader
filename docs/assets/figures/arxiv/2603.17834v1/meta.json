@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.17834v1/fig-001.webp",
+      "caption": "Figure 5. Task setups for the real-world robotic deployment, showing the configurations for both the Nut Assembly and the Chemistry Tube Arrangement tasks.",
+      "page": 15,
+      "index": 1,
+      "width": 791,
+      "height": 295
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17834v1/fig-002.webp",
+      "caption": "Table 2. Success rate (%) of different VLA methods on the RoboTwin 2.0 benchmark. Each task is evaluated under two difficulty levels: Easy and Hard. For every method we report the success rate for each task and difficulty level, together with the average performance across all five tasks. Higher values indicate better task completion ability. The best result in each column is highlighted in bold.",
+      "page": 7,
+      "index": 2,
+      "width": 837,
+      "height": 189
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17834v1/fig-003.webp",
+      "caption": "Figure 1. Generative Control as Optimization (GeCO). (A) The Paradigm Shift: Unlike standard flow matching which relies on rigid, time-dependent integration schedules (top), GeCO learns a stationary velocity field where inference becomes an iterative optimization process toward stable attractors (bottom). (B) Adaptive Computation: This formulation enables the policy to dynamically allocate computational budget based on state complexity—exiting early for simple transit phases (Scenario 1) while performing deep refinement for precise manipulation (Scenario 2). (C) Intrinsic Safety: The stationary geometry provides a zero-shot safety mechanism. In-distribution (ID) states converge to low-energy equilibria (||fθ|| ≈ 0), whereas out-of-distribution (OOD) anomalies exhibit persistently high field norms (||fθ|| ≫ 0), enabling robust detection.",
+      "page": 3,
+      "index": 3,
+      "width": 987,
+      "height": 417
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17834v1/fig-004.webp",
+      "caption": "Table 8. Per-task success rates on VLABench primitive 10-task evaluation. We report success rates for the baseline π0 and π0 with GeCO (ours) across five tracks; higher is better. Track averages correspond to the averages over the 10 tasks in each track.",
+      "page": 13,
+      "index": 4,
+      "width": 723,
+      "height": 331
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17834v1/fig-005.webp",
+      "caption": "Figure 2. Computation Follows Task Complexity. We visualize the spatial distribution of inference effort along a single rollout. The first three panels (a–c) are sampled from LIBERO-Spatial, and the last three panels (d–f) are from LIBERO-Object. The color of each line encodes the number of function evaluations (NFE) required for convergence at that state, ranging from blue (NFE = 1) to red (NFE = 20). This visualization illustrates how GeCO allocates more computation to challenging states while using fewer steps in easier regions.",
+      "page": 5,
+      "index": 5,
+      "width": 1017,
+      "height": 195
+    },
+    {
+      "url": "assets/figures/arxiv/2603.17834v1/fig-006.webp",
+      "caption": "Figure 6. Dynamic NFE allocation during real-world execution. We visualize the real-time Number of Function Evaluations (NFE) employed by GeCO across a full episode for both the (a) Nut Assembly and (b) Tube Arrangement tasks. Instead of relying on a fixed computation schedule, GeCO automatically allocates maximum compute (NFE=10) during critical bottleneck phases—such as precise target alignment, picking, and insertion. Conversely, the policy adaptively exits early (with NFE dropping as low as 3) during simpler free-space transit phases. This dynamic temporal modulation directly translates to the reduced average NFE (6.45 and 5.11, respectively) and improved real-time inference efficiency on physical hardware without sacrificing task success rates.",
+      "page": 16,
+      "index": 6,
+      "width": 1017,
+      "height": 345
+    }
+  ]
+}

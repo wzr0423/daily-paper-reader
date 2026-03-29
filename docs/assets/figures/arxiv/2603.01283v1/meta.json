@@ -1,0 +1,22 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.01283v1/fig-001.webp",
+      "caption": "Fig. 1. Information-theoretic structure of the observation–action–outcome interaction. Each circle represents the entropy of one variable: observations 𝐻(𝑆), actions 𝐻(𝐴), and outcomes 𝐻(𝑆′). The central overlap is the mutual information 𝑀𝐼(𝑆, 𝐴; 𝑆′); non-overlapping regions correspond to conditional entropies. Note on visual representation: While the central overlap is labeled 𝑀𝐼(𝑆, 𝐴; 𝑆′) for clarity, it serves as a visual proxy for the joint mutual information; mathematically, 𝑀𝐼(𝑆, 𝐴; 𝑆′) corresponds to the entire region of 𝑆′ shared with the (𝑆, 𝐴) union. Bi-predictability (𝑃) is defined as the ratio of this shared information to the total informational union 𝐻(𝑆, 𝐴, 𝑆′).",
+      "page": 2,
+      "index": 1,
+      "width": 518,
+      "height": 286
+    },
+    {
+      "url": "assets/figures/arxiv/2603.01283v1/fig-002.webp",
+      "caption": "Fig. 2. Information Digital Twin (IDT) architecture. The IDT operates alongside the agent–environment loop, receiving copies of observations (S, S') and actions (A). The 𝑃 Calculator calculates bi-predictability 𝑃 and predictive asymmetry ΔH from the interaction stream. The 𝑃 Controller detects statistical deviations from baseline coupling. Dashed boxes indicate architecturally specified modulation pathways — observation modulation and action modulation — that are not experimentally validated in this work. The Adaptive Signal path connects controller output to the modulation interfaces.",
+      "page": 4,
+      "index": 2,
+      "width": 529,
+      "height": 229
+    }
+  ]
+}

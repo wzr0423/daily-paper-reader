@@ -1,0 +1,110 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.24329v1/fig-001.webp",
+      "caption": "Figure 2: Overview of GAMEPLAYQA. Gameplay videos undergo (1) dense multi-track temporal captioning on 6 types of target entities (Sec. 3.2), (2) captioning includes negative labels for hallucination-inducing distractors, and (3) QA pairs are generated through a combinatorial template-based algorithm (Sec. 3.3). After (4) quality assurance (Sec. 3.4), the benchmark enables (5) model evaluation with (6) fine-grained hallucination analysis (Sec. 4.2).",
+      "page": 2,
+      "index": 1,
+      "width": 922,
+      "height": 475
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24329v1/fig-002.webp",
+      "caption": "Table 3: Model performance across task categories. Gold = best, Silver = second best. L1: ActRec (Action Recognition), StaRec (State Recognition), ObjRec (Object Recognition), EvtRec (Event Recognition), SOC (Static Object Count). L2: X-Ent (Cross-Entity Referring), TsRef (Timestamp Referring), TimLoc (Time Localization), AbsRec (Absence Recognition), OccCnt (Occurrence Count), Order (Ordering), Intent (Intent Identification). L3: SyncRef (Sync-Referring), X-VOrd (Cross-Video Ordering), POV-ID (POV Identification).",
+      "page": 7,
+      "index": 2,
+      "width": 975,
+      "height": 442
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24329v1/fig-003.webp",
+      "caption": "Figure 6: Top left: Distribution of the first four words of the questions. The arc length indicates the frequency. Top right: Distribution of question codes, categorized by count and task type (using color for cognitive level). Bottom: Word cloud visualizing question terms by entity type.",
+      "page": 14,
+      "index": 3,
+      "width": 948,
+      "height": 1120
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24329v1/fig-004.webp",
+      "caption": "Figure 3: Example questions from GAMEPLAYQA across different question codes and cognitive levels. Each example shows video frames paired with the corresponding QA pair, illustrating the progression from basic perception (L1) to temporal reasoning (L2) to cross-video understanding (L3). Additional cross-domain examples from car collision and egocentric human activity videos demonstrate the generalizability of the framework.",
+      "page": 3,
+      "index": 4,
+      "width": 908,
+      "height": 756
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24329v1/fig-005.webp",
+      "caption": "Table 7: GameplayQA question taxonomy. Each question is defined by a combination of dimensions, enabling systematic coverage of perception, temporal reasoning, and cross-video reasoning.",
+      "page": 18,
+      "index": 5,
+      "width": 1042,
+      "height": 1032
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24329v1/fig-006.webp",
+      "caption": "Table 15: Level 3 (cross-video) question templates. Cross-video reference templates cover all 36 Ref → Ans pairs (6 reference types × 6 answer types) in both IDENT and EXIST forms; representative examples are shown. V1/V2 are replaced by actual video indices at generation time. {refOther} refers to the other player in the reference video. POV-ID answer options are video numbers; ORDER options are formatted as “The POV player in Video X is [action]”.",
+      "page": 23,
+      "index": 6,
+      "width": 867,
+      "height": 317
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24329v1/fig-007.webp",
+      "caption": "Figure 4: Error rate analysis across four dimensions. Top-left: Cross-video and temporal distractors cause the most errors. Top-right: Fast-paced shooters (CS2, Battlefield) are hardest. Bottom-left: Error increases with video length. Bottom-right: Error scales with number of synchronized videos.",
+      "page": 8,
+      "index": 7,
+      "width": 446,
+      "height": 327
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24329v1/fig-008.webp",
+      "caption": "Table 4: Model performance by entity category. Gold",
+      "page": 8,
+      "index": 8,
+      "width": 423,
+      "height": 406
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24329v1/fig-009.webp",
+      "caption": "Table 1: Comparison of relevant video understanding benchmarks.",
+      "page": 4,
+      "index": 9,
+      "width": 933,
+      "height": 246
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24329v1/fig-010.webp",
+      "caption": "Table 8: Inference configurations for tested models. All models are evaluated using the listed inference providers.",
+      "page": 19,
+      "index": 10,
+      "width": 927,
+      "height": 509
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24329v1/fig-011.webp",
+      "caption": "Table 9: Default reasoning effort for tested models. All models are evaluated using their default reasoning settings.",
+      "page": 19,
+      "index": 11,
+      "width": 483,
+      "height": 284
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24329v1/fig-012.webp",
+      "caption": "Figure 8: Screenshot of the annotation interface in the multi-video setting, shown for the game Arc Raiders. Three synchronized video perspectives are displayed in parallel, with aligned timelines enabling annotators to capture cross-video events and temporal relations. The same explosion in the sky is captured by all three videos.",
+      "page": 17,
+      "index": 12,
+      "width": 939,
+      "height": 529
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24329v1/fig-013.webp",
+      "caption": "Figure 7: Screenshot of the annotation interface in the single-video setting, shown for the game Valheim. Annotators label actions, states, events, and entities on a synchronized timeline.",
+      "page": 17,
+      "index": 13,
+      "width": 939,
+      "height": 530
+    }
+  ]
+}

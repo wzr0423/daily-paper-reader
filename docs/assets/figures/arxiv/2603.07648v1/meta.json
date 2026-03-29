@@ -1,0 +1,102 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.07648v1/fig-001.webp",
+      "caption": "Figure 1. Overview of AtomicVLA. Unlike previous VLA models with a single action head, which suffer from limited scalability and severe interference among mixed skills, AtomicVLA employs a SG-MoE architecture to build a scalable skill expert library. By unifying task planning and action execution within this framework, it achieves strong performance on long-horizon and continual learning tasks in both simulation and real-world settings.",
+      "page": 1,
+      "index": 1,
+      "width": 498,
+      "height": 321
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07648v1/fig-002.webp",
+      "caption": "Table 1. Comparison of Different Methods on LIBERO Benchmark(%).",
+      "page": 6,
+      "index": 2,
+      "width": 872,
+      "height": 242
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07648v1/fig-003.webp",
+      "caption": "Table 7. List of tasks and prompts used in our real-world experiments.",
+      "page": 15,
+      "index": 3,
+      "width": 690,
+      "height": 419
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07648v1/fig-004.webp",
+      "caption": "Figure 5. Demonstrations show the execution process of AtomicVLA* (second row) and baselines π0.5 (first row).",
+      "page": 7,
+      "index": 4,
+      "width": 1021,
+      "height": 182
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07648v1/fig-005.webp",
+      "caption": "Figure 7. The prompts and examples of the InternVideo2.5.",
+      "page": 14,
+      "index": 5,
+      "width": 1005,
+      "height": 802
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07648v1/fig-006.webp",
+      "caption": "Figure 2. (a) AtomicVLA Pipline. AtomicVLA is a framework that unifies task planning and action execution. The VLM adaptively predicts atomic skill abstraction and latent action. Action Decoder in the SG-MoE architecture receives both the latent action and the newly inferred atomic skill abstraction, and generates fine grained motor actions. (b) Skill-Guided Mixture of Experts. SG-MoE includes a skill router, a shared expert, and multiple atomic-skill experts. The router selects the top skill expert based on the atomic skill, and the action token is processed by both the activated skill expert and the shared expert. (c) Continual Learning with Skill Expansion. New skills are added by training only the new expert and extending the router. (d) Task Planning Embodied Data Generation. High-quality embodied reasoning data are generated using principal-axis analysis with InternVideo2.5 [52] model.",
+      "page": 3,
+      "index": 6,
+      "width": 1021,
+      "height": 479
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07648v1/fig-007.webp",
+      "caption": "Figure 10. Demonstrations of real-world experiments(Long-horizon tasks).",
+      "page": 18,
+      "index": 7,
+      "width": 1026,
+      "height": 631
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07648v1/fig-008.webp",
+      "caption": "Figure 6. Mixed-Training Skill Interference and ContinualLearning Degradation. The top two rows illustrate skill interference in long-horizon tasks: the first shows successful single-skill executions, while the second shows failures after mixed training. The bottom two rows show degradation after continual learning: the first row presents the performance of π0.5 before learning new skills, and the second shows its performance afterward. Red and green boxes highlight the key differences.",
+      "page": 8,
+      "index": 8,
+      "width": 477,
+      "height": 392
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07648v1/fig-009.webp",
+      "caption": "Figure 9. Error recovery cases in real-world experiments.",
+      "page": 17,
+      "index": 9,
+      "width": 940,
+      "height": 291
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07648v1/fig-010.webp",
+      "caption": "Figure 3. Inference Example of AtomicVLA. We visualize two tasks from LIBERO-LONG. For each task, the top row shows the task progression, and the bottom row shows AtomicVLA’s inferred outputs. Gray blocks denote Thinking, while colored blocks indicate Acting, with colors corresponding to the activated skill experts. The left row shows the initial task state (top) and the skill-expert activation during inference (bottom).",
+      "page": 5,
+      "index": 10,
+      "width": 1015,
+      "height": 401
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07648v1/fig-011.webp",
+      "caption": "Table 9. Success rates for all evaluated tasks on CALVIN ABC-D dataset.",
+      "page": 16,
+      "index": 11,
+      "width": 822,
+      "height": 302
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07648v1/fig-012.webp",
+      "caption": "Figure 8. Demonstrations of LIBERO and Calvin experiments.",
+      "page": 16,
+      "index": 12,
+      "width": 804,
+      "height": 603
+    }
+  ]
+}

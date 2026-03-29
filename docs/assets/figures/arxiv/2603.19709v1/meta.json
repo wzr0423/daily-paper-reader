@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.19709v1/fig-001.webp",
+      "caption": "Figure 3. G1 Domain-Specific Hybrid Dataset Construction Pipeline. Our approach synergizes cost-free, high-fidelity exact 3D/2D geometry rendered from a 9-camera simulation environment (Isaac Lab) with Real-World Human-in-the-Loop (HITL) annotations to correct visual domain shifts, enabling robust native pose estimation.",
+      "page": 6,
+      "index": 1,
+      "width": 496,
+      "height": 257
+    },
+    {
+      "url": "assets/figures/arxiv/2603.19709v1/fig-002.webp",
+      "caption": "Figure 1. Dream2Act: Zero-shot Humanoid Interaction via Robot-Centric Video Synthesis. (A) Traditional human-centric retargeting fails due to the morphology gap, causing spatial misalignments. (B) Our Dream2Act pipeline leverages Seedance 2.0 to hallucinate morphology-consistent interactions directly in the robot’s native space. (C) This visual prior translates into successful zero-shot physical execution for spatially-sensitive tasks like sitting on a sofa and kicking a ball.",
+      "page": 2,
+      "index": 2,
+      "width": 1036,
+      "height": 523
+    },
+    {
+      "url": "assets/figures/arxiv/2603.19709v1/fig-003.webp",
+      "caption": "Figure 4. Qualitative Comparison on Diverse Spatially-Sensitive Tasks. We evaluate zero-shot performance across Kicking, Hugging, Punching, and Sitting. (Top) Traditional human-centric retargeting suffers from spatial misalignments and kinematic violations due to the morphology gap. (Bottom) Dream2Act’s robot-centric hallucination ensures precise contacts and dynamic stability.",
+      "page": 7,
+      "index": 3,
+      "width": 1036,
+      "height": 401
+    },
+    {
+      "url": "assets/figures/arxiv/2603.19709v1/fig-004.webp",
+      "caption": "Figure 5. Spatial Generalization Analysis on Multi-Location Ball Kicking. To verify scale adaptability, we evaluate Dream2Act across four distinct ball positions. (Top) Human-centric retargeting fails to replicate spatial variations due to the morphology gap. (Bottom) Dream2Act successfully hallucinates and executes kicks for all targets, demonstrating robust spatial diversity.",
+      "page": 7,
+      "index": 4,
+      "width": 1036,
+      "height": 467
+    },
+    {
+      "url": "assets/figures/arxiv/2603.19709v1/fig-005.webp",
+      "caption": "Figure 6. Qualitative Comparison of Text-to-Motion Pipelines in Free Space. Conventional human-centric T2M models amplify inherent artifacts during retargeting, causing dynamic constraint violations and hardware failure. Dream2Act strictly enforces physical consistency, achieving stable zero-shot deployment.",
+      "page": 8,
+      "index": 5,
+      "width": 496,
+      "height": 327
+    },
+    {
+      "url": "assets/figures/arxiv/2603.19709v1/fig-006.webp",
+      "caption": "Figure 2. Dream2Act System Architecture. The framework comprises three core modules: (1) Interaction Hallucination via Seedance to generate morphology-consistent visual priors; (2) Native Pose Estimation and 2D-to-3D Lifting to extract precise 3D keypoints; and (3) Morphology-Aware Kinematic Recovery employing Constrained IK and PnP scale recovery to trajectories for physical execution.",
+      "page": 4,
+      "index": 6,
+      "width": 1036,
+      "height": 442
+    },
+    {
+      "url": "assets/figures/arxiv/2603.19709v1/fig-007.webp",
+      "caption": "Figure 7. Qualitative Ablation on Native G1 Pose Estimation. Given a challenging real-world image: (a) Zero-shot ViTPose (COCOonly) completely misidentifies robot features; (b) A Sim-Only variant suffers from local drift due to domain shift; (c) Our Dream2Act native estimator, fine-tuned on the hybrid dataset, achieves pixel-perfect alignment.",
+      "page": 9,
+      "index": 7,
+      "width": 832,
+      "height": 344
+    }
+  ]
+}

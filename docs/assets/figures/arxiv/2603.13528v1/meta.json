@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.13528v1/fig-001.webp",
+      "caption": "Fig. 1: Dream2Fix is a data generation pipeline that synthesizes large-scale, photorealistic failure rollouts with paired corrections from successful demonstrations and curates them with physical and visual verification.",
+      "page": 1,
+      "index": 1,
+      "width": 508,
+      "height": 252
+    },
+    {
+      "url": "assets/figures/arxiv/2603.13528v1/fig-002.webp",
+      "caption": "Fig. 4: Real world robot execution. For each task, we show the initial failed execution (left) and the corrected execution (right). Across diverse tasks, the correction adjusts the action to recover from the failure under the same real-robot setup.",
+      "page": 7,
+      "index": 2,
+      "width": 871,
+      "height": 529
+    },
+    {
+      "url": "assets/figures/arxiv/2603.13528v1/fig-003.webp",
+      "caption": "Fig. 2: Overview of Dream2Fix pipeline. Dream2Fix generates diverse failure cases from successful demonstrations via keyframe-level action perturbations, then validates and curates them with physical and visual verifiers. The verified rollouts are auto-labeled into a structured schema to instruction-tune a VLM that predicts actionable corrections for real-world recovery.",
+      "page": 3,
+      "index": 3,
+      "width": 1031,
+      "height": 341
+    },
+    {
+      "url": "assets/figures/arxiv/2603.13528v1/fig-004.webp",
+      "caption": "TABLE I: Comparison to existing datasets. We compare Dream2Fix with AHA [9] and REFLECT [12] in terms of dataset scale, input modalities, and label style. Dream2Fix pairs synthesized failure clips with structured labels that specify failure type and stage, together with executable corrections, enabling vision-language models to produce grounded failure diagnoses and executable corrections.",
+      "page": 4,
+      "index": 4,
+      "width": 950,
+      "height": 542
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.08455v1/fig-001.webp",
+      "caption": "Figure 2: Signal detection theory analysis. Each point represents a detector configuration; x-axis is baseline false positive rate (detection rate at ε=10−4), y-axis is detection rate at reference intensity ε=0.003 (chosen as it falls within the transition region for most environments). HalfCheetah and Ant show clear separation (upper-left clustering); Walker2d falls along the diagonal (no detector achieves good sensitivity-specificity separation); Hopper shows a wide spread reflecting the fundamental tradeoff.",
+      "page": 6,
+      "index": 1,
+      "width": 932,
+      "height": 667
+    },
+    {
+      "url": "assets/figures/arxiv/2603.08455v1/fig-002.webp",
+      "caption": "Figure 4: Hopper: Collapse Before Awareness analysis. Red triangles show mean time to policy collapse from drift onset; blue squares show mean time to detection (TTA) for episodes where detection occurs. Hopper collapses at nearly all drift intensities; detection only succeeds when Tdetection < Tcollapse (high ε). At ε=0.05, collapse occurs within 25 steps and no detector fires.",
+      "page": 11,
+      "index": 2,
+      "width": 932,
+      "height": 458
+    },
+    {
+      "url": "assets/figures/arxiv/2603.08455v1/fig-003.webp",
+      "caption": "Figure 3: Detection rate vs. drift intensity (linear profile) for all detector configurations across four environments. Each curve represents a distinct detector with specific hyperparameters. The sigmoid shape is consistent across all detectors; the horizontal position (ε∗) varies.",
+      "page": 10,
+      "index": 3,
+      "width": 932,
+      "height": 667
+    },
+    {
+      "url": "assets/figures/arxiv/2603.08455v1/fig-004.webp",
+      "caption": "Figure 1: Sharp sigmoid threshold across detector configurations (linear drift). Detection rate vs. drift intensity for five Doubt Index configurations in HalfCheetah and Ant. All configurations exhibit the same sigmoid shape; the horizontal position (ε∗) shifts with detector parameters. Full results in Appendix A.",
+      "page": 4,
+      "index": 4,
+      "width": 932,
+      "height": 360
+    },
+    {
+      "url": "assets/figures/arxiv/2603.08455v1/fig-005.webp",
+      "caption": "Figure 5: Top: Prediction error time series for three conditions (HalfCheetah, ε=0.01). After drift onset (dashed line), linear drift PE diverges while sinusoidal PE remains within baseline range. Bottom: Power spectral density (post-drift). Linear drift exhibits 201.6× baseline power; sinusoidal drift is indistinguishable from baseline (0.8×).",
+      "page": 12,
+      "index": 5,
+      "width": 932,
+      "height": 619
+    }
+  ]
+}

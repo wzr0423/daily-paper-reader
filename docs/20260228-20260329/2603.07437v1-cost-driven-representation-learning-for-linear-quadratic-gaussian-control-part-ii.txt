@@ -1,0 +1,3862 @@
+Title: Cost-Driven Representation Learning for Linear Quadratic Gaussian Control: Part II
+
+URL Source: https://arxiv.org/pdf/2603.07437v1
+
+Published Time: Tue, 10 Mar 2026 01:04:35 GMT
+
+Number of Pages: 38
+
+Markdown Content:
+# Cost-Driven Representation Learning for Linear Quadratic Gaussian Control: Part II 
+
+Yi Tian yitian@mit.edu 
+
+Massachusetts Institute of Technology 
+
+Kaiqing Zhang kaiqing@umd.edu 
+
+University of Maryland, College Park 
+
+Russ Tedrake russt@mit.edu 
+
+Massachusetts Institute of Technology 
+
+Suvrit Sra s.sra@tum.de 
+
+Technical University Munich 
+
+Abstract 
+
+We study the problem of state representation learning for control from partial and potentially high-dimensional observations. We approach this problem via cost-driven state representation learning , in which we learn a dynamical model in a latent state space by predicting cumulative costs . In particular, we establish finite-sample guaran-tees on finding a near-optimal representation function and a near-optimal controller using the learned latent model for infinite-horizon time-invariant Linear Quadratic Gaussian (LQG) control. We study two approaches to cost-driven representation learning, which differ in whether the transition function of the latent state is learned explicitly or implicitly. The first approach has also been investigated in Part I of this work, for finite-horizon time-varying LQG control. The second approach closely re-sembles MuZero , a recent breakthrough in empirical reinforcement learning, in that it learns latent dynamics implicitly by predicting cumulative costs . A key technical contribution of this Part II is to prove persistency of excitation for a new stochastic process that arises from the analysis of quadratic regression in our approach, and may be of independent interest. 
+
+# 1 Introduction 
+
+Control with a learned latent model has achieved state-of-the-art performance in several rein-forcement learning (RL) benchmarks, including board games, Atari games, and visuomotor control (Schrittwieser et al., 2020; Ye et al., 2021; Hafner et al., 2023). To better understand this machinery in RL, we introduce it to a classical optimal control problem, namely the linear quadratic Gaussian (LQG) control, and study its theoretical, in particular, finite-sample per-formance. Essential to this approach is the learning of two components: a state representation 
+
+function that maps an observed history to some latent state, and a latent model that predicts 1
+
+> arXiv:2603.07437v1 [cs.LG] 8 Mar 2026
+
+the transition and cost in the latent state space. The latent model is usually a Markov decision process, using which we obtain a policy in the latent space or execute online planning. What is the correct objective to optimize for learning a good latent model? One popular choice is to learn a function that reconstructs the observation from the latent state (Hafner et al., 2019a,b, 2020, 2023). A latent model learned this way is agnostic to control tasks and retains all the infor-mation about the environment. This class of approaches may achieve satisfactory performance empirically, but are prone to background distraction and control-irrelevant information (Fu et al., 2021). The second class of methods learn an inverse model that infers actions from latent states at different time steps (Pathak et al., 2017; Lamb et al., 2022). A latent model learned with this methodology is also task-agnostic but can extract control-relevant information. In contrast, the third class of methods learn task-relevant representations by predicting costs in the control task (Oh et al., 2017; Zhang et al., 2020; Schrittwieser et al., 2020). The concept that a good la-tent state should be able to predict costs is intuitive, as the costs are directly relevant to optimal control. This class of methods is the focus of this work, which aims to examine the soundness of this methodology in classical partially observable control problems, e.g., the LQG control. In Part I of this work (Tian et al., 2022), we have studied provable cost-driven state representa-tion learning in LQG for the finite-horizon, time-varying setting. In this Part II, we build upon it and complement it by studying the same question for the infinite-horizon, time-invariant setting. In this setting, both the representation function and the latent model are stationary , which is usually the case in empirical RL practice. This allows us to formulate a new approach that draws an even closer connection to the state representation learning in MuZero (Schrittwieser et al., 2020), an RL algorithm that matches the superhuman performance of AlphaZero in Go, shogi and chess, while outperforming model-free RL algorithms in Atari games. We summarize our contributions as follows. • We show that two cost-driven state representation learning methods provably solve infinite-horizon time-invariant LQG control, with finite-sample guarantees. Both meth-ods only need a single trajectory; one resembles the method in Part I of this work, and the other resembles the state representation learning in MuZero. • By analyzing the MuZero-style algorithm, we notice the potential issue of coordinate mis-alignment : Costs can be invariant to orthogonal transformations of the latent states, and implicit dynamics learning by predicting one-step transition may not recover the latent state coordinates consistently. This insight suggests the need to predict multi-step latent transition or other coordinate alignment procedures in the MuZero-style, implicit dynam-ics learning approaches. • Technically, we overcome the difficulty of having correlated data in a single trajectory for latent model learning, as we are dealing with the time-invariant setting and need to ag-gregate samples across time steps in contrast to the Part I of this work. To achieve so, on one hand, we prove a new result about the persistency of excitation for a stochastic process that arises from the analysis of the quadratic regression subroutine in both of our methods; on the other hand, to prove concentration beyond martingale difference se-quences, we build on the idea that widely separated sample points in a mixing process are 2almost independent, and introduce a new analysis method by partitioning the sequence and applying the Gram-Schmidt process. 
+
+Notation. The notation in this Part II is the same as that in Part I of this work. For a collection of 
+
+d-dimensional vectors (vt)jt=i, we define vi:j := [ vi; vi+1; . . . ; vj] ∈ Rd(j−i+1) as the concatenation along the column in Part I; in Part II we additionally let vj:i := [ vj; vj−1; . . . ; vi] ∈ Rd(j−i+1)
+
+denote the concatenation along the column in the reverse order. Besides, for a square matrix A,let ρ(A) denote its spectral radius, and define α(A) := sup k≥0 ∥Ak∥2ρ(A)−k > 1. Let Sd denote the unit sphere in Rd+1.
+
+# 2 Problem setup 
+
+A partially observable linear time-invariant (LTI) dynamical system is described by 
+
+xt+1 = A∗ xt + B∗ut + wt, yt = C∗ xt + vt, (2.1) with state xt ∈ Rdx , observation yt ∈ Rdy , and control ut ∈ Rdu for all t ≥ 0. Process noises 
+
+(wt)t≥0 and observation noises (vt)t≥0 are i.i.d. sampled from N (0, Σwt ) and N (0, Σvt ), respec-tively. Let initial state x0 be independently sampled from N (0, Σ0). The quadratic cost function is given by 
+
+c(x, u) = ∥x∥2 
+
+> Q∗
+
++ ∥u∥2 
+
+> R∗
+
+, (2.2) where Q∗ ≽ 0 and R∗ ≻ 0. A policy/controller π determines an action/control input ut at time step t based on the history 
+
+[y0: t; u0: (t−1)] up to this time step. For t ≥ 0, let ct := c(xt, ut) denote the cost at time step t.Given a policy π, let 
+
+J(π) := lim sup 
+
+> T→∞
+
+1
+
+T ∑T−1 
+
+> t=0
+
+E[ct] (2.3) denote the infinite-horizon time-averaged expected cost. The goal of LQG control is to find a policy π that minimizes J(π).We make the following standard assumptions. 
+
+Assumption 1. System dynamics (2.1) and cost (2.2) satisfy: 1. The system is stable, that is, ρ(A∗) < 1.2. (A∗, B∗) is ν-controllable for some ν > 0, that is, the controllability matrix 
+
+Φc(A∗, B∗) := [ B∗, A∗ B∗, . . . , (A∗)dx −1 B∗]
+
+has rank d x and σmin (Φc(A∗, B∗)) ≥ ν.
+
+33. (A∗, C∗) is ω-observable for some ω > 0, that is, the observability matrix 
+
+Φo (A∗, C∗) := [ C∗; C∗ A∗; . . . ; C∗(A∗)dx −1]
+
+has rank d x and σmin (Φo (A∗, C∗)) ≥ ω.4. (A∗, Σ1/2  
+
+> w
+
+) is κ-controllable for some κ > 0.5. (A∗, (Q∗)1/2 ) is μ-observable for some μ > 0.6. Σv ≽ σ2 
+
+> v
+
+I for some σv > 0; this can always be achieved by inserting Gaussian noises with full-rank covariance matrices to the observations. 7. R ∗ ≽ r2 I for some r > 0.8. The operator norms of A ∗, B ∗, C ∗, Q ∗, R ∗, Σw, Σv, Σ0 and α(A∗), α(A∗) are O(1), the singular value lower bounds ν, ω, ν, κ, σv, r and spectral radii ρ(A∗), ρ(A∗) are Ω(1), where A ∗ :=(I − L∗C∗)A∗ with L ∗ defined in (2.5) .
+
+If the system parameters (A∗, B∗, C∗, Q∗, R∗, Σw, Σv) are known, the optimal policy is obtained by combining the Kalman filter 
+
+z∗ 
+
+> t+1
+
+= A∗z∗ 
+
+> t
+
++ B∗ut + L∗(yt+1 − C∗(A∗z∗ 
+
+> t
+
++ B∗ut)) (2.4) with the optimal feedback gain K∗ of the linear quadratic regulator such that ut = K∗z∗ 
+
+> t
+
+, where 
+
+L∗ is the Kalman gain, and at the initial time step, we can set, e.g., z∗ 
+
+> 0
+
+= L∗y0. This fact is known as the separation principle , and the Kalman gain and optimal feedback gain are given by 
+
+L∗ = S∗(C∗)⊤(C∗S∗(C∗)⊤ + Σv)−1, (2.5) 
+
+K∗ = − (( B∗)⊤ P∗ B∗ + R)−1(B∗)⊤ P∗ A∗, (2.6) where S∗ and P∗ are determined by their respective discrete-time algebraic Riccati equations (DAREs): 
+
+S∗ = A∗ S∗ − S∗(C∗)⊤(C∗S∗(C∗)⊤ + Σv)−1C∗S∗(A∗)⊤ + Σw, (2.7) 
+
+P∗ = ( A∗)⊤ P∗ − P∗ B∗(( B∗)⊤ P∗ B∗ + R∗)−1(B∗)⊤ P∗A∗ + Q∗. (2.8) Assumptions 1.2 to 1.7 guarantee the existence and uniqueness of the positive definite solutions 
+
+S∗ and P∗; Assumption 1.8 further guarantees that their operator norms are O(1) and minimum singular values are Ω(1). Hence, ∥L∗∥2 and ∥K∗∥2 are of order O(1). The assumption on 
+
+α(A∗), α(A∗), ρ(A∗), ρ(A∗) provides guarantees for state estimation from a finite history and has also been made in the literature (Mania et al., 2019; Oymak and Ozay, 2019). If ρ(A∗) or 
+
+ρ(A∗) equals zero, then (A∗)dx or (A∗)dx is a zero matrix by the Cayley-Hamilton theorem, so using history length H ≥ dx completely eliminates the truncation errors. Thus, Assumption 1.8 does not lose generality. Let α := max (α(A∗), α(A∗)) and ρ := max (ρ(A∗), ρ(A∗)) .We consider the data-driven control setting, where the LQG model (A∗, B∗, C∗, Q∗, Σw, Σv) is unknown. For simplicity, we assume R∗ is known, though our approaches can be readily extended to the case where it is unknown, which we discuss in more detail in §3.1. 42.1 Latent model of infinite-horizon time-invariant LQG 
+
+The stationary Kalman filter (2.4) asymptotically produces the optimal state estimation in the sense of minimum mean squared errors. With a finite horizon, however, the optimal state estimator is time-varying, given by 
+
+z∗ 
+
+> t+1
+
+= A∗z∗ 
+
+> t
+
++ B∗ut + L∗
+
+> t+1
+
+(yt+1 − C∗(A∗z∗ 
+
+> t
+
++ B∗ut)) , (2.9) where L∗ 
+
+> t
+
+is the time-varying Kalman gain, converging to L∗ as t → ∞. This convergence is equivalent to that of the error covariance matrix E[( xt − z∗ 
+
+> t
+
+)( xt − z∗ 
+
+> t
+
+)⊤], which is exponentially fast (Komaroff, 1994). Hence, for simplicity, we assume this error covariance matrix is stationary at the initial time step by the choice of z∗ 
+
+> 0
+
+so that L∗ 
+
+> t
+
+= L∗ for t ≥ 1; this assumption has also been adopted in the literature (Lale et al., 2020, 2021; Jadbabaie et al., 2021). The innovation term it+1 := yt+1 − C∗(A∗z∗ 
+
+> t
+
++ B∗ut) is independent of z∗ 
+
+> 0
+
+and the history 
+
+(u0, y1, . . . , ut−1, yt) and (it)t≥1 are mutually independent. The following proposition, taken from (Tian et al., 2022, Proposition 1), represents the system in terms of the state estimates obtained by the Kalman filter, which we refer to as the latent model .
+
+Proposition 1. Let z ∗ 
+
+> 0
+
+be the initial state estimate and (z∗ 
+
+> t
+
+)t≥1 be the state estimates given by the Kalman filter. Then, for t ≥ 0,z∗ 
+
+> t+1
+
+= A∗z∗ 
+
+> t
+
++ B∗ut + L∗it+1,
+
+where L ∗it+1 is independent of z ∗ 
+
+> t
+
+and u t, i.e., the state estimates follow the same linear dynamics with noises {L∗it+1}t≥0. The cost at step t can be reformulated as a function of the state estimates by ct = ∥z∗ 
+
+> t
+
+∥2 
+
+> Q∗
+
++ ∥ut∥2 
+
+> R∗
+
++ b∗ + γt + ηt,
+
+where b ∗ = E[∥xt − z∗ 
+
+> t
+
+∥2 
+
+> Q∗
+
+] > 0, and γt = ∥xt − z∗ 
+
+> t
+
+∥2 
+
+> Q∗
+
+− b∗, ηt = 2 z∗ 
+
+> t
+
+, xt − z∗  
+
+> tQ∗
+
+are both zero-mean subexponential random variables. Moreover, b ∗ = O(1) and ∥γt∥ψ1 = O(d1/2  
+
+> x
+
+); if control ut ∼ N (0, σ2 
+
+> u
+
+I) for t ≥ 0, then we have ∥ηt∥ψ1 = O(d1/2  
+
+> x
+
+).
+
+Proposition 1 shows that the dynamics of the state estimates computed by the time-varying Kalman filter are the same as the original system up to noises; the costs are also the same, up to constants and noises. Hence, a latent model can be parameterized by (A, B, Q, R∗), with the constant b∗ and noises neglected due to their irrelevance to planning. A stationary latent policy is a linear controller ut = Kz t on latent state zt, parameterized by the feedback gain K ∈ Rdu ×dx .The latent model enables us to find a good latent policy. To learn such a latent model and to deploy a latent policy in the original partially observable system, we need a representation function . Let A∗ := ( I − L∗C∗)A∗ and B∗ := ( I − L∗C∗)B∗. Then, the Kalman filter can be written as z∗ 
+
+> t+1
+
+= A∗z∗ 
+
+> t
+
++ B∗ut + L∗yt+1. For t ≥ 0, unrolling the recursion gives 
+
+z∗ 
+
+> t
+
+= A∗(A∗z∗ 
+
+> t−2
+
++ B∗ut−2 + L∗yt−1) + B∗ut−1 + L∗yt
+
+= [( A∗)t−1 L∗, . . . , L∗]y1: t + [( A∗)t−1 B∗, . . . , B∗]u0: (t−1) + ( A∗)tz∗
+
+> 0
+
+=: M∗ 
+
+> t
+
+[y1: t; u0: (t−1); z∗ 
+
+> 0
+
+],5where M∗ 
+
+> t
+
+∈ Rdx ×(td y +td u +dx ). This means that the representation function can be parameterized as linear mappings for full histories (with y0 replaced by z∗ 
+
+> 0
+
+). Despite the simplicity, the input dimension of the function grows linearly in time, making it intractable to estimate the state using the full history for large t; nor it is necessary, since the impact of old data decreases exponentially. Under Assumption 1, ρ(A∗) < 1 (Bertsekas, 2012, Appendix E.4). With an H-step truncated history, the state estimate can thus be written as 
+
+z∗ 
+
+> t
+
+= [( A∗)H−1 L∗, . . . , L∗]y(t−H+1):t + [( A∗)H−1 B∗, . . . , B∗]u(t−H):(t−1) + δt
+
+=: M∗[y(t−H+1):t; u(t−H):(t−1)] + δt, (2.10) where δt = ( A∗)H z∗ 
+
+> t−H
+
+denotes the truncation error, whose impact decays exponentially in H
+
+and can be neglected for sufficiently large H, since z∗ 
+
+> t−H
+
+converges to a stationary distribution and its norm is bounded with high probability. Hence, the representation function that we aim to recover is M∗ ∈ Rdx ×H(dy +du ), which has an O(1) operate norm and takes as input the 
+
+H-step history ht = [ y(t−H+1):t; u(t−H):(t−1)]. Henceforth, we let dh := H(dy + du). Then, a representation function is parameterized by a matrix M ∈ Rdx ×dh .Overall, a policy is a combination of a state representation function parameterized by M and a feedback gain K in the latent model, denoted by π = ( M, K). Such a policy can be applied after we have H steps of history; for the first H steps, we can use an arbitrary stabilizing policy, e.g., zero or zero-mean Gaussian control inputs. Learning to solve LQG control in this framework can thus be achieved by: 1) learning the state representation function parameter M; 2) extracting latent model (A, B, Q, R∗); and 3) finding the optimal K by planning in the latent model. Note that policy (M∗, K∗) is near, but not exactly, optimal due to the truncation error δt; the exactly optimal policy is still characterized by (L∗, K∗). Next, we introduce our approach following this pipeline. 
+
+# 3 Method 
+
+In practice, latent model learning methods collect trajectories by interacting with the system online using some policy; the trajectories are used to improve the learned latent model, which in turn improves the policy. In LQG control, it is known that one can learn a good latent model from a single trajectory, collected using zero-mean Gaussian control inputs, by viewing this procedure as a classical system identification problem; see e.g., (Oymak and Ozay, 2019). This is also how we assume the data are collected. We note that our results also apply to data from multiple independent trajectories using control inputs from the same zero-mean Gaussian distribution. In our cost-driven state representation learning approach, state representations are learned by predicting costs. To learn the transition function in the latent model, two approaches have been explored in the literature. The first approach explicitly minimizes the transition prediction error (Subramanian et al., 2020; Hafner et al., 2019a). Algorithmically, the overall loss is a combination of cost prediction and transition prediction errors. 6Algorithm 1 Cost-driven state representation learning  
+
+> 1:
+
+Input: length T, history length H, noise magnitude σu 
+
+> 2:
+
+Collect trajectories of length T + H using ut ∼ N (0, σ2 
+
+> u
+
+I), for t ≥ 0, to obtain 
+
+Draw = ( y0, u0, c0, y1, u1, c1, . . . , yT+H−1, uT+H−1, cT+H−1, yT+H ) (3.1)  
+
+> 3:
+
+Estimate the state representation function and cost constants by solving ˆN, ˆb0 ∈ argmin 
+
+> N=N⊤,b0
+
+# ∑T+H−1
+
+> t=H
+
+  ht 
+
+> 2
+> N
+
++ b0 − ct
+
+2, (3.2) where ht = [ y(t−H+1):t; u(t−H):(t−1)] and ct := ∑t+dx −1 
+
+> τ=t
+
+(cτ − ∥ uτ ∥2 
+
+> R∗
+
+) 
+
+> 4:
+
+Find ˆM ∈ argmin M∈Rdx ×H(dy +du ) ∥M⊤ M − ˆN∥F 
+
+> 5:
+
+Compute ˆ zt = ˆM[y(t−H+1):t; u(t−H):(t−1)] for all t ≥ H, so that the data are converted to 
+
+Dstate :
+
+( ˆzH , uH, cH , . . . , ˆ zT+H−1, uT+H−1, cT+H−1, ˆ zT+H ) 
+
+> 6:
+
+Run S ys Id (3.4) or C oSys Id (Algorithm 2) to obtain system dynamics matrices ( ˆA, ˆ B) 
+
+> 7:
+
+Estimate the cost function by solving 
+
+eQ, ˆb ∈ argmin 
+
+> Q=Q⊤,b
+
+# ∑T+H−1 
+
+> t=H
+
+(∥ ˆzt∥2 
+
+> Q
+
++ ∥ut∥2 
+
+> R∗
+
++ b − ct)2 (3.3)  
+
+> 8:
+
+Truncate negative eigenvalues of eQ to 0 to obtain ˆQ ≽ 0 
+
+> 9:
+
+Find feedback gain ˆ K from ( ˆA, ˆ B, ˆ Q, R∗) by solving DARE (2.8) and (2.6)  
+
+> 10:
+
+Return: policy ˆ π = ( ˆM, ˆ K)
+
+The second approach, as taken by MuZero in (Schrittwieser et al., 2020), learns the transi-tion dynamics implicitly , by minimizing cost prediction errors at future states generated from the transition function (Oh et al., 2017; Schrittwieser et al., 2020). Algorithmically, the overall loss aggregates the cost prediction errors across multiple time steps . In both approaches, the coupling of different terms in the loss makes finite-sample analysis difficult. As observed in Part I of this work, the structure of LQG allows us to learn the representation function independently of learning the transition function. This allows us to formulate both approaches under the same cost-driven state representation learning framework (Algorithm 1). Algorithm 1 consists of three main steps. Lines 3 to 5 correspond to cost-driven representation function learning. Lines 6 to 8 correspond to latent model learning, where the system dynamics can be identified either explicitly, by ordinary least squares (S ys Id), or implicitly, by future cost prediction (C oSys Id, Algorithm 2). Line 9 corresponds to the policy optimization procedure in the latent model; in LQG this amounts to solving DAREs. Below we elaborate on cost-driven representation learning, S ys Id, and C oSys Id in order. 73.1 Cost-driven representation function learning 
+
+The procedure of cost-driven representation function learning is consistent with Part I of this work. The main idea is to perform quadratic regression (3.2) to the dx-step cumulative costs; this step corresponds to the value prediction in MuZero (Schrittwieser et al., 2020). By the 
+
+μ-observability of (A∗, (Q∗)1/2 ) (Assumption 1.5), the cost observability Gram matrix satisfies 
+
+Q∗ := ∑dx −1 
+
+> t=0
+
+(( A∗)t)⊤Q∗(A∗)t ≽ μ2 I.Under zero control and zero noise, starting from x, the dx-step cumulative cost is precisely 
+
+∥x∥2 
+
+> Q∗
+
+. Hence, with the impact of zero-mean actions and zero-mean noises averaged out, ˆN es-timates N∗ := ( M∗)⊤Q∗ M∗; up to an orthogonal transformation, ˆM recovers M∗′ := ( Q∗)1/2 M∗,the representation function under an equivalent parameterization, termed as the normalized pa-rameterization in Part I of this work, where 
+
+A∗′ = ( Q∗)1/2 A∗(Q∗)−1/2 , B∗′ = ( Q∗)1/2 B∗, C∗′ = C∗(Q∗)−1/2 ,
+
+w′ 
+
+> t
+
+= ( Q∗)1/2 wt, Q∗′ = ( Q∗)−1/2 Q∗(Q∗)−1/2 .Without loss of generality, we assume that system (2.1) is in the normalized parameterization. Note that with a known R∗, we subtract ∑t+dx −1 
+
+> τ=t
+
+∥uτ ∥2 
+
+> R∗
+
+from ct in (3.2) to reduce its variance for the benefit of regression. However, the subtraction is not necessary if R∗ is unknown, as Proposition 3 still holds without it. In this case, we can learn R∗ subsequently in (3.3). Due to the following proposition, the algorithm does not need to know the dimension dx of the latent model; it can discover dx from the eigenvalues of ˆN.
+
+Proposition 2. Under i.i.d. actions u t ∼ N (0, σ2 
+
+> u
+
+I) for t ≥ 0, λmin (Cov (z∗ 
+
+> t
+
+)) = Ω(ν2) for t ≥ dx, where ν is defined in Assumption 1.2. Recall that for a square matrix A, we define 
+
+α(A) := sup k≥0 ∥Ak∥2ρ(A)−k. There exists a dimension-free constant a > 0, such that as long as H ≥ log (aα(A∗ ))   
+
+> log (ρ(A∗)−1)
+
+, M ∗ has rank d x and σmin (M∗) = Ω(νH−1/2 ).Proof. For t ≥ dx, unrolling the Kalman filter gives 
+
+z∗ 
+
+> t
+
+= A∗z∗ 
+
+> t−1
+
++ B∗ut−1 + L∗it
+
+= A∗(A∗z∗ 
+
+> t−2
+
++ B∗ut−2 + L∗it−1) + L∗it
+
+= [ B∗, . . . , (A∗)dx −1 B∗][ ut−1; . . . ; ut−dx ] + ( A∗)dx z∗ 
+
+> t−dx
+
++ [ L∗, . . . , (A∗)dx −1 L∗][ it; . . . ; it−dx +1],where (uτ )t−1 
+
+> τ=t−dx
+
+, z∗ 
+
+> t−dx
+
+and (iτ )t  
+
+> τ=t−dx+1
+
+are independent. For H ≥ dx, the matrix multiplied by 
+
+[ut−1; . . . ; ut−dx ] is precisely the controllability matrix Φc(A∗, B∗). Then, Cov (z∗ 
+
+> t
+
+) = E[z∗ 
+
+> t
+
+(z∗ 
+
+> t
+
+)⊤] ≽ Φc(A∗, B∗)E[[ ut−1; . . . ; ut−ℓ][ ut−1; . . . ; ut−ℓ]⊤]Φ⊤ 
+
+> c
+
+(A∗, B∗)= σ2 
+
+> u
+
+Φc(A∗, B∗)Φ⊤ 
+
+> c
+
+(A∗, B∗).By the ν-controllability of (A∗, B∗), Cov (z∗ 
+
+> t
+
+) is full-rank and λmin (Cov (z∗ 
+
+> t
+
+)) ≥ σ2 
+
+> u
+
+ν2. Since z∗ 
+
+> t
+
+=
+
+M∗ht + δt by (2.10), we have Cov (M∗ht) = Cov (z∗ 
+
+> t
+
+− δt) = Cov (z∗ 
+
+> t
+
+) + Cov (δt) − Cov (z∗ 
+
+> t
+
+, δt) − Cov (δt, z∗ 
+
+> t
+
+).8Then, 
+
+∥Cov (z∗ 
+
+> t
+
+, δt)∥2 = ∥Cov (δt, z∗ 
+
+> t
+
+)∥2 = ∥E[z∗ 
+
+> t
+
+δ⊤ 
+
+> t
+
+]∥2
+
+> (i)
+
+≤ ∥ E[z∗ 
+
+> t
+
+(z∗ 
+
+> t
+
+)⊤]∥1/2 2 · ∥ E[δtδ⊤ 
+
+> t
+
+]∥1/2 2
+
+= ∥Cov (z∗ 
+
+> t
+
+)∥1/2 2 · ∥ Cov (δt)∥1/2 2 ,where (i) is due to (Tian et al., 2022, Lemma 13). Hence, by Weyl’s inequality, 
+
+λmin (Cov (M∗ht)) ≥ λmin (Cov (z∗ 
+
+> t
+
+)) − 2∥Cov (z∗ 
+
+> t
+
+)∥1/2 2 · ∥ Cov (δt)∥1/2 2 .Since ∥Cov (z∗ 
+
+> t
+
+)∥2 = O(1) due to the stability of A∗ and δt = ( A∗)H z∗ 
+
+> t−H
+
+, there exists some dimension-free constant a > 0 such that as long as H ≥ log (aα(A∗ ))   
+
+> log (ρ(A∗)−1)
+
+,
+
+λmin (Cov (M∗ht)) ≥ σ2 
+
+> u
+
+ν2/2. On the other hand, 
+
+E[M∗hth⊤ 
+
+> t
+
+(M∗)⊤] ≼ ∥E[hth⊤ 
+
+> t
+
+]∥2 M∗(M∗)⊤.Since ht = [ y(t−H+1):t; u(t−H):(t−1)] and (Cov (yt)) t≥0, (Cov (ut)) t≥0 have O(1) operator norms, by (Tian et al., 2022, Lemma 12), ∥Cov (ht)∥2 = ∥E[hth⊤ 
+
+> t
+
+]∥2 = O(H). Hence, 0 < σ2 
+
+> u
+
+ν2/2 ≤ λmin (Cov (M∗ht)) = O(H)σ2 
+
+> dx
+
+(M∗).Since M∗ ∈ Rdx ×dh , this implies that rank (M∗) = dx and σmin (M∗) = Ω(νH−1/2 ).Proposition 2 is an adaptation of (Tian et al., 2022, Proposition 2) to the infinite-horizon LTI setting. Necessarily, this implies that by our choice of H, dh = H(dy + du) ≥ dx. More-over, since Q∗ ≽ μ2 I, N∗ = ( M∗)⊤Q∗ M∗ is a dh × dh matrix with rank dx, and λ+
+
+> min
+
+(N∗) ≥
+
+λmin (Q∗)σ2min (M∗) = Ω(μ2ν2 H−1). Hence, if ˆN is sufficiently close to N∗, by setting an appro-priate threshold on the eigenvalues of ˆN, the dimension of the latent model equals the number of eigenvalues above it. To find an approximate factorization of ˆN, let ˆN = UΛU⊤ be its eigenvalue decomposition, where the diagonal elements of Λ are listed in descending order, and U is an orthogonal ma-trix. Let Λdx be the top-left dx × dx block of Λ and Udx be the left dx columns of U. By the Eckart-Young-Mirsky theorem, ˆM = max (Λdx , 0 )1/2 U⊤ 
+
+> dx
+
+, where “max” applies elementwise, is the solution to Line 4 of Algorithm 1, that is, the best approximate factorization of ˆN among 
+
+dx × dh matrices in terms of the Frobenius norm approximation error. In the next two subsections, we move on to discussing the learning of latent dynamics, including the explicit approach S ys Id and the implicit approach C oSys Id.93.2 Explicit learning of system dynamics 
+
+Explicit learning of the system dynamics simply minimizes the transition prediction error in the latent space (Subramanian et al., 2020), or more generally, the statistical distances between the predicted and estimated distributions of the next latent state, like the KL divergence (Hafner et al., 2019a). In linear systems, it suffices to use the ordinary least squares as the S ys Id proce-dure, that is, to solve 
+
+( ˆA, ˆ B) ∈ argmin 
+
+> A,B
+
+# ∑T+H−1 
+
+> t=H
+
+∥A ˆzt + Bu t − ˆzt+1∥2. (3.4) In this linear regression, if ( ˆzt)t≥H are the optimal state estimates (z∗ 
+
+> t
+
+)t≥H (2.9), then (Simchowitz et al., 2018) has shown finite-sample guarantees for obtaining ( ˆA, ˆ B). Here, however, ˆ zt contains errors resulting from the representation function ˆM and the residual error δt in (2.10), but as long as T and H are large enough, S ys Id still has a finite-sample guarantee, as will be shown in Lemma 5. We refer to the algorithm that instantiates Algorithm 1 with S ys Id as C oReL-E (C ost-driven state R epresentation Learning). As the time-varying counterpart in Part I of this work, this algorithm provably solves LQG control without model knowledge, as will be shown in Theorem 1. 
+
+3.3 Implicit learning of system dynamics (MuZero-style) 
+
+An important ingredient of latent model learning in MuZero (Schrittwieser et al., 2020) is to 
+
+implicitly learn the transition function by minimizing the cost prediction error at future latent states generated from the transition function. Let zt = Mh t denote the latent state given by the representation function parameter M at step t. Let zt,0 = zt and zt,i = Az t,i−1 + Bu t+i−1 for i ≥ 1be the future latent state predicted by dynamics (A, B) from zt after i steps of transition. For a trajectory of length T + H like (3.1), the loss that considers ℓ steps into the future is given by 
+
+# ∑T+H−ℓ−1 
+
+> t=H
+
+# ∑ℓ
+
+> i=0
+
+(∥zt,i∥2 
+
+> Q
+
++ ∥ut+i∥2 
+
+> R∗
+
++ b − ct+i)2.This loss involves powers of A up to Aℓ; with the squared norm, the powers double, making the minimization over A hard to solve and analyze for ℓ ≥ 2. In LQG control, as we shall discuss, it suffices to take ℓ = 1. The MuZero algorithm also predicts optimal values and optimal actions; in LQG, to handle the case Q∗̸ ≻ 0, like cost-driven representation learning (see §3.1), we adopt the cumulative costs and use the normalized parameterization. Recall that in Algorithm 1 we define ct := ∑t+dx −1 
+
+> τ=t
+
+(cτ − ∥ uτ ∥2 
+
+> R∗
+
+). Then, the optimization problem we aim to solve is given by min  
+
+> M,A,B,b
+
+# ∑T+H−1
+
+> t=H
+
+ (∥Mh t∥2 + b − ct)2 + ( ∥AMh t + Bu t∥2 + b − ct+1)2. (3.5) To convexify the optimization problem (3.5), we define N := M⊤ M and N1 :=[AM , B]⊤[AM , B]. Then, (3.5) becomes min  
+
+> N,N1,b
+
+# ∑T+H−1
+
+> t=H
+
+ (∥ht∥2 
+
+> N
+
++ b − ct)2 + ( ∥[ht; ut]∥2 
+
+> N1
+
++ b − ct+1)2. (3.6) 10 Algorithm 2 CoSys Id: Cost-driven system identification  
+
+> 1:
+
+Input: data Draw from Algorithm 1, representation function parameter ˆM 
+
+> 2:
+
+Estimate the system dynamics by ˆN1, ˆb1 ∈ argmin  
+
+> N1=N⊤
+> 1,b1
+
+# ∑T+H−1
+
+> t=H
+
+ ∥[ht; ut]∥2 
+
+> N1
+
++ b1 − ct+1
+
+2 (3.7)  
+
+> 3:
+
+Find ˆM1 ∈ argmin M1∈Rdx ×(Hdy +( H+1)du ) ∥M⊤ 
+
+> 1
+
+M1 − ˆN1∥F 
+
+> 4:
+
+Split ˆM1 to [ eM, eB] at column H(dy + du) and set eA = eM ˆM†. 
+
+> 5:
+
+Find alignment matrix ˆ S0 by solving ˆS0 ∈ argmin  
+
+> S0∈Rdx ×dx
+
+# ∑T+H−1 
+
+> t=H
+
+∥S0 ˆM1[ht; ut] − ˆMh t+1∥2 (3.8)  
+
+> 6:
+
+Return: system dynamics estimate ( ˆA, ˆ B) = ( ˆS0 eA, ˆ S0 eB)
+
+This minimization problem is convex in N, N1, and b, and has a closed-form solution; essen-tially, it consists of two linear regression problems coupled by b. As a relaxation, we can decou-ple the two regression problems by allowing b to take different values in them, as b is a term accounting for the estimation error, not part of the representation function. This decoupling further simplifies the analysis: the first regression problem is exactly cost-driven representa-tion learning (§3.1), and the second is cost-driven system identification (C oSys Id, Algorithm 2). The algorithm that instantiates Algorithm 1 with C oSys Id will be referred to as C oReL-I (C ost-driven state R epresentation and D ynamic Learning). Like C oReL-E, this MuZero-style latent model learning method provably solves LQG, as we will show next. CoSys Id has similar steps as cost-driven representation learning (§3.1), except that in Line 5 of Algorithm 2, it requires fitting a matrix ˆS0. This is because the cost is invariant to the orthogonal transformations of latent states, and the approximate factorization steps recover 
+
+M∗ and M∗ 
+
+> 1
+
+up to orthogonal transformations S and S1, but there is no guarantee for the two transformations to be the same. MuZero bypasses this problem by predicting multiple steps of costs into the future, but analyzing such an optimization function involves the additional complexity of dealing with higher-order powers of A. Here, we instead estimate the S0 = SS ⊤
+
+> 1
+
+to align such two transformations. We note that although C oSys Id needs the output ˆM from cost-driven representation learning, the two quadratic regressions (3.2) and (3.7) are not coupled and can be solved in parallel. 
+
+Discussion on CoSysId. In C oSys Id (Algorithm 2), the covariates of the quadratic regression in (3.7) are ([ ht; ut]) t≥H. One may wonder if we can pursue an alternative approach by fixing M
+
+to be ˆM, and using ([ ˆzt; ut]) t≥H as covariates, which have a much lower dimension, though the two quadratic regressions cannot be solved in parallel anymore. Specifically, the new quadratic regression we need to solve is given by ˆN2, ˆb2 ∈ argmin  
+
+> N2=N⊤
+> 2,b2
+
+# ∑T+H−1
+
+> t=H
+
+ ∥[ ˆzt; ut]∥2 
+
+> N2
+
++ b2 − ct+1
+
+2,11 where ˆzt = ˆMh t is an approximation of Sz ∗ 
+
+> t
+
+. The ground truth for ˆN2 is N∗ 
+
+> 2
+
+=[SA ∗S⊤, SB ∗]⊤[SA ∗S⊤, SB ∗], so its approximate factorization recovers [S2 A∗S⊤, S2 B∗] for some orthogonal matrix S2. In a similar way to C oSys Id, we still need to fit an alignment matrix 
+
+S3 = SS ⊤ 
+
+> 2
+
+to align the coordinates. Let eA, eB denote the system parameters recovered from ˆN2.The linear regression we now need to solve is from ([ eA, eB][ ˆzt; ut]) T+H−1 
+
+> t=H
+
+to ( ˆzt+1)T+H−1 
+
+> t=H
+
+. How-ever, without further assumptions, [A∗, B∗] does not necessarily have full row rank, and hence, neither does [ eA, eB], in which case recovering the entire S3 is impossible. On the other hand, for C oSys Id (Algorithm 2), the ground truth of ˆM1 is M∗ 
+
+> 1
+
+= [ A∗ M∗, B∗],which is guaranteed to have full row rank by the same argument as the proof of Proposition 2, since M∗ 
+
+> 1
+
+[ht; ut] estimates z∗
+
+> t+1
+
+, which has full-rank covariance. Hence, recovering S0 = SS ⊤
+
+> 1
+
+is feasible. 
+
+# 4 Theoretical guarantees and proofs 
+
+The following Theorem 1 shows that both C oReL-E and C oReL-I can provably solve unknown LQG control. 
+
+Theorem 1. Given an unknown LQG control problem defined by (2.1) and (2.2) , under Assumption 1, for a given p ∈ (0, 1 ), if we run CoReL-E (Algorithm 1 with (3.4) ) or CoReL-I (Algorithm 1 with Algorithm 2) for T ≥ poly (dx, dy, du, log (T/p)) , H = Ω( log (αH(dy +du )T/p) 
+
+> log (1/ ρ)
+
+), and σu = Θ(1), then with probability at least 1 − p, the learned representation function ˆM is poly (H, dx, du, dy, log (T/p)) -optimal, and the overall output policy ˆπ = ( ˆM, ˆ K) satisfies J( ˆπ) − J(π∗) = O(poly (H, dx, du, dy, log (T/p)) T−1).We defer the proof of Theorem 1 to §4.6. Compared with the time-varying setting in Part I of this work, the bounds here do not have a separation between the initial steps and future steps, where for the initial several steps, as the system has not been fully excited, the bounds were much worse. This is due to the fact that in the time-invariant setting, the representation function and the latent model are both stationary .On the other hand, to learn such stationary functions across different time steps, we need to aggregate correlated data along a single trajectory, which poses new significant challenges for the analysis. A major effort to overcome such difficulties involves proving a new result on the persistency of excitation (Lemma 1) using the small-ball method (Mendelson, 2015; Simchowitz et al., 2018), which will be discussed further in §4.2 with more details. Compared with common system identification methods based on learning the Markov parame-ters (Oymak and Ozay, 2019; Simchowitz et al., 2019), the error bounds of the system parameters produced by C oReL-I (or C oReL-E) have the same dependence on T, but worse dependence on system dimensions. Moreover, to establish persistency of excitation, C oReL-I (or C oReL-E) requires a larger burn-in period. These relative sample inefficiencies are the price we pay for cost-driven state representation learning, which is only supervised by scalar-valued costs that are quadratic in history, instead of vector-valued observations that are linear in history. Hence, 12 we have to address the more challenging problem of quadratic regression , which lifts the dimen-sion of the optimization problem. On the other hand, cost-driven state representation learning avoids learning the observation-reconstruction function C∗, and can learn task-relevant repre-sentations in more complex settings, as demonstrated by the empirical studies. 
+
+4.1 Proposition on multi-step cumulative costs 
+
+The following proposition shows the relationship between ct and ht, which is important for later analyses. 
+
+Proposition 3. Given an LQG control problem satisfying Assumption 1, let M ∗ parameterize the optimal state representation function under the normalized parameterization. Recall that α :=
+
+max (α(A∗), α(A∗)) and ρ := max (ρ(A∗), ρ(A∗)) . If we apply u t ∼ N (0, σ2 
+
+> u
+
+I), then for any t ≥ H, ct := ∑t+dx −1 
+
+> τ=t
+
+(cτ − ∥ uτ ∥2 
+
+> R∗
+
+) = ∥M∗ht∥2 + δt + b∗ + et,
+
+where δt = O(α2ρH log (T/p)) is a small error term, b ∗ = O(dx) is a positive constant, and e t is a zero-mean subexponential random variable with ∥et∥ψ1 = O(d3/2  
+
+> x
+
+). Moreover, let f t = [ svec (hth⊤ 
+
+> t
+
+); 1 ].There exists a dimension-free constant a > 0 such that for a given p ∈ (0, 1 ), as long as H ≥ max (dx −
+
+1, a log (αT log (T/p))  
+
+> log (1/ ρ)
+
+), (et)t≥H satisfy 
+
+# ∑T+H−1 
+
+> t=H
+
+f tet = O(d3/2  
+
+> x
+
+dh H1/2 T1/2 log 1/2 (H/p)) .
+
+Proof. Below we use Φc,ℓ as a shorthand for Φc,ℓ(A∗, B∗) and for ℓ = 0, the term Φc,ℓu(t+ℓ−1):t is seen as zero. By definition, for ℓ ≥ 0, we have 
+
+ct+ℓ − ∥ ut+ℓ∥2 
+
+> R∗
+
+= ∥xt+ℓ∥2
+
+> Q∗
+
+= (A∗)ℓ xt + Φc,ℓ[ut+ℓ−1; . . . ; ut] + ∑ℓ
+
+> i=1
+
+(A∗)i−1wt+ℓ−i
+
+> 2
+> Q∗
+> (i)
+
+= ∥(A∗)ℓ xt∥2 
+
+> Q∗
+
++ ∥Φc,ℓu(t+ℓ−1):t∥2 
+
+> Q∗
+
++ ∑ℓ
+
+> i=1
+
+(A∗)i−1wt+ℓ−i 
+
+> 2
+> Q∗
+
+,where (i) is due to the independence of the three terms. Substituting xt = z∗ 
+
+> t
+
++ ( xt − z∗ 
+
+> t
+
+) and z∗ 
+
+> t
+
+= M∗ht + δt into the above equation, we have 
+
+ct+ℓ − ∥ ut+ℓ∥2 
+
+> R∗
+
+= ∥(A∗)ℓz∗ 
+
+> t
+
+∥2 
+
+> Q∗
+
++ ∥(A∗)ℓ(xt − z∗ 
+
+> t
+
+)∥2 
+
+> Q∗
+
++ 2 (A∗)ℓz∗ 
+
+> t
+
+, (A∗)ℓ(xt − z∗ 
+
+> t
+
+) Q∗
+
++ ∥Φc,ℓu(t+ℓ−1):t∥2 
+
+> Q∗
+
++ ∑ℓ
+
+> i=1
+
+(A∗)i−1wt+ℓ−i
+
+> 2
+> Q∗
+
+= ∥(A∗)ℓ(M∗ht + δt)∥2 
+
+> Q∗
+
++ ∥(A∗)ℓ(xt − z∗ 
+
+> t
+
+)∥2 
+
+> Q∗
+
++ 2 (A∗)ℓz∗ 
+
+> t
+
+, (A∗)ℓ(xt − z∗ 
+
+> t
+
+) Q∗
+
++ ∥Φc,ℓu(t+ℓ−1):t∥2 
+
+> Q∗
+
++ ∑ℓ
+
+> i=1
+
+(A∗)i−1wt+ℓ−i
+
+> 2
+> Q∗
+
+= ∥(A∗)ℓ M∗ht∥2 
+
+> Q∗
+
++ δt,ℓ + b∗ 
+
+> ℓ
+
++ et,ℓ,13 where δt,ℓ := ∥(A∗)ℓδt∥2 
+
+> Q∗
+
++ 2 (A∗)ℓ M∗ht, (A∗)ℓδt Q∗ is a small term, and 
+
+b∗ 
+
+> ℓ
+
+:= E
+
+h
+
+∥(A∗)ℓ(xt − z∗ 
+
+> t
+
+)∥2 
+
+> Q∗
+
++ ∥Φc,ℓu(t+ℓ−1):t∥2 
+
+> Q∗
+
++ ∑ℓ
+
+> i=1
+
+(A∗)i−1wt+ℓ−i
+
+> 2
+> Q∗
+
+i
+
+,
+
+et,ℓ := ∥(A∗)ℓ(xt − z∗ 
+
+> t
+
+)∥2 
+
+> Q∗
+
++ 2 (A∗)ℓz∗ 
+
+> t
+
+, (A∗)ℓ(xt − z∗ 
+
+> t
+
+) Q∗
+
++ ∥Φc,ℓu(t+ℓ−1):t∥2 
+
+> Q∗
+
++ ∑ℓ
+
+> i=1
+
+(A∗)i−1wt+ℓ−i 
+
+> 2
+> Q∗
+
+− b∗ 
+
+> ℓ
+
+.Note that b∗ 
+
+> ℓ
+
+is not a function of time step t and et,ℓ is a zero-mean subexponential random variable with ∥et,ℓ∥ψ1 = O(d1/2  
+
+> x
+
+) by (Tian et al., 2022, Lemma 11). Define filtration (Ft)t≥0 with 
+
+Ft := σ(x0, y0, u0, x1, y1, . . . , ut−1, xt, yt).Then, et,ℓ is Ft+ℓ-measurable. Under the normalized parameterization, where 
+
+∑dx −1 
+
+> ℓ=0
+
+(( A∗)ℓ)⊤Q∗(A∗)ℓ = I, we have 
+
+ct = ∑t+dx −1 
+
+> τ=t
+
+(cτ − ∥ uτ ∥2 
+
+> R∗
+
+) = ∥M∗ht∥2 + δt + b∗ + et,where we use 
+
+# ∑dx −1 
+
+> ℓ=0
+
+(A∗)ℓ M∗ht, (A∗)ℓδt Q∗ = ∑dx −1 
+
+> ℓ=0
+
+(M∗ 
+
+> t
+
+ht)⊤(( A∗)ℓ)⊤Q∗(A∗)ℓδt = ( M∗ 
+
+> t
+
+ht)⊤δt = M∗ht, δt
+
+and define 
+
+δt := ∑dx −1 
+
+> ℓ=0
+
+δt,ℓ = ∥δt∥2 + 2 M∗ht, δt ,
+
+b∗ := ∑dx −1 
+
+> ℓ=0
+
+b∗ 
+
+> ℓ
+
+= E
+
+h
+
+∥xt − z∗ 
+
+> t
+
+∥2 + ∑dx −1
+
+> ℓ=0
+
+
+
+∥Φc,ℓu(t+ℓ−1):t∥2 
+
+> Q∗
+
++ ∑ℓ
+
+> i=1
+
+(A∗)i−1wt+ℓ−i
+
+> 2
+> Q∗
+
+i 
+
+,
+
+et := ∑dx −1 
+
+> ℓ=0
+
+et,ℓ = ∥xt − z∗ 
+
+> t
+
+∥2 + 2 z∗ 
+
+> t
+
+, xt − z∗
+
+> t
+
++ ∑dx −1
+
+> ℓ=0
+
+
+
+∥Φc,ℓu(t+ℓ−1):t∥2 
+
+> Q∗
+
++ ∑ℓ
+
+> i=1
+
+(A∗)i−1wt+ℓ−i
+
+> 2
+> Q∗
+
+
+
+− b∗.Since δt = ( A∗)H z∗
+
+> t−H
+
+, we have 
+
+∥δt∥ = O(α2ρ2H log (T/p) + αρ H log (T/p)) = O(α2ρH log (T/p)) .Moreover, constant b∗ = O(dx), et is a zero-mean subexponential random variable with ∥et∥ψ1 =
+
+O(d3/2  
+
+> x
+
+), and the random process (et)t≥H is adapted to the filtration (Ft+dx −1)t≥H .However, the concentration of ∑T+H−1 
+
+> t=H
+
+f tet or even ∑T+H−1 
+
+> t=H
+
+et is highly nontrivial, in that (et)t≥H
+
+is not a martingale difference sequence. Below we develop the idea that random variables that are widely separated in a mixing stochastic process are nearly independent, in order to show the concentration of ∑T+H−1 
+
+> t=H
+
+f tet. Specifically, we divide the time steps into H = 2(H + dx − 1) = 
+
+O(H) partitions. For the ith partition with H ≤ i < H + H, the indices are given by (i + jH )j≥0.14 To obtain independent random variables (gi+jH )j≥0, we apply the Gram-Schmidt process to 
+
+( f i+jH ei+jH )j≥0, which is adapted to (Fi+jH +dx −1)j≥0. That is, gi = f iei, and for j ≥ 0, 
+
+gi+( j+1)H = f i+( j+1)H ei+( j+1)H − E[ f i+( j+1)H ei+( j+1)H | F i+jH +dx −1].Thus, we further have 
+
+# ∑T+H−1 
+
+> t=H
+
+f tet = ∑T+H−1 
+
+> t=H
+
+gt + ∑T+H−1 
+
+> t=H
+
+E[ f t+H et+H | F t+dx −1]. (4.1) By (Zhang and Wei, 2022, Proposition 2), since each dimension of f t is subexponential with mean and the subexponential norm both bounded by O(1), each dimension of gi+jH is 12 -sub-Weibull, with the sub-Weibull norm being O(d3/2  
+
+> x
+
+). By applying the sub-Weibull concentration bound (Hao et al., 2019, Theorem 3.1) to each of the 1 + dh(dh + 1)/2 dimensions in (gi+jH )j≥0,we have that with probability at least 1 − p,
+
+# ∑j≥0 gi+jH = O(d3/2  
+
+> x
+
+dh(T/H)1/2 log 1/2 (1/ p)) .Repeating the argument for each H ≤ i < H + H and by the union bound, we have 
+
+# ∑T+H−1 
+
+> t=H
+
+gt = O(d3/2  
+
+> x
+
+dh H(T/H)1/2 log 1/2 (H/p)) = O(d3/2  
+
+> x
+
+dh H1/2 T1/2 log 1/2 (H/p)) . (4.2) It remains to bound the residuals of the Gram-Schmidt process. To this end, we first split f t+H
+
+and et+H into two parts, with one being measurable with respect to, and the other independent of, Ft+dx −1. By definition, for k ≥ 1, 
+
+yt+k = C∗(( A∗)k xt + Φc,ku(t+k−1):t + ∑ki=1(A∗)i−1wt+k−i) + vt+k = C∗(A∗)k xt + ξyt,k,where ξyt,k is independent of Ft, and it is a zero-mean Gaussian random vector with the operator norm of the covariance matrix being O(1), due to the stability of A∗.Recall that ft = svec (hth⊤ 
+
+> t
+
+) and ht = [ u(t−H):(t−1); y(t−H+1):t]. Let ht+H = st+H + ξht+H, where 
+
+st+H = [ C∗(A∗)H−H−dx +2 xt+dx −1; . . . ; C∗(A∗)H−dx +1 xt+dx −1; 0 Hd u ],
+
+ξht+H = [ ξyt+dx −1, H−H−dx +2; . . . ; ξyt+dx −1, H−dx +1; u(t+H−H):(t+H−1)],and ξht+H is independent of Ft+dx −1, and it is a zero-mean Gaussian random vector with the variance of each dimension bounded by O(1). Then, we have 
+
+f t+H = [ svec (ht+H h⊤ 
+
+> t+H
+
+); 1 ]= [ svec (st+H s⊤ 
+
+> t+H
+
++ st+H (ξht+H )⊤ + ξht+H s⊤ 
+
+> t+H
+
++ ξht+H (ξht+H )⊤); 1 ]. (4.3) We now turn to analyze et. Notice that 
+
+xt+1 − z∗ 
+
+> t+1
+
+= A∗ xt + B∗ut + wt − (A∗z∗ 
+
+> t
+
++ B∗ut + L∗(yt+1 − C∗(A∗z∗ 
+
+> t
+
++ B∗ut))) = A∗(xt − z∗ 
+
+> t
+
+) + wt − L∗(C∗(A∗ xt + B∗ut + wt) + vt+1 − C∗(A∗z∗ 
+
+> t
+
++ B∗ut)) = A∗(xt − z∗ 
+
+> t
+
+) + ( I − L∗C∗)wt + vt+1,15 we thus have 
+
+xt+H − z∗ 
+
+> t+H
+
+= ( A∗)H−dx +1(xt+dx −1 − z∗ 
+
+> t+dx−1
+
+) + δxt+H,where δxt+H is independent of Ft+dx −1, and it is a zero-mean Gaussian random vector with the operator norm of the covariance matrix bounded by O(1), due to the stability of A∗. Since 
+
+z∗ 
+
+> t+1
+
+= A∗z∗ 
+
+> t
+
++ B∗ut + L∗yt+1
+
+= A∗z∗ 
+
+> t
+
++ B∗ut + L∗(C∗(A∗ xt + B∗ut + wt) + vt+1)= A∗z∗ 
+
+> t
+
++ L∗C∗ A∗(xt − z∗ 
+
+> t
+
+) + B∗ut + L∗C∗wt + L∗vt+1,we have 
+
+z∗ 
+
+> t+H
+
+= ( A∗)H−dx +1z∗  
+
+> t+dx−1
+
++ ΦA(xt+dx −1 − z∗ 
+
+> t+dx−1
+
+) + ξzt+H,where ΦA := ∑H−dx +1 
+
+> i=1
+
+(A∗)H−dx +1−i L∗C∗ A∗(A∗)i−1 and ξzt+H is independent of Ft+dx −1, and a zero-mean Gaussian random vector with the operator norm of the covariance matrix bounded by O(1) due to the stability of A∗ and A∗.Hence, et+H can be expressed as 
+
+et+H = ∥(A∗)H−dx +1(xt+dx −1 − z∗ 
+
+> t+dx−1
+
+) + ξxt+H ∥2
+
++ 2 (A∗)H−dx +1z∗  
+
+> t+dx−1
+
++ ΦA(xt+dx −1 − z∗ 
+
+> t+dx−1
+
+)+ ξzt+H, (A∗)H−dx +1(xt+dx −1 − z∗ 
+
+> t+dx−1
+
+) + ξxt+H
+
++ ξet+H − E
+
+h
+
+∥(A∗)H−dx +1(xt+dx −1 − z∗ 
+
+> t+dx−1
+
+) + ξxt+H ∥2i
+
+,(4.4) where 
+
+ξet+H := ∑dx −1
+
+> ℓ=0
+
+
+
+∥Φc,ℓu(t+H+ℓ−1):(t+H)∥2 
+
+> Q∗
+
++ ∑ℓ
+
+> i=1
+
+(A∗)i−1wt+H+ℓ−i
+
+> 2
+> Q∗
+
+
+
+− E
+
+h
+
+# ∑dx −1
+
+> ℓ=0
+
+
+
+∥Φc,ℓu(t+H+ℓ−1):(t+H)∥2 
+
+> Q∗
+
++ ∑ℓ
+
+> i=1
+
+(A∗)i−1wt+H+ℓ−i
+
+> 2
+> Q∗
+
+i 
+
+is independent of Ft+dx −1, and it is a zero-mean subexponential random variable with O(d3/2  
+
+> x
+
+)
+
+subexponential norm due to the stability of A∗.Notice that 
+
+E[ f tet] = E[E[ f tet | y0: t, u0: (t−1)]] = E[ f tE[et | y0: t, u0: (t−1)]] = 0. 16 Then, by substituting (4.3) and (4.4), we have 
+
+E[ f t+H et+H | F t+dx −1]= E[ f t+H et+H | F t+dx −1] − E[ f t+H et+H ]= E
+
+h 
+
+[svec (st+H st+H + st+H (ξht+H )⊤ + ξht+H s⊤ 
+
+> t+H
+
++ ξht+H (ξht+H )⊤); 1 ]
+
+
+
+·
+
+
+
+∥(A∗)H−dx +1(xt+dx −1 − z∗ 
+
+> t+dx−1
+
+) + ξxt+H ∥2 + 2 (A∗)H−dx +1z∗ 
+
+> t+dx−1
+
++ ΦA(xt+dx −1 − z∗ 
+
+> t+dx−1
+
+) + ξzt+H , (A∗)H−dx +1 · (xt+dx −1 − z∗ 
+
+> t+dx−1
+
+) + ξxt+H
+
++ ξet+H
+
+
+
+Ft+dx −1
+
+i
+
+− E
+
+h 
+
+[svec (st+H st+H + st+H (ξht+H )⊤ + ξht+H s⊤ 
+
+> t+H
+
++ ξht+H (ξht+H )⊤); 1 ]
+
+
+
+·
+
+
+
+∥(A∗)H−dx +1(xt+dx −1 − z∗ 
+
+> t+dx−1
+
+) + ξxt+H ∥2 + 2 (A∗)H−dx +1z∗ 
+
+> t+dx−1
+
++ ΦA(xt+dx −1 − z∗ 
+
+> t+dx−1
+
+) + ξzt+H , (A∗)H−dx +1 · (xt+dx −1 − z∗ 
+
+> t+dx−1
+
+) + ξxt+H + ξet+H
+
+i 
+
+,where the terms completely independent of Ft+dx −1 cancel each other, and all other terms contain at least one of (A∗)H−H−dx +2, (A∗)H−dx +1 and ΦA, with each of the 1 + dh(dh + 1)/2 dimensions being the product of two subexponential random variables. Hence, with probability at least 1 − p,
+
+∥E[ f t+H et+H | F t+dx −1]∥ = O(αd3/2  
+
+> x
+
+dhρH−H−dx +2 log 3(T/p)) = O(αd3/2  
+
+> x
+
+dhρH log 2(T/p)) . (4.5) Finally, combining (4.1) with the bounds in (4.2) and (4.5), we have 
+
+∥ ∑T+H−1 
+
+> t=H
+
+f tet∥ = O(d3/2  
+
+> x
+
+dh(H1/2 T1/2 log 1/2 (H/p) + αρ H T log 2(T/p))) .Hence, as long as H ≥ a log (αT log (T/p))  
+
+> log (1/ ρ)
+
+for some dimension-free constant a > 0, we have 
+
+∥ ∑T+H−1 
+
+> t=H
+
+f tet∥ = O(d3/2  
+
+> x
+
+dh H1/2 T1/2 log 1/2 (H/p)) ,completing the proof. 
+
+4.2 Persistency of excitation 
+
+Central to the analysis of C oReL-E and C oReL-I is the finite-sample characterization of the 
+
+quadratic regression problem (3.2). To this end, notice that 
+
+∥ht∥2 
+
+> N
+
+= N, hth⊤  
+
+> tF
+
+= svec (N), svec (hth⊤ 
+
+> t
+
+) ,which means that this quadratic regression is essentially a linear regression problem in terms of [svec (N); b0]. A major difficulty in the analysis is to establish persistency of excitation for 
+
+([ svec (hth⊤ 
+
+> t
+
+); 1 ]) t≥H , meaning that the minimum eigenvalue of the Gram matrix 
+
+# ∑T+H−1 
+
+> t=H
+
+[svec (hth⊤ 
+
+> t
+
+); 1 ][ svec (hth⊤ 
+
+> t
+
+)⊤, 1 ]
+
+17 grows linearly in the data size T. This is needed to ensure the uniqueness and convergence of the parameter estimation. A linear lower bound on λmin (∑T+H−1 
+
+> t=H
+
+hth⊤ 
+
+> t
+
+) is a known result for the identification of partially observable linear dynamical systems, see the recent overview in (Tsiamis et al., 2022). In our case, however, elements of svec (hth⊤ 
+
+> t
+
+) are products of Gaussians, making the analysis difficult. If (ht)t≥H are independent, which is the case if they are from multiple independent trajectories, the result has been established in (Jadbabaie et al., 2021) and Part I of this work. It can also be proved with the matrix Azuma inequality (Tropp, 2012). Here, by contrast, we need to aggregate correlated data to estimate a set of stationary parameters. In sum, the difficulty we face results from both products of Gaussians and the data dependence. In principle, given enough burn-in time, the state xt, and hence the observation yt and the truncated history ht, converge to the steady-state distributions, and samples with an interval of the order of mixing time are approximately independent (Levin and Peres, 2017); our proof of Propositions 3 has been built upon this idea. Hence, a linear lower bound is expected. However, the bound yielded by such an analysis deteriorates as the system becomes less stable and the mixing time increases. To eschew such dependence, the so-called small-ball method is introduced in (Simchowitz et al., 2018). We take the same route, while establishing different arguments to handle the products of Gaussian random variables. Let us first recall the block martingale small-ball condition (Simchowitz et al., 2018, Definition 2.1). 
+
+Definition 1 (Block martingale small-ball (BMSB) condition) . Let ( ft)t≥1 be a stochastic process in 
+
+Rd adapted to the filtration (Ft)t≥1. We say ( ft)t≥1 satisfies the (k, Γ, q)-BMSB condition for k ∈ N+,
+
+Γ ≻ 0 and q > 0, if for any t ≥ 1, for any fixed unit vector v ∈ Rd, 1 
+
+> k
+
+∑ki=1 P(| ⟨ ft+i, v⟩ | ≥ ∥v∥Γ | F t) ≥ q almost surely. 
+
+The key lemma below shows that ([ svec (hth⊤ 
+
+> t
+
+); 1 ]) t≥H is persistently exciting using the BMSB condition. 
+
+Lemma 1. Let ht = [y(t−H+1):t; u(t−H):(t−1)] be the H-step history at time step t ≥ Hin system (2.1) with ut ∼ N (0, σ2 
+
+> u
+
+I) for t ≥ 0. Define filtration (Ft)t≥0 with Ft :=
+
+σ(x0, y0, u0, x1, y1, . . . , ut−1, xt, yt). Define f t := svec (hth⊤ 
+
+> t
+
+) and f t := [ ft; 1 ], adapted to (Ft)t≥H .Recall that for square matrix A, α(A) := sup k≥0 ∥(A)k∥2ρ(A)−k. There exist dimension-free con-stants a 1, a2 > 0, such that for a given p ∈ (0, 1 ), as long as H ≥ a1 log (dh α(A∗ ) log (T/p))   
+
+> log (ρ(A∗)−1)
+
+and T ≥ a2 Hd 8 
+
+> h
+
+log (dh/p), we have 
+
+λmin 
+
+
+
+# ∑T+H−1 
+
+> t=H
+
+f t f ⊤
+
+> t
+
+
+
+= Ω(d−9 
+
+> h
+
+T).
+
+Proof. Since svec is a bijection, every vector w ∈ Rdh (dh +1)/2 corresponds to a symmetric matrix 
+
+D ∈ Rdh ×dh with Frobenius norm ∥w∥. Then, for any unit vector v = [ w; s] with w ∈ Rdh (dh +1)/2 
+
+and s ∈ R,
+
+D
+
+f t+i, v
+
+E
+
+= ⟨ ft+i, w⟩ + s = svec (ht+i h⊤
+
+> t+i
+
+), svec (D) + s = h⊤ 
+
+> t+i
+
+Dh t+i + s.18 Take Γ = γ2 I for some γ > 0 to be specified later. Then, ∥v∥Γ = γ. It suffices to show that for 
+
+i > H for some H > 0, 
+
+P(|h⊤ 
+
+> t+i
+
+Dh t+i + s| ≥ γ | F t) ≥ q,since if so, we have 12H ∑2Hi=1 P(|h⊤ 
+
+> t+i
+
+Dh t+i + s| ≥ γ | F t) ≥ 12H ∑2Hi=H+1 P(|h⊤ 
+
+> t+i
+
+Dh t+i + s| ≥ γ | F t) ≥ q/2, which means ( f t)t≥H is (2H, γ2 I, q/2 )-BMSB. Now let us take a close look at 
+
+ht+i = [ y(t+i−H+1):(t+i); u(t+i−H):(t+i−1)].Since 
+
+yt+i = C∗(A∗)i xt + ∑ij=1 C∗(A∗)j(B∗ut+i−j + wt+i−j) + vt+i,
+
+yt+i | Ft is Gaussian with mean C∗(A∗)i xt and covariance determined by 
+
+∑ij=1 C∗(A∗)j(B∗ut+i−j + wt+i−j) + vt+i, where we note that vt+i is independent of all other random variables and has full-rank covariance. Hence, for i ≥ H, ht+i | F t is Gaussian and has full-rank covariance. Then intuitively, since ∥D∥F = 1, |h⊤ 
+
+> t+i
+
+Dh t+i| | F t is a well-behaved random variable that can exceed some γ > 0 with a positive probability q.Formally, let μt,i := E[ht+i | F t]. By Lemma 3, for i ≥ H, there exists some absolute constant 
+
+a > 0, such that 
+
+E[|(ht+i − μt,i)⊤ D(ht+i − μt,i) + s| | F t] ≥ a min {σu, σv}d−3/2  
+
+> h
+
+.By the triangle inequality, we have 
+
+|(ht+i − μt,i)⊤ D(ht+i − μt,i) + s| = |h⊤ 
+
+> t+i
+
+Dh t+i + μ⊤ 
+
+> t,i
+
+Dμt,i − 2h⊤ 
+
+> t+i
+
+Dμt,i + s|≤ | h⊤ 
+
+> t+i
+
+Dh t+i + s| + |μ⊤ 
+
+> t,i
+
+Dμt,i| + 2|h⊤ 
+
+> t+i
+
+Dμt,i|.Hence, 
+
+E[|h⊤ 
+
+> t+i
+
+Dh t+i + s| | F t] ≥ a min {σu, σv}d−3/2  
+
+> h
+
+− E[|μ⊤ 
+
+> t,i
+
+Dμt,i| + 2|h⊤ 
+
+> t+i
+
+Dμt,i| | F t].Now we argue that for large enough i, E[|μ⊤ 
+
+> t,i
+
+Dμt,i| + 2|h⊤ 
+
+> t+i
+
+Dμt,i|] is negligible. Since matrix A∗
+
+is stable, ∥Cov (xt)∥2 = O(1) for all t ≥ 0. By the tail bound of sub-Gaussian random variable 
+
+∥xt∥ and the union bound, with probability at least 1 − p, ∥xt∥ = O(d1/2  
+
+> x
+
+log (T/p)) for all 0 ≤ t ≤ T + H. Hence, 
+
+∥C∗(A∗)i xt∥ = O(α(A∗)ρ(A∗)id1/2  
+
+> x
+
+log (T/p)) ,19 where we recall that α(A∗) := sup k≥0 ∥(A∗)k∥2ρ(A∗)−k and ∥C∗∥2, ∥A∗∥2 are hidden in O(·).Then, for i ≥ H,
+
+E[|μ⊤ 
+
+> t,i
+
+Dμt,i| + 2|h⊤ 
+
+> t+i
+
+Dμt,i| | F t] = | μt,iμ⊤
+
+> t,i
+
+, D F | + 2E[| μt,i h⊤
+
+> t+i
+
+, D F | | F t]
+
+≤ ∥ μt,iμ⊤
+
+> t,i
+
+∥F · ∥ D∥F + 2E[∥μt,i h⊤
+
+> t+i
+
+∥F · ∥ D∥F | F t]= ∥μt,i∥2 + 2∥μt,i∥ · E[∥ht+i∥ | F t].By definition, μt,i is the concatenation of (C∗(A∗)j xt)i−H+1≤j≤i and zero vectors. Hence, we have 
+
+∥μt,i∥ = O(d1/2  
+
+> h
+
+α(A∗)ρ(A∗)i log (T/p)) .Choosing H ≥ a1 log (dh α(A∗ ) log (T/p))   
+
+> log (ρ(A∗)−1)
+
+for some dimension-free constant a1 > 0, such that for 
+
+i > 2H, we have 
+
+∥μt,i∥2 + 2∥μt,i∥ · E[∥ht+i∥ | F t] ≤ a min {σu, σv}d−3/2  
+
+> h
+
+/2. Then, we obtain the desired lower bound that 
+
+E[|h⊤ 
+
+> t+i
+
+Dh t+i + s| | F t] ≥ a min {σu, σv}d−3/2  
+
+> h
+
+/2. On the other hand, since 
+
+|h⊤ 
+
+> t+i
+
+Dh t+i + s| = D, ht+i h⊤  
+
+> t+iF
+
++ s ≤ ∥ D∥F ∥ht+i h⊤
+
+> t+i
+
+∥F + |s| ≤ h⊤ 
+
+> t+i
+
+ht+i + |s|,we have E[|h⊤ 
+
+> t+i
+
+Dh t+i + s|2 | F t] ≤ 2E[∥ht+i∥4 | F t] + 2s2. Since ∥ht+i∥ | F t is sub-Gaussian with 
+
+∥∥ ht+i∥ | F t∥ψ2 = O(∥E[ht+i h⊤ 
+
+> t+i
+
+| F t]∥1/2 2 ) = O(1),it follows that E[|h⊤ 
+
+> t+i
+
+Dh t+i + s|2 | F t] = O(1). By the Paley-Zygmund inequality, for β ∈ [0, 1 ]
+
+we have 
+
+P(|h⊤ 
+
+> t+i
+
+Dh t+i + s| ≥ βa min {σu, σv}d−3/2  
+
+> h
+
+/2 | F t) = Ω(( 1 − β)2a2d−3 
+
+> h
+
+),where the dependence on σu, σv is hidden in Ω(·). By taking β = 1/2, we can see that ( ft)t≥H
+
+satisfies the (k, γ2 I, q)-BMSB condition for k = 4H, γ = Θ(d−3/2  
+
+> h
+
+) and q = Θ(d−3 
+
+> h
+
+).Following the analysis in (Simchowitz et al., 2018, Appendix D), by lower bounding inf  
+
+> v:∥v∥=1
+
+# ∑T+H−1
+
+> t=H
+
+D
+
+v, f t
+
+E2
+
+using a covering argument (Simchowitz et al., 2018, Lemma 4.1), we can show that for a given 
+
+p ∈ (0, 1 ), as long as T ≥ a2 Hd 8 
+
+> h
+
+log (dh/p) = Ω(kd 2
+
+> h
+
+q−2 log (dh/(γqp ))) for some dimension-free constant a2 > 0, we have with probability at least 1 − p that 
+
+λmin 
+
+
+
+# ∑T+H−1 
+
+> t=H
+
+f t f ⊤
+
+> t
+
+
+
+= Ω(γ2q2T) = Ω(d−9 
+
+> h
+
+T),which completes the proof. 20 Crucial for the proof above is Lemma 3, a lower bound on the expectation of Gaussian quadratic forms, which might be of independent interest. 
+
+Lower bound for Gaussian quadratic forms. Lemma 2. Let z1, z2, . . . , zd be independent standard Gaussian random variables. Let v =[v1, v2, . . . , vd+1]⊤ ∈ Sd be a (d + 1)-dimensional unit vector. Then, 
+
+inf v∈Sd E
+
+h
+
+vd+1 + ∑di=1 viz2
+
+> i
+
+i
+
+≥ 0.8 · d−3/2 .
+
+Proof. Let us consider the value of vd+1. Since E[z2 
+
+> i
+
+] = 1 for all 1 ≤ i ≤ d, we have 
+
+E
+
+h
+
+# ∑di=1 viz2
+
+> i
+
+i
+
+≤ ∑di=1 |vi| ≤ 
+
+q
+
+d ∑di=1 v2 
+
+> i
+
+≤
+
+q
+
+d(1 − v2
+
+> d+1
+
+).Then, we have 
+
+E
+
+h
+
+vd+1 + ∑di=1 viz2
+
+> i
+
+i
+
+≥ | vd+1| − E
+
+h
+
+# ∑di=1 viz2
+
+> i
+
+i
+
+≥ | vd+1| − 
+
+q
+
+d(1 − v2
+
+> d+1
+
+).Hence, if |vd+1| ≥ 2pd/(4d + 1), we have 
+
+q
+
+d(1 − v2
+
+> d+1
+
+) ≤ | vd+1|/2. It follows that 
+
+E
+
+h
+
+vd+1 + ∑di=1 viz2
+
+> i
+
+i
+
+≥ |vd+1|
+
+2 ≥
+
+r d
+
+4d + 1 ≥ 1
+
+√5 .Below we consider the case where |vd+1| < 2pd/(4d + 1). Let sign (·) denote the sign function. Let I+ := {i : sign (vi) = 1, 1 ≤ i ≤ d} and I− := {i : sign (vi) = −1, 1 ≤ i ≤ d} be the index sets of positive and negative values among (vi)di=1. Then, 
+
+E
+
+h
+
+vd+1 + ∑di=1 viz2
+
+> i
+
+i
+
+= E
+
+h
+
+vd+1 + ∑di=1 |vi| sign (vi)z2
+
+> i
+
+i
+
+= E
+
+h
+
+vd+1 + ∑i∈I + |vi|z2 
+
+> i
+
+− ∑j∈I − |vj|z2
+
+> j
+
+i
+
+.For a given v, since (z2 
+
+> i
+
+)di=1 have identical distributions, E
+
+h
+
+vd+1 + ∑i∈I + |vi|z2 
+
+> i
+
+− ∑j∈I − |vj|z2
+
+> j
+
+i
+
+has the same value under permutations of (vi)i∈I + and (vj)j∈I − . Summing over all the permu-tations of (vi)i∈I + and (vj)j∈I − gives 
+
+dE
+
+h
+
+vd+1 + ∑di=1 viz2
+
+> i
+
+i
+
+≥ E
+
+h
+
+d · vd+1 +  
+
+# ∑i∈I + |vi|
+
+# ∑i∈I + z2 
+
+> i
+
+−  
+
+# ∑j∈I − |vj|
+
+# ∑j∈I − z2
+
+> j
+
+i
+
+.Hence, we further have 
+
+E
+
+h
+
+vd+1 + ∑di=1 viz2
+
+> i
+
+i
+
+≥ 1
+
+d
+
+
+
+# ∑di=1 |vi|
+
+
+
+E
+
+h
+
+d · vd+1 + ∑di=1 sign (vi)z2
+
+> i
+
+i
+
+Since ∑di=1 |vi| ≥ (∑di=1 v2 
+
+> i
+
+)1/2 = ( 1 − v2
+
+> d+1
+
+)1/2 , we have 
+
+E vd+1 + ∑di=1 viz2
+
+> i
+
+ ≥ (1 − v2
+
+> d+1
+
+)1/2 
+
+d inf w∈{± 1}d E d · vd+1 + ∑di=1 wiz2
+
+> i
+
+.21 It remains to lower bound inf w∈{± 1}d E d · vd+1 + ∑di=1 wiz2
+
+> i
+
+. By symmetry, for any pair wi̸ =
+
+wj, the expectation remains the same if we interchange zi and zj. Hence, for any random variable x,
+
+E[|x + zi − zj|] = 12 (E[|x + zi − zj|] + E[|x + zi − zj|]) ≥ E[|x|].We shall further apply this symmetry trick in the following to cancel terms with opposite signs. Let p denote the number of +1’s and q denote the number of −1’s in w, such that p + q = n. If 
+
+p̸ = q, by the symmetry trick, 
+
+E d · vd+1 + ∑di=1 wiz2
+
+> i
+
+ ≥ E d · vd+1 + ∑|p−q| 
+
+> i=1
+
+z2
+
+> i
+
+ ≥ Var  
+
+# ∑|p−q| 
+
+> i=1
+
+z2
+
+> i
+
+ = 2|p − q| ≥ 2. If p = q, again, the symmetry trick yields 
+
+E[|d · vd+1 + ∑di=1 wiz2 
+
+> i
+
+|] ≥ E[|d · vd+1 + z21 − z22|] ≥ Var  z21 − z22
+
+ = 4. Hence, regardless of p and q, we have inf w∈{± 1}d E[|d · vd+1 + ∑di=1 wiz2 
+
+> i
+
+|] ≥ 2, which further yields 
+
+E
+
+h
+
+vd+1 + ∑di=1 viz2
+
+> i
+
+i
+
+≥ 2 · (1 − v2
+
+> d+1
+
+)1/2 
+
+d .Since |vd+1| < 2pd/(4d + 1),
+
+E
+
+h
+
+vd+1 + ∑di=1 viz2
+
+> i
+
+i
+
+= 2 · 1
+
+√4d + 1 · d = 0.8 d−3/2 .Hence, overall we have inf v∈Sd E
+
+h
+
+vd+1 + ∑di=1 viz2
+
+> i
+
+i
+
+≥ 0.8 d−3/2 ,which completes the proof. Based on Lemma 2, we can prove the more general Lemma 3 below. 
+
+Lemma 3. Let x be a d-dimensional zero-mean Gaussian random vector with covariance Σ. For any d × d symmetric matrix A and constant b ∈ R that satisfy ∥A∥2 
+
+> F
+
++ b2 = 1, there exists an absolute constant a > 0, such that E[|x⊤ Ax + b|] ≥ aλmin (Σ)d−3/2 .Proof. Let y := Σ−1/2 x. Then y is a standard Gaussian random vector, and x⊤ Ax =
+
+y⊤Σ1/2 AΣ1/2 y. Let U⊤ΛU be the eigenvalue decomposition of Σ1/2 AΣ1/2 . Then, 
+
+x⊤ Ax = y⊤U⊤ΛUy = z⊤Λz,where z := Uy is still a standard Gaussian random vector. By the unitary invariance of the Frobenius norm, 
+
+∥Λ∥F = ∥U⊤ΛU∥F = ∥Σ1/2 AΣ1/2 ∥F ≥ λmin (Σ)∥A∥F.22 Hence, 
+
+∥Λ∥2 
+
+> F
+
++ b2 ≥ λ2min (Σ)∥A∥2 
+
+> F
+
++ b2 ≥ λ2min (Σ) ∧ 1. Therefore, by Lemma 2, there exists an absolute constant a > 0, such that inf ∥A∥2  
+
+> F+b2=1
+
+E[|x⊤ Ax + b|] ≥ inf ∥Λ∥2  
+
+> F+b2≥λ2min (Σ)∧1
+
+E[|z⊤Λz + b|] ≥ a(λmin (Σ) ∧ 1)d−3/2 ,which completes the proof. 
+
+4.3 Quadratic regression bound 
+
+The following quadratic regression bound is at the core of proving Theorem 1. Its proof builds on the new persistency of excitation result (Lemma 1). We retain (et)t≥1 in the bound, as in our problem (et)t≥1 may not correspond to a martingale, and may contain an additional small error term resulting from using M∗ht to approximate z∗ 
+
+> t
+
+. For notational convenience, we note that the 
+
+ht, ct, Ft in Lemma 4 and its proof slightly abuse the notation, which uses different variables from the rest of the paper. Hence, the indices start with t = 1, rather than t = H as in the CoReL-E and C oReL-I algorithms. 
+
+Lemma 4. Let (h∗ 
+
+> t
+
+)t≥1 be a sequence of d-dimensional Gaussian random vectors adapted to the filtration 
+
+(Ft)t≥1 with ∥E[h∗ 
+
+> t
+
+(h∗ 
+
+> t
+
+)⊤]∥1/2 2 ≤ σ for all t ≥ 1. Define random variable c t := ( h∗ 
+
+> t
+
+)⊤ N∗h∗ 
+
+> t
+
++ b∗ + et,where N ∗ ∈ Rd×d is a positive semidefinite matrix and b ∗ ∈ R is a constant. Assume σ and ∥N∗∥2 are 
+
+O(1). Define h t = h∗ 
+
+> t
+
++ δt, where the perturbation vector δt can be correlated with h ∗ 
+
+> t
+
+and its ℓ2-norm is sub-Gaussian with E[∥δt∥] ≤ ϵ, ∥∥ δt∥∥ ψ2 ≤ ϵ. Define f ∗ 
+
+> t
+
+:= svec (h∗ 
+
+> t
+
+(h∗ 
+
+> t
+
+)⊤) and f ∗ 
+
+> t
+
+:= [ f ∗ 
+
+> t
+
+; 1 ].Assume that ( f ∗ 
+
+> t
+
+)t≥1 satisfies λmin (∑Tt=1 f ∗ 
+
+> t
+
+( f ∗ 
+
+> t
+
+)⊤) ≥ β2 
+
+> d
+
+T for βd > 0. Consider 
+
+( ˆN, ˆb) ∈ argmin 
+
+> N=N⊤,b
+
+# ∑Tt=1(ct − ∥ ht∥2 
+
+> N
+
+− b)2. (4.6) 
+
+There exsits an absolute constant a > 0, such that for a given p ∈ (0, 1 ), under the condition that 
+
+ϵ ≤ min (σd1/2 , aβdσ−1d−1/2 (log (T/p)) −1), with probability at least 1 − p, 
+
+∥ ˆN − N∗∥F = O
+
+
+
+ϵσβ −1 
+
+> d
+
+d1/2 log (T/p)+ ϵσβ −2 
+
+> d
+
+d1/2 T−1 log (T/p) ∑Tt=1 ∥et∥ + β−2 
+
+> d
+
+T−1 ∑Tt=1 f ∗ 
+
+> t
+
+et
+
+
+
+.
+
+Proof. Regression (4.6) can be written as argmin 
+
+> svec (N),b
+
+# ∑Tt=1
+
+ ct − svec (hth⊤ 
+
+> t
+
+)⊤svec (N) − b2.Define ft := svec (hth⊤ 
+
+> t
+
+) and f t := [ ft; 1 ]. It is a linear regression problem with extended covariates f t, which can be further rewritten as argmin 
+
+> svec (N),b
+
+# ∑Tt=1
+
+ ct − f ⊤ 
+
+> t
+
+[svec (N); b]2. (4.7) 23 Let F := [ f 1, f 2, . . . , f T ]⊤ be the T × d2+d+22 matrix whose tth row is f ⊤ 
+
+> t
+
+. Define F∗ similarly by replacing f t by f ∗ 
+
+> t
+
+. Solving linear regression (4.7) gives 
+
+F⊤ F[svec ( ˆN); ˆb] = ∑Tt=1 f tct.Substituting ct = ( f ∗ 
+
+> t
+
+)⊤[svec (N∗); b∗] + et into the above equation yields 
+
+F⊤ F[svec ( ˆN); ˆb] = F⊤ F∗[svec (N∗); b∗] + F⊤ξ,where ξ denotes the vector whose tth element is et. Rearranging the terms, we have 
+
+F⊤ F[svec ( ˆN − N∗); ˆb − b∗] = F⊤(F∗ − F)[ svec (N∗); b∗] + F⊤ξ. (4.8) Next, we show that F⊤ F is invertible with high probability. By our assumption, 
+
+λmin (( F∗)⊤ F∗) = λmin 
+
+
+
+# ∑Tt=1 f t( f t)⊤
+
+≥ β2 
+
+> d
+
+T.By Weyl’s inequality for singular values, 
+
+|σmin (F) − σmin (F∗)| ≤ ∥ F − F∗∥2 = ∥F − F∗∥2.Hence, we want to bound ∥F∗ − F∥2, which satisfies 
+
+∥F∗ − F∥22 ≤ ∥ F∗ − F∥2 
+
+> F
+
+= ∑Tt=1 ∥h∗ 
+
+> t
+
+(h∗ 
+
+> t
+
+)⊤ − hth⊤ 
+
+> t
+
+∥2
+
+> F
+
+.Since h∗ 
+
+> t
+
+(h∗)⊤ 
+
+> t
+
+− hth⊤ 
+
+> t
+
+has at most rank two, we have 
+
+∥h∗ 
+
+> t
+
+(h∗ 
+
+> t
+
+)⊤ − hth⊤ 
+
+> t
+
+∥F ≤ √2∥h∗ 
+
+> t
+
+(h∗ 
+
+> t
+
+)⊤ − hth⊤ 
+
+> t
+
+∥2
+
+= √2∥h∗ 
+
+> t
+
+(h∗ 
+
+> t
+
+− ht)⊤ + ( h∗ 
+
+> t
+
+− ht)h⊤ 
+
+> t
+
+∥2
+
+≤ √2(∥h∗ 
+
+> t
+
+∥ + ∥ht∥)∥δt∥.Since h∗ 
+
+> t
+
+is Gaussian with ∥E[h∗ 
+
+> t
+
+(h∗ 
+
+> t
+
+)⊤]∥1/2 2 ≤ σ, ∥h∗∥ is sub-Gaussian with its mean and sub-Gaussian norm bounded by O(σd1/2 ). Since ∥δt∥ is sub-Gaussian with its mean and sub-Gaussian norm bounded by ϵ ≤ σd1/2 , we conclude that ∥h∗ 
+
+> t
+
+(h∗ 
+
+> t
+
+)⊤ − hth⊤ 
+
+> t
+
+∥2 is subexponential with its mean and subexponential norm bounded by O(ϵσ d1/2 ). Hence, with probability at least 1 − p,
+
+∥h∗ 
+
+> t
+
+(h∗ 
+
+> t
+
+)⊤ − hth⊤ 
+
+> t
+
+∥F = O(ϵσ d1/2 log (T/p)) .Therefore, 
+
+∥F∗ − F∥2 
+
+> F
+
+= ∑Tt=1 ∥h∗ 
+
+> t
+
+(h∗ 
+
+> t
+
+)⊤ − hth⊤ 
+
+> t
+
+∥2 
+
+> F
+
+= O(ϵ2σ2dT log 2(T/p)) .It follows that 
+
+∥F∗ − F∥2 = O(ϵσ (dT )1/2 log (T/p)) .24 Hence, there exists an absolute constant a > 0, such that as long as ϵ ≤
+
+aβdσ−1d−1/2 (log (T/p)) −1, we have 
+
+|σmin (F) − σmin (F∗)| ≤ βd T1/2 /2. It follows that 
+
+λmin (F⊤ F) = σ2min (F) = Ω(βd T).Now we return to (4.8). By inverting F⊤ F, we obtain 
+
+∥[svec ( ˆN − N∗); ˆb − b∗]∥ = ∥F†(F∗ − F)[ svec (N∗); b∗] + F†ξ∥≤ ∥ F†(F∗ − F)[ svec (N∗); b∗]∥
+
+| {z }
+
+> (a)
+
++ ∥F†ξ∥
+
+| {z } 
+
+> (b)
+
+. (4.9) Term (a) is upper bounded by 
+
+σmin (F)−1∥(F∗ − F)[ svec (N∗); b∗]∥ = O(σmin (F)−1)∥(F∗ − F)svec (N∗)∥
+
+= O(β−1 
+
+> d
+
+T−1/2 )∥(F∗ − F)svec (N∗)∥.Using arguments similar to those in (Mhammedi et al., 2020, Section B.2.13), we have 
+
+∥(F∗ − F)svec (N∗)∥2 = ∑Tt=1
+
+D
+
+svec (h∗ 
+
+> t
+
+(h∗ 
+
+> t
+
+)⊤) − svec (hth⊤ 
+
+> t
+
+), svec (N∗)
+
+E2
+
+= ∑Tt=1
+
+D
+
+h∗ 
+
+> t
+
+(h∗ 
+
+> t
+
+)⊤ − hth⊤ 
+
+> t
+
+, N∗E2
+
+> F
+
+≤ ∥ N∗∥22 ∑Tt=1 ∥h∗ 
+
+> t
+
+(h∗ 
+
+> t
+
+)⊤ − hth⊤ 
+
+> t
+
+∥2
+
+> ∗
+> (i)
+
+≤ 2∥N∗∥22 ∑Tt=1 ∥h∗ 
+
+> t
+
+(h∗ 
+
+> t
+
+)⊤ − hth⊤ 
+
+> t
+
+∥2
+
+> F
+
+= 2∥N∗∥22∥F − F∥2
+
+> F
+
+,where ∥ · ∥ ∗ denotes the nuclear norm, (i) follows from the fact that the matrix h∗ 
+
+> t
+
+(h∗ 
+
+> t
+
+)⊤ − hth⊤
+
+> t
+
+has at most rank two. Hence, term (a) in (4.9) is bounded by 
+
+O β−1 
+
+> d
+
+T−1/2 ϵσ ∥N∗∥2d1/2 T1/2 log (T/p) = O(β−1 
+
+> d
+
+d1/2 ϵσ log (T/p)) .Now we consider term (b) in (4.9): 
+
+(b) = ∥F†ξ∥ ≤ λmin (F⊤ F)−1∥F⊤ξ∥ = O(β−2 
+
+> d
+
+T−1) ∑Tt=1 f tet .Since 
+
+# ∑Tt=1 f tet ≤ ∑Tt=1 f ∗ 
+
+> t
+
+et + ∑Tt=1 ∥ f t − f ∗ 
+
+> t
+
+∥∥ et∥.we have 
+
+(b) = O
+
+
+
+β−2 
+
+> d
+
+T−1 ∑Tt=1 f ∗ 
+
+> t
+
+et + ϵσβ −2 
+
+> d
+
+d1/2 T−1 log (T/p) ∑Tt=1 ∥et∥
+
+
+
+.25 Combining the bounds on (a) and (b), we show that with probability at least 1 − p,
+
+∥[svec ( ˆN − N∗); ˆb − b∗]∥
+
+= O(ϵσβ −1 
+
+> d
+
+d1/2 log (T/p) + ϵσβ −2 
+
+> d
+
+d1/2 T−1 log (T/p) ∑Tt=1 ∥et∥ + β−2 
+
+> d
+
+T−1 ∑Tt=1 f tet ),completing the proof. 
+
+4.4 Perturbed linear regression bound 
+
+Identifying the time-invariant latent dynamics involves linear regression with correlated data and 
+
+perturbed measurements . The following Lemma 5 extends the previous linear system identifica-tion result in (Simchowitz et al., 2018) to the case with noises in both input and output variables. In Lemma 5, γ and q are treated as dimension-free constants (in contrast to Lemma 4), which is indeed the case in our application of Lemma 5 to (z∗ 
+
+> t
+
+)t≥H in analyzing S ys Id (3.4) for C oReL-E and in analyzing the alignment matrix estimation (3.8) in Algorithm 2 for C oReL-I in §4.6. Note that the bound in Lemma 5 is worse than that in the time-varying setting in Part I of this work, due to the treatment of correlated data. 
+
+Lemma 5. Let (x∗ 
+
+> t
+
+)t≥1 be a sequence of d 1-dimensional Gaussian random vectors adapted to the filtration 
+
+(Ft)t≥1 with ∥E[x∗ 
+
+> t
+
+(x∗ 
+
+> t
+
+)⊤]∥1/2 2 ≤ σ for all t ≥ 1. Define y ∗ 
+
+> t
+
+= A∗ x∗ 
+
+> t
+
++ et, where A ∗ ∈ Rd2×d1 and et | F t is Gaussian with zero mean and ∥E[ete⊤ 
+
+> t
+
+]∥1/2 2 ≤ ϵ. Define y t = y∗ 
+
+> t
+
++ δyt and x t = x∗ 
+
+> t
+
++ δxt , where the perturbation vectors δxt and δyt can be correlated with x ∗ 
+
+> t
+
+and y ∗ 
+
+> t
+
+, and their ℓ2-norms are sub-Gaussian with E[∥δxt ∥] ≤ ϵx, ∥∥ δxt ∥∥ ψ2 ≤ ϵx and E[∥δyt ∥] ≤ ϵy, ∥∥ δyt ∥∥ ψ2 ≤ ϵy. Assume that (x∗ 
+
+> t
+
+)t≥1 satisfies the (k, γ2 I, q)-BMSB condition, and that ∥A∗∥2, σ, ϵ are O(1) and k , γ, q are Θ(1). Consider 
+
+ˆA ∈ argmin 
+
+> A∈Rd2×d1
+
+# ∑Tt=1 ∥yt − Ax t∥2. (4.10) 
+
+Then, there exist absolute constants a 0, a1 > 0, such that for a given p ∈ (0, 1 ), under the condition that T ≥ a0kq −2(log (1/ p) + d1 log (10/ q) + d1 log (σγ −1d1 log (T/p)) + d2), ϵx ≤
+
+min (d−1/2 1 d−1/2 2 (log (T/p)) −3/2 , a1γq(log (T/p))) and ϵy ≤ d−1/2 1 (log (T/p)) −1, with probability at least 1 − p, 
+
+∥ ˆA − A∗∥2 = O(( ϵx + ϵy)d1/2 1 log (T/p) + ϵ(d2 + d1 log (d1 log (T/p)) + log (1/ p)) 1/2 T−1/2 ).
+
+Proof. Let X ∈ RT×d1 denote the matrix whose tth row is x⊤ 
+
+> t
+
+. Define X∗, Y, E, ∆x, ∆y similarly. To solve the regression problem, we set the gradient of the objective to be zero and substitute in Y = X∗(A∗)⊤ + E + ∆y to obtain ˆA(X⊤ X) = A∗(X∗)⊤ X + E⊤ X + ∆⊤ 
+
+> y
+
+X. (4.11) Substituting in X = X∗ + ∆x gives 
+
+( ˆA − A∗)(( X∗)⊤ X∗)= A∗(X∗)⊤∆x − ˆA(∆⊤ 
+
+> x
+
+∆x + ∆⊤ 
+
+> x
+
+X∗ + ( X∗)⊤∆x ) + E⊤ X∗ + E⊤∆x + ∆⊤ 
+
+> y
+
+X∗ + ∆⊤ 
+
+> y
+
+∆x. (4.12) 26 Now we deal with each term on the right-hand side. Since (x∗ 
+
+> t
+
+)t≥1 are Gaussian, by the tail bound of the sub-Gaussian random variable ∥x∗ 
+
+> t
+
+∥ and the union bound, with probability at least 1 − p, ∥x∗ 
+
+> t
+
+∥ = O(σd1/2 1 log 1/2 (T/p)) for 1 ≤ t ≤ T. By the triangle inequality, ∥(X∗)⊤ X∗∥2 ≤
+
+∑Tt=1 ∥x∗ 
+
+> t
+
+(x∗ 
+
+> t
+
+)⊤∥2 = ∑Tt=1 ∥x∗ 
+
+> t
+
+∥2, and thus 
+
+∥X∗∥2 = O(σd1/2 1 T1/2 log 1/2 (T/p)) .Similarly, with probability at least 1 − p,
+
+∥E∥2 = O(ϵd1/2 2 T1/2 log 1/2 (T/p)) .Such arguments also apply to ∆x, ∆y. Since (∥δxt ∥)t≥1 are sub-Gaussian with E[∥δxt ∥] ≤ ϵx and 
+
+∥∥ δxt ∥∥ ψ2 ≤ ϵx, with probability at least 1 − p, ∥δxt ∥ = O(ϵx log 1/2 (T/p)) ; similarly, ∥δyt ∥ =
+
+O(ϵy log 1/2 (T/p)) . Therefore, we further have 
+
+∥∆x ∥2 = O(ϵx T1/2 log 1/2 (T/p)) , ∥∆y∥2 = O(ϵy T1/2 log 1/2 (T/p)) .It remains to bound ∥ ˆA∥2. By (Simchowitz et al., 2018, Appendix D), there exist absolute constants a0, a2 > 0, such that as long as T ≥ T0 := a0kq −2(log (1/ p) + d1 log (10/ q) + 
+
+d1 log (σγ −1d1 log (T/p))) , with probability at least 1 − p, λmin (( X∗)⊤ X∗) ≥ a22γ2q2T. By Weyl’s inequality for singular values, we have 
+
+|σmin (X) − σmin (X∗)| ≤ ∥ ∆x ∥2.Hence, there exists an absolute constant a1 > 0, such that as long as ϵx ≤ a1γq(log (T/p)) −1/2 ,we have |σmin (X) − σmin (X∗)| ≤ a2γqT 1/2 /2. Since σmin (X∗) ≥ a2γqT 1/2 ,
+
+λmin (X⊤ X) = σ2min (X) = Ω(γ2q2T).Hence, we can invert X⊤ X in (4.11) and obtain ˆA = ( A∗(X∗)⊤ + E⊤ + ∆⊤ 
+
+> y
+
+)X(X⊤ X)−1
+
+= A∗(X† X∗)⊤ + ( X† E)⊤ + ( X†∆y)⊤
+
+= A∗ − A∗(X†∆x )⊤ + ( X† E)⊤ + ( X†∆y)⊤.Then, we have 
+
+∥ ˆA∥2 = ∥A∗∥2 + ( ∥A∗∥2∥∆x ∥2 + ∥E∥2 + ∥∆y∥2)∥X†∥2
+
+= O(( γq)−1(ϵx + ϵd1/2 2 + ϵy) log 1/2 (T/p)) = O(d1/2 2 log 1/2 (T/p)) .By (Simchowitz et al., 2018, Theorem 2.4), as long as T ≥ T0,
+
+∥E⊤(X∗)†∥2 = O(ϵ(d2 + d1 log (d1 log (T/p)) + log (1/ p)) 1/2 T−1/2 ).Combining all the above individual bounds for the terms on the right-hand side of (4.12), we have 
+
+∥ ˆA − A∗∥2 = O(ϵxd1/2 1 d1/2 2 log 3/2 (T/p) + ϵyd1/2 1 log (T/p)+ ϵ(d2 + d1 log (d1 log (T/p)) + log (1/ p)) 1/2 T−1/2 ).By the assumptions on ϵx, ϵy, T, we have ∥ ˆA∥2 = O(1), which, combined with the above individ-ual bounds for the terms on the right-hand side of (4.12), strengthens the bound on ∥ ˆA − A∗∥2
+
+and completes the proof. 27 4.5 Stable linear system under small perturbations 
+
+To quantify the impact of the truncation error δt on the state covariance and the cost, we intro-duce the following lemma that bounds the state covariance difference for a stable linear system under small perturbations. 
+
+Lemma 6. Consider a linear system x t+1 = A∗ xt + wt + δt, t ≥ 0, where x 0 is a zero-mean Gaussian random vector and (wt)t≥0 are i.i.d. sampled from N (0, Σw) with w t independent of x t for each t ≥ 0.For t ≥ 0, perturbation δt is a zero-mean Gaussian random vector that is independent of w t and may be correlated with x t; let Σt denote the covariance matrices of x t. Assume that the operator norms of A ∗, Σw,and Cov (x0) are O(1) and ρ(A∗) < 1; assume that for t ≥ 0, ∥Cov (δt)∥1/2 2 ≤ ε(1 + max τ≤t ∥Σt∥1/2 2 ),where ε ∈ (0, 1 ) and satisfies 2εα 2(A∗)( 1 + 2∥A∗∥2) ≤ 1 − ρ2(A∗). Let Σ∗ denote the covariance matrix of the stationary distribution of (xt)t≥0 without perturbations. Recall that for square matrix A, we define α(A) := sup k≥0 ∥(A)k∥2ρ(A)−k. Then, for large enough t such that α2(A∗)ρ2t(A∗)∥Σ0 −
+
+Σ∗∥2 = O(ε), we have ∥Σt − Σ∗∥2 = O(ε).Proof. By the definition of the covariance matrix, 
+
+Σ∗ = A∗Σ∗(A∗)⊤ + Σw,
+
+Σt+1 = A∗Σt(A∗)⊤ + Σw + Cov (δt) + A∗Cov (xt, δt) + Cov (δt, xt)( A∗)⊤.Hence, taking the difference and defining the matrix ∆t := Cov (δt) + A∗Cov (xt, δt) + 
+
+Cov (δt, xt)( A∗)⊤, we have 
+
+Σt+1 − Σ∗ 
+
+> t+1
+
+= A∗(Σt − Σ∗ 
+
+> t
+
+)( A∗)⊤ + Cov (δt) + A∗Cov (xt, δt) + Cov (δt, xt)( A∗)⊤
+
+= A∗(Σt − Σ∗ 
+
+> t
+
+)( A∗)⊤ + ∆t.Moreover, the matrix ∆t satisfies 
+
+∥∆t∥2 ≤ ∥ Cov (δt)∥2 + 2∥A∗∥2∥Cov (xt, δt)∥2
+
+≤ ∥ Cov (δt)∥2 + 2∥A∗∥2∥Σt∥1/2 2 ∥Cov (δt)∥1/2 2
+
+> (i)
+
+= ε(1 + 2∥A∗∥2)( 1 + max τ≤t ∥Στ ∥2),where (i) is due to ε < 1. Now we show that ∥Σt∥2 is uniformly bounded for all t ≥ 0 by induction. Suppose that 
+
+∥Στ ∥2 ≤ a for all τ ≤ t for a constant a > 0 to be specified shortly. Then, for all τ ≤ t, we have 
+
+∥∆τ ∥2 ≤ ε(1 + 2∥A∗∥2)( 1 + a).Since 
+
+Σt+1 − Σ∗ = ( A∗)t+1(Σ0 − Σ∗)(( A∗)t+1)⊤ + ∑t
+
+> τ=0
+
+(A∗)τ ∆t−τ (( A∗)τ )⊤,we have 
+
+∥Σt+1 − Σ∗∥2 ≤ α2(A∗)ρ2(t+1)(A∗)∥Σ0 − Σ∗∥2 + ∑t 
+
+> τ=0
+
+α2(A∗)ρ2τ (A∗)∥∆t−τ ∥2
+
+≤ α2(A∗)ρ2(t+1)(A∗)∥Σ0 − Σ∗∥2 + εα 2(A∗)( 1 + 2∥A∗∥2)( 1 + a)
+
+1 − ρ2(A∗) .28 As long as εα 2(A∗)( 1 + 2∥A∗∥2) ≤ 1−ρ2(A∗ ) 
+
+> 2
+
+, we can choose 
+
+a := 2(∥Σ∗∥2 + α2(A∗)∥Σ0 − Σ∗∥2) + 1 = O(1),such that ∥Σt+1∥2 ≤ ∥ Σ∗∥2 + ∥Σt+1 − Σ∗∥2 ≤ a, completing the induction. Hence, for all t ≥ 0, 
+
+∥Σt∥2 ≤ a, and 
+
+∥Σt − Σ∗∥2 ≤ α2(A∗)ρ2t(A∗)∥Σ0 − Σ∗∥2 + εα 2(A∗)( 1 + 2∥A∗∥2)( 1 + a)
+
+1 − ρ2(A∗) .Therefore, for large enough t such that α2(A∗)ρ2t(A∗)∥Σ0 − Σ∗∥2 = O(ε), we have ∥Σt − Σ∗∥2 =
+
+O(ε), which completes the proof. 
+
+4.6 Proof of Theorem 1 
+
+In this section, we prove the sample complexity bounds for C oReL-E and C oReL-I in Theorem 1. Without loss of generality, we assume the system is expressed in the normalized parameteri-zation where Q∗ := ∑dx −1 
+
+> t=0
+
+(( A∗)t)⊤Q∗(A∗)t = I, since otherwise we can transform it with an invertible matrix to satisfy this condition. 
+
+Learning of the state representation function. By Proposition 3, we have 
+
+ct := ∑t+dx −1 
+
+> τ=t
+
+(cτ − ∥ uτ ∥2 
+
+> R∗
+
+) = ∥M∗ht∥2 + δt + b∗ + et,where δt = O(α2ρH log (T/p)) is a small error term, b∗ = O(dx) is a positive constant, and et
+
+is a zero-mean subexponential random variable with ∥et∥ψ1 = O(d3/2  
+
+> x
+
+). Recall that we define 
+
+N∗ := ( M∗)⊤ M∗, ft := svec (hth⊤ 
+
+> t
+
+), f t := [ svec (hth⊤ 
+
+> t
+
+); 1 ], and dh := H(dy + du). Rewriting the above equation, we have 
+
+ct = f ⊤ 
+
+> t
+
+[svec (N∗); b∗] + δt + et. (4.13) By Lemma 1, for a given p ∈ (0, 1 ), there exists a problem-dependent constant a0 > 0, such that as long as T ≥ a0 Hd 8 
+
+> h
+
+log (dh/p), with probability at least 1 − p,
+
+λmin 
+
+
+
+# ∑T+H−1 
+
+> t=H
+
+f t( f t)⊤
+
+= Ω(d−9 
+
+> h
+
+T).Moreover, by (Tian et al., 2022, Lemma 12), ∥Cov (ht)∥2 = ∥E[hth⊤ 
+
+> t
+
+]∥2 = O(H). Since 
+
+∥M∗∥2 = O(1), ∥N∗∥2 = O(1). Then, by Lemma 4 with ϵ = 0 therein, ˆN obtained by solving regression (3.2) has the guarantee that 
+
+∥ ˆN − N∗∥F = O
+
+
+
+d9 
+
+> h
+
+T−1 ∑Tt=1 f t(δt + et)
+
+
+
+.By Proposition 3, there exists a dimension-free constant a1 > 0, such that as long as H ≥   
+
+> a1log (αTlog (T/p))
+> log (1/ ρ)
+
+,
+
+# ∑T+H−1 
+
+> t=H
+
+f tet = O(d3/2  
+
+> x
+
+dh H1/2 T1/2 log 1/2 (H/p)) .29 Since ∥ ∑T+H−1 
+
+> t=H
+
+f tδt∥ = O(α2dhρH T log (T/p)) , we have 
+
+∥ ˆN − N∗∥F = O
+
+
+
+d9 
+
+> h
+
+T−1 d3/2  
+
+> x
+
+dh H1/2 T1/2 log 1/2 (H/p) + α2dhρH T log (T/p)
+
+.Hence, there exists a dimension-free constant a2 > 0, such that as long as H ≥ a2 log (αT log (T/p))  
+
+> log (1/ ρ)
+
+,
+
+∥ ˆN − N∗∥F is bounded by 
+
+O(H21/2 d3/2  
+
+> x
+
+(dy + du)10 T−1/2 log 1/2 (H/p)) . (4.14) By (Tu et al., 2016, Lemma 5.4), there exists an orthogonal matrix S, such that ∥ ˆM − SM ∗∥F is of the same order as ∥ ˆN − N∗∥F. To understand the approximation error ˆ zt − Sz ∗ 
+
+> t
+
+, recall that 
+
+z∗ 
+
+> t
+
+= M∗ht + δt, where δt = ( A∗)H z∗
+
+> t−H
+
+. Then, 
+
+∥ ˆzt − Sz ∗ 
+
+> t
+
+∥ = ∥( ˆM − SM ∗)ht − Sδt∥ ≤ ∥ ˆM − SM ∗∥2∥ht∥ + ∥δt∥.Since ∥ht∥ is sub-Gaussian with E[∥ht∥] = O(d1/2  
+
+> h
+
+), ∥∥ ht∥∥ ψ2 = O(d1/2  
+
+> h
+
+), we have ∥ ˆM −
+
+SM ∗∥2∥ht∥ is sub-Gaussian with its mean and sub-Gaussian norm bounded by 
+
+O(H11 d3/2  
+
+> x
+
+(dy + du)21/2 T−1/2 log 1/2 (H/p)) . (4.15) Notice that ∥δt∥ is sub-Gaussian with mean and sub-Gaussian norm bounded by 
+
+O(α(A∗)ρ(A∗)H d1/2  
+
+> x
+
+), which, by our choice of H, is dominated by (4.15). Hence, for all t ≥ H,
+
+∥ ˆzt − Sz ∗ 
+
+> t
+
+∥ is sub-Gaussian with its mean and sub-Gaussian norm bounded by (4.15). 
+
+Identification of the latent cost matrix. The latent cost is also described in Proposition 1, given by 
+
+ct = ∥z∗ 
+
+> t
+
+∥2 
+
+> Q∗
+
++ ∥ut∥2 
+
+> R∗
+
++ b∗ + et,where b∗ = E[∥xt − z∗ 
+
+> t
+
+∥2 
+
+> Q∗
+
+], et = ∥xt − z∗ 
+
+> t
+
+∥2 
+
+> Q∗
+
++ 2 z∗ 
+
+> t
+
+, xt − z∗  
+
+> tQ∗
+
+− b∗ is a zero-mean subexpo-nential random variable with ∥et∥ψ1 = O(d1/2  
+
+> x
+
+), and the random process (et)t≥H is adapted to the filtration (Ft)t≥H. In a similar way to the analysis for ([ svec (hth⊤ 
+
+> t
+
+); 1 ]) t≥H in the proof of Lemma 1, ([ svec (z∗ 
+
+> t
+
+(z∗ 
+
+> t
+
+)⊤); 1 ]) t≥H satisfies λmin (∑T+H−1 
+
+> t=H
+
+[svec (z∗ 
+
+> t
+
+(z∗ 
+
+> t
+
+)⊤); 1 ][ svec (z∗ 
+
+> t
+
+(z∗ 
+
+> t
+
+)⊤); 1 ]⊤) = 
+
+Ω(d−9 
+
+> x
+
+T), which remains true under the similarity transformation S. As ˆ zt approximates Sz ∗ 
+
+> t
+
+,the ground truth for the latent cost matrix is SQ ∗S⊤. By the perturbed quadratic regression bound (Lemma 4) with ϵ being bounded by (4.15) and σ = O(d1/2  
+
+> x
+
+) therein, eQ from regres-sion (3.3) has the guarantee that 
+
+∥ eQ − SQ ∗S⊤∥F
+
+= O
+
+
+
+H11 d3/2  
+
+> x
+
+(dy + du)21/2 T−1/2 log 1/2 (H/p) · (d9/2  
+
+> x
+
+d1/2  
+
+> x
+
+log (T/p)+ d9 
+
+> x
+
+d1/2  
+
+> x
+
+log (T/p)T−1 ∑T+H−1 
+
+> t=H
+
+∥et∥) + d9 
+
+> x
+
+T−1 ∑T+H−1 
+
+> t=H
+
+[svec (z∗ 
+
+> t
+
+(z∗ 
+
+> t
+
+)⊤); 1 ]et
+
+
+
+.By the tail bound of subexponential random variables and the union bound, with probability at least 1 − p, ∥et∥ = O(d1/2  
+
+> x
+
+log (T/p)) for H ≤ t ≤ T + H − 1. By a similar analysis to that for 
+
+∑T+H−1 
+
+> t=H
+
+f tet in the proof of Proposition 3, we have 
+
+# ∑T+H−1 
+
+> t=H
+
+[svec (z∗ 
+
+> t
+
+(z∗ 
+
+> t
+
+)⊤); 1 ]et = O(d1/2  
+
+> x
+
+dx H1/2 T1/2 log 1/2 (H/p)) .30 Since Q∗ ≽ 0 and ˆQ is the projection of eQ onto the space of positive semidefinite matrices, we have 
+
+∥ ˆQ − SQ ∗S⊤∥F ≤ ∥ eQ − SQ ∗S⊤∥F = O(H11 d23/2  
+
+> x
+
+(dy + du)21/2 T−1/2 log 5/2 (T/p)) .
+
+Identification of the latent dynamics in CoReL-E. To analyze the standard system identification procedure in C oReL-E, consider the latent dynamics described in Proposition 1, given by z∗ 
+
+> t+1
+
+=
+
+A∗z∗ 
+
+> t
+
++ B∗ut + L∗it+1. To apply the perturbed linear regression bound (Lemma 5), the noise term 
+
+L∗it+1 | F t needs to be zero-mean Gaussian, which does not hold here, since 
+
+it+1 = yt+1 − C∗(A∗z∗ 
+
+> t
+
++ B∗ut)= C∗(( A∗ xt + B∗ut + wt) + vt+1) − C∗(A∗z∗ 
+
+> t
+
++ B∗ut)= C∗ A∗(xt − z∗ 
+
+> t
+
+) + C∗wt + vt+1,where xt − z∗ 
+
+> t
+
+is Ft-measurable. To solve this problem, we consider a different filtration 
+
+(Gt := σ(y0, u0, y1, . . . , ut−1, yt)) t≥0 that involves only observations and actions. Then, z∗ 
+
+> t
+
+is 
+
+Gt-measurable and L∗it+1 | G t is zero-mean Gaussian with the operator norm of the covariance matrix bounded by O(1).By (Simchowitz et al., 2018, Proposition 3.1), (z∗ 
+
+> t
+
+)t≥H satisfies the (Θ(1), Θ(1), Θ(1)) -BMSB con-dition, which remains true under the similarity transformation S. As ˆ zt approximates Sz ∗ 
+
+> t
+
+, the ground truth for the latent dynamics is [SA ∗S⊤, SB ∗]. With filtration (Gt)t≥0, by the perturbed linear regression bound (Lemma 5), for T greater than a constant polynomial in the problem parameters, we have 
+
+∥[ ˆA, ˆ B] − S[A∗S⊤, B∗]∥2 = O(H11 d3/2  
+
+> x
+
+(dy + du)21/2 T−1/2 log 1/2 (H/p) · d1/2  
+
+> x
+
+log (T/p)) = O(H11 d2 
+
+> x
+
+(dy + du)21/2 T−1/2 log 3/2 (T/p)) ,where the second term in the bound in Lemma 5 is dominated by the first term and omitted above. Hence, ∥ ˆA − SA ∗S⊤∥2, ∥ ˆB − SB ∗∥2 and ∥ ˆQ − SQ ∗S⊤∥2 are all bounded by 
+
+O(H11 d23/2  
+
+> x
+
+(dy + du)21/2 T−1/2 log 5/2 (T/p)) .
+
+Identification of the latent dynamics in CoReL-I. To analyze the cost-driven system identi-fication (Algorithm 2) in C oReL-I, define M∗ 
+
+> 1
+
+:= [ A∗ M∗, B∗] as the composition of one-step transition and representation functions and N∗ 
+
+> 1
+
+:= ( M∗ 
+
+> 1
+
+)⊤ M∗ 
+
+> 1
+
+, which is estimated by ˆ N1 in (3.7). By the same analysis as that of ˆN, we have 
+
+∥ ˆN1 − N∗ 
+
+> 1
+
+∥F = O(H1/2 (H(dy + du) + dx )10 d3/2  
+
+> x
+
+T−1/2 log 1/2 (H/p)) .By (Tu et al., 2016, Lemma 5.4), there exists an orthogonal matrix S1, such that ∥ ˆM1 − S1 M∗ 
+
+> 1
+
+∥F is of the same order as ∥ ˆN1 − N∗ 
+
+> 1
+
+∥F. The bound on ∥ ˆM1 − S1 M∗ 
+
+> 1
+
+∥F applies to both ∥ eM − S1 A∗ M∗∥2
+
+and ∥ eB − S1 B∗∥2. By Algorithm 2, 
+
+eA = eM ˆM†
+
+= ( S1 A∗ M∗ + eM − S1 A∗ M∗)(( M∗)†S⊤ + ˆM† − (M∗)†S⊤)= S1 A∗S⊤ + S1 A∗ M∗( ˆM† − (M∗)†S⊤) + ( eM − S1 A∗ M∗)( M∗)†S⊤
+
++ ( eM − S1 A∗ M∗)( ˆM† − (M∗)†S⊤).31 By the perturbation bound of the Moore-Penrose inverse (Wedin, 1973), ∥ ˆM† − (M∗)†S⊤∥2 =
+
+O(∥ ˆM − SM ∗∥2) = O(∥ ˆN1 − N∗ 
+
+> 1
+
+∥2). Hence, ∥ eA − S1 A∗S⊤∥2 is of the same order as ∥ ˆN1 − N∗ 
+
+> 1
+
+∥F.As mentioned for C oReL-E, since ˆ zt approximates Sz ∗ 
+
+> t
+
+, the ground truth for the latent dynamics is [SA ∗S⊤, SB ∗]. To align eA with SA ∗S⊤, we compute another matrix ˆ S0 by solving the regres-sion (3.8) from ˆM1[ht; ut] to ˆMh t+1. Since ˆM1[ht; ut] and ˆMh t+1 approximate S1z∗ 
+
+> t+1
+
+and Sz ∗
+
+> t+1
+
+,respectively, (3.8) is essentially a linear regression that estimates the alignment matrix SS ⊤ 
+
+> 1
+
+with perturbed variables ˆM1[ht; ut] and ˆMh t+1. The ℓ2-norm of the perturbation on Sz ∗ 
+
+> t
+
+is given by (4.15). Similarly, the ℓ2-norm of the other perturbation ∥ ˆM1[ht; ut] − S1z∗
+
+> t+1
+
+∥ is sub-Gaussian with its mean and sub-Gaussian norm bounded by 
+
+O(H1/2 (H(dy + du) + dx )21/2 d3/2  
+
+> x
+
+T−1/2 log 1/2 (H/p)) .Hence, by the perturbed linear regression bound (Lemma 5) with ϵ = 0 therein, for T greater than a constant polynomial in the problem parameters, we have 
+
+∥ ˆS0 − SS ⊤ 
+
+> 1
+
+∥2 = O(H1/2 (H(dy + du) + dx )21/2 d3/2  
+
+> x
+
+T−1/2 log 1/2 (H/p) · d1/2  
+
+> x
+
+log (T/p)) = O(H11 d2 
+
+> x
+
+(dy + du)21/2 T−1/2 log 3/2 (T/p)) ,where we use H(dy + du) + dx = O(H(dy + du)) due to dh = H(dy + du) ≥ dx. As a result, 
+
+∥ ˆA − SA ∗S⊤∥2 = ∥ ˆS0 eA − SS ⊤ 
+
+> 1
+
+S1 A∗S⊤∥2
+
+= ∥( ˆS0 − SS ⊤ 
+
+> 1
+
+) eA∥2 + ∥SS ⊤ 
+
+> 1
+
+( eA − S1 A∗S⊤)∥2
+
+= O(H11 d2 
+
+> x
+
+(dy + du)21/2 T−1/2 log 3/2 (T/p)) ,and ∥ ˆB − SB ∗∥2 has the same order. Hence, ∥ ˆA − SA ∗S⊤∥2, ∥ ˆB − SB ∗∥2 and ∥ ˆQ − SQ ∗S⊤∥2 are all bounded by 
+
+O(H11 d23/2  
+
+> x
+
+(dy + du)21/2 T−1/2 log 5/2 (T/p)) .
+
+Certainty equivalent linear quadratic control. As argued in Part I of this work, E[x⊤ 
+
+> t
+
+Q∗ xt] −
+
+E[( z∗ 
+
+> t
+
+)⊤Q∗z∗ 
+
+> t
+
+] = Q∗, E[( xt − z∗ 
+
+> t
+
+)( xt − z∗ 
+
+> t
+
+)⊤] F is a constant regardless of the actions (uτ )τ≤t,and it suffices to consider the latent state space for studying the policy suboptimality gap. In the latent state space, for t ≥ H, the action ut = ˆK ˆMh t = ˆK(Sz ∗ 
+
+> t
+
++ δzt ), where δzt := ( ˆM −
+
+SM ∗)ht − Sδt is a Gaussian noise vector correlated with z∗ 
+
+> t
+
+. Recall that δt = ( A∗)H z∗ 
+
+> t−H
+
+is the residual error. Since z∗ 
+
+> t
+
+= M∗ht + δt, we have 
+
+δzt = ( ˆM − SM ∗)( M∗)†(z∗ 
+
+> t
+
+− δt) − Sδt = ( ˆM − SM ∗)( M∗)†z∗ 
+
+> t
+
+− ˆM(M∗)†δt.By Proposition 2, σmin (M∗) = Ω(νH−1/2 ) = Ω(H−1/2 ). Hence, we have 
+
+∥( ˆM − SM ∗)( M∗)†∥2 = O(H1/2 ∥ ˆM − SM ∗∥2).Then, substituting δzt into ut, we have 
+
+ut = ˆK(S + ( ˆM − SM ∗)( M∗)†)z∗ 
+
+> t
+
+− ˆK ˆM(M∗)†δt = eKz ∗ 
+
+> t
+
+− ˆK ˆM(M∗)†δt,32 where eK := ˆK(S + ( ˆM − SM ∗)( M∗)†).We now consider the stability of the system (A∗, B∗) under feedback gain eKS . By (Mania et al., 2019, Propositions 1 and 2), there exists a dimension-free constant T0 > 0 depending polyno-mially on the problem parameters such that as long as T ≥ T0, ∥ ˆK − K∗S⊤∥2 is bounded by 
+
+O(H11 d23/2  
+
+> x
+
+(dy + du)21/2 T−1/2 log 5/2 (T/p)) ,and that ˆ K stabilizes the system (SA ∗S⊤, SB ∗), i.e., A∗ + B∗ ˆKS is stable. This also implies that 
+
+∥ ˆK∥2 = O(∥K∗∥2) = O(1). By (Mania et al., 2019, Lemma 5), there exists a dimension-free constant ε0 > 0 with ε−10 depending polynomially on the problem parameters, such that as long as ∥( ˆM − SM ∗)( M∗)†∥2 ≤ ε0, A∗ + B∗ eK is stable. The control input ut = eKz ∗ 
+
+> t
+
+− ˆK ˆM(M∗)†δt, t ≥ H contains an additional perturbation term :
+
+− ˆK ˆM(M∗)†δt, whose covariance matrix is bounded by 
+
+∥ ˆK ˆM(M∗)†(A∗)H ∥2∥Cov (z∗ 
+
+> t−H
+
+)∥1/2 2 = O(H1/2 αρ H ∥Cov (z∗ 
+
+> t−H
+
+)∥1/2 2 ).For H ≤ t ≤ 2H, ∥Cov (z∗ 
+
+> t−H
+
+)∥2 = O(1) by an arbitrary stabilizing controller, as discussed at the end of §2. Let Σ denote the covariance matrix of the stationary distribution of (z∗ 
+
+> t
+
+)t≥0 in the system (A∗, B∗) under the controller ut = eKz ∗ 
+
+> t
+
+, t ≥ 0. By Assumption 1, ∥Σ∥2 = O(1). Hence, 
+
+∥Cov (z∗ 
+
+> t−H
+
+) − Σ∥2 is also of order O(1) for H ≤ t ≤ 2H.Applying Lemma 6 to the latent system (A∗, B∗) for t ≥ H, we have that for large enough t,
+
+∥Cov (z∗ 
+
+> t
+
+) − Σ∥2 = O(H1/2 αρ H ), (4.16) where the ε in Lemma 6 is on the order of (4.16) and satisfies the required conditions by our choice of H. Hence, for large enough t, the cost difference incurred by the perturbation term at each step is bounded by 
+
+Q∗, Cov (z∗ 
+
+> t
+
+) − Σ F + R∗, Cov ( eKz ∗ 
+
+> t
+
+− ˆK ˆM(M∗)†δt) − Cov ( eKz ∗ 
+
+> t
+
+) F = O(( dx + du)H1/2 αρ H ),where the bound on covariance difference in the second term is due to (Tian et al., 2022, Lemma 14). This implies that the difference in the time-averaged expected cost satisfies 
+
+|J( ˆπ) − J(( ˆM, eK)) | = O(( dx + du)H1/2 αρ H ). (4.17) Finally, we consider the policy suboptimality gap 
+
+J( ˆπ) − J(π∗) = J( ˆπ) − J(( ˆM, eK)) + J(( ˆM, eK)) − J(π∗).Let P∗ denote the optimal value matrix in system (A∗, B∗, Q∗, R∗) given by the DARE (2.8). By Assumption 1, ∥P∗∥2 = O(1). By (Mania et al., 2019, Lemma 3) (also (Fazel et al., 2018, Lemma 12)), we have 
+
+J(( ˆM, eK)) − J(π∗) = O(tr (Σ( eK − K∗)⊤(R∗ + ( B∗)⊤ P∗ B∗)( eK − K∗))) = O(∥Σ∥2∥R∗ + ( B∗)⊤ P∗ B∗∥2∥ eK − K∗∥2 
+
+> F
+
+).33 Since 
+
+∥ eK − K∗∥2 ≤ ∥ ˆK∥2∥( ˆM − SM ∗)( M∗)†∥2 + ∥ ˆK − K∗S⊤∥2
+
+= O(H1/2 ∥ ˆM − SM ∗∥2 + H11 d23/2  
+
+> x
+
+(dy + du)21/2 T−1/2 log 5/2 (T/p)) 
+
+> (i)
+
+= O(H11 d23/2  
+
+> x
+
+(dy + du)21/2 T−1/2 log 5/2 (T/p)) ,where (i) is due to the bound on ∥ ˆM − SM ∗∥2 in (4.14), the suboptimality gap J(( ˆM, eK)) − J(π∗)
+
+is bounded by 
+
+O(H22 d23  
+
+> x
+
+(dy + du)21 du T−1 log 5(T/p)) . (4.18) Due to our choice of H, the bound in (4.18) dominates that in (4.17). Hence, combining the bounds in (4.17) and (4.18), we have 
+
+J( ˆπ) − J(π∗) = O(H22 d23  
+
+> x
+
+(dy + du)21 du T−1 log 5(T/p)) ,which completes the proof. 
+
+# 5 Additional discussion on MuZero 
+
+In this section, we discuss MuZero (Schrittwieser et al., 2020) in more detail, given its impressive performance and connection to this work. Announced by DeepMind in 2019, MuZero extends the line of works including AlphaGo (Silver et al., 2016), AlphaGo Zero (Silver et al., 2017), and AlphaZero (Silver et al., 2018) by obviating the knowledge of the game rules. MuZero matches the superhuman performance of AlphaZero in Go, shogi and chess, while outperform-ing model-free RL algorithms in Atari games. MuZero builds upon the powerful planning procedure of Monte Carlo Tree Search, with the major innovation being learning a latent model .The latent model replaces the rule-based simulator during planning, and avoids the burden-some planning in pixel space for Atari games. MuZero is a milestone algorithm in representation learning for control. Intuitively, the algo-rithm design makes sense, but its complexity has so far inhibited a formal theoretical study. On the other hand, statistical learning theory for linear dynamical systems and control has evolved rapidly in recent years (Tsiamis et al., 2022); for partially observable linear dynamical systems, much of the work relies on learning Markov parameters , lacking a direct connection to the em-pirical methods used in practice for possibly nonlinear systems. In this work, we aim to bridge the two areas by studying provable MuZero-style latent model learning in LQG control. In a sense, this work can be seen as a case study of the state representation learning algorithm of MuZero in linear systems. The state representation learning algorithm of MuZero features three ingredients: 1) stacking frames, i.e., observations, as input to the representation function; 2) predicting costs, “optimal” values, and “optimal” actions from latent states; and 3) implicit learning of latent dynamics by predicting these quantities from latent states at future time steps. These are the defining characteristics of the MuZero-style algorithm that we shall consider. In this work, we also 34 handle partial observability by using a finite-length history, but we use a history of observations and actions, rather than only observations. In MuZero, the “optimal” values and actions are found by the powerful online planning procedure. In this work, we simplify the setup by considering data collected using random actions, which are known to suffice for identifying a partially observable linear dynamical system (Oymak and Ozay, 2019). In this setup, the values become those associated with this trivial policy and we do not predict actions since they are simply random noises. Note that although our study of the above ingredients is directly motivated by MuZero, previous empirical works have also explored them. For example, frame stacking has been a widely used technique to handle partial observability (Mnih et al., 2013, 2015; Oh et al., 2017); predicting values for learning a latent model has been studied in (Oh et al., 2017), which also learns the latent state transition implicitly. 
+
+# 6 Concluding remarks 
+
+We studied cost-driven state representation learning for solving unknown infinite-horizon time-invariant LQG control. We established finite-sample guarantees for two methods, which differ in whether the latent state dynamics is learned explicitly by minimizing the transition pre-diction errors, or implicitly by using the transition for future cost predictions, with the latter being motivated by that used in MuZero (Schrittwieser et al., 2020). For MuZero-style latent model learning, our analysis identified a coordinate misalignment problem in the latent state space, suggesting the value of multi-step future cost prediction. A limitation of this work is that we only considered state representation based on truncated histories, i.e., frame stacking, as used in MuZero; the recursive form of the representation function, as in the Kalman filter, is also used empirically (Ha and Schmidhuber, 2018; Hafner et al., 2019a), and might be worth further investigation. Together with Part I of this work, we have established a theoretical framework for analyzing cost-driven state representation learning for control. This opens up many opportunities for future research. For example, one may wonder about the extent to which cost-driven state rep-resentation learning provably generalizes to nonlinear observations or systems. Besides, one argument for favoring latent-model-based over model-free methods is their ability to general-ize across different tasks; our framework may offer a perspective to formalize this intuition. Moreover, given the ubiquity of visual perception in real-world control systems, it is of prac-tical value to study state representation learning with a time-varying observation function or multiple observation functions, modeling images taken from different angles. 
+
+# Acknowledgment 
+
+This work was supported in part by the NSF TRIPODS program (award number DMS-2022448). KZ acknowledges partial support from Simons-Berkeley Research Fellowship, the U.S. Army Research Office grant W911NF-24-1-0085, and the NSF CAREER Award 2443704. 35 References 
+
+Dimitri Bertsekas. Dynamic Programming and Optimal Control: Volume I , volume 1. Athena Scientific, 2012. Maryam Fazel, Rong Ge, Sham Kakade, and Mehran Mesbahi. Global convergence of policy gradient methods for the linear quadratic regulator. In International Conference on Machine Learning , pages 1467–1476. PMLR, 2018. Xiang Fu, Ge Yang, Pulkit Agrawal, and Tommi Jaakkola. Learning task informed abstractions. In International Conference on Machine Learning , pages 3480–3491. PMLR, 2021. David Ha and Jürgen Schmidhuber. World models. arXiv preprint arXiv:1803.10122 , 2018. Danijar Hafner, Timothy Lillicrap, Jimmy Ba, and Mohammad Norouzi. Dream to control: Learning behaviors by latent imagination. arXiv preprint arXiv:1912.01603 , 2019a. Danijar Hafner, Timothy Lillicrap, Ian Fischer, Ruben Villegas, David Ha, Honglak Lee, and James Davidson. Learning latent dynamics for planning from pixels. In International conference on machine learning , pages 2555–2565. PMLR, 2019b. Danijar Hafner, Timothy Lillicrap, Mohammad Norouzi, and Jimmy Ba. Mastering Atari with discrete world models. arXiv preprint arXiv:2010.02193 , 2020. Danijar Hafner, Jurgis Pasukonis, Jimmy Ba, and Timothy Lillicrap. Mastering diverse domains through world models. arXiv preprint arXiv:2301.04104 , 2023. Botao Hao, Yasin Abbasi Yadkori, Zheng Wen, and Guang Cheng. Bootstrapping upper confi-dence bound. Advances in Neural Information Processing Systems , 32, 2019. Ali Jadbabaie, Horia Mania, Devavrat Shah, and Suvrit Sra. Time varying regression with hidden linear dynamics. arXiv preprint arXiv:2112.14862 , 2021. N Komaroff. Iterative matrix bounds and computational solutions to the discrete algebraic Riccati equation. IEEE Transactions on Automatic Control , 39(8):1676–1678, 1994. Sahin Lale, Kamyar Azizzadenesheli, Babak Hassibi, and Anima Anandkumar. Logarithmic regret bound in partially observable linear dynamical systems. Advances in Neural Information Processing Systems , 33:20876–20888, 2020. Sahin Lale, Kamyar Azizzadenesheli, Babak Hassibi, and Anima Anandkumar. Adaptive con-trol and regret minimization in linear quadratic Gaussian (LQG) setting. In 2021 American Control Conference (ACC) , pages 2517–2522. IEEE, 2021. Alex Lamb, Riashat Islam, Yonathan Efroni, Aniket Didolkar, Dipendra Misra, Dylan Foster, Lekan Molu, Rajan Chari, Akshay Krishnamurthy, and John Langford. Guaranteed discovery of controllable latent states with multi-step inverse models. arXiv preprint arXiv:2207.08229 ,2022. 36 David A Levin and Yuval Peres. Markov chains and mixing times , volume 107. American Mathe-matical Soc., 2017. Horia Mania, Stephen Tu, and Benjamin Recht. Certainty equivalence is efficient for linear quadratic control. Advances in Neural Information Processing Systems , 32, 2019. Shahar Mendelson. Learning without concentration. Journal of the ACM (JACM) , 62(3):1–25, 2015. Zakaria Mhammedi, Dylan J Foster, Max Simchowitz, Dipendra Misra, Wen Sun, Akshay Kr-ishnamurthy, Alexander Rakhlin, and John Langford. Learning the linear quadratic regulator from nonlinear observations. Advances in Neural Information Processing Systems , 33:14532– 14543, 2020. Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Alex Graves, Ioannis Antonoglou, Daan Wierstra, and Martin Riedmiller. Playing Atari with deep reinforcement learning. arXiv preprint arXiv:1312.5602 , 2013. Volodymyr Mnih, Koray Kavukcuoglu, David Silver, Andrei A Rusu, Joel Veness, Marc G Belle-mare, Alex Graves, Martin Riedmiller, Andreas K Fidjeland, Georg Ostrovski, et al. Human-level control through deep reinforcement learning. nature , 518(7540):529–533, 2015. Junhyuk Oh, Satinder Singh, and Honglak Lee. Value prediction network. Advances in neural information processing systems , 30, 2017. Samet Oymak and Necmiye Ozay. Non-asymptotic identification of LTI systems from a single trajectory. In 2019 American control conference (ACC) , pages 5655–5661. IEEE, 2019. Deepak Pathak, Pulkit Agrawal, Alexei A Efros, and Trevor Darrell. Curiosity-driven explo-ration by self-supervised prediction. In International conference on machine learning , pages 2778–2787. PMLR, 2017. Julian Schrittwieser, Ioannis Antonoglou, Thomas Hubert, Karen Simonyan, Laurent Sifre, Si-mon Schmitt, Arthur Guez, Edward Lockhart, Demis Hassabis, Thore Graepel, et al. Master-ing Atari, Go, chess and shogi by planning with a learned model. Nature , 588(7839):604–609, 2020. David Silver, Aja Huang, Chris J Maddison, Arthur Guez, Laurent Sifre, George Van Den Driess-che, Julian Schrittwieser, Ioannis Antonoglou, Veda Panneershelvam, Marc Lanctot, et al. Mastering the game of Go with deep neural networks and tree search. nature , 529(7587): 484–489, 2016. David Silver, Julian Schrittwieser, Karen Simonyan, Ioannis Antonoglou, Aja Huang, Arthur Guez, Thomas Hubert, Lucas Baker, Matthew Lai, Adrian Bolton, et al. Mastering the game of Go without human knowledge. nature , 550(7676):354–359, 2017. David Silver, Thomas Hubert, Julian Schrittwieser, Ioannis Antonoglou, Matthew Lai, Arthur Guez, Marc Lanctot, Laurent Sifre, Dharshan Kumaran, Thore Graepel, et al. A general reinforcement learning algorithm that masters chess, shogi, and Go through self-play. Science ,362(6419):1140–1144, 2018. 37 Max Simchowitz, Horia Mania, Stephen Tu, Michael I Jordan, and Benjamin Recht. Learning without mixing: Towards a sharp analysis of linear system identification. In Conference On Learning Theory , pages 439–473. PMLR, 2018. Max Simchowitz, Ross Boczar, and Benjamin Recht. Learning linear dynamical systems with semi-parametric least squares. In Conference on Learning Theory , pages 2714–2802. PMLR, 2019. Jayakumar Subramanian, Amit Sinha, Raihan Seraj, and Aditya Mahajan. Approximate in-formation state for approximate planning and reinforcement learning in partially observed systems. arXiv preprint arXiv:2010.08843 , 2020. Yi Tian, Kaiqing Zhang, Russ Tedrake, and Suvrit Sra. Cost-driven representation learning for linear quadratic Gaussian control: Part I. arXiv preprint arXiv:2212.14511v4 , 2022. Joel A Tropp. User-friendly tail bounds for sums of random matrices. Foundations of computa-tional mathematics , 12:389–434, 2012. Anastasios Tsiamis, Ingvar Ziemann, Nikolai Matni, and George J Pappas. Statistical learning theory for control: A finite sample perspective. arXiv preprint arXiv:2209.05423 , 2022. Stephen Tu, Ross Boczar, Max Simchowitz, Mahdi Soltanolkotabi, and Ben Recht. Low-rank solutions of linear matrix equations via Procrustes flow. In International Conference on Machine Learning , pages 964–973. PMLR, 2016. Per-Åke Wedin. Perturbation theory for pseudo-inverses. BIT Numerical Mathematics , 13:217– 232, 1973. Weirui Ye, Shaohuai Liu, Thanard Kurutach, Pieter Abbeel, and Yang Gao. Mastering Atari games with limited data. Advances in Neural Information Processing Systems , 34:25476–25488, 2021. Amy Zhang, Rowan McAllister, Roberto Calandra, Yarin Gal, and Sergey Levine. Learning invariant representations for reinforcement learning without reconstruction. arXiv preprint arXiv:2006.10742 , 2020. Huiming Zhang and Haoyu Wei. Sharper sub-Weibull concentrations. Mathematics , 10(13):2252, 2022. 38

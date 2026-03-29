@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.18464v2/fig-001.webp",
+      "caption": "Figure 5: Learning curves of the proposed AcceRL framework with World Model (WM) integration. (a) The evaluation average return plotted against environment steps demonstrates exceptional sample efficiency. To clearly illustrate the effectiveness of RL fine-tuning, the policy is deliberately initialized from a suboptimal checkpoint trained with limited demonstrations (starting at ∼0.6 return). By leveraging imagination, the policy rapidly breaks through the 0.8 return threshold within merely 10,000 real-world interactions. (b) The evaluation performance against training steps validates the rapid convergence speed. Driven by analytic gradients from the differentiable WM, the policy reaches a stable, near-optimal plateau in fewer than 400 updates.",
+      "page": 11,
+      "index": 1,
+      "width": 959,
+      "height": 376
+    },
+    {
+      "url": "assets/figures/arxiv/2603.18464v2/fig-002.webp",
+      "caption": "Figure 4: Scalability performance of the AcceRL framework with decoupled data labels. (a) Throughput scaling demonstrates near-linear performance up to 64 rollout workers. (b) Trainer scalability shows that the actual trainer SPS closely tracks the ideal marginal scaling curve when scaling up to 7 GPUs. Both configurations effectively maintain high hardware utilization without suffering from severe communication overhead.",
+      "page": 10,
+      "index": 2,
+      "width": 974,
+      "height": 318
+    },
+    {
+      "url": "assets/figures/arxiv/2603.18464v2/fig-003.webp",
+      "caption": "Figure 7: Ablation study of the AcceRL framework regarding the GIPO algorithm. The curves highlight the stability of GIPO (dark blue) compared to standard PPO (light blue). GIPO maintains a robust, high-performance trajectory, whereas PPO exhibited oscillatory behavior and inferior performance due to policy lag.",
+      "page": 13,
+      "index": 3,
+      "width": 470,
+      "height": 347
+    },
+    {
+      "url": "assets/figures/arxiv/2603.18464v2/fig-004.webp",
+      "caption": "Figure 2: Timeline of a synchronous RL framework (left) and the asynchronous framework AcceRL (right). The inference forward blocks in AcceRL encompass both the batching wait time and the inference time. By eliminating the GPU bubbles, AcceRL maximizes hardware utilization and significantly enhances overall training efficiency.",
+      "page": 4,
+      "index": 4,
+      "width": 969,
+      "height": 198
+    },
+    {
+      "url": "assets/figures/arxiv/2603.18464v2/fig-005.webp",
+      "caption": "Figure 6: Ablation study of the AcceRL framework regarding the value recomputation mechanism. The comparison highlights the critical role of recomputing values in maintaining training stability. AcceRL with Revalue (dark blue) effectively handles data staleness in low-rollout scenarios, while AcceRL without Revalue (light blue) exhibits significant performance drops and higher variance due to misaligned value targets.",
+      "page": 12,
+      "index": 5,
+      "width": 479,
+      "height": 353
+    },
+    {
+      "url": "assets/figures/arxiv/2603.18464v2/fig-006.webp",
+      "caption": "Figure 3: The pipeline of AcceRL base backbone (left) and world-model-augmented mode (right). The framework isolates training, inference, and rollout into independent asynchronous streams. By integrating a plug-and-play world model, AcceRL bypasses physical simulation constraints through imagination rollouts to significantly enhance sample efficiency.",
+      "page": 5,
+      "index": 6,
+      "width": 976,
+      "height": 339
+    }
+  ]
+}

@@ -1,0 +1,126 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.07432v1/fig-001.webp",
+      "caption": "Figure 2: RL training system for mobile agent. We integrate GRPO with a scalable rollout collection system that parallelizes multiple environments. Docker containerization provides resource isolation and decouples trainer and environments through HTTP communication for reliability. Asynchronous rollouts eliminate synchronization bottlenecks, enabling more agent steps per unit time. Together, these three techniques facilitate reliable and efficient large-scale training.",
+      "page": 6,
+      "index": 1,
+      "width": 824,
+      "height": 347
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07432v1/fig-002.webp",
+      "caption": "Table 5: Action space of mobile use agents in AndroidWorld.",
+      "page": 25,
+      "index": 2,
+      "width": 672,
+      "height": 255
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07432v1/fig-003.webp",
+      "caption": "Figure 8: Case study 1.",
+      "page": 21,
+      "index": 3,
+      "width": 827,
+      "height": 541
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07432v1/fig-004.webp",
+      "caption": "Figure 9: Case study 2.",
+      "page": 21,
+      "index": 4,
+      "width": 775,
+      "height": 437
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07432v1/fig-005.webp",
+      "caption": "Figure 1: Sample task instructions with corresponding screenshots from the train and test sets of the three unseen regimes in the AndroidWorld-Generalization benchmark. Red highlights the unseen scenarios: Instance, Template, and Application.",
+      "page": 2,
+      "index": 5,
+      "width": 824,
+      "height": 300
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07432v1/fig-006.webp",
+      "caption": "Figure 11: Case study 4.",
+      "page": 22,
+      "index": 6,
+      "width": 775,
+      "height": 437
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07432v1/fig-007.webp",
+      "caption": "Figure 10: Case study 3.",
+      "page": 22,
+      "index": 7,
+      "width": 826,
+      "height": 541
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07432v1/fig-008.webp",
+      "caption": "Figure 7: (Left) Time profiling of a policy update vs. the collection of 16 rollouts per training step. (Right) Performance of async vs. sync rollouts with varying environment counts.",
+      "page": 10,
+      "index": 8,
+      "width": 732,
+      "height": 200
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07432v1/fig-009.webp",
+      "caption": "Figure 12: Case study 5.",
+      "page": 23,
+      "index": 9,
+      "width": 827,
+      "height": 541
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07432v1/fig-010.webp",
+      "caption": "Table 2: Comparison of methods on AndroidWorld. “API-Based” denotes use of proprietary inference APIs. “Open-Source” denotes availability of model weights. “Reproducible” denotes availability of full codebase.",
+      "page": 8,
+      "index": 10,
+      "width": 821,
+      "height": 525
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07432v1/fig-011.webp",
+      "caption": "Figure 4: Training dynamics of GRPO across the three unseen regimes. We report training success rates and evaluation success rates with standard deviations.",
+      "page": 9,
+      "index": 11,
+      "width": 802,
+      "height": 184
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07432v1/fig-012.webp",
+      "caption": "Figure 5: Training dynamics of PPO across the three unseen regimes.",
+      "page": 9,
+      "index": 12,
+      "width": 802,
+      "height": 184
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07432v1/fig-013.webp",
+      "caption": "Figure 3: Training dynamics on Unseen Instance with curriculum learning. Colored areas denote curriculum stages: blue (Easy), red (Easy + Medium), green (All). (Left) Average training and evaluation success rates. (Right) Average evaluation success rates by task type (Task Completion, Information Retrieval) and difficulty (Easy, Medium, Hard).",
+      "page": 9,
+      "index": 13,
+      "width": 790,
+      "height": 258
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07432v1/fig-014.webp",
+      "caption": "Table 4: AndroidWorld evaluation performance for Mobile Agents. 2",
+      "page": 20,
+      "index": 14,
+      "width": 818,
+      "height": 461
+    },
+    {
+      "url": "assets/figures/arxiv/2603.07432v1/fig-015.webp",
+      "caption": "Table 3: Comparison between AndroidWorld and AndroidWorld-Generalization.",
+      "page": 20,
+      "index": 15,
+      "width": 862,
+      "height": 286
+    }
+  ]
+}

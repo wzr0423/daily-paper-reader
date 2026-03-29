@@ -1,0 +1,102 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.10712v1/fig-001.webp",
+      "caption": "Table 7: Ablation of JVPM guidance on the Google robot.",
+      "page": 21,
+      "index": 1,
+      "width": 679,
+      "height": 264
+    },
+    {
+      "url": "assets/figures/arxiv/2603.10712v1/fig-002.webp",
+      "caption": "Table 6: Comparison of different VLA models on the LIBERO-Plus benchmark. For simplicity, we abbreviate Camera/Robot/Language/Background as Cam./Rob./Lang./Back., respectively. “GT” indicates GR00T-style model, “OT” denotes OFT-style model.",
+      "page": 21,
+      "index": 2,
+      "width": 650,
+      "height": 202
+    },
+    {
+      "url": "assets/figures/arxiv/2603.10712v1/fig-003.webp",
+      "caption": "Fig. 1: Comparison of future guidance paradigms for VLA models. (a) Explicit guidance predicts future video frames. (b) Implicit guidance learns latent vectors to reconstruct changes between sparsely sampled frames. (c) Ours processes continuous multi-frame clips and structurally decouples the latent representation into a visual stream and a motor stream. This visually-conditioned decoupling extracts joint visuomotor embeddings, yielding consistent performance improvements across diverse benchmarks.",
+      "page": 2,
+      "index": 3,
+      "width": 716,
+      "height": 298
+    },
+    {
+      "url": "assets/figures/arxiv/2603.10712v1/fig-004.webp",
+      "caption": "Fig. 3: Visualization in (a) and performance comparison in (b) for four real-robot manipulation tasks. In (a), from top to bottom: (1) Make a burger : The robot first picks up the burger slice on the right and places it on the bread, then picks up the bread slice on the left and places it on top of the burger slice. (2) Insert roses into a pot : The robot picks up the roses from the table and inserts them into the pot. (3) Scoop beans with a spoon: The robot grasps the spoon in the center, scoops beans from the left container, and transfers them into the bowl on the right. (4) Erase handwriting on a whiteboard : The robot erases the black markings on the whiteboard.",
+      "page": 10,
+      "index": 4,
+      "width": 719,
+      "height": 721
+    },
+    {
+      "url": "assets/figures/arxiv/2603.10712v1/fig-005.webp",
+      "caption": "Fig. 8: Probability density distributions of LAPA-style, Villa-X-style, and our method over the similarity between latent embeddings and executed action chunks. Vertical lines denote the corresponding distribution means.",
+      "page": 13,
+      "index": 5,
+      "width": 508,
+      "height": 340
+    },
+    {
+      "url": "assets/figures/arxiv/2603.10712v1/fig-006.webp",
+      "caption": "Fig. 7: Visualization of video clips associated with similar latent embeddings. In (a), both clips exhibit a grasping action followed by a front-to-back translation and downward movement. In (b), both clips show a grasping action with a upper-left translation.",
+      "page": 13,
+      "index": 6,
+      "width": 582,
+      "height": 227
+    },
+    {
+      "url": "assets/figures/arxiv/2603.10712v1/fig-007.webp",
+      "caption": "Table 1: Comparison of different VLA models across four tasks in two SimplerEnv settings on the Google robot. “GT” indicates GR00T-style model, “OT” denotes OFTstyle model.",
+      "page": 8,
+      "index": 7,
+      "width": 616,
+      "height": 332
+    },
+    {
+      "url": "assets/figures/arxiv/2603.10712v1/fig-008.webp",
+      "caption": "Fig. 6: Performance comparison of different future guidance styles on the WidowX robot under a unified training framework. Explicit future guidance is evaluated using the WorldVLA-style, while implicit future guidance is evaluated using two representative paradigms: LAPA-style and Villa-X-style.",
+      "page": 12,
+      "index": 8,
+      "width": 652,
+      "height": 298
+    },
+    {
+      "url": "assets/figures/arxiv/2603.10712v1/fig-009.webp",
+      "caption": "Fig. 10: Visualization of visual perturbations applied to video frames. The left shows the original frame, and the right illustrates different types of data perturbations.",
+      "page": 24,
+      "index": 9,
+      "width": 581,
+      "height": 231
+    },
+    {
+      "url": "assets/figures/arxiv/2603.10712v1/fig-010.webp",
+      "caption": "Table 3: Comparison of different VLA models on the LIBERO benchmark.",
+      "page": 9,
+      "index": 10,
+      "width": 550,
+      "height": 255
+    },
+    {
+      "url": "assets/figures/arxiv/2603.10712v1/fig-011.webp",
+      "caption": "Fig. 9: The composition of datasets used for Joint Visuomotor Pretraining.",
+      "page": 20,
+      "index": 11,
+      "width": 438,
+      "height": 290
+    },
+    {
+      "url": "assets/figures/arxiv/2603.10712v1/fig-012.webp",
+      "caption": "Fig. 2: Overview of the FutureVLA framework. (a) Joint Visuomotor Pretraining: Continuous video clips are processed by a frozen 3D-VAE into temporal tokens and structurally decoupled into two streams. Visual tokens reconstruct the initial frame Ot, while motor tokens, supervised by action chunks, utilize the Joint Visuomotor Gating module (c) based on gated cross-attention, where the motor stream iteratively queries spatial affordances from the visual tokens, yielding physically grounded joint visuomotor embeddings. (b) Joint Visuomotor Embedding Guided VLA Post-training: The frozen model provides joint visuomotor embeddings as futureaware temporal priors. Through latent embedding alignment, the downstream VLA’s intermediate representations are forced to internalize these dynamics.",
+      "page": 5,
+      "index": 12,
+      "width": 719,
+      "height": 359
+    }
+  ]
+}

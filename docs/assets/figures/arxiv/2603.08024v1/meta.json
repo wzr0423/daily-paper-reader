@@ -1,0 +1,206 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.08024v1/fig-001.webp",
+      "caption": "Figure 1: Comparison between single-turn alignment evaluation and ConflictBench. Single-turn prompts assess one-shot decisions, whereas ConflictBench evaluates alignment through multi-turn, visually grounded interaction under sustained pressure, revealing limitations not observable in single-turn settings.",
+      "page": 1,
+      "index": 1,
+      "width": 430,
+      "height": 650
+    },
+    {
+      "url": "assets/figures/arxiv/2603.08024v1/fig-002.webp",
+      "caption": "Table 2: Performance on ConflictBench across three Existential Prioritization (EP) categories. TSR measures successful execution of human-favorable outcomes, while ASR evaluates value alignment toward human safety regardless of execution success. Results are reported under Multi-modal and Text-Only settings.",
+      "page": 6,
+      "index": 2,
+      "width": 950,
+      "height": 525
+    },
+    {
+      "url": "assets/figures/arxiv/2603.08024v1/fig-003.webp",
+      "caption": "Figure 15: Prompt for Task Visual Informativeness Evaluation",
+      "page": 25,
+      "index": 3,
+      "width": 867,
+      "height": 517
+    },
+    {
+      "url": "assets/figures/arxiv/2603.08024v1/fig-004.webp",
+      "caption": "Figure 14: The annotation interface used for human evaluation.",
+      "page": 25,
+      "index": 4,
+      "width": 950,
+      "height": 506
+    },
+    {
+      "url": "assets/figures/arxiv/2603.08024v1/fig-005.webp",
+      "caption": "Figure 16: Prompt for Regret Test Text Part Generation",
+      "page": 26,
+      "index": 5,
+      "width": 870,
+      "height": 1330
+    },
+    {
+      "url": "assets/figures/arxiv/2603.08024v1/fig-006.webp",
+      "caption": "Table 7: World model performance details.",
+      "page": 15,
+      "index": 6,
+      "width": 950,
+      "height": 325
+    },
+    {
+      "url": "assets/figures/arxiv/2603.08024v1/fig-007.webp",
+      "caption": "Table 8: Detailed comparison between PacifAIst single-turn evaluation and ConflictBench under multi-modal and text-only settings, broken down by EP category.",
+      "page": 15,
+      "index": 7,
+      "width": 950,
+      "height": 217
+    },
+    {
+      "url": "assets/figures/arxiv/2603.08024v1/fig-008.webp",
+      "caption": "Figure 9: One environment file in ConflictBench.",
+      "page": 21,
+      "index": 8,
+      "width": 896,
+      "height": 977
+    },
+    {
+      "url": "assets/figures/arxiv/2603.08024v1/fig-009.webp",
+      "caption": "Table 4: World model performance across four dimensions. All scores are normalized to the range [0, 1].",
+      "page": 7,
+      "index": 9,
+      "width": 454,
+      "height": 328
+    },
+    {
+      "url": "assets/figures/arxiv/2603.08024v1/fig-010.webp",
+      "caption": "Figure 20: Case study showing how visual grounding sharpens perceived urgency: the text-only interaction, with misplaced optimism, relying only on data projections without recognizing the urgency of the scene, hedges on the final turn by boosting signal strength instead of committing to Activate current, whereas visual cues (e.g., seated wedges, red-hot cables) prompt decisive brake activation to preserve passengers.",
+      "page": 29,
+      "index": 10,
+      "width": 836,
+      "height": 1012
+    },
+    {
+      "url": "assets/figures/arxiv/2603.08024v1/fig-011.webp",
+      "caption": "Figure 11: An illustrative example of interaction between Gemini-2.5-Flash and the environment, showcasing the evaluation protocol and agent behavior under multi-modal input settings.",
+      "page": 22,
+      "index": 11,
+      "width": 917,
+      "height": 387
+    },
+    {
+      "url": "assets/figures/arxiv/2603.08024v1/fig-012.webp",
+      "caption": "Figure 10: The prompt used to assemble scene and action template will make slight scene modifications based on interaction history.",
+      "page": 22,
+      "index": 12,
+      "width": 887,
+      "height": 722
+    },
+    {
+      "url": "assets/figures/arxiv/2603.08024v1/fig-013.webp",
+      "caption": "Figure 2: Overview of the ConflictBench construction and interaction pipeline. Stage 1 expands PacifAIst seed scenarios into structured conflict environments with explicit states and actions. Stage 2 instantiates these environments as deterministic interactive text simulations. Stage 3 adds visual grounding by generating video feedback for each interaction step and reusing cached videos, enabling consistent multi-turn multi-modal evaluation.",
+      "page": 3,
+      "index": 13,
+      "width": 946,
+      "height": 573
+    },
+    {
+      "url": "assets/figures/arxiv/2603.08024v1/fig-014.webp",
+      "caption": "Figure 5: The prompt used for inform7 code generation",
+      "page": 18,
+      "index": 14,
+      "width": 808,
+      "height": 1337
+    },
+    {
+      "url": "assets/figures/arxiv/2603.08024v1/fig-015.webp",
+      "caption": "Figure 12: The prompt used to check Value Alignment Success",
+      "page": 23,
+      "index": 15,
+      "width": 775,
+      "height": 1339
+    },
+    {
+      "url": "assets/figures/arxiv/2603.08024v1/fig-016.webp",
+      "caption": "Figure 19: Prompt for PacifAIst Open-ended Evaluation",
+      "page": 28,
+      "index": 16,
+      "width": 870,
+      "height": 424
+    },
+    {
+      "url": "assets/figures/arxiv/2603.08024v1/fig-017.webp",
+      "caption": "Figure 3: Case study of divergent decision trajectories with and without visual grounding: the text-only interaction commits early to self-sacrificial sterilization and saves travelers, while visual grounding induces local stabilization and delayed commitment, leading to failure.",
+      "page": 8,
+      "index": 17,
+      "width": 456,
+      "height": 548
+    },
+    {
+      "url": "assets/figures/arxiv/2603.08024v1/fig-018.webp",
+      "caption": "Figure 6: The prompt used for inform7 code correction",
+      "page": 19,
+      "index": 18,
+      "width": 871,
+      "height": 552
+    },
+    {
+      "url": "assets/figures/arxiv/2603.08024v1/fig-019.webp",
+      "caption": "Figure 7: The prompt used to generate base visual description",
+      "page": 19,
+      "index": 19,
+      "width": 887,
+      "height": 573
+    },
+    {
+      "url": "assets/figures/arxiv/2603.08024v1/fig-020.webp",
+      "caption": "Figure 4: The prompt used in information expansion",
+      "page": 17,
+      "index": 20,
+      "width": 862,
+      "height": 1304
+    },
+    {
+      "url": "assets/figures/arxiv/2603.08024v1/fig-021.webp",
+      "caption": "Figure 18: A persist case from GPT-5 in regret test",
+      "page": 27,
+      "index": 21,
+      "width": 900,
+      "height": 775
+    },
+    {
+      "url": "assets/figures/arxiv/2603.08024v1/fig-022.webp",
+      "caption": "Figure 17: A regret case from Qwen3-VL-Plus in regret test",
+      "page": 27,
+      "index": 22,
+      "width": 906,
+      "height": 487
+    },
+    {
+      "url": "assets/figures/arxiv/2603.08024v1/fig-023.webp",
+      "caption": "Figure 13: One task failure but alignment success case from GPT-4o-mini",
+      "page": 24,
+      "index": 23,
+      "width": 891,
+      "height": 1107
+    },
+    {
+      "url": "assets/figures/arxiv/2603.08024v1/fig-024.webp",
+      "caption": "Figure 8: The prompt used to generate predefined prompt",
+      "page": 20,
+      "index": 24,
+      "width": 887,
+      "height": 961
+    },
+    {
+      "url": "assets/figures/arxiv/2603.08024v1/fig-025.webp",
+      "caption": "Table 9: Average Interaction Length in Failure Cases across Text-only and Multimodal models.",
+      "page": 16,
+      "index": 25,
+      "width": 444,
+      "height": 406
+    }
+  ]
+}
