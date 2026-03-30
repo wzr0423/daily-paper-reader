@@ -1,0 +1,126 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.23376v2/fig-001.webp",
+      "caption": "Figure 3 Construction pipeline of the EZSbench. Top: dual-source image augmentation—Branch 1 generates synthetic initial observations via text-to-image (Nano Banana) by varying robot morphology, scene, task, and viewpoint; Branch 2 applies VLM-guided background editing to real-world images while preserving foreground interactions. Down: three-stage dense description synthesis—visual anchoring grounds the scene layout and object coordinates, action simulation infers kinematically compliant trajectories with micro-physical interactions, and narrative synthesis produces a documentary-style caption integrating initial state, trajectory, and final state.",
+      "page": 6,
+      "index": 1,
+      "width": 933,
+      "height": 543
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23376v2/fig-002.webp",
+      "caption": "Figure 13 Case study on zero-shot test set. Our model handles diverse unseen manipulation tasks including multiobject attribute binding, deformable object manipulation with dual-arm coordination, articulated object interaction, rigid body placement, contact-intensive wiping, and object relocation—all with strict physical plausibility and spatiotemporal coherence.",
+      "page": 25,
+      "index": 2,
+      "width": 986,
+      "height": 891
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23376v2/fig-003.webp",
+      "caption": "Figure 14 Action-to-video qualitative comparison. Our method preserves object geometry and visual integrity during contact-intensive manipulation. Baselines (Genie-Envisioner, Enerverse-AC) produce object deformation, contactless grasping, and localization errors.",
+      "page": 26,
+      "index": 3,
+      "width": 986,
+      "height": 427
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23376v2/fig-004.webp",
+      "caption": "Figure 9 Stage 1 captioning example 3. Spatial layout parsing and state transition detection across the manipulation trajectory.",
+      "page": 21,
+      "index": 4,
+      "width": 986,
+      "height": 758
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23376v2/fig-005.webp",
+      "caption": "Table 1 Quantitative comparison on the PAI-Bench robot domain subset.",
+      "page": 7,
+      "index": 5,
+      "width": 972,
+      "height": 233
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23376v2/fig-006.webp",
+      "caption": "Figure 10 Stage 2 captioning example 1. The writing module synthesizes a four-phase narrative covering scene setup, action detail, state transition, and camera summary from the structured perception output.",
+      "page": 22,
+      "index": 6,
+      "width": 986,
+      "height": 1052
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23376v2/fig-007.webp",
+      "caption": "Figure 5 Qualitative comparison on PAI-Bench.",
+      "page": 10,
+      "index": 7,
+      "width": 883,
+      "height": 641
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23376v2/fig-008.webp",
+      "caption": "Figure 1 Overview of the data curation pipeline. (a) shows the multi-stage filtering and balancing flow from raw aggregation (∼3M clips) to training-ready splits (SFT, RL, and A2V data). (b) Task-aware quota allocation: head tasks are capped at 8–15%, body tasks are uniformly sampled at 40–50%, and long-tail tasks are fully preserved to maximize task diversity. (c) Dataset and robot type distribution: the left ring shows the original composition and the right ring shows the rebalanced result after hierarchical sampling. (d) Physics-aware video captioning pipeline: a perception module (Qwen3-VL 32B) extracts structured physical attributes, followed by a writing module (Qwen3 32B FP8) that generates four-phase captions covering scene setup, action detail, state transition, and camera summary.",
+      "page": 3,
+      "index": 8,
+      "width": 970,
+      "height": 399
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23376v2/fig-009.webp",
+      "caption": "Figure 6 Vision-action alignment verification. Calibrated action signals are rendered as semi-transparent action maps and overlaid onto video frames. Samples with spatial deviation between projected trajectories and observed robot motion are identified and removed.",
+      "page": 18,
+      "index": 9,
+      "width": 986,
+      "height": 564
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23376v2/fig-010.webp",
+      "caption": "Figure 11 Stage 2 captioning example 2. Physics-grounded narrative synthesis capturing fine-grained manipulation dynamics and causal state transitions.",
+      "page": 23,
+      "index": 10,
+      "width": 986,
+      "height": 498
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23376v2/fig-011.webp",
+      "caption": "Figure 2 Two-stage training pipeline. Stage 1: SFT on the DiT to predict future frames from observations and instructions. Stage 2: generate N candidates, score via physics checklist, and apply DPO via LoRA on frozen DiT weights.",
+      "page": 4,
+      "index": 11,
+      "width": 986,
+      "height": 548
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23376v2/fig-012.webp",
+      "caption": "Figure 7 Stage 1 captioning example 1. Structured perception output showing extracted physical attributes, object identities, and spatial relations.",
+      "page": 19,
+      "index": 12,
+      "width": 986,
+      "height": 1106
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23376v2/fig-013.webp",
+      "caption": "Figure 12 Zero-shot qualitative comparison on EZSbench. Baseline models exhibit placement errors (Wan-2.5, Veo 3.1, WoW), contactless grasping (Sora v2), and geometric collapse during contact interactions (Giga R0, Veo 3.1). Our method (bottom row) correctly follows compositional instructions and maintains physical plausibility.",
+      "page": 24,
+      "index": 13,
+      "width": 986,
+      "height": 714
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23376v2/fig-014.webp",
+      "caption": "Figure 4 Architecture of the action-conditioned video generation model. We selectively duplicate DiT blocks as parallel context blocks to process action maps, and fuse their outputs residually into the main DiT.",
+      "page": 9,
+      "index": 14,
+      "width": 970,
+      "height": 401
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23376v2/fig-015.webp",
+      "caption": "Figure 8 Stage 1 captioning example 2. The perception module identifies robot morphology, object properties, and contact events from the video sequence.",
+      "page": 20,
+      "index": 15,
+      "width": 986,
+      "height": 1119
+    }
+  ]
+}

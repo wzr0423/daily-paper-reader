@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.23610v1/fig-001.webp",
+      "caption": "Table 1: Overall performance across experimental conditions on WebArena (n=812 tasks). Brackets show Wilson 95% confidence intervals. Steps are capped at 30 per task.",
+      "page": 6,
+      "index": 1,
+      "width": 829,
+      "height": 206
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23610v1/fig-002.webp",
+      "caption": "Figure 4: Generalized environment map structure. A synthetic map example demonstrating the various node types and edge relationships.",
+      "page": 15,
+      "index": 2,
+      "width": 890,
+      "height": 824
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23610v1/fig-003.webp",
+      "caption": "Figure 2: (a) Overall end-to-end task success on WebArena Verified. Bars correspond to the three experimental conditions (Baseline, Trajectory access, Environment map access). n=812 tasks. (b) Success rate by environment (single-site tasks). The x-axis labels match the benchmark environments from §3.1: ECommerce denotes the Magento Storefront tasks (n=187), CMS denotes the Magento Admin tasks (n=182), GitLab denotes GitLab CE (n=180), Map denotes OpenStreetMap (n=109), and Reddit denotes the Postmill forum (n=106). (c) Generalization vs. demonstration coverage. Success rates on tasks that do vs. do not have a human demonstration trace (trace-covered: n=179; non-trace: n=633).",
+      "page": 7,
+      "index": 3,
+      "width": 898,
+      "height": 257
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23610v1/fig-004.webp",
+      "caption": "Figure 1: Environment map framework. The system extracts structured spatial and semantic knowledge from multimodal data (e.g., traces and videos) to build an environment map. The map serves as a knowledge base for the agent during task execution, informing its action–observation loop. Solid black lines indicate pathways used in our experiments; gray lines indicate optional pathways not used, such as human-in-the-loop edits and map updates from agent traces, disabled to maintain a controlled experimental setting.",
+      "page": 3,
+      "index": 4,
+      "width": 806,
+      "height": 311
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23610v1/fig-005.webp",
+      "caption": "Figure 3: (a) Aggregate tool usage by experimental condition. Stacked bars show total tool calls by type across all n=812 tasks. (b) Mean tool calls per task by environment and outcome. Grouped bars show average tool calls for each condition, split by task outcome and environment.",
+      "page": 8,
+      "index": 5,
+      "width": 718,
+      "height": 275
+    },
+    {
+      "url": "assets/figures/arxiv/2603.23610v1/fig-006.webp",
+      "caption": "Figure 5: GitLab environment map (curated subset). A curated 8-context, 42-action subset of the full 96-context GitLab environment map derived from 41 WebArena task trajectories. This visualization shows representative contexts including the main dashboard, search page, project views, and user settings. The density of connections illustrates the navigational structure captured from real agent interactions, while the mix of taken (orange) and potential (green) actions demonstrates how parameterization expands the action space beyond observed instances.",
+      "page": 16,
+      "index": 6,
+      "width": 890,
+      "height": 825
+    }
+  ]
+}
