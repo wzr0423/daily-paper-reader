@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.22126v2/fig-001.webp",
+      "caption": "Figure 4: Failure boundary in friction-mass space (Franka 20K). Green dots: success, red dots: failure (3K subsample shown for clarity). The solid curve shows the logistic decision boundary µ∗(m). The region left of the boundary (low friction) is the danger zone.",
+      "page": 6,
+      "index": 1,
+      "width": 510,
+      "height": 492
+    },
+    {
+      "url": "assets/figures/arxiv/2603.22126v2/fig-002.webp",
+      "caption": "Table 9: Franka failure dictionary schema (26 fields per experiment).",
+      "page": 11,
+      "index": 2,
+      "width": 408,
+      "height": 527
+    },
+    {
+      "url": "assets/figures/arxiv/2603.22126v2/fig-003.webp",
+      "caption": "Table 12: Octo-Small VLA: per-variant results on 68 scenarios. SR = success rate.",
+      "page": 11,
+      "index": 3,
+      "width": 602,
+      "height": 413
+    },
+    {
+      "url": "assets/figures/arxiv/2603.22126v2/fig-004.webp",
+      "caption": "Figure 1: ROBOGATE two-stage adaptive sampling pipeline. Stage 1 performs uniform Latin Hypercube Sampling across the 8D parameter space (20K experiments: Franka 10K + UR5e 10K). Stage 2 concentrates 10K boundary-focused experiments in the 30–70% success rate transition zone identified from Stage 1 results.",
+      "page": 4,
+      "index": 4,
+      "width": 510,
+      "height": 264
+    },
+    {
+      "url": "assets/figures/arxiv/2603.22126v2/fig-005.webp",
+      "caption": "Table 2: Experimental configurations for the three evaluation campaigns.",
+      "page": 4,
+      "index": 5,
+      "width": 508,
+      "height": 255
+    },
+    {
+      "url": "assets/figures/arxiv/2603.22126v2/fig-006.webp",
+      "caption": "Figure 2: Cross-robot comparison between Franka Panda and UR5e. (a) Failure mode distribution: UR5e exhibits only grasp_miss failures due to suction gripper design. (b) Perparameter success rate comparison on shared dimensions, showing UR5e consistently outperforms Franka.",
+      "page": 5,
+      "index": 6,
+      "width": 508,
+      "height": 308
+    },
+    {
+      "url": "assets/figures/arxiv/2603.22126v2/fig-007.webp",
+      "caption": "Figure 3: Success rate heatmap across the friction × mass parameter plane (Franka, 20K experiments). The dashed white curve shows the logistic regression decision boundary (SR = 50%). Low friction and high mass regions (lower-left) exhibit near-zero success rates.",
+      "page": 5,
+      "index": 7,
+      "width": 510,
+      "height": 392
+    }
+  ]
+}

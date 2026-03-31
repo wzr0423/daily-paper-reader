@@ -1,0 +1,94 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.22876v1/fig-001.webp",
+      "caption": "Table 1: Factorized domain randomization results under Simulation OOD and zeroshot real-world evaluation across five tasks.",
+      "page": 11,
+      "index": 1,
+      "width": 718,
+      "height": 414
+    },
+    {
+      "url": "assets/figures/arxiv/2603.22876v1/fig-002.webp",
+      "caption": "Table 7: Impact of photorealistic and physical-realistic fidelity on zero-shot real-world policy generalization. Default denotes high-fidelity rendering with ray-tracing enabled and standard physics settings. All experiments are trained using the All Factors domain randomization configuration.",
+      "page": 25,
+      "index": 2,
+      "width": 712,
+      "height": 475
+    },
+    {
+      "url": "assets/figures/arxiv/2603.22876v1/fig-003.webp",
+      "caption": "Table 6: Frame-wise domain randomization results under zero-shot real-world evaluation across five tasks.",
+      "page": 25,
+      "index": 3,
+      "width": 712,
+      "height": 408
+    },
+    {
+      "url": "assets/figures/arxiv/2603.22876v1/fig-004.webp",
+      "caption": "Table 8: RL fine-tuning results under zero-shot real-world evaluation across five tasks.",
+      "page": 26,
+      "index": 4,
+      "width": 712,
+      "height": 383
+    },
+    {
+      "url": "assets/figures/arxiv/2603.22876v1/fig-005.webp",
+      "caption": "Fig. 4: Model architecture of OpenVLA-OFT.",
+      "page": 21,
+      "index": 5,
+      "width": 725,
+      "height": 302
+    },
+    {
+      "url": "assets/figures/arxiv/2603.22876v1/fig-006.webp",
+      "caption": "Table 4: Task descriptions and average step counts for the five evaluation tasks.",
+      "page": 21,
+      "index": 6,
+      "width": 804,
+      "height": 273
+    },
+    {
+      "url": "assets/figures/arxiv/2603.22876v1/fig-007.webp",
+      "caption": "Fig. 1: Overview of our framework for analyzing Sim2Real generalization in VisionLanguage-Action (VLA) models. We study how different Sim2Real techniques, including domain randomization, rendering fidelity, and reinforcement learning fine-tuning, influence generalization across Vision, Semantics, and Execution under both simulation OOD and real-world evaluations.",
+      "page": 2,
+      "index": 7,
+      "width": 721,
+      "height": 487
+    },
+    {
+      "url": "assets/figures/arxiv/2603.22876v1/fig-008.webp",
+      "caption": "Fig. 2: Real-world manipulation setup and randomized factors used in our experiments. Left: the physical platform with robot arms, camera, lighting, objects, and distractors. Right: examples of variations including object positions, lighting, backgrounds, object instances, and distractor configurations.",
+      "page": 10,
+      "index": 8,
+      "width": 723,
+      "height": 284
+    },
+    {
+      "url": "assets/figures/arxiv/2603.22876v1/fig-009.webp",
+      "caption": "Fig. 3: Rendering fidelity analysis. (a) Quantitative results showing the impact of photorealism and physical realism on Sim-OOD and real-world success rates. (b) Example renderings under different photorealism levels (Low, Medium, High).",
+      "page": 14,
+      "index": 9,
+      "width": 717,
+      "height": 225
+    },
+    {
+      "url": "assets/figures/arxiv/2603.22876v1/fig-010.webp",
+      "caption": "Table 2: Results of randomization granularity. ∆ denotes the gain of frame-wise over episode-wise.",
+      "page": 12,
+      "index": 10,
+      "width": 714,
+      "height": 217
+    },
+    {
+      "url": "assets/figures/arxiv/2603.22876v1/fig-011.webp",
+      "caption": "Table 5: Factorized domain randomization results under zero-shot real-world evaluation on five tasks.",
+      "page": 24,
+      "index": 11,
+      "width": 712,
+      "height": 1012
+    }
+  ]
+}
