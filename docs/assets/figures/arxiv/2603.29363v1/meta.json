@@ -1,0 +1,86 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.29363v1/fig-001.webp",
+      "caption": "Figure 2.: Required manipulation precision of ±0.75mm for screw removal within the workspace (900× 400× 750mm, width × depth × height).",
+      "page": 6,
+      "index": 1,
+      "width": 681,
+      "height": 429
+    },
+    {
+      "url": "assets/figures/arxiv/2603.29363v1/fig-002.webp",
+      "caption": "Figure 9.: A scene of calibration.",
+      "page": 11,
+      "index": 2,
+      "width": 681,
+      "height": 529
+    },
+    {
+      "url": "assets/figures/arxiv/2603.29363v1/fig-003.webp",
+      "caption": "Figure 3.: Associated challenges in the proposed system.",
+      "page": 7,
+      "index": 3,
+      "width": 850,
+      "height": 267
+    },
+    {
+      "url": "assets/figures/arxiv/2603.29363v1/fig-004.webp",
+      "caption": "Figure 8.: The calibration jig and the driver-hand.",
+      "page": 10,
+      "index": 4,
+      "width": 850,
+      "height": 468
+    },
+    {
+      "url": "assets/figures/arxiv/2603.29363v1/fig-005.webp",
+      "caption": "Figure 12.: Robotic disassembly for actual air conditioner outdoor unit.",
+      "page": 14,
+      "index": 5,
+      "width": 681,
+      "height": 198
+    },
+    {
+      "url": "assets/figures/arxiv/2603.29363v1/fig-006.webp",
+      "caption": "Figure 11.: Target workpieces.",
+      "page": 14,
+      "index": 6,
+      "width": 681,
+      "height": 387
+    },
+    {
+      "url": "assets/figures/arxiv/2603.29363v1/fig-007.webp",
+      "caption": "Figure 10.: The acquired calibration dataset.",
+      "page": 12,
+      "index": 7,
+      "width": 681,
+      "height": 373
+    },
+    {
+      "url": "assets/figures/arxiv/2603.29363v1/fig-008.webp",
+      "caption": "Figure 6.: Test Evaluation Gauge (TEG) used for the preliminary evaluation. The gauge replicates the size of an air conditioner outdoor unit and provides controlled pose variations (in-plane rotation ±4◦ and tilt ±6◦).",
+      "page": 9,
+      "index": 8,
+      "width": 850,
+      "height": 517
+    },
+    {
+      "url": "assets/figures/arxiv/2603.29363v1/fig-009.webp",
+      "caption": "Figure 1.: Overview of the automated disassembly system.",
+      "page": 5,
+      "index": 9,
+      "width": 596,
+      "height": 460
+    },
+    {
+      "url": "assets/figures/arxiv/2603.29363v1/fig-010.webp",
+      "caption": "Figure 14.: Robotic disassembly for actual microwave oven.",
+      "page": 16,
+      "index": 10,
+      "width": 681,
+      "height": 204
+    }
+  ]
+}

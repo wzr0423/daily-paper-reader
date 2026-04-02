@@ -1,0 +1,182 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.24318v1/fig-001.webp",
+      "caption": "Fig. 1: Deep learning for robotic manipulator motion planning. (a, b) Point cloud networks (PCNets) for End-to-end (E2E) planning [1], [2] (Section V-A). (c) Variational autoencoders (VAEs) [3], and (d) normalizing flows [4] for informed sampling (Section V-C). (e) Multilayer perceptions (MLPs) for trajectory optimization [5] (Section V-D). (f) Convolutional neural networks (CNNs) for E2E planning [6] (Section V-A). (g) Generative adversarial networks (GANs) for constraint manifold learning [7] (Section V-C). (h) MLPs for trajectory optimization [8] (Section V-D). (i) Graph neural networks (GNNs) for collision checking [9] (Section V-E). (j) MLPs for steering [10] (Section V-B2). (k) VAEs for trajectory optimization [11] (Section V-D). (l) CNNs for collision checking [12] (Section V-E).",
+      "page": 1,
+      "index": 1,
+      "width": 429,
+      "height": 580
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24318v1/fig-002.webp",
+      "caption": "TABLE V: The two main categories of sampling-based planning algorithms for motion planning of robotic manipulators, their advanced variants, algorithmic primitives, and limitations.",
+      "page": 6,
+      "index": 2,
+      "width": 1060,
+      "height": 236
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24318v1/fig-003.webp",
+      "caption": "TABLE VII: Schematic of basic Deep learning frameworks, their characteristics, and their potential for improving various components of classical planning algorithms for robotic manipulators.",
+      "page": 11,
+      "index": 3,
+      "width": 1079,
+      "height": 456
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24318v1/fig-004.webp",
+      "caption": "TABLE XV: Overview of the state-of-the-art of deep learning for improving collision checking, including the metrics reported relative to evaluated benchmark methods, and each approach’s primary contribution to robotic manipulator motion planning.",
+      "page": 26,
+      "index": 4,
+      "width": 1081,
+      "height": 829
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24318v1/fig-005.webp",
+      "caption": "Fig. 8: Deep learning application in manipulator planning.",
+      "page": 15,
+      "index": 5,
+      "width": 1060,
+      "height": 1467
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24318v1/fig-006.webp",
+      "caption": "Fig. 12: Possible methods to enhance the safety of neural motion planners: (a) Constraint-aware neural motion planning [241]. (b) Safety filters [324]. (c) Digital twins [389].",
+      "page": 30,
+      "index": 6,
+      "width": 1069,
+      "height": 284
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24318v1/fig-007.webp",
+      "caption": "Fig. 11: Possible methods to improve the generalizability of neural motion planners: (a) LLMs for end-to-end planning [330]. (b) Large-scale synthetic dataset generation [384].",
+      "page": 29,
+      "index": 7,
+      "width": 513,
+      "height": 345
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24318v1/fig-008.webp",
+      "caption": "TABLE XII: Overview of the state-of-the-art of deep learning for improving the steering primitive, including the planning metrics reported relative to evaluated benchmark methods, and each approach’s primary contribution to robotic manipulator motion planning.",
+      "page": 22,
+      "index": 8,
+      "width": 1081,
+      "height": 242
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24318v1/fig-009.webp",
+      "caption": "TABLE I: Overview of existing survey papers on robotic motion planning, their scope, focus, and limitations compared to this paper.",
+      "page": 3,
+      "index": 9,
+      "width": 1081,
+      "height": 388
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24318v1/fig-010.webp",
+      "caption": "Fig. 3: An example of a robotic manipulator’s autonomy stack.",
+      "page": 3,
+      "index": 10,
+      "width": 477,
+      "height": 348
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24318v1/fig-011.webp",
+      "caption": "Fig. 14: Human-robot intelligent collaboration for disassembly. (a) Desktop disassembly. (b) Electric-vehicle battery disassembly [447].",
+      "page": 33,
+      "index": 11,
+      "width": 537,
+      "height": 459
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24318v1/fig-012.webp",
+      "caption": "TABLE IX: Overview of the state-of-the-art of utilizing deep learning for end-to-end planning, including the planning metrics reported relative to evaluated benchmark methods, and each approach’s primary contribution to robotic manipulator motion planning.",
+      "page": 18,
+      "index": 12,
+      "width": 1081,
+      "height": 1059
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24318v1/fig-013.webp",
+      "caption": "TABLE XIII: Overview of the state-of-the-art of deep learning for improving constrained sampling-based planning, including the planning metrics reported relative to evaluated benchmark methods, and each approach’s primary contribution to robotic manipulator motion planning.",
+      "page": 23,
+      "index": 13,
+      "width": 1081,
+      "height": 497
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24318v1/fig-014.webp",
+      "caption": "TABLE VIII: Schematic of various deep generative models, their characteristics, and their applications in improving various components of classical planning algorithms for robotic manipulators. The flow matching figure is adopted from [199].",
+      "page": 13,
+      "index": 14,
+      "width": 1074,
+      "height": 645
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24318v1/fig-015.webp",
+      "caption": "TABLE VI: The two main categories of trajectory optimization planning algorithms for robotic manipulators, their constituent algorithms, characteristics, and limitations.",
+      "page": 8,
+      "index": 15,
+      "width": 1070,
+      "height": 200
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24318v1/fig-016.webp",
+      "caption": "TABLE X: State-of-the-art literature on utilizing various deep learning frameworks to improve various components of samplingbased motion planning algorithms for robotic manipulator motion planning.",
+      "page": 19,
+      "index": 16,
+      "width": 967,
+      "height": 299
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24318v1/fig-017.webp",
+      "caption": "Fig. 13: Robot-assisted surgery. (a) Asensus Senhance surgical robot platform [421]. (b) Autonomous robot for autonomous laparoscopic soft tissue anastomosis [425]. (c) Robot-assisted surgery robot transformer (RT-RAS) control loop [424].",
+      "page": 32,
+      "index": 17,
+      "width": 526,
+      "height": 695
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24318v1/fig-018.webp",
+      "caption": "Fig. 10: Data representation and training objectives of neural motion planners for robotic manipulators. The left column illustrates the input and output modalities (data representation) and the right column demonstrates the corresponding loss function (training objective) for training and deploying neural motion planners. Classical motion planners such as cuRobo [138] and planners from OMPL [375], along with collision checkers from FCL [147], are mainly used to generate oracle datasets for training neural motion planners.",
+      "page": 27,
+      "index": 18,
+      "width": 1064,
+      "height": 539
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24318v1/fig-019.webp",
+      "caption": "TABLE XIV: Overview of the state-of-the-art of deep learning for improving trajectory optimization, including the planning metrics reported relative to evaluated benchmark methods, and each approach’s primary contribution to robotic manipulator motion planning.",
+      "page": 24,
+      "index": 19,
+      "width": 1081,
+      "height": 777
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24318v1/fig-020.webp",
+      "caption": "TABLE XVII: A qualitative comparison between neural motion planning and classical motion planning for robotic manipulators.",
+      "page": 31,
+      "index": 20,
+      "width": 537,
+      "height": 270
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24318v1/fig-021.webp",
+      "caption": "TABLE XI: Overview of the state-of-the-art of utilizing deep learning frameworks for informed sampling, including the planning metrics reported relative to evaluated benchmark methods, and each approach’s primary contribution to robotic manipulator motion planning.",
+      "page": 20,
+      "index": 21,
+      "width": 1081,
+      "height": 952
+    },
+    {
+      "url": "assets/figures/arxiv/2603.24318v1/fig-022.webp",
+      "caption": "Fig. 9: A comparison of neural motion planners with benchmark planners across various planning complexities for out-ofdistribution planning scenarios. (a) Planning metrics were used to quantify the performance of motion planners. (b) Environment complexity: SIMPNet [281] performance compared with benchmark planners (Bi-RRT [50], IRRT* [61], MPNet [20], KGPlanner [282]) across different scenarios. (c) Degree of freedom: VQ-MPT [3] performance compared with benchmark planners (RRT*, IRRT* [61], BIT* [65], MPNet [20]) across different scenarios. (d) Obstacle type: MPD [19] performance compared with benchmark planners (Bi-RRT [50], GPMP [91]) across different scenarios.",
+      "page": 16,
+      "index": 22,
+      "width": 964,
+      "height": 363
+    }
+  ]
+}

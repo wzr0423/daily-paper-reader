@@ -1,0 +1,30 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.25725v1/fig-001.webp",
+      "caption": "Fig. 3: Simulation Tasks. SOFTMIMICGEN is used to generate new demonstrations across 10 challenging tasks involving 4 distinct robot embodiments: (a-b) GR1 humanoid, (c-f) Franka arm, (g-h) dVRK surgical robot, and (i-j) bimanual YAM arms. These tasks demand high precision and fine-grained manipulation to be successfully executed.",
+      "page": 5,
+      "index": 1,
+      "width": 1002,
+      "height": 202
+    },
+    {
+      "url": "assets/figures/arxiv/2603.25725v1/fig-002.webp",
+      "caption": "TABLE I: Policy Performance on Source and Generated Datasets. Success rates of visuomotor policies trained on source demonstrations and on SOFTMIMICGEN-generated datasets. Success rates reported as the maximum over three training seeds.",
+      "page": 6,
+      "index": 2,
+      "width": 514,
+      "height": 243
+    },
+    {
+      "url": "assets/figures/arxiv/2603.25725v1/fig-003.webp",
+      "caption": "Fig. 2: SOFTMIMICGEN System Pipeline. (Left) Human-teleoperated demonstrations are segmented into object-centric subtasks using manual annotations or heuristic signals, forming a library of source segments. (Right) Given a new target scene, SOFTMIMICGEN (i) observes the current deformable state, (ii) performs non-rigid registration to establish correspondence and a warp field between the source and target geometries (correspondence + warp field), (iii) selects the source segment with the lowest registration cost and applies the resulting warp field to the end-effector trajectory (warp trajectory; source end-effector trajectory in light arrows, warped trajectory in darker arrows), and (iv) executes the warped trajectory in the target environment.",
+      "page": 4,
+      "index": 3,
+      "width": 864,
+      "height": 395
+    }
+  ]
+}
