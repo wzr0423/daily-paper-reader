@@ -1,0 +1,86 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.18336v2/fig-001.webp",
+      "caption": "Figure 3: Runtime pipeline of ManiDreams. The planning loop (yellow): The solver generates candidate actions, predicts their DRIS outcomes via TSIP, and selects the best action satisfying the caging constraint; the loop may iterate for refinement. The execution loop (green): The selected action is appended to an action chunk; once complete, the chunk is dispatched to the real robot or simulator, which observes the outcome and produces an updated DRIS for the next planning cycle.",
+      "page": 6,
+      "index": 1,
+      "width": 982,
+      "height": 346
+    },
+    {
+      "url": "assets/figures/arxiv/2603.18336v2/fig-002.webp",
+      "caption": "Figure 8: Real-robot deployment. Left : Cluttered push-picking (corn, avocado, chicken leg, croissant), where the robot pushes obstructing objects aside before grasping the target. Right : Scooping via wall corner for flat objects (steak, pancake, thin box, pizza). In both tasks, ManiDreams plans with learning-based TSIP and pixel-based DRIS (red region behind the object) for consecutive action chunks.",
+      "page": 11,
+      "index": 2,
+      "width": 994,
+      "height": 367
+    },
+    {
+      "url": "assets/figures/arxiv/2603.18336v2/fig-003.webp",
+      "caption": "Figure 9: Success rate under increasing perturbations across three ManiSkill tasks (top to bottom: PushCube, PickCube, PushT ). Left : Observation noise (σ in meters). Center : Observation delay (in simulation steps). Right : Physics perturbation severity. Shaded regions indicate one standard deviation over 10 runs.",
+      "page": 11,
+      "index": 3,
+      "width": 994,
+      "height": 347
+    },
+    {
+      "url": "assets/figures/arxiv/2603.18336v2/fig-004.webp",
+      "caption": "Figure 1: ManiDreams unifies perceptual, parametric, and structural uncertainties through Task-specific Intuitive Physics (TSIP) and Domain-randomized Instance Set (DRIS). Left : Simulation-based TSIP across standard tasks (PushCube, PickCube, PushT ), where the overlaid objects are DRIS instances. Right : A card picking task and a pushing task driven by simulation-based and learning-based TSIPs.",
+      "page": 2,
+      "index": 4,
+      "width": 1132,
+      "height": 430
+    },
+    {
+      "url": "assets/figures/arxiv/2603.18336v2/fig-005.webp",
+      "caption": "Figure 6: Card picking example with a simulation-based TSIP and a Geometric3DCage (transparent green sphere).",
+      "page": 10,
+      "index": 5,
+      "width": 587,
+      "height": 340
+    },
+    {
+      "url": "assets/figures/arxiv/2603.18336v2/fig-006.webp",
+      "caption": "Figure 7: Dynamic ball catching example with a simulation-based TSIP and a pretrained PPO sampler.",
+      "page": 10,
+      "index": 6,
+      "width": 580,
+      "height": 362
+    },
+    {
+      "url": "assets/figures/arxiv/2603.18336v2/fig-007.webp",
+      "caption": "Figure 10: Wall-clock time per control step on PushCube for increasing N×m configurations and a diffusionbased TSIP.",
+      "page": 13,
+      "index": 7,
+      "width": 584,
+      "height": 334
+    },
+    {
+      "url": "assets/figures/arxiv/2603.18336v2/fig-008.webp",
+      "caption": "Figure 4: Minimal working example. Three steps configure and launch the full sample-predict-constrain pipeline. Setting num samples=1 and omitting the cage reduces the pipeline to direct policy execution, serving as the baseline in all experiments.",
+      "page": 8,
+      "index": 8,
+      "width": 598,
+      "height": 385
+    },
+    {
+      "url": "assets/figures/arxiv/2603.18336v2/fig-009.webp",
+      "caption": "Figure 2: Three-layer architecture. Layer 1 defines abstract interfaces for the four core abstractions, analogous to OMPL’s StateSpace, StatePropagator, StateValidityChecker, and Planner. Layer 2 provides concrete implementations unified behind a single environment class. Layer 3 is user-facing: adding a new task requires only populating this layer. Dashed arrows indicate inheritance.",
+      "page": 4,
+      "index": 9,
+      "width": 486,
+      "height": 607
+    },
+    {
+      "url": "assets/figures/arxiv/2603.18336v2/fig-010.webp",
+      "caption": "Figure 5: Object pushing with circular trajectory following using different TSIPs. Random target objects are selected from the YCB dataset Calli et al. [2017]. Top: Simulation-based TSIP. Bottom: Learning-based TSIP based on a pre-trained diffusion model.",
+      "page": 9,
+      "index": 10,
+      "width": 598,
+      "height": 402
+    }
+  ]
+}

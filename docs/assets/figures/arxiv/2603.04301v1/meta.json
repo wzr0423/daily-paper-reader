@@ -1,0 +1,70 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.04301v1/fig-001.webp",
+      "caption": "Fig. 15. The normal contact forces of all fingertips in an example run.",
+      "page": 11,
+      "index": 1,
+      "width": 505,
+      "height": 379
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04301v1/fig-002.webp",
+      "caption": "Fig. 14. Experimental results of 19 runs of in-hand rotation of the cylinder, plotted as the mean and standard deviation. Trajectory tracking errors are small.",
+      "page": 11,
+      "index": 2,
+      "width": 496,
+      "height": 381
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04301v1/fig-003.webp",
+      "caption": "Fig. 16. The tangential contact forces of all fingertips in an example run.",
+      "page": 11,
+      "index": 3,
+      "width": 505,
+      "height": 379
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04301v1/fig-004.webp",
+      "caption": "Fig. 13. The inset shows the evolution of the contact point on the robot’s index fingertip during one execution of in-hand rolling manipulation.",
+      "page": 10,
+      "index": 4,
+      "width": 512,
+      "height": 466
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04301v1/fig-005.webp",
+      "caption": "Fig. 11. Snapshots of in-hand rolling manipulation to rotate the cylinder.",
+      "page": 10,
+      "index": 5,
+      "width": 512,
+      "height": 392
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04301v1/fig-006.webp",
+      "caption": "Fig. 10. Left: A cylindrical object with a central axis. Right: An axis that allows only vertical and rotational motions of the cylindrical object.",
+      "page": 10,
+      "index": 6,
+      "width": 529,
+      "height": 235
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04301v1/fig-007.webp",
+      "caption": "TABLE I FRAME DEFINITIONS",
+      "page": 4,
+      "index": 7,
+      "width": 518,
+      "height": 379
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04301v1/fig-008.webp",
+      "caption": "TABLE II NOTATION FROM [47], [81]",
+      "page": 5,
+      "index": 8,
+      "width": 518,
+      "height": 675
+    }
+  ]
+}

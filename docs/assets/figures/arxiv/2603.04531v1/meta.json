@@ -1,0 +1,86 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.04531v1/fig-001.webp",
+      "caption": "Fig. 11: Screenshots comparing ours (top) and proprioception baseline (bottom).",
+      "page": 11,
+      "index": 1,
+      "width": 529,
+      "height": 335
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04531v1/fig-002.webp",
+      "caption": "Fig. 10: objects used in data collection and policy evaluation",
+      "page": 11,
+      "index": 2,
+      "width": 529,
+      "height": 390
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04531v1/fig-003.webp",
+      "caption": "TABLE II: We compare the performance improvement over various baselines on z-axis in hand rotation, under the same training setting in simulation. Specifically, compared to [11], we first demonstrate that Asymmetric Actor critic with latent supervision (AAC) improves performance in simulation significantly. Further, we demonstrate that additional input modalities such as object shape and pose produce significant improvements in simulation, which is a pre-requisite for tactile distillation to outperform the baselines.",
+      "page": 7,
+      "index": 3,
+      "width": 522,
+      "height": 244
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04531v1/fig-004.webp",
+      "caption": "Fig. 2: (left) Privileged latent distillation is a two stage approach to training policies in simulation. An oracle policy with privileged information is trained in stage 1, then it is distilled into a deployable policy in stage 2 (in simulation). (right) Asymmetric Actor Critic is a single stage approach where two networks actor and critic respectively are trained simultaneously. The critic is provided with privileged information and learns the value function, while the actor is only given deployable partial sensor information",
+      "page": 3,
+      "index": 4,
+      "width": 860,
+      "height": 273
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04531v1/fig-005.webp",
+      "caption": "Fig. 8: (top) Real world comparison of in-hand rotation policy performance over 10 trials with three cylinder like objects. PTLD consistently outperforms all baselines by a large margin (bottom) We observe that with PTLD, the tactile policies show recovery behavior where finger gaiting patterns change to keep the",
+      "page": 8,
+      "index": 5,
+      "width": 1076,
+      "height": 431
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04531v1/fig-006.webp",
+      "caption": "Fig. 9: Visualization of object pose reconstruction from tactile latent decoder: The red transparent cylinder denotes the predicted object pose prediction, while the gray translucent cylinder denotes the true object pose recorded from the instrumented cell during deployment. Specifically, we compose the predictions over each second to visualize the cumulative tactile object pose reconstruction over time.",
+      "page": 8,
+      "index": 6,
+      "width": 967,
+      "height": 198
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04531v1/fig-007.webp",
+      "caption": "Fig. 3: A simplified illustration of PTLD. Once we have a privileged sensor policy trained in simulation using AAC, first we collect demonstrations in the real world by deploying the policy, and additionally collect deployment sensor observations. Then, we train a deployment encoder (tactile encoder in this case) to recover the latents from the privileged sensor policy using an offline dataset.",
+      "page": 4,
+      "index": 7,
+      "width": 752,
+      "height": 358
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04531v1/fig-008.webp",
+      "caption": "Fig. 12: Visualization of simulation in-hand reorientation",
+      "page": 12,
+      "index": 8,
+      "width": 1076,
+      "height": 262
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04531v1/fig-009.webp",
+      "caption": "Fig. 13: Visualization of real world tactile in-hand reorientation",
+      "page": 12,
+      "index": 9,
+      "width": 1076,
+      "height": 422
+    },
+    {
+      "url": "assets/figures/arxiv/2603.04531v1/fig-010.webp",
+      "caption": "Fig. 5: Tactile encoders for manipulation tasks: a) For in-hand rotation, we concatenate a history of tactile signals and sensor positions, and encode them using a 1D temporal convolution network to predict the tactile latents. b) For in-hand reorientation, we concatenate, tactile signals, proprioception, goal orientations and past latents and embed them with a causal transformer to produce future tactile latents.",
+      "page": 5,
+      "index": 10,
+      "width": 527,
+      "height": 298
+    }
+  ]
+}

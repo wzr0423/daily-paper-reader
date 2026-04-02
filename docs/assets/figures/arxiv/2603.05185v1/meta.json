@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.05185v1/fig-001.webp",
+      "caption": "Fig. 1: Overview. (a) Previous static dual-system pipeline. (b) Ours dynamically routes between a high-level VLM and VLA via an independent Critic. The right radar chart highlights our superior success rates over the baseline across diverse scenes. The bottom panels showcase real-world capabilities, notably demonstrating out-of-distribution (OOD) generalization where our system successfully picks and places a cup using an OOD left arm, despite lacking left-arm training data for this task.",
+      "page": 2,
+      "index": 1,
+      "width": 721,
+      "height": 312
+    },
+    {
+      "url": "assets/figures/arxiv/2603.05185v1/fig-002.webp",
+      "caption": "Fig. 6: Qualitative comparison on a long-horizon manipulation task. While the SingleSystem grasps the wrong object and the Dual-System suffers from execution stagnation, our Tri-System successfully completes the continuous multi-step sequence. The bottom plot illustrates the Critic’s real-time progress tracking across sequential subtasks.",
+      "page": 13,
+      "index": 2,
+      "width": 723,
+      "height": 352
+    },
+    {
+      "url": "assets/figures/arxiv/2603.05185v1/fig-003.webp",
+      "caption": "Fig. 5: Qualitative results of real-world evaluations. Our proposed system demonstrates robust capabilities across complex scenarios: (Left) stable, long-horizon manipulation of deformable objects; (Middle) out-of-distribution (OOD) generalization via human-inspired rule to resolve execution stagnation; and (Right) real-time anomaly detection (triggered by the <aci> token) followed by autonomous recovery.",
+      "page": 12,
+      "index": 3,
+      "width": 723,
+      "height": 286
+    },
+    {
+      "url": "assets/figures/arxiv/2603.05185v1/fig-004.webp",
+      "caption": "Fig. 4: Overview of the automated subtask annotation pipeline. Raw end-effector trajectories are processed into candidate waypoints (top right) via geometric filtering and gripper state analysis. Paired with corresponding visual frames, a VLM retrieves precise semantic labels, resulting in the continuous temporal segmentation and subtask annotation shown at the bottom.",
+      "page": 9,
+      "index": 4,
+      "width": 725,
+      "height": 394
+    },
+    {
+      "url": "assets/figures/arxiv/2603.05185v1/fig-005.webp",
+      "caption": "Fig. 2: Overview of the proposed method. Our Tri-System VLA architecture decouples cognitive reasoning from continuous control via event-driven scheduling. System 2 (Brain) uses a VLM to generate semantic subtasks, while System 1 (Cerebellum) translates them into continuous actions. System 3 (Critic) asynchronously monitors execution, detects anomalies, and integrates human-inspired heuristic rules. By triggering the Brain for replanning only upon completion, failure, or interruption, this asynchronous design effectively bypasses VLM inference bottlenecks in robot control.",
+      "page": 5,
+      "index": 5,
+      "width": 723,
+      "height": 356
+    }
+  ]
+}

@@ -1,0 +1,811 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-04-02T03:43:35.996518+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 22,
+    "deep_cap": 6,
+    "deep_selected": 8,
+    "quick_candidates": 51,
+    "quick_skim_target": 11,
+    "quick_selected": 11
+  },
+  "deep_dive": [
+    {
+      "id": "2603.04301v1",
+      "source": "arxiv",
+      "title": "Compliant In-hand Rolling Manipulation Using Tactile Sensing",
+      "abstract": "We investigate in-hand rolling manipulation using a multifingered robot hand, where each finger is compliant and equipped with a tactile fingertip providing contact location and wrench information. We derive the equations of motion for compliant quasistatic in-hand rolling manipulation and formulate a fingertip rolling manipulation controller for multiple fingers to achieve a desired object twist within a grasp. The contact mechanics are demonstrated in simulation and the controller is tested on an experimental robot system.",
+      "authors": [
+        "Huan Weng",
+        "Yifei Chen",
+        "Kevin M. Lynch"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-04T17:21:18+00:00",
+      "link": "https://arxiv.org/pdf/2603.04301v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "controller to achieve desired object twist within a grasp",
+      "llm_evidence_cn": "实现抓取内所需物体扭转的控制器",
+      "llm_evidence": "实现抓取内所需物体扭转的控制器",
+      "canonical_evidence": "实现抓取内所需物体扭转的控制器",
+      "llm_tldr_en": "Derives equations and controllers for compliant in-hand rolling to achieve specific object twists.",
+      "llm_tldr_cn": "推导了顺应性手内滚动操作的方程和控制器，以实现特定的物体扭转动作。",
+      "llm_tldr": "推导了顺应性手内滚动操作的方程和控制器，以实现特定的物体扭转动作。",
+      "llm_tags": [
+        "query:rob-rot"
+      ],
+      "matched_query_tag": "query:rob-rot",
+      "matched_query_text": "learning manipulation policies for twisting motions",
+      "matched_requirement_id": "req-5",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.10971v1",
+      "source": "arxiv",
+      "title": "Contact Coverage-Guided Exploration for General-Purpose Dexterous Manipulation",
+      "abstract": "Deep Reinforcement learning (DRL) has achieved remarkable success in domains with well-defined reward structures, such as Atari games and locomotion. In contrast, dexterous manipulation lacks general-purpose reward formulations and typically depends on task-specific, handcrafted priors to guide hand-object interactions. We propose Contact Coverage-Guided Exploration (CCGE), a general exploration method designed for general-purpose dexterous manipulation tasks. CCGE represents contact state as the intersection between object surface points and predefined hand keypoints, encouraging dexterous hands to discover diverse and novel contact patterns, namely which fingers contact which object regions. It maintains a contact counter conditioned on discretized object states obtained via learned hash codes, capturing how frequently each finger interacts with different object regions. This counter is leveraged in two complementary ways: (1) to assign a count-based contact coverage reward that promotes exploration of novel contact patterns, and (2) an energy-based reaching reward that guides the agent toward under-explored contact regions. We evaluate CCGE on a diverse set of dexterous manipulation tasks, including cluttered object singulation, constrained object retrieval, in-hand reorientation, and bimanual manipulation. Experimental results show that CCGE substantially improves training efficiency and success rates over existing exploration methods, and that the contact patterns learned with CCGE transfer robustly to real-world robotic systems. Project page is https://contact-coverage-guided-exploration.github.io.",
+      "authors": [
+        "Zixuan Liu",
+        "Ruoyi Qiao",
+        "Chenrui Tie",
+        "Xuanwei Liu",
+        "Yunfan Lou",
+        "Chongkai Gao",
+        "Zhixuan Xu",
+        "Lin Shao"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-03-11T16:55:49+00:00",
+      "link": "https://arxiv.org/pdf/2603.10971v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "exploration method for general-purpose dexterous manipulation",
+      "llm_evidence_cn": "通用灵巧操纵的探索方法",
+      "llm_evidence": "通用灵巧操纵的探索方法",
+      "canonical_evidence": "通用灵巧操纵的探索方法",
+      "llm_tldr_en": "CCGE encourages diverse contact patterns to solve general-purpose dexterous manipulation tasks.",
+      "llm_tldr_cn": "CCGE 通过鼓励多样化的接触模式来解决通用的灵巧操纵任务。",
+      "llm_tldr": "CCGE 通过鼓励多样化的接触模式来解决通用的灵巧操纵任务。",
+      "llm_tags": [
+        "query:rob-rot"
+      ],
+      "matched_query_tag": "query:rob-rot",
+      "matched_query_text": "dexterous robotic manipulation for rotating objects",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.12967v1",
+      "source": "arxiv",
+      "title": "Language-Grounded Decoupled Action Representation for Robotic Manipulation",
+      "abstract": "The heterogeneity between high-level vision-language understanding and low-level action control remains a fundamental challenge in robotic manipulation. Although recent methods have advanced task-specific action alignment, they often struggle to generate robust and accurate actions for novel or semantically related tasks. To address this, we propose the Language-Grounded Decoupled Action Representation (LaDA) framework, which leverages natural language as a semantic bridge to connect perception and control. LaDA introduces a fine-grained intermediate layer of three interpretable action primitives--translation, rotation, and gripper control--providing explicit semantic structure for low-level actions. It further employs a semantic-guided soft-label contrastive learning objective to align similar action primitives across tasks, enhancing generalization and motion consistency. An adaptive weighting strategy, inspired by curriculum learning, dynamically balances contrastive and imitation objectives for stable and effective training. Extensive experiments on simulated benchmarks (LIBERO and MimicGen) and real-world demonstrations validate that LaDA achieves strong performance and generalizes effectively to unseen or related tasks.",
+      "authors": [
+        "Wuding Weng",
+        "Tongshu Wu",
+        "Liucheng Chen",
+        "Siyu Xie",
+        "Zheng Wang",
+        "Xing Xu",
+        "Jingkuan Song",
+        "Heng Tao Shen"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-13T13:08:26+00:00",
+      "link": "https://arxiv.org/pdf/2603.12967v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "action primitives including rotation",
+      "llm_evidence_cn": "包含旋转在内的动作原语",
+      "llm_evidence": "包含旋转在内的动作原语",
+      "canonical_evidence": "包含旋转在内的动作原语",
+      "llm_tldr_en": "LaDA decouples actions into translation, rotation, and gripper control to bridge perception and control.",
+      "llm_tldr_cn": "LaDA 将动作解耦为平移、旋转和夹持器控制，建立了感知与控制之间的语义桥梁。",
+      "llm_tldr": "LaDA 将动作解耦为平移、旋转和夹持器控制，建立了感知与控制之间的语义桥梁。",
+      "llm_tags": [
+        "query:rob-rot"
+      ],
+      "matched_query_tag": "query:rob-rot",
+      "matched_query_text": "robotic arm manipulation strategies for rotational tasks",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.15789v1",
+      "source": "arxiv",
+      "title": "Emergent Dexterity via Diverse Resets and Large-Scale Reinforcement Learning",
+      "abstract": "Reinforcement learning in massively parallel physics simulations has driven major progress in sim-to-real robot learning. However, current approaches remain brittle and task-specific, relying on extensive per-task engineering to design rewards, curricula, and demonstrations. Even with this engineering, they often fail on long-horizon, contact-rich manipulation tasks and do not meaningfully scale with compute, as performance quickly saturates when training revisits the same narrow regions of state space. We introduce \\Method, a simple and scalable framework that enables on-policy reinforcement learning to robustly solve a broad class of dexterous manipulation tasks using a single reward function, fixed algorithm hyperparameters, no curricula, and no human demonstrations. Our key insight is that long-horizon exploration can be dramatically simplified by using simulator resets to systematically expose the RL algorithm to the diverse set of robot-object interactions which underlie dexterous manipulation. \\Method\\ programmatically generates such resets with minimal human input, converting additional compute directly into broader behavioral coverage and continued performance gains. We show that \\Method\\ gracefully scales to long-horizon dexterous manipulation tasks beyond the capabilities of existing approaches and is able to learn robust policies over significantly wider ranges of initial conditions than baselines. Finally, we distill \\Method \\ into visuomotor policies which display robust retrying behavior and substantially higher success rates than baselines when transferred to the real world zero-shot. Project webpage: https://omnireset.github.io",
+      "authors": [
+        "Patrick Yin",
+        "Tyler Westenbroek",
+        "Zhengyu Zhang",
+        "Joshua Tran",
+        "Ignacio Dagnino",
+        "Eeshani Shilamkar",
+        "Numfor Mbiziwo-Tiapo",
+        "Simran Bagaria",
+        "Xinlei Liu",
+        "Galen Mullins",
+        "Andrey Kolobov",
+        "Abhishek Gupta"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-16T18:14:36+00:00",
+      "link": "https://arxiv.org/pdf/2603.15789v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Scalable RL for a broad class of dexterous manipulation tasks",
+      "llm_evidence_cn": "用于广泛灵巧操作任务的可扩展强化学习",
+      "llm_evidence": "用于广泛灵巧操作任务的可扩展强化学习",
+      "canonical_evidence": "用于广泛灵巧操作任务的可扩展强化学习",
+      "llm_tldr_en": "This framework uses large-scale RL and diverse resets to solve complex, contact-rich dexterous manipulation tasks.",
+      "llm_tldr_cn": "该框架利用大规模强化学习和多样化重置，解决了复杂的接触密集型灵巧操作任务。",
+      "llm_tldr": "该框架利用大规模强化学习和多样化重置，解决了复杂的接触密集型灵巧操作任务。",
+      "llm_tags": [
+        "query:rob-rot"
+      ],
+      "matched_query_tag": "query:rob-rot",
+      "matched_query_text": "dexterous robotic manipulation for rotating objects",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.15789v2",
+      "source": "arxiv",
+      "title": "Emergent Dexterity via Diverse Resets and Large-Scale Reinforcement Learning",
+      "abstract": "Reinforcement learning in massively parallel physics simulations has driven major progress in sim-to-real robot learning. However, current approaches remain brittle and task-specific, relying on extensive per-task engineering to design rewards, curricula, and demonstrations. Even with this engineering, they often fail on long-horizon, contact-rich manipulation tasks and do not meaningfully scale with compute, as performance quickly saturates when training revisits the same narrow regions of state space. We introduce OmniReset, a simple and scalable framework that enables on-policy reinforcement learning to robustly solve a broad class of dexterous manipulation tasks using a single reward function, fixed algorithm hyperparameters, no curricula, and no human demonstrations. Our key insight is that long-horizon exploration can be dramatically simplified by using simulator resets to systematically expose the RL algorithm to the diverse set of robot-object interactions which underlie dexterous manipulation. OmniReset programmatically generates such resets with minimal human input, converting additional compute directly into broader behavioral coverage and continued performance gains. We show that OmniReset gracefully scales to long-horizon dexterous manipulation tasks beyond the capabilities of existing approaches and is able to learn robust policies over significantly wider ranges of initial conditions than baselines. Finally, we distill OmniReset into visuomotor policies which display robust retrying behavior and substantially higher success rates than baselines when transferred to the real world zero-shot. Project webpage: https://omnireset.github.io",
+      "authors": [
+        "Patrick Yin",
+        "Tyler Westenbroek",
+        "Zhengyu Zhang",
+        "Joshua Tran",
+        "Ignacio Dagnino",
+        "Eeshani Shilamkar",
+        "Numfor Mbiziwo-Tiapo",
+        "Simran Bagaria",
+        "Xinlei Liu",
+        "Galen Mullins",
+        "Andrey Kolobov",
+        "Abhishek Gupta"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-16T18:14:36+00:00",
+      "link": "https://arxiv.org/pdf/2603.15789v2",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "RL framework for contact-rich dexterous manipulation tasks",
+      "llm_evidence_cn": "富接触灵巧操纵任务的强化学习框架",
+      "llm_evidence": "富接触灵巧操纵任务的强化学习框架",
+      "canonical_evidence": "富接触灵巧操纵任务的强化学习框架",
+      "llm_tldr_en": "OmniReset enables robust reinforcement learning for a broad class of dexterous manipulation tasks.",
+      "llm_tldr_cn": "OmniReset 为广泛的灵巧操纵任务实现了鲁棒的强化学习。",
+      "llm_tldr": "OmniReset 为广泛的灵巧操纵任务实现了鲁棒的强化学习。",
+      "llm_tags": [
+        "query:rob-rot"
+      ],
+      "matched_query_tag": "query:rob-rot",
+      "matched_query_text": "dexterous robotic manipulation for rotating objects",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.18336v1",
+      "source": "arxiv",
+      "title": "ManiDreams: An Open-Source Library for Robust Object Manipulation via Uncertainty-aware Task-specific Intuitive Physics",
+      "abstract": "Dynamics models, whether simulators or learned world models, have long been central to robotic manipulation, but most focus on minimizing prediction error rather than confronting a more fundamental challenge: real-world manipulation is inherently uncertain. We argue that robust manipulation under uncertainty is fundamentally an integration problem: uncertainties must be represented, propagated, and constrained within the planning loop, not merely suppressed during training. We present and open-source ManiDreams, a modular framework for uncertainty-aware manipulation planning over intuitive physics models. It realizes this integration through composable abstractions for distributional state representation, backend-agnostic dynamics prediction, and declarative constraint specification for action optimization. The framework explicitly addresses three sources of uncertainty: perceptual, parametric, and structural. It wraps any base policy with a sample-predict-constrain loop that evaluates candidate actions against distributional outcomes, adding robustness without retraining. Experiments on ManiSkill tasks show that ManiDreams maintains robust performance under various perturbations where the RL baseline degrades significantly. Runnable examples on pushing, picking, catching, and real-world deployment demonstrate flexibility across different policies, optimizers, physics backends, and executors. The framework is publicly available at https://github.com/Rice-RobotPI-Lab/ManiDreams",
+      "authors": [
+        "Gaotian Wang",
+        "Kejia Ren",
+        "Andrew S. Morgan",
+        "Kaiyu Hang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-18T22:46:46+00:00",
+      "link": "https://arxiv.org/pdf/2603.18336v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "learned world models for robotic manipulation planning",
+      "llm_evidence_cn": "用于机器人操作规划的学习型世界模型",
+      "llm_evidence": "用于机器人操作规划的学习型世界模型",
+      "canonical_evidence": "用于机器人操作规划的学习型世界模型",
+      "llm_tldr_en": "ManiDreams is an open-source library for uncertainty-aware manipulation planning using intuitive physics world models.",
+      "llm_tldr_cn": "ManiDreams是一个开源库，利用直觉物理世界模型进行不确定性感知下的机器人操作规划。",
+      "llm_tldr": "ManiDreams是一个开源库，利用直觉物理世界模型进行不确定性感知下的机器人操作规划。",
+      "llm_tags": [
+        "query:1:composite"
+      ],
+      "matched_query_tag": "query:1:composite",
+      "matched_query_text": "Papers central to 寻找关于世界动作模型（World Action Model）及相关领域（如模型预测、强化学习）的学术论文。, especially work that connects or combines: r; V; World models in reinforcement learning and robotics; Action-conditioned world models for decision making; Learning latent dynamics for world modeling; Model-based reinforcement learning with world models; Recent advances in world action models for autonomous agents; Action conditioned generative world models for robotics.",
+      "matched_requirement_id": "req-composite-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.18336v2",
+      "source": "arxiv",
+      "title": "ManiDreams: An Open-Source Library for Robust Object Manipulation via Uncertainty-aware Task-specific Intuitive Physics",
+      "abstract": "Dynamics models, whether simulators or learned world models, have long been central to robotic manipulation, but most focus on minimizing prediction error rather than confronting a more fundamental challenge: real-world manipulation is inherently uncertain. We argue that robust manipulation under uncertainty is fundamentally an integration problem: uncertainties must be represented, propagated, and constrained within the planning loop, not merely suppressed during training. We present and open-source ManiDreams, a modular framework for uncertainty-aware manipulation planning over intuitive physics models. It realizes this integration through composable abstractions for distributional state representation, backend-agnostic dynamics prediction, and declarative constraint specification for action optimization. The framework explicitly addresses three sources of uncertainty: perceptual, parametric, and structural. It wraps any base policy with a sample-predict-constrain loop that evaluates candidate actions against distributional outcomes, adding robustness without retraining. Experiments on ManiSkill tasks show that ManiDreams maintains robust performance under various perturbations where the RL baseline degrades significantly. Runnable examples on pushing, picking, catching, and real-world deployment demonstrate flexibility across different policies, optimizers, physics backends, and executors. The framework is publicly available at https://github.com/Rice-RobotPI-Lab/ManiDreams",
+      "authors": [
+        "Gaotian Wang",
+        "Kejia Ren",
+        "Andrew S. Morgan",
+        "Kaiyu Hang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-18T22:46:46+00:00",
+      "link": "https://arxiv.org/pdf/2603.18336v2",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "Uncertainty-aware manipulation planning over intuitive physics world models",
+      "llm_evidence_cn": "基于直觉物理世界模型的不确定性感知操作规划",
+      "llm_evidence": "基于直觉物理世界模型的不确定性感知操作规划",
+      "canonical_evidence": "基于直觉物理世界模型的不确定性感知操作规划",
+      "llm_tldr_en": "ManiDreams is a framework for robust manipulation using uncertainty-aware world models and intuitive physics.",
+      "llm_tldr_cn": "ManiDreams是一个利用不确定性感知世界模型和直觉物理进行鲁棒操作的框架。",
+      "llm_tldr": "ManiDreams是一个利用不确定性感知世界模型和直觉物理进行鲁棒操作的框架。",
+      "llm_tags": [
+        "query:1:composite"
+      ],
+      "matched_query_tag": "query:1:composite",
+      "matched_query_text": "Papers central to 寻找关于世界动作模型（World Action Model）及相关领域（如模型预测、强化学习）的学术论文。, especially work that connects or combines: r; V; World models in reinforcement learning and robotics; Action-conditioned world models for decision making; Learning latent dynamics for world modeling; Model-based reinforcement learning with world models; Recent advances in world action models for autonomous agents; Action conditioned generative world models for robotics.",
+      "matched_requirement_id": "req-composite-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.29409v1",
+      "source": "arxiv",
+      "title": "CLaD: Planning with Grounded Foresight via Cross-Modal Latent Dynamics",
+      "abstract": "Robotic manipulation involves kinematic and semantic transitions that are inherently coupled via underlying actions. However, existing approaches plan within either semantic or latent space without explicitly aligning these cross-modal transitions. To address this, we propose CLaD, a framework that models how proprioceptive and semantic states jointly evolve under actions through asymmetric cross-attention that allows kinematic transitions to query semantic ones. CLaD predicts grounded latent foresights via self-supervised objectives with EMA target encoders and auxiliary reconstruction losses, preventing representation collapse while anchoring predictions to observable states. Predicted foresights are modulated with observations to condition a diffusion policy for action generation. On LIBERO-LONG benchmark, CLaD achieves 94.7\\% success rate, competitive with large VLAs with significantly fewer parameters.",
+      "authors": [
+        "Andrew Jeong",
+        "Jaemin Kim",
+        "Sebin Lee",
+        "Sung-Eui Yoon"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-31T08:13:45+00:00",
+      "link": "https://arxiv.org/pdf/2603.29409v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "models cross-modal latent dynamics for planning",
+      "llm_evidence_cn": "建模跨模态潜空间动力学用于规划",
+      "llm_evidence": "建模跨模态潜空间动力学用于规划",
+      "canonical_evidence": "建模跨模态潜空间动力学用于规划",
+      "llm_tldr_en": "Proposes CLaD to model joint evolution of proprioceptive and semantic states for robotic planning.",
+      "llm_tldr_cn": "提出CLaD框架，通过建模本体感受和语义状态的共同演化来实现机器人规划。",
+      "llm_tldr": "提出CLaD框架，通过建模本体感受和语义状态的共同演化来实现机器人规划。",
+      "llm_tags": [
+        "query:1:composite"
+      ],
+      "matched_query_tag": "query:1:composite",
+      "matched_query_text": "Papers central to 寻找关于世界动作模型（World Action Model）及相关领域（如模型预测、强化学习）的学术论文。, especially work that connects or combines: r; V; World models in reinforcement learning and robotics; Action-conditioned world models for decision making; Learning latent dynamics for world modeling; Model-based reinforcement learning with world models; Recent advances in world action models for autonomous agents; Action conditioned generative world models for robotics.",
+      "matched_requirement_id": "req-composite-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2603.03960v1",
+      "source": "arxiv",
+      "title": "Structural Action Transformer for 3D Dexterous Manipulation",
+      "abstract": "Achieving human-level dexterity in robots via imitation learning from heterogeneous datasets is hindered by the challenge of cross-embodiment skill transfer, particularly for high-DoF robotic hands. Existing methods, often relying on 2D observations and temporal-centric action representation, struggle to capture 3D spatial relations and fail to handle embodiment heterogeneity. This paper proposes the Structural Action Transformer (SAT), a new 3D dexterous manipulation policy that challenges this paradigm by introducing a structural-centric perspective. We reframe each action chunk not as a temporal sequence, but as a variable-length, unordered sequence of joint-wise trajectories. This structural formulation allows a Transformer to natively handle heterogeneous embodiments, treating the joint count as a variable sequence length. To encode structural priors and resolve ambiguity, we introduce an Embodied Joint Codebook that embeds each joint's functional role and kinematic properties. Our model learns to generate these trajectories from 3D point clouds via a continuous-time flow matching objective. We validate our approach by pre-training on large-scale heterogeneous datasets and fine-tuning on simulation and real-world dexterous manipulation tasks. Our method consistently outperforms all baselines, demonstrating superior sample efficiency and effective cross-embodiment skill transfer. This structural-centric representation offers a new path toward scaling policies for high-DoF, heterogeneous manipulators.",
+      "authors": [
+        "Xiaohan Lei",
+        "Min Wang",
+        "Bohong Weng",
+        "Wengang Zhou",
+        "Houqiang Li"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "published": "2026-03-04T11:38:12+00:00",
+      "link": "https://arxiv.org/pdf/2603.03960v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "3D dexterous manipulation policy for high-DoF robotic hands",
+      "llm_evidence_cn": "高自由度机器人手的3D灵巧操纵策略",
+      "llm_evidence": "高自由度机器人手的3D灵巧操纵策略",
+      "canonical_evidence": "高自由度机器人手的3D灵巧操纵策略",
+      "llm_tldr_en": "SAT uses a structural-centric perspective to handle heterogeneous embodiments in 3D dexterous manipulation.",
+      "llm_tldr_cn": "SAT 采用以结构为中心的视角来处理3D灵巧操纵中的异构具身。",
+      "llm_tldr": "SAT 采用以结构为中心的视角来处理3D灵巧操纵中的异构具身。",
+      "llm_tags": [
+        "query:rob-rot"
+      ],
+      "matched_query_tag": "query:rob-rot",
+      "matched_query_text": "dexterous robotic manipulation for rotating objects",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2603.07165v1",
+      "source": "arxiv",
+      "title": "RoTri-Diff: A Spatial Robot-Object Triadic Interaction-Guided Diffusion Model for Bimanual Manipulation",
+      "abstract": "Bimanual manipulation is a fundamental robotic skill that requires continuous and precise coordination between two arms. While imitation learning (IL) is the dominant paradigm for acquiring this capability, existing approaches, whether robot-centric or object-centric, often overlook the dynamic geometric relationship among the two arms and the manipulated object. This limitation frequently leads to inter-arm collisions, unstable grasps, and degraded performance in complex tasks. To address this, in this paper we explicitly models the Robot-Object Triadic Interaction (RoTri) representation in bimanual systems, by encoding the relative 6D poses between the two arms and the object to capture their spatial triadic relationship and establish continuous triangular geometric constraints. Building on this, we further introduce RoTri-Diff, a diffusion-based imitation learning framework that combines RoTri constraints with robot keyposes and object motion in a hierarchical diffusion process. This enables the generation of stable, coordinated trajectories and robust execution across different modes of bimanual manipulation. Extensive experiments show that our approach outperforms state-of-the-art baselines by 10.2% on 11 representative RLBench2 tasks and achieves stable performance on 4 challenging real-world bimanual tasks. Project website: https://rotri-diff.github.io/.",
+      "authors": [
+        "Zixuan Chen",
+        "Nga Teng Chan",
+        "Yiwen Hou",
+        "Chenrui Tie",
+        "Zixuan Liu",
+        "Haonan Chen",
+        "Junting Chen",
+        "Jieqi Shi",
+        "Yang Gao",
+        "Jing Huo",
+        "Lin Shao"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-07T12:12:35+00:00",
+      "link": "https://arxiv.org/pdf/2603.07165v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "6D poses and triadic relations for bimanual manipulation",
+      "llm_evidence_cn": "双臂操纵中的6D位姿和三元关系建模",
+      "llm_evidence": "双臂操纵中的6D位姿和三元关系建模",
+      "canonical_evidence": "双臂操纵中的6D位姿和三元关系建模",
+      "llm_tldr_en": "RoTri-Diff models triadic interactions to improve coordination and spatial relations in bimanual manipulation.",
+      "llm_tldr_cn": "RoTri-Diff 通过建模三元交互来改进双臂操纵中的协调和空间关系。",
+      "llm_tldr": "RoTri-Diff 通过建模三元交互来改进双臂操纵中的协调和空间关系。",
+      "llm_tags": [
+        "query:rob-rot:composite"
+      ],
+      "matched_query_tag": "query:rob-rot:composite",
+      "matched_query_text": "Papers central to 机械臂学习旋转操作策略（如拧瓶盖）的论文检索, especially work that connects or combines: robotic arm manipulation strategies for rotational tasks; learning rotational manipulation tasks in robotics; robotic learning for unscrewing and screwing bottle caps; dexterous robotic manipulation for rotating objects; learning manipulation policies for twisting motions; robotic arm learning to unscrew bottle caps and rotate objects; learning twisting and screwing motions in robotics.",
+      "matched_requirement_id": "req-composite-rob-rot",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2603.05117v1",
+      "source": "arxiv",
+      "title": "SeedPolicy: Horizon Scaling via Self-Evolving Diffusion Policy for Robot Manipulation",
+      "abstract": "Imitation Learning (IL) enables robots to acquire manipulation skills from expert demonstrations. Diffusion Policy (DP) models multi-modal expert behaviors but suffers performance degradation as observation horizons increase, limiting long-horizon manipulation. We propose Self-Evolving Gated Attention (SEGA), a temporal module that maintains a time-evolving latent state via gated attention, enabling efficient recurrent updates that compress long-horizon observations into a fixed-size representation while filtering irrelevant temporal information. Integrating SEGA into DP yields Self-Evolving Diffusion Policy (SeedPolicy), which resolves the temporal modeling bottleneck and enables scalable horizon extension with moderate overhead. On the RoboTwin 2.0 benchmark with 50 manipulation tasks, SeedPolicy outperforms DP and other IL baselines. Averaged across both CNN and Transformer backbones, SeedPolicy achieves 36.8% relative improvement in clean settings and 169% relative improvement in randomized challenging settings over the DP. Compared to vision-language-action models such as RDT with 1.2B parameters, SeedPolicy achieves competitive performance with one to two orders of magnitude fewer parameters, demonstrating strong efficiency and scalability. These results establish SeedPolicy as a state-of-the-art imitation learning method for long-horizon robotic manipulation. Code is available at: https://github.com/Youqiang-Gui/SeedPolicy.",
+      "authors": [
+        "Youqiang Gui",
+        "Yuxuan Zhou",
+        "Shen Cheng",
+        "Xinyang Yuan",
+        "Haoqiang Fan",
+        "Peng Cheng",
+        "Shuaicheng Liu"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-05T12:42:53+00:00",
+      "link": "https://arxiv.org/pdf/2603.05117v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "temporal module for maintaining time-evolving latent state in manipulation",
+      "llm_evidence_cn": "用于维持操作中随时间演化的潜状态的时间模块",
+      "llm_evidence": "用于维持操作中随时间演化的潜状态的时间模块",
+      "canonical_evidence": "用于维持操作中随时间演化的潜状态的时间模块",
+      "llm_tldr_en": "Introduces SeedPolicy to scale observation horizons in robot manipulation via gated attention.",
+      "llm_tldr_cn": "引入 SeedPolicy，通过门控注意力扩展机器人操作中的观测时界。",
+      "llm_tldr": "引入 SeedPolicy，通过门控注意力扩展机器人操作中的观测时界。",
+      "llm_tags": [
+        "query:1:composite"
+      ],
+      "matched_query_tag": "query:1:composite",
+      "matched_query_text": "Papers central to 寻找关于世界动作模型（World Action Model）及相关领域（如模型预测、强化学习）的学术论文。, especially work that connects or combines: r; V; World models in reinforcement learning and robotics; Action-conditioned world models for decision making; Learning latent dynamics for world modeling; Model-based reinforcement learning with world models; Recent advances in world action models for autonomous agents; Action conditioned generative world models for robotics.",
+      "matched_requirement_id": "req-composite-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2603.04363v1",
+      "source": "arxiv",
+      "title": "ManipulationNet: An Infrastructure for Benchmarking Real-World Robot Manipulation with Physical Skill Challenges and Embodied Multimodal Reasoning",
+      "abstract": "Dexterous manipulation enables robots to purposefully alter the physical world, transforming them from passive observers into active agents in unstructured environments. This capability is the cornerstone of physical artificial intelligence. Despite decades of advances in hardware, perception, control, and learning, progress toward general manipulation systems remains fragmented due to the absence of widely adopted standard benchmarks. The central challenge lies in reconciling the variability of the real world with the reproducibility and authenticity required for rigorous scientific evaluation. To address this, we introduce ManipulationNet, a global infrastructure that hosts real-world benchmark tasks for robotic manipulation. ManipulationNet delivers reproducible task setups through standardized hardware kits, and enables distributed performance evaluation via a unified software client that delivers real-time task instructions and collects benchmarking results. As a persistent and scalable infrastructure, ManipulationNet organizes benchmark tasks into two complementary tracks: 1) the Physical Skills Track, which evaluates low-level physical interaction skills, and 2) the Embodied Reasoning Track, which tests high-level reasoning and multimodal grounding abilities. This design fosters the systematic growth of an interconnected network of real-world abilities and skills, paving the path toward general robotic manipulation. By enabling comparable manipulation research in the real world at scale, this infrastructure establishes a sustainable foundation for measuring long-term scientific progress and identifying capabilities ready for real-world deployment.",
+      "authors": [
+        "Yiting Chen",
+        "Kenneth Kimble",
+        "Edward H. Adelson",
+        "Tamim Asfour",
+        "Podshara Chanrungmaneekul",
+        "Sachin Chitta",
+        "Yash Chitambar",
+        "Ziyang Chen",
+        "Ken Goldberg",
+        "Danica Kragic",
+        "Hui Li",
+        "Xiang Li",
+        "Yunzhu Li",
+        "Aaron Prather",
+        "Nancy Pollard",
+        "Maximo A. Roa-Garzon",
+        "Robert Seney",
+        "Shuo Sha",
+        "Shihefeng Wang",
+        "Yu Xiang",
+        "Kaifeng Zhang",
+        "Yuke Zhu",
+        "Kaiyu Hang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-04T18:29:28+00:00",
+      "link": "https://arxiv.org/pdf/2603.04363v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "benchmarking real-world robot manipulation with physical skill challenges",
+      "llm_evidence_cn": "具有物理技能挑战的真实世界机器人操作基准测试",
+      "llm_evidence": "具有物理技能挑战的真实世界机器人操作基准测试",
+      "canonical_evidence": "具有物理技能挑战的真实世界机器人操作基准测试",
+      "llm_tldr_en": "ManipulationNet provides a global infrastructure and benchmark for evaluating dexterous robotic manipulation.",
+      "llm_tldr_cn": "ManipulationNet为评估灵巧机器人操作提供了一个全球性的基础设施和基准测试平台。",
+      "llm_tldr": "ManipulationNet为评估灵巧机器人操作提供了一个全球性的基础设施和基准测试平台。",
+      "llm_tags": [
+        "query:emb-bm:composite"
+      ],
+      "matched_query_tag": "query:emb-bm:composite",
+      "matched_query_text": "Papers central to 具身智能世界模型基准测试相关论文检索, especially work that connects or combines: world models for embodied intelligence and robotics; benchmarking suites for world models; evaluation metrics for embodied world models; video generation benchmarks for world models; datasets for training and testing world models; state of the art benchmarks for embodied world models; comparative analysis of world model evaluation frameworks; standardized testing environments for robotic world models; performance metrics for generative world models in robotics.",
+      "matched_requirement_id": "req-composite-emb-bm",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2603.07691v1",
+      "source": "arxiv",
+      "title": "RoboPCA: Pose-centered Affordance Learning from Human Demonstrations for Robot Manipulation",
+      "abstract": "Understanding spatial affordances -- comprising the contact regions of object interaction and the corresponding contact poses -- is essential for robots to effectively manipulate objects and accomplish diverse tasks. However, existing spatial affordance prediction methods mainly focus on locating the contact regions while delegating the pose to independent pose estimation approaches, which can lead to task failures due to inconsistencies between predicted contact regions and candidate poses. In this work, we propose RoboPCA, a pose-centered affordance prediction framework that jointly predicts task-appropriate contact regions and poses conditioned on instructions. To enable scalable data collection for pose-centered affordance learning, we devise Human2Afford, a data curation pipeline that automatically recovers scene-level 3D information and infers pose-centered affordance annotations from human demonstrations. With Human2Afford, scene depth and the interaction object's mask are extracted to provide 3D context and object localization, while pose-centered affordance annotations are obtained by tracking object points within the contact region and analyzing hand-object interaction patterns to establish a mapping from the 3D hand mesh to the robot end-effector orientation. By integrating geometry-appearance cues through an RGB-D encoder and incorporating mask-enhanced features to emphasize task-relevant object regions into the diffusion-based framework, RoboPCA outperforms baseline methods on image datasets, simulation, and real robots, and exhibits strong generalization across tasks and categories.",
+      "authors": [
+        "Zhanqi Xiao",
+        "Ruiping Wang",
+        "Xilin Chen"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "published": "2026-03-08T15:46:04+00:00",
+      "link": "https://arxiv.org/pdf/2603.07691v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "Pose-centered affordance learning for robot manipulation",
+      "llm_evidence_cn": "以姿态为中心的机器人操作示能性学习",
+      "llm_evidence": "以姿态为中心的机器人操作示能性学习",
+      "canonical_evidence": "以姿态为中心的机器人操作示能性学习",
+      "llm_tldr_en": "RoboPCA jointly predicts contact regions and poses to improve the success rate of diverse manipulation tasks.",
+      "llm_tldr_cn": "RoboPCA联合预测接触区域和姿态，以提高多种操作任务的成功率。",
+      "llm_tldr": "RoboPCA联合预测接触区域和姿态，以提高多种操作任务的成功率。",
+      "llm_tags": [
+        "query:rob-rot:composite"
+      ],
+      "matched_query_tag": "query:rob-rot:composite",
+      "matched_query_text": "Papers central to 机械臂学习旋转操作策略（如拧瓶盖）的论文检索, especially work that connects or combines: robotic arm manipulation strategies for rotational tasks; learning rotational manipulation tasks in robotics; robotic learning for unscrewing and screwing bottle caps; dexterous robotic manipulation for rotating objects; learning manipulation policies for twisting motions; robotic arm learning to unscrew bottle caps and rotate objects; learning twisting and screwing motions in robotics.",
+      "matched_requirement_id": "req-composite-rob-rot",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2603.05185v1",
+      "source": "arxiv",
+      "title": "Critic in the Loop: A Tri-System VLA Framework for Robust Long-Horizon Manipulation",
+      "abstract": "Balancing high-level semantic reasoning with low-level reactive control remains a core challenge in visual robotic manipulation. While Vision-Language Models (VLMs) excel at cognitive planning, their inference latency precludes real-time execution. Conversely, fast Vision-Language-Action (VLA) models often lack the semantic depth required for complex, long-horizon tasks. To bridge this gap, we introduce Critic in the Loop, an adaptive hierarchical framework driven by dynamic VLM-Expert scheduling. At its core is a bionic Tri-System architecture comprising a VLM brain for global reasoning, a VLA cerebellum for reactive execution, and a lightweight visual Critic. By continuously monitoring the workspace, the Critic dynamically routes control authority. It sustains rapid closed-loop execution via the VLA for routine subtasks, and adaptively triggers the VLM for replanning upon detecting execution anomalies such as task stagnation or failures. Furthermore, our architecture seamlessly integrates human-inspired rules to intuitively break infinite retry loops. This visually-grounded scheduling minimizes expensive VLM queries, while substantially enhancing system robustness and autonomy in out-of-distribution (OOD) scenarios. Comprehensive experiments on challenging, long-horizon manipulation benchmarks reveal that our approach achieves state-of-the-art performance.",
+      "authors": [
+        "Pengfei Yi",
+        "Yingjie Ma",
+        "Wenjiang Xu",
+        "Yanan Hao",
+        "Shuai Gan",
+        "Wanting Li",
+        "Shanlin Zhong"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-05T13:55:33+00:00",
+      "link": "https://arxiv.org/pdf/2603.05185v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "VLA framework for long-horizon manipulation",
+      "llm_evidence_cn": "用于长程操作的VLA框架",
+      "llm_evidence": "用于长程操作的VLA框架",
+      "canonical_evidence": "用于长程操作的VLA框架",
+      "llm_tldr_en": "Introduces a hierarchical VLA framework with a visual critic for robust long-horizon robotic manipulation.",
+      "llm_tldr_cn": "引入了一种带有视觉评论器的分层VLA框架，用于实现鲁棒的长程机器人操作。",
+      "llm_tldr": "引入了一种带有视觉评论器的分层VLA框架，用于实现鲁棒的长程机器人操作。",
+      "llm_tags": [
+        "query:1:composite"
+      ],
+      "matched_query_tag": "query:1:composite",
+      "matched_query_text": "Papers central to 寻找关于世界动作模型（World Action Model）及相关领域（如模型预测、强化学习）的学术论文。, especially work that connects or combines: r; V; World models in reinforcement learning and robotics; Action-conditioned world models for decision making; Learning latent dynamics for world modeling; Model-based reinforcement learning with world models; Recent advances in world action models for autonomous agents; Action conditioned generative world models for robotics.",
+      "matched_requirement_id": "req-composite-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2603.04531v1",
+      "source": "arxiv",
+      "title": "PTLD: Sim-to-real Privileged Tactile Latent Distillation for Dexterous Manipulation",
+      "abstract": "Tactile dexterous manipulation is essential to automating complex household tasks, yet learning effective control policies remains a challenge. While recent work has relied on imitation learning, obtaining high quality demonstrations for multi-fingered hands via robot teleoperation or kinesthetic teaching is prohibitive. Alternatively, with reinforcement we can learn skills in simulation, but fast and realistic simulation of tactile observations is challenging. To bridge this gap, we introduce PTLD: sim-to-real Privileged Tactile Latent Distillation, a novel approach to learning tactile manipulation skills without requiring tactile simulation. Instead of simulating tactile sensors or relying purely on proprioceptive policies to transfer zero-shot sim-to-real, our key idea is to leverage privileged sensors in the real world to collect real-world tactile policy data. This data is then used to distill a robust state estimator that operates on tactile input. We demonstrate from our experiments that PTLD can be used to improve proprioceptive manipulation policies trained in simulation significantly by incorporating tactile sensing. On the benchmark in-hand rotation task, PTLD achieves a 182% improvement over a proprioception only policy. We also show that PTLD enables learning the challenging task of tactile in-hand reorientation where we see a 57% improvement in the number of goals reached over using proprioception alone. Website: https://akashsharma02.github.io/ptld-website/.",
+      "authors": [
+        "Rosy Chen",
+        "Mustafa Mukadam",
+        "Michael Kaess",
+        "Tingfan Wu",
+        "Francois R Hogan",
+        "Jitendra Malik",
+        "Akash Sharma"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-04T19:17:42+00:00",
+      "link": "https://arxiv.org/pdf/2603.04531v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "Tactile latent distillation for dexterous manipulation skills",
+      "llm_evidence_cn": "用于灵巧操作技能的触觉潜空间蒸馏",
+      "llm_evidence": "用于灵巧操作技能的触觉潜空间蒸馏",
+      "canonical_evidence": "用于灵巧操作技能的触觉潜空间蒸馏",
+      "llm_tldr_en": "PTLD enables learning dexterous manipulation skills in simulation and transferring them to reality without tactile sensors.",
+      "llm_tldr_cn": "PTLD通过潜空间蒸馏在仿真中学习灵巧操作技能，并实现无触觉传感器的实机迁移。",
+      "llm_tldr": "PTLD通过潜空间蒸馏在仿真中学习灵巧操作技能，并实现无触觉传感器的实机迁移。",
+      "llm_tags": [
+        "query:rob-rot"
+      ],
+      "matched_query_tag": "query:rob-rot",
+      "matched_query_text": "dexterous robotic manipulation for rotating objects",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2603.08342v1",
+      "source": "arxiv",
+      "title": "PhaForce: Phase-Scheduled Visual-Force Policy Learning with Slow Planning and Fast Correction for Contact-Rich Manipulation",
+      "abstract": "Contact-rich manipulation requires not only vision-dominant task semantics but also closed-loop reactions to force/torque (F/T) transients. Yet, generative visuomotor policies are typically constrained to low-frequency updates due to inference latency and action chunking, underutilizing F/T for control-rate feedback. Furthermore, existing force-aware methods often inject force continuously and indiscriminately, lacking an explicit mechanism to schedule when / how much / where to apply force across different task phases. We propose PhaForce, a phase-scheduled visual--force policy that coordinates low-rate chunk-level planning and high-rate residual correction via a unified contact/phase schedule. PhaForce comprises (i) a contact-aware phase predictor (CAP) that estimates contact probability and phase belief, (ii) a Slow diffusion planner that performs dual-gated visual--force fusion with orthogonal residual injection to preserve vision semantics while conditioning on force, and (iii) a Fast corrector that applies control-rate phase-routed residuals in interpretable corrective subspaces for within-chunk micro-adjustments. Across multiple real-robot contact-rich tasks, PhaForce achieves an average success rate of 86% (+40 pp over baselines), while also substantially improving contact quality by regulating interaction forces and exhibiting robust adaptability to OOD geometric shifts.",
+      "authors": [
+        "Mingxin Wang",
+        "Zhirun Yue",
+        "Renhao Lu",
+        "Yizhe Li",
+        "Zihan Wang",
+        "Guoping Pan",
+        "Kangkang Dong",
+        "Jun Cheng",
+        "Yi Cheng",
+        "Houde Liu"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-09T13:03:29+00:00",
+      "link": "https://arxiv.org/pdf/2603.08342v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "contact-rich manipulation with force/torque feedback",
+      "llm_evidence_cn": "带有力/力矩反馈的接触密集型操作",
+      "llm_evidence": "带有力/力矩反馈的接触密集型操作",
+      "canonical_evidence": "带有力/力矩反馈的接触密集型操作",
+      "llm_tldr_en": "PhaForce coordinates visual planning and high-rate force correction for contact-rich manipulation tasks.",
+      "llm_tldr_cn": "PhaForce 协调视觉规划和高频力反馈校正，用于处理接触密集型操作任务。",
+      "llm_tldr": "PhaForce 协调视觉规划和高频力反馈校正，用于处理接触密集型操作任务。",
+      "llm_tags": [
+        "query:rob-rot:composite"
+      ],
+      "matched_query_tag": "query:rob-rot:composite",
+      "matched_query_text": "Papers central to 机械臂学习旋转操作策略（如拧瓶盖）的论文检索, especially work that connects or combines: robotic arm manipulation strategies for rotational tasks; learning rotational manipulation tasks in robotics; robotic learning for unscrewing and screwing bottle caps; dexterous robotic manipulation for rotating objects; learning manipulation policies for twisting motions; robotic arm learning to unscrew bottle caps and rotate objects; learning twisting and screwing motions in robotics.",
+      "matched_requirement_id": "req-composite-rob-rot",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2603.05312v1",
+      "source": "arxiv",
+      "title": "UltraDexGrasp: Learning Universal Dexterous Grasping for Bimanual Robots with Synthetic Data",
+      "abstract": "Grasping is a fundamental capability for robots to interact with the physical world. Humans, equipped with two hands, autonomously select appropriate grasp strategies based on the shape, size, and weight of objects, enabling robust grasping and subsequent manipulation. In contrast, current robotic grasping remains limited, particularly in multi-strategy settings. Although substantial efforts have targeted parallel-gripper and single-hand grasping, dexterous grasping for bimanual robots remains underexplored, with data being a primary bottleneck. Achieving physically plausible and geometrically conforming grasps that can withstand external wrenches poses significant challenges. To address these issues, we introduce UltraDexGrasp, a framework for universal dexterous grasping with bimanual robots. The proposed data-generation pipeline integrates optimization-based grasp synthesis with planning-based demonstration generation, yielding high-quality and diverse trajectories across multiple grasp strategies. With this framework, we curate UltraDexGrasp-20M, a large-scale, multi-strategy grasp dataset comprising 20 million frames across 1,000 objects. Based on UltraDexGrasp-20M, we further develop a simple yet effective grasp policy that takes point clouds as input, aggregates scene features via unidirectional attention, and predicts control commands. Trained exclusively on synthetic data, the policy achieves robust zero-shot sim-to-real transfer and consistently succeeds on novel objects with varied shapes, sizes, and weights, attaining an average success rate of 81.2% in real-world universal dexterous grasping. To facilitate future research on grasping with bimanual robots, we open-source the data generation pipeline at https://github.com/InternRobotics/UltraDexGrasp.",
+      "authors": [
+        "Sizhe Yang",
+        "Yiman Xie",
+        "Zhixuan Liang",
+        "Yang Tian",
+        "Jia Zeng",
+        "Dahua Lin",
+        "Jiangmiao Pang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-05T15:54:21+00:00",
+      "link": "https://arxiv.org/pdf/2603.05312v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "dexterous grasping for bimanual robots",
+      "llm_evidence_cn": "双臂机器人的灵巧抓取",
+      "llm_evidence": "双臂机器人的灵巧抓取",
+      "canonical_evidence": "双臂机器人的灵巧抓取",
+      "llm_tldr_en": "UltraDexGrasp enables universal dexterous grasping for bimanual robots using synthetic data.",
+      "llm_tldr_cn": "UltraDexGrasp 利用合成数据实现了双臂机器人的通用灵巧抓取。",
+      "llm_tldr": "UltraDexGrasp 利用合成数据实现了双臂机器人的通用灵巧抓取。",
+      "llm_tags": [
+        "query:rob-rot"
+      ],
+      "matched_query_tag": "query:rob-rot",
+      "matched_query_text": "dexterous robotic manipulation for rotating objects",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2603.08122v1",
+      "source": "arxiv",
+      "title": "Towards Human-Like Manipulation through RL-Augmented Teleoperation and Mixture-of-Dexterous-Experts VLA",
+      "abstract": "While Vision-Language-Action (VLA) models have demonstrated remarkable success in robotic manipulation, their application has largely been confined to low-degree-of-freedom end-effectors performing simple, vision-guided pick-and-place tasks. Extending these models to human-like, bimanual dexterous manipulation-specifically contact-rich in-hand operations-introduces critical challenges in high-fidelity data acquisition, multi-skill learning, and multimodal sensory fusion. In this paper, we propose an integrated framework to address these bottlenecks, built upon two components. First, we introduce IMCopilot (In-hand Manipulation Copilot), a suite of reinforcement learning-trained atomic skills that plays a dual role: it acts as a shared-autonomy assistant to simplify teleoperation data collection, and it serves as a callable low-level execution primitive for the VLA. Second, we present MoDE-VLA (Mixture-of-Dexterous-Experts VLA), an architecture that seamlessly integrates heterogeneous force and tactile modalities into a pretrained VLA backbone. By utilizing a residual injection mechanism, MoDE-VLA enables contact-aware refinement without degrading the model's pretrained knowledge. We validate our approach on four tasks of escalating complexity, demonstrating doubled success rate improvement over the baseline in dexterous contact-rich tasks.",
+      "authors": [
+        "Tutian Tang",
+        "Xingyu Ji",
+        "Wanli Xing",
+        "Ce Hao",
+        "Wenqiang Xu",
+        "Lin Shao",
+        "Cewu Lu",
+        "Qiaojun Yu",
+        "Jiangmiao Pang",
+        "Kaifeng Zhang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-09T09:02:30+00:00",
+      "link": "https://arxiv.org/pdf/2603.08122v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "contact-rich in-hand operations and dexterous manipulation",
+      "llm_evidence_cn": "高接触在手操作与灵巧操作",
+      "llm_evidence": "高接触在手操作与灵巧操作",
+      "canonical_evidence": "高接触在手操作与灵巧操作",
+      "llm_tldr_en": "Develops a VLA framework for bimanual dexterous manipulation and contact-rich in-hand operations.",
+      "llm_tldr_cn": "开发了一个用于双臂灵巧操作和高接触在手操作的VLA框架。",
+      "llm_tldr": "开发了一个用于双臂灵巧操作和高接触在手操作的VLA框架。",
+      "llm_tags": [
+        "query:rob-rot"
+      ],
+      "matched_query_tag": "query:rob-rot",
+      "matched_query_text": "dexterous robotic manipulation for rotating objects",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2603.10451v1",
+      "source": "arxiv",
+      "title": "FAR-Dex: Few-shot Data Augmentation and Adaptive Residual Policy Refinement for Dexterous Manipulation",
+      "abstract": "Achieving human-like dexterous manipulation through the collaboration of multi-fingered hands with robotic arms remains a longstanding challenge in robotics, primarily due to the scarcity of high-quality demonstrations and the complexity of high-dimensional action spaces. To address these challenges, we propose FAR-Dex, a hierarchical framework that integrates few-shot data augmentation with adaptive residual refinement to enable robust and precise arm-hand coordination in dexterous tasks. First, FAR-DexGen leverages the IsaacLab simulator to generate diverse and physically constrained trajectories from a few demonstrations, providing a data foundation for policy training. Second, FAR-DexRes introduces an adaptive residual module that refines policies by combining multi-step trajectory segments with observation features, thereby enhancing accuracy and robustness in manipulation scenarios. Experiments in both simulation and real-world demonstrate that FAR-Dex improves data quality by 13.4% and task success rates by 7% over state-of-the-art methods. It further achieves over 80% success in real-world tasks, enabling fine-grained dexterous manipulation with strong positional generalization.",
+      "authors": [
+        "Yushan Bai",
+        "Fulin Chen",
+        "Hongzheng Sun",
+        "Yuchuang Tong",
+        "En Li",
+        "Zhengtao Zhang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-03-11T06:10:03+00:00",
+      "link": "https://arxiv.org/pdf/2603.10451v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "arm-hand coordination in dexterous tasks",
+      "llm_evidence_cn": "灵巧任务中的臂手协同",
+      "llm_evidence": "灵巧任务中的臂手协同",
+      "canonical_evidence": "灵巧任务中的臂手协同",
+      "llm_tldr_en": "FAR-Dex uses data augmentation and residual refinement for robust arm-hand coordination in dexterous manipulation.",
+      "llm_tldr_cn": "FAR-Dex通过数据增强和残差细化实现了灵巧操作中鲁棒的臂手协同。",
+      "llm_tldr": "FAR-Dex通过数据增强和残差细化实现了灵巧操作中鲁棒的臂手协同。",
+      "llm_tags": [
+        "query:rob-rot"
+      ],
+      "matched_query_tag": "query:rob-rot",
+      "matched_query_text": "dexterous robotic manipulation for rotating objects",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

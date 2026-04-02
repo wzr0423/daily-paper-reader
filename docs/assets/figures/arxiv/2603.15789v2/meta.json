@@ -1,0 +1,102 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.15789v2/fig-001.webp",
+      "caption": "Figure 11: Visual randomizations. Examples of domain randomization applied during training. We vary lighting conditions, backgrounds, object and robot appearance, and workspace textures, along with camera pose and field-of-view jitter, to improve robustness to real-world visual variation.",
+      "page": 11,
+      "index": 1,
+      "width": 414,
+      "height": 416
+    },
+    {
+      "url": "assets/figures/arxiv/2603.15789v2/fig-002.webp",
+      "caption": "Figure 1: OmniReset is a scalable framework for dexterous manipulation which uses diverse simulator resets and large scale reinforcement learning to solve contact-rich, long horizon tasks beyond the capabilities of existing approaches. These policies are then distilled to RGB camera observations and robustly transferred to the real world zero-shot, where they are able to consistently solve challenging tasks over much wider ranges of initial conditions than baselines.",
+      "page": 2,
+      "index": 2,
+      "width": 832,
+      "height": 950
+    },
+    {
+      "url": "assets/figures/arxiv/2603.15789v2/fig-003.webp",
+      "caption": "Figure 4: Additional tasks. Visualizations of the new manipulation tasks solved with OmniReset. From left to right: Four-Leg Table Assembly, Cube Stacking, Cupcake on Plate, Block Reorientation on Wall",
+      "page": 7,
+      "index": 3,
+      "width": 829,
+      "height": 231
+    },
+    {
+      "url": "assets/figures/arxiv/2603.15789v2/fig-004.webp",
+      "caption": "Table 2: Domain randomization and state initialization used during training. Parameters are either sampled directly from distributions or applied as multiplicative scaling to nominal values (denoted by ×).",
+      "page": 22,
+      "index": 4,
+      "width": 961,
+      "height": 945
+    },
+    {
+      "url": "assets/figures/arxiv/2603.15789v2/fig-005.webp",
+      "caption": "Figure 8: Ablation on number of environments. We plot the success rates over course of RL using different number of environments. We find that the number of environments significantly impacts training performance.",
+      "page": 10,
+      "index": 5,
+      "width": 738,
+      "height": 190
+    },
+    {
+      "url": "assets/figures/arxiv/2603.15789v2/fig-006.webp",
+      "caption": "Figure 7: Successful initial states of RL policy. For the Lew Twisting, we plot the xy configurations from which RL polices trained with Demo Curriculum and OmniResetsucceed. We find that OmniResetsucceeds from a much broader range of initial conditions.",
+      "page": 10,
+      "index": 6,
+      "width": 817,
+      "height": 244
+    },
+    {
+      "url": "assets/figures/arxiv/2603.15789v2/fig-007.webp",
+      "caption": "Figure 12: Success Rates on Different Stages of Task. We plot the success rates for the Leg Twisting task when starting from states that are in the Near-Goal region and also the Reaching Region of the state space. When evaluating these success rates, we sample resets from the demonstrations used by the baseline algorithms to ensure the resulting policies start from in-distribution states. We see that the baselines can achieve moderate success rates when starting close to the goal (Near Goal), but struggle to make meaningful progress on the full long-horizon task (captured by the reaching resets).",
+      "page": 18,
+      "index": 7,
+      "width": 813,
+      "height": 320
+    },
+    {
+      "url": "assets/figures/arxiv/2603.15789v2/fig-008.webp",
+      "caption": "Figure 5: Success rates during RL training. We plot success rates over learning process for tasks described in Sec.4. We see that OmniResetscales to task where baselines struggle to make meaningful progress, especially with the wide range of initial conditions specified in the Hard variants of tasks.",
+      "page": 8,
+      "index": 8,
+      "width": 829,
+      "height": 994
+    },
+    {
+      "url": "assets/figures/arxiv/2603.15789v2/fig-009.webp",
+      "caption": "Figure 2: Sim-to-Real Pipeline with OmniReset (1) After generating partial assemblies and grasps from the simulator, (2) we collect reset states: reaching, near object, grasped, and near goal. (3) We then train a state-based RL policy initialized from these reset states, which is used to (4) train student-teacher distillation to get a RGB policy. (5) By finetuning this RGB policy on a mix of simulation data and small set of real demonstrations, (6) we deploy the RGB-based policy in the real world.",
+      "page": 4,
+      "index": 9,
+      "width": 826,
+      "height": 215
+    },
+    {
+      "url": "assets/figures/arxiv/2603.15789v2/fig-010.webp",
+      "caption": "Figure 13: Effect of system identification. Comparison of chirp trajectory fit with and without system identification.",
+      "page": 19,
+      "index": 10,
+      "width": 826,
+      "height": 1299
+    },
+    {
+      "url": "assets/figures/arxiv/2603.15789v2/fig-011.webp",
+      "caption": "Table 1: Sim-to-real performance across tasks: We report state-based RL performance in simulation, distilled image policy performance in simulation and real-world deployment, and a behavior cloning baseline trained on only 100 real-world demos.",
+      "page": 12,
+      "index": 11,
+      "width": 789,
+      "height": 220
+    },
+    {
+      "url": "assets/figures/arxiv/2603.15789v2/fig-012.webp",
+      "caption": "Figure 6: Success rate over perturbations. We plot the decline in success rate (measured by ratio of success rate between no perturbations and current level of perturbations). We find that OmniResetis robust to perturbations while performance of baselines drops significantly.",
+      "page": 9,
+      "index": 12,
+      "width": 826,
+      "height": 204
+    }
+  ]
+}

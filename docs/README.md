@@ -6,149 +6,79 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-03-31
-- 运行时间：2026-03-31 20:11:10 UTC
+- 最新运行日期：2026-03-04 ~ 2026-04-02
+- 运行时间：2026-04-02 03:47:07 UTC
 - 运行状态：成功
-- 本次总论文数：42
-- 精读区：31
+- 本次总论文数：19
+- 精读区：8
 - 速读区：11
 
 ### 今日简报（AI）
-- 今日共生成 42 篇推荐（精读 31 篇，速读 11 篇）
-- 精读：《Do World Action Models Generalize Better than VLAs? A Robustness Study》（10.0/10）, 《Omni-WorldBench: Towards a Comprehensive Interaction-Centric Evaluation for World Models》（10.0/10）
-- 速读：《WorldCache: Content-Aware Caching for Accelerated Video World Models》（8.0/10）, 《Grounding Sim-to-Real Generalization in Dexterous Manipulation: An Empirical Study with Vision-Language-Action Models》（8.0/10）, 《Knowledge-Guided Manipulation Using Multi-Task Reinforcement Learning》（8.0/10）
-- 这些结果覆盖了当下较热的方向，建议先看精读区论文的关键问题与方法。
-- 详情：[/202603/31/README](/202603/31/README)
+本期深度研读 19 篇灵巧操作前沿论文，重点攻克触觉感知与复杂交互下的物体操控难题。
+核心突破在于利用触觉实现顺应性指间滚动，以及通过接触覆盖引导显著提升通用灵巧操作的探索效率。
+建议关注触觉潜空间蒸馏（PTLD）与多模态推理基准，探索机器人从仿真到现实的灵巧进化。
+- 详情：[/20260304-20260402/README](/20260304-20260402/README)
 
 ### 精读区论文标签
-1. [Do World Action Models Generalize Better than VLAs? A Robustness Study](/202603/31/2603.22078v1-do-world-action-models-generalize-better-than-vlas-a-robustness-study)  
-   标签：评分：10.0/10、query:1
-   evidence：针对机器人动作规划的世界动作模型（WAMs）鲁棒性研究
-2. [Omni-WorldBench: Towards a Comprehensive Interaction-Centric Evaluation for World Models](/202603/31/2603.22212v1-omni-worldbench-towards-a-comprehensive-interaction-centric-evaluation-for-world-models)  
-   标签：评分：10.0/10、query:emb-bm
-   evidence：以交互为中心的视频世界模型评估基准
-3. [Model Predictive Control with Differentiable World Models for Offline Reinforcement Learning](/202603/31/2603.22430v1-model-predictive-control-with-differentiable-world-models-for-offline-reinforcement-learning)  
-   标签：评分：10.0/10、query:1
-   evidence：强化学习中带有可微世界模型的模型预测控制
-4. [Describe-Then-Act: Proactive Agent Steering via Distilled Language-Action World Models](/202603/31/2603.23149v1-describe-then-act-proactive-agent-steering-via-distilled-language-action-world-models)  
-   标签：评分：10.0/10、query:1
-   evidence：用于主动智能体引导的蒸馏语言动作世界模型
-5. [ABot-PhysWorld: Interactive World Foundation Model for Robotic Manipulation with Physics Alignment](/202603/31/2603.23376v1-abot-physworld-interactive-world-foundation-model-for-robotic-manipulation-with-physics-alignment)  
-   标签：评分：10.0/10、query:emb-bm
-   evidence：具有物理对齐功能的机器人操纵交互式世界基础模型
-6. [ABot-PhysWorld: Interactive World Foundation Model for Robotic Manipulation with Physics Alignment](/202603/31/2603.23376v2-abot-physworld-interactive-world-foundation-model-for-robotic-manipulation-with-physics-alignment)  
-   标签：评分：10.0/10、query:1
-   evidence：具有物理对齐功能的机器人操纵交互式世界基础模型
-7. [VTAM: Video-Tactile-Action Models for Complex Physical Interaction Beyond VLAs](/202603/31/2603.23481v1-vtam-video-tactile-action-models-for-complex-physical-interaction-beyond-vlas)  
-   标签：评分：10.0/10、query:1
-   evidence：用于具身智能的多模态世界建模框架
-8. [WildWorld: A Large-Scale Dataset for Dynamic World Modeling with Actions and Explicit State toward Generative ARPG](/202603/31/2603.23497v1-wildworld-a-large-scale-dataset-for-dynamic-world-modeling-with-actions-and-explicit-state-toward-generative-arpg)  
-   标签：评分：10.0/10、query:emb-bm
-   evidence：用于动作调节动态世界建模的大规模数据集
-9. [Latent-WAM: Latent World Action Modeling for End-to-End Autonomous Driving](/202603/31/2603.24581v1-latent-wam-latent-world-action-modeling-for-end-to-end-autonomous-driving)  
-   标签：评分：10.0/10、query:1
-   evidence：用于自动驾驶的潜空间世界动作建模
-10. [Persistent Robot World Models: Stabilizing Multi-Step Rollouts via Reinforcement Learning](/202603/31/2603.25685v1-persistent-robot-world-models-stabilizing-multi-step-rollouts-via-reinforcement-learning)  
-   标签：评分：10.0/10、query:1
-   evidence：动作调节机器人世界模型及用于稳定性的强化学习后训练
-11. [World Reasoning Arena](/202603/31/2603.25887v1-world-reasoning-arena)  
-   标签：评分：10.0/10、query:emb-bm
-   evidence：评估世界模型的全面基准测试
-12. [LOME: Learning Human-Object Manipulation with Action-Conditioned Egocentric World Model](/202603/31/2603.27449v1-lome-learning-human-object-manipulation-with-action-conditioned-egocentric-world-model)  
-   标签：评分：10.0/10、query:1
-   evidence：动作条件的自我中心世界模型用于人机交互操控
-13. [ManipArena: Comprehensive Real-world Evaluation of Reasoning-Oriented Generalist Robot Manipulation](/202603/31/2603.28545v1-maniparena-comprehensive-real-world-evaluation-of-reasoning-oriented-generalist-robot-manipulation)  
-   标签：评分：10.0/10、query:emb-bm
-   evidence：机器人世界模型的标准化评估框架
-14. [What Do World Models Learn in RL? Probing Latent Representations in Learned Environment Simulators](/202603/31/2603.21546v1-what-do-world-models-learn-in-rl-probing-latent-representations-in-learned-environment-simulators)  
+1. [Compliant In-hand Rolling Manipulation Using Tactile Sensing](/20260304-20260402/2603.04301v1-compliant-in-hand-rolling-manipulation-using-tactile-sensing)  
+   标签：评分：9.0/10、query:rob-rot
+   evidence：实现抓取内所需物体扭转的控制器
+2. [Contact Coverage-Guided Exploration for General-Purpose Dexterous Manipulation](/20260304-20260402/2603.10971v1-contact-coverage-guided-exploration-for-general-purpose-dexterous-manipulation)  
+   标签：评分：9.0/10、query:rob-rot
+   evidence：通用灵巧操纵的探索方法
+3. [Language-Grounded Decoupled Action Representation for Robotic Manipulation](/20260304-20260402/2603.12967v1-language-grounded-decoupled-action-representation-for-robotic-manipulation)  
+   标签：评分：9.0/10、query:rob-rot
+   evidence：包含旋转在内的动作原语
+4. [Emergent Dexterity via Diverse Resets and Large-Scale Reinforcement Learning](/20260304-20260402/2603.15789v1-emergent-dexterity-via-diverse-resets-and-large-scale-reinforcement-learning)  
+   标签：评分：9.0/10、query:rob-rot
+   evidence：用于广泛灵巧操作任务的可扩展强化学习
+5. [Emergent Dexterity via Diverse Resets and Large-Scale Reinforcement Learning](/20260304-20260402/2603.15789v2-emergent-dexterity-via-diverse-resets-and-large-scale-reinforcement-learning)  
+   标签：评分：9.0/10、query:rob-rot
+   evidence：富接触灵巧操纵任务的强化学习框架
+6. [ManiDreams: An Open-Source Library for Robust Object Manipulation via Uncertainty-aware Task-specific Intuitive Physics](/20260304-20260402/2603.18336v1-manidreams-an-open-source-library-for-robust-object-manipulation-via-uncertainty-aware-task-specific-intuitive-physics)  
    标签：评分：9.0/10、query:1
-   evidence：探究强化学习中学习到的环境模拟器（世界模型）的潜表征
-15. [Mind over Space: Can Multimodal Large Language Models Mentally Navigate?](/202603/31/2603.21577v1-mind-over-space-can-multimodal-large-language-models-mentally-navigate)  
-   标签：评分：9.0/10、query:emb-bm
-   evidence：评估具身多模态大模型心理导航能力的基准测试
-16. [PRM-as-a-Judge: A Dense Evaluation Paradigm for Fine-Grained Robotic Auditing](/202603/31/2603.21669v1-prm-as-a-judge-a-dense-evaluation-paradigm-for-fine-grained-robotic-auditing)  
-   标签：评分：9.0/10、query:emb-bm
-   evidence：机器人审计的稠密评估范式
-17. [ThinkJEPA: Empowering Latent World Models with Large Vision-Language Reasoning Model](/202603/31/2603.22281v1-thinkjepa-empowering-latent-world-models-with-large-vision-language-reasoning-model)  
+   evidence：用于机器人操作规划的学习型世界模型
+7. [ManiDreams: An Open-Source Library for Robust Object Manipulation via Uncertainty-aware Task-specific Intuitive Physics](/20260304-20260402/2603.18336v2-manidreams-an-open-source-library-for-robust-object-manipulation-via-uncertainty-aware-task-specific-intuitive-physics)  
    标签：评分：9.0/10、query:1
-   evidence：用于预测未来世界状态的潜空间世界模型
-18. [CaP-X: A Framework for Benchmarking and Improving Coding Agents for Robot Manipulation](/202603/31/2603.22435v1-cap-x-a-framework-for-benchmarking-and-improving-coding-agents-for-robot-manipulation)  
-   标签：评分：9.0/10、query:emb-bm
-   evidence：机器人操纵编程智能体的基准测试框架
-19. [SG-VLA: Learning Spatially-Grounded Vision-Language-Action Models for Mobile Manipulation](/202603/31/2603.22760v1-sg-vla-learning-spatially-grounded-vision-language-action-models-for-mobile-manipulation)  
+   evidence：基于直觉物理世界模型的不确定性感知操作规划
+8. [CLaD: Planning with Grounded Foresight via Cross-Modal Latent Dynamics](/20260304-20260402/2603.29409v1-clad-planning-with-grounded-foresight-via-cross-modal-latent-dynamics)  
    标签：评分：9.0/10、query:1
-   evidence：用于移动操作的视觉-语言-动作模型
-20. [PhotoAgent: A Robotic Photographer with Spatial and Aesthetic Understanding](/202603/31/2603.22796v1-photoagent-a-robotic-photographer-with-spatial-and-aesthetic-understanding)  
-   标签：评分：9.0/10、query:emb-bm
-   evidence：用于机器人心理模拟的高保真内部世界模型
-21. [See, Remember, Explore: A Benchmark and Baselines for Streaming Spatial Reasoning](/202603/31/2603.23864v1-see-remember-explore-a-benchmark-and-baselines-for-streaming-spatial-reasoning)  
-   标签：评分：9.0/10、query:emb-bm
-   evidence：具身智能体流式空间推理的基准测试套件
-22. [Toward Physically Consistent Driving Video World Models under Challenging Trajectories](/202603/31/2603.24506v1-toward-physically-consistent-driving-video-world-models-under-challenging-trajectories)  
-   标签：评分：9.0/10、query:1
-   evidence：物理一致的驾驶视频世界模型
-23. [DCARL: A Divide-and-Conquer Framework for Autoregressive Long-Trajectory Video Generation](/202603/31/2603.24835v1-dcarl-a-divide-and-conquer-framework-for-autoregressive-long-trajectory-video-generation)  
-   标签：评分：9.0/10、query:1
-   evidence：用于世界建模的长轨迹视频生成
-24. [LaMP: Learning Vision-Language-Action Policies with 3D Scene Flow as Latent Motion Prior](/202603/31/2603.25399v1-lamp-learning-vision-language-action-policies-with-3d-scene-flow-as-latent-motion-prior)  
-   标签：评分：9.0/10、query:1
-   evidence：使用3D场景流作为潜运动先验的视觉-语言-动作框架
-25. [MMaDA-VLA: Large Diffusion Vision-Language-Action Model with Unified Multi-Modal Instruction and Generation](/202603/31/2603.25406v2-mmada-vla-large-diffusion-vision-language-action-model-with-unified-multi-modal-instruction-and-generation)  
-   标签：评分：9.0/10、query:1
-   evidence：捕获环境动力学的大型扩散VLA机器人控制模型
-26. [Out of Sight but Not Out of Mind: Hybrid Memory for Dynamic Video World Models](/202603/31/2603.25716v1-out-of-sight-but-not-out-of-mind-hybrid-memory-for-dynamic-video-world-models)  
-   标签：评分：9.0/10、query:emb-bm
-   evidence：用于动态视频世界模型的大规模视频数据集
-27. [ViGoR-Bench: How Far Are Visual Generative Models From Zero-Shot Visual Reasoners?](/202603/31/2603.25823v1-vigor-bench-how-far-are-visual-generative-models-from-zero-shot-visual-reasoners)  
-   标签：评分：9.0/10、query:emb-bm
-   evidence：视频生成模型中物理与因果推理的基准测试
-28. [Can Vision Foundation Models Navigate? Zero-Shot Real-World Evaluation and Lessons Learned](/202603/31/2603.25937v1-can-vision-foundation-models-navigate-zero-shot-real-world-evaluation-and-lessons-learned)  
-   标签：评分：9.0/10、query:emb-bm
-   evidence：使用路径指标对视觉导航模型进行真实世界评估
-29. [Policy-Guided World Model Planning for Language-Conditioned Visual Navigation](/202603/31/2603.25981v1-policy-guided-world-model-planning-for-language-conditioned-visual-navigation)  
-   标签：评分：9.0/10、query:1
-   evidence：视觉导航的潜空间世界模型规划
-30. [Language-Conditioned World Modeling for Visual Navigation](/202603/31/2603.26741v1-language-conditioned-world-modeling-for-visual-navigation)  
-   标签：评分：9.0/10、query:emb-bm
-   evidence：用于视觉导航的语言调节世界模型及数据集
-31. [Video Generation Models as World Models: Efficient Paradigms, Architectures and Algorithms](/202603/31/2603.28489v1-video-generation-models-as-world-models-efficient-paradigms-architectures-and-algorithms)  
-   标签：评分：9.0/10、query:1
-   evidence：视频生成模型作为世界模拟器
+   evidence：建模跨模态潜空间动力学用于规划
 
 ### 速读区论文标签
-1. [WorldCache: Content-Aware Caching for Accelerated Video World Models](/202603/31/2603.22286v1-worldcache-content-aware-caching-for-accelerated-video-world-models)  
-   标签：评分：8.0/10、query:1
-   evidence：使用扩散Transformer加速视频世界模型
-2. [Grounding Sim-to-Real Generalization in Dexterous Manipulation: An Empirical Study with Vision-Language-Action Models](/202603/31/2603.22876v1-grounding-sim-to-real-generalization-in-dexterous-manipulation-an-empirical-study-with-vision-language-action-models)  
-   标签：评分：8.0/10、query:1
-   evidence：机器人操作中视觉-语言-动作（VLA）模型的实证研究
-3. [Knowledge-Guided Manipulation Using Multi-Task Reinforcement Learning](/202603/31/2603.24083v1-knowledge-guided-manipulation-using-multi-task-reinforcement-learning)  
-   标签：评分：8.0/10、query:1
-   evidence：基于模型强化学习与3D场景图结合的机器人操纵框架
-4. [GameplayQA: A Benchmarking Framework for Decision-Dense POV-Synced Multi-Video Understanding of 3D Virtual Agents](/202603/31/2603.24329v1-gameplayqa-a-benchmarking-framework-for-decision-dense-pov-synced-multi-video-understanding-of-3d-virtual-agents)  
+1. [Structural Action Transformer for 3D Dexterous Manipulation](/20260304-20260402/2603.03960v1-structural-action-transformer-for-3d-dexterous-manipulation)  
+   标签：评分：8.0/10、query:rob-rot
+   evidence：高自由度机器人手的3D灵巧操纵策略
+2. [ManipulationNet: An Infrastructure for Benchmarking Real-World Robot Manipulation with Physical Skill Challenges and Embodied Multimodal Reasoning](/20260304-20260402/2603.04363v1-manipulationnet-an-infrastructure-for-benchmarking-real-world-robot-manipulation-with-physical-skill-challenges-and-embodied-multimodal-reasoning)  
    标签：评分：8.0/10、query:emb-bm
-   evidence：3D环境中以智能体为中心的感知与推理基准测试框架
-5. [ROBOGATE: Adaptive Failure Discovery for Safe Robot Policy Deployment via Two-Stage Boundary-Focused Sampling](/202603/31/2603.22126v1-robogate-adaptive-failure-discovery-for-safe-robot-policy-deployment-via-two-stage-boundary-focused-sampling)  
-   标签：评分：7.0/10、query:emb-bm
-   evidence：机器人策略部署的标准测试与故障发现
-6. [ROBOGATE: Adaptive Failure Discovery for Safe Robot Policy Deployment via Two-Stage Boundary-Focused Sampling](/202603/31/2603.22126v2-robogate-adaptive-failure-discovery-for-safe-robot-policy-deployment-via-two-stage-boundary-focused-sampling)  
-   标签：评分：7.0/10、query:emb-bm
-   evidence：用于机器人策略失效发现的物理仿真
-7. [CATNAV: Cached Vision-Language Traversability for Efficient Zero-Shot Robot Navigation](/202603/31/2603.22800v1-catnav-cached-vision-language-traversability-for-efficient-zero-shot-robot-navigation)  
-   标签：评分：7.0/10、query:emb-bm
-   evidence：机器人的具身感知导航与视觉语义推理
-8. [VLA-IAP: Training-Free Visual Token Pruning via Interaction Alignment for Vision-Language-Action Models](/202603/31/2603.22991v1-vla-iap-training-free-visual-token-pruning-via-interaction-alignment-for-vision-language-action-models)  
-   标签：评分：7.0/10、query:1
-   evidence：用于具身智能和物理交互的VLA模型
-9. [From Part to Whole: 3D Generative World Model with an Adaptive Structural Hierarchy](/202603/31/2603.21557v1-from-part-to-whole-3d-generative-world-model-with-an-adaptive-structural-hierarchy)  
+   evidence：具有物理技能挑战的真实世界机器人操作基准测试
+3. [PTLD: Sim-to-real Privileged Tactile Latent Distillation for Dexterous Manipulation](/20260304-20260402/2603.04531v1-ptld-sim-to-real-privileged-tactile-latent-distillation-for-dexterous-manipulation)  
+   标签：评分：8.0/10、query:rob-rot
+   evidence：用于灵巧操作技能的触觉潜空间蒸馏
+4. [Towards Human-Like Manipulation through RL-Augmented Teleoperation and Mixture-of-Dexterous-Experts VLA](/20260304-20260402/2603.08122v1-towards-human-like-manipulation-through-rl-augmented-teleoperation-and-mixture-of-dexterous-experts-vla)  
+   标签：评分：8.0/10、query:rob-rot
+   evidence：高接触在手操作与灵巧操作
+5. [RoTri-Diff: A Spatial Robot-Object Triadic Interaction-Guided Diffusion Model for Bimanual Manipulation](/20260304-20260402/2603.07165v1-rotri-diff-a-spatial-robot-object-triadic-interaction-guided-diffusion-model-for-bimanual-manipulation)  
+   标签：评分：7.0/10、query:rob-rot
+   evidence：双臂操纵中的6D位姿和三元关系建模
+6. [RoboPCA: Pose-centered Affordance Learning from Human Demonstrations for Robot Manipulation](/20260304-20260402/2603.07691v1-robopca-pose-centered-affordance-learning-from-human-demonstrations-for-robot-manipulation)  
+   标签：评分：7.0/10、query:rob-rot
+   evidence：以姿态为中心的机器人操作示能性学习
+7. [PhaForce: Phase-Scheduled Visual-Force Policy Learning with Slow Planning and Fast Correction for Contact-Rich Manipulation](/20260304-20260402/2603.08342v1-phaforce-phase-scheduled-visual-force-policy-learning-with-slow-planning-and-fast-correction-for-contact-rich-manipulation)  
+   标签：评分：7.0/10、query:rob-rot
+   evidence：带有力/力矩反馈的接触密集型操作
+8. [FAR-Dex: Few-shot Data Augmentation and Adaptive Residual Policy Refinement for Dexterous Manipulation](/20260304-20260402/2603.10451v1-far-dex-few-shot-data-augmentation-and-adaptive-residual-policy-refinement-for-dexterous-manipulation)  
+   标签：评分：7.0/10、query:rob-rot
+   evidence：灵巧任务中的臂手协同
+9. [SeedPolicy: Horizon Scaling via Self-Evolving Diffusion Policy for Robot Manipulation](/20260304-20260402/2603.05117v1-seedpolicy-horizon-scaling-via-self-evolving-diffusion-policy-for-robot-manipulation)  
    标签：评分：6.0/10、query:1
-   evidence：用于视觉到图形的3D生成式世界模型
-10. [Ego2Web: A Web Agent Benchmark Grounded in Egocentric Videos](/202603/31/2603.22529v1-ego2web-a-web-agent-benchmark-grounded-in-egocentric-videos)  
-   标签：评分：6.0/10、query:emb-bm
-   evidence：连接第一人称视频感知与智能体执行的基准测试
-11. [WorldMesh: Generating Navigable Multi-Room 3D Scenes via Mesh-Conditioned Image Diffusion](/202603/31/2603.22972v1-worldmesh-generating-navigable-multi-room-3d-scenes-via-mesh-conditioned-image-diffusion)  
-   标签：评分：6.0/10、query:emb-bm
-   evidence：为具身环境生成可导航的3D场景
+   evidence：用于维持操作中随时间演化的潜状态的时间模块
+10. [Critic in the Loop: A Tri-System VLA Framework for Robust Long-Horizon Manipulation](/20260304-20260402/2603.05185v1-critic-in-the-loop-a-tri-system-vla-framework-for-robust-long-horizon-manipulation)  
+   标签：评分：6.0/10、query:1
+   evidence：用于长程操作的VLA框架
+11. [UltraDexGrasp: Learning Universal Dexterous Grasping for Bimanual Robots with Synthetic Data](/20260304-20260402/2603.05312v1-ultradexgrasp-learning-universal-dexterous-grasping-for-bimanual-robots-with-synthetic-data)  
+   标签：评分：6.0/10、query:rob-rot
+   evidence：双臂机器人的灵巧抓取
 
 
 <div class="dpr-home-promo-card">

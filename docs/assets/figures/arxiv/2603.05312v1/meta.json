@@ -1,0 +1,38 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.05312v1/fig-001.webp",
+      "caption": "Fig. 6: Real-world experiment setup. We employ two UR5e robots, two XHand, and two eye-on-base Azure Kinect DK cameras. A variety of objects are collected for testing.",
+      "page": 7,
+      "index": 1,
+      "width": 504,
+      "height": 245
+    },
+    {
+      "url": "assets/figures/arxiv/2603.05312v1/fig-002.webp",
+      "caption": "Fig. 2: Overview of data generation pipeline. We first collect diverse object assets and import the objects and the robot URDF files into the simulator. An optimization-based grasp synthesizer is then used to generate feasible grasps, from which the preferred grasp is selected. Finally, motion planning is employed to generate demonstration trajectories.",
+      "page": 4,
+      "index": 2,
+      "width": 1032,
+      "height": 500
+    },
+    {
+      "url": "assets/figures/arxiv/2603.05312v1/fig-003.webp",
+      "caption": "Fig. 4: Overview of the policy architecture. The proposed grasp policy takes point clouds as input, encodes them using a point encoder, aggregates scene features via unidirectional attention, and predicts control commands. The policy supports multiple grasp strategies and improves generalization across diverse objects.",
+      "page": 6,
+      "index": 3,
+      "width": 1025,
+      "height": 281
+    },
+    {
+      "url": "assets/figures/arxiv/2603.05312v1/fig-004.webp",
+      "caption": "Fig. 5: The variation in performance with growing amounts of training data. The performance of the policy consistently improves as the volume of data increases.",
+      "page": 6,
+      "index": 4,
+      "width": 437,
+      "height": 275
+    }
+  ]
+}

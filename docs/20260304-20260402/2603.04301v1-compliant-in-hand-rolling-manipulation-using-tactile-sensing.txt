@@ -1,0 +1,1611 @@
+Title: Compliant In-hand Rolling Manipulation Using Tactile Sensing
+
+URL Source: https://arxiv.org/pdf/2603.04301v1
+
+Published Time: Thu, 05 Mar 2026 02:31:11 GMT
+
+Number of Pages: 14
+
+Markdown Content:
+> 1
+
+# Compliant In-hand Rolling Manipulation Using Tactile Sensing 
+
+Huan Weng, Yifei Chen, and Kevin M. Lynch, Fellow, IEEE 
+
+Abstract —We investigate in-hand rolling manipulation using a multifingered robot hand, where each finger is compliant and equipped with a tactile fingertip providing contact location and wrench information. We derive the equations of motion for compliant quasistatic in-hand rolling manipulation and formulate a fingertip rolling manipulation controller for multiple fingers to achieve a desired object twist within a grasp. The contact mechanics are demonstrated in simulation and the controller is tested on an experimental robot system. 
+
+Index Terms —Tactile sensing, compliance, in-hand manipula-tion, rolling manipulation, contact mechanics 
+
+I. I NTRODUCTION 
+
+# PERHAPS the biggest challenge in creating useful hu-manoid robots is the “hands problem”: achieving dexterity approaching or exceeding human manual dexterity [1], [2]. Dexterous manipulation by hands can be divided into two broad categories: nonprehensile manipulation (such as push-ing) and grasping manipulation. Grasping manipulation can be further divided into fixed grasps, where the manipulated object remains fixed relative to a hand (palm) frame, as with power grasps, and in-hand manipulation, where fingers control the state of the object relative to the palm frame, as when twisting the lid of a jar (Figure 1). These manipulation types also apply to manipulation by multiple hands, or of multiple objects. Different manipulation types can occur simultaneously, even in a single hand; for example, during a typical use of chopsticks, the lower chopstick may be effectively held in a fixed grasp while the upper chopstick undergoes in-hand manipulation (Figure 2). A simple kinematic analysis of a rigid body within amultifingered grasp shows that, unless each grasping finger has at least six degrees of freedom, achieving full in-hand mobility of the grasped object relative to the palm requires relative motion at the grasping contacts (Figure 1). Examples of relative motion at a contact include sliding in the contact tangent plane, which adds two degrees of freedom of mobility at the contact; spinning about the contact normal, which adds one degree of freedom of mobility; no-spin “pure rolling” [3], i.e., rotation about two axes in the contact tangent plane but not about the contact normal axis, which adds two degrees of freedom of mobility; rolling, which is a combination of spin and pure rolling; and general roll-slide contacts, which add five degrees of freedom of mobility.  
+
+> The authors are with the Center for Robotics and Biosystems and the Department of Mechanical Engineering, Northwestern University, Evanston, IL 60208 USA. Kevin M. Lynch is also with the Northwestern Institute on Complex Systems (NICO). (email: huanweng@u.northwestern.edu ,
+> yifeichen2026@u.northwestern.edu ,
+> kmlynch@northwestern.edu ). We thank Paul B. Umbanhowar and Randy A. Freeman for their helpful suggestions and comments.
+> Fig. 1. Most in-hand manipulation requires rolling, sliding, and/or spinning at finger contact patches, as illustrated in this example of three-fingered in-hand twisting of the lid of a jar.
+
+in-hand manipulation 
+
+fixed grasp nonprehensile manipulation  
+
+> Fig. 2. Three major categories of dexterous manipulation in a common example of tool use. The lower chopstick is held in a fixed grasp, the upper chopstick undergoes in-hand manipulation, and the chopsticks push the steamed bun (nonprehensile manipulation) before grasping it.
+
+The focus of this paper is controlling in-hand manipulation of rigid bodies, specifically using three-degree-of-freedom rolling at fingertips (Figure 3). Control of relative motion at the fingertips is facilitated by tactile sensing, and desirable features of tactile fingertips include  
+
+> •
+
+contact location sensing;  
+
+> •
+
+contact wrench sensing;  
+
+> •
+
+a smooth, strictly convex shape ensuring a positive-definite relative curvature form at point contacts with convex objects, enabling rolling; and  
+
+> •
+
+passive compliance, to allow safe and stable grasping of rigid objects while avoiding mechanical overconstraint. To model passive compliance, we use the anchor-fingertip model of Figure 4. The controls are joint velocities of the fingers, a model consistent with the high impedance of many robot hand designs that rely on high gear ratio transmissions. These joint velocities directly generate a twist at the “anchor” frame at the distal link of each finger. The anchor is connected to the fingertip via a 6-dof flexure, providing passive compli-ance for safe manipulation of rigid objects. In this model, all passive compliance is concentrated at the flexure, but a mathematical equivalence can be established to fingers with distributed compliance or passive compliance at the joints,   
+
+> arXiv:2603.04301v1 [cs.RO] 4 Mar 2026 2Dexterous manipulation Grasp Nonprehensile
+> Quasistatic Dynamic No-spin “pure” rolling contacts Rolling contacts In-hand manipulation
+> Fixed grasp Sliding contacts
+> Fig. 3. A classification of types of dexterous manipulation. This paper focuses on quasistatic in-hand rolling manipulation of rigid bodies.
+
+anchor fingertip 
+
+palm flexure  
+
+> Fig. 4. Simplified model of a finger. The “anchor” is driven by high-impedance, effectively position-controlled, finger joints, typical of the highly-geared actuators used in many robot hands. The fingertip is mounted to the anchor by a 6-dof flexure, providing passive compliance and the possibility of force control for safe manipulation of rigid objects.
+
+e.g., joints actuated by series-elastic actuators or compliant tendons. At low bandwidths, the compliance of the anchor-fingertip model can be emulated by active stiffness control [4]. In-hand manipulation with compliant fingers results from the controlled motion of the anchors, the compliance, the shape of the fingertips, and friction at the contacts (e.g., Figure 9). To derive a mathematical model of in-hand rolling manipulation, we make the following assumptions: (1) the hand manipulates a single rigid object in free space; (2) contacts are confined to fingertips, and contact patches are small and can be modeled as points; (3) contacts are governed by dry Coulomb friction; and (4) inertial forces are negligible (quasistatic mechanics). For experimental implementation, we use an Allegro robot hand with each finger equipped with a Visiflex tactile finger-tip [5], as shown in Figure 5. The Visiflex is an optical tactile sensor with a camera in the anchor, a spring steel flexure, and a hemispherical light-infused waveguide fingertip. The Visiflex is designed for (1) well-characterized compliance due to the flexure, (2) optical contact location sensing, and (3) optical 6-dof contact wrench sensing, using the imaged displacement of the fingertip and a model of the flexure’s stiffness. Its hemispherical shape facilitates rolling contact, which is not possible for flat tactile fingertips manipulating objects with flat sides. Real-time wrench and contact location feedback, coupled with the control strategy explored in this paper, can enable robust execution of in-hand rolling manipulation, such 
+
+> Fig. 5. The Barrett WAM robot arm and Allegro hand equipped with Visiflex tactile sensors.
+
+as twisting the lid in Figure 1. The contributions of this paper include  
+
+> •
+
+derivation of the quasistatic contact mechanics of a robot hand with multiple compliant fingertips in rolling contact with a grasped object;  
+
+> •
+
+a control algorithm for compliant quasistatic in-hand rolling manipulation based on tactile sensing; and  
+
+> •
+
+preliminary experimental validation of the approach. This paper adopts a model-based approach, which clarifies the role of compliance and geometry in rolling manipulation of rigid objects but requires accurate models of the hand and object for practical implementation. For cases where accurate models are not available and a data-driven approach to in-hand manipulation is warranted, an understanding of the compliant rolling mechanics, provided by the model-based approach, can be used to (1) focus robot experiments or (2) extract more information from experiments to achieve more efficient robot learning (e.g., Section II-D). The remainder of the paper is organized as follows. Sec-tion II presents related work. Section III introduces mathe-matical preliminaries for contact modeling. Section IV derives the contact mechanics of multiple fingers rolling an object within a compliant grasp and proposes a controller for in-hand rolling manipulation. Section V presents preliminary experiments validating the approach. Section VI concludes and presents avenues for future research. II. R ELATED WORK 
+
+A. Tactile sensing for dexterous manipulation 
+
+For decades, various types of tactile sensors, along with corresponding data processing methods, have been developed to detect fingertip slip, including but not limited to [6], [7], [8], [9], [10]. Lynch et al . used active tactile sensing to estimate an object’s center of mass by pushing it [11]. Sundaralingam and Hermans estimated objects’ friction and inertial parameters using vision and tactile fingertip sensing. The parameters were estimated by standard numerical optimization based on a factor 3
+
+graph representing the dynamics between the fingertips and the object [12]. Suresh et al . developed NeuralFeels, combining vision and touch sensing to perform shape and pose estimation during in-hand manipulation [13]. Di et al . leveraged optical fiber bundles to reduce the form factor of their tactile sensor, DIGIT Pinki, and utilized it in teleoperated digital palpation [14]. Tactile feedback can also guide reactive manipulation con-trol strategies. Rodriguez emphasized the use of tactile feed-back to regulate contact modes in manipulation, thereby sim-plifying the dynamics of frictional contact [15]. Rodriguez 
+
+et al . also developed a series of tactile sensors, including the GelSlim [16], [17], [10] variation of GelSight [18], [19], and used them for dexterous manipulation tasks such as local grasp adjustments [20], cable manipulation [21], and extrinsic contact sensing [22]. Maria et al . developed force/tactile sensors [23], [24] and different model-based strategies to avoid slippage [25], [26] and achieve slipping control [27], [28]. Similar to our approach, Dollar et al . integrated contact sens-ing on a well-tuned compliant hand to improve grasp success rate [29]. Hoof et al . used reinforcement learning to acquire in-hand manipulation skills, avoiding the modeling complexity from compliant hands and tactile sensors [30]. Khadivar and Billard developed a control framework for robust grasp and in-hand manipulation based on coupled dynamical systems [31]. The controller relied on tactile sensors whose information was used to estimate the contact frames for all fingertips through a learned model. Zhao et al . proposed a novel tactile-informed manipulation method, Tac-Man, that can robustly maintain stable contact during manipulation of articulated objects but requires no prior-based modeling [32]. Yuan et al . proposed Robot Synesthesia, a visuotactile approach to perform in-hand rotation of a single or multiple objects [33]. Their policy was trained in simulation but can be effectively transferred to the real world. Model-based, data-driven, and combined methods have been explored for processing different types of tactile information, as reviewed in [34], [35], [36]. 
+
+B. Compliant grasp 
+
+Early work on grasping using compliant multi-fingered hands can be traced back to [37], when Hanafusa and Asada pro-posed a control strategy for stable prehension. The object geometry is given by an overhead camera. Stable prehension is defined by force balance and minimum potential energy. The existence of stable grasps for different geometries was analyzed across various hand-finger configurations. Based on that model, Baker et al . studied the stability of different grips on planar polygons by investigating the local minimum of the potential energy function [38]. Cutkosky and Kao analyzed the dependence of grasp compliance on grasp configuration, contact conditions, and the mechanical properties of fingers. They controlled the finger joint stiffness to achieve the desired grasp compliance [39]. They further formulated the differential equations for a fingertip compliantly sliding on the object sur-face [40]. Bruyninckx et al . developed a differential geometric framework to measure the stability of compliant grasps based on the generalized eigen-decomposition of the grasp stiffness matrix [41]. Malvezzi and Prattichizzo proposed a quasistatic model for a compliant robot hand grasping objects. Grasp compliance was evaluated considering both the structural com-pliance and the gains of impedance controllers [42]. Chen et al .developed an adaptive compliant grasp control strategy robust to object pose uncertainties. The compliance is generated from joint torques of fingers, and the controller is based on a virtual spatial spring framework between fingertips [43]. Pozzi et al . proposed potential contact robustness and potential grasp robustness indexes which can be used to measure the quality of compliant grasps [44]. Zhou et al . developed the DexCo hand that can achieve fine in-hand manipulation [45]. Finger compliance from soft hydraulic actuation improved robustness and simplified control. 
+
+C. In-hand manipulation 
+
+Dafle et al . studied “extrinsic dexterity,” using external forces to enhance the dexterity of a robot hand in regrasp operations. A grasp graph is generated to transit between different grasps for complicated tasks [46]. For rolling, Montana derived the first-order kinematics of contact between two rigid bodies, including the contact equations for pure rolling [47]. Cole et al .developed the kinematics, prehensility, dynamics, and control of in-hand manipulation of objects with arbitrary shapes by multiple rolling fingers [48]. They also presented a dynamic control law for sliding regrasp in planar cases [49]. Ward-Cherrier et al . achieved model-free active tactile manipulation using a tactile gripper. Cylinders are reoriented by rolling between gripper pads [50]. Spiers et al . developed robotic fingers with variable friction surfaces, which meet different friction needs to achieve in-hand rolling and sliding, and thus can enhance the hand dexterity [51]. Lee et al .developed an object rolling controller based on the optimization of the trajectory of the finger movement while ensuring that contact points move along the fingers. The introduction of a force controller with compliance further improved the accuracy and robustness of the motion [52]. Building on trajectory optimization, recent frameworks have achieved large-range manipulation through geometry-free ap-proaches [53] and enabled complex contact sequences via hierarchical exploration [54]. Machine learning has also been utilized to achieve in-hand dexterity [55], [56], [57], [58], [59]. To bridge the sim-to-real gap, recent learning paradigms have introduced joint-wise neural dynamics modeling for robust in-the-air rotation [60] and hierarchical policies leveraging pre-trained skills to reorient complex objects [61]. Hou et al . developed a strategy to achieve planar dynamic pivoting, a unique form of sliding regrasp, through wrist swing motion and grip force regulation. The strategy is robust to uncertainties in both friction and grasp position [62]. Dafle et al . generalized the construction of the motion cone for a broad set of planar manipulation tasks. Using this representation, they showed that regrasp could be achieved by a sequence of object pushes against external constraints when the gripper slides on the object [63]. Shi et al . implemented passively compliant fingers to achieve sliding regrasp by taking advan-tage of external forces such as those from object inertial load 4
+
+[64] and contact between the object and a rigid environment [4]. 
+
+D. Physics-informed learning of in-hand manipulation 
+
+Replicating the success of foundation models from natural language and computer vision in robotics is fundamentally obstructed by a “100,000-year data gap”—the orders-of-magnitude disparity between internet-scale linguistic data and the scarcity of physical interaction data [65]. To bridge this gap, recent research leverages physical priors as structural inductive biases to avoid unstructured end-to-end mapping and ensure physical consistency [66], [67]. Recent works explicitly embed analytical priors into the learning loop via differentiable simulation or neural feature extraction. Differentiable simulators have been developed to propagate gradients through contact events, facilitating sys-tem identification and tactile policy transfer [68], [69]. For instance, Hu et al . [70] guided reinforcement learning (RL) policies using contact center positions extracted from tactile sensors to achieve precise rolling of cylindrical objects. No-tably, Lee and Fazeli [71] developed ViTaSCOPE, employing physics-constrained neural implicit representations to fuse vision and tactile feedback for contact field reconstruction. Stability-aware constraints have also been integrated directly into the RL objective to ensure mechanical consistency. Recent approaches explicitly embedded force-closure metrics [72], [73] or control barrier functions [74] into the reward structure or policy optimization to prioritize stable grasp configurations. Such methods effectively focus robot experiments within phys-ically valid state-space regions. Where analytical models fall short due to unmodeled inter-actions, residual physics learning combines nominal analyti-cal controllers with learned residual policies [75], [76]. For example, the Grasp-to-Act framework utilizes physics-based optimization to guide RL-driven adaptation [77]. Similarly, R¨ ostel et al . leveraged RL critics to score initial grasps that promote specific in-hand manipulation goals [78]. Physics-informed world models, such as RoboScape [79] and PIN-WM [80], extend this synergy by constraining latent dy-namics with geometric consistency and rigid-body parameters for physically consistent policy refinement. III. C ONTACT MODEL AND PRELIMINARIES 
+
+A. Contact model 
+
+Figure 6 illustrates a moving compliant fingertip making a point contact with a moving object. A local surface patch and coordinates with orthogonal axes u1,x and u1,y are defined at the contact point on the object to represent the contact velocity 
+
+˙u1 along the object surface [47], as shown in Figure 7. Using the definitions in [47] and the finger spring compliance model in [4], we define frames as listed in Table I, and an extra index 
+
+i = 1 . . . n is used in subscripts to indicate the particular finger. 
+
+B. Notation 
+
+Scalars are written in italic lower case. Vectors and matrices are written as bold letters, except for poses represented by {w} {a} {f 0 } {f} {o} {l 2}/{c 2 }{l 1 }/{c 1 } ^
+
+z c2
+
+> ^
+
+x c2
+
+> ^
+
+x c1
+
+> ^
+
+y c2
+
+> ^
+
+z c1
+
+> ^
+
+y c1           
+
+> φ
+> Fig. 6. A fingertip displaced from the flexure’s relaxed position and making contact with an object, with defined frames. The fingertip’s pose when the flexure is relaxed is drawn in grey. All the frames at the contact point have their ˆz-axes normal to the tangent plane. ϕis the rotation angle about the ˆz-axis of frame {l1}/{c1}from the ˆx-axis of {l1}/{c1}to that of {l2}/{c2}.
+
+fcon 
+
+u1
+
+u1,x u1,y      
+
+> Fig. 7. A compliant fingertip moving on the object surface while applying the contact force fcon . A local surface patch and a coordinate frame are defined with the origin at the contact point and two axes u1,x and u1,y orthogonal to each other. The contact point velocity can be represented in that frame as
+> ˙u1.
+
+exponential coordinates X ∈ R6, twists V = ( ω, v) ∈ R6,wrenches F = ( m, f ) ∈ R6, and the gravity vector g ∈ R3.All variables are expressed in the world frame {w} unless noted otherwise in the superscripts, and other descriptions are noted in the subscripts. For example, Vwo indicates the twist of the object frame relative to the world frame, expressed in the world frame, and Vowa,2 indicates the twist of the anchor frame of finger 2 relative to the world frame, expressed in the object frame. Table II summarizes most of the notation, drawn                              
+
+> TABLE I FRAME DEFINITIONS
+> Frame Definition
+> {w}World frame.
+> {o}Object frame, attached to the object.
+> {a}Fingertip anchor frame connected to the robot hand palm through finger links (phalanges) and joints.
+> {f}Fingertip frame, attached to the hemispherical fingertip, connected with {a}through the flexure.
+> {f0}Fingertip rest frame, attached to {a}but coincident with {f}
+> when the flexure is at rest.
+> {l1},{l2}Stationary contact frames at the current contact points, attached to {o}and {f}, respectively, each with its ˆz-axis pointing outwards and ˆx,ˆy-axes tangential to the local coordinate system of the surface patch.
+> {c1},{c2}Moving contact frames at the contact points, attached to the moving contact on the object and fingertip and simultane-ously coincident with {l1}and {l2}, respectively. 5
+
+TABLE II NOTATION FROM [47], [81] Variable Description 
+
+pij Position vector pointing from the origin of frame {i} to that of 
+
+{j}, pij ∈ R3.
+
+Rij Rotation matrix from frame {i} to {j}, Rij ∈ SO (3) .
+
+Tij Transformation matrix from frame {i} to {j}, Tij := Rij piij 
+
+0 1
+
+ ∈ SE (3) .
+
+[Ad Tij ] Adjoint representation of Tij , [Ad Tij ] := 
+
+ Rij 0
+
+[piij ]Rij Rij 
+
+.
+
+Xij Exponential coordinates representation of Tij , Xij ∈ R6, Tij =
+
+exp ([ X iij ]) .
+
+Vij Twist of frame {j} relative to {i}, Vij := 
+
+ωij 
+
+vij 
+
+ ∈ R6.
+
+F Wrench, including moment and force, F := 
+
+mf
+
+ ∈ R6.
+
+K 6 × 6 stiffness matrix, F = KX .
+
+u Coordinates of a point on a surface patch, u ∈ R2.
+
+Kcur 2 × 2 curvature form at a point on a surface. 
+
+Ttor 1 × 2 torsion form at a point on a surface. 
+
+Mmet 2 × 2 diagonal metric at a point on a surface. 
+
+ϕ Angle of rotation about ˆz-axis of frame {l1}/{c1},from ˆx-axis of {l1}/{c1} to that of {l2}/{c2}.
+
+m Object mass. 
+
+g 3 × 1 gravity vector. 
+
+primarily from [47] and [81]. 
+
+C. Preliminaries 1) Properties of skew-symmetric matrices: The so (3) ma-trix representation [a] of a = ( a1, a 2, a 3) is 
+
+[a] = 
+
+ 0 −a3 a2
+
+a3 0 −a1
+
+−a2 a1 0
+
+ .
+
+These skew-symmetric matrices satisfy 
+
+[[ a]b] = [ a][ b] − [b][ a] ∀a, b ∈ R3 (1) and 
+
+ [a] [b]
+
+03×3 [a]
+
+  xy
+
+
+
+= −
+
+[x] [y][y] 03×3
+
+  ab
+
+
+
+∀a, b, x, y ∈ R3.
+
+(2) A rotation matrix R ∈ SO (3) and position vector p ∈ R3
+
+satisfy 
+
+[Rp ] = R[p]R⊺. (3) 
+
+2) Transformations: The representations of the relative position between frames {i} and {j} satisfy 
+
+piij = −piji = −Rij pjji , (4) and representations of exponential coordinates, twists, and wrenches satisfy 
+
+X i = [ Ad Tij ]X j, Vi = [ Ad Tij ]Vj, Fi = [ Ad Tji ]⊺Fj. (5) We define a 6 × 6 matrix representation W of a wrench F as 
+
+W := 
+
+[m] [f ][f ] 03×3
+
+
+
+,
+
+which shares the same units as a stiffness matrix K. Trans-formations of K and W between frames {i} and {j} satisfy 
+
+Ki = [ Ad Tji ]⊺Kj[Ad Tji ], Wi = [ Ad Tji ]⊺Wj[Ad Tji ]. (6) 
+
+3) Time derivatives: The time derivative of Tij is 
+
+˙Tij = [ Viij ]Tij ⇒ ˙Rij = [ ωiij ]Rij , ˙piij = [ ωiij ]piij + viij . (7) The time derivative of [Ad Tij ], using Equations (1), (3), (4), and (7), is 
+
+ddt ([ Ad Tij ]) = −[Ad Tij ]
+
+"
+
+[ωjji ] 03×3
+
+[vjji ] [ωjji ]
+
+#
+
+. (8) Details are in Appendix A. For each finger, the flexure stiffness represented in the frame 
+
+{f0}, Kf0
+
+> spr
+
+, is a constant matrix, and the wrench applied to the spring is Ff0 
+
+> spr
+
+= Kf0
+
+> spr
+
+X f0 
+
+> f0f
+
+for small displacements X f0
+
+> f0f
+
+. The time derivative is 
+
+˙Ff0 
+
+> spr
+
+= ddt (Kf0
+
+> spr
+
+X f0
+
+> f0f
+
+) = Kf0 
+
+> spr
+
+˙X f0
+
+> f0f
+
+.
+
+For small displacements, ˙X f0 
+
+> f0f
+
+≈ V f0
+
+> f0f
+
+. Substituting this yields 
+
+˙Ff0 
+
+> spr
+
+= Kf0
+
+> spr
+
+Vf0
+
+> f0f
+
+. (9) The time derivative of a wrench ˙Fi can be represented in another moving frame {j} using Equations (2) and (8) (details in Appendix B): 
+
+˙Fi = ddt ([ Ad Tji ]⊺Fj) = −WiViij + [ Ad Tji ]⊺ ˙Fj. (10) 
+
+4) Contact kinematics: When a fingertip rolls, spins, and/or slides on an object’s surface while maintaining contact with the object, the twist representing the object’s motion relative to the fingertip can be represented as 
+
+Vl1 
+
+> l1l2
+
+=
+
+
+
+ωx
+
+ωy
+
+ωz
+
+vx
+
+vy
+
+vz
+
+
+
+} → pure rolling 
+
+→ spinning about ˆz-axis 
+
+} → sliding 
+
+≡ 0 impenetrability 6
+
+Following the contact kinematics derivation from Mon-tana [47], 
+
+vc1 
+
+> oc 1
+
+=
+
+Mmet,1 ˙u1
+
+0
+
+
+
+,
+
+[ωc1 
+
+> oc 1
+
+] = 
+
+ 0 −Ttor,1 Mmet,1 ˙u1 Kcur,1 Mmet,1 ˙u1
+
+Ttor,1 Mmet,1 ˙u1 0
+
+−(Kcur,1 Mmet,1 ˙u1)⊺ 0
+
+
+
+vc2 
+
+> fc 2
+
+=
+
+Mmet,2 ˙u2
+
+0
+
+
+
+,
+
+[ωc2 
+
+> fc 2
+
+] = 
+
+ 0 −Ttor,2 Mmet,2 ˙u2 Kcur,2 Mmet,2 ˙u2
+
+Ttor,2 Mmet,2 ˙u2 0
+
+−(Kcur,2 Mmet,2 ˙u2)⊺ 0
+
+
+
+vc2 
+
+> c2c1
+
+= 03×1, [ωc2 
+
+> c2c1
+
+] = 
+
+
+
+0 − ˙ϕ 0˙ϕ 0 00 0 0
+
+ .
+
+(11) Defining the 6 × 2 matrix 
+
+Gi := 
+
+0 −11 0
+
+
+
+Kcur,i 
+
+Ttor,i 
+
+I2×2
+
+01×2
+
+ , i = 1 , 2,
+
+Montana’s Equation (11) can be rewritten as 
+
+
+
+Vc1 
+
+> oc 1
+
+= G1Mmet,1 ˙u1,
+
+Vc2 
+
+> fc 2
+
+= G2Mmet,2 ˙u2,
+
+Vc2 
+
+> c2c1
+
+= [0 , 0, ˙ϕ, 0, 0, 0] ⊺.
+
+(12) Moreover, ˙u1 can be expressed by elements of Vl1 
+
+> l1l2
+
+as 
+
+˙u1 = M−1
+
+> met,1
+
+(Kcur,1 + eKcur.,2 )−1(
+
+ ωy
+
+−ωx
+
+
+
++ eKcur.,2 
+
+vx
+
+vy
+
+
+
+), (13) where 
+
+eKcur.,2 := RϕKcur,2 Rϕ, Rϕ := 
+
+cos ϕ sin ϕ
+
+sin ϕ − cos ϕ
+
+
+
+.
+
+To maintain contact, vz = 0 . In the absence of sliding, vx =
+
+vy = 0 . Substituting these into Equation (13) yields 
+
+Mmet,1 ˙u1 = ( Kcur,1 + eKcur,2 )−1NVl1 
+
+> l1l2
+
+, N := 
+
+ 0 1 02×4
+
+−1 0
+
+
+
+.
+
+Further substituting into Equation (12) yields the twist of the object contact frame relative to the object frame, 
+
+Vc1 
+
+> oc 1
+
+= L1Vl1 
+
+> l1l2
+
+, L1 := G1(Kcur,1 + eKcur,2 )−1N. (14) Equation (14) embeds the contact kinematics derivation from Montana for rolling contact, and it shows the relation between 
+
+Vc1 
+
+> oc 1
+
+and Vl1 
+
+> l1l2
+
+, which will be used in the next section. IV. C ONTACT MECHANICS AND CONTROL OF IN-HAND 
+
+ROLLING MANIPULATION 
+
+A rigid object of known mass and geometry is grasped by 
+
+n compliant fingers. The object is in point contact with each fingertip and can roll or spin on the fingertip’s surface without sliding. An external wrench Fext acts on the object due to gravity. If the object were in contact with an environment, wrenches due to those contacts would also appear in Fext . For simplicity, we focus on the case of in-hand manipulation of an object in free space. The controls for the quasistatic hand-object system are the twists of the finger anchors. The state is defined as the configuration of the object relative to a world frame fixed to the palm, the contact points on the object, the corresponding contact frames at the contact points on the fingertips (which, together with the object configuration and contact points, specify the configurations of the fingertips), and the finger anchor configurations. This description uniquely defines the configuration of each fingertip relative to its anchor, and the stiffness of the finger flexure yields the wrench Fcon, i applied to the object by fingertip i. For a state to be a valid quasistatic grasp, nX
+
+> i=1
+
+Fcon, i + Fext = 06×1. (15) In this section, we derive the quasistatic forward mechanics (given the state and controls, determine the rate of change of the state) and a version of the inverse mechanics (given the state and the desired object twist, determine consistent controls). Using the inverse mechanics, we propose an in-hand rolling manipulation controller based on vision and tactile feedback. 
+
+A. Mechanics constraints 
+
+The forward and inverse rolling mechanics must satisfy no-slip and wrench equilibrium constraints. Below, we derive these constraints and collect them together into a set of equations that forms the basis for the forward and inverse mechanics. 
+
+1) Rolling constraints: For each contact, the rolling con-straint indicates there is no relative linear velocity between the object and the fingertip 
+
+vl1 
+
+> l1l2
+
+= 03×3 I3×3
+
+ Vl1 
+
+> l1l2
+
+=
+
+03×3 I3×3
+
+
+
+ : I
+
+[Ad Tl1c1 ] [Ad Tc1w ]Vl1l2 =
+
+[pc1
+
+> c1w
+
+]Rc1w Rc1w
+
+ (>0
+
+Vl1o + Vow + Vwf + >0
+
+Vfl 2 ) = 03×1.
+
+Using Equations (3) and (4) to rewrite yields 
+
+Pi(Vwf, i − V wo ) = 03×1, ∀i = 1 , . . . , n, (16) where Pi := [pwc 1,i ] −I3×3
+
+ ∈ R3×6 and pwc 1,i = pwc 2,i 
+
+is the location of each fingertip contact. 
+
+2) Wrench equilibrium: The contact wrench Fcon applied by a fingertip to an object is equal to the negative of the wrench applied to the fingertip flexure, 
+
+Fcon = −F spr ⇔ Wcon = −Wspr . (17) Taking the time derivative of Fc1 
+
+> con
+
+and substituting Equa-tions (9), (10), and (17) yields 
+
+˙Fc1 
+
+> con
+
+= − ˙Fc1
+
+> spr
+
+= − Wc1
+
+> con
+
+(Vc1 
+
+> c1o
+
++ Vc1 
+
+> ow
+
++ Vc1 
+
+> wa
+
++ >0
+
+Vc1 
+
+> af 0
+
+) − [Ad Tf0c1 ]⊺ ˙Ff0
+
+> spr
+
+=Wc1
+
+> con
+
+(Vc1 
+
+> oc 1
+
++ Vc1 
+
+> wo
+
+− V c1
+
+> wa
+
+) − [Ad Tf0c1 ]⊺Kf0
+
+> spr
+
+Vf0
+
+> f0f
+
+,
+
+(18) 7
+
+where the fingertip displacement rate Vf0 
+
+> f0f
+
+satisfies 
+
+Vf0 
+
+> f0f
+
+=   
+
+0
+
+Vf0 
+
+> f0a
+
++ Vf0 
+
+> aw
+
++ Vf0
+
+> wf
+
+.
+
+Further substituting this into Equation (18) and transforming using Equations (5) and (6) yields 
+
+˙Fc1 
+
+> con
+
+=[ Ad Twc 1 ]⊺Wcon (Voc 1 + Vwo − V wa )
+
+− [Ad Twc 1 ]⊺Kspr (Vaw + Vwf )) =[ Ad Twc 1 ]⊺(( Kspr − Wcon )Vwa − Kspr Vwf 
+
++ Wcon (Vwo + Voc 1 )) ,
+
+(19) where Voc 1 can be expressed using Equation (14) as 
+
+Voc 1 = [ Ad Twc 1 ]L1Vl1 
+
+> l1l2
+
+= [ Ad Twc 1 ]L1[Ad Tc1w ]( Vow + Vwf )= eL1(Vwf − V wo )
+
+(20) and eL1 := [ Ad Twc 1 ]L1[Ad Twc 1 ]−1 ∈ R6×6, in which Rwc 1 de-pends on the local surface patch and coordinates at the contact on the object. Substituting Equation (20) into Equation (19) yields 
+
+˙Fc1 
+
+> con ,i
+
+=[ ˙ mc1
+
+> con ,i
+
+, ˙f c1
+
+> con ,i
+
+]⊺
+
+=[ Ad Twc 1,i ]⊺(−AiVwf, i − BiVwo + CiVwa, i)
+
+∀i = 1 , . . . , n, 
+
+(21) where 
+
+
+
+Ai := Kspr ,i − Wcon ,i eL1,i ∈ R6×6
+
+Bi := Wcon, i(eL1,i − I6×6) ∈ R6×6
+
+Ci := Kspr ,i − Wcon, i ∈ R6×6.
+
+For point contacts with no torsional friction, the moment portion of the contact wrench is always zero, so ˙mc1 
+
+> con
+
+≡ 03×1,which indicates 
+
+Qi(AiVwf, i +BiVwo −CiVwa, i) = 03×1, ∀i = 1 , . . . , n, (22) where Qi := −I3×3 [pwc 1,i ] ∈ R3×6.Finally, taking the derivative of the wrench balance con-straint (Equation (15)) and substituting Equations (10) and (19) yields nX
+
+> i=1
+
+(Kspr ,i Vwf, i) = 
+
+> n
+
+X
+
+> i=1
+
+(CiVwa, i) + ˙Fext . (23) Details are in Appendix C. When there is no environmental contact, Fext is determined by the object pose, mass, and gravity, 
+
+Fext =
+
+pwo × mg
+
+mg
+
+
+
+= m
+
+[pwo ]gg
+
+
+
+.
+
+Taking the derivative yields 
+
+˙Fext = m
+
+[ ˙ pwo ]g
+
+03×1
+
+
+
+= m
+
+−[g]([ ωwo ]pwo + vwo )
+
+03×1
+
+
+
+= m
+
+[g] [pwo ] −I3×3
+
+
+
+03×6
+
+
+
+Vwo .
+
+(24) 
+
+3) Combining the constraints: Stacking Equations (16), (22), (23), and (24) yields 
+
+DfVf + DoVwo = DaVa, (25) where 
+
+
+
+Df := 
+
+"
+
+Q1A1
+
+P1
+
+#
+
+· · · 06×6
+
+... . . . ...
+
+06×6 · · · 
+
+"
+
+QnAn
+
+Pn
+
+#
+
+Kspr ,1 · · · Kspr ,n 
+
+
+
+∈ R6( n+1) ×6n
+
+Do := 
+
+"
+
+Q1B1
+
+−P1
+
+#
+
+..."
+
+QnBn
+
+−Pn
+
+#
+
+m[g]
+
+h
+
+−[pwo ] I3×3
+
+i
+
+03×6
+
+
+
+∈ R6( n+1) ×6
+
+Da := 
+
+"
+
+Q1C1
+
+03×6
+
+#
+
+· · · 06×6
+
+... . . . ...
+
+06×6 · · · 
+
+"
+
+QnCn
+
+03×6
+
+#
+
+C1 · · · Cn
+
+
+
+∈ R6( n+1) ×6n
+
+Vf := 
+
+
+
+Vwf, 1
+
+...
+
+Vwf, n
+
+ , Va := 
+
+
+
+Vwa, 1
+
+...
+
+Vwa, n
+
+ ∈ R6n,
+
+for all i = 1 , . . . , n . The matrices Df, Da, and Do are all determined by the system state. Equation (25) collects the 6( n + 1) state-dependent kine-matic and wrench constraints relating the external wrench rate and the twists of the object, finger anchors, and fingertips. 
+
+B. Forward mechanics 
+
+The forward mechanics problem is: Given the current state of the grasp and the controls (the anchor twists), find the twists of the object and the fingertips. Rewriting Equation (25) yields 
+
+Df&o Vf&o = β, (26) where 
+
+Df&o := Df Do
+
+ , Vf&o := 
+
+ Vf
+
+Vwo 
+
+
+
+, β := DaVa.
+
+There are 6( n + 1) unknowns, Vf&o , to be solved using the same number of constraints. The rank of Df&o depends on the current state; generically, it is full rank, with rank( Df&o ) = 6( n + 1) . In this case, Df&o is invertible and Equation (26) gives a unique solution for the fingertip and object twists, 
+
+Vf&o = D−1
+
+> f&o
+
+β. In singular states where Df&o is not full rank, 8
+
+multiple solutions exist. A higher-order analysis including dynamics would be needed to resolve such cases. 1
+
+C. Inverse mechanics 
+
+The inverse mechanics problem is: Given the current state of the grasp and the desired object twist, find consistent finger anchor twists Va.Based on Equation (26), define a selection matrix 
+
+Sji := S′ 
+
+> 1
+
+· · · S′
+
+> i
+
+ ∈ R6×6i, where 
+
+S′ 
+
+> k
+
+=
+
+(
+
+I6×6, k = j
+
+06×6, otherwise , 1 ≤ k ≤ i. (27) When Df&o is invertible, the object twist can be expressed as 
+
+Vwo = Sn+1 
+
+> n+1
+
+Vf&o = Sn+1 
+
+> n+1
+
+D−1
+
+> f&o
+
+β = ΠV a, (28) where Π := Sn+1 
+
+> n+1
+
+D−1
+
+> f&o
+
+Da ∈ R6×6( n+1) . If Π is full rank (rank( Π) = 6), then there exists a set of anchor twists consistent with the desired Vwo . For practical robot hand control, the fingers must be capable of achieving an element of this set. 
+
+D. Contact force inequalities 
+
+The derivation above does not consider contact force in-equalities that must be satisfied during rolling manipulation: (1) the normal force must be nonnegative at each fingertip contact and (2) each contact force must satisfy friction limits. Beginning from an initial grasp that satisfies these constraints, we formulate the continued enforcement of these inequality constraints as (1) a constraint on the rate of change of the contact force magnitude when it reaches a minimum value and (2) a constraint on the rate of change of the contact force direction when the force is at the friction limit. Assuming Df&o is invertible, Equations (21), (26), (27), and (28) indicate that the rate of change of the contact force at contact i is 
+
+˙f c1 
+
+> con ,i
+
+= 03×3 R⊺
+
+> wc1,i
+
+ (−AiVwf, i − BiVwo + CiVwa, i)= 03×3 R⊺
+
+> wc1,i
+
+
+
+(−AiSin+1 Vf&o − BiSn+1 
+
+> n+1
+
+Vf&o + CiSinVa)=Ψa,i Va,
+
+where 
+
+Ψa,i := 03×3 R⊺
+
+> wc1,i
+
+
+
+(−AiSin+1 D−1
+
+> f&o
+
+Da − BiΠ + CiSin).
+
+When || f c1
+
+> con ,i
+
+|| ≤ fmin , where fmin > 0 is a defined minimum allowed contact force magnitude, we can enforce the constraint that the contact force magnitude cannot decrease, f c1⊺ 
+
+> con ,i
+
+˙f c1 
+
+> con ,i
+
+≥
+
+0, i.e., 
+
+−f c1⊺
+
+> con ,i
+
+Ψa,i Va ≤ 0. (29) 
+
+> 1For example, consider a ball squeezed between two flat, parallel, opposing fingertips attached to stationary anchors. Because there is no torsional friction at the contacts, no contact moments can be generated about the common contact normal axis, and there is no force-closure grasp. Any spin of the ball about the common contact normal axis satisfies quasistatic wrench balance and rolling constraints.
+
+To enforce the friction constraint, we define μmax < μ to be a lower bound on the actual friction coefficient μ and finger i’s contact force components f c1 
+
+> con ,i
+
+= f c1
+
+> con ,i,x
+
+, f c1 
+
+> con ,i,y
+
+, f c1
+
+> con ,i,z
+
+⊺.Then the friction constraint becomes active if 
+
+q
+
+(f c1
+
+> con ,i,x
+
+)2 + ( f c1 
+
+> con ,i,y
+
+)2
+
+f c1
+
+> con ,i,z
+
+≥ μmax , (30) and it can be written as 
+
+(( Hf c1 
+
+> con ,i
+
+× f c1
+
+> con ,i
+
+) × f c1
+
+> con ,i
+
+)⊺ ˙f c1 
+
+> con ,i
+
+≥ 0, i.e., 
+
+Zcon Ψa,i Va ≤ 0, (31) where 
+
+Zcon := f c1⊺
+
+> con ,i
+
+[[ Hf c1
+
+> con ,i
+
+]f c1
+
+> con ,i
+
+]
+
+H := 
+
+
+
+1 0 00 1 00 0 0
+
+ .
+
+E. Calculating finger joint velocities for inverse mechanics 
+
+Of anchor twists Va satisfying (28) and contact force inequality constraints, we are specifically interested in anchor twists that can be achieved by the fingers of a given robot hand. Each finger’s Jacobian matrix J maps its joint velocities ˙θ to its anchor twist Vwa = J ˙θ. Stacking for all n fingers yields 
+
+Va = Ξ ˙Θ, Ξ := 
+
+
+
+J1 0
+
+. . .
+
+0 Jn
+
+ , ˙Θ := 
+
+
+
+˙θ1
+
+...
+
+˙θn
+
+ . (32) Substituting into Equation (28) yields 
+
+Σ ˙Θ = Vwo ,
+
+where Σ = ΠΞ is a 6 × dim( ˙Θ) matrix. If rank( Σ) < 6, the hand cannot achieve most object twists via in-hand rolling. When rank( Σ) = 6 , we can solve for joint velocities ˙Θ
+
+that achieve the desired object twist and minimize its two-norm using the following convex quadratic program: 
+
+min 
+
+> ˙Θ
+
+˙Θ⊺ ˙Θ
+
+s.t. Σ ˙Θ = Vwo 
+
+− f c1⊺
+
+> con ,i
+
+Ψa,i Va ≤ 0 for all || f c1
+
+> con ,i
+
+|| < f min 
+
+Zcon Ψa,i Va ≤ 0 for all (30) .
+
+(33) When no inequality constraints are active, the closed-form solution is 
+
+˙Θ = Σ†Vwo , where Σ† = Σ⊺(ΣΣ ⊺)−1. (34) 
+
+F. In-hand rolling manipulation controller 
+
+A complete in-hand rolling manipulation feedback con-troller is illustrated in Figure 8. The desired object pose Td
+
+is compared to the actual pose of the object Two (from vision feedback) to generate an object configuration error 
+
+Ve = [ Ad Two ] log( T−1 
+
+> wo
+
+Td).
+
+This error is fed into a PI controller, and the output is summed with the feedforward desired object twist Vd to generate a 9QP (33) PI control VcVedT PD control 
+
+dt Robot hand, fingertips, object, environment ++ ΣΣ τΘeΘc
+
+˙ΘcVision tracking 
+
+Two 
+
+Ve = [Ad T wo ]log( T −1wo T d)
+
+Implemented by Gravity compensation Low-pass filter Joint encoders +
+
+Θ
+
+Visiflex sensors 
+
+F acon Tac2 and of each fingertip Forward kinematics of each finger Twa Frame conversion and Twc2 _
+
+Fcon of each fingertip 
+
+Vd+ Σ
+
++ 
+
+> Fig. 8. Feedback control of in-hand rolling manipulation.
+> Fig. 9. (Top left) Two planar fingers in initial contact with a disk. (Top right) When each finger anchor advances forward, the disk rotates in place, the flexure-mounted fingertips comply symmetrically, and the fingertips roll on the object. (Bottom) A simulation of the manual experiment predicts similar results. Flexures are not drawn in the simulation snapshots.
+
+commanded twist Vc of the object. The quadratic program (33) uses the commanded twist and feedback from vision, finger encoders, and the Visiflex sensors to generate finger joint velocities ˙Θc, which are then numerically integrated to gen-erate commanded finger joint positions Θc. The commanded joint positions are tracked using a PD controller plus gravity compensation. V. E XPERIMENTS 
+
+A. Simulation of contact mechanics 
+
+We developed a simulator that integrates the forward mechan-ics (26), and we used it to qualitatively predict the results of a manual experiment with two 3d-printed planar fingers, each consisting of an anchor, flexure, and fingertip (Figure 9). The fingers manipulate a disk object, and the radii of the circular fingertips and the object are 0.0075 m and 0.015 m, respectively. A rubber band around the disk increases friction at the contacts. Figure 9 shows the two planar fingers in initial contact with the disk. As each finger anchor advances forward at approxi-mately the same speed, the disk rotates approximately in place, the flexure-mounted fingertips comply symmetrically, and the fingertips roll on the object. This simple example demonstrates       
+
+> TABLE III HARDWARE OF THE MANIPULATION SYSTEM
+> Component Inputs and outputs Rate (Hz) OptiTrack vision tracking Output: object pose 360 Tactile sensors Output: contact locations and wrenches 60 Allegro hand and controller Input: commanded joint positions. Output: fin-ger configurations and Jacobians 333 WAM arm and controller Input: all data from other components. Output: finger joint position commands 500
+
+how object and fingertip shapes, flexure properties, and anchor motion generate compliant quasistatic rolling manipulation, as predicted by the forward mechanics (26). The simulation of the manual experiment, using estimated stiffnesses of the flexures, yields results similar to the physical experiment, as shown in Figure 9. The figure shows a planar slice of a 3d simulation of a cylindrical object and hemispherical fingers. 
+
+B. Fingertip rolling control 
+
+We tested in-hand rolling control using a Barrett WAM robot arm, an Allegro hand, four Visiflex tactile fingertips, and 10 OptiTrack Prime x cameras. More details are in Table III. In all experiments, the robot arm and, consequently, the palm were held stationary during manipulation, and all manipulation was performed solely by the fingers. The Allegro fingers each have four degrees of freedom, meaning that at least two degrees of freedom of relative motion are required at fingertip contacts to achieve general in-hand twists. The rolling contact model in this paper allows up to three degrees of freedom at each contact. Inspired by the lid-twisting example of Figure 1, we tested in-hand rolling of the cylindrical object shown in Figure 10. The cylinder is constrained to rotate and translate along an axis, and OptiTrack markers are used for motion tracking. The task was to use two fingers and the thumb of the Allegro hand to rotate the cylinder at a constant speed about its axis by 30 ◦ in 5 s and then to hold the cylinder at that 10   
+
+> Fig. 10. Left: A cylindrical object with a central axis. Right: An axis that allows only vertical and rotational motions of the cylindrical object.
+> Fig. 11. Snapshots of in-hand rolling manipulation to rotate the cylinder.
+
+orientation for another 5 s. The fingers are initially brought into contact with the cylinder by a fixed motion of the WAM arm and Allegro hand. We rely on position control of the finger joints, along with the fingertips’ passive compliance, to form a stable grasp of the cylinder with initial fingertip normal forces of approximately 1 to 2 N. Then we engage a version of the rolling controller of Figure 8 using the closed-form solution (34) for finger joint velocities. After the task is completed, the hand opens and the arm moves to a reset position. Figure 11 shows snapshots from one execution. Because each Allegro finger has only four joints, relative motion (e.g., rolling) is required at the fingertips to achieve rotation of the cylinder via in-hand manipulation. Figure 12 shows the view from one of the Visiflex tactile sensors: the location of the object contact on the fingertip dome is tracked, and the motions of the eight LED fiducials are used to determine the flexure’s displacement, and therefore the contact wrench from the known flexure stiffness. Figure 13 shows the travel of the contact point on one of the fingertip domes due to rolling during one execution of the task. Figure 14 shows the twisting angle results of 19 experimental runs. Experimental runs concluded after 10 s or if a finger lost contact with the object. Figures 15 and 16 show the normal and tangential force plots of all three fingertips in an example run. As shown in Figure 14, the cylinder was successfully rotated LED ring Dome           
+
+> Fig. 12. (Left) Schematic of the Visiflex tactile sensor. (Middle) The embedded camera detects the contact location on the dome and the deflection of the eight LED fiducials, which allows calculation of the contact wrench due to the known flexure stiffness. (Right) A color-adjusted version of the camera’s view.
+
+0° 45° -45° 
+
+0° -45° -90° -45° 0°  
+
+> Fig. 13. The inset shows the evolution of the contact point on the robot’s index fingertip during one execution of in-hand rolling manipulation.
+
+to the desired angle at the desired velocity, and the tracking error was small. In our implementation, however, we used the closed-form solution (34) to calculate commanded finger joint velocities instead of the quadratic program (33). Sufficient normal forces during manipulation were due to the residual of the initial pre-programmed grasp, not explicit enforcement of contact inequality constraints throughout the manipulation. As a result of not explicitly enforcing force inequality constraints, near the end of several of the experimental runs, one or more fingers broke contact with the cylinder. VI. C ONCLUSION 
+
+This paper derives the mechanics of quasistatic, compliant, in-hand rolling manipulation, including forward and inverse mechanics; proposes a feedback controller based on vision and tactile feedback; and reports a preliminary experimental validation on the task of twisting a cylinder using three fingers of an Allegro hand outfitted with Visiflex tactile fingertips. Robot hand and tactile sensor hardware will continue to rapidly evolve, as will AI and control for dexterity, but control of compliant in-hand rolling manipulation, as illustrated in Figures 1 and 2, will remain a core dexterous capability, 11 0 2 4 6 8 10 Time (s) -5 0510 15 20 25 30 35 Angle (deg)                
+
+> Reference Actual
+> Fig. 14. Experimental results of 19 runs of in-hand rotation of the cylinder, plotted as the mean and standard deviation. Trajectory tracking errors are small. 0246810 Time (s) 0.5 11.5 22.5 3Normal force (N)
+> Index Middle Thumb
+> Fig. 15. The normal contact forces of all fingertips in an example run. 0246810 Time (s) 00.2 0.4 0.6 0.8 1Tangential force (N)
+> Index Middle Thumb
+> Fig. 16. The tangential contact forces of all fingertips in an example run.
+
+and the mechanics governing this interaction will remain unchanged. This paper’s results are easily adapted to cases where the object interacts with an environment including springs and dampers, in addition to gravity, by modifying Equation (24). If the object interacts with k hard kinematic constraints (e.g., 
+
+k = 3 if the object is constrained to slide on a surface, or k = 5 
+
+if it is constrained to spin about an axis), the inverse mechanics must be modified. In this case, the inverse mechanics would allow the user to specify the rate of change of k components of the wrench the object applies to the environment and an orthogonal 6−k components of the object’s twist Vwo . Contact with the environment may also be used to help achieve in-hand manipulation (e.g., [46], [4]). The approach in this paper can be extended to “small” soft contact patches modeled by torsional friction, or manipulation of articulated rigid bodies, like scissors or a pipette. A different approach is required for large contact patches, contact patches spanning multiple phalanges of the fingers, and deformable objects. Our focus is on the differential rolling motion within a grasp, not establishing the grasp in the first place. Our work could be augmented by existing approaches to grasp planning and, for large in-hand motions, finger gaiting, where one or more fingers detach and establish a new grasp before continuing with in-hand rolling manipulation. To implement finger gaiting, the hand must have enough fingers to hold the object in wrench equilibrium while one or more fingers are out of contact, and the finger joint velocity calculation (33) must be modified to drive the contact force of a detaching finger to zero to allow it to break contact. Future work includes more extensive experimental valida-tion and robustification using the Allegro hand and other robot hands (among the many currently being produced) that exhibit compliance that can be modeled. We are also investigating data-driven approaches to in-hand manipulation, based on behavior cloning and reinforcement learning, that integrate models as explored in this paper. For example, models can provide a stable performance baseline, allowing learning to focus on estimating residual physics that are not well modeled (e.g., deformable contacts). Also, models can be used to focus real and simulated robot experiments on physically meaningful interactions, and to extract more generalizable information from each experiment, with the goal of more efficient robot learning. 12 
+
+APPENDIX 
+
+A. Derivation of Equation (8) 
+
+ddt ([ Ad Tij ]) =
+
+ ˙Rij 03×3 
+
+> ddt
+
+([ piij ]Rij ) ˙Rij 
+
+
+
+=
+
+" ˙R⊺ 
+
+> ji
+
+03×3 
+
+> ddt
+
+([ −R⊺ 
+
+> ji
+
+pjji ]Rij ) ˙R⊺
+
+> ji
+
+#
+
+(Using Equation (4)) 
+
+=
+
+" ˙R⊺ 
+
+> ji
+
+03×3
+
+− ddt (R⊺ 
+
+> ji
+
+[pjji ]) ˙R⊺
+
+> ji
+
+#
+
+=
+
+" ˙R⊺ 
+
+> ji
+
+03×3
+
+− ˙R⊺ 
+
+> ji
+
+[pjji ] − R⊺ 
+
+> ji
+
+[ ˙ pjji ] ˙R⊺
+
+> ji
+
+#
+
+(Using Equation (3)) 
+
+=
+
+"
+
+([ ωjji ]Rji )⊺ 03×3
+
+−([ ωjji ]Rji )⊺[pjji ] − R⊺ 
+
+> ji
+
+[[ ωjji ]pjji + vjji ] ([ ωjji ]Rji )⊺
+
+#
+
+(Using Equation (7)) 
+
+=
+
+"
+
+−R⊺ 
+
+> ji
+
+[ωjji ] 03×3
+
+R⊺ 
+
+> ji
+
+[ωjji ][ pjji ] − R⊺ 
+
+> ji
+
+[[ ωjji ]pjji ] − R⊺ 
+
+> ji
+
+[vjji ] −R⊺ 
+
+> ji
+
+[ωjji ]
+
+#
+
+=
+
+"
+
+−Rij [ωjji ] 03×3
+
+Rij [pjji ][ ωjji ] − Rij [vjji ] −Rij [ωjji ]
+
+#
+
+(Using Equation (1)) 
+
+=
+
+"
+
+−Rij [ωjji ] 03×3
+
+Rij [−Rji piij ][ ωjji ] − Rij [vjji ] −Rij [ωjji ]
+
+#
+
+(Using Equation (4)) 
+
+= −
+
+"
+
+Rij [ωjji ] 03×3
+
+[piij ]Rij [ωjji ] + Rij [vjji ] Rij [ωjji ]
+
+#
+
+(Using Equation (3)) 
+
+= − [Ad Tij ]
+
+"
+
+[ωjji ] 03×3
+
+[vjji ] [ωjji ]
+
+#
+
+.
+
+B. Derivation of Equation (10) 
+
+˙Fi = ddt ([ Ad Tji ]⊺Fj) = ddt ([ Ad Tji ]) ⊺Fj + [ Ad Tji ]⊺ ˙Fj
+
+=( −[Ad Tji ]
+
+[ωiij ] 03×3
+
+[viij ] [ωiij ]
+
+
+
+)⊺Fj + [ Ad Tji ]⊺ ˙Fj
+
+(Using Equation (8)) 
+
+=
+
+ [ωiij ] [viij ]
+
+03×3 [ωiij ]
+
+
+
+[Ad Tji ]⊺Fj + [ Ad Tji ]⊺ ˙Fj
+
+=
+
+ [ωiij ] [viij ]
+
+03×3 [ωiij ]
+
+
+
+Fi + [ Ad Tji ]⊺ ˙Fj
+
+= − WiViij + [ Ad Tji ]⊺ ˙Fj (Using Equation (2)) .
+
+C. Derivation of Equation (23) 
+
+> n
+
+X
+
+> i=1
+
+˙Fcon ,i =
+
+> n
+
+X
+
+> i=1
+
+(−Wcon ,i Vwc 1, i + [ Ad Tc1w,i ]⊺ ˙Fc1
+
+> con ,i
+
+)
+
+(Using Equation (10)) 
+
+=
+
+> n
+
+X
+
+> i=1
+
+(−Wcon ,i Vwc 1, i + ( Kspr ,i − Wcon ,i )Vwa, i
+
+− Kspr ,i Vwf, i + Wcon ,i (Vwo + Voc 1, i )) 
+
+(Using Equation (19)) 
+
+=
+
+> n
+
+X
+
+> i=1
+
+(( Kspr ,i − Wcon ,i )Vwa, i − Kspr ,i Vwf, i).
+
+Taking the derivative of Equation (15) and substituting this yields Equation (23). REFERENCES [1] “Dexterity for humanoids webinar panel,” May 2025. [Online]. Available: https://www.youtube.com/watch?v=dB1mdFhO4oI [2] J. Keilman, “The ‘hands problem’ holding back the humanoid revolution,” Wall Street Journal, Oct. 2025. [Online]. Available: https://www.wsj.com/tech/ the-hands-problem-holding-back-the-humanoid-revolution-c1aa6123 [3] J. Z. Woodruff and K. M. Lynch, “Robotic contact juggling,” IEEE Transactions on Robotics , vol. 39, no. 3, pp. 1964–1981, 2023. [4] J. Shi, H. Weng, and K. M. Lynch, “In-hand sliding regrasp with spring-sliding compliance and external constraints,” IEEE Access , vol. 8, pp. 88 729–88 744, 2020. [5] A. J. Fernandez, H. Weng, P. B. Umbanhowar, and K. M. Lynch, “Visiflex: A low-cost compliant tactile fingertip for force, torque, and contact sensing,” IEEE Robotics and Automation Letters , vol. 6, no. 2, pp. 3009–3016, 2021. [6] E. Holweg, H. Hoeve, W. Jongkind, L. Marconi, C. Melchiorri, and C. Bonivento, “Slip detection by tactile sensors: algorithms and exper-imental results,” in Proceedings of IEEE International Conference on Robotics and Automation , vol. 4. IEEE, 1996, pp. 3234–3239. [7] C. Melchiorri, “Slip detection and control using tactile and force sensors,” IEEE/ASME transactions on mechatronics , vol. 5, no. 3, pp. 235–243, 2000. [8] J. W. James, N. Pestell, and N. F. Lepora, “Slip detection with a biomimetic tactile sensor,” IEEE Robotics and Automation Letters ,vol. 3, no. 4, pp. 3340–3346, 2018. [9] J. W. James and N. F. Lepora, “Slip detection for grasp stabilization with a multifingered tactile robot hand,” IEEE Transactions on Robotics ,vol. 37, no. 2, pp. 506–519, 2020. [10] S. Dong, D. Ma, E. Donlon, and A. Rodriguez, “Maintaining grasps within slipping bounds by monitoring incipient slip,” in 2019 Interna-tional Conference on Robotics and Automation (ICRA) . IEEE, 2019, pp. 3818–3824. [11] K. M. Lynch, H. Maekawa, and K. Tanie, “Manipulation and active sensing by pushing using tactile feedback.” in IROS , vol. 1, 1992, pp. 416–421. [12] B. Sundaralingam and T. Hermans, “In-hand object-dynamics inference using tactile fingertips,” IEEE Transactions on Robotics , 2021. [13] S. Suresh, H. Qi, T. Wu, T. Fan, L. Pineda, M. Lambeta, J. Malik, M. Kalakrishnan, R. Calandra, M. Kaess et al. , “Neuralfeels with neural fields: Visuotactile perception for in-hand manipulation,” Science Robotics , vol. 9, no. 96, p. eadl0628, 2024. [14] J. Di, Z. Dugonjic, W. Fu, T. Wu, R. Mercado, K. Sawyer, V. R. Most, G. Kammerer, S. Speidel, R. E. Fan et al. , “Using fiber optic bundles to miniaturize vision-based tactile sensors,” IEEE Transactions on Robotics , 2024. [15] A. Rodriguez, “The unstable queen: Uncertainty, mechanics, and tactile feedback,” Science Robotics , vol. 6, no. 54, p. eabi4667, 2021. [16] E. Donlon, S. Dong, M. Liu, J. Li, E. Adelson, and A. Rodriguez, “Gelslim: A high-resolution, compact, robust, and calibrated tactile-sensing finger,” in 2018 IEEE/RSJ International Conference on Intel-ligent Robots and Systems (IROS) . IEEE, 2018, pp. 1927–1934. 13 
+
+[17] D. Ma, E. Donlon, S. Dong, and A. Rodriguez, “Dense tactile force esti-mation using gelslim and inverse fem,” in 2019 International Conference on Robotics and Automation (ICRA) . IEEE, 2019, pp. 5418–5424. [18] R. Li, R. Platt, W. Yuan, A. ten Pas, N. Roscup, M. A. Srinivasan, and E. Adelson, “Localization and manipulation of small parts using gelsight tactile sensing,” in 2014 IEEE/RSJ International Conference on Intelligent Robots and Systems . IEEE, 2014, pp. 3988–3993. [19] W. Yuan, S. Dong, and E. H. Adelson, “Gelsight: High-resolution robot tactile sensors for estimating geometry and force,” Sensors , vol. 17, no. 12, p. 2762, 2017. [20] F. R. Hogan, M. Bauza, O. Canal, E. Donlon, and A. Rodriguez, “Tactile regrasp: Grasp adjustments via simulated tactile transformations,” in 
+
+2018 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) . IEEE, 2018, pp. 2963–2970. [21] Y. She, S. Wang, S. Dong, N. Sunil, A. Rodriguez, and E. Adelson, “Cable manipulation with a tactile-reactive gripper,” The International Journal of Robotics Research , vol. 40, no. 12-14, pp. 1385–1401, 2021. [22] D. Ma, S. Dong, and A. Rodriguez, “Extrinsic contact sensing with relative-motion tracking from distributed tactile measurements,” 2021 IEEE International Conference on Robotics and Automation (ICRA) ,pp. 11 262–11 268, 2021. [23] G. De Maria, C. Natale, and S. Pirozzi, “Force/tactile sensor for robotic applications,” Sensors and Actuators A: Physical , vol. 175, pp. 60–72, 2012. [24] A. D’Amore, G. De Maria, L. Grassia, C. Natale, and S. Pirozzi, “Silicone-rubber-based tactile sensors for the measurement of normal and tangential components of the contact force,” Journal of Applied Polymer Science , vol. 122, no. 6, pp. 3757–3769, 2011. [25] A. Cirillo, P. Cirillo, G. De Maria, C. Natale, and S. Pirozzi, “Control of linear and rotational slippage based on six-axis force/tactile sensor,” in 2017 IEEE International Conference on Robotics and Automation (ICRA) . IEEE, 2017, pp. 1587–1594. [26] G. De Maria, C. Natale, and S. Pirozzi, “Slipping control through tactile sensing feedback,” in 2013 IEEE International Conference on Robotics and Automation . IEEE, 2013, pp. 3523–3528. [27] M. Costanzo, G. De Maria, and C. Natale, “Slipping control algorithms for object manipulation with sensorized parallel grippers,” in 2018 IEEE International Conference on Robotics and Automation (ICRA) . IEEE, 2018, pp. 7455–7461. [28] ——, “Two-fingered in-hand object handling based on force/tactile feedback,” IEEE Transactions on Robotics , vol. 36, no. 1, pp. 157–173, 2019. [29] A. M. Dollar, L. P. Jentoft, J. H. Gao, and R. D. Howe, “Contact sensing and grasping performance of compliant hands,” Autonomous Robots ,vol. 28, no. 1, pp. 65–75, 2010. [30] H. Van Hoof, T. Hermans, G. Neumann, and J. Peters, “Learning robot in-hand manipulation with tactile features,” in 2015 IEEE-RAS 15th International Conference on Humanoid Robots (Humanoids) . IEEE, 2015, pp. 121–127. [31] F. Khadivar and A. Billard, “Adaptive fingers coordination for robust grasp and in-hand manipulation under disturbances and unknown dy-namics,” IEEE Transactions on Robotics , vol. 39, no. 5, pp. 3350–3367, 2023. [32] Z. Zhao, Y. Li, W. Li, Z. Qi, L. Ruan, Y. Zhu, and K. Althoefer, “Tac-man: Tactile-informed prior-free manipulation of articulated objects,” 
+
+IEEE Transactions on Robotics , 2024. [33] Y. Yuan, H. Che, Y. Qin, B. Huang, Z.-H. Yin, K.-W. Lee, Y. Wu, S.-C. Lim, and X. Wang, “Robot synesthesia: In-hand manipulation with visuotactile sensing,” in 2024 IEEE International Conference on Robotics and Automation (ICRA) . IEEE, 2024, pp. 6558–6565. [34] R. D. Howe, “Tactile sensing and control of robotic manipulation,” 
+
+Advanced Robotics , vol. 8, no. 3, pp. 245–261, 1993. [35] J. Tegin and J. Wikander, “Tactile sensing in intelligent robotic manipulation–a review,” Industrial Robot: An International Journal ,2005. [36] Q. Li, O. Kroemer, Z. Su, F. F. Veiga, M. Kaboli, and H. J. Ritter, “A review of tactile information: Perception and action through touch,” 
+
+IEEE Transactions on Robotics , vol. 36, no. 6, pp. 1619–1634, 2020. [37] H. Hanafusa and H. Asada, “Stable prehension of objects by the robot hand with elastic fingers,” Transactions of the Society of Instrument and Control Engineers , vol. 13, no. 4, pp. 370–377, 1977. [38] B. Baker, S. Fortune, and E. Grosse, “Stable prehension with a multi-fingered hand,” in Proceedings. 1985 IEEE International Conference on Robotics and Automation , vol. 2. IEEE, 1985, pp. 570–575. [39] M. R. Cutkosky and I. Kao, “Computing and controlling compliance of a robotic hand,” IEEE transactions on robotics and automation , vol. 5, no. 2, pp. 151–165, 1989. [40] I. Kao and M. R. Cutkosky, “Quasistatic manipulation with compliance and sliding,” The International journal of robotics research , vol. 11, no. 1, pp. 20–40, 1992. [41] H. Bruyninckx, S. Demey, and V. Kumar, “Generalized stability of compliant grasps,” in Proceedings. 1998 IEEE International Conference on Robotics and Automation (Cat. No. 98CH36146) , vol. 3. IEEE, 1998, pp. 2396–2402. [42] M. Malvezzi and D. Prattichizzo, “Evaluation of grasp stiffness in underactuated compliant hands,” in 2013 IEEE International conference on robotics and automation . IEEE, 2013, pp. 2074–2079. [43] Z. Chen, T. Wimb¨ ock, M. A. Roa, B. Pleintinger, M. Neves, C. Ott, C. Borst, and N. Y. Lii, “An adaptive compliant multi-finger approach-to-grasp strategy for objects with position uncertainties,” in 2015 IEEE International Conference on Robotics and Automation (ICRA) . IEEE, 2015, pp. 4911–4918. [44] M. Pozzi, M. Malvezzi, and D. Prattichizzo, “On grasp quality measures: Grasp robustness and contact force distribution in underactuated and compliant robotic hands,” IEEE Robotics and Automation Letters , vol. 2, no. 1, pp. 329–336, 2016. [45] J. Zhou, J. Huang, Q. Dou, P. Abeel, and Y. Liu, “A dexterous and compliant (dexco) hand based on soft hydraulic actuation for human inspired fine in-hand manipulation,” IEEE Transactions on Robotics ,2024. [46] N. C. Dafle, A. Rodriguez, R. Paolini, B. Tang, S. S. Srinivasa, M. Erdmann, M. T. Mason, I. Lundberg, H. Staab, and T. Fuhlbrigge, “Extrinsic dexterity: In-hand manipulation with external forces,” in 2014 IEEE International Conference on Robotics and Automation (ICRA) .IEEE, 2014, pp. 1578–1585. [47] D. J. Montana, “The kinematics of contact and grasp,” The International Journal of Robotics Research , vol. 7, no. 3, pp. 17–32, 1988. [48] A. Cole, J. Hauser, and S. Sastry, “Kinematics and control of mul-tifingered hands with rolling contact,” in Proceedings. 1988 IEEE International Conference on Robotics and Automation . IEEE, 1988, pp. 228–233. [49] A. A. Cole, P. Hsu, and S. S. Sastry, “Dynamic control of sliding by robot hands for regrasping,” IEEE Transactions on robotics and automation , vol. 8, no. 1, pp. 42–52, 1992. [50] B. Ward-Cherrier, N. Rojas, and N. F. Lepora, “Model-free precise in-hand manipulation with a 3d-printed tactile gripper,” IEEE Robotics and Automation Letters , vol. 2, no. 4, pp. 2056–2063, 2017. [51] A. J. Spiers, B. Calli, and A. M. Dollar, “Variable-friction finger surfaces to enable within-hand manipulation via gripping and sliding,” IEEE Robotics and Automation Letters , vol. 3, no. 4, pp. 4116–4123, 2018. [52] H. Lee, Y. Kim, V. M. Staven, and C. Sloth, “Trajectory optimization for in-hand manipulation with tactile force control,” arXiv preprint arXiv:2503.08222 , 2025. [53] M. Yu, Y. Jiang, C. Chen, Y. Jia, and X. Li, “Robotic in-hand manip-ulation for large-range precise object movement: The rgmc champion solution,” IEEE Robotics and Automation Letters , vol. 10, no. 5, pp. 4738–4745, 2025. [54] X. Cheng, S. Patil, Z. Temel, O. Kroemer, and M. T. Mason, “Enhancing dexterity in robotic manipulation via hierarchical contact exploration,” 2023. [Online]. Available: https://arxiv.org/abs/2307.00383 [55] S. Levine, C. Finn, T. Darrell, and P. Abbeel, “End-to-end training of deep visuomotor policies,” The Journal of Machine Learning Research ,vol. 17, no. 1, pp. 1334–1373, 2016. [56] O. M. Andrychowicz, B. Baker, M. Chociej, R. Jozefowicz, B. McGrew, J. Pachocki, A. Petron, M. Plappert, G. Powell, A. Ray et al. , “Learning dexterous in-hand manipulation,” The International Journal of Robotics Research , vol. 39, no. 1, pp. 3–20, 2020. [57] M. Gualtieri and R. Platt, “Learning manipulation skills via hierarchical spatial attention,” IEEE Transactions on Robotics , vol. 36, no. 4, pp. 1067–1078, 2020. [58] L. R¨ ostel, J. Pitz, L. Sievers, and B. B¨ auml, “Estimator-coupled rein-forcement learning for robust purely tactile in-hand manipulation,” in 
+
+2023 IEEE-RAS 22nd International Conference on Humanoid Robots (Humanoids) . IEEE, 2023, pp. 1–8. [59] J. Pitz, L. R¨ ostel, L. Sievers, and B. B¨ auml, “Learning time-optimal and speed-adjustable tactile in-hand manipulation,” in 2024 IEEE-RAS 23rd International Conference on Humanoid Robots (Humanoids) . IEEE, 2024, pp. 973–979. [60] X. Liu, H. Wang, and L. Yi, “Dexndm: Closing the reality gap for dexterous in-hand rotation via joint-wise neural dynamics model,” 2025. [Online]. Available: https://arxiv.org/abs/2510.08556 [61] H. Qi, B. Yi, M. Lambeta, Y. Ma, R. Calandra, and J. Malik, “From simple to complex skills: The case of in-hand object reorientation,” 14 
+
+in 2025 IEEE International Conference on Robotics and Automation (ICRA) , 2025, pp. 14 291–14 298. [62] Y. Hou, Z. Jia, A. M. Johnson, and M. T. Mason, “Robust planar dynamic pivoting by regulating inertial and grip forces,” in Algorithmic Foundations of Robotics XII . Springer, 2020, pp. 464–479. [63] N. Chavan-Dafle, R. Holladay, and A. Rodriguez, “Planar in-hand manipulation via motion cones,” The International Journal of Robotics Research , vol. 39, no. 2-3, pp. 163–182, 2020. [64] J. Shi, J. Z. Woodruff, P. B. Umbanhowar, and K. M. Lynch, “Dynamic in-hand sliding manipulation,” IEEE Transactions on Robotics , vol. 33, no. 4, pp. 778–795, 2017. [65] K. Goldberg, “Good old-fashioned engineering can close the 100,000-year “data gap” in robotics,” Science Robotics , vol. 10, no. 105, p. eaea7390, 2025. [66] R. Brooks, “Why today’s humanoids won’t learn dexterity,” https:// rodneybrooks.com/why-todays-humanoids-wont-learn-dexterity/, 2025, accessed: 2025-11-24. [67] H. Zhu, J. Yu, A. Gupta, D. Shah, K. Hartikainen, A. Singh, V. Kumar, and S. Levine, “The ingredients of real-world robotic reinforcement learning,” arXiv preprint arXiv:2004.12570 , 2020. [68] X. Yang, Z. Ji, and Y.-K. Lai, “Differentiable physics-based system identification for robotic manipulation of elastoplastic materials,” The International Journal of Robotics Research , vol. 44, no. 13, pp. 2126– 2155, 2025. [69] Z. Si, G. Zhang, Q. Ben, B. Romero, Z. Xian, C. Liu, and C. Gan, “DIFFTACTILE: A physics-based differentiable tactile simulator for contact-rich robotic manipulation,” in International Conference on Learning Representations (ICLR) , 2024. [70] W. Hu, B. Huang, W. W. Lee, S. Yang, Y. Zheng, and Z. Li, “Dexterous in-hand manipulation of slender cylindrical objects through deep reinforcement learning with tactile sensing,” Robotics and Autonomous Systems , vol. 186, p. 104904, 2025. [Online]. Available: https://www.sciencedirect.com/science/article/pii/S0921889024002884 [71] J. Lee and N. Fazeli, “Vitascope: Visuo-tactile implicit representation for in-hand pose and extrinsic contact estimation,” in Robotics: Science and Systems (RSS) , 2025. [72] Y. Chen, S. Lu, H. Zhang, and K. M. Lynch, “In-hand manipulation with enforced grasp stability for contact-rich tasks,” in ICRA 2025 Workshop on Contact-Rich Manipulation , 2025. [73] R. Zurbr¨ ugg, A. Cramariuc, and M. Hutter, “Graspqp: Differentiable optimization of force closure for diverse and robust dexterous grasping,” in 9th Conference on Robot Learning (CoRL) , 2025. [74] L. Yang, B. Werner, M. de Sa, and A. D. Ames, “Cbf-rl: Safety filtering reinforcement learning in training with control barrier functions,” 2025. [75] Y. Shirai, K. Ota, D. K. Jha, and D. Romeres, “Sim-to-real contact-rich pivoting via optimization-guided rl with vision and touch,” in NeurIPS Workshop on Embodied World Models , 2025. [76] E. Su, T. Westenbroek, A. Nagabandi, and A. Gupta, “Rfs: Reinforcement learning with residual flow steering for dexterous manipulation,” 2026. [Online]. Available: https://arxiv.org/abs/2602. 01789 [77] H. Gupta, M. A. Mirzaee, and W. Yuan, “Grasp to act: Dexterous grasping for tool use in dynamic settings,” 2025, available at https: //grasp2act.github.io/. [78] L. R¨ ostel, D. Winkelbauer, L. Pitz, Johannes Sievers, and B. B¨ auml, “Composing dextrous grasping and in-hand manipulation via scoring with a reinforcement learning critic,” in 2025 IEEE International Con-ference on Robotics and Automation (ICRA) . IEEE, May 2025. [79] Y. Shang, X. Zhang, Y. Tang, L. Jin, C. Gao, W. Wu, and Y. Li, “Roboscape: Physics-informed embodied world model,” in Advances in Neural Information Processing Systems (NeurIPS) , 2025. [80] W. Li, H. Zhao, Z. Yu, Y. Du, Q. Zou, R. Hu, and K. Xu, “PIN-WM: Learning physics-informed world models for non-prehensile manipula-tion,” in Robotics: Science and Systems (RSS) , 2025. [81] K. M. Lynch and F. C. Park, Modern Robotics . Cambridge University Press, 2017.
