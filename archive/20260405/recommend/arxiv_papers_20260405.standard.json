@@ -1,0 +1,702 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-04-05T19:45:05.542698+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 7,
+    "deep_cap": 6,
+    "deep_selected": 6,
+    "quick_candidates": 19,
+    "quick_skim_target": 11,
+    "quick_selected": 11
+  },
+  "deep_dive": [
+    {
+      "id": "2603.28955v1",
+      "source": "arxiv",
+      "title": "Enhancing Policy Learning with World-Action Model",
+      "abstract": "This paper presents the World-Action Model (WAM), an action-regularized world model that jointly reasons over future visual observations and the actions that drive state transitions. Unlike conventional world models trained solely via image prediction, WAM incorporates an inverse dynamics objective into DreamerV2 that predicts actions from latent state transitions, encouraging the learned representations to capture action-relevant structure critical for downstream control. We evaluate WAM on enhancing policy learning across eight manipulation tasks from the CALVIN benchmark. We first pretrain a diffusion policy via behavioral cloning on world model latents, then refine it with model-based PPO inside the frozen world model. Without modifying the policy architecture or training procedure, WAM improves average behavioral cloning success from 59.4% to 71.2% over DreamerV2 and DiWA baselines. After PPO fine-tuning, WAM achieves 92.8% average success versus 79.8% for the baseline, with two tasks reaching 100%, using 8.7x fewer training steps.",
+      "authors": [
+        "Yuci Han",
+        "Alper Yilmaz"
+      ],
+      "primary_category": "cs.AI",
+      "categories": [
+        "cs.AI"
+      ],
+      "published": "2026-03-30T19:56:05+00:00",
+      "link": "https://arxiv.org/pdf/2603.28955v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 10.0,
+      "llm_evidence_en": "World-Action Model (WAM) for action-regularized world modeling",
+      "llm_evidence_cn": "用于动作正则化世界建模的世界动作模型 (WAM)",
+      "llm_evidence": "用于动作正则化世界建模的世界动作模型 (WAM)",
+      "canonical_evidence": "用于动作正则化世界建模的世界动作模型 (WAM)",
+      "llm_tldr_en": "WAM incorporates inverse dynamics into world models to capture action-relevant structures for policy learning.",
+      "llm_tldr_cn": "WAM 将逆动力学融入世界模型，捕捉动作相关结构以增强策略学习。",
+      "llm_tldr": "WAM 将逆动力学融入世界模型，捕捉动作相关结构以增强策略学习。",
+      "llm_tags": [
+        "query:1:composite"
+      ],
+      "matched_query_tag": "query:1:composite",
+      "matched_query_text": "Papers central to 寻找关于世界动作模型（World Action Model）及相关领域（如模型预测、强化学习）的学术论文。, especially work that connects or combines: r; V; World models in reinforcement learning and robotics; Action-conditioned world models for decision making; Learning latent dynamics for world modeling; Model-based reinforcement learning with world models; Recent advances in world action models for autonomous agents; Action conditioned generative world models for robotics.",
+      "matched_requirement_id": "req-composite-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.27449v1",
+      "source": "arxiv",
+      "title": "LOME: Learning Human-Object Manipulation with Action-Conditioned Egocentric World Model",
+      "abstract": "Learning human-object manipulation presents significant challenges due to its fine-grained and contact-rich nature of the motions involved. Traditional physics-based animation requires extensive modeling and manual setup, and more importantly, it neither generalizes well across diverse object morphologies nor scales effectively to real-world environment. To address these limitations, we introduce LOME, an egocentric world model that can generate realistic human-object interactions as videos conditioned on an input image, a text prompt, and per-frame human actions, including both body poses and hand gestures. LOME injects strong and precise action guidance into object manipulation by jointly estimating spatial human actions and the environment contexts during training. After finetuning a pretrained video generative model on videos of diverse egocentric human-object interactions, LOME demonstrates not only high action-following accuracy and strong generalization to unseen scenarios, but also realistic physical consequences of hand-object interactions, e.g., liquid flowing from a bottle into a mug after executing a ``pouring'' action. Extensive experiments demonstrate that our video-based framework significantly outperforms state-of-the-art image based and video-based action-conditioned methods and Image/Text-to-Video (I/T2V) generative model in terms of both temporal consistency and motion control. LOME paves the way for photorealistic AR/VR experiences and scalable robotic training, without being limited to simulated environments or relying on explicit 3D/4D modeling.",
+      "authors": [
+        "Quankai Gao",
+        "Jiawei Yang",
+        "Qiangeng Xu",
+        "Le Chen",
+        "Yue Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV"
+      ],
+      "published": "2026-03-28T23:58:29+00:00",
+      "link": "https://arxiv.org/pdf/2603.27449v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "action-conditioned egocentric world model for human-object manipulation",
+      "llm_evidence_cn": "用于人机交互操作的动作条件第一视角世界模型",
+      "llm_evidence": "用于人机交互操作的动作条件第一视角世界模型",
+      "canonical_evidence": "用于人机交互操作的动作条件第一视角世界模型",
+      "llm_tldr_en": "LOME is an egocentric world model generating realistic human-object interactions guided by precise actions.",
+      "llm_tldr_cn": "LOME 是一个第一视角世界模型，在精确动作引导下生成逼真的人与物体交互视频。",
+      "llm_tldr": "LOME 是一个第一视角世界模型，在精确动作引导下生成逼真的人与物体交互视频。",
+      "llm_tags": [
+        "query:1:composite"
+      ],
+      "matched_query_tag": "query:1:composite",
+      "matched_query_text": "Papers central to 寻找关于世界动作模型（World Action Model）及相关领域（如模型预测、强化学习）的学术论文。, especially work that connects or combines: r; V; World models in reinforcement learning and robotics; Action-conditioned world models for decision making; Learning latent dynamics for world modeling; Model-based reinforcement learning with world models; Recent advances in world action models for autonomous agents; Action conditioned generative world models for robotics.",
+      "matched_requirement_id": "req-composite-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.28545v1",
+      "source": "arxiv",
+      "title": "ManipArena: Comprehensive Real-world Evaluation of Reasoning-Oriented Generalist Robot Manipulation",
+      "abstract": "Vision-Language-Action (VLA) models and world models have recently emerged as promising paradigms for general-purpose robotic intelligence, yet their progress is hindered by the lack of reliable evaluation protocols that reflect real-world deployment. Existing benchmarks are largely simulator-centric, which provide controllability but fail to capture the reality gap caused by perception noise, complex contact dynamics, hardware constraints, and system latency. Moreover, fragmented real-world evaluations across different robot platforms prevent fair and reproducible comparison. To address these challenges, we introduce ManipArena, a standardized evaluation framework designed to bridge simulation and real-world execution. ManipArena comprises 20 diverse tasks across 10,812 expert trajectories emphasizing reasoning-oriented manipulation tasks requiring semantic and spatial reasoning, supports multi-level generalization through controlled out-of-distribution settings, and incorporates long-horizon mobile manipulation beyond tabletop scenarios. The framework further provides rich sensory diagnostics, including low-level motor signals, and synchronized real-to-sim environments constructed via high-quality 3D scanning. Together, these features enable fair, realistic, and reproducible evaluation for both VLA and world model approaches, providing a scalable foundation for diagnosing and advancing embodied intelligence systems.",
+      "authors": [
+        "Yu Sun",
+        "Meng Cao",
+        "Ping Yang",
+        "Rongtao Xu",
+        "Yunxiao Yan",
+        "Runze Xu",
+        "Liang Ma",
+        "Roy Gan",
+        "Andy Zhai",
+        "Qingxuan Chen",
+        "Zunnan Xu",
+        "Hao Wang",
+        "Jincheng Yu",
+        "Lucy Liang",
+        "Qian Wang",
+        "Ivan Laptev",
+        "Ian D Reid",
+        "Xiaodan Liang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "published": "2026-03-30T15:06:41+00:00",
+      "link": "https://arxiv.org/pdf/2603.28545v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "standardized evaluation framework for world models and VLA in robotics",
+      "llm_evidence_cn": "机器人世界模型与VLA的标准化评估框架",
+      "llm_evidence": "机器人世界模型与VLA的标准化评估框架",
+      "canonical_evidence": "机器人世界模型与VLA的标准化评估框架",
+      "llm_tldr_en": "Introduces ManipArena, a benchmark for evaluating generalist robot manipulation and world models.",
+      "llm_tldr_cn": "推出ManipArena，一个用于评估通用机器人操作和世界模型的基准测试框架。",
+      "llm_tldr": "推出ManipArena，一个用于评估通用机器人操作和世界模型的基准测试框架。",
+      "llm_tags": [
+        "query:emb-bm:composite"
+      ],
+      "matched_query_tag": "query:emb-bm:composite",
+      "matched_query_text": "Papers central to 具身智能世界模型基准测试相关论文检索, especially work that connects or combines: world models for embodied intelligence and robotics; benchmarking suites for world models; evaluation metrics for embodied world models; video generation benchmarks for world models; datasets for training and testing world models; state of the art benchmarks for embodied world models; comparative analysis of world model evaluation frameworks; standardized testing environments for robotic world models; performance metrics for generative world models in robotics.",
+      "matched_requirement_id": "req-composite-emb-bm",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.29363v1",
+      "source": "arxiv",
+      "title": "Industrial-Grade Robust Robot Vision for Screw Detection and Removal under Uneven Conditions",
+      "abstract": "As the amount of used home appliances is expected to increase despite the decreasing labor force in Japan, there is a need to automate disassembling processes at recycling plants. The automation of disassembling air conditioner outdoor units, however, remains a challenge due to unit size variations and exposure to dirt and rust. To address these challenges, this study proposes an automated system that integrates a task-specific two-stage detection method and a lattice-based local calibration strategy. This approach achieved a screw detection recall of 99.8% despite severe degradation and ensured a manipulation accuracy of +/-0.75 mm without pre-programmed coordinates. In real-world validation with 120 units, the system attained a disassembly success rate of 78.3% and an average cycle time of 193 seconds, confirming its feasibility for industrial application.",
+      "authors": [
+        "Tomoki Ishikura",
+        "Genichiro Matsuda",
+        "Takuya Kiyokawa",
+        "Kensuke Harada"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-31T07:36:12+00:00",
+      "link": "https://arxiv.org/pdf/2603.29363v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "automated system for screw detection and removal",
+      "llm_evidence_cn": "螺丝检测与拆卸自动化系统",
+      "llm_evidence": "螺丝检测与拆卸自动化系统",
+      "canonical_evidence": "螺丝检测与拆卸自动化系统",
+      "llm_tldr_en": "Develops a robust vision and manipulation system for industrial screw detection and removal in recycling.",
+      "llm_tldr_cn": "开发了一种用于工业回收中螺丝检测和拆卸的鲁棒视觉与操作系统。",
+      "llm_tldr": "开发了一种用于工业回收中螺丝检测和拆卸的鲁棒视觉与操作系统。",
+      "llm_tags": [
+        "query:rob-rot"
+      ],
+      "matched_query_tag": "query:rob-rot",
+      "matched_query_text": "robotic learning for unscrewing and screwing bottle caps",
+      "matched_requirement_id": "req-3",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.29409v1",
+      "source": "arxiv",
+      "title": "CLaD: Planning with Grounded Foresight via Cross-Modal Latent Dynamics",
+      "abstract": "Robotic manipulation involves kinematic and semantic transitions that are inherently coupled via underlying actions. However, existing approaches plan within either semantic or latent space without explicitly aligning these cross-modal transitions. To address this, we propose CLaD, a framework that models how proprioceptive and semantic states jointly evolve under actions through asymmetric cross-attention that allows kinematic transitions to query semantic ones. CLaD predicts grounded latent foresights via self-supervised objectives with EMA target encoders and auxiliary reconstruction losses, preventing representation collapse while anchoring predictions to observable states. Predicted foresights are modulated with observations to condition a diffusion policy for action generation. On LIBERO-LONG benchmark, CLaD achieves 94.7\\% success rate, competitive with large VLAs with significantly fewer parameters.",
+      "authors": [
+        "Andrew Jeong",
+        "Jaemin Kim",
+        "Sebin Lee",
+        "Sung-Eui Yoon"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-31T08:13:45+00:00",
+      "link": "https://arxiv.org/pdf/2603.29409v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "cross-modal latent dynamics for planning with grounded foresight",
+      "llm_evidence_cn": "用于具身前瞻规划的跨模态潜空间动力学",
+      "llm_evidence": "用于具身前瞻规划的跨模态潜空间动力学",
+      "canonical_evidence": "用于具身前瞻规划的跨模态潜空间动力学",
+      "llm_tldr_en": "CLaD models joint evolution of proprioceptive and semantic states for robotic manipulation planning.",
+      "llm_tldr_cn": "CLaD 框架通过建模本体感受和语义状态的共同演化，实现机器人操作的具身前瞻规划。",
+      "llm_tldr": "CLaD 框架通过建模本体感受和语义状态的共同演化，实现机器人操作的具身前瞻规划。",
+      "llm_tags": [
+        "query:1:composite"
+      ],
+      "matched_query_tag": "query:1:composite",
+      "matched_query_text": "Papers central to 寻找关于世界动作模型（World Action Model）及相关领域（如模型预测、强化学习）的学术论文。, especially work that connects or combines: r; V; World models in reinforcement learning and robotics; Action-conditioned world models for decision making; Learning latent dynamics for world modeling; Model-based reinforcement learning with world models; Recent advances in world action models for autonomous agents; Action conditioned generative world models for robotics.",
+      "matched_requirement_id": "req-composite-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2603.27317v1",
+      "source": "arxiv",
+      "title": "Where-to-Learn: Analytical Policy Gradient Directed Exploration for On-Policy Robotic Reinforcement Learning",
+      "abstract": "On-policy reinforcement learning (RL) algorithms have demonstrated great potential in robotic control, where effective exploration is crucial for efficient and high-quality policy learning. However, how to encourage the agent to explore the better trajectories efficiently remains a challenge. Most existing methods incentivize exploration by maximizing the policy entropy or encouraging novel state visiting regardless of the potential state value. We propose a new form of directed exploration that uses analytical policy gradients from a differentiable dynamics model to inject task-aware, physics-guided guidance, thereby steering the agent towards high-reward regions for accelerated and more effective policy learning.",
+      "authors": [
+        "Leixin Chang",
+        "Xinchen Yao",
+        "Ben Liu",
+        "Liangjing Yang",
+        "Hua Chen"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-28T15:50:54+00:00",
+      "link": "https://arxiv.org/pdf/2603.27317v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "directed exploration using analytical policy gradients from a differentiable dynamics model",
+      "llm_evidence_cn": "利用可微动力学模型的解析策略梯度进行定向探索",
+      "llm_evidence": "利用可微动力学模型的解析策略梯度进行定向探索",
+      "canonical_evidence": "利用可微动力学模型的解析策略梯度进行定向探索",
+      "llm_tldr_en": "Uses differentiable dynamics for task-aware guidance in on-policy robotic reinforcement learning.",
+      "llm_tldr_cn": "在同策略机器人强化学习中，利用可微动力学提供任务感知的引导。",
+      "llm_tldr": "在同策略机器人强化学习中，利用可微动力学提供任务感知的引导。",
+      "llm_tags": [
+        "query:1:composite"
+      ],
+      "matched_query_tag": "query:1:composite",
+      "matched_query_text": "Papers central to 寻找关于世界动作模型（World Action Model）及相关领域（如模型预测、强化学习）的学术论文。, especially work that connects or combines: r; V; World models in reinforcement learning and robotics; Action-conditioned world models for decision making; Learning latent dynamics for world modeling; Model-based reinforcement learning with world models; Recent advances in world action models for autonomous agents; Action conditioned generative world models for robotics.",
+      "matched_requirement_id": "req-composite-1",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2603.27317v2",
+      "source": "arxiv",
+      "title": "Where-to-Learn: Analytical Policy Gradient Directed Exploration for On-Policy Robotic Reinforcement Learning",
+      "abstract": "On-policy reinforcement learning (RL) algorithms have demonstrated great potential in robotic control, where effective exploration is crucial for efficient and high-quality policy learning. However, how to encourage the agent to explore the better trajectories efficiently remains a challenge. Most existing methods incentivize exploration by maximizing the policy entropy or encouraging novel state visiting regardless of the potential state value. We propose a new form of directed exploration that uses analytical policy gradients from a differentiable dynamics model to inject task-aware, physics-guided guidance, thereby steering the agent towards high-reward regions for accelerated and more effective policy learning.",
+      "authors": [
+        "Leixin Chang",
+        "Xinchen Yao",
+        "Ben Liu",
+        "Liangjing Yang",
+        "Hua Chen"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-28T15:50:54+00:00",
+      "link": "https://arxiv.org/pdf/2603.27317v2",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "differentiable dynamics model for directed exploration in RL",
+      "llm_evidence_cn": "用于强化学习定向探索的可微动力学模型",
+      "llm_evidence": "用于强化学习定向探索的可微动力学模型",
+      "canonical_evidence": "用于强化学习定向探索的可微动力学模型",
+      "llm_tldr_en": "Uses analytical policy gradients from differentiable dynamics to steer RL exploration toward high-reward regions.",
+      "llm_tldr_cn": "利用可微动力学的解析策略梯度，引导强化学习探索高奖励区域。",
+      "llm_tldr": "利用可微动力学的解析策略梯度，引导强化学习探索高奖励区域。",
+      "llm_tags": [
+        "query:1:composite"
+      ],
+      "matched_query_tag": "query:1:composite",
+      "matched_query_text": "Papers central to 寻找关于世界动作模型（World Action Model）及相关领域（如模型预测、强化学习）的学术论文。, especially work that connects or combines: r; V; World models in reinforcement learning and robotics; Action-conditioned world models for decision making; Learning latent dynamics for world modeling; Model-based reinforcement learning with world models; Recent advances in world action models for autonomous agents; Action conditioned generative world models for robotics.",
+      "matched_requirement_id": "req-composite-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2603.27346v2",
+      "source": "arxiv",
+      "title": "D-SPEAR: Dual-Stream Prioritized Experience Adaptive Replay for Stable Reinforcement Learning in Robotic Manipulation",
+      "abstract": "Robotic manipulation remains challenging for reinforcement learning due to contact-rich dynamics, long horizons, and training instability. Although off-policy actor-critic algorithms such as SAC and TD3 perform well in simulation, they often suffer from policy oscillations and performance collapse in realistic settings, partly due to experience replay strategies that ignore the differing data requirements of the actor and the critic. We propose D-SPEAR: Dual-Stream Prioritized Experience Adaptive Replay, a replay framework that decouples actor and critic sampling while maintaining a shared replay buffer. The critic leverages prioritized replay for efficient value learning, whereas the actor is updated using low-error transitions to stabilize policy optimization. An adaptive anchor mechanism balances uniform and prioritized sampling based on the coefficient of variation of TD errors, and a Huber-based critic objective further improves robustness under heterogeneous reward scales. We evaluate D-SPEAR on challenging robotic manipulation tasks from the robosuite benchmark, including Block-Lifting and Door-Opening. Results demonstrate that D-SPEAR consistently outperforms strong off-policy baselines, including SAC, TD3, and DDPG, in both final performance and training stability, with ablation studies confirming the complementary roles of the actorside and critic-side replay streams.",
+      "authors": [
+        "Yu Zhang",
+        "Karl Mason"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-03-28T17:34:28+00:00",
+      "link": "https://arxiv.org/pdf/2603.27346v2",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "stable reinforcement learning for contact-rich robotic manipulation",
+      "llm_evidence_cn": "针对接触密集型机械臂操作的稳定强化学习",
+      "llm_evidence": "针对接触密集型机械臂操作的稳定强化学习",
+      "canonical_evidence": "针对接触密集型机械臂操作的稳定强化学习",
+      "llm_tldr_en": "Proposes a dual-stream replay framework to stabilize RL in complex, contact-rich robotic manipulation.",
+      "llm_tldr_cn": "提出双流回放框架，旨在稳定复杂接触密集型机械臂操作中的强化学习过程。",
+      "llm_tldr": "提出双流回放框架，旨在稳定复杂接触密集型机械臂操作中的强化学习过程。",
+      "llm_tags": [
+        "query:rob-rot:composite"
+      ],
+      "matched_query_tag": "query:rob-rot:composite",
+      "matched_query_text": "Papers central to 机械臂学习旋转操作策略（如拧瓶盖）的论文检索, especially work that connects or combines: robotic arm manipulation strategies for rotational tasks; learning rotational manipulation tasks in robotics; robotic learning for unscrewing and screwing bottle caps; dexterous robotic manipulation for rotating objects; learning manipulation policies for twisting motions; robotic arm learning to unscrew bottle caps and rotate objects; learning twisting and screwing motions in robotics.",
+      "matched_requirement_id": "req-composite-rob-rot",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2603.27346v1",
+      "source": "arxiv",
+      "title": "D-SPEAR: Dual-Stream Prioritized Experience Adaptive Replay for Stable Reinforcement Learninging Robotic Manipulation",
+      "abstract": "Robotic manipulation remains challenging for reinforcement learning due to contact-rich dynamics, long horizons, and training instability. Although off-policy actor-critic algorithms such as SAC and TD3 perform well in simulation, they often suffer from policy oscillations and performance collapse in realistic settings, partly due to experience replay strategies that ignore the differing data requirements of the actor and the critic. We propose D-SPEAR: Dual-Stream Prioritized Experience Adaptive Replay, a replay framework that decouples actor and critic sampling while maintaining a shared replay buffer. The critic leverages prioritized replay for efficient value learning, whereas the actor is updated using low-error transitions to stabilize policy optimization. An adaptive anchor mechanism balances uniform and prioritized sampling based on the coefficient of variation of TD errors, and a Huber-based critic objective further improves robustness under heterogeneous reward scales. We evaluate D-SPEAR on challenging robotic manipulation tasks from the robosuite benchmark, including Block-Lifting and Door-Opening. Results demonstrate that D-SPEAR consistently outperforms strong off-policy baselines, including SAC, TD3, and DDPG, in both final performance and training stability, with ablation studies confirming the complementary roles of the actorside and critic-side replay streams.",
+      "authors": [
+        "Yu Zhang",
+        "Karl Mason"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI",
+        "cs.LG"
+      ],
+      "published": "2026-03-28T17:34:28+00:00",
+      "link": "https://arxiv.org/pdf/2603.27346v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "reinforcement learning for robotic manipulation",
+      "llm_evidence_cn": "机器人操作的强化学习",
+      "llm_evidence": "机器人操作的强化学习",
+      "canonical_evidence": "机器人操作的强化学习",
+      "llm_tldr_en": "Proposes D-SPEAR, a dual-stream experience replay framework to stabilize RL in contact-rich robotic manipulation.",
+      "llm_tldr_cn": "提出D-SPEAR双流经验回放框架，以稳定接触密集型机器人操作中的强化学习。",
+      "llm_tldr": "提出D-SPEAR双流经验回放框架，以稳定接触密集型机器人操作中的强化学习。",
+      "llm_tags": [
+        "query:rob-rot:composite"
+      ],
+      "matched_query_tag": "query:rob-rot:composite",
+      "matched_query_text": "Papers central to 机械臂学习旋转操作策略（如拧瓶盖）的论文检索, especially work that connects or combines: robotic arm manipulation strategies for rotational tasks; learning rotational manipulation tasks in robotics; robotic learning for unscrewing and screwing bottle caps; dexterous robotic manipulation for rotating objects; learning manipulation policies for twisting motions; robotic arm learning to unscrew bottle caps and rotate objects; learning twisting and screwing motions in robotics.",
+      "matched_requirement_id": "req-composite-rob-rot",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2603.27670v1",
+      "source": "arxiv",
+      "title": "ProgressVLA: Progress-Guided Diffusion Policy for Vision-Language Robotic Manipulation",
+      "abstract": "Most existing vision-language-action (VLA) models for robotic manipulation lack progress awareness, typically relying on hand-crafted heuristics for task termination. This limitation is particularly severe in long-horizon tasks involving cascaded sub-goals. In this work, we investigate the estimation and integration of task progress, proposing a novel model named {\\textbf \\vla}. Our technical contributions are twofold: (1) \\emph{robust progress estimation}: We pre-train a progress estimator on large-scale, unsupervised video-text robotic datasets. This estimator achieves a low prediction residual (0.07 on a scale of $[0, 1]$) in simulation and demonstrates zero-shot generalization to unseen real-world samples, and (2) \\emph{differentiable progress guidance}: We introduce an inverse dynamics world model that maps predicted action tokens into future latent visual states. These latents are then processed by the progress estimator; by applying a maximal progress regularization, we establish a differentiable pipeline that provides progress-piloted guidance to refine action tokens. Extensive experiments on the CALVIN and LIBERO benchmarks, alongside real-world robot deployment, consistently demonstrate substantial improvements in success rates and generalization over strong baselines.",
+      "authors": [
+        "Hongyu Yan",
+        "Qiwei Li",
+        "Jiaolong Yang",
+        "Yadong Mu"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-03-29T12:38:11+00:00",
+      "link": "https://arxiv.org/pdf/2603.27670v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "progress-guided diffusion policy for vision-language robotic manipulation",
+      "llm_evidence_cn": "视觉语言机械臂操作的进度引导扩散策略",
+      "llm_evidence": "视觉语言机械臂操作的进度引导扩散策略",
+      "canonical_evidence": "视觉语言机械臂操作的进度引导扩散策略",
+      "llm_tldr_en": "Integrates task progress estimation into VLA models to improve long-horizon robotic manipulation.",
+      "llm_tldr_cn": "将任务进度估计集成到VLA模型中，以改进长程机器人操作任务。",
+      "llm_tldr": "将任务进度估计集成到VLA模型中，以改进长程机器人操作任务。",
+      "llm_tags": [
+        "query:rob-rot:composite"
+      ],
+      "matched_query_tag": "query:rob-rot:composite",
+      "matched_query_text": "Papers central to 机械臂学习旋转操作策略（如拧瓶盖）的论文检索, especially work that connects or combines: robotic arm manipulation strategies for rotational tasks; learning rotational manipulation tasks in robotics; robotic learning for unscrewing and screwing bottle caps; dexterous robotic manipulation for rotating objects; learning manipulation policies for twisting motions; robotic arm learning to unscrew bottle caps and rotate objects; learning twisting and screwing motions in robotics.",
+      "matched_requirement_id": "req-composite-rob-rot",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2604.00055v1",
+      "source": "arxiv",
+      "title": "Generalizable Dense Reward for Long-Horizon Robotic Tasks",
+      "abstract": "Existing robotic foundation policies are trained primarily via large-scale imitation learning. While such models demonstrate strong capabilities, they often struggle with long-horizon tasks due to distribution shift and error accumulation. While reinforcement learning (RL) can finetune these models, it cannot work well across diverse tasks without manual reward engineering. We propose VLLR, a dense reward framework combining (1) an extrinsic reward from Large Language Models (LLMs) and Vision-Language Models (VLMs) for task progress recognition, and (2) an intrinsic reward based on policy self-certainty. VLLR uses LLMs to decompose tasks into verifiable subtasks and then VLMs to estimate progress to initialize the value function for a brief warm-up phase, avoiding prohibitive inference cost during full training; and self-certainty provides per-step intrinsic guidance throughout PPO finetuning. Ablation studies reveal complementary benefits: VLM-based value initialization primarily improves task completion efficiency, while self-certainty primarily enhances success rates, particularly on out-of-distribution tasks. On the CHORES benchmark covering mobile manipulation and navigation, VLLR achieves up to 56% absolute success rate gains over the pretrained policy, up to 5% gains over state-of-the-art RL finetuning methods on in-distribution tasks, and up to $10\\%$ gains on out-of-distribution tasks, all without manual reward engineering. Additional visualizations can be found in https://silongyong.github.io/vllr_project_page/",
+      "authors": [
+        "Silong Yong",
+        "Stephen Sheng",
+        "Carl Qi",
+        "Xiaojie Wang",
+        "Evan Sheehan",
+        "Anurag Shivaprasad",
+        "Yaqi Xie",
+        "Katia Sycara",
+        "Yesh Dattatreya"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV",
+        "cs.LG"
+      ],
+      "published": "2026-03-31T02:05:07+00:00",
+      "link": "https://arxiv.org/pdf/2604.00055v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "dense reward for long-horizon robotic tasks",
+      "llm_evidence_cn": "长程机器人任务的稠密奖励",
+      "llm_evidence": "长程机器人任务的稠密奖励",
+      "canonical_evidence": "长程机器人任务的稠密奖励",
+      "llm_tldr_en": "Proposes VLLR, a framework using LLMs and VLMs to provide dense rewards for complex robotic manipulation tasks.",
+      "llm_tldr_cn": "提出VLLR框架，利用大模型为复杂的机器人操作任务提供稠密奖励和任务分解。",
+      "llm_tldr": "提出VLLR框架，利用大模型为复杂的机器人操作任务提供稠密奖励和任务分解。",
+      "llm_tags": [
+        "query:rob-rot:composite"
+      ],
+      "matched_query_tag": "query:rob-rot:composite",
+      "matched_query_text": "Papers central to 机械臂学习旋转操作策略（如拧瓶盖）的论文检索, especially work that connects or combines: robotic arm manipulation strategies for rotational tasks; learning rotational manipulation tasks in robotics; robotic learning for unscrewing and screwing bottle caps; dexterous robotic manipulation for rotating objects; learning manipulation policies for twisting motions; robotic arm learning to unscrew bottle caps and rotate objects; learning twisting and screwing motions in robotics.",
+      "matched_requirement_id": "req-composite-rob-rot",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2603.27796v1",
+      "source": "arxiv",
+      "title": "Spectral Decomposition of Inverse Dynamics for Fast Exploration in Model-Based Manipulation",
+      "abstract": "Planning long duration robotic manipulation sequences is challenging because of the complexity of exploring feasible trajectories through nonlinear contact dynamics and many contact modes. Moreover, this complexity grows with the problem's horizon length. We propose a search tree method that generates trajectories using the spectral decomposition of the inverse dynamics equation. This equation maps actuator displacement to object displacement, and its spectrum is efficient for exploration because its components are orthogonal and they approximate the reachable set of the object while remaining dynamically feasible. These trajectories can be combined with any search based method, such as Rapidly-Exploring Random Trees (RRT), for long-horizon planning. Our method performs similarly to recent work in model-based planning for short-horizon tasks, and differentiates itself with its ability to solve long-horizon tasks: whereas existing methods fail, ours can generate 45 second duration, 10+ contact mode plans using 15 seconds of computation, demonstrating real-time capability in highly complex domains.",
+      "authors": [
+        "Solvin Sigurdson",
+        "Benjamin Riviere",
+        "Joel Burdick"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-29T18:22:36+00:00",
+      "link": "https://arxiv.org/pdf/2603.27796v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "model-based manipulation and inverse dynamics",
+      "llm_evidence_cn": "基于模型的操控与逆动力学",
+      "llm_evidence": "基于模型的操控与逆动力学",
+      "canonical_evidence": "基于模型的操控与逆动力学",
+      "llm_tldr_en": "Uses spectral decomposition of inverse dynamics for efficient trajectory exploration in model-based manipulation.",
+      "llm_tldr_cn": "利用逆动力学的谱分解在基于模型的操作中进行高效的轨迹探索。",
+      "llm_tldr": "利用逆动力学的谱分解在基于模型的操作中进行高效的轨迹探索。",
+      "llm_tags": [
+        "query:1:composite"
+      ],
+      "matched_query_tag": "query:1:composite",
+      "matched_query_text": "Papers central to 寻找关于世界动作模型（World Action Model）及相关领域（如模型预测、强化学习）的学术论文。, especially work that connects or combines: r; V; World models in reinforcement learning and robotics; Action-conditioned world models for decision making; Learning latent dynamics for world modeling; Model-based reinforcement learning with world models; Recent advances in world action models for autonomous agents; Action conditioned generative world models for robotics.",
+      "matched_requirement_id": "req-composite-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2604.01158v1",
+      "source": "arxiv",
+      "title": "SMASH: Mastering Scalable Whole-Body Skills for Humanoid Ping-Pong with Egocentric Vision",
+      "abstract": "Existing humanoid table tennis systems remain limited by their reliance on external sensing and their inability to achieve agile whole-body coordination for precise task execution. These limitations stem from two core challenges: achieving low-latency and robust onboard egocentric perception under fast robot motion, and obtaining sufficiently diverse task-aligned strike motions for learning precise yet natural whole-body behaviors. In this work, we present \\methodname, a modular system for agile humanoid table tennis that unifies scalable whole-body skill learning with onboard egocentric perception, eliminating the need for external cameras during deployment. Our work advances prior humanoid table-tennis systems in three key aspects. First, we achieve agile and precise ball interaction with tightly coordinated whole-body control, rather than relying on decoupled upper- and lower-body behaviors. This enables the system to exhibit diverse strike motions, including explosive whole-body smashes and low crouching shots. Second, by augmenting and diversifying strike motions with a generative model, our framework benefits from scalable motion priors and produces natural, robust striking behaviors across a wide workspace. Third, to the best of our knowledge, we demonstrate the first humanoid table-tennis system capable of consecutive strikes using onboard sensing alone, despite the challenges of low-latency perception, ego-motion-induced instability, and limited field of view. Extensive real-world experiments demonstrate stable and precise ball exchanges under high-speed conditions, validating scalable, perception-driven whole-body skill learning for dynamic humanoid interaction tasks.",
+      "authors": [
+        "Junli Ren",
+        "Yinghui Li",
+        "Kai Zhang",
+        "Penglin Fu",
+        "Haoran Jiang",
+        "Yixuan Pan",
+        "Guangjun Zeng",
+        "Tao Huang",
+        "Weizhong Guo",
+        "Peng Lu",
+        "Tianyu Li",
+        "Jingbo Wang",
+        "Li Chen",
+        "Hongyang Li",
+        "Ping Luo"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-04-01T17:11:52+00:00",
+      "link": "https://arxiv.org/pdf/2604.01158v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "whole-body skill learning for precise robotic task execution",
+      "llm_evidence_cn": "用于精确机器人任务执行的全身技能学习",
+      "llm_evidence": "用于精确机器人任务执行的全身技能学习",
+      "canonical_evidence": "用于精确机器人任务执行的全身技能学习",
+      "llm_tldr_en": "Presents a system for agile humanoid coordination and whole-body skill learning using egocentric vision.",
+      "llm_tldr_cn": "提出一种利用第一视角视觉实现敏捷类人协调和全身技能学习的系统。",
+      "llm_tldr": "提出一种利用第一视角视觉实现敏捷类人协调和全身技能学习的系统。",
+      "llm_tags": [
+        "query:rob-rot:composite"
+      ],
+      "matched_query_tag": "query:rob-rot:composite",
+      "matched_query_text": "Papers central to 机械臂学习旋转操作策略（如拧瓶盖）的论文检索, especially work that connects or combines: robotic arm manipulation strategies for rotational tasks; learning rotational manipulation tasks in robotics; robotic learning for unscrewing and screwing bottle caps; dexterous robotic manipulation for rotating objects; learning manipulation policies for twisting motions; robotic arm learning to unscrew bottle caps and rotate objects; learning twisting and screwing motions in robotics.",
+      "matched_requirement_id": "req-composite-rob-rot",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2603.28422v1",
+      "source": "arxiv",
+      "title": "Active Stereo-Camera Outperforms Multi-Sensor Setup in ACT Imitation Learning for Humanoid Manipulation",
+      "abstract": "The complexity of teaching humanoid robots new tasks is one of the major reasons hindering their widespread adoption in the industry. While Imitation Learning (IL), particularly Action Chunking with Transformers (ACT), enables rapid task acquisition, there is no consensus yet on the optimal sensory hardware required for manipulation tasks. This paper benchmarks 14 sensor combinations on the Unitree G1 humanoid robot equipped with three-finger hands for two manipulation tasks. We explicitly evaluate the integration of tactile and proprioceptive modalities alongside active vision. Our analysis demonstrates that strategic sensor selection can outperform complex configurations in data-limited regimes while reducing computational overhead. We develop an open-source Unified Ablation Framework that utilizes sensor masking on a comprehensive master dataset. Results indicate that additional modalities often degrade performance for IL with limited data. A minimal active stereo-camera setup outperformed complex multi-sensor configurations, achieving 87.5% success in a spatial generalization task and 94.4% in a structured manipulation task. Conversely, adding pressure sensors to this setup reduced success to 67.3% in the latter task due to a low signal-to-noise ratio. We conclude that in data-limited regimes, active vision offers a superior trade-off between robustness and complexity. While tactile modalities may require larger datasets to be effective, our findings validate that strategic sensor selection is critical for designing an efficient learning process.",
+      "authors": [
+        "Robin Kühn",
+        "Moritz Schappler",
+        "Thomas Seel",
+        "Dennis Bank"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-30T13:30:34+00:00",
+      "link": "https://arxiv.org/pdf/2603.28422v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "benchmarks sensor combinations for humanoid manipulation tasks",
+      "llm_evidence_cn": "为人形机器人操作任务基准测试传感器组合",
+      "llm_evidence": "为人形机器人操作任务基准测试传感器组合",
+      "canonical_evidence": "为人形机器人操作任务基准测试传感器组合",
+      "llm_tldr_en": "Benchmarks 14 sensor combinations for humanoid manipulation, finding active stereo-cameras highly effective.",
+      "llm_tldr_cn": "对人形机器人操作的14种传感器组合进行基准测试，发现主动双目相机效果显著。",
+      "llm_tldr": "对人形机器人操作的14种传感器组合进行基准测试，发现主动双目相机效果显著。",
+      "llm_tags": [
+        "query:emb-bm:composite"
+      ],
+      "matched_query_tag": "query:emb-bm:composite",
+      "matched_query_text": "Papers central to 具身智能世界模型基准测试相关论文检索, especially work that connects or combines: world models for embodied intelligence and robotics; benchmarking suites for world models; evaluation metrics for embodied world models; video generation benchmarks for world models; datasets for training and testing world models; state of the art benchmarks for embodied world models; comparative analysis of world model evaluation frameworks; standardized testing environments for robotic world models; performance metrics for generative world models in robotics.",
+      "matched_requirement_id": "req-composite-emb-bm",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2603.28427v1",
+      "source": "arxiv",
+      "title": "Tele-Catch: Adaptive Teleoperation for Dexterous Dynamic 3D Object Catching",
+      "abstract": "Teleoperation is a key paradigm for transferring human dexterity to robots, yet most prior work targets objects that are initially static, such as grasping or manipulation. Dynamic object catch, where objects move before contact, remains underexplored. Pure teleoperation in this task often fails due to timing, pose, and force errors, highlighting the need for shared autonomy that combines human input with autonomous policies. To this end, we present Tele-Catch, a systematic framework for dexterous hand teleoperation in dynamic object catching. At its core, we design DAIM, a dynamics-aware adaptive integration mechanism that realizes shared autonomy by fusing glove-based teleoperation signals into the diffusion policy denoising process. It adaptively modulates control based on the interaction object state. To improve policy robustness, we introduce DP-U3R, which integrates unsupervised geometric representations from point cloud observations into diffusion policy learning, enabling geometry-aware decision making. Extensive experiments demonstrate that Tele-Catch significantly improves accuracy and robustness in dynamic catching tasks, while also exhibiting consistent gains across distinct dexterous hand embodiments and previously unseen object categories.",
+      "authors": [
+        "Weiguang Zhao",
+        "Junting Dong",
+        "Rui Zhang",
+        "Kailin Li",
+        "Qin Zhao",
+        "Kaizhu Huang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "published": "2026-03-30T13:34:14+00:00",
+      "link": "https://arxiv.org/pdf/2603.28427v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "dexterous hand teleoperation for dynamic object catching",
+      "llm_evidence_cn": "动态物体抓取的灵巧手遥操作",
+      "llm_evidence": "动态物体抓取的灵巧手遥操作",
+      "canonical_evidence": "动态物体抓取的灵巧手遥操作",
+      "llm_tldr_en": "Tele-Catch enables shared autonomy for dexterous robotic catching of moving objects via adaptive teleoperation.",
+      "llm_tldr_cn": "Tele-Catch通过自适应遥操作实现机器人灵巧抓取运动物体的共享自主控制。",
+      "llm_tldr": "Tele-Catch通过自适应遥操作实现机器人灵巧抓取运动物体的共享自主控制。",
+      "llm_tags": [
+        "query:rob-rot"
+      ],
+      "matched_query_tag": "query:rob-rot",
+      "matched_query_text": "dexterous robotic manipulation for rotating objects",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2603.28475v1",
+      "source": "arxiv",
+      "title": "Tac2Real: Reliable and GPU Visuotactile Simulation for Online Reinforcement Learning and Zero-Shot Real-World Deployment",
+      "abstract": "Visuotactile sensors are indispensable for contact-rich robotic manipulation tasks. However, policy learning with tactile feedback in simulation, especially for online reinforcement learning (RL), remains a critical challenge, as it demands a delicate balance between physics fidelity and computational efficiency. To address this challenge, we present Tac2Real, a lightweight visuotactile simulation framework designed to enable efficient online RL training. Tac2Real integrates the Preconditioned Nonlinear Conjugate Gradient Incremental Potential Contact (PNCG-IPC) method with a multi-node, multi-GPU high-throughput parallel simulation architecture, which can generate marker displacement fields at interactive rates. Meanwhile, we propose a systematic approach, TacAlign, to narrow both structured and stochastic sources of domain gap, ensuring a reliable zero-shot sim-to-real transfer. We further evaluate Tac2Real on the contact-rich peg insertion task. The zero-shot transfer results achieve a high success rate in the real-world scenario, verifying the effectiveness and robustness of our framework. The project page is: https://ningyurichard.github.io/tac2real-project-page/",
+      "authors": [
+        "Ningyu Yan",
+        "Shuai Wang",
+        "Xing Shen",
+        "Hui Wang",
+        "Hanqing Wang",
+        "Yang Xiang",
+        "Jiangmiao Pang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-03-30T14:14:37+00:00",
+      "link": "https://arxiv.org/pdf/2603.28475v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "visuotactile simulation for contact-rich manipulation",
+      "llm_evidence_cn": "针对接触密集型操作的视触觉仿真",
+      "llm_evidence": "针对接触密集型操作的视触觉仿真",
+      "canonical_evidence": "针对接触密集型操作的视触觉仿真",
+      "llm_tldr_en": "A GPU-accelerated visuotactile simulation framework for efficient RL training in contact-rich manipulation.",
+      "llm_tldr_cn": "一种GPU加速的视触觉仿真框架，用于接触密集型机器人操作的强化学习训练。",
+      "llm_tldr": "一种GPU加速的视触觉仿真框架，用于接触密集型机器人操作的强化学习训练。",
+      "llm_tags": [
+        "query:rob-rot:composite"
+      ],
+      "matched_query_tag": "query:rob-rot:composite",
+      "matched_query_text": "Papers central to 机械臂学习旋转操作策略（如拧瓶盖）的论文检索, especially work that connects or combines: robotic arm manipulation strategies for rotational tasks; learning rotational manipulation tasks in robotics; robotic learning for unscrewing and screwing bottle caps; dexterous robotic manipulation for rotating objects; learning manipulation policies for twisting motions; robotic arm learning to unscrew bottle caps and rotate objects; learning twisting and screwing motions in robotics.",
+      "matched_requirement_id": "req-composite-rob-rot",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2603.29419v1",
+      "source": "arxiv",
+      "title": "RAAP: Retrieval-Augmented Affordance Prediction with Cross-Image Action Alignment",
+      "abstract": "Understanding object affordances is essential for enabling robots to perform purposeful and fine-grained interactions in diverse and unstructured environments. However, existing approaches either rely on retrieval, which is fragile due to sparsity and coverage gaps, or on large-scale models, which frequently mislocalize contact points and mispredict post-contact actions when applied to unseen categories, thereby hindering robust generalization. We introduce Retrieval-Augmented Affordance Prediction (RAAP), a framework that unifies affordance retrieval with alignment-based learning. By decoupling static contact localization and dynamic action direction, RAAP transfers contact points via dense correspondence and predicts action directions through a retrieval-augmented alignment model that consolidates multiple references with dual-weighted attention. Trained on compact subsets of DROID and HOI4D with as few as tens of samples per task, RAAP achieves consistent performance across unseen objects and categories, and enables zero-shot robotic manipulation in both simulation and the real world. Project website: https://github.com/SEU-VIPGroup/RAAP.",
+      "authors": [
+        "Qiyuan Zhuang",
+        "He-Yang Xu",
+        "Yijun Wang",
+        "Xin-Yang Zhao",
+        "Yang-Yang Li",
+        "Xiu-Shen Wei"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI",
+        "cs.CV"
+      ],
+      "published": "2026-03-31T08:25:22+00:00",
+      "link": "https://arxiv.org/pdf/2603.29419v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "predicting action directions for fine-grained robotic interactions",
+      "llm_evidence_cn": "预测细粒度机器人交互中的动作方向",
+      "llm_evidence": "预测细粒度机器人交互中的动作方向",
+      "canonical_evidence": "预测细粒度机器人交互中的动作方向",
+      "llm_tldr_en": "Unifies affordance retrieval and alignment-based learning to predict contact points and action directions.",
+      "llm_tldr_cn": "统一示能表示检索与对齐学习，用于预测接触点和动作方向。",
+      "llm_tldr": "统一示能表示检索与对齐学习，用于预测接触点和动作方向。",
+      "llm_tags": [
+        "query:rob-rot:composite"
+      ],
+      "matched_query_tag": "query:rob-rot:composite",
+      "matched_query_text": "Papers central to 机械臂学习旋转操作策略（如拧瓶盖）的论文检索, especially work that connects or combines: robotic arm manipulation strategies for rotational tasks; learning rotational manipulation tasks in robotics; robotic learning for unscrewing and screwing bottle caps; dexterous robotic manipulation for rotating objects; learning manipulation policies for twisting motions; robotic arm learning to unscrew bottle caps and rotate objects; learning twisting and screwing motions in robotics.",
+      "matched_requirement_id": "req-composite-rob-rot",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}
