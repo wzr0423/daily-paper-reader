@@ -1,0 +1,70 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.28542v1/fig-001.webp",
+      "caption": "Fig. 7: Tactile sensing and shape mapping performance across various end-effectors. Comparison of raw sensing inputs (i) and physical rendering outputs on TAG (ii) across various robot end-effectors (right). TAG effectively translates diverse sensor geometries into coherent tactile feedback: (a) LeapTac: linear ridge; (b) Inspire Hand: circular area; (c) XHand: dual contact points; (d) GelSight Mini and (e) TacSL: complex shapes.",
+      "page": 6,
+      "index": 1,
+      "width": 1033,
+      "height": 276
+    },
+    {
+      "url": "assets/figures/arxiv/2603.28542v1/fig-002.webp",
+      "caption": "TABLE II: Results of multimodal desk lamp control.",
+      "page": 7,
+      "index": 2,
+      "width": 512,
+      "height": 307
+    },
+    {
+      "url": "assets/figures/arxiv/2603.28542v1/fig-003.webp",
+      "caption": "Fig. 2: Hardware architecture of TAG. (a) Exploded view of the joint encoder, utilizing a magnetometer and ring magnet for angle sensing. (b) Exploded view of the tactile feedback module, a multi-layer EOP stack sandwiching a membrane between PCBs. (c) TAG is compatible with diverse arm tracking solutions, such as 6DoF trackers or exoskeletons. (d) Kinematic configuration distributing 21 encoders for full-hand motion capture.",
+      "page": 3,
+      "index": 3,
+      "width": 1037,
+      "height": 421
+    },
+    {
+      "url": "assets/figures/arxiv/2603.28542v1/fig-004.webp",
+      "caption": "Fig. 15: Illustration of Filament Pinching and Pull-out Task. The schematic shows the thumb and index finger pinching the filament.",
+      "page": 13,
+      "index": 4,
+      "width": 462,
+      "height": 263
+    },
+    {
+      "url": "assets/figures/arxiv/2603.28542v1/fig-005.webp",
+      "caption": "Fig. 10: Real-world teleoperation tasks using TAG. (a) Multimodal lamp control: Hierarchical interaction via short press, press-and-turn, and subtle rotation. (b) Sequential filament pinching: Distinguishing successful capture of a 1.75mm filament from empty pinches via localized tactile feedback. (c) Multi-level spring compression: Maintaining three distinct pressure levels (0.5N, 3.5N, 7.5N) guided by rendered tactile feedback.",
+      "page": 8,
+      "index": 5,
+      "width": 1046,
+      "height": 393
+    },
+    {
+      "url": "assets/figures/arxiv/2603.28542v1/fig-006.webp",
+      "caption": "Fig. 4: Dynamic demonstration of the TAG feedback module. (a) Active area expansion in Pressure Mode under varying pressure levels. (b) Dynamic force profiles simulating forward-to-backward motion.",
+      "page": 4,
+      "index": 6,
+      "width": 458,
+      "height": 286
+    },
+    {
+      "url": "assets/figures/arxiv/2603.28542v1/fig-007.webp",
+      "caption": "Fig. 14: Illustration of teleoperation tasks in Press Mode. (a) Multimodal Control of a Smart Desk Lamp. (b) Multi-level Spring Compression.",
+      "page": 12,
+      "index": 7,
+      "width": 518,
+      "height": 281
+    },
+    {
+      "url": "assets/figures/arxiv/2603.28542v1/fig-008.webp",
+      "caption": "Fig. 5: Exoskeleton glove tracking performance. (a) Experimental setup for joint-tracking. (b) Real-time tracking results for discrete and continuous trajectories. (c) Long-term stability test over 1000s of operation. (d) Statistical distribution of instantaneous tracking errors with Gaussian fit.",
+      "page": 5,
+      "index": 8,
+      "width": 1031,
+      "height": 190
+    }
+  ]
+}

@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.02408v1/fig-001.webp",
+      "caption": "Fig. 6: Visualization and quantitative results on the fixed-base robotic arm. (Left) Visualization of heatmaps and predicted object flow during policy execution. In the 56×56 resolution heatmaps, blue and red regions denote low and high responsiveness, respectively. The predicted flow is visualized using pink lines transitioning from dark to light. (Middle) Third-person perspective of the robot performing the task. The timestamp in the top-right corner indicates the elapsed time since the task started, highlighting the dynamic nature of the task and the robot’s responsiveness. (Right) Quantitative comparison results across different tasks, benchmarking F2F-AP and three baselines under identical experimental conditions.",
+      "page": 6,
+      "index": 1,
+      "width": 1038,
+      "height": 440
+    },
+    {
+      "url": "assets/figures/arxiv/2604.02408v1/fig-002.webp",
+      "caption": "Fig. 7: Visualization and quantitative results on the quadruped mobile manipulator. Similar to Fig. 6, (Left) displays the heatmaps and predicted optical flow during policy execution. (Middle) shows the third-person perspective of the robot performing the task. (Right) presents the quantitative analysis and comparison across different tasks.",
+      "page": 7,
+      "index": 2,
+      "width": 1037,
+      "height": 305
+    },
+    {
+      "url": "assets/figures/arxiv/2604.02408v1/fig-003.webp",
+      "caption": "Fig. 12: Failure Case Visualization illustrates four representative failure scenarios in different tasks.",
+      "page": 14,
+      "index": 3,
+      "width": 516,
+      "height": 404
+    },
+    {
+      "url": "assets/figures/arxiv/2604.02408v1/fig-004.webp",
+      "caption": "Fig. 3: Analysis of Asynchronous Inference. The policy π(a|s,o) maps inputs of observations and robot states to action sequences. From left to right, the policy sequentially incorporates future states and predicted observations as augmented context. These additions respectively resolve the trajectory discontinuity caused by state lag and the temporal misalignment of actions resulting from information lag.",
+      "page": 3,
+      "index": 4,
+      "width": 1025,
+      "height": 225
+    },
+    {
+      "url": "assets/figures/arxiv/2604.02408v1/fig-005.webp",
+      "caption": "Fig. 8: Visualization and quantitative results of the advanced experiment. (Left) shows the diversity of trajectory. (Middle) shows a third-person view illustrating the entire process of grasping the bottle. (Right) is the quantitative results.",
+      "page": 8,
+      "index": 5,
+      "width": 1066,
+      "height": 237
+    },
+    {
+      "url": "assets/figures/arxiv/2604.02408v1/fig-006.webp",
+      "caption": "Fig. 4: Overview of the pipeline. Left: Illustration of the asynchronous inference achieved by F2F-AP. The model plans from a future state st3 towards the anticipated position t6 of the interacting object at timestamp t1, enabling advance planning and motion despite real-world system latency. Middle: The model takes robot states and multi-frame RGB images as input. A Flow Predictor extracts object flow to synthesize augmented future observations, which are then processed by the Policy as future observation to generate action chunks. Right:We introduce contrastive learning to minimize the feature distance between predicted and real future observations. the ⋆ indicates that these features share the same encoder.",
+      "page": 4,
+      "index": 6,
+      "width": 1071,
+      "height": 422
+    },
+    {
+      "url": "assets/figures/arxiv/2604.02408v1/fig-007.webp",
+      "caption": "TABLE I: Ablation Studies. The upper section reports results from the Hammer Handover task, while the lower section corresponds to the Banana Picking task in Sec. IV-B.",
+      "page": 9,
+      "index": 7,
+      "width": 479,
+      "height": 271
+    }
+  ]
+}
