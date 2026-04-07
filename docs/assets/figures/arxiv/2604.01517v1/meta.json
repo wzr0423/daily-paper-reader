@@ -1,0 +1,86 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.01517v1/fig-001.webp",
+      "caption": "Figure 3: Simulation and physical platform used for data collection.",
+      "page": 6,
+      "index": 1,
+      "width": 786,
+      "height": 327
+    },
+    {
+      "url": "assets/figures/arxiv/2604.01517v1/fig-002.webp",
+      "caption": "Figure 1: Schematic of morphology-based whole-body motion control (MorphoGuard). (A) An example of a robot facing complex contact combinations in an unstructured environment. (B) MorphoGuard is tasked with learning a mapping from the entity morphology in the workspace to the configuration space. (C) MorphoGuard takes as input MPs that discretely represent the robot morphology and predicts the corresponding joint motion commands.",
+      "page": 2,
+      "index": 2,
+      "width": 979,
+      "height": 544
+    },
+    {
+      "url": "assets/figures/arxiv/2604.01517v1/fig-003.webp",
+      "caption": "Figure 4: Training and validation loss curves for different backbone architectures. The MLP backbone demonstrates the lowest validation loss, indicating superior generalization performance compared to CNN, Transformer, and GNN backbones.",
+      "page": 7,
+      "index": 3,
+      "width": 976,
+      "height": 247
+    },
+    {
+      "url": "assets/figures/arxiv/2604.01517v1/fig-004.webp",
+      "caption": "Table 1: Architecture Comparison - Core Metrics Focus",
+      "page": 7,
+      "index": 4,
+      "width": 826,
+      "height": 191
+    },
+    {
+      "url": "assets/figures/arxiv/2604.01517v1/fig-005.webp",
+      "caption": "Figure 6: Test procedure and object trajectories for the sequential manipulation task. (A)sequential manipulation task. (B)simultaneous manipulation task.",
+      "page": 10,
+      "index": 5,
+      "width": 979,
+      "height": 469
+    },
+    {
+      "url": "assets/figures/arxiv/2604.01517v1/fig-006.webp",
+      "caption": "Figure 7: Test results for the multi-object manipulation tasks. (A) Contact point error for the sequential manipulation task. (B) Contact point error for the simultaneous manipulation task.",
+      "page": 10,
+      "index": 6,
+      "width": 786,
+      "height": 241
+    },
+    {
+      "url": "assets/figures/arxiv/2604.01517v1/fig-007.webp",
+      "caption": "Figure 2: An overview of the MorphoGuard framework. The model consists of a MPs encoding module, an fusion module, and a joint command decoding module. The morphology encoding module encodes the current morphology and the target morphology into feature representations. The information fusion module integrates the encoded features to capture the relationship between the current and target morphologies. Finally, the joint command decoding module predicts the joint commands based on the fused features.",
+      "page": 3,
+      "index": 7,
+      "width": 786,
+      "height": 468
+    },
+    {
+      "url": "assets/figures/arxiv/2604.01517v1/fig-008.webp",
+      "caption": "Table 3: Model Scale Comparison Results",
+      "page": 8,
+      "index": 8,
+      "width": 976,
+      "height": 238
+    },
+    {
+      "url": "assets/figures/arxiv/2604.01517v1/fig-009.webp",
+      "caption": "Table 2: MLP Scaling Experiment: Model Architecture and Computational Efficiency",
+      "page": 8,
+      "index": 9,
+      "width": 976,
+      "height": 205
+    },
+    {
+      "url": "assets/figures/arxiv/2604.01517v1/fig-010.webp",
+      "caption": "Figure 5:",
+      "page": 9,
+      "index": 10,
+      "width": 786,
+      "height": 350
+    }
+  ]
+}

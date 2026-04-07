@@ -1,0 +1,62 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2603.29272v2/fig-001.webp",
+      "caption": "Figure 5. Examples of motion adaptation achieved by the residual policy. (a) Jump + Alternating Kick: Two behaviors are combined via alternating masks on lower and upper body. Kicks first emerge in the legs, then swapping the mask restores jumping while shifting the adapted behavior to the upper body. (b) Locomotion + Rotate Arms: With walking as the base motion, both arms are initially masked to perform rotating-arm motion. Unmasking the left arm yields fine-grained control, where only the right arm continues the adapted behavior, producing smooth, localized transitions. (c) Aim + Sneak: When no region is masked, the controller performs only aiming. Masking the lower body induces sneaking in that region, creating a natural blend between base and adapted behaviors. (d) Text-driven partial motion tracking: The character begins with walking and responds to sequential text commands by producing semantically aligned arm motions.",
+      "page": 6,
+      "index": 1,
+      "width": 1024,
+      "height": 760
+    },
+    {
+      "url": "assets/figures/arxiv/2603.29272v2/fig-002.webp",
+      "caption": "Figure 6. Goal-driven tasks (a–c) and complex scenarios (d–e) enabled by dynamic motion composition.",
+      "page": 7,
+      "index": 2,
+      "width": 1026,
+      "height": 388
+    },
+    {
+      "url": "assets/figures/arxiv/2603.29272v2/fig-003.webp",
+      "caption": "Figure 2. Qualitative comparison of composition methods, each motion generated from the same initial state. In (a), the kick motion in CML is delayed; in (b), CML exhibits severe artifacts and fails to complete full arm rotations; and in (c), CML produces limited motion combinations compared to ours.",
+      "page": 14,
+      "index": 3,
+      "width": 986,
+      "height": 392
+    },
+    {
+      "url": "assets/figures/arxiv/2603.29272v2/fig-004.webp",
+      "caption": "Figure 3. Qualitative comparison of our method, CML, and a from-scratch model for the partial tracking task given the text commands on the left. The red region highlights deviations from the base behavior.",
+      "page": 14,
+      "index": 4,
+      "width": 458,
+      "height": 370
+    },
+    {
+      "url": "assets/figures/arxiv/2603.29272v2/fig-005.webp",
+      "caption": "Figure 1. Frame visitation frequencies for locomotion with both legs masked. The policy without MI loss (blue) shows a skewed visitation pattern, whereas applying the MI loss (yellow) produces a markedly more uniform distribution. Our mask-invariant base achieves a level of uniformity comparable to AMP (green), indicating that the MI loss preserves diverse state visitation even under heavy masking.",
+      "page": 13,
+      "index": 5,
+      "width": 496,
+      "height": 265
+    },
+    {
+      "url": "assets/figures/arxiv/2603.29272v2/fig-006.webp",
+      "caption": "Table 3. Comparison of performance on goal-driven tasks",
+      "page": 8,
+      "index": 6,
+      "width": 462,
+      "height": 273
+    },
+    {
+      "url": "assets/figures/arxiv/2603.29272v2/fig-007.webp",
+      "caption": "Figure 4. Overview of text-guided partial motion tracking during inference. The trajectory generatorG continuously produces kinematic trajectories in response to dynamic text inputs, which serve as tracking targets for the residual policy.",
+      "page": 5,
+      "index": 7,
+      "width": 458,
+      "height": 349
+    }
+  ]
+}
