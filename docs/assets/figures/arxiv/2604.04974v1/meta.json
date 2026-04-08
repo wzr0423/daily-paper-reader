@@ -1,0 +1,110 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.04974v1/fig-001.webp",
+      "caption": "Figure 4. Control-loop integration across three interface families. Each row shows one family’s control loop; arrows returning to World indicate the outer feedback cycle. (a) Direct : the policy maps observations directly to actions with no exposed intermediate. (b) Latent : a latent-action policy produces a compact variable zt, which is then grounded to robot actions via a separate module. (c) Explicit : an interface predictor generates an interpretable target (subgoal, trajectory, or plan) that a downstream controller tracks. Dashed elements indicate optional capabilities: target verification before execution and closed-loop observation feedback during execution.",
+      "page": 6,
+      "index": 1,
+      "width": 1018,
+      "height": 614
+    },
+    {
+      "url": "assets/figures/arxiv/2604.04974v1/fig-002.webp",
+      "caption": "Table 9. Structural comparison of explicit visual interface methods. Methods are grouped by interface type: subgoal images/video plans predict future visual states, while trajectory-based methods predict lower-dimensional motion signals. “Transferred To” indicates whether an explicit interface-transfer step is applied; “Loop” indicates open-loop (execute plan once) or closed-loop (replan or update targets during execution). See footnotes for marker definitions.",
+      "page": 26,
+      "index": 2,
+      "width": 1031,
+      "height": 832
+    },
+    {
+      "url": "assets/figures/arxiv/2604.04974v1/fig-003.webp",
+      "caption": "Table 5. Discovery and grounding mechanisms of latent-action methods. “Discovery Data” indicates the action-free video used to learn latent actions. “Grounding Approach” describes how the latent-to-action mapping is established. “Grounding Data” specifies the action-labeled supervision or interaction required to connect latents to executable controls.",
+      "page": 15,
+      "index": 3,
+      "width": 1031,
+      "height": 242
+    },
+    {
+      "url": "assets/figures/arxiv/2604.04974v1/fig-004.webp",
+      "caption": "Table 1",
+      "page": 30,
+      "index": 4,
+      "width": 1031,
+      "height": 615
+    },
+    {
+      "url": "assets/figures/arxiv/2604.04974v1/fig-005.webp",
+      "caption": "Figure 2. Three families of video-based manipulation interfaces. Each column shows how video-derived temporal structure is connected to robot actions through predictive modules and control modules. Direct video–action policies (left) keep this interface implicit within a shared backbone; latent-action methods (center) route it through a learned action-like intermediate; and explicit visual interfaces (right) predict interpretable targets that a downstream controller or policy module tracks. From left to right, the interface becomes more explicit and the stages of prediction and control become more cleanly separated.",
+      "page": 2,
+      "index": 5,
+      "width": 801,
+      "height": 315
+    },
+    {
+      "url": "assets/figures/arxiv/2604.04974v1/fig-006.webp",
+      "caption": "Figure 8. Explicit visual interface–based methods for robotic manipulation. Sub-figure (a–b) These methods decouple perception and control by first predicting a human-interpretable interface (e.g., subgoal images, trajectories, or pose sequences) from visual observations and optional language, and then mapping the interface to robot actions with a downstream policy. Some approaches additionally apply an interface transfer step (e.g., 2D trajectories → 6D object poses) before policy execution. Sub-figure (c) Representative explicit interfaces used in prior work, parentheses denote interface format (e.g., RGB, RGB-D) where methods in the same group differ; examples are reproduced/adapted from (Mendonca et al. 2023; Black et al. 2023; Zhang et al. 2025a; Wen et al. 2024a; Xu et al. 2024a; Wang et al. 2023a; Yuan et al. 2024; Wang et al. 2025b; Shi et al. 2025). Methods in this section typically pretrain the interface predictor on video without action labels, and learn the downstream policy from robot data.",
+      "page": 22,
+      "index": 6,
+      "width": 1029,
+      "height": 585
+    },
+    {
+      "url": "assets/figures/arxiv/2604.04974v1/fig-007.webp",
+      "caption": "Table 11. Family-level comparison across three design philosophies. Direct video–action models keep the video–action link implicit in shared representations; latent-action methods introduce an intermediate action abstraction; explicit visual-interface methods expose structured, human-interpretable targets for a downstream controller.",
+      "page": 33,
+      "index": 7,
+      "width": 1052,
+      "height": 681
+    },
+    {
+      "url": "assets/figures/arxiv/2604.04974v1/fig-008.webp",
+      "caption": "Table 8. Training sources, deployment requirements, and real-robot evaluation scope of explicit visual interface methods.",
+      "page": 23,
+      "index": 8,
+      "width": 1031,
+      "height": 1201
+    },
+    {
+      "url": "assets/figures/arxiv/2604.04974v1/fig-009.webp",
+      "caption": "Table 2. Structural comparison of direct video–action methods. Methods are grouped by architectural paradigm: joint methods generate video and actions in a shared model, and two-stage methods pre-train video predictors then adapt for action generation. “Video at Inference” indicates whether explicit video generation is required during deployment: Optional means the method can bypass video generation and decode actions directly.",
+      "page": 8,
+      "index": 9,
+      "width": 1032,
+      "height": 472
+    },
+    {
+      "url": "assets/figures/arxiv/2604.04974v1/fig-010.webp",
+      "caption": "Figure 3. Design space of video-based manipulation methods. Methods are positioned by interface explicitness (x-axis) and distance from robot actions (y-axis; higher indicates that the control interface is farther from low-level actions, e.g., subgoals, trajectories, or poses, rather than direct action prediction). Marker shape indicates family (direct video→action, latent-action, explicit interfaces). Marker size qualitatively reflects the typical amount of action-labeled robot data used for grounding/training (low/medium/high). Plotted methods are representative anchors, not exhaustive.",
+      "page": 4,
+      "index": 10,
+      "width": 498,
+      "height": 360
+    },
+    {
+      "url": "assets/figures/arxiv/2604.04974v1/fig-011.webp",
+      "caption": "Figure 7. Latent actions inducing coherent behavior in visual scenes (adapted from Genie (Bruce et al. 2024)). The first column shows the input frame; different rows correspond to different scenes. Columns 2–4 visualize predicted future observations obtained by applying different latent actions to the same input. Although latent actions are not explicitly labeled with semantic meanings, they induce consistent and interpretable effects in the scene (e.g., object motion or end-effector displacement in different directions), illustrating an emergent alignment between the learned latent action space and real robot action-relevant visual changes.",
+      "page": 17,
+      "index": 11,
+      "width": 504,
+      "height": 415
+    },
+    {
+      "url": "assets/figures/arxiv/2604.04974v1/fig-012.webp",
+      "caption": "Table 3. Training sources and transfer mechanisms of direct video–action methods. “Video Pre-training Data” describes the source of action-free video for learning visual dynamics. “Action Supervision” specifies how action labels are obtained. “Video→Action Transfer” summarizes how video representations contribute to action prediction. “Real robot” indicates whether the paper reports real-robot evaluation.",
+      "page": 9,
+      "index": 12,
+      "width": 1031,
+      "height": 684
+    },
+    {
+      "url": "assets/figures/arxiv/2604.04974v1/fig-013.webp",
+      "caption": "Figure 6. Generic latent-action pipeline. Most latent-action methods follow a two-stage process. Stage 1 (top): Using only action-free videos, an encoder (inverse dynamics module) infers a latent action zt from observed transitions (ot, ot+H), a bottleneck strategy constrains capacity, and a decoder (forward dynamics module) predicts future observations or their representations. The reconstruction loss (dashed bidirectional arrow) compares the predicted output with the ground truth, driving learning of meaningful latent actions. The prediction target may be pixels, learned features, or latent states, depending on the method. Stage 2 (bottom): A frozen Stage 1 encoder generates (ot, ot+H , at, zt) pairs from action-labeled robot videos (step 1). A latent policy or planner (step 2) selects zt from the current observation, optionally conditioned on task description or goal image. A lightweight mapping module (step 3) translates zt to robot actions at using limited action-labeled data. Optional feature extractors (E) and reconstructors (D) are shown with dashed outlines.",
+      "page": 16,
+      "index": 13,
+      "width": 927,
+      "height": 642
+    }
+  ]
+}
