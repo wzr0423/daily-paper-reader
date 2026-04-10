@@ -1,0 +1,729 @@
+{
+  "mode": "standard",
+  "generated_at": "2026-04-10T20:14:55.264176+00:00",
+  "stats": {
+    "mode": "standard",
+    "tag_count": 1,
+    "deep_divecandidates": 9,
+    "deep_cap": 6,
+    "deep_selected": 6,
+    "quick_candidates": 23,
+    "quick_skim_target": 11,
+    "quick_selected": 11
+  },
+  "deep_dive": [
+    {
+      "id": "2604.03181v1",
+      "source": "arxiv",
+      "title": "Multi-View Video Diffusion Policy: A 3D Spatio-Temporal-Aware Video Action Model",
+      "abstract": "Robotic manipulation requires understanding both the 3D spatial structure of the environment and its temporal evolution, yet most existing policies overlook one or both. They typically rely on 2D visual observations and backbones pretrained on static image--text pairs, resulting in high data requirements and limited understanding of environment dynamics. To address this, we introduce MV-VDP, a multi-view video diffusion policy that jointly models the 3D spatio-temporal state of the environment. The core idea is to simultaneously predict multi-view heatmap videos and RGB videos, which 1) align the representation format of video pretraining with action finetuning, and 2) specify not only what actions the robot should take, but also how the environment is expected to evolve in response to those actions. Extensive experiments show that MV-VDP enables data-efficient, robust, generalizable, and interpretable manipulation. With only ten demonstration trajectories and without additional pretraining, MV-VDP successfully performs complex real-world tasks, demonstrates strong robustness across a range of model hyperparameters, generalizes to out-of-distribution settings, and predicts realistic future videos. Experiments on Meta-World and real-world robotic platforms demonstrate that MV-VDP consistently outperforms video-prediction--based, 3D-based, and vision--language--action models, establishing a new state of the art in data-efficient multi-task manipulation.",
+      "authors": [
+        "Peiyan Li",
+        "Yixiang Chen",
+        "Yuan Xu",
+        "Jiabing Yang",
+        "Xiangnan Wu",
+        "Jun Guo",
+        "Nan Sun",
+        "Long Qian",
+        "Xinghang Li",
+        "Xin Xiao",
+        "Jing Liu",
+        "Nianfeng Liu",
+        "Tao Kong",
+        "Yan Huang",
+        "Liang Wang",
+        "Tieniu Tan"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.CV"
+      ],
+      "published": "2026-04-03T16:57:06+00:00",
+      "link": "https://arxiv.org/pdf/2604.03181v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "video action model for environment dynamics",
+      "llm_evidence_cn": "用于环境动力学的视频动作模型",
+      "llm_evidence": "用于环境动力学的视频动作模型",
+      "canonical_evidence": "用于环境动力学的视频动作模型",
+      "llm_tldr_en": "A multi-view video diffusion policy that models 3D spatio-temporal environment dynamics for manipulation.",
+      "llm_tldr_cn": "一种通过多视图视频扩散策略建模三维时空环境动力学的机器人操作模型。",
+      "llm_tldr": "一种通过多视图视频扩散策略建模三维时空环境动力学的机器人操作模型。",
+      "llm_tags": [
+        "query:1:composite"
+      ],
+      "matched_query_tag": "query:1:composite",
+      "matched_query_text": "Papers central to 寻找关于世界动作模型（World Action Model）及相关领域（如模型预测、强化学习）的学术论文。, especially work that connects or combines: r; V; World models in reinforcement learning and robotics; Action-conditioned world models for decision making; Learning latent dynamics for world modeling; Model-based reinforcement learning with world models; Recent advances in world action models for autonomous agents; Action conditioned generative world models for robotics.",
+      "matched_requirement_id": "req-composite-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2604.04502v1",
+      "source": "arxiv",
+      "title": "Veo-Act: How Far Can Frontier Video Models Advance Generalizable Robot Manipulation?",
+      "abstract": "Video generation models have advanced rapidly and are beginning to show a strong understanding of physical dynamics. In this paper, we investigate how far an advanced video generation model such as Veo-3 can support generalizable robotic manipulation. We first study a zero-shot approach in which Veo-3 predicts future image sequences from current robot observations, while an inverse dynamics model IDM recovers the corresponding robot actions. The IDM is trained solely on random-play data, requiring neither human supervision nor expert demonstrations. The key intuition is that, if a video model can generate physically plausible future motions in image space, an IDM can translate those visual trajectories into executable robot actions. We evaluate this \"Veo-3+IDM\" approach in both simulation and the real world using a high-dimensional dexterous hand. We find that, owing to the strong generalization capability of frontier video models, Veo-3+IDM can consistently generate approximately correct task-level trajectories. However, its low-level control accuracy remains insufficient to solve most tasks reliably. Motivated by this observation, we develop a hierarchical framework, Veo-Act, which uses Veo-3 as a high-level motion planner and a VLA policy as the low-level executor, significantly improving the instruction-following performance of a state-of-the-art vision-language-action policy. Overall, our results suggest that, as video generation models continue to improve, video models can be a valuable component for generalizable robot learning.",
+      "authors": [
+        "Zhongru Zhang",
+        "Chenghan Yang",
+        "Qingzhou Lu",
+        "Yanjiang Guo",
+        "Jianke Zhang",
+        "Yucheng Hu",
+        "Jianyu Chen"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-04-06T07:57:52+00:00",
+      "link": "https://arxiv.org/pdf/2604.04502v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 9.0,
+      "llm_evidence_en": "video generation models for physical dynamics and robot actions",
+      "llm_evidence_cn": "用于物理动力学和机器人动作预测的视频生成模型",
+      "llm_evidence": "用于物理动力学和机器人动作预测的视频生成模型",
+      "canonical_evidence": "用于物理动力学和机器人动作预测的视频生成模型",
+      "llm_tldr_en": "Explores using video generation models as world models to predict future states and recover robot actions.",
+      "llm_tldr_cn": "探索利用视频生成模型作为世界模型来预测未来状态并恢复机器人动作。",
+      "llm_tldr": "探索利用视频生成模型作为世界模型来预测未来状态并恢复机器人动作。",
+      "llm_tags": [
+        "query:1:composite"
+      ],
+      "matched_query_tag": "query:1:composite",
+      "matched_query_text": "Papers central to 寻找关于世界动作模型（World Action Model）及相关领域（如模型预测、强化学习）的学术论文。, especially work that connects or combines: r; V; World models in reinforcement learning and robotics; Action-conditioned world models for decision making; Learning latent dynamics for world modeling; Model-based reinforcement learning with world models; Recent advances in world action models for autonomous agents; Action conditioned generative world models for robotics.",
+      "matched_requirement_id": "req-composite-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2604.07517v1",
+      "source": "arxiv",
+      "title": "Grasp as You Dream: Imitating Functional Grasping from Generated Human Demonstrations",
+      "abstract": "Building generalist robots capable of performing functional grasping in everyday, open-world environments remains a significant challenge due to the vast diversity of objects and tasks. Existing methods are either constrained to narrow object/task sets or rely on prohibitively large-scale data collection to capture real-world variability. In this work, we present an alternative approach, GraspDreamer, a method that leverages human demonstrations synthesized by visual generative models (VGMs) (e.g., video generation models) to enable zero-shot functional grasping without labor-intensive data collection. The key idea is that VGMs pre-trained on internet-scale human data implicitly encode generalized priors about how humans interact with the physical world, which can be combined with embodiment-specific action optimization to enable functional grasping with minimal effort. Extensive experiments on the public benchmarks with different robot hands demonstrate the superior data efficiency and generalization performance of GraspDreamer compared to previous methods. Real-world evaluations further validate the effectiveness on real robots. Additionally, we showcase that GraspDreamer can (1) be naturally extended to downstream manipulation tasks, and (2) can generate data to support visuomotor policy learning.",
+      "authors": [
+        "Chao Tang",
+        "Jiacheng Xu",
+        "Haofei Lu",
+        "Bolin Zou",
+        "Wenlong Dong",
+        "Hong Zhang",
+        "Danica Kragic"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-04-08T18:52:16+00:00",
+      "link": "https://arxiv.org/pdf/2604.07517v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "visual generative models for functional grasping demonstrations",
+      "llm_evidence_cn": "用于功能性抓取演示的视觉生成模型",
+      "llm_evidence": "用于功能性抓取演示的视觉生成模型",
+      "canonical_evidence": "用于功能性抓取演示的视觉生成模型",
+      "llm_tldr_en": "Uses video generation models to synthesize human demonstrations for zero-shot functional robotic grasping.",
+      "llm_tldr_cn": "利用视频生成模型合成人类演示，实现机器人零样本功能性抓取。",
+      "llm_tldr": "利用视频生成模型合成人类演示，实现机器人零样本功能性抓取。",
+      "llm_tags": [
+        "query:1:composite"
+      ],
+      "matched_query_tag": "query:1:composite",
+      "matched_query_text": "Papers central to 寻找关于世界动作模型（World Action Model）及相关领域（如模型预测、强化学习）的学术论文。, especially work that connects or combines: r; V; World models in reinforcement learning and robotics; Action-conditioned world models for decision making; Learning latent dynamics for world modeling; Model-based reinforcement learning with world models; Recent advances in world action models for autonomous agents; Action conditioned generative world models for robotics.",
+      "matched_requirement_id": "req-composite-1",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2604.04974v1",
+      "source": "arxiv",
+      "title": "From Video to Control: A Survey of Learning Manipulation Interfaces from Temporal Visual Data",
+      "abstract": "Video is a scalable observation of physical dynamics: it captures how objects move, how contact unfolds, and how scenes evolve under interaction -- all without requiring robot action labels. Yet translating this temporal structure into reliable robotic control remains an open challenge, because video lacks action supervision and differs from robot experience in embodiment, viewpoint, and physical constraints. This survey reviews methods that exploit non-action-annotated temporal video to learn control interfaces for robotic manipulation. We introduce an \\emph{interface-centric taxonomy} organized by where the video-to-control interface is constructed and what control properties it enables, identifying three families: direct video--action policies, which keep the interface implicit; latent-action methods, which route temporal structure through a compact learned intermediate; and explicit visual interfaces, which predict interpretable targets for downstream control. For each family, we analyze control-integration properties -- how the loop is closed, what can be verified before execution, and where failures enter. A cross-family synthesis reveals that the most pressing open challenges center on the \\emph{robotics integration layer} -- the mechanisms that connect video-derived predictions to dependable robot behavior -- and we outline research directions toward closing this gap.",
+      "authors": [
+        "Linfang Zheng",
+        "Zikai Ouyang",
+        "Chen Wang",
+        "Jia Pan",
+        "Wei Zhang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-04-04T15:37:11+00:00",
+      "link": "https://arxiv.org/pdf/2604.04974v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "survey of learning manipulation from temporal visual data",
+      "llm_evidence_cn": "从时序视觉数据学习操作的综述",
+      "llm_evidence": "从时序视觉数据学习操作的综述",
+      "canonical_evidence": "从时序视觉数据学习操作的综述",
+      "llm_tldr_en": "Surveys methods for learning robotic control from video data, relevant to world model benchmarking and training.",
+      "llm_tldr_cn": "综述了从视频数据中学习机器人控制的方法，涉及世界模型的训练与基准评估。",
+      "llm_tldr": "综述了从视频数据中学习机器人控制的方法，涉及世界模型的训练与基准评估。",
+      "llm_tags": [
+        "query:emb-bm:composite"
+      ],
+      "matched_query_tag": "query:emb-bm:composite",
+      "matched_query_text": "Papers central to 具身智能世界模型基准测试相关论文检索, especially work that connects or combines: world models for embodied intelligence and robotics; benchmarking suites for world models; evaluation metrics for embodied world models; video generation benchmarks for world models; datasets for training and testing world models; state of the art benchmarks for embodied world models; comparative analysis of world model evaluation frameworks; standardized testing environments for robotic world models; performance metrics for generative world models in robotics.",
+      "matched_requirement_id": "req-composite-emb-bm",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2604.04138v1",
+      "source": "arxiv",
+      "title": "Learning Dexterous Grasping from Sparse Taxonomy Guidance",
+      "abstract": "Dexterous manipulation requires planning a grasp configuration suited to the object and task, which is then executed through coordinated multi-finger control. However, specifying grasp plans with dense pose or contact targets for every object and task is impractical. Meanwhile, end-to-end reinforcement learning from task rewards alone lacks controllability, making it difficult for users to intervene when failures occur. To this end, we present GRIT, a two-stage framework that learns dexterous control from sparse taxonomy guidance. GRIT first predicts a taxonomy-based grasp specification from the scene and task context. Conditioned on this sparse command, a policy generates continuous finger motions that accomplish the task while preserving the intended grasp structure. Our result shows that certain grasp taxonomies are more effective for specific object geometries. By leveraging this relationship, GRIT improves generalization to novel objects over baselines and achieves an overall success rate of 87.9%. Moreover, real-world experiments demonstrate controllability, enabling grasp strategies to be adjusted through high-level taxonomy selection based on object geometry and task intent.",
+      "authors": [
+        "Juhan Park",
+        "Taerim Yoon",
+        "Seungmin Kim",
+        "Joonggil Kim",
+        "Wontae Ye",
+        "Jeongeun Park",
+        "Yoonbyung Chai",
+        "Geonwoo Cho",
+        "Geunwoo Cho",
+        "Dohyeong Kim",
+        "Kyungjae Lee",
+        "Yongjae Kim",
+        "Sungjoon Choi"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI"
+      ],
+      "published": "2026-04-05T14:53:43+00:00",
+      "link": "https://arxiv.org/pdf/2604.04138v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "dexterous manipulation and coordinated multi-finger control",
+      "llm_evidence_cn": "灵巧操作与协调多指控制",
+      "llm_evidence": "灵巧操作与协调多指控制",
+      "canonical_evidence": "灵巧操作与协调多指控制",
+      "llm_tldr_en": "Learns dexterous grasping and finger motions from sparse taxonomy guidance to accomplish complex tasks.",
+      "llm_tldr_cn": "通过稀疏分类指导学习灵巧抓取和手指运动，以完成复杂的机器人操作任务。",
+      "llm_tldr": "通过稀疏分类指导学习灵巧抓取和手指运动，以完成复杂的机器人操作任务。",
+      "llm_tags": [
+        "query:rob-rot"
+      ],
+      "matched_query_tag": "query:rob-rot",
+      "matched_query_text": "dexterous robotic manipulation for rotating objects",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch"
+    },
+    {
+      "id": "2604.07335v1",
+      "source": "arxiv",
+      "title": "TAMEn: Tactile-Aware Manipulation Engine for Closed-Loop Data Collection in Contact-Rich Tasks",
+      "abstract": "Handheld paradigms offer an efficient and intuitive way for collecting large-scale demonstration of robot manipulation. However, achieving contact-rich bimanual manipulation through these methods remains a pivotal challenge, which is substantially hindered by hardware adaptability and data efficacy. Prior hardware designs remain gripper-specific and often face a trade-off between tracking precision and portability. Furthermore, the lack of online feasibility checking during demonstration leads to poor replayability. More importantly, existing handheld setups struggle to collect interactive recovery data during robot execution, lacking the authentic tactile information necessary for robust policy refinement. To bridge these gaps, we present TAMEn, a tactile-aware manipulation engine for closed-loop data collection in contact-rich tasks. Our system features a cross-morphology wearable interface that enables rapid adaptation across heterogeneous grippers. To balance data quality and environmental diversity, we implement a dual-modal acquisition pipeline: a precision mode leveraging motion capture for high-fidelity demonstrations, and a portable mode utilizing VR-based tracking for in-the-wild acquisition and tactile-visualized recovery teleoperation. Building on this hardware, we unify large-scale tactile pretraining, task-specific bimanual demonstrations, and human-in-the-loop recovery data into a pyramid-structured data regime, enabling closed-loop policy refinement. Experiments show that our feasibility-aware pipeline significantly improves demonstration replayability, and that the proposed visuo-tactile learning framework increases task success rates from 34% to 75% across diverse bimanual manipulation tasks. We further open-source the hardware and dataset to facilitate reproducibility and support research in visuo-tactile manipulation.",
+      "authors": [
+        "Longyan Wu",
+        "Jieji Ren",
+        "Chenghang Jiang",
+        "Junxi Zhou",
+        "Shijia Peng",
+        "Ran Huang",
+        "Guoying Gu",
+        "Li Chen",
+        "Hongyang Li"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-04-08T17:49:35+00:00",
+      "link": "https://arxiv.org/pdf/2604.07335v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "tactile-aware manipulation for contact-rich tasks",
+      "llm_evidence_cn": "针对接触密集型任务的触觉感知操作",
+      "llm_evidence": "针对接触密集型任务的触觉感知操作",
+      "canonical_evidence": "针对接触密集型任务的触觉感知操作",
+      "llm_tldr_en": "Introduces TAMEn for closed-loop data collection in contact-rich manipulation using tactile information.",
+      "llm_tldr_cn": "引入TAMEn引擎，利用触觉信息实现接触密集型任务的闭环数据采集与策略优化。",
+      "llm_tldr": "引入TAMEn引擎，利用触觉信息实现接触密集型任务的闭环数据采集与策略优化。",
+      "llm_tags": [
+        "query:rob-rot:composite"
+      ],
+      "matched_query_tag": "query:rob-rot:composite",
+      "matched_query_text": "Papers central to 机械臂学习旋转操作策略（如拧瓶盖）的论文检索, especially work that connects or combines: robotic arm manipulation strategies for rotational tasks; learning rotational manipulation tasks in robotics; robotic learning for unscrewing and screwing bottle caps; dexterous robotic manipulation for rotating objects; learning manipulation policies for twisting motions; robotic arm learning to unscrew bottle caps and rotate objects; learning twisting and screwing motions in robotics.",
+      "matched_requirement_id": "req-composite-rob-rot",
+      "selection_source": "fresh_fetch"
+    }
+  ],
+  "quick_skim": [
+    {
+      "id": "2604.05697v1",
+      "source": "arxiv",
+      "title": "GraspSense: Physically Grounded Grasp and Grip Planning for a Dexterous Robotic Hand via Language-Guided Perception and Force Maps",
+      "abstract": "Dexterous robotic manipulation requires more than geometrically valid grasps: it demands physically grounded contact strategies that account for the spatially non-uniform mechanical properties of the object. However, existing grasp planners typically treat the surface as structurally homogeneous, even though contact in a weak region can damage the object despite a geometrically perfect grasp. We present a pipeline for grasp selection and force regulation in a five-fingered robotic hand, based on a map of locally admissible contact loads. From an operator command, the system identifies the target object, reconstructs its 3D geometry using SAM3D, and imports the model into Isaac Sim. A physics-informed geometric analysis then computes a force map that encodes the maximum lateral contact force admissible at each surface location without deformation. Grasp candidates are filtered by geometric validity and task-goal consistency. When multiple candidates are comparable under classical metrics, they are re-ranked using a force-map-aware criterion that favors grasps with contacts in mechanically admissible regions. An impedance controller scales the stiffness of each finger according to the locally admissible force at the contact point, enabling safe and reliable grasp execution. Validation on paper, plastic, and glass cups shows that the proposed approach consistently selects structurally stronger contact regions and keeps grip forces within safe bounds. In this way, the work reframes dexterous manipulation from a purely geometric problem into a physically grounded joint planning problem of grasp selection and grip execution for future humanoid systems.",
+      "authors": [
+        "Elizaveta Semenyakina",
+        "Ivan Snegirev",
+        "Mariya Lezina",
+        "Miguel Altamirano Cabrera",
+        "Safina Gulyamova",
+        "Dzmitry Tsetserukou"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "eess.SY"
+      ],
+      "published": "2026-04-07T10:48:33+00:00",
+      "link": "https://arxiv.org/pdf/2604.05697v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "dexterous robotic hand grasp and grip planning",
+      "llm_evidence_cn": "灵巧机器人手抓取与握持规划",
+      "llm_evidence": "灵巧机器人手抓取与握持规划",
+      "canonical_evidence": "灵巧机器人手抓取与握持规划",
+      "llm_tldr_en": "A pipeline for physically grounded grasp selection and force regulation in five-fingered dexterous hands.",
+      "llm_tldr_cn": "一种用于五指灵巧手的物理接地抓取选择和力调节流水线。",
+      "llm_tldr": "一种用于五指灵巧手的物理接地抓取选择和力调节流水线。",
+      "llm_tags": [
+        "query:rob-rot"
+      ],
+      "matched_query_tag": "query:rob-rot",
+      "matched_query_text": "dexterous robotic manipulation for rotating objects",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2604.03006v1",
+      "source": "arxiv",
+      "title": "A Flow Matching Framework for Soft-Robot Inverse Dynamics",
+      "abstract": "Learning the inverse dynamics of soft continuum robots remains challenging due to high-dimensional nonlinearities and complex actuation coupling. Conventional feedback-based controllers often suffer from control chattering due to corrective oscillations, while deterministic regression-based learners struggle to capture the complex nonlinear mappings required for accurate dynamic tracking. Motivated by these limitations, we propose an inverse-dynamics framework for open-loop feedforward control that learns the system's differential dynamics as a generative transport map. Specifically, inverse dynamics is reformulated as a conditional flow-matching problem, and Rectified Flow (RF) is adopted as a lightweight instance to generate physically consistent control inputs rather than conditional averages. Two variants are introduced to further enhance physical consistency: RF-Physical, utilizing a physics-based prior for residual modeling; and RF-FWD, integrating a forward-dynamics consistency loss during flow matching. Extensive evaluations demonstrate that our framework reduces trajectory tracking RMSE by over 50% compared to standard regression baselines (MLP, LSTM, Transformer). The system sustains stable open-loop execution at a peak end-effector velocity of 1.14 m/s with sub-millisecond inference latency (0.995 ms). This work demonstrates flow matching as a robust, high-performance paradigm for learning differential inverse dynamics in soft robotic systems.",
+      "authors": [
+        "Hang Yang",
+        "Fangju Yang",
+        "Yangming Zhang",
+        "Ibrahim Alsarraj",
+        "Yuhao Wang",
+        "Zhenye Luo",
+        "Zixi Chen",
+        "Ke Wu"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-04-03T12:45:46+00:00",
+      "link": "https://arxiv.org/pdf/2604.03006v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "flow matching for robot dynamics",
+      "llm_evidence_cn": "机器人动力学的流匹配",
+      "llm_evidence": "机器人动力学的流匹配",
+      "canonical_evidence": "机器人动力学的流匹配",
+      "llm_tldr_en": "A flow-matching framework for learning the complex inverse dynamics of soft continuum robots.",
+      "llm_tldr_cn": "一种用于学习软体连续机器人复杂逆动力学的流匹配框架。",
+      "llm_tldr": "一种用于学习软体连续机器人复杂逆动力学的流匹配框架。",
+      "llm_tags": [
+        "query:1:composite"
+      ],
+      "matched_query_tag": "query:1:composite",
+      "matched_query_text": "Papers central to 寻找关于世界动作模型（World Action Model）及相关领域（如模型预测、强化学习）的学术论文。, especially work that connects or combines: r; V; World models in reinforcement learning and robotics; Action-conditioned world models for decision making; Learning latent dynamics for world modeling; Model-based reinforcement learning with world models; Recent advances in world action models for autonomous agents; Action conditioned generative world models for robotics.",
+      "matched_requirement_id": "req-composite-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2604.01570v1",
+      "source": "arxiv",
+      "title": "Boosting Vision-Language-Action Finetuning with Feasible Action Neighborhood Prior",
+      "abstract": "In real-world robotic manipulation, states typically admit a neighborhood of near-equivalent actions. That is, for each state, there exist a feasible action neighborhood (FAN) rather than a single correct action, within which motions yield indistinguishable progress. However, prevalent VLA training methodologies are directly inherited from linguistic settings and do not exploit the FAN property, thus leading to poor generalization and low sample efficiency. To address this limitation, we introduce a FAN-guided regularizer that shapes the model's output distribution to align with the geometry of FAN. Concretely, we introduce a Gaussian prior that promotes locally smooth and unimodal predictions around the preferred direction and magnitude. In extensive experiments across both reinforced finetuning (RFT) and supervised finetuning (SFT), our method achieves significant improvement in sample efficiency, and success rate in both in-distribution and out-of-distribution (OOD) scenarios. By aligning with the intrinsic action tolerance of physical manipulation, FAN-guided regularization provides a principled and practical method for sample-efficient, and generalizable VLA adaptation.",
+      "authors": [
+        "Haochen Niu",
+        "Kanyu Zhang",
+        "Shuyu Yin",
+        "Qinghai Guo",
+        "Peilin Liu",
+        "Fei Wen"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-04-02T03:30:43+00:00",
+      "link": "https://arxiv.org/pdf/2604.01570v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "VLA finetuning for robotic manipulation",
+      "llm_evidence_cn": "机器人操作的VLA微调",
+      "llm_evidence": "机器人操作的VLA微调",
+      "canonical_evidence": "机器人操作的VLA微调",
+      "llm_tldr_en": "Improves VLA finetuning efficiency by exploiting feasible action neighborhoods in manipulation tasks.",
+      "llm_tldr_cn": "通过利用操作任务中的可行动作邻域来提高视觉-语言-动作模型的微调效率。",
+      "llm_tldr": "通过利用操作任务中的可行动作邻域来提高视觉-语言-动作模型的微调效率。",
+      "llm_tags": [
+        "query:rob-rot:composite"
+      ],
+      "matched_query_tag": "query:rob-rot:composite",
+      "matched_query_text": "Papers central to 机械臂学习旋转操作策略（如拧瓶盖）的论文检索, especially work that connects or combines: robotic arm manipulation strategies for rotational tasks; learning rotational manipulation tasks in robotics; robotic learning for unscrewing and screwing bottle caps; dexterous robotic manipulation for rotating objects; learning manipulation policies for twisting motions; robotic arm learning to unscrew bottle caps and rotate objects; learning twisting and screwing motions in robotics.",
+      "matched_requirement_id": "req-composite-rob-rot",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2604.06133v1",
+      "source": "arxiv",
+      "title": "Learning-Guided Force-Feedback Model Predictive Control with Obstacle Avoidance for Robotic Deburring",
+      "abstract": "Model Predictive Control (MPC) is widely used for torque-controlled robots, but classical formulations often neglect real-time force feedback and struggle with contact-rich industrial tasks under collision constraints. Deburring in particular requires precise tool insertion, stable force regulation, and collision-free circular motions in challenging configurations, which exceeds the capability of standard MPC pipelines. We propose a framework that integrates force-feedback MPC with diffusion-based motion priors to address these challenges. The diffusion model serves as a memory of motion strategies, providing robust initialization and adaptation across multiple task instances, while MPC ensures safe execution with explicit force tracking, torque feasibility, and collision avoidance. We validate our approach on a torque-controlled manipulator performing industrial deburring tasks. Experiments demonstrate reliable tool insertion, accurate normal force tracking, and circular deburring motions even in hard-to-reach configurations and under obstacle constraints. To our knowledge, this is the first integration of diffusion motion priors with force-feedback MPC for collision-aware, contact-rich industrial tasks.",
+      "authors": [
+        "Krzysztof Wojciechowski",
+        "Ege Gursoy",
+        "Arthur Haffemayer",
+        "Sebastien Kleff",
+        "Vincent Bonnet",
+        "Florent Lamiraux",
+        "Nicolas Mansard"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-04-07T17:43:32+00:00",
+      "link": "https://arxiv.org/pdf/2604.06133v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "circular motions and contact-rich industrial tasks",
+      "llm_evidence_cn": "圆周运动与接触密集型工业任务",
+      "llm_evidence": "圆周运动与接触密集型工业任务",
+      "canonical_evidence": "圆周运动与接触密集型工业任务",
+      "llm_tldr_en": "Combines MPC with diffusion priors for robotic deburring involving complex circular and contact-rich motions.",
+      "llm_tldr_cn": "结合模型预测控制与扩散先验，解决涉及复杂圆周运动的机器人去毛刺任务。",
+      "llm_tldr": "结合模型预测控制与扩散先验，解决涉及复杂圆周运动的机器人去毛刺任务。",
+      "llm_tags": [
+        "query:rob-rot"
+      ],
+      "matched_query_tag": "query:rob-rot",
+      "matched_query_text": "robotic arm manipulation strategies for rotational tasks",
+      "matched_requirement_id": "req-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2604.03023v1",
+      "source": "arxiv",
+      "title": "Behavior-Constrained Reinforcement Learning with Receding-Horizon Credit Assignment for High-Performance Control",
+      "abstract": "Learning high-performance control policies that remain consistent with expert behavior is a fundamental challenge in robotics. Reinforcement learning can discover high-performing strategies but often departs from desirable human behavior, whereas imitation learning is limited by demonstration quality and struggles to improve beyond expert data. We propose a behavior-constrained reinforcement learning framework that improves beyond demonstrations while explicitly controlling deviation from expert behavior. Because expert-consistent behavior in dynamic control is inherently trajectory-level, we introduce a receding-horizon predictive mechanism that models short-term future trajectories and provides look-ahead rewards during training. To account for the natural variability of human behavior under disturbances and changing conditions, we further condition the policy on reference trajectories, allowing it to represent a distribution of expert-consistent behaviors rather than a single deterministic target. Empirically, we evaluate the approach in high-fidelity race car simulation using data from professional drivers, a domain characterized by extreme dynamics and narrow performance margins. The learned policies achieve competitive lap times while maintaining close alignment with expert driving behavior, outperforming baseline methods in both performance and imitation quality. Beyond standard benchmarks, we conduct human-grounded evaluation in a driver-in-the-loop simulator and show that the learned policies reproduce setup-dependent driving characteristics consistent with the feedback of top-class professional race drivers. These results demonstrate that our method enables learning high-performance control policies that are both optimal and behavior-consistent, and can serve as reliable surrogates for human decision-making in complex control systems.",
+      "authors": [
+        "Siwei Ju",
+        "Jan Tauberschmidt",
+        "Oleg Arenz",
+        "Peter van Vliet",
+        "Jan Peters"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-04-03T13:13:47+00:00",
+      "link": "https://arxiv.org/pdf/2604.03023v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "receding-horizon predictive mechanism for control",
+      "llm_evidence_cn": "用于控制的后退水平预测机制",
+      "llm_evidence": "用于控制的后退水平预测机制",
+      "canonical_evidence": "用于控制的后退水平预测机制",
+      "llm_tldr_en": "A RL framework using receding-horizon prediction to align high-performance control with expert behavior.",
+      "llm_tldr_cn": "一种利用后退水平预测机制使高性能控制策略与专家行为保持一致的强化学习框架。",
+      "llm_tldr": "一种利用后退水平预测机制使高性能控制策略与专家行为保持一致的强化学习框架。",
+      "llm_tags": [
+        "query:1:composite"
+      ],
+      "matched_query_tag": "query:1:composite",
+      "matched_query_text": "Papers central to 寻找关于世界动作模型（World Action Model）及相关领域（如模型预测、强化学习）的学术论文。, especially work that connects or combines: r; V; World models in reinforcement learning and robotics; Action-conditioned world models for decision making; Learning latent dynamics for world modeling; Model-based reinforcement learning with world models; Recent advances in world action models for autonomous agents; Action conditioned generative world models for robotics.",
+      "matched_requirement_id": "req-composite-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2604.02021v1",
+      "source": "arxiv",
+      "title": "Bridging Discrete Planning and Continuous Execution for Redundant Robot",
+      "abstract": "Voxel-grid reinforcement learning is widely adopted for path planning in redundant manipulators due to its simplicity and reproducibility. However, direct execution through point-wise numerical inverse kinematics on 7-DoF arms often yields step-size jitter, abrupt joint transitions, and instability near singular configurations. This work proposes a bridging framework between discrete planning and continuous execution without modifying the discrete planner itself. On the planning side, step-normalized 26-neighbor Cartesian actions and a geometric tie-breaking mechanism are introduced to suppress unnecessary turns and eliminate step-size oscillations. On the execution side, a task-priority damped least-squares (TP-DLS) inverse kinematics layer is implemented. This layer treats end-effector position as a primary task, while posture and joint centering are handled as subordinate tasks projected into the null space, combined with trust-region clipping and joint velocity constraints. On a 7-DoF manipulator in random sparse, medium, and dense environments, this bridge raises planning success in dense scenes from about 0.58 to 1.00, shortens representative path length from roughly 1.53 m to 1.10 m, and while keeping end-effector error below 1 mm, reduces peak joint accelerations by over an order of magnitude, substantially improving the continuous execution quality of voxel-based RL paths on redundant manipulators.",
+      "authors": [
+        "Teng Yan",
+        "Yue Yu",
+        "Yihan Liu",
+        "Bingzhuo Zhong"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-04-02T13:23:54+00:00",
+      "link": "https://arxiv.org/pdf/2604.02021v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "execution framework for redundant manipulators",
+      "llm_evidence_cn": "冗余机械臂的执行框架",
+      "llm_evidence": "冗余机械臂的执行框架",
+      "canonical_evidence": "冗余机械臂的执行框架",
+      "llm_tldr_en": "A framework bridging discrete planning and continuous execution for stable 7-DoF arm control.",
+      "llm_tldr_cn": "一种连接离散规划与连续执行的框架，用于实现稳定的七自由度机械臂控制。",
+      "llm_tldr": "一种连接离散规划与连续执行的框架，用于实现稳定的七自由度机械臂控制。",
+      "llm_tags": [
+        "query:rob-rot:composite"
+      ],
+      "matched_query_tag": "query:rob-rot:composite",
+      "matched_query_text": "Papers central to 机械臂学习旋转操作策略（如拧瓶盖）的论文检索, especially work that connects or combines: robotic arm manipulation strategies for rotational tasks; learning rotational manipulation tasks in robotics; robotic learning for unscrewing and screwing bottle caps; dexterous robotic manipulation for rotating objects; learning manipulation policies for twisting motions; robotic arm learning to unscrew bottle caps and rotate objects; learning twisting and screwing motions in robotics.",
+      "matched_requirement_id": "req-composite-rob-rot",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2604.08410v1",
+      "source": "arxiv",
+      "title": "BLaDA: Bridging Language to Functional Dexterous Actions within 3DGS Fields",
+      "abstract": "In unstructured environments, functional dexterous grasping calls for the tight integration of semantic understanding, precise 3D functional localization, and physically interpretable execution. Modular hierarchical methods are more controllable and interpretable than end-to-end VLA approaches, but existing ones still rely on predefined affordance labels and lack the tight semantic--pose coupling needed for functional dexterous manipulation. To address this, we propose BLaDA (Bridging Language to Dexterous Actions in 3DGS fields), an interpretable zero-shot framework that grounds open-vocabulary instructions as perceptual and control constraints for functional dexterous manipulation. BLaDA establishes an interpretable reasoning chain by first parsing natural language into a structured sextuple of manipulation constraints via a Knowledge-guided Language Parsing (KLP) module. To achieve pose-consistent spatial reasoning, we introduce the Triangular Functional Point Localization (TriLocation) module, which utilizes 3D Gaussian Splatting as a continuous scene representation and identifies functional regions under triangular geometric constraints. Finally, the 3D Keypoint Grasp Matrix Transformation Execution (KGT3D+) module decodes these semantic-geometric constraints into physically plausible wrist poses and finger-level commands. Extensive experiments on complex benchmarks demonstrate that BLaDA significantly outperforms existing methods in both affordance grounding precision and the success rate of functional manipulation across diverse categories and tasks. Code will be publicly available at https://github.com/PopeyePxx/BLaDA.",
+      "authors": [
+        "Fan Yang",
+        "Wenrui Chen",
+        "Guorun Yan",
+        "Ruize Liao",
+        "Wanjun Jia",
+        "Dongsheng Luo",
+        "Kailun Yang",
+        "Zhiyong Li",
+        "Yaonan Wang"
+      ],
+      "primary_category": "cs.CV",
+      "categories": [
+        "cs.CV",
+        "cs.RO"
+      ],
+      "published": "2026-04-09T16:10:20+00:00",
+      "link": "https://arxiv.org/pdf/2604.08410v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 8.0,
+      "llm_evidence_en": "functional dexterous actions and grasping",
+      "llm_evidence_cn": "功能性灵巧动作与抓取",
+      "llm_evidence": "功能性灵巧动作与抓取",
+      "canonical_evidence": "功能性灵巧动作与抓取",
+      "llm_tldr_en": "A zero-shot framework grounding language instructions into functional dexterous manipulation constraints.",
+      "llm_tldr_cn": "一种将语言指令转化为功能性灵巧操作约束的零样本框架。",
+      "llm_tldr": "一种将语言指令转化为功能性灵巧操作约束的零样本框架。",
+      "llm_tags": [
+        "query:rob-rot"
+      ],
+      "matched_query_tag": "query:rob-rot",
+      "matched_query_text": "dexterous robotic manipulation for rotating objects",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "8plus"
+    },
+    {
+      "id": "2604.03540v1",
+      "source": "arxiv",
+      "title": "Drift-Based Policy Optimization: Native One-Step Policy Learning for Online Robot Control",
+      "abstract": "Although multi-step generative policies achieve strong performance in robotic manipulation by modeling multimodal action distributions, they require multi-step iterative denoising at inference time. Each action therefore needs tens to hundreds of network function evaluations (NFEs), making them costly for high-frequency closed-loop control and online reinforcement learning (RL). To address this limitation, we propose a two-stage framework for native one-step generative policies that shifts refinement from inference to training. First, we introduce the Drift-Based Policy (DBP), which leverages fixed-point drifting objectives to internalize iterative refinement into the model parameters, yielding a one-step generative backbone by design while preserving multimodal action modeling capacity. Second, we develop Drift-Based Policy Optimization (DBPO), an online RL framework that equips the pretrained backbone with a compatible stochastic interface, enabling stable on-policy updates without sacrificing the one-step deployment property. Extensive experiments demonstrate the effectiveness of the proposed framework across offline imitation learning, online fine-tuning, and real-world control scenarios. DBP matches or exceeds the performance of multi-step diffusion policies while achieving up to $100\\times$ faster inference. It also consistently outperforms existing one-step baselines on challenging manipulation benchmarks. Moreover, DBPO enables effective and stable policy improvement in online settings. Experiments on a real-world dual-arm robot demonstrate reliable high-frequency control at 105.2 Hz.",
+      "authors": [
+        "Yuxuan Gao",
+        "Yedong Shen",
+        "Shiqi Zhang",
+        "Wenhao Yu",
+        "Yifan Duan",
+        "Jia pan",
+        "Jiajia Wu",
+        "Jiajun Deng",
+        "Yanyong Zhang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-04-04T01:32:01+00:00",
+      "link": "https://arxiv.org/pdf/2604.03540v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "one-step policy learning for robot control",
+      "llm_evidence_cn": "机器人控制的一步策略学习",
+      "llm_evidence": "机器人控制的一步策略学习",
+      "canonical_evidence": "机器人控制的一步策略学习",
+      "llm_tldr_en": "A framework for native one-step generative policies to enable high-frequency closed-loop robot control.",
+      "llm_tldr_cn": "一种原生一步生成策略框架，旨在实现高频闭环机器人控制。",
+      "llm_tldr": "一种原生一步生成策略框架，旨在实现高频闭环机器人控制。",
+      "llm_tags": [
+        "query:1:composite"
+      ],
+      "matched_query_tag": "query:1:composite",
+      "matched_query_text": "Papers central to 寻找关于世界动作模型（World Action Model）及相关领域（如模型预测、强化学习）的学术论文。, especially work that connects or combines: r; V; World models in reinforcement learning and robotics; Action-conditioned world models for decision making; Learning latent dynamics for world modeling; Model-based reinforcement learning with world models; Recent advances in world action models for autonomous agents; Action conditioned generative world models for robotics.",
+      "matched_requirement_id": "req-composite-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2604.03037v1",
+      "source": "arxiv",
+      "title": "ARM: Advantage Reward Modeling for Long-Horizon Manipulation",
+      "abstract": "Long-horizon robotic manipulation remains challenging for reinforcement learning (RL) because sparse rewards provide limited guidance for credit assignment. Practical policy improvement thus relies on richer intermediate supervision, such as dense progress rewards, which are costly to obtain and ill-suited to non-monotonic behaviors such as backtracking and recovery. To address this, we propose Advantage Reward Modeling (ARM), a framework that shifts from hard-to-quantify absolute progress to estimating relative advantage. We introduce a cost-effective tri-state labeling strategy -- Progressive, Regressive, and Stagnant -- that reduces human cognitive overhead while ensuring high cross-annotator consistency. By training on these intuitive signals, ARM enables automated progress annotation for both complete demonstrations and fragmented DAgger-style data. Integrating ARM into an offline RL pipeline allows for adaptive action-reward reweighting, effectively filtering suboptimal samples. Our approach achieves a 99.4% success rate on a challenging long-horizon towel-folding task, demonstrating improved stability and data efficiency over current VLA baselines with near-zero human intervention during policy training.",
+      "authors": [
+        "Yiming Mao",
+        "Zixi Yu",
+        "Weixin Mao",
+        "Yinhao Li",
+        "Qirui Hu",
+        "Zihan Lan",
+        "Minzhao Zhu",
+        "Hua Chen"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO",
+        "cs.AI",
+        "cs.CV"
+      ],
+      "published": "2026-04-03T13:45:59+00:00",
+      "link": "https://arxiv.org/pdf/2604.03037v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 6.0,
+      "llm_evidence_en": "long-horizon manipulation and advantage reward modeling",
+      "llm_evidence_cn": "长程操作与优势奖励建模",
+      "llm_evidence": "长程操作与优势奖励建模",
+      "canonical_evidence": "长程操作与优势奖励建模",
+      "llm_tldr_en": "Proposes Advantage Reward Modeling to provide better guidance for long-horizon robotic manipulation tasks.",
+      "llm_tldr_cn": "提出优势奖励建模框架，通过三态标签策略解决长程机器人操作中的稀疏奖励问题。",
+      "llm_tldr": "提出优势奖励建模框架，通过三态标签策略解决长程机器人操作中的稀疏奖励问题。",
+      "llm_tags": [
+        "query:rob-rot:composite"
+      ],
+      "matched_query_tag": "query:rob-rot:composite",
+      "matched_query_text": "Papers central to 机械臂学习旋转操作策略（如拧瓶盖）的论文检索, especially work that connects or combines: robotic arm manipulation strategies for rotational tasks; learning rotational manipulation tasks in robotics; robotic learning for unscrewing and screwing bottle caps; dexterous robotic manipulation for rotating objects; learning manipulation policies for twisting motions; robotic arm learning to unscrew bottle caps and rotate objects; learning twisting and screwing motions in robotics.",
+      "matched_requirement_id": "req-composite-rob-rot",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "6"
+    },
+    {
+      "id": "2604.03540v2",
+      "source": "arxiv",
+      "title": "Drift-Based Policy Optimization: Native One-Step Policy Learning for Online Robot Control",
+      "abstract": "Although multi-step generative policies achieve strong performance in robotic manipulation by modeling multimodal action distributions, they require multi-step iterative denoising at inference time. Each action therefore needs tens to hundreds of network function evaluations (NFEs), making them costly for high-frequency closed-loop control and online reinforcement learning (RL). To address this limitation, we propose a two-stage framework for native one-step generative policies that shifts refinement from inference to training. First, we introduce the Drift-Based Policy (DBP), which leverages fixed-point drifting objectives to internalize iterative refinement into the model parameters, yielding a one-step generative backbone by design while preserving multimodal action modeling capacity. Second, we develop Drift-Based Policy Optimization (DBPO), an online RL framework that equips the pretrained backbone with a compatible stochastic interface, enabling stable on-policy updates without sacrificing the one-step deployment property. Extensive experiments demonstrate the effectiveness of the proposed framework across offline imitation learning, online fine-tuning, and real-world control scenarios. DBP matches or exceeds the performance of multi-step diffusion policies while achieving up to $100\\times$ faster inference. It also consistently outperforms existing one-step baselines on challenging manipulation benchmarks. Moreover, DBPO enables effective and stable policy improvement in online settings. Experiments on a real-world dual-arm robot demonstrate reliable high-frequency control at 105.2 Hz.",
+      "authors": [
+        "Yuxuan Gao",
+        "Yedong Shen",
+        "Shiqi Zhang",
+        "Wenhao Yu",
+        "Yifan Duan",
+        "Jia pan",
+        "Jiajia Wu",
+        "Jiajun Deng",
+        "Yanyong Zhang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-04-04T01:32:01+00:00",
+      "link": "https://arxiv.org/pdf/2604.03540v2",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "generative policies for online robot control and RL",
+      "llm_evidence_cn": "用于在线机器人控制和强化学习的生成式策略",
+      "llm_evidence": "用于在线机器人控制和强化学习的生成式策略",
+      "canonical_evidence": "用于在线机器人控制和强化学习的生成式策略",
+      "llm_tldr_en": "Introduces a one-step generative policy framework to speed up inference in model-based robotic manipulation.",
+      "llm_tldr_cn": "引入单步生成式策略框架，旨在加速基于模型的机器人操作中的推理过程。",
+      "llm_tldr": "引入单步生成式策略框架，旨在加速基于模型的机器人操作中的推理过程。",
+      "llm_tags": [
+        "query:1:composite"
+      ],
+      "matched_query_tag": "query:1:composite",
+      "matched_query_text": "Papers central to 寻找关于世界动作模型（World Action Model）及相关领域（如模型预测、强化学习）的学术论文。, especially work that connects or combines: r; V; World models in reinforcement learning and robotics; Action-conditioned world models for decision making; Learning latent dynamics for world modeling; Model-based reinforcement learning with world models; Recent advances in world action models for autonomous agents; Action conditioned generative world models for robotics.",
+      "matched_requirement_id": "req-composite-1",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    },
+    {
+      "id": "2604.03613v1",
+      "source": "arxiv",
+      "title": "Human-Robot Copilot for Data-Efficient Imitation Learning",
+      "abstract": "Collecting human demonstrations via teleoperation is a common approach for teaching robots task-specific skills. However, when only a limited number of demonstrations are available, policies are prone to entering out-of-distribution (OOD) states due to compounding errors or environmental stochasticity. Existing interactive imitation learning or human-in-the-loop methods try to address this issue by following the Human-Gated DAgger (HG-DAgger) paradigm, an approach that augments demonstrations through selective human intervention during policy execution. Nevertheless, these approaches struggle to balance dexterity and generality: they either provide fine-grained corrections but are limited to specific kinematic structures, or achieve generality at the cost of precise control. To overcome this limitation, we propose the Human-Robot Copilot framework that can leverage a scaling factor for dexterous teleoperation while maintaining compatibility with a wide range of industrial and research manipulators. Experimental results demonstrate that our framework achieves higher performance with the same number of demonstration trajectories. Moreover, since corrective interventions are required only intermittently, the overall data collection process is more efficient and less time-consuming.",
+      "authors": [
+        "Rui Yan",
+        "Zaitian Gongye",
+        "Lars Paulsen",
+        "Xuxin Cheng",
+        "Xiaolong Wang"
+      ],
+      "primary_category": "cs.RO",
+      "categories": [
+        "cs.RO"
+      ],
+      "published": "2026-04-04T07:00:32+00:00",
+      "link": "https://arxiv.org/pdf/2604.03613v1",
+      "tags": [
+        "keyword:ROB ROT",
+        "query:ROB ROT"
+      ],
+      "llm_score": 7.0,
+      "llm_evidence_en": "dexterity and human-in-the-loop imitation learning",
+      "llm_evidence_cn": "灵巧性与人机协作模仿学习",
+      "llm_evidence": "灵巧性与人机协作模仿学习",
+      "canonical_evidence": "灵巧性与人机协作模仿学习",
+      "llm_tldr_en": "Proposes a human-robot copilot system to balance dexterity and generality in imitation learning for robotics.",
+      "llm_tldr_cn": "提出一种人机协作系统，旨在平衡机器人模仿学习中的灵巧性与通用性。",
+      "llm_tldr": "提出一种人机协作系统，旨在平衡机器人模仿学习中的灵巧性与通用性。",
+      "llm_tags": [
+        "query:rob-rot"
+      ],
+      "matched_query_tag": "query:rob-rot",
+      "matched_query_text": "dexterous robotic manipulation for rotating objects",
+      "matched_requirement_id": "req-4",
+      "selection_source": "fresh_fetch",
+      "quick_tier": "7"
+    }
+  ]
+}

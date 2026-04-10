@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.03613v1/fig-001.webp",
+      "caption": "Fig. 4: Training and data augmentation workflow. The base policy is first initialized through regular imitation learning. It is then deployed to identify potential failure modes. During deployment, a human teleoperator intervenes when necessary, providing corrective actions. These corrective demonstrations are recorded and incorporated into the original dataset, which is subsequently used to fine-tune the policy.",
+      "page": 4,
+      "index": 1,
+      "width": 475,
+      "height": 270
+    },
+    {
+      "url": "assets/figures/arxiv/2604.03613v1/fig-002.webp",
+      "caption": "Fig. 3: Illustration of task workspaces under different scaling factors. The black cube represents the workspace of the leader arm, while the two blue cubes correspond to task workspaces under different scaling factors. A larger task workspace facilitates rapid large-scale movements, whereas a smaller task workspace supports precise and accurate actions for high-precision tasks.",
+      "page": 4,
+      "index": 2,
+      "width": 508,
+      "height": 287
+    },
+    {
+      "url": "assets/figures/arxiv/2604.03613v1/fig-003.webp",
+      "caption": "Fig. 5: The real-world experiments and their key challenges. Fig. A illustrates the tower of hanoi insertion task. In addition to the narrow tolerance required for insertion, grasping the disk itself is challenging. From the top view (top-right), the gripper must align precisely with the disk’s center; otherwise, the disk slips out. From the side view (bottom-right), the gripper must also engage below the midpoint of the disk’s curved edge. Fig. B presents the cube sorting task, where cubes of different colors must be placed into their corresponding containers. The six objects are randomly distributed within a 45 cm × 35 cm workspace, creating a highly randomized environment that significantly increases the difficulty of learning correct actions.",
+      "page": 6,
+      "index": 3,
+      "width": 1052,
+      "height": 285
+    },
+    {
+      "url": "assets/figures/arxiv/2604.03613v1/fig-004.webp",
+      "caption": "TABLE I: Simulation results. Each task is divided into two stages during evaluation. Each task is evaluated over 50 rollouts. We report success rate (%) for each stage and overall performance.",
+      "page": 6,
+      "index": 4,
+      "width": 810,
+      "height": 186
+    },
+    {
+      "url": "assets/figures/arxiv/2604.03613v1/fig-005.webp",
+      "caption": "TABLE II: Real-world results with additional teleoperation baselines (Keyboard and VR). Each task is evaluated over 50 rollouts. We report success rate (%) for each stage and overall.",
+      "page": 6,
+      "index": 5,
+      "width": 1040,
+      "height": 186
+    },
+    {
+      "url": "assets/figures/arxiv/2604.03613v1/fig-006.webp",
+      "caption": "Fig. 6: End-effector trajectories under different scaling factors (α = 2.0 vs α = 0.5) during Tower of Hanoi insertion. Top: lateral position over time showing the full transport-toalignment trajectory. Bottom: lateral and forward deviations from the target position during the alignment phase (starting from the first velocity zero-crossing). The alignment-phase RMS deviations are reported below.",
+      "page": 7,
+      "index": 6,
+      "width": 477,
+      "height": 414
+    }
+  ]
+}

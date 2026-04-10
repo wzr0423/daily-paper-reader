@@ -1,0 +1,46 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.06133v1/fig-001.webp",
+      "caption": "Fig. 1: Torque-controlled Franka Emika Panda robot executing the deburring task in scenario 3 (see sec. V-D). The robot inserts a custom end-effector into different holes of the workpiece and applies a constant normal force while performing circular motions, all while adapting to varying joint configurations and avoiding collisions with the environment.",
+      "page": 1,
+      "index": 1,
+      "width": 413,
+      "height": 412
+    },
+    {
+      "url": "assets/figures/arxiv/2604.06133v1/fig-002.webp",
+      "caption": "Fig. 7: Positions of the 5 holes to be deburred on the investigated workpiece and reaching postures for each hole.",
+      "page": 6,
+      "index": 2,
+      "width": 802,
+      "height": 375
+    },
+    {
+      "url": "assets/figures/arxiv/2604.06133v1/fig-003.webp",
+      "caption": "Fig. 4: Representative sequence of a circular deburring motion performed onto the object. (Scenario 2, Sec. V-D)",
+      "page": 5,
+      "index": 3,
+      "width": 487,
+      "height": 287
+    },
+    {
+      "url": "assets/figures/arxiv/2604.06133v1/fig-004.webp",
+      "caption": "Fig. 5: Scenario 1 (Sec. V-C): Force-colored end-effector x-y trajectories for a single hole; color encodes normal normal force magnitude. (a) 1D contact, no obstacle avoidance; (b) 1D contact with an obstacle in front of the robot; (c) 3D contact, no collision avoidance; (d) 3D contact with collision avoidance. The obstacle shape is clearly visible in the successful example c, and prevents the robot to achieve the complete circle.",
+      "page": 5,
+      "index": 4,
+      "width": 498,
+      "height": 419
+    },
+    {
+      "url": "assets/figures/arxiv/2604.06133v1/fig-005.webp",
+      "caption": "Fig. 6: Scenario 1 (Sec. V-C): Tracking of normal and tangential forces during deburring motion on a flat table with collision avoidance with 1D (top) and 3D contact (bottom) models. In this case when 1D contact model approaches collision, lateral forces exceed force friction cone (µ = 0.6) and break the contact while 3D contact maintains stable movement.",
+      "page": 5,
+      "index": 5,
+      "width": 445,
+      "height": 444
+    }
+  ]
+}
