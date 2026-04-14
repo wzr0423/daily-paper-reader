@@ -6,67 +6,73 @@
 </div>
 
 ## 每次日报
-- 最新运行日期：2026-04-13
-- 运行时间：2026-04-13 20:05:25 UTC
+- 最新运行日期：2026-04-14
+- 运行时间：2026-04-14 20:04:56 UTC
 - 运行状态：成功
-- 本次总论文数：15
-- 精读区：4
+- 本次总论文数：17
+- 精读区：6
 - 速读区：11
 
 ### 今日简报（AI）
-今日聚焦视频生成模型赋能机器人操控，深度解析 Veo-Act 与 ViVa 等 15 篇最新成果。
-重点展示了视频大模型在提升机器人泛化性与强化学习价值评估方面的巨大潜力。
-推荐优先研读精读论文，掌握大模型驱动具身智能进化的前沿范式。
-- 详情：[/202604/13/README](/202604/13/README)
+今日聚焦视频大模型与灵巧手进化，深度解析 17 篇论文中机器人泛化操作的最新突破。
+重点关注 Veo-Act 如何利用前沿视频模型提升操控泛化性，以及 ViserDex 在灵巧手实机重定向上的卓越表现。
+推荐深入探索生成式演示与触觉反馈技术，以应对高接触、复杂任务的闭环数据采集挑战。
+- 详情：[/202604/14/README](/202604/14/README)
 
 ### 精读区论文标签
-1. [Veo-Act: How Far Can Frontier Video Models Advance Generalizable Robot Manipulation?](/202604/13/2604.04502v1-veo-act-how-far-can-frontier-video-models-advance-generalizable-robot-manipulation)  
+1. [Veo-Act: How Far Can Frontier Video Models Advance Generalizable Robot Manipulation?](/202604/14/2604.04502v1-veo-act-how-far-can-frontier-video-models-advance-generalizable-robot-manipulation)  
    标签：评分：9.0/10、query:1
-   evidence：用于机器人操作和逆动力学的视频生成模型
-2. [ViVa: A Video-Generative Value Model for Robot Reinforcement Learning](/202604/13/2604.08168v1-viva-a-video-generative-value-model-for-robot-reinforcement-learning)  
+   evidence：用于通用机器人操作和物理动力学的视频生成模型
+2. [ViserDex: Visual Sim-to-Real for Robust Dexterous In-hand Reorientation](/202604/14/2604.11138v1-viserdex-visual-sim-to-real-for-robust-dexterous-in-hand-reorientation)  
+   标签：评分：9.0/10、query:rob-rot
+   evidence：利用视觉虚实迁移和3D高斯泼溅实现鲁棒的手内灵巧重定向操作
+3. [WM-DAgger: Enabling Efficient Data Aggregation for Imitation Learning with World Models](/202604/14/2604.11351v1-wm-dagger-enabling-efficient-data-aggregation-for-imitation-learning-with-world-models)  
    标签：评分：9.0/10、query:1
-   evidence：用于强化学习时间动力学的视频生成价值模型
-3. [Learning-Guided Force-Feedback Model Predictive Control with Obstacle Avoidance for Robotic Deburring](/202604/13/2604.06133v1-learning-guided-force-feedback-model-predictive-control-with-obstacle-avoidance-for-robotic-deburring)  
+   evidence：利用世界模型合成机器人操作数据
+4. [GraspSense: Physically Grounded Grasp and Grip Planning for a Dexterous Robotic Hand via Language-Guided Perception and Force Maps](/202604/14/2604.05697v1-graspsense-physically-grounded-grasp-and-grip-planning-for-a-dexterous-robotic-hand-via-language-guided-perception-and-force-maps)  
    标签：评分：8.0/10、query:rob-rot
-   evidence：针对接触密集型任务的圆周运动和力调节
-4. [A Benchmark of Dexterity for Anthropomorphic Robotic Hands](/202604/13/2604.09294v1-a-benchmark-of-dexterity-for-anthropomorphic-robotic-hands)  
-   标签：评分：8.0/10、query:emb-bm
-   evidence：拟人机器人手的灵巧性基准测试
+   evidence：灵巧机器人手的接触策略与力调节
+5. [BLaDA: Bridging Language to Functional Dexterous Actions within 3DGS Fields](/202604/14/2604.08410v1-blada-bridging-language-to-functional-dexterous-actions-within-3dgs-fields)  
+   标签：评分：8.0/10、query:rob-rot
+   evidence：3DGS场内的功能性灵巧动作与操作
+6. [A Benchmark of Dexterity for Anthropomorphic Robotic Hands](/202604/14/2604.09294v1-a-benchmark-of-dexterity-for-anthropomorphic-robotic-hands)  
+   标签：评分：8.0/10、query:rob-rot
+   evidence：针对仿人机器人手的全面灵巧性基准测试，包含多种操作动作
 
 ### 速读区论文标签
-1. [Learning Dexterous Grasping from Sparse Taxonomy Guidance](/202604/13/2604.04138v1-learning-dexterous-grasping-from-sparse-taxonomy-guidance)  
+1. [Flow Motion Policy: Manipulator Motion Planning with Flow Matching Models](/202604/14/2604.07084v1-flow-motion-policy-manipulator-motion-planning-with-flow-matching-models)  
    标签：评分：7.0/10、query:rob-rot
-   evidence：用于完成任务的多指协同灵巧控制
-2. [FlashSAC: Fast and Stable Off-Policy Reinforcement Learning for High-Dimensional Robot Control](/202604/13/2604.04539v1-flashsac-fast-and-stable-off-policy-reinforcement-learning-for-high-dimensional-robot-control)  
+   evidence：使用流匹配的机械臂神经运动规划
+2. [TAMEn: Tactile-Aware Manipulation Engine for Closed-Loop Data Collection in Contact-Rich Tasks](/202604/14/2604.07335v1-tamen-tactile-aware-manipulation-engine-for-closed-loop-data-collection-in-contact-rich-tasks)  
+   标签：评分：7.0/10、query:rob-rot
+   evidence：接触密集型操作任务的触觉感知数据采集
+3. [Grasp as You Dream: Imitating Functional Grasping from Generated Human Demonstrations](/202604/14/2604.07517v1-grasp-as-you-dream-imitating-functional-grasping-from-generated-human-demonstrations)  
+   标签：评分：7.0/10、query:rob-rot
+   evidence：利用视频生成模型从人类演示中模仿功能性抓取
+4. [HEX: Humanoid-Aligned Experts for Cross-Embodiment Whole-Body Manipulation](/202604/14/2604.07993v1-hex-humanoid-aligned-experts-for-cross-embodiment-whole-body-manipulation)  
    标签：评分：7.0/10、query:1
-   evidence：高维控制的离策强化学习
-3. [GraspSense: Physically Grounded Grasp and Grip Planning for a Dexterous Robotic Hand via Language-Guided Perception and Force Maps](/202604/13/2604.05697v1-graspsense-physically-grounded-grasp-and-grip-planning-for-a-dexterous-robotic-hand-via-language-guided-perception-and-force-maps)  
+   evidence：预测全身操作的时间运动动力学
+5. [ActiveGlasses: Learning Manipulation with Active Vision from Ego-centric Human Demonstration](/202604/14/2604.08534v1-activeglasses-learning-manipulation-with-active-vision-from-ego-centric-human-demonstration)  
    标签：评分：7.0/10、query:rob-rot
-   evidence：灵巧机械手的物理接地接触策略
-4. [BiCoord: A Bimanual Manipulation Benchmark towards Long-Horizon Spatial-Temporal Coordination](/202604/13/2604.05831v1-bicoord-a-bimanual-manipulation-benchmark-towards-long-horizon-spatial-temporal-coordination)  
-   标签：评分：7.0/10、query:emb-bm
-   evidence：用于时空协调的双臂操作基准测试
-5. [BiDexGrasp: Coordinated Bimanual Dexterous Grasps across Object Geometries and Sizes](/202604/13/2604.06589v1-bidexgrasp-coordinated-bimanual-dexterous-grasps-across-object-geometries-and-sizes)  
+   evidence：通过主动视觉从第一人称人类演示中学习机器人操作
+6. [MoRI: Mixture of RL and IL Experts for Long-Horizon Manipulation Tasks](/202604/14/2604.10165v1-mori-mixture-of-rl-and-il-experts-for-long-horizon-manipulation-tasks)  
    标签：评分：7.0/10、query:rob-rot
-   evidence：跨越物体几何形状的双灵巧手抓取
-6. [Learning-Based Strategy for Composite Robot Assembly Skill Adaptation](/202604/13/2604.06949v1-learning-based-strategy-for-composite-robot-assembly-skill-adaptation)  
-   标签：评分：7.0/10、query:rob-rot
-   evidence：接触密集型装配技能和残差强化学习
-7. [VA-FastNavi-MARL: Real-Time Robot Control with Multimedia-Driven Meta-Reinforcement Learning](/202604/13/2604.03998v1-va-fastnavi-marl-real-time-robot-control-with-multimedia-driven-meta-reinforcement-learning)  
+   evidence：通过在强化学习和模仿学习专家之间切换来处理细粒度操作
+7. [FlashSAC: Fast and Stable Off-Policy Reinforcement Learning for High-Dimensional Robot Control](/202604/14/2604.04539v1-flashsac-fast-and-stable-off-policy-reinforcement-learning-for-high-dimensional-robot-control)  
    标签：评分：6.0/10、query:1
-   evidence：多媒体驱动的机器人控制元强化学习
-8. [Dynamic Whole-Body Dancing with Humanoid Robots -- A Model-Based Control Approach](/202604/13/2604.03999v1-dynamic-whole-body-dancing-with-humanoid-robots----a-model-based-control-approach)  
-   标签：评分：6.0/10、query:1
-   evidence：基于模型的控制和动态运动的未来状态预测
-9. [Primitive-based Truncated Diffusion for Efficient Trajectory Generation of Differential Drive Mobile Manipulators](/202604/13/2604.04166v1-primitive-based-truncated-diffusion-for-efficient-trajectory-generation-of-differential-drive-mobile-manipulators)  
+   evidence：用于高维机器人控制的离线强化学习
+8. [Referring-Aware Visuomotor Policy Learning for Closed-Loop Manipulation](/202604/14/2604.05544v1-referring-aware-visuomotor-policy-learning-for-closed-loop-manipulation)  
    标签：评分：6.0/10、query:rob-rot
-   evidence：移动机械臂的轨迹生成
-10. [Learning from Imperfect Demonstrations via Temporal Behavior Tree-Guided Trajectory Repair](/202604/13/2604.04225v1-learning-from-imperfect-demonstrations-via-temporal-behavior-tree-guided-trajectory-repair)  
+   evidence：用于闭环操作和轨迹引导的视觉运动策略学习
+9. [HiPolicy: Hierarchical Multi-Frequency Action Chunking for Policy Learning](/202604/14/2604.06067v1-hipolicy-hierarchical-multi-frequency-action-chunking-for-policy-learning)  
    标签：评分：6.0/10、query:rob-rot
-   evidence：修复次优轨迹以用于下游策略学习
-11. [You're Pushing My Buttons: Instrumented Learning of Gentle Button Presses](/202604/13/2604.05954v1-youre-pushing-my-buttons-instrumented-learning-of-gentle-button-presses)  
+   evidence：用于机器人操作中细粒度反应性动作的分层动作分块框架
+10. [Learning-Based Strategy for Composite Robot Assembly Skill Adaptation](/202604/14/2604.06949v1-learning-based-strategy-for-composite-robot-assembly-skill-adaptation)  
    标签：评分：6.0/10、query:rob-rot
-   evidence：利用视听感知学习接触密集型操作
+   evidence：使用残差强化学习进行接触密集型装配技能自适应
+11. [A Unified Multi-Layer Framework for Skill Acquisition from Imperfect Human Demonstrations](/202604/14/2604.08341v1-a-unified-multi-layer-framework-for-skill-acquisition-from-imperfect-human-demonstrations)  
+   标签：评分：6.0/10、query:rob-rot
+   evidence：从人类演示中学习轨迹和可变阻抗以获取操作技能
 
 
 <div class="dpr-home-promo-card">
