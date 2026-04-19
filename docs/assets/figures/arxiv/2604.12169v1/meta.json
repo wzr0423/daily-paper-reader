@@ -1,0 +1,78 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.12169v1/fig-001.webp",
+      "caption": "Fig. 4 Observable differences in gold nanoparticle concentration when the robot was instructed to perform simple lab tasks, such as stirring.",
+      "page": 6,
+      "index": 1,
+      "width": 452,
+      "height": 297
+    },
+    {
+      "url": "assets/figures/arxiv/2604.12169v1/fig-002.webp",
+      "caption": "Fig. 6 Comparison of as-synthesized gold nanoparticles, with and without stirring.",
+      "page": 6,
+      "index": 2,
+      "width": 450,
+      "height": 306
+    },
+    {
+      "url": "assets/figures/arxiv/2604.12169v1/fig-003.webp",
+      "caption": "Fig. 1 Robot performing constrained manipulation tasks as part of Magnetite Nano-Particle synthesis experiment.",
+      "page": 2,
+      "index": 3,
+      "width": 1032,
+      "height": 296
+    },
+    {
+      "url": "assets/figures/arxiv/2604.12169v1/fig-004.webp",
+      "caption": "Fig. 8 Characterization of magnetite nanoparticles synthesized by the robot.",
+      "page": 7,
+      "index": 4,
+      "width": 502,
+      "height": 288
+    },
+    {
+      "url": "assets/figures/arxiv/2604.12169v1/fig-005.webp",
+      "caption": "Fig. 7 Automated Magnetite Nanoparticle Synthesis using Robots: Sequence of tasks involved in the synthesis of Magnetite Nanoparticles.",
+      "page": 7,
+      "index": 5,
+      "width": 1032,
+      "height": 433
+    },
+    {
+      "url": "assets/figures/arxiv/2604.12169v1/fig-006.webp",
+      "caption": "Fig. 9 XRD pattern of magnetite nanoparticles synthesized by the robot. Major peaks associated with magnetite are labeled.",
+      "page": 8,
+      "index": 6,
+      "width": 487,
+      "height": 384
+    },
+    {
+      "url": "assets/figures/arxiv/2604.12169v1/fig-007.webp",
+      "caption": "Fig. 10 Magnetite titration curve and corresponding first derivative.",
+      "page": 8,
+      "index": 7,
+      "width": 465,
+      "height": 332
+    },
+    {
+      "url": "assets/figures/arxiv/2604.12169v1/fig-008.webp",
+      "caption": "Fig. 2 User provided kinesthetic demonstrations for the manipulation tasks involved in the nanoparticle synthesis.",
+      "page": 4,
+      "index": 8,
+      "width": 1013,
+      "height": 462
+    },
+    {
+      "url": "assets/figures/arxiv/2604.12169v1/fig-009.webp",
+      "caption": "Fig. 3 Automated Gold Nanoparticle Synthesis using Robots: Sequence of tasks involved in the synthesis of Gold Nanoparticles.",
+      "page": 5,
+      "index": 9,
+      "width": 1032,
+      "height": 683
+    }
+  ]
+}

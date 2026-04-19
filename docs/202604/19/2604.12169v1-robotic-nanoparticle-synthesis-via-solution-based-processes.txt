@@ -1,0 +1,429 @@
+Title: Robotic Nanoparticle Synthesis via Solution-based Processes
+
+URL Source: https://arxiv.org/pdf/2604.12169v1
+
+Published Time: Wed, 15 Apr 2026 00:32:35 GMT
+
+Number of Pages: 10
+
+Markdown Content:
+# Dasharadhan Mahalingam 1
+
+Department of Mechanical Engineering, Stony Brook University, Stony Brook, NY 11794, USA email: 
+
+> dasharadhan.mahalingam@stonybrook.edu
+
+# Michael Gallagher 
+
+Department of Chemistry, Stony Brook University, Stony Brook, NY 11794, USA email: michael.g.gallagher@stonybrook.edu 
+
+# Nilanjan Chakraborty 
+
+Department of Mechanical Engineering, Stony Brook University, Stony Brook, NY 11794, USA email: nilanjan.chakraborty@stonybrook.edu 
+
+# Stanislaus S. Wong 
+
+Department of Chemistry, Stony Brook University, Stony Brook, NY 11794, USA email: stanislaus.wong@stonybrook.edu 
+
+# Robotic Nanoparticle Synthesis via Solution-based Processes 
+
+We present a screw geometry–based manipulation planning framework for the robotic automation of solution-based synthesis, exemplified through the preparation of gold and magnetite nanoparticles. The synthesis protocols are inherently long-horizon, multi-step tasks, requiring skills such as pick-and-place, pouring, turning a knob, and periodic vi-sual inspection to detect reaction completion. A central challenge is that some skills, notably pouring, transferring containers with solutions, and turning a knob, impose ge-ometric and kinematic constraints on the end-effector motion. To address this, we use a programming by demonstration paradigm where the constraints can be extracted from a single demonstration. This combination of screw-based motion representation and demonstration-driven specification enables domain experts, such as chemists, to readily adapt and reprogram the system for new experimental protocols and laboratory setups without requiring expertise in robotics or motion planning. We extract sequences of con-stant screws from demonstrations, which compactly encode the motion constraints while remaining coordinate-invariant. This representation enables robust generalization across variations in grasp placement and allows parameterized reuse of a skill learned from a single example. By composing these screw-parameterized primitives according to the syn-thesis protocol, the robot autonomously generates motion plans that execute the complete experiment over repeated runs. Our results highlight that screw-theoretic planning, com-bined with programming by demonstration, provides a rigorous and generalizable foun-dation for long-horizon laboratory automation, thereby enabling fundamental kinematics to have a translational impact on the use of robots in developing scalable solution-based synthesis protocols. Keywords: Screw Geometry, Complex Manipulation Tasks, Constrained Motion Planning, Lab Automation. 
+
+1 Introduction 
+
+Automation in chemical laboratories has advanced significantly in recent years, particularly through the use of flow-reaction plat-forms that enable highly repeatable and continuous synthesis [1]. While these systems provide a high degree of automation, they are limited in scope; many protocols in chemistry rely on solution-based processes that require physical manipulation of containers, liquids, and intermediate products. These protocols demand a robot to perform tasks involving constrained manipulation skills such as pouring, scooping, stirring, or carefully placing vessels under specific geometric and kinematic constraints. Despite the critical importance of such tasks, robotic systems that can robustly execute a variety of tasks that require constrained manipulation skills remain underdeveloped. Traditional motion planning approaches have fundamental limi-tations in this context. In joint space–based methods [2–4], the constraints imposed by manipulation tasks (e.g., maintaining a fixed pouring axis) form nonlinear manifolds. These manifolds change with different grasp placements, since the representation is not coordinate-invariant. On the other hand, task space–based methods [5] represent constraints directly in terms of end-effector position and orientation, but the resulting parameterizations are often nonlinear and similarly lack coordinate invariance. These properties make both approaches brittle to changes in grasp or task instance (placement of task-relevant objects), limiting their robust-ness in long-horizon protocols. In this paper, we propose a screw geometry–based manipula-tion planning framework that addresses these shortcomings. Screw representations offer a coordinate-invariant and compact way to encode motion constraints, enabling robust generalization from a single demonstration to new task instances [6]. As shown in [6– 
+
+> 1Corresponding Author. April 15, 2026
+
+9], a multitude of manipulation tasks where the constraints arise from the manipulation of articulated structures (like doors and drawers) or from the nature of the task itself (like pouring and scooping) can be represented as a sequence of constant screws, which capture the essential kinematic structure of the task. The screw representation is coordinate-invariant, which implies that it is robust to choices of the coordinate frame on the object being manipulated or grasp placement variations. By extracting such screw-parameterized primitives from kinesthetic demonstrations, the robot acquires a library of reusable skills that can be flexibly composed to execute multistep laboratory protocols. The param-eterized skills enable the robot to plan motion for a new instance of the same task, allowing the robot to autonomously perform the full sequence of actions required for the synthesis. Given demonstrations of all the required tasks and knowledge of their ordering, along with visual cues to detect state changes and time delays where needed, the framework synthesizes joint space motion plans that the robot executes. We illustrate the approach based on the synthesis of two nano-scale motifs, namely gold and magnetite nanoparticles, generated via two distinct synthetic routes, as canonical examples of solution-based chemical synthesis wherein lessons learned can be reasonably applied to other anal-ogous systems. Specifically, these examples include demonstra-tions of both room-temperature and heated solution-based methods and highlight the ability to control key reaction variables such as reagent concentrations autonomously. Although our experiments focus on this particular process, the framework is general and can be extended to other chemical syntheses by providing the appro-priate demonstrations. Since many laboratory tasks share common primitives (e.g., pouring, pick-and-place), demonstrations can be reused across protocols, enabling the gradual development of a database of parameterized manipulation skills. 
+
+Contributions : The contributions of this paper are two-fold. First, we show that a screw geometry–based planning framework enables 
+
+ASME Letters in Translational Robotics PREPRINT / 1    
+
+> arXiv:2604.12169v1 [cs.RO] 14 Apr 2026 (a) Transfer without spilling (b) Pouring (c) Operating Stir Plate
+> Fig. 1 Robot performing constrained manipulation tasks as part of Magnetite Nano-Particle synthesis experiment.
+
+the execution of long-horizon, multistep protocols in solution-based synthesis, where the composition of multiple constrained manipulation skills must be robustly sequenced to achieve a com-plete experiment. Using gold nanoparticle and magnetite nanopar-ticle synthesis as representative case studies, we are able to show how demonstrations of individual primitives can be parameterized and reused to autonomously generate motion plans for the entire protocol. Second, we highlight the translational potential of this approach: by creating a reusable database of parameterized ma-nipulation primitives, our framework moves toward flexible and reproducible laboratory automation that can extend the capabilities of human chemists, operate continuously, and accelerate discov-ery. While the present work focuses on nanoparticle synthesis, the framework generalizes naturally to other chemical protocols that require constrained manipulation, thereby positioning screw-theoretic planning as a foundation for scalable robotic chemists. 
+
+Organization of the Paper : The paper is organized as follows: In Section 2, we present the related literature on the use of robotics in automating experimental protocols and also a brief review of the state-of-the-art in robotics on constrained manipulation plan-ning. In Section 4, we formalize our problem, and in Section 5, we present our solution approach. The experimental results are pre-sented and discussed in Section 6 and the conclusions and future work are laid out in Section 7. 
+
+2 Related Work 
+
+2.1 Laboratory Automation using Robots. With the recent advances being made in the field of robotics, the use of general purpose robots to automate experiments in chemical laboratories has been gaining traction [10–12]. The use of such robots, while reducing the physical and mental fatigue experienced by chemists performing those reactions, also reduces the risks associated with the handling of harmful chemicals. Moreover, Self Driving Labo-ratories (SDL) consisting of automated systems which are capable of performing experiments and making decisions autonomously help to accelerate discovery of chemicals/materials [13]. Such labs require automated systems that are not too specific to a partic-ular reaction so that they can be used in a wide variety of reactions without much modification of existing laboratory setups. Hence, general purpose robots, which are capable of dexterous manipula-tion, are being used in lab automation to perform complex manipu-lation tasks and operate lab equipment that actual human chemists perform. Researchers in [10] have shown that robots can assist in exper-imental searches when the experimental complexity scales expo-nentially with the number of variables. They conducted a search for photo-catalysts that can be used for hydrogen production from water. [14] demonstrated an automated robotic platform for sol-ubility screening. [15] proposes a standard architecture for inte-grating different robotic platforms and laboratory equipment for automating chemical experiments. [16] proposes a RL based ap-proach to acquire the manipulation skills required for performing scraping. [17] highlights a method incorporating multi-modal per-ception within a behavior tree for verifying successful execution of a task. [18] demonstrated a robotic system capable of perform-ing pipetting using force control. [11] describes a system capable of tasks such as performing pouring in addition to pick-and-place. [12,19] discusses a robotic assistant that utilizes LLMs to translate natural language into long-horizon task plans for execution using a constrained task and motion planner. While previous research has shown the advantages of using robots to automate chemical experiments in laboratories, with re-spect to manipulation, their main focus was on developing systems that were capable of performing a finite set of manipulation tasks. In [10], pick-and-place was the only manipulation task considered, whereas [14] considered capping/uncapping procedures in addition to pick-and-place. Also, specialized controllers that are specific to certain tasks are proposed in [12,15,18]. While [16] describes a learning approach for tasks, it is specific to the scraping task. Cur-rent research does not focus on how a wide variety of manipulation skills with complex constraints can be added to the repertoire of tasks that the robot can perform. By contrast, this work focuses on how people without prior robotics knowledge can teach robots a number of specific manipulation skills that may be necessary to perform a chemical reaction. The robot then uses these manipula-tion skills that were subsequently shown to autonomously run an experiment. 
+
+2.2 Constrained Motion Planning. This work features aframework that uses a single kinesthetic demonstration provided by the user to perform a manipulation task. Manipulation tasks performed in chemical synthesis may have complex constraints on the object motion that need to be satisfied. For example, consider tasks such as pouring liquids from one container into another and, transferring containers filled with liquids without spilling. These constraints may be hard to describe as they may form nonlinear manifolds in the task-space as well as the joint-space. Representing such constraints analytically is non-trivial, and many Learning from Demonstration (LfD) [20] approaches have been proposed to facili-tate their autonomous execution on robots. Motion primitive based approaches [21] based on GMMs [22,23] and HMMs [24–26] re-quire multiple demonstrations. DMP [27] based approaches use a single demonstration but require tuning of the hyper-parameters. Human provided tele-operated demonstrations have been used along with diffusion-based [28] and transformer-based [29] ap-proaches for learning tasks. However, such approaches require significantly more demonstrations [30] and places the burden on the end user to provide multiple demonstrations for every task. Prior work on using the screw geometry-based representation of motion [6,7] has shown that it can be used to successfully extract task constraints from a single kinesthetic demonstration for au-  
+
+> 2 / PREPRINT Transactions of the ASME
+
+tonomous execution. This work highlights that it can be extended to create a database of reusable manipulation primitives, which can then be sequenced together to perform the manipulation tasks involved in an experiment. 
+
+3 Mathematical Preliminaries 
+
+In this section, we provide a brief review of the background knowledge required for this work. The joint space of the robot is the set of all possible joint configurations and is denoted by 
+
+J ⊂ R𝑛 where 𝑛 is the number of degrees of freedom (DoF) of the robot. The set of all rigid body configurations is 𝑆𝐸 (3), the Special Euclidean Group of dimension 3. An element of 𝑆𝐸 (3)
+
+is also referred to as a pose . Thus, the task space T of the robot, i.e., the set of end-effector poses, is a subset of 𝑆𝐸 (3). The joint configuration of the robot, 𝚯 ∈ J , is a vector of length 𝑛 . For every valid joint configuration 𝚯 , the forward kinematics of the manipulator maps it to a unique end-effector pose, G ∈ T . The synthesis of a chemical compound involves a sequence of manip-ulation tasks. For example, consider the following sequence of tasks: pour solution A from a test-tube into a beaker containing solution B, then add salt C into the beaker, and finally stir the solution. The above synthesis process involves three distinctive and different manipulation tasks. Throughout this paper, when we refer to a task, we mean a specific manipulation task involved in the synthesis of a compound. 
+
+3.1 Task Instance. Objects whose poses affect the gener-ation of manipulation plans for performing a task are called 
+
+task-relevant objects . A task instance is defined as the set of all task-relevant object poses, and it is denoted by O =
+
+{O1, O2, . . . , O𝑚 }. For the simple task mentioned earlier in Sec-tion 3, the task instance consists of the poses of the test-tube con-taining solution A, the beaker containing solution B, and the con-tainer containing salt C, O = {O𝐴 , O𝐵 , O𝐶 }.
+
+3.2 Kinesthetic Demonstration. A user can provide a kines-thetic demonstration D by enabling the zero gravity mode and then moving the robot’s end-effector to perform the manipulation task. A particular demonstration D is associated with a task instance 
+
+O. The kinesthetic demonstration is recorded as a sequence of joint angles, i.e., a path in J , which can be mapped to a path in the task space T using the forward kinematics map. Throughout this paper, whenever we mention a demonstration, we refer to the sequence of poses, G = ⟨G1, G2, G3, ... ⟩ in the task space T that the end-effector of the robot goes through, while performing the task along with its associated task instance, D = (G, O).
+
+3.3 Screw Displacement. The Chasles-Mozzi theorem states that the general Euclidean displacement/motion of a rigid body from the origin I to T = (R, 𝒑 ) ∈ 𝑆𝐸 (3) can be expressed as a rotation 𝜃 about a fixed axis S, called the screw axis , and a translation 𝑑 along that axis. Plücker coordinates can be used to represent the screw axis by 𝝎 and 𝒎 , where 𝝎 ∈ R3 is a unit vector that represents the direction of the screw axis, 𝒎 = 𝒓 × 𝝎 ,and 𝒓 ∈ R3 is an arbitrary point on the screw axis. Thus, the screw parameters are defined as 𝝎 , 𝒎 , ℎ, 𝜃 , where ℎ is the pitch of the screw and 𝜃 is its magnitude. In general, for pure rotation and general screw motion, ℎ is finite, while for pure translation, ℎ = ∞.If R ≠ I, then by using the standard procedure to obtain rotation axis and magnitude from the rotation matrix R, we can determine 
+
+𝝎 and 𝜃 . The pitch is given by ℎ = 𝝎 𝑇 𝝊 and m = 𝝊 − ℎ𝝎 where 
+
+𝝊 =[︁ (I − 𝑒 ˆ𝝎 𝜃 ) ˆ𝝎 + 𝜃 𝝎𝝎 𝑇 ]︁ −1 𝒑 . If R = I, then the motion is pure translation where ℎ = ∞ and 𝒎 = 0 by definition. We can obtain 𝜃 
+
+and 𝝎 from 𝜃 = || 𝒑 || and 𝝎 = 𝒑 /|| 𝒑 || . A constant screw motion 
+
+is a motion where the parameters 𝝎 , 𝒎 , and ℎ stay constant throughout the motion .Given the screw parameters 𝝎 , 𝒎 and ℎ, the screw displacement for a motion of magnitude 𝜃 can be obtained using the matrix exponential, T = 𝑒 ˆ︁ 𝝃 𝜃 . Here, ˆ︁ 𝝃 ∈ 𝑠𝑒 (3) and 𝝃 ∈ R6 are the unit twist and unit twist coordinates associated with the motion. They are defined as, ˆ︁ 
+
+𝝃 =[︃ˆ︁ 𝝎 𝒎 + ℎ𝝎 
+
+0 0]︃ , 𝝃 =[︃ 𝒎 + ℎ𝝎 𝝎 ]︃ for ℎ ≠ ∞ (1) ˆ︁ 
+
+𝝃 =[︃ I 𝝎 
+
+0 0]︃ , 𝝃 =[︃ 𝝎 
+
+0]︃ for ℎ = ∞ (2) It is noteworthy that while the matrix exponential maps elements of 
+
+𝑠𝑒 (3) to 𝑆𝐸 (3), the corresponding matrix logarithm maps elements of 𝑆𝐸 (3) to 𝑠𝑒 (3). Please refer to [31,32] for more details. 
+
+𝑒 ˆ︁ 𝝃 𝜃 = T, log T =ˆ︁ 𝝃 𝜃 (3) 
+
+3.4 Screw Linear Interpolation (ScLERP). To perform a one DoF smooth screw motion (with a constant rotation and transla-tion rate) between two poses in 𝑆𝐸 (3), Screw Linear interpolation (ScLERP) can be used. ScLERP generates a geodesic motion be-tween two given poses G𝑖 , G𝑓 ∈ 𝑆𝐸 (3). ScLERP can be performed using, 
+
+G𝜏 = 𝑒 ˆ︁ 𝝃 𝜏 𝜃 G𝑖 (4) where ˆ︁ 𝝃 𝜃 = log (G𝑓 G−1 
+
+> 𝑖
+
+) is the twist that results in the screw dis-placement form G𝑖 to G𝑓 and 𝜏 ∈ [ 0, 1] is the linear interpolation factor. 
+
+4 Problem Formulation 
+
+Consider the action of a robot performing chemical synthesis. The action can be decomposed as a sequence of tasks with the end goal being defined as the successful execution of all the individual tasks in sequence. While successful motion plan generation and execution are a required condition for a task to be successfully performed, there may be additional conditions that need to be sat-isfied, depending upon the nature of the task, and come from the domain knowledge of the user. In this paper, we consider three other conditions: 1) Waiting for “ 𝑡 ” amount of time before/after motion execution, 2) Monitoring for visual color changes of the products of chemical synthesis, and 3) Monitoring the pH values of the solutions. Let us define a mapping 𝑓 (L) : L → D which maps the manipulation task labels to its appropriate demonstration. Here 
+
+L = {pour , stir , pick , place , . . . } is described as the set of ma-nipulation task labels and D = {Dpour , Dstir , Dpick , Dplace , . . . }
+
+is defined as the set of demonstrations for each of the manipula-tion tasks involved in the chemical compound synthesis. Please note that we are overloading the notation D to represent a set of demonstrations and the sub-scripted notation Dx to represent a sin-gle demonstration for the task “ x”. Given the mapping 𝑓 (L) : L → D, along with the sequence of manipulation tasks M = ⟨( pick , O′
+
+> pick
+
+), (pour , O′
+
+> pour
+
+), . . . ⟩,which defines the order in which the manipulation tasks have to be carried out with their corresponding task instance, the problem of chemical compound synthesis can be stated as: Determine the sequence of joint configurations 𝚯 = ⟨𝜽 1, 𝜽 2, . . . ⟩, 𝜽 𝑖 ∈ R𝑛 , that would allow the robot to perform the given sequence of manipula-tion tasks M, while satisfying the task constraints to successfully synthesize the chemical compound under consideration .Here, the sets L, D and the sequence M are user-defined de-pending upon the processes involved in the synthesis of the chemi-cal compound under consideration. The user is required to provide a single kinesthetic demonstration Dx for every manipulation task “x”, that has to be performed for the synthesis. Figure 2 shows the user providing a kinesthetic demonstration for the pouring and operating stir plate tasks that need to be performed in the magnetite nanoparticle synthesis experiment.    
+
+> ASME Letters in Translational Robotics PREPRINT / 3 Pouring Operating Stir Plate
+> Fig. 2 User provided kinesthetic demonstrations for the manipulation tasks involved in the nanoparticle synthesis.
+
+5 Solution Approach 
+
+In this section, we will go over the solution approach we use to automate the synthesis of nanoparticles using robots. 
+
+5.1 User Guided Motion Planning. This work uses a screw-geometry based representation of the motion involved in the ma-nipulation tasks [6]. We represent these task constraints as a se-quence of constant screw segments . The rationale behind the screw segmentation of motion is implied by the Chasles theorem: 
+
+Any curve in 𝑆𝐸 (3), which represents a rigid body motion, can be approximated arbitrarily closely by a sequence of constant screw motions (or one-parameter subgroups of 𝑆𝐸 (3)). This is analogous to approximating a curve in space as a sequence of straight line segments. The screw-geometry based representation of the motion constraints is coordinate invariant (i.e. it does not depend on the choice of global or body reference frame assignment) allowing us to successfully transfer these constraints to a new task instance. We first collect a single kinesthetic demonstration of every ma-nipulation task involved in the synthesis. These demonstrations im-plicitly embed the constraints on the motion of the object that need to be satisfied in order to perform the task successfully. Consider a demonstration of task “ x”, denoted as Dx = (Gx, Ox), given by the user. The sequence of 𝑆𝐸 (3) poses, Gx = ⟨Gx,1, Gx,2, . . . , Gx,𝑚 ⟩,describes the motion that the end-effector of the robot goes through to successfully perform task “ x”. For the robot to successfully ex-ecute the task, given a new task instance O′
+
+> x
+
+, which describes the new pose of the task related object, it should be ensured that the task constraints embedded in the sequence Gx for the task instance 
+
+Ox are extracted and transferred to the new task instance O′
+
+> x
+
+.To determine these task constraints, we segment the demon-strated motion Gx as a sequence of constant screw segments, 
+
+Gx,𝑠𝑒𝑔 = ⟨Gx,1, Gx,𝑘 1 , Gx,𝑘 2 . . . , Gx,𝑘 𝑢 , Gx,𝑚 ⟩, 2 ≤ 𝑘 𝑖 < 𝑚, ∀ 𝑖 =
+
+1, 2, . . . , 𝑢 . The segmented motion Gx,𝑠𝑒𝑔 is a sub-sequence of the demonstrated motion Gx such that each pair of consecutive poses in the segmented motion, (Gx, 𝑗 , Gx, 𝑗 +1), where, 𝑗 = 1, 𝑘 1, 𝑘 2, ..., 𝑘 𝑢 ,defines a constant screw segment with the entire demonstration consisting of 𝑢 + 1 constant screw segments. By following the heuristic, that the essential task constraints are observed in the demonstrated motion within a region surrounding the task relevant objects, we identify the screw segments in the sequence Gx,𝑠𝑒𝑔 
+
+that lie within this region-of-interest surrounding the pose of the task related objects Ox during the demonstration. In this work, we define the region-of-interest to be a sphere of radius 𝑟 meters with its center located at the position of the task related object. If there are a total of 𝑣 task related objects, then we construct the region-of-interest for each of the 𝑣 objects in Ox and identify the screw segments associated with each object 𝑖, 1 ≤ 𝑖 ≤ 𝑣 as, 
+
+⟨Gx,𝑙 𝑖, 1 , Gx,𝑙 𝑖, 2 , . . . , Gx,𝑙 𝑖,𝑢 𝑖 ⟩ where 𝑙 𝑖, 1, 𝑙 𝑖, 2, . . . , 𝑙 𝑖,𝑢 𝑖 represent the indices of the 𝑆𝐸 (3) pose in the sequence Gx,𝑠𝑒𝑔 that lie within the region-of-interest of object 𝑖 . Each object 𝑖 has a total of 𝑢 𝑖 
+
+screw segments associated with it. The screw constraints corre-sponding to O𝑖 will be referred to as the guiding poses associated with object 𝑖 , GP x,𝑖 = ⟨O−1 
+
+> 𝑖
+
+Gx,𝑙 𝑖, 1 , O−1 
+
+> 𝑖
+
+Gx,𝑙 𝑖, 2 , . . . , O−1 
+
+> 𝑖
+
+Gx,𝑙 𝑖,𝑢 𝑖 ⟩.The guiding poses associated with the task x can then be ex-pressed as the sequence of guiding poses associated with all of the 𝑣 objects, GP x = ⟨GP x,1, GP x,2, . . . , GP x,𝑣 ⟩. These guiding poses represent the sequence of constant screw mo-tions that the end-effector of the robot goes through relative to each task- relevant object to successfully perform the task. Given a new task instance, O′ = {O′
+
+> 1
+
+, O′
+
+> 2
+
+, . . . , O′ 
+
+> 𝑣
+
+}, the guid-ing poses associated with each object 𝑖 can be recomputed as, 
+
+GP ′ 
+
+> x,𝑖
+
+= ⟨O′ 
+
+> 𝑖
+
+O−1 
+
+> 𝑖
+
+Gx,𝑙 𝑖, 1 , O′ 
+
+> 𝑖
+
+O−1 
+
+> 𝑖
+
+Gx,𝑙 𝑖, 2 , . . . , O′ 
+
+> 𝑖
+
+O−1 
+
+> 𝑖
+
+Gx,𝑙 𝑖,𝑢 𝑖 ⟩, giving us the guiding poses associated with the new task instance to be 
+
+GP ′ 
+
+> x
+
+= ⟨GP ′
+
+> x,1
+
+, GP ′
+
+> x,2
+
+, . . . , GP ′
+
+> x,𝑣
+
+⟩. The recomputed guiding poses give us the sequence of constant screw motions that the end-effector of the robot needs to go through to successfully perform the task for the new task instance O′.Once the guiding poses associated with the new task instance are computed, we can then plan for the joint space path of the robot to perform the task. We need to ensure that while computing the joint space path, the motion of the robot’s end-effector satisfies the constant screw constraints defined by each pair of consecutive guiding poses. While the consecutive poses in the sequence GP ′
+
+> x,𝑖
+
+define a constant screw constraint associated with object 𝑖 , when going in-between the poses associated with objects 𝑖 and 𝑖 +1 (when going from the last pose in GP ′ 
+
+> x,𝑖
+
+to the first pose in GP ′
+
+> x,𝑖 +1
+
+), we enforce the constant screw constraint as this ensures that for transfer tasks, the orientation of the container is maintained. To determine the joint space path 𝚯 , that ensures the constant screw constraints on the end-effector motion, we use a ScLERP based planner [33] combined with Resolved Motion Rate Control (RMRC) [34]. Using ScLERP ensures that the computed joint space path satisfies the constant screw constraints. 
+
+5.2 Chemical Synthesis using Robots. Using the User Guided Motion Planning approach, given a set of demonstrations    
+
+> 4 / PREPRINT Transactions of the ASME Fig. 3 Automated Gold Nanoparticle Synthesis using Robots: Sequence of tasks involved in the synthesis of Gold Nanoparti-cles.
+
+D = {Dpour , Dstir , Dpick , Dplace , . . . }, we can determine the guiding poses for each of the tasks relative to the task related objects as, {GP pour , GP stir , GP pick , GP place , . . . }. By deter-mining the guiding poses for all the given demonstrations, we can compute the joint space path required to perform any of the task for which we have provided a demonstration if we are given a new task instance. Consider that the synthesis of a chemical compound requires a sequence of the following manipulation tasks in order: {pick , pour , place , stir }. Assuming that the task instances for each of the above tasks, containing the poses of the relevant objects are {O′
+
+> pick
+
+, O′
+
+> pour
+
+, O′
+
+> place
+
+, O′ 
+
+> stir
+
+},we can construct the sequence of manipulation tasks, M =
+
+⟨( pick , O′
+
+> pick
+
+), (pour , O′
+
+> pour
+
+), (place , O′
+
+> place
+
+), (stir , O′
+
+> stir
+
+)⟩ ,and then determine the joint space path required to perform the tasks in sequence while satisfying the task constraints by following the proposed approach. In this manner, if the user collects the demonstration set D consisting of a single demonstration for each of the manipulation task involved and constructs the sequence of manipulation tasks, M for the synthesis of the required chemical compound, we can determine the required motion plan, 𝚯 .
+
+6 Experimental Results 
+
+To evaluate our approach, we conducted real world experiments to synthesize nanoparticles using a robot. We considered the synthesis of 1) Gold (Au) Nanoparticles (NPs) and 2) Magnetite Nanoparticles. 
+
+6.1 Experimental Hardware Setup. Our experimental setup consisted of a 7 DoF Franka Emika Panda robot with the necessary glassware and other chemical equipment (solution dispenser, stir plate, temperature controller, etc.) placed within the workspace of the robot. The robot was equipped with a Realsense D415 RGBD camera in an eye-in-hand configuration. We used the camera to observe visual changes in the chemical reaction, such as color changes. We do not use the camera to perceive the environment and localize task related objects. We assume that the robot knows where the objects and other equipment are located. Since we are operating in a chemical laboratory environment, it is a reasonable assumption that objects are placed in an orderly manner at specific locations around the lab. Apart from the robot performing demon-strated manipulation tasks and moving the end-effector to bring the relevant containers within the field of view of the camera for perception, we have the following automation systems interfaced with the robot: 1) Solenoid valves connected to a reservoir for dispensing precise volumes of solutions, 2) pH probe for measur-ing the solution pH, and 3) Relays to turn on/off the temperature controller for heating solutions. These systems are used in con-junction with the manipulation tasks to synthesize the chemicals. An Arduino UNO R4 WiFi micro-controller connected to a L293D Driver shield was used for controlling the solenoids and relays. The solenoids were gravity fed from a reservoir containing the required solutions for the chemical synthesis. For pH measurements, we used a Vernier brand Go Direct pH Sensor connected via Blue-tooth. As these tasks are not associated with manipulation, we will not go into the details of these systems. For all the conducted experiments, a single kinesthetic demon-stration was provided for each of the manipulation tasks. The user then specified the sequence of tasks that need to be carried out in order for the solution to be synthesized. For more details about the hardware setup and the conducted experiments, please refer to the following video https://youtu.be/gBd9wzv8Cgs .  
+
+> ASME Letters in Translational Robotics PREPRINT / 5
+
+6.2 Gold Nanoparticle Synthesis. The facile synthesis of Au NPs [35] was selected as a preliminary test to evaluate the capa-bility of the system for nanoparticle synthesis. Two reaction con-ditions were run simultaneously by the robot: one without stirring and the other with stirring. The reduction of potassium chloroau-rate ( KAuCl 4) by a polysorbate 80 (T-80), a non-ionic surfactant, can be completed by simple mixing. Stock solutions of 1 weight percent polysorbate 80 in water and 0.4 mM KAuCl 4 were prepared and provided in reservoirs connected to solenoid controlled liquid dispensers. The robot picked up a nearby scintillation vial, moved it to each liquid dispenser, and collected 10 mL of polysorbate 80 and 4 mL of KAuCl 4. The robot subsequently moved the vial onto a nearby stand. To ensure that the sample was not exposed to light for the duration of the experiment, it lifted a provided opaque plas-tic lid and placed it to cover the vial. The robot then collected the same volume of each reagent in a second scintillation vial that had been prepared to include a magnetic stir bar. The robot placed this vial on the stir plate, covered it with a similar opaque plastic lid, and turned the knob on the plate to begin stirring. The solution was stirred at moderate speed for the duration of the experiment. After one hour had passed, the robot lifted each of the plastic lids to re-veal the vials, allowing the camera on the robot to photograph each of the sample vials. The lids were subsequently replaced. Pho-tography was repeated every two hours, following the progression of this process until a total of five hours had elapsed. Following each instance of visual photographic assessment, an aliquot of the sample was collected by a human chemist for characterization via transmission electron microscopy. 1 Hour 3 Hours 5 Hours Stirring Not Stirring   
+
+> Fig. 4 Observable differences in gold nanoparticle concen-tration when the robot was instructed to perform simple lab tasks, such as stirring.
+> Fig. 5 Gold Nanoparticle growth over time.
+
+6.2.1 Experimental Setup. For this experiment, the user pro-vided a single kinesthetic demonstration for each of the following manipulation tasks: 1) Pick up object ( Dpick ), 2) Place object (Dplace ), 3) Move to dispenser ( Dpredispense ), 4) Move away from dispenser ( Dpostdispense ), 5) Turn on stirrer ( Dstirrer ), and 6) 1 Hour 3 Hours 5 Hours Stirring Not Stirring       
+
+> Fig. 6Comparison of as-synthesized gold nanoparticles, with and without stirring.
+
+Move the end effector to view the scintillation vial ( Dview ). For dis-pensing the solution and placing the vial, the following sequence of tasks was used ⟨( pick , Ovpick ), (predispense , OKAuCl 4 ),
+
+(postdispense , OKAuCl 4 ), (predispense , OT−80 ),
+
+(postdispense , OT−80 ), (place , Ovplace )⟩ where Ovpick and 
+
+Ovplace correspond to the pose at which to pick the scintillation vial from and the pose at which to place the scintillation vial after dispensing the solutions respectively. To pick and close the vials with the opaque plastic lid, we used the following sequence of tasks, ⟨( pick , Ocpick ), (place , Ocplacei ), (pick , Ocplacei ),
+
+(place , Ocplace )⟩ . Please note that for picking and placing the cover, we first pick the cover from Ocpick , place the cover at an intermediate pose Ocplacei , and then pick the cover from the intermediate pose with a different grasp to finally place the cover over the scintillation vial. This was done to prevent motion plan failure, as the required motion when using a single grasp caused the manipulator to go outside its workspace. Please refer to the supplementary video for more details. To turn on the stirrer, we perform the manipulation task 
+
+⟨( stirrer , Ostirrer )⟩ where Ostirrer is the pose of the stir plate. To check the progress of the reaction, we need to remove the cover, move the end-effector to view the scintillation vial, and then replace the cover. We use the sequence of manipula-tion tasks ⟨( pick , Ocplace ), (place , Ocplacei ), (pick , Ocplacei ),
+
+(view , Ovplace ), (place , Ocplace )⟩ . We pick the cover from where it was finally placed in the previous step, place it in an intermediate configuration, move the end-effector to bring the scintillation vial within the field of view of the camera, capture an image and then replace the cover on the vial. We repeat this process in a loop until the given time duration has passed with a time delay between each iteration. In our experiment, we checked the reaction progress at 1 hour, 3 hours and 5 hours since the experiment starts. The images captured by the robot are shown in Figure 4. For segmenting the vial in the image, we use SAM [36]. The prompt given by the user as a mouse click on the RGB image captured by the camera was used to segment the vial containing the solution for deter-mining the solution color. Figure 3 shows the sequence of steps that were performed in this experiment. Using the provided se-quence of manipulation tasks, the robot autonomously determined the joint space path that the robot needs to go through to perform the manipulation tasks and execute them in real-time. 
+
+6.2.2 Structural and Chemical Characterization. Three series of gold nanoparticles were completed as part of these demonstra-tions. Each of these runs probed a different parameter controllable by the robot. Initial tests, before stirring was implemented, showed little influence on particle size as a result of varying concentration. By contrast, particle sizes increased with longer reaction times, as one might expect from a reaction that is limited by sample diffu-sion and the low reduction potential of polysorbate 80. Specifically,    
+
+> 6 / PREPRINT Transactions of the ASME Fig. 7 Automated Magnetite Nanoparticle Synthesis using Robots: Sequence of tasks involved in the synthesis of Magnetite Nanoparticles.
+
+longer reaction times enabled the growth of larger particles as in-coming gold ions in solutions were slowly coordinated by polysor-bate 80 onto the surfaces of the growing nanoclusters and were consequently reduced. These findings are confirmed using TEM, as shown in Figure 5. Notably, particles synthesized in this way were similar to those presented in the work being replicated [35]. From these findings, we can conclude that the slow reduction of the Au 3+ ions is mediated entirely by the availability of polysor-bate 80 ions to serve as reducing agents. When trained to operate a stir plate, the robot was able to demonstrate a clear improvement in the rate of reaction. Specifically, an earlier color change was indicative of a faster reduction of Au NPs, as noted in Figure 4. By comparison, while the evolution of larger particles was (not surprisingly) observed first in the stirred sample, these particles did not show any significant changes in size and morphology after five hours, as shown in Figure 6. By being able to replicate the gold nanoparticle synthesis pro-tocol with a robotic setup, we enable the exploration of various variants of the experiments, which is difficult to conduct by hu-mans because of the enormity of the search space. For example, future experiments may involve a number of strategies including the heating of the reaction vessel, careful control of the stirring rate, and/or increasing concentrations of polysorbate 80. 
+
+6.3 Magnetite Nanoparticle Synthesis. Following the suc-cessful reproduction of the Au NP synthesis procedure, to highlight the versatility of our approach, we selected a different protocol to synthesize magnetite nanoparticles, where the robot also has to use the skill of pouring. The reaction followed a facile 1-step protocol [37], in which 100 
+
+mL of 0.45 M FeSO 4 was oxidized to magnetite via the addition of 0.45 M NaOH. Solutions of reagents were prepared by human operators, and then supplied to the robot using the same calibrated liquid dispensers discussed before. Due to the low solubility of 
+
+FeSO 4 in water, the reservoir containing this reagent was left to stir for the duration of the reaction. The robot was subsequently provided with a 250 mL beaker and a 500 mL round-bottom flask mounted in a heating mantle and above a stir plate. A temperature probe and pH probe were inserted into the round bottom flask, prior to experimentation. In sequence, the robot picked up the beaker, navigated to the 
+
+FeSO 4 dispenser, collected 100 mL, and delivered it into the round-bottom flask. Following these steps, the robot powered on the stir plate, and the temperature controller was also turned on. When             
+
+> (a)TEM image of mag-netite nanoparticles, as synthesized by the robot.
+> 20 40 60 80 100 120
+> 0
+> 1
+> 2
+> 3
+> ·10 −2
+> Particle Size (nm)
+> Density
+> (b) Size distribution of isolated, analyzed par-ticles, measured over 50 particles.
+> Fig. 8 Characterization of magnetite nanoparticles synthe-sized by the robot.
+
+45 °C was measured, the robot began adding in NaOH dropwise. After each series of drops were added in, the associated pH values were measured again and recorded. The number of drops added varied as the volume in the reservoir decreased, in order to main-tain the addition of a level of constant volume within the reaction vessels. When a pH of 12 was achieved, the reaction was com-pleted. The temperature controller and stir plate were switched off, and the reaction vessel was allowed to cool before being col-lected for washing and characterization by a human chemist. The resulting product consisted of a black powder. 
+
+6.3.1 Experimental Setup. For this experiment, the user pro-vided a single kinesthetic demonstration for each of the follow-ing manipulation tasks: 1) Turn on stirrer ( Dstirrer ) 2) Pouring solution from container ( Dpour ). We also reused the demonstra-tions Dpick , Dplace , Dpredispense from the previous task. This shows that we can create a reusable database of manipulation primitives that can be used across different experiments. The only reason we had to provide a new demonstration for stirring is because we wanted to use a different speed setting for the stir plate which meant that the control knob had to be rotated to a different angular position compared to the previous experi-ment. The sequence of manipulation tasks involved in this experi-ment are ⟨( pick , Obpick ), (predispense , OFeSO 4 ), (pour , Oflask ),
+
+(place , Obppick )⟩ . The robot picks a beaker, dispenses 100 mL of   
+
+> ASME Letters in Translational Robotics PREPRINT / 7
+
+20 40 60 80 
+
+0
+
+2,000 
+
+4,000 
+
+6,000 
+
+111 
+
+311 
+
+400 
+
+422 
+
+511 
+
+440 
+
+533 
+
+2𝜃  
+
+> Intensity
+> Fig. 9 XRD pattern of magnetite nanoparticles synthesized by the robot. Major peaks associated with magnetite are labeled.
+
+FeSO 4 and then pours it into a round bottom flask. It then places the beaker at the same pose from where it picked it up and then turns the stir plate on. After this sequence of manipulation tasks is completed, the Arduino turns on the heating mantle and then runs the titration process by dispensing 4 mL of NaOH , measuring the pH of the solution and repeating this process until a pH of 12 was achieved. The titration curve of the reaction is shown in Figure 10. Figure 7 shows the sequence of steps that were performed to syn-thesize Magnetite. Similar to the previous experiment, the robot used the provided sequence of manipulation tasks to determine the joint space path to perform the given manipulation tasks and to execute it in real-time. 
+
+6.3.2 Structural and Chemical Characterization. Magnetite particles were imaged by both TEM and X-ray diffraction (XRD) analysis, as highlighted in Figures 8 and 9. TEM analysis of these particles yields a morphology that closely resembles spheres sim-ilar to those presented in the referenced work, with the isolated particles showing the expected size of 42.3 ± 14.2 nm. We fur-ther investigated the crystal structure of the as-synthesized particles by XRD analysis, which produces a series of characteristic peaks resulting from the arrangement of atoms within repeating crystal layers. These layers have predicted lengths that result from the dif-ferent bond lengths between atoms. Consequently, XRD analysis allows for a quantitative assessment of the crystal make-up and a qualitative assessment of the crystallinity and purity of a sample. In this case, XRD analysis gave rise to a pattern similar to that observed in the original work, with a reduced 𝛼 -FeOOH impurity, especially when compared with the previously published studies. This pattern clearly evinced the formation of magnetite. Finally, upon reviewing the pH output readings recorded by the robot during the reaction, as seen in Figure 10, we found a similar pattern analogous to that of the published findings. Notably, two clear inflection points are visible at pH 4.2 and 10.4. These inflec-tion points indicate regions in which the concentration of sodium hydroxide in solution is high enough for a change in the equilib-rium state of the dissolved iron. The first inflection point, which occurs immediately as sodium hydroxide is added to the reaction mixture, is the hydrolysis of iron sulfate to goethite (FeOOH), an iron hydroxide intermediate. As more sodium hydroxide is added, the pH steadily increases until the pH is high enough to form iron (II) hydroxides, which promptly react with the as-formed goethite, resulting in the formation of magnetite ( Fe 2O3) above pH 10.4. Both inflection points were detected at nearly the same pH as in the published work, thereby giving credence to the suitability and accuracy of our system. It is worth noting that the peaks for the 
+
+0 10 20 30 40 50 
+
+4
+
+6
+
+8
+
+10 
+
+12 
+
+Volume of NaOH Added (mL) pH 
+
+0
+
+0.2
+
+0.4
+
+0.6
+
+0.8
+
+> pH 1st Derivative
+
+pH 1st Derivative        
+
+> Fig. 10 Magnetite titration curve and corresponding first derivative.
+
+first derivative are wider than one would typically expect. This observation was the result of our current titrator delivering so-lutions dropwise, rather than as a continuous flow. Modules that deliver a solution continuously are commercially available and may be added to our system in the future, enabling the collection of a higher quality and more precise set of data. 
+
+7 Conclusion 
+
+In this work, we have proposed a screw geometry based ma-nipulation planning framework that allows us to build a library of reusable manipulation skills using kinesthetic demonstrations, which can then be composed to perform multi-step laboratory pro-tocols. The proposed framework can extract the complex mo-tion constraints that are implicit in the provided demonstration and ensure that the generated motion plans can satisfy such con-straints. To show the effectiveness of our framework, we con-ducted solution-based synthesis of nanoparticles which involves a sequence of manipulation tasks with motion constraints. We pro-vided the kinesthetic demonstrations to build a library of reusable manipulation skills, and put these together to create the multi-step protocol required for the chemical synthesis. We then used the ScLERP based planner combined with Jacobian pseudoinverse to execute the tasks with actual reagents for synthesizing nanoparti-cles in a laboratory setting. We also showed that the manipulation skills can be transferred from one chemical synthesis protocol to another, proving that the manipulation skills can be reused. We characterized the structural and chemical properties of the nanopar-ticles that were synthesized using our framework to evaluate the effectiveness of our framework. The proposed framework is gen-eral enough to be extended to other chemical protocols involving constrained manipulation. While the proposed framework indicates considerable promise in performing a fixed protocol for the synthesis, it can be extended to vary parameters within the multi-step protocol to potentially ex-plore the automated synthesis of chemicals. Moreover, the current implementation does not use sensor information to perceive the environment for detecting and localizing the chemical apparatus and other equipment. Future work would involve extending this framework to incorporate a structured approach to vary protocol parameters and sensing. 
+
+References       
+
+> [1] Vescovi, R., Ginsburg, T., Hippe, K., Ozgulbas, D., Stone, C., Stroka, A., Butler, R., Blaiszik, B., Brettin, T., Chard, K., et al., 2023, “Towards a modular architecture for science factories,” Digital Discovery, 2(6). [2] Berenson, D., Srinivasa, S. S., and Kuffner, J. J., 2011, “Task Space Regions: A Framework for Pose-Constrained Manipulation Planning,” The International Journal of Robotics Research, 30 (12).
+> 8 / PREPRINT Transactions of the ASME
+
+[3] Jaillet, L. and Porta, J. M., 2013, “Path Planning Under Kinematic Constraints by Rapidly Exploring Manifolds,” IEEE Transactions on Robotics, 29 (1). [4] Kingston, Z., Moll, M., and Kavraki, L. E., 2018, “Sampling-Based Methods for Motion Planning with Constraints,” Annual Review of Control, Robotics, and Autonomous Systems, 1.[5] Chiaverini, S., 1997, “Singularity-Robust Task-Priority Redundancy Resolution for Real-Time Kinematic Control of Robot Manipulators,” IEEE Transactions on Robotics, 13 (3). [6] Mahalingam, D. and Chakraborty, N., 2023, “Human-Guided Planning for Com-plex Manipulation Tasks Using the Screw Geometry of Motion,” 2023 IEEE International Conference on Robotics and Automation (ICRA) , pp. 7851–7857, doi: 10.1109/ICRA48891.2023.10161130. [7] Mahalingam, D., Patankar, A., Phi, K., Chakraborty, N., McGann, R., and Ramakrishnan, I., 2024, “Containerized Vertical Farming Using Cobots,” 2024 IEEE International Conference on Robotics and Automation (ICRA) , pp. 17897– 17903, doi: 10.1109/ICRA57147.2024.10609985. [8] Laha, R., Rao, A., Figueredo, L. F. C., Chang, Q., Haddadin, S., and Chakraborty, N., 2021, “Point-to-Point Path Planning Based on User Guid-ance and Screw Linear Interpolation,” International Design Engineering Tech-nical Conferences and Computers and Information in Engineering Conference ,Vol. Volume 8B: 45th Mechanisms and Robotics Conference (MR), American Society of Mechanical Engineers, p. V08BT08A010, doi: 10.1115/DETC2021-71814. [9] Laha, R., Sun, R., Wu, W., Mahalingam, D., Chakraborty, N., Figueredo, L. F., and Haddadin, S., 2022, “Coordinate Invariant User-Guided Constrained Path Planning with Reactive Rapidly Expanding Plane-Oriented Escaping Trees,” 
+
+2022 International Conference on Robotics and Automation (ICRA) , pp. 977– 984, doi: 10.1109/ICRA46639.2022.9812014. [10] Burger, B., Maffettone, P. M., Gusev, V. V., Aitchison, C. M., Bai, Y., Wang, X., Li, X., Alston, B. M., Li, B., Clowes, R., et al., 2020, “A mobile robotic chemist,” Nature, 583 (7815). [11] Lim, J. X.-Y., Leow, D., Pham, Q.-C., and Tan, C.-H., 2021, “Development of a Robotic System for Automatic Organic Chemistry Synthesis,” IEEE Transactions on Automation Science and Engineering, 18 (4). [12] Darvish, K., Skreta, M., Zhao, Y., Yoshikawa, N., Som, S., Bogdanovic, M., Cao, Y., Hao, H., Xu, H., Aspuru-Guzik, A., Garg, A., and Shkurti, F., 2025, “ORGANA: A robotic assistant for automated chemistry experimentation and characterization,” Matter, 8(2). [13] Tom, G., Schmid, S. P., Baird, S. G., Cao, Y., Darvish, K., Hao, H., Lo, S., Pablo-García, S., Rajaonson, E. M., Skreta, M., Yoshikawa, N., Corapi, S., Akkoc, G. D., Strieth-Kalthoff, F., Seifrid, M., and Aspuru-Guzik, A., 2024, “Self-Driving Laboratories for Chemistry and Materials Science,” Chemical Reviews, 124 (16), PMID: 39137296. [14] Shiri, P., Lai, V., Zepel, T., Griffin, D., Reifman, J., Clark, S., Grunert, S., Yunker, L. P., Steiner, S., Situ, H., Yang, F., Prieto, P. L., and Hein, J. E., 2021, “Automated solubility screening platform using computer vision,” iScience, 
+
+24 (3). [15] Fakhruldeen, H., Pizzuto, G., Glowacki, J., and Cooper, A. I., 2022, “AR-Chemist: Autonomous Robotic Chemistry System Architecture,” 2022 In-ternational Conference on Robotics and Automation (ICRA) , pp. 6013–6019, doi: 10.1109/ICRA46639.2022.9811996. [16] Pizzuto, G., Wang, H., Fakhruldeen, H., Peng, B., Luck, K. S., and Cooper, A. I., 2024, “Accelerating Laboratory Automation Through Robot Skill Learning For Sample Scraping*,” 2024 IEEE 20th International Con-ference on Automation Science and Engineering (CASE) , pp. 2103–2110, doi: 10.1109/CASE59546.2024.10711291. [17] Fakhruldeen, H., Nambiar, A. R., Veeramani, S., Tailor, B. V., Juneghani, H. B., Pizzuto, G., and Cooper, A. I., 2025, “Multimodal Behaviour Trees for Robotic Laboratory Task Automation,” 2025 IEEE Interna-tional Conference on Robotics and Automation (ICRA) , pp. 15872–15878, doi: 10.1109/ICRA55743.2025.11128408. [18] Knobbe, D., Zwirnmann, H., Eckhoff, M., and Haddadin, S., 2022, “Core Pro-cesses in Intelligent Robotic Lab Assistants: Flexible Liquid Handling,” 2022 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) ,pp. 2335–2342, doi: 10.1109/IROS47612.2022.9981636. [19] Yoshikawa, N., Skreta, M., Darvish, K., Arellano-Rubach, S., Ji, Z., Bjørn Kris-tensen, L., Li, A. Z., Zhao, Y., Xu, H., Kuramshin, A., et al., 2023, “Large language models for chemistry robotics,” Autonomous Robots, 47 (8). [20] Billard, A. G., Calinon, S., and Dillmann, R., 2016, “Learning from humans,” Springer Handbook of Robotics. [21] Gutierrez, N. B. and Beksi, W. J., 2025, “Movement Primitives in Robotics: A Comprehensive Survey,” arXiv preprint arXiv:2601.02379. [22] Calinon, S., Guenter, F., and Billard, A., 2007, “On Learning, Representing, and Generalizing a Task in a Humanoid Robot,” IEEE Transactions on Systems, Man, and Cybernetics, Part B (Cybernetics), 37 (2). [23] Calinon, S., Bruno, D., and Caldwell, D. G., 2014, “A task-parameterized probabilistic model with minimal intervention control,” 2014 IEEE Inter-national Conference on Robotics and Automation (ICRA) , pp. 3339–3344, doi: 10.1109/ICRA.2014.6907339. [24] Calinon, S., D’halluin, F., Sauser, E. L., Caldwell, D. G., and Billard, A. G., 2010, “Learning and Reproduction of Gestures by Imitation,” IEEE Robotics & Automation Magazine, 17 (2). [25] Calinon, S., Pistillo, A., and Caldwell, D. G., 2011, “Encoding the time and space constraints of a task in explicit-duration Hidden Markov Model,” 2011 IEEE/RSJ International Conference on Intelligent Robots and Systems , pp. 3413–3418, doi: 10.1109/IROS.2011.6094418. [26] Niekum, S., Chitta, S., Barto, A. G., Marthi, B., and Osentoski, S., 2013, “Incremental Semantically Grounded Learning from Demonstration.” Robotics: Science and Systems , Vol. 9, Berlin, Germany, pp. 10–15607. [27] Ijspeert, A. J., Nakanishi, J., Hoffmann, H., Pastor, P., and Schaal, S., 2013, “Dynamical Movement Primitives: Learning Attractor Models for Motor Be-haviors,” Neural Comput., 25 (2). [28] Bekris, K., Hauser, K., Herbert, S., Yu, J., Chi, C., Xu, Z., Feng, S., Cousineau, E., Du, Y., Burchfiel, B., Tedrake, R., and Song, S., 2025, “Diffusion policy: Visuomotor policy learning via action diffusion,” Int. J. Rob. Res., 44 (10–11). [29] Zhao, T. Z., Kumar, V., Levine, S., and Finn, C., 2023, “Learning fine-grained bimanual manipulation with low-cost hardware,” arXiv preprint arXiv:2304.13705. [30] O’Neill, A., Rehman, A., Maddukuri, A., Gupta, A., Padalkar, A., Lee, A., Poo-ley, A., Gupta, A., Mandlekar, A., Jain, A., et al., 2024, “Open x-embodiment: Robotic learning datasets and rt-x models: Open x-embodiment collaboration 0,” 2024 IEEE International Conference on Robotics and Automation (ICRA) ,IEEE, pp. 6892–6903. [31] Lynch, K. M. and Park, F. C., 2017, Modern robotics , Cambridge University Press. [32] Murray, R. M., Li, Z., and Sastry, S. S., 2017, A mathematical introduction to robotic manipulation , CRC press. [33] Sarker, A., Sinha, A., and Chakraborty, N., 2020, “On Screw Linear Interpolation for Point-to-Point Path Planning,” 2020 IEEE/RSJ Interna-tional Conference on Intelligent Robots and Systems (IROS) , pp. 9480–9487, doi: 10.1109/IROS45743.2020.9341651. [34] Whitney, D. E., 1969, “Resolved Motion Rate Control of Manipulators and Human Prostheses,” IEEE Transactions on Man-Machine Systems, 10 (2). [35] Premkumar, T., Kim, D., Lee, K., and Geckeler, K. E., 2007, “A facile and efficient “one-step” synthesis of Auo with tunable size,” Gold Bulletin, 40 (4). [36] Kirillov, A., Mintun, E., Ravi, N., Mao, H., Rolland, C., Gustafson, L., Xiao, T., Whitehead, S., Berg, A. C., Lo, W.-Y., Dollár, P., and Girshick, R., 2023, “Segment Anything,” arXiv:2304.02643. [37] Suppiah, D. D. and Abd Hamid, S. B., 2016, “One step facile synthesis of ferromagnetic magnetite nanoparticles,” Journal of Magnetism and Magnetic Materials, 414 .
+
+ASME Letters in Translational Robotics PREPRINT / 9 List of Figures 
+
+1 Robot performing constrained manipulation tasks as part of Magnetite Nano-Particle synthesis experiment. . . . . . . . . 2(a) Transfer without spilling . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2(b) Pouring . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 2(c) Operating Stir Plate . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 22 User provided kinesthetic demonstrations for the manipulation tasks involved in the nanoparticle synthesis. . . . . . . . . 43 Automated Gold Nanoparticle Synthesis using Robots: Sequence of tasks involved in the synthesis of Gold Nanoparticles. 54 Observable differences in gold nanoparticle concentration when the robot was instructed to perform simple lab tasks, such as stirring. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 65 Gold Nanoparticle growth over time. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 66 Comparison of as-synthesized gold nanoparticles, with and without stirring. . . . . . . . . . . . . . . . . . . . . . . . . 67 Automated Magnetite Nanoparticle Synthesis using Robots: Sequence of tasks involved in the synthesis of Magnetite Nanoparticles. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 78 Characterization of magnetite nanoparticles synthesized by the robot. . . . . . . . . . . . . . . . . . . . . . . . . . . . . 7(a) TEM image of magnetite nanoparticles, as synthesized by the robot. . . . . . . . . . . . . . . . . . . . . . . . . 7(b) Size distribution of isolated, analyzed particles, measured over 50 particles. . . . . . . . . . . . . . . . . . . . . 79 XRD pattern of magnetite nanoparticles synthesized by the robot. Major peaks associated with magnetite are labeled. . 810 Magnetite titration curve and corresponding first derivative. . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . . 8
