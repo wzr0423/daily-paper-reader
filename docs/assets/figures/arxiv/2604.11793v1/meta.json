@@ -1,0 +1,70 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.11793v1/fig-001.webp",
+      "caption": "Fig. 4: Coverage vs. Precision. We further evaluate TAXDPD and the baselines on coverage and precision with increasing numbers of inference samples on the RPDiff task Book/Shelf.",
+      "page": 6,
+      "index": 1,
+      "width": 512,
+      "height": 410
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11793v1/fig-002.webp",
+      "caption": "Fig. 6: DEDO Task Environment. (Top) A visualization of the variation in configuration in the HangProcCloth-DH task. (Middle) Our method generalizes well to diverse cloth geometries. (Bottom) Successful placements with a goal-conditioned placement policy.",
+      "page": 11,
+      "index": 2,
+      "width": 1052,
+      "height": 422
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11793v1/fig-003.webp",
+      "caption": "TABLE IV: Ablations and Task Success Rates on modified DEDO HangProcCloth task.",
+      "page": 10,
+      "index": 3,
+      "width": 558,
+      "height": 217
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11793v1/fig-004.webp",
+      "caption": "Fig. 8: The vision-based insertion requires two cameras, one on the end effector (wrist camera, Intel D405), and the other fixed to ground (side camera, ZEDX-Mini). The setup shows Yaskawa GP4 robot, and Robotiq HandE gripper.",
+      "page": 14,
+      "index": 4,
+      "width": 529,
+      "height": 400
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11793v1/fig-005.webp",
+      "caption": "Fig. 9: The conditioning scene is the receptacle or socket, and the object is the plug or connector. Random variations of 20◦ y-axis rotation, 10mm x-axis translation, and 5mm x-axis translation are applied to the objects.",
+      "page": 14,
+      "index": 5,
+      "width": 456,
+      "height": 404
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11793v1/fig-006.webp",
+      "caption": "Fig. 2: Method Overview. (Left) Our Global Placement Initialization samples a rough global position using a novel dense GMM-based prediction module, a framework that models highly multi-modal placement distributions at the scene-level. (Right) Our Local Configuration Refinement then proceeds with a novel disentangled shape and reference frame diffusion that simultaneously allow precise and dense goal predictions.",
+      "page": 3,
+      "index": 6,
+      "width": 1052,
+      "height": 310
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11793v1/fig-007.webp",
+      "caption": "Fig. 7: Data collection process for the vision-based insertion skill. The number of cycles, pose variation ranges, and setup parameters are defined using a YAML configuration file.",
+      "page": 13,
+      "index": 7,
+      "width": 512,
+      "height": 350
+    },
+    {
+      "url": "assets/figures/arxiv/2604.11793v1/fig-008.webp",
+      "caption": "TABLE VI: Point Cloud Downsampling per Task.",
+      "page": 12,
+      "index": 8,
+      "width": 492,
+      "height": 281
+    }
+  ]
+}

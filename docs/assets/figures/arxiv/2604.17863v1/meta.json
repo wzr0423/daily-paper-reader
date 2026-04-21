@@ -1,0 +1,54 @@
+{
+  "version": 2,
+  "extractor": "pdffigures2",
+  "figures": [
+    {
+      "url": "assets/figures/arxiv/2604.17863v1/fig-001.webp",
+      "caption": "Fig. 1: Overview of the framework: particle–spring modeling for strategy evaluation, combined with a tendon-driven dexterous wrist and high–low level control, enabling flexible and precise handkerchief spinning around arbitrary axes.",
+      "page": 1,
+      "index": 1,
+      "width": 506,
+      "height": 339
+    },
+    {
+      "url": "assets/figures/arxiv/2604.17863v1/fig-002.webp",
+      "caption": "Fig. 6: Evaluate the unfolding extent of the handkerchief over time under different strategies within the model, with partial time interfaces visualized.",
+      "page": 6,
+      "index": 2,
+      "width": 522,
+      "height": 592
+    },
+    {
+      "url": "assets/figures/arxiv/2604.17863v1/fig-003.webp",
+      "caption": "Fig. 7: Evaluate the unfolding extent of the handkerchief over time under different strategies within the model, with partial time interfaces visualized.",
+      "page": 7,
+      "index": 3,
+      "width": 1042,
+      "height": 442
+    },
+    {
+      "url": "assets/figures/arxiv/2604.17863v1/fig-004.webp",
+      "caption": "Fig. 2: Overview of the dexterous wrist and its kinematics. (a): Parallel anti-parallelogram tendon-driven wrist architecture using re-parameterized anti-parallelogram structures to shorten D, reduce footprint/inertia, and enable ∼ 90◦ omnidirectional rotation; rear-mounted motors with tendon guides minimize distal inertia, and two decoupled encoders provide precise roll–pitch sensing. (b): Design details and parameter optimization showing a nearly constant rolling radius r(ψ); stacking two orthogonal modules yields a compact 2-DOF wrist. (c): Kinematic abstraction as a spherical rolling-contact joint, with coordinate frames and tendon fixation indicated, and the corresponding tendon-length variation in the bending plane.",
+      "page": 3,
+      "index": 4,
+      "width": 1027,
+      "height": 387
+    },
+    {
+      "url": "assets/figures/arxiv/2604.17863v1/fig-005.webp",
+      "caption": "Fig. 8: Comparison of modeled and experimental trajectories with tracking errors under variable-axis spinning. The Cartesian trajectory and x/y profiles demonstrate effective hierarchical control, enabling precise axis reorientation and stable handkerchief spinning.",
+      "page": 8,
+      "index": 5,
+      "width": 494,
+      "height": 539
+    },
+    {
+      "url": "assets/figures/arxiv/2604.17863v1/fig-006.webp",
+      "caption": "Fig. 4: Overview of the physical simulation framework for the handkerchief spreading task.",
+      "page": 4,
+      "index": 6,
+      "width": 508,
+      "height": 558
+    }
+  ]
+}
