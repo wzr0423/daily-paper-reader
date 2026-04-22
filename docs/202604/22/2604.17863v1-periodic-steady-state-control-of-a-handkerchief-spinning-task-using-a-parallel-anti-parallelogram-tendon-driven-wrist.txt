@@ -1,0 +1,589 @@
+Title: Periodic Steady-State Control of a Handkerchief-Spinning Task Using a Parallel Anti-Parallelogram Tendon-driven Wrist
+
+URL Source: https://arxiv.org/pdf/2604.17863v1
+
+Published Time: Tue, 21 Apr 2026 01:59:02 GMT
+
+Number of Pages: 8
+
+Markdown Content:
+# Periodic Steady-State Control of a Handkerchief-Spinning Task Using a Parallel Anti-Parallelogram Tendon-driven Wrist 
+
+Lei Liu 1,2,∗, Haonan Zhang 1,3,∗, Huahang Xu 4, Zefan Zhang 1,5, Lulu Chang 1,6, Lei Lv 1,7
+
+Andrew Ross McIntosh 8, Kai Sun 1,2, Zhenshan Bing 9,10 , Jiahong Dong 11 ,12 ,13 †, Fuchun Sun 1,†, Fellow, IEEE 
+
+Abstract — Spinning flexible objects, exemplified by tradi-tional Chinese handkerchief performances, demands periodic steady-state motions under nonlinear dynamics with frictional contacts and boundary constraints. To address these challenges, we first design an intuitive dexterous wrist based on a paral-lel anti-parallelogram tendon-driven structure, which achieves 
+
+90 ◦ omnidirectional rotation with low inertia and decoupled roll–pitch sensing, and implement a high–low level hierarchical control scheme. We then develop a particle–spring model of the handkerchief for control-oriented abstraction and strategy evaluation. Hardware experiments validate this framework, achieving an unfolding ratio of approximately 99% and fingertip tracking error of RMSE = 2 .88 mm in high-dynamic spinning. These results demonstrate that integrating control-oriented modeling with a task-tailored dexterous wrist enables robust rest-to–steady-state transitions and precise periodic manipula-tion of highly flexible objects. More visualizations: https:// slowly1113.github.io/icra2026-handkerchief/ .
+
+I. INTRODUCTION Dynamic manipulation of flexible objects is an increas-ingly important yet challenging problem in robotics. In this work, we focus on the traditional Chinese task of handker-chief spinning , where a square fabric is driven into a stable periodic rotation by dexterous wrist actions. While significant progress has been made in the static and quasi-static handling of rigid [1] or quasi-rigid [2] deformables and highly flexible objects, dynamic control of highly flexible objects [3], [4] remains in its infancy. From a hardware perspective, the human wrist comprises a parallel array of carpal bones actuated by antagonis-tic musculotendinous units with rich sensorimotor feed-back [5]. This skeletal–musculotendinous–neural architecture combines compliance with load-bearing capacity, yielding low effective inertia and high dynamic responsiveness [6]. 
+
+*These authors contributed equally to this research (E-Mail: liul22@ mails.tsinghua.edu.cn ). †Co-corresponding authors: Jiahong Dong and Fuchun Sun ( fcsun@mail.tsinghua.edu.cn ). 1Department of Computer Science and Technology, Tsinghua University, Beijing, China. 
+
+> 2
+
+School of Biomedical Engineering, Tsinghua University, Beijing, China. 
+
+> 3
+
+School of Artificial Intelligence, Beihang University, Beijing, China. 
+
+> 4
+
+Institute of Nuclear and New Energy Technology, Tsinghua Univer-sity, Beijing, China. 5Tsinghua Shenzhen International Graduate School, Tsinghua University, Shenzhen, China. 6School of Automation, Nanjing University of Science and Technology, Nanjing, China. 7Shanghai Research Institute for Intelligent Autonomous Systems, Tongji University, Shanghai, China. 8Department of Mechanical Engineering, Tsinghua University, Bei-jing, China. 9School of Computation, Information and Technology, Tech-nical University of Munich, Garching, Germany. 10 State Key Laboratory for Novel Software Technology and the School of Science and Technology, Nanjing University (Suzhou Campus), Suzhou, China. 11 Hepato-pancreato-biliary Center, Beijing Tsinghua Changgung Hospital, Beijing, China. 12 Key Laboratory of Digital Intelligence Hepatology (Ministry of Education), Bei-jing, China. 13 School of Clinical Medicine, Tsinghua Medicine, Tsinghua University, Beijing, China. Flexible and precise 
+
+handkerchief spinning 
+
+around arbitrary axes 
+
+Intuitive dexterous wrist 
+
+Handkerchief 
+
+> Particles spring modeling
+> Strategy evaluation
+> Design and modeling
+> High –low level control
+> Spinning path
+> Given axis path
+
+Fig. 1: Overview of the framework: particle–spring model-ing for strategy evaluation, combined with a tendon-driven dexterous wrist and high–low level control, enabling flexible and precise handkerchief spinning around arbitrary axes. By contrast, conventional robotic wrists implemented as serial motor stacks concentrate inertia and exhibit limited intrinsic dexterity. They often require additional degrees of freedom and sophisticated motion planning to approximate tasks such as handkerchief spinning , which reduces real-time responsiveness and increases control complexity [7]. These observations motivate rethinking the wrist mechanism itself. Recent studies have therefore explored parallel wrist architectures to improve dynamic response [8]–[10], partly because such parallel, tendon-driven layouts are more similar to the human skeletal–muscular–neural system [6]. While promising, these designs still struggle to balance precision and dexterity, limiting their ability to support uniform axial spinning in highly dynamic tasks [11]. Humans can intuitively inject energy and exploit friction to initiate and sustain fabric spinning under boundary con-straints. For robots, however, this process is governed by frictional contact, inertia, and nonlinear elasticity, making it highly nonlinear, difficult to model, and challenging to reproduce in a stable manner. Existing research can be broadly categorized into three directions: (i) tasks such as folding, spreading, or arranging cloths [12], [13]; (ii) 
+
+approaches that rely on object inertia without explicitly modeling fabric dynamics [14]; and (iii) graphics-based simulations that emphasize visual realism [15], [16], while fiber–fiber contact models remain difficult to incorporate into controller design [17]. In robotics, studies on highly dynamic deformable object manipulation are primarily confined to 
+
+> arXiv:2604.17863v1 [cs.RO] 20 Apr 2026
+
+one-dimensional settings [18], [19]. Consequently, although perception and planning methods can alleviate geometric uncertainty, they fall short in addressing dynamic regimes dominated by frictional interactions and nonlinear behavior. From a control perspective, the initiation and stabilization of friction-driven fabric spinning remain largely unexplored, underscoring the need for an integrated approach that unifies dedicated hardware design with tractable control strategies. In this work, we adopt a systematic perspective, develop-ing the dexterous wrist (Fig. 1) to equip a robot hand with the dexterity and high-dynamic capability required to spin a handkerchief. Then we model the initiation period and the steady spinning period. Our core contributions are as follows:  
+
+> •
+
+Parallel anti-parallelogram tendon-driven wrist and hierarchical control. We design a tendon-driven wrist with parallel anti-parallelogram links that combines high dynamic performance with dexterity. The structure achieves 90 ◦ omnidirectional rotation while maintaining low inertia. A task-tailored two-level controller reg-ulates initiation with kinematic control. Once steady spinning emerges, it switches to direct periodic motor commands to sustain the motion with improved stability.  
+
+> •
+
+Control-oriented modeling and initiation strategy. 
+
+We develop a control-oriented initiation model and strategies that yield robust transitions from rest to steady spinning, relying on periodicity, energy balance, and phase locking rather than explicit friction models.  
+
+> •
+
+Empirical validation and key findings. Through simu-lations and hardware experiments, we demonstrate low-inertia, high-dynamic axial rotations and robust rest-to–steady-state transitions. In the periodic regime, direct motor-level periodic commands sustain the spin and enhance dynamic performance and stability, validating the proposed initiation strategy and hierarchical control. II. D ESIGN AND MODELING OF THE PARALLEL 
+
+ANTI -P ARALLELOGRAM TENDON -DRIVEN WRIST 
+
+A. Overview Design of the Parallel Anti-Parallelogram Tendon-driven Wrist 
+
+Guided by wrist anatomy [20], we adopt a tendon-driven dexterous wrist with parallel links. Our design builds upon the Quaternion Joint [8] with the following modifications :
+
+(i) Compared with the original Quaternion Joint, our design reduces the length-to-width ratio by about 50% , thereby decreasing both the overall footprint and the effective in-ertia. (ii) We further redesign the parallel link structure to preserve omnidirectional 90 ◦ rotation (Fig. 2(a)), extending the mobility ranges of the human wrist (about 45 ◦ ulnar, 
+
+25 ◦ radial, and 75 ◦ flexion/extension [20]) by approximately 
+
+100% , 260% , and 20% , respectively. In addition, two de-coupled joint-angle encoders (one per orthogonal subchain) are integrated to provide precise roll–pitch sensing without cross-coupling. (iii) A task-tailored two-level hierarchical control is adopted: during initiation, kinematic regulation ensures a reliable rest-to–steady-state transition, and once stable spin is reached, the controller simplifies to direct peri-odic motor commands for efficient maintenance, leveraging the joint’s decoupled sensing advantage and high dynamic responsiveness. 
+
+B. Detailed Design of the Anti-parallelogram Parallel Struc-ture 
+
+Fig. 2(b) shows the structural schematic of the proposed parallel anti-parallelogram tendon-driven wrist. An anti-parallelogram mechanism generates an ellipse (red curve) that approximates the motion of a circular rolling surface (blue curve). Here, we aim to shorten the wrist length D to reduce the space occupied by the wrist and simultaneously decrease its inertia. For the red curve in Fig. 2(b), which represents the actual elliptical trajectory formed by the link, the mathematical expression can be written as: 
+
+x2
+
+> c
+
+(lc/2) 2 + y2
+
+> c
+
+(hc/2) 2 = 1 . (1) For this anti-parallelogram structure, the center O of the approximated circular rolling surface and its distance to a point Pc on the ellipse can be expressed as: 
+
+
+
+xc = r(ψ) sin ψ, yc = 1tan ψ xc − ho, (2) where ψ denotes the angle between the connecting line and the y-axis. Combining Eq. (1) and Eq. (2), the distance r(ψ) from the circle center O to point Pc on the ellipse can be expressed as a function of ψ:
+
+r(ψ) = 
+
+ho +
+
+r
+
+h2 
+
+> o
+
++
+
+
+
+1 + h2 
+
+> c
+> h2
+> c+w2
+> c
+
+tan 2 ψ
+
+    hc
+
+> 2
+
+2 − h2
+
+> o
+
+
+
+cos ψ
+
+
+
+1 + h2 
+
+> c
+> h2
+> c+w2
+> c
+
+tan 2 ψ
+
+ .
+
+(3) Using Eq. (3), appropriate (ho, w c, h c) values can be selected. If r(ψ) remains nearly constant, the structure ap-proximates a circular rolling surface. With the parameters 
+
+ho = 8 mm , wc = 35 mm , and hc = 47 mm , where ψ
+
+ranges from 0◦ to 45 ◦ (corresponding to actual wrist rotation of −90 ◦ to 90 ◦), the maximum deviation between the ellipse and the approximated circle is below 1 mm (Fig. 2(b)). Compared with [8], our design reduces the ratio hc/w c
+
+from 80 .33 /30 ≈ 2.68 to 47 /35 ≈ 1.34 , corresponding to a reduction of about 50% , thereby decreasing the occupied area and inertia. As shown in Fig. 2(b), two anti-parallelogram structures are arranged orthogonally to form a 2-DOF wrist, thereby enabling omnidirectional rotation. The joint is actuated by four tendons, arranged in opposing pairs. Each pair is driven by one motor, and the tendons are routed through guides to a spool, thereby shifting actuation away from the wrist and reducing distal inertia. In this way, the posteriorly placed motors can effectively drive the parallel anti-parallelogram tendon-driven wrist at the robot’s distal end. To enable accurate sensing, two decoupled joint-angle encoders are mounted on the orthogonal subchains, providing independent roll–pitch feedback without cross-coupling. This compact integration preserves the wrist’s low inertia while supporting high-dynamic control. wc    
+
+> hc
+> Circle
+> Ellipse
+> x
+> y
+> O(0,−ℎ0)
+> φ
+> Pc(𝑥 𝑐 ,𝑦 𝑐 )
+> Error :0.8 mm
+
+x
+
+𝛼 
+
+y
+
+x0
+
+y0 𝜃 
+
++lr
+
+-lr +lp
+
+-lp
+
+w
+
+𝑂 0
+
+xe
+
+x0
+
+ze
+
+z0
+
+𝛽 
+
+L
+
+wcos 𝛾 
+
+𝑂 𝑒 
+
+wsin 𝛾 
+
+x
+
+z
+
+y
+
+𝛼 
+
+𝑂 0
+
+𝑂 𝑒 
+
+-lr +lr-lp+lp
+
+> D
+> M
+> M
+> Spool Motor
+> Encoder
+> Flexion
+> -75 °
+> Extension
+> -75 °
+> Flexion
+> -90 °
+> Ulnar
+> -90 °
+> Radial
+> -90 °
+> Extension
+> -90 °
+
+(a)  Overall design and rotation range 
+
+Human wrist 
+
+Intuitive dexterous wrist 
+
+(b) Structure design and parameter optimization  (c) Kinematic modeling 
+
+1-DOF structure  2-DOF wrist 
+
+> 𝜓 (°)
+> r(𝜓 )
+
+Fig. 2: Overview of the dexterous wrist and its kinematics. (a) : Parallel anti-parallelogram tendon-driven wrist architecture using re-parameterized anti-parallelogram structures to shorten D, reduce footprint/inertia, and enable ∼ 90 ◦ omnidirectional rotation; rear-mounted motors with tendon guides minimize distal inertia, and two decoupled encoders provide precise roll–pitch sensing. (b) : Design details and parameter optimization showing a nearly constant rolling radius r(ψ); stacking two orthogonal modules yields a compact 2-DOF wrist. (c) : Kinematic abstraction as a spherical rolling-contact joint, with coordinate frames and tendon fixation indicated, and the corresponding tendon-length variation in the bending plane. 
+
+C. Kinematics Modeling 
+
+To reflect the axial spinning nature of the handkerchief task, the wrist motion is parameterized by two variables: the rotation-plane angle α and the deflection angle β. The wrist is approximated as a sphere rolling-contact joint. 
+
+1) Joint space to Cartesian space: The forward kinemat-ics from joint space to Cartesian space is derived by sequen-tially applying the following steps: (i) rotate by α to select the bending plane; (ii) rotate by β within the bending plane, established according to the coordinate system (Fig. 2(c)). The homogeneous transformation can thus be expressed as: 
+
+> o
+
+He = Rz (α)Ry
+
+ β
+
+> 2
+
+
+
+Tz (D)Ry
+
+ β
+
+> 2
+
+
+
+Rz (−α)=                            
+
+> 
+> 1−2C2(α)S2(β
+> 2)−2S(2 α)S2(β
+> 2)C(α)S(β)DC (α)S(β
+> 2)
+> −2S(2 α)S2(β
+> 2)1−2S2(α)S2(β
+> 2)S(α)S(β)DS (α)S(β
+> 2)
+> −C(α)S(β)−S(α)S(β)C(β)DC (β)0001
+> 
+
+(4) Here Rz (·) and Ry (·) denote the homogeneous rotation matrices about the z and y axes; Tz (·) denotes the homo-geneous translation matrix along the z-axis; C(·) and S(·)
+
+are abbreviations for the cosine and sine functions; and D
+
+represents the diameter of the sphere rolling-contact joint. 
+
+2) Actuation space to joint space: Since the wrist fixes the driving tendons at symmetric points on the plane passing through the sphere’s center, tendon elongation and contrac-tion remain equal. This symmetry allows pairs of tendons to be driven precisely by a single motor. Meanwhile, with two orthogonal tendon–motor pairs, the joint achieves indepen-dent roll and pitch motions in a fully decoupled manner. Using geometric analysis, the tendon length variations under torsion α and joint rotation β can be expressed as 
+
+lr = w sin( θ − α) sin β, lp = w cos( θ − α) sin β, (5) High -level Control 
+
+> Optimized policy, kinematic control
+> (Precise control, accelerated spin)
+> Low -level Control
+> Motor periodic signals
+> (Stable spin)
+> Two tendon -driven motors
+> Handkerchief spinning
+> Initiate
+> spinning
+> Stable
+> spinning
+
+Fig. 3: High–low level hierarchical control for the handker-chief spin task. The high-level control provides optimized policy and kinematic commands to initiate and regulate spin. The low-level control converts these commands into periodic motor signals that coordinate the two tendon-driven motors, sustaining stable handkerchief spinning. where θ denotes the angle between the x-axis and the tendon tunnel on the joint base, set to 45 ◦ in the present design. In summary, this kinematic formulation reveals a clear mapping from tendon displacements to joint rotations through the torsion–bending parameters (α, β ), and subse-quently to Cartesian motions. For the handkerchief-spinning task, such modeling is advantageous because the deflection angle β directly corresponds to the spin amplitude, while the rotation-plane angle α corresponds to the spinning axis, enabling intuitive strategy design for periodic control. 
+
+D. High–low Level Hierarchical Control for Handkerchief Spinning 
+
+As shown in Fig. 3, we establish a hierarchical control framework tailored to the handkerchief-spinning task. At the high-level control, the controller plans the initiation and regulates spin using optimized policies and kinematic-based feedback, enabling precise acceleration into periodic motion. At the low-level control, the controller transforms these commands into motor-level periodic signals that directly drive the two tendon-actuated motors. During the transient phase, the high-level control ensures reliable initiation and acceleration. Once steady spinning is established, the low-level control maintains the periodic ro-tation with simple signals, improving stability and efficiency. This hierarchy unifies precise high-level planning with intu-itive low-level stabilization, enabling robust rest-to–steady-state transitions and sustained handkerchief spinning. III. C ONTROL -O RIENTED MODELING 
+
+To study how to initiate handkerchief spinning, we develop a particle–spring model that captures the essential dynamics under boundary constraints and frictional contact. This model provides a simulation environment for a serial robotic arm to perform the task and enables systematic evaluation and optimization of initiation strategies. 
+
+A. Physical Engine Design 
+
+The simulation system consists of three fundamental phys-ical entities: particles, anisotropic spring constraints, and collision surfaces .
+
+The particles possess mass mi, position vector ri ∈ R3,and velocity vector vi ∈ R3. Some particles exhibit driv-ing attributes (their position and velocity are controlled by external functions), while the remainder are driven particles whose physical states are determined by the system’s force transmission and constraint conditions. 
+
+The anisotropic spring chain serves as a constraint element connecting particles i and j, adhering to modi-fied Hooke’s law. It exhibits distinct stiffness coefficients for tension ks and compression kc, relative to its natural length Lmax,i,j , simulating fabric’s tendency to fold easily while resisting elongation. Additionally, to ensure simulation convergence, spring damping coefficient c is introduced in the spring chain system to model energy loss during elastic deformation of flexible fabric. Velocity damping ξ
+
+is incorporated in the simulation world system to simulate real-world phenomena like air friction. 
+
+The collision surface consists of a deformable rigid triangular plane formed by three particles, used for collision detection between particles and the fabric surface represented by the triangular plane. The overall collision dynamics adhere to momentum conservation. Due to the properties of flexible materials, collisions in the simulation involve mo-mentum and energy loss. Therefore, an elasticity coefficient 
+
+ε is introduced to control the rebound strength of collisions, and a momentum loss coefficient η is introduced to control the proportion of total momentum loss. These components collectively approximate the elastic and dissipative behavior of flexible fabrics under high dynamic energy input. 
+
+B. Forces and Dynamics 
+
+During simulation, the total external forces FiT otal, i(t)
+
+acting on particle i include gravity, spring forces, and damp-ing forces. Among these, spring forces simulate the tension transmitted between fabric fibers. Such forces exist not only between dispersed particles but also between the friction contact points of the handkerchief, namely the driving points defined in the simulation, and each individual particle. Configuration Parameters                                                              
+
+> （𝑘 𝑠 ,𝑘 𝑐 ,𝑐 ,𝜉 ,𝜉 𝑟𝑎𝑛𝑑𝑜𝑚 ,𝜀 ,𝜂 ,𝒈 ,）
+> Model the
+> position of particles Add spring constraints Configure
+> Collision Surface
+> Drive Controller （𝒗 0=𝑓 𝑅 ,𝑣′ ）
+> Update Force Constraint :
+> 𝑭 𝑖 𝑇𝑜𝑡𝑎𝑙 ,𝑖 𝑡 =𝑭 𝑔𝑟𝑎𝑣𝑖𝑡𝑦 +𝑭 𝑠𝑝𝑟𝑖𝑛𝑔 =𝑚 𝑖 𝒂 𝑖 𝑡
+> Semi -implicit Euler integration
+> Update velocity
+> 𝒗 𝑖 𝑡 +Δ𝑡 =𝒗 𝑖 𝑡 +𝒂 𝑖 𝑡 𝛥𝑡
+> Update location
+> 𝒓 𝑖 𝑡 +Δ𝑡 =𝒓 𝑖 𝑡 +𝒗 𝑖 𝑡 +Δ𝑡 𝛥𝑡
+> Collision Surface
+> Angle and Angular
+> Velocity Update
+> Collision Detection and Handling :
+> 𝒗 𝑖 =𝒗 𝑖 +1−𝜂 𝑱 𝑖 𝒏
+> 3𝑚 𝑠𝑢𝑟𝑓𝑎𝑐𝑒
+> 𝒗 𝑎 ,𝒗 𝑏 ,𝒗 𝑐 =𝒗 𝑎 ,𝒗 𝑏 ,𝒗 𝑐 −1−𝜂 𝑱 𝑖 𝒏
+> 3𝑚 𝑠𝑢𝑟𝑓𝑎𝑐𝑒
+> Reconfiguring spring force constraints
+> between friction contact points and discrete particles
+> Random disturbance:
+> Changes in friction conditions
+> Application of velocity damping Random disturbance:
+> Changes in air resistance, etc.
+> Update visual information and conduct handkerchief spread assessment
+
+Fig. 4: Overview of the physical simulation framework for the handkerchief spreading task. Among these, g = −9.81 acts on all particles except the driving point, whose motion state is specified by the driving equation. Together, these forces yield a high-dimensional nonlinear system where particle trajectories emerge from coupled elastic, damping, and collisional interactions. 
+
+k (∥rj − ri∥ − Lmax ,i,j ) ri,j 
+
+∥rj − ri∥ + cvi,j 
+
+ri,j ri,j 
+
+∥rj − ri∥2 (6) where: 
+
+k =
+
+ ks, if L cur,i,j > L max ,i,j 
+
+kc, if L cur,i,j ⩽ Lmax ,i,j 
+
+(7) Here, Lcur ,i,j = ∥rj − ri∥ is the current spring length, 
+
+ri,j = rj − ri, and vi,j = vj − vi.Additionally, the impulse method is employed to handle collisions between the particles and triangular surfaces. 
+
+C. Driving Point and Boundary Constraints 
+
+In the simulation, in addition to the internal length con-straints of the spring chain, a dynamic chain-length constraint is enforced between the driving point and the surrounding particles. The driving point represents the contact location between the finger and the fabric. Rather than explicitly modeling friction forces, which are difficult to constrain numerically, we directly approximate their effect by assigning a prescribed velocity to the material particle at the contact point along a specified direction. This formulation avoids the instability of frictional modeling while preserving its role in fabric motion initiation. To capture uncertainties arising from contact posture vari-ations, slippage, and snagging, random perturbations are 𝑆 𝑆 𝑡𝑒𝑝 
+
+> 𝑆 𝐼 𝑛𝑖𝑡
+
+Fig. 5: Modeling the handkerchief and constructing the degree of handkerchief unfolding: evaluating the unfolding degree of a handkerchief by comparing the projected area on a rotational plane to its fully unfolded area. applied to the contact point position. The geometric relation between the contact point and the particle distribution is defined with respect to the fully unfolded configuration. The contact motion is parameterized as a circular trajectory of radius R centered at the fabric center with angular speed v′.
+
+D. Numerical Integration and Damping 
+
+During simulation under gravitational acceleration g, the time step is denoted as ∆t, and each frame is divided into N sub-steps. Particle dynamics are updated using a semi-implicit Euler scheme, which ensures stable trajectory convergence while maintaining sufficient fidelity to capture fabric dynamics. At each sub-step, the driving point velocity and posi-tion are updated according to the driving equation v0 =
+
+f (R(t), v′(t)) , with additional random perturbations. The relative distances between particles and friction-driving points are then computed, and the spring-chain constraints between the driving point and distributed particles are en-forced. Particle velocities are updated within the time step under gravity g.After force updates, collision handling between particles and fabric triangular faces is performed to obtain corrected velocities. A damping operation is subsequently applied to improve numerical stability and convergence. Velocity damping follows an exponential decay model vi(t + ∆ t) = 
+
+ξ · ξrand vi, where ξrand is a stochastic perturbation factor that approximates unpredictable variations such as air resistance during fabric motion. The damped velocities are finally integrated to update particle positions for visualization. IV. C ONTROL STRATEGIES FOR INITIATION 
+
+The handkerchief-spinning task can be formulated as the construction of a periodic steady-state motion. In the model introduced in Sec. 2, this objective is simplified by parameterizing the driving function through time-modulated rotational speed α(t) and rotational radius β(t). The resulting driving signal imposes velocity inputs on designated particles corresponding to frictional contact points in the handkerchief model. This section presents a quantitative metric to evaluate the unfolding progress and analyzes several intuitive initial-ization strategies for achieving stable periodic motion. 
+
+A. Handkerchief Model and Evaluation Function 
+
+Among commercially available performance handker-chiefs, the most common configuration is an octagonal star pattern formed by two squares overlapped at a 45 ◦ angle. Accordingly, to model high-dynamic tossing behavior, the handkerchief is represented as an octagonal mesh. The eight particles correspond to the centers of mass of eight identical fabric units, assuming uniform mass distribution. The edge-based spring chains, together with the springs connecting the particles to the friction contact points, transmit both dynamic forces and geometric constraints throughout the network. During high-speed rotational motion, centrifugal effects drive the handkerchief toward planar expansion. The particle positions are projected onto the rotational plane, and the unfolding degree is quantified as the ratio between the area enclosed by these projected particles and the reference area corresponding to the fully unfolded configuration. The pro-jected polygon area is computed using the shoelace formula applied to the planar particle coordinates. 
+
+B. Nonlinear Analysis 
+
+Analysis reveals that external conditions and internal constraints are relatively stable. In the dissipative system of handkerchief spinning (involving damping and inelastic collisions), we observe that the relative steady state after the handkerchief begins to spin exhibits periodicity, stability to perturbations, and attractiveness. The Poincar´ e map provides an effective approach for analyzing periodic steady states and chaotic behavior in flexible systems [21]. To construct this periodic steady state of handkerchief motion, we employ Poincar´ e mapping. In the dynamical model of the discrete particle–spring system, we consider the driving equation in the following form: In the dynamical model of a discrete particle–spring system, we consider the driving equation in the following form: 
+
+M ¨X(t) + D ˙X(t) + K(X(t)) = f (R(t), V (t)) (8) Here, M denotes the mass matrix, D represents the damping matrix, K(·) signifies the nonlinear spring force term, and 
+
+f (R(t), V (t)) denotes the external input function. Its tem-poral characteristics directly determine whether the system can achieve and maintain periodic steady-state motion. Let 
+
+T denote the fundamental period of the input function. The Poincar´ e map is defined as P : X(t0) 7 → X(t0 + T ). Here, 
+
+X(t) denotes the state of the system in phase space. If there exists a fixed point X∗ such that P (X∗) = X∗, then the system possesses a periodic solution with a period coinciding with the input period T . Furthermore, if all eigenvalues of the Jacobian matrix of P near X∗ satisfy |λi| < 1, the cycle solution is asymptotically stable under the Poincar´ e map. To ensure discrete particles maintain stable periodic motion, the input function f (R(t), V (t)) should satisfy the following temporal characteristics: 1) Cycle consistency: The input function must have a well-defined fundamental period T , that is, 
+
+f (R(t + T ), v (t + T )) = f (R(t), V (t)) ∀t (9) This ensures the formation of closed orbits in the Poincar´ e section and guarantees fixed points in the state space. 2) Energy balance: Within an input cycle of period T ,the work done by external forces should compensate for energy dissipation, i.e., 
+
+Z T
+
+> 0
+
+f (R(t), V (t)) · ˙X(t) dt ≈
+
+Z T
+
+> 0
+
+D ˙X(t) · ˙X(t) dt. 
+
+(10) Otherwise, motion decays due to insufficient energy or diverges due to excess energy. 3) Phase locking: The input signal should remain phase-locked with the dominant mode of the response to prevent detuning. That is, the input phase ϕf (t) and the response phase ϕx(t) satisfy ϕf (t)−ϕx(t) ≈ constant. 4) Harmonic control: If the input contains higher-order harmonics, their frequencies should be integer multi-ples of the fundamental: 
+
+f (R(t), V (t)) = 
+
+> ∞
+
+X
+
+> n=1
+
+Fn cos( nΩt + φn), Ω = 2πT .
+
+(11) Otherwise, quasi-periodic or chaotic responses may appear and hinder steady-state maintenance. To drive the discrete particle system toward a stable periodic motion aligned with the driving cycle, we implement a driving input in which both amplitude and velocity increase linearly over time: 
+
+(
+
+R(t) = R0 + ( RT − R0) min( t, T k )
+
+> Tk
+
+V (t) = V0 + ( VT − V0) min( t, T k )
+
+> Tk
+
+(12) Here, Tk represents the rise time scale for rotation radius and speed. It can be defined by the number of revolutions required to reach the target driving state. The rationale of this strategy lies in three principal con-siderations. First, a smooth ramp provides quasi-adiabatic traction that limits excitation of higher modes and guides the state toward the desired attractor. Second, the final single dominant frequency couples strongly to the main mode and suppresses unnecessary harmonics. Third, by shaping R(t),the net energy injection per cycle Win = R t+Tt f (s)· ˙X(s) ds 
+
+can be tuned to balance dissipation and maintain steady amplitude. Simulation results show that the Poincar´ e sequence {Xn}
+
+sampled at t = nT exhibits convergence. By numerically integrating the differential equation along the last period, the single-period fundamental matrix Φ( T ) is obtained, whose eigenvalues (Floquet multipliers) are all less than 1 (maxi-mum magnitude approximately 0.799817 ). Meanwhile, the area-based unfolding metric exceeds 90% .Therefore, the periodic orbits are linearly asymptotically stable in the Poincar´ e sense. Small perturbations diminish with each cycle. Based on the linearization criterion for the Poincar´ e map, the periodic orbit remains locally asymptoti-cally stable under the given driving. 
+
+C. Strategy Analysis and Comparison 
+
+In the previous section, dynamic analysis demonstrated that the acceleration-based strategy for amplitude and speed enables the handkerchief model to achieve periodic steady-state behavior. In dynamic tasks targeting handkerchief Modulation Strategy for                         
+
+> Speed and Amplitude
+> 0
+> 20
+> 40
+> 60
+> 80
+> 100
+> 00.5 11.5 22.5 3
+> Unfolding Degree
+> Time: s
+> 0
+> 20
+> 40
+> 60
+> 80
+> 100
+> 00.5 11.5 22.5 3
+> Unfolding  Degree
+> Time: s
+> 0
+> 20
+> 40
+> 60
+> 80
+> 100
+> 00.5 11.5 22.5 3
+> Unfolding Degree
+> Time: s
+> 𝜆 max =0.7998
+> 𝜆 max =4.294 7
+> 𝜆 max =11 .770 7
+> Assessment of Handkerchief
+> Unfolding Degree
+> Amplitude
+> Speed
+> Amplitude
+> Speed
+> Amplitude
+> Speed
+
+Fig. 6: Evaluate the unfolding extent of the handkerchief over time under different strategies within the model, with partial time interfaces visualized. spinning, forced motion ultimately leads to a steady-state oscillation synchronized with the driving cycle. However, the process of establishing this steady state depends strongly on the initial condition. The speed and stability of the initial spin reflect the robustness of the transition from rest to a stable periodic state. To identify robust initiation strategies, we compare several alternatives that satisfy the conditions outlined above. The comparison shows that human-inspired modulation strategies behave differently in the model. Under identical parameters, the acceleration-based strategy increases the ra-dius linearly before holding it constant. The speed also rises linearly before stabilizing. This strategy reaches a periodic steady state within three seconds and fully unfolds the handkerchief. In contrast, the directional-throw strategy uses an elliptic radius transition from a small to a large circle, followed by constant speed. The periodic-energy injection strategy maintains a fixed radius while modulating speed si-nusoidally. Neither of these two strategies achieves complete unfolding within the same timeframe. Furthermore, Poincar´ e analysis shows maximum Floquet multipliers of 4.2947 and 11.7707 for the directional-throw and periodic-energy injection strategies. Both values are much greater than one and higher than the 0.7998 observed for the acceleration-based strategy. These results demonstrate the robustness advantage of the acceleration-based modu-lation. This finding will be further validated in subsequent simulations and real-world experiments. Failed          
+
+> Unstable
+> Success
+> The unfolding process of handkerchiefs over time under
+> different strategies
+> 0
+> 20
+> 40
+> 60
+> 80
+> 100
+> 0123
+> Unfolding Degree
+> Time: s
+> 0
+> 20
+> 40
+> 60
+> 80
+> 100
+> 0123
+> Unfolding Degree
+> Time: s
+> 0
+> 20
+> 40
+> 60
+> 80
+> 100
+> 0123
+> Unfolding  Degree
+> The degree of unfolding in
+> model and real
+> Time: s
+> Amplitude
+> Speed
+> Amplitude
+> Speed
+> Amplitude
+> Speed
+> Model
+> Real
+> Model
+> Real
+> Model
+> Real
+> Acceleration -based strategy
+> Directional -throwing strategy
+> Periodic -energy injection strategy
+
+Fig. 7: Evaluate the unfolding extent of the handkerchief over time under different strategies within the model, with partial time interfaces visualized. V. E XPERIMENTAL VERIFICATION 
+
+This section presents hardware experiments that validate both the proposed initiation strategies and the hierarchical control framework. We first evaluate different spinning strate-gies on the developed wrist prototype, and then demonstrate the feasibility of the high–low level control scheme in real-world handkerchief spinning. 
+
+A. Performance of Different Strategies on Dexterous Wrist 
+
+To quantify unfolded area of the handkerchief, we employ SAM-V2 to segment the handkerchief mask from images. The median depth Z within the segmented region is extracted and combined with the camera intrinsic parameters to convert the pixel count into an estimated physical area, computed as 
+
+A ≈ Npx · (Z/f x) · (Z/f y ) (cm 2). This formulation provides a real-time estimate of the unfolded area. As shown in Fig. 7, the experimental results are consistent with the simulation analysis. The acceleration-based strategy, in which both angular speed and rotation radius are gradually ramped to their target values, reliably drives the handkerchief from rest to a fully unfolded steady-state spin within a few seconds. In contrast, oscillatory modulation or large-amplitude directional swings frequently result in incomplete unfolding or unstable transients, indicating reduced robust-ness under real-world conditions. Quantitatively, the acceleration-based strategy achieves an unfolding degree of approximately 99% with minimal fluctuation ( CV ≈ 0.7% ). The directional-throw strategy reaches a maximum unfolding of 77 .5% , but the degree later decreases as trailing fabric catches up with the lead-ing portion and forms folds. The periodic-energy injection strategy remains ineffective, with an average unfolding of only 22 .91% throughout the process. This shows that under the current parameters, adding high-frequency components outside the fundamental period does not improve stability. Comparison between model predictions and experimental measurements shows close agreement. The model effec-tively captures the kinematic transition from rest to steady-state spinning under boundary-constrained frictional driving. These results confirm that the control-oriented abstraction, though simplified, is sufficient to guide robust strategy design for high-dynamic fabric manipulation. 
+
+B. High–low Level Control of the Dexterous Wrist 
+
+To validate the proposed hierarchical control framework (Fig. 3), we conducted experiments on the tendon-driven wrist under variable-axis spinning tasks. In these tests (Fig. 8), the high-level controller specified the spinning axis and initiation strategy, while the low-level tendon actuation executed the commanded trajectories and stabilized transient dynamics. The high-level command followed a rotational profile with an angular velocity of ˙α = 0.1 rad/s and a total rotation angle of β = 12 ◦. The commanded trajectory in joint space and the corresponding x- and y-axis profiles demonstrate that the hierarchical control achieves accurate trajectory tracking and coordinated spinning. The resulting tracking error of fingertip was relatively small, with RMSE = 2 .88 mm and R2 = 0 .9898 , confirming that the system can realize precise, high-dynamic rotational motion around arbitrary axes. The residual error is mainly attributed to the inertia of the hand structure during rapid spinning. Overall, these results show that the proposed de-coupled high-low level hierarchical controller enables cou-pled control of axis reorientation and handkerchief spinning. VI. C ONCLUSION 
+
+We developed a parallel anti-parallelogram tendon-driven wrist and validated it through hardware experiments with a high–low level control scheme. The wrist achieves low effec-tive inertia and 90 ◦ omnidirectional rotation with decoupled roll–pitch sensing, enabling responsive and precise dynamic Hybrid  (Model)  Hybrid  (Real) High level  Low  level Fig. 8: Comparison of modeled and experimental trajecto-ries with tracking errors under variable-axis spinning. The Cartesian trajectory and x/y profiles demonstrate effective hierarchical control, enabling precise axis reorientation and stable handkerchief spinning. motion. Experiments demonstrate robust handkerchief spin-ning with an unfolding ratio of ≈ 99% and fingertip tracking error of RMSE = 2 .88 mm, confirming the effectiveness of the proposed architecture. Complementing the hardware, we introduced a control-oriented particle–spring model that abstracts friction into a tractable form for controller design and systematic strat-egy evaluation. The model confirms that a linear ramp of radius and speed reliably drives the cloth from rest to a periodic steady state, consistent with the hardware observa-tions. These findings show that low-inertia wrist hardware, combined with modeling-guided control strategies, provides a practical recipe for robust rest-to–steady-state transitions and accurate periodic manipulation of highly flexible objects. Future work will build on this framework to explore learning-based methods for more complex handkerchief-spinning skills and to integrate the bionic wrist into hu-manoid dual-arm systems for advanced multi-arm coordi-nation, which may further enhance robotic capabilities in handling flexible objects under dynamic conditions. VII. A CKNOWLEDGMENTS 
+
+This work was done at Tsinghua University and was sup-ported by the Joint Funds of the National Key Research and Development Program of China (No. 2024YFB4711102), the National Natural Science Foundation of China (No. U22A2057), the Nanjing Major Science and Technology Special Project (No. 202405017), the Fundamental Research Funds for the Central Universities (No. KG202514), and the National Natural Science Foundation of China (No. 82090053 and 82090050). REFERENCES [1] Y. Yao, U. Yoo, J. Oh, C. G. Atkeson, and J. Ichnowski, “Soft robotic dynamic in-hand pen spinning,” in 2025 IEEE International Conference on Robotics and Automation (ICRA) . IEEE, 2025, pp. 1–7. [2] B. Sundaralingam and T. Hermans, “Geometric in-hand regrasp plan-ning: Alternating optimization of finger gaits and in-grasp manip-ulation,” in 2018 IEEE International Conference on Robotics and Automation (ICRA) . IEEE, 2018, pp. 231–238. [3] U. Yoo, N. Dennler, M. Mataric, S. Nikolaidis, J. Oh, and J. Ichnowski, “Moe-hair: Toward soft and compliant contact-rich hair manipulation and care,” in Companion of the 2024 ACM/IEEE International Con-ference on Human-Robot Interaction , 2024, pp. 1163–1167. [4] O. Nocentini, J. Kim, Z. M. Bashir, and F. Cavallo, “Learning-based control approaches for service robots on cloth manipulation and dress-ing assistance: a comprehensive review,” Journal of NeuroEngineering and Rehabilitation , vol. 19, no. 1, p. 117, 2022. [5] R. S. Behnke, Kinetic anatomy . Human Kinetics, 2012. [6] S. M. Levin, “The tensegrity-truss as a model for spine mechanics: biotensegrity,” Journal of Mechanics in Medicine and Biology , vol. 2, no. 03n04, pp. 375–388, 2002. [7] H. Fan, G. Wei, and L. Ren, “Prosthetic and robotic wrists comparing with the intelligently evolved human wrist: A review,” Robotica ,vol. 40, no. 11, pp. 4169–4191, 2022. [8] Y.-J. Kim, J.-I. Kim, and W. Jang, “Quaternion joint: Dexterous 3-dof joint representing quaternion motion for high-speed safe interaction,” in 2018 IEEE/RSJ International Conference on Intelligent Robots and Systems (IROS) . IEEE, 2018, pp. 935–942. [9] T. Zheng, X. Zhang, M. Wang, M. Li, and M. Zhang, “Novel Variable Stiffness Bionic Parallel Wrist: Synthesis, Modeling, and Analysis,” 
+
+Journal of Mechanical Design , vol. 147, no. 11, p. 113304, Nov. 2025. [10] X. Xie, D. Xiong, and J. Z. Wen, “A wrist-inspired suspended tubercle-type tensegrity joint with variable stiffness capacity,” Bioinspiration & Biomimetics , vol. 18, no. 1, p. 016010, Jan. 2023. [11] D. Shah, Y. Wu, A. Scalzo, G. Metta, and A. Parmiggiani, “A Comparison of Robot Wrist Implementations for the iCub Humanoid,” 
+
+Robotics , vol. 8, no. 1, p. 11, Feb. 2019. [12] C. Zhou, R. Jiang, F. Luan, S. Meng, Z. Wang, Y. Dong, Y. Zhou, and B. He, “Dual-arm robotic fabric manipulation with quasi-static and dynamic primitives for rapid garment flattening,” IEEE/ASME Transactions on Mechatronics , 2025. [13] A. Ganapathi, P. Sundaresan, B. Thananjeyan, A. Balakrishna, D. Seita, J. Grannen, M. Hwang, R. Hoque, J. E. Gonzalez, N. Jamali 
+
+et al. , “Learning dense visual correspondences in simulation to smooth and fold real fabrics,” in 2021 IEEE International Conference on Robotics and Automation (ICRA) . IEEE, 2021, pp. 11 515–11 522. [14] L. Y. Chen, H. Huang, E. Novoseller, D. Seita, J. Ichnowski, M. Laskey, R. Cheng, T. Kollar, and K. Goldberg, “Efficiently learning single-arm fling motions to smooth garments,” in The International Symposium of Robotics Research . Springer, 2022, pp. 36–51. [15] V. Mozafary and P. Payvandy, “Study and comparison techniques in fabric simulation using mass spring model,” International Journal of Clothing Science and Technology , vol. 28, no. 5, pp. 634–689, 2016. [16] N. Magnenat-Thalmann, C. Luible, P. Volino, and E. Lyard, “From measured fabric to the simulation of cloth,” in 2007 10th IEEE International Conference on Computer-Aided Design and Computer Graphics . IEEE, 2007, pp. 7–18. [17] D. Durville, “Simulation of the mechanical behaviour of woven fabrics at the scale of fibers,” International journal of material forming , vol. 3, no. Suppl 2, pp. 1241–1251, 2010. [18] B.-K. Han, S.-C. Kim, and D.-S. Kwon, “Towards shape-changing devices: Physical interface control with an active contour model,” 
+
+Symmetry , vol. 10, no. 3, p. 57, 2018. [19] H. Zhang, J. Ichnowski, D. Seita, J. Wang, H. Huang, and K. Goldberg, “Robots of the lost arc: Self-supervised learning to dynamically manip-ulate fixed-endpoint cables,” in 2021 IEEE International Conference on Robotics and Automation (ICRA) . IEEE, 2021, pp. 4560–4567. [20] N. M. Bajaj, A. J. Spiers, and A. M. Dollar, “State of the Art in Artificial Wrists: A Review of Prosthetic and Robotic Wrist Design,” 
+
+IEEE Transactions on Robotics , vol. 35, no. 1, pp. 261–277, Feb. 2019. [21] C. Ban, G. Cai, W. Wei, and S. Peng, “Dynamic response and chaotic behavior of a controllable flexible robot,” Nonlinear Dynamics , vol. 109, no. 2, pp. 547–562, 2022.
